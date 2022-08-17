@@ -2,7 +2,7 @@ import IRepository from "../../../infra/repositories/abstract/IRepository"
 import IResponse from "../../../infra/Responses/IResponse"
 import IService from "./IService"
 
-export class AbstractService<T> implements IService<T> {
+export class abstract AbstractService<T> implements IService<T> {
     private _: IRepository<T>
 
     constructor(repo: IRepository<T>) {
