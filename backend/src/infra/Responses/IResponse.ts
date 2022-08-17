@@ -1,6 +1,6 @@
 export default interface IResponse {
-    status : number
-    hasError : boolean
+    status? : number
+    hasError? : boolean
 
     errorCode?: string
     errorMessage?: string

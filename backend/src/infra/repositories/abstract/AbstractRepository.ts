@@ -2,7 +2,7 @@ import { AppDataSource } from "../../../data-source"
 import IRepository from "./IRepository"
 
 export default abstract class AbstractRepository<T> implements IRepository<T> {
-    private _: any
+    protected _: any
 
     constructor(repo: any) {
         this._ = AppDataSource.getRepository<T>(repo)
