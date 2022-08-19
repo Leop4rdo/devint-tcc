@@ -2,30 +2,30 @@ import { AppDataSource } from "../../../data-source"
 import IRepository from "./IRepository"
 
 export default abstract class AbstractRepository<T> implements IRepository<T> {
-    protected _: any
+    protected db: any
 
     constructor(repo: any) {
-        this._ = AppDataSource.getRepository<T>(repo)
+        this.db = AppDataSource.getRepository<T>(repo)
     }
 
-    update = async (entity: T) => await this._.save(entity)
+    async update(entity: T) { return await this.db.save(entity)}
 
-    create = async (entity: T) => await this._.save(entity)
+    async create(entity: T) { return await this.db.save(entity)}
 
-    list = async () => await this._.find()
+    async list() { return await this.db.find()}
 
-    remove = async (id:string) => await this._.delete({id})
+    async remove(id:string) { return await this.db.delete({id})}
     
-    findById = async (id: string) => {
-        return this._.findOne({
+    async findById(id: string){
+        return this.db.findOne({
             where: {
                 id
             }
         })
     }
 
-    findBy = async (key: keyof T, value: any) => {
-        return this._.findOne({
+    async findBy(key: keyof T, value: any){
+        return this.db.findOne({
             where: {
                 [key]: value
             }

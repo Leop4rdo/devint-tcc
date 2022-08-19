@@ -12,8 +12,5 @@ export default class BadRequestResponse implements IResponse  {
         this.hasError = true;
         this.errorCode = props.errorCode;
         this.errorMessage = props.errorMessage;
-        
-        
-
     }
 }

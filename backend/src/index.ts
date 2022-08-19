@@ -1,10 +1,12 @@
+import "./config/env"
+
 import { AppDataSource } from "./data-source"
 import express from "express"
 import cors from "cors"
 import helmet from "helmet"
 import routes from "./routes";
 
-const PORT = 8080;
+const PORT = process.env.SE_PORT || 8080;
 
 AppDataSource.initialize().then(async () => {
     const app = express(); // creating express app

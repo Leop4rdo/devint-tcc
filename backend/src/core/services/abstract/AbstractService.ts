@@ -1,21 +1,107 @@
+import errors from "../../../handler/errors.handler"
 import IRepository from "../../../infra/repositories/abstract/IRepository"
-import IResponse from "../../../infra/Responses/IResponse"
+import BadRequestResponse from "../../../Responses/BadRequestResponse"
+import IResponse from "../../../Responses/IResponse"
+import ServerErrorResponse from "../../../Responses/ServerErrorResponse"
+import SuccessResponse from "../../../Responses/SuccessResponse"
 import IService from "./IService"
 
-export class abstract AbstractService<T> implements IService<T> {
-    private _: IRepository<T>
+export abstract class  AbstractService<T> implements IService<T> {
+    protected repo: IRepository<T>
 
     constructor(repo: IRepository<T>) {
-        this._ = repo
+        this.repo = repo
     }
 
-    list = async () : Promise<IResponse> => { /* TODO : implement this */ }
+    async list() : Promise<IResponse> { 
+        try {
 
-    findById: (id: string) : Promise<IResponse> => { /* TODO : implement this */ }
+            return new SuccessResponse({
+                data : await this.repo.list()
+            })
 
-    findByKey: (key: string, value: any) : Promise<IResponse> => { /* TODO : implement this */ }
+        } catch (e) {
+            return new ServerErrorResponse({ 
+                errorMessage: e.errorMessage
+            })
+        }
+    }
 
-    create: (entity: T) : Promise<IResponse> => { /* TODO : implement this */ }
+    async findById(id: string) : Promise<IResponse> {
+        try {
 
-    update: (entity: T) : Promise<IResponse> => { /* TODO : implement this */ }
+            return new SuccessResponse({
+                data: await this.repo.findById(id)
+            })
+
+        } catch (e) {
+            return new ServerErrorResponse({ 
+                errorMessage: e.errorMessage
+            })
+        }
+    }
+
+    async create(entity: T) : Promise<IResponse> {
+        try {
+
+            return new SuccessResponse({
+                status: 201,
+                data: await this.repo.create(entity)
+            })
+
+        } catch (e) {
+            return new ServerErrorResponse({ 
+                errorMessage: e.errorMessage
+            })
+        }
+    }
+
+    async update(entity: T, id : string) : Promise<IResponse> {
+        try {
+
+            const entityExists = await this.repo.findById(id)
+
+            if (!entityExists) {
+                return new BadRequestResponse({
+                    errorMessage: errors.ENTITY_NOT_FOUND.message,
+                    errorCode: errors.ENTITY_NOT_FOUND.code
+                })
+            }
+
+            for (const [key, value] of Object.entries(entity)) {
+                entityExists[key] = value
+            }
+
+            await this.repo.update(entityExists)
+
+            return new SuccessResponse({
+                status: 204,
+                data: entityExists
+            })
+
+        } catch (e) {
+            return new ServerErrorResponse({ 
+                errorMessage: e.errorMessage
+            })
+        }
+    }
+
+    async delete(id:string) : Promise<IResponse> {
+        try {
+            const entityExists = await this.repo.findById(id)
+
+            if (!entityExists) {
+                return new BadRequestResponse({
+                    errorMessage: errors.ENTITY_NOT_FOUND.message,
+                    errorCode: errors.ENTITY_NOT_FOUND.code
+                })
+            }
+
+            this.repo.remove(id);
+        } catch (e) {
+            return new ServerErrorResponse({ 
+                errorMessage: e.errorMessage
+            })
+        }
+    }
 }
