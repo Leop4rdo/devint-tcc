@@ -13,5 +13,7 @@ export default interface IUserService extends IService<UserEntity>{
 
     update(entity : UserCreateDTO, id : string) : Promise<IResponse>
 
-    disable(id : string) : Promise<IResponse> 
+    disable(id : string) : Promise<IResponse>
+    
+    login(body : LoginDTO) : Promise<IResponse>
 }

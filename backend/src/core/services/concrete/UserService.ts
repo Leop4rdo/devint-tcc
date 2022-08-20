@@ -1,4 +1,4 @@
-import { hash } from "bcrypt";
+import { hash, compare } from "bcrypt";
 import { Entity } from "typeorm";
 import errors from "../../../handler/errors.handler";
 import IRepository from "../../../infra/repositories/abstract/IRepository";
@@ -6,6 +6,7 @@ import BadRequestResponse from "../../../Responses/BadRequestResponse";
 import IResponse from "../../../Responses/IResponse";
 import ServerErrorResponse from "../../../Responses/ServerErrorResponse";
 import SuccessResponse from "../../../Responses/SuccessResponse";
+import LoginDTO from "../../dtos/user/LoginDTO";
 import UserCreateDTO from "../../dtos/user/UserCreateDTO";
 import UserDTO from "../../dtos/user/UserDTO";
 import UserResponseDTO from "../../dtos/user/UserResponseDTO";
@@ -13,6 +14,7 @@ import UserEntity from "../../entities/UserEntity";
 import { IUserProps } from "../../interfaces/IUser";
 import { AbstractService } from "../abstract/AbstractService";
 import IUserService from "../abstract/IUserService";
+import * as jwt from 'jsonwebtoken'
 
 export default class UserService extends AbstractService<UserEntity> implements IUserService {
     constructor(_repo : IRepository<UserEntity>) {
@@ -108,6 +110,35 @@ export default class UserService extends AbstractService<UserEntity> implements 
         }
     } 
 
+    async login(body : LoginDTO) : Promise<IResponse> {
+        const user = await this.repo.findBy("email", body.email)
+
+        const forbiddenResponseProps = {
+            status : 403,
+            errorCode : errors.LOGIN_FAILED.code,
+            errorMessage : errors.LOGIN_FAILED.message
+        }
+
+        if (!user) 
+            return new BadRequestResponse(forbiddenResponseProps)
+
+        const isPasswordEquals = await compare(body.password, user.password)
+
+        if (!isPasswordEquals)
+            return new BadRequestResponse(forbiddenResponseProps)
+
+        const userRes = new UserResponseDTO(user as IUserProps)
+
+        const _token = this.createToken(userRes);
+
+        return new SuccessResponse({
+            data : {
+                token : _token,
+                user : userRes
+            }
+        })
+    }
+
     async disable(id: string): Promise<IResponse> {
         try {
 
@@ -133,5 +164,9 @@ export default class UserService extends AbstractService<UserEntity> implements 
                 errorMessage: e.errorMessage
             })
         }
+    }
+
+    createToken(user : UserResponseDTO) {
+        return jwt.sign({...user}, process.env.SECRET, { expiresIn : '1d' })
     }
 }

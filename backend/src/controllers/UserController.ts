@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import LoginDTO from "../core/dtos/user/LoginDTO";
 import UserDTO from "../core/dtos/user/UserDTO";
 import UserEntity from "../core/entities/UserEntity";
 import { IUserProps } from "../core/interfaces/IUser";
@@ -46,11 +47,17 @@ export default class UserController {
             .catch(err => res.status(400).json(this.handleError(err)))
     }
 
+    login = (req : Request, res : Response) => {
+        this.service.login(new LoginDTO(req.body as IUserProps))
+            .then(_res => res.status(_res.status || 200).json(_res))
+            .catch(err => res.status(400).json(this.handleError(err)))
+    }
+
     private handleError(err: any) {
         return new ServerErrorResponse({
             status : 400,
-            errorMessage : errors.BASE.message,
-            errorCode :errors.BASE.code 
+            errorMessage : err.message || errors.BASE.message,
+            errorCode : errors.BASE.code 
         })
     }
 }

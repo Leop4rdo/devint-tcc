@@ -12,7 +12,12 @@ const errors = {
     USER_EMAIL_ALREADY_IN_USE : {
         message : 'This email is already in use!',
         code : "UE0001"
-    }
+    },
+
+    LOGIN_FAILED : {
+        message : 'Invalid user name or password!',
+        code : 'UE0002'
+    },
 }
 
 export default errors;
