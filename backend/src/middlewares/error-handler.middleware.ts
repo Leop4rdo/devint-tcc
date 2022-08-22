@@ -10,15 +10,10 @@ function errorHandlerMiddleware(
   res: Response,
   next: NextFunction
 ) {
-  if (err instanceof BusinessLogicError) {
-    res.status(err.status || 400).json(new BadRequestResponse({...err}))
-    return
-  }
-
   res.status(err.status || 400).json(new BadRequestResponse({
     status : 400,
     errorMessage : err.message || errors.BASE.message,
-    errorCode : errors.BASE.code
+    errorCode : err.errorCode || errors.BASE.code
   }))
 }
 
