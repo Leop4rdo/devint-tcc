@@ -10,6 +10,6 @@ export default class BusinessLogicError extends Error {
     super(props.errorMessage);
     this.errorMessage = props.errorMessage;
     this.errorCode = props.errorCode;
-    this.status = props.status || 404;
+    this.status = 400;
   }
 }

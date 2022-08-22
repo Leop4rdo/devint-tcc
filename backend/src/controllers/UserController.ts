@@ -20,44 +20,30 @@ export default class UserController {
     list = (req : Request, res : Response) => {
         this.service.list()
             .then(_res => res.status(_res.status || 200).json(_res))
-            .catch(err => res.status(400).json(this.handleError(err)))
     }
 
     getById = (req : Request, res : Response) => {
         this.service.findById(req.params.userId)
             .then(_res => res.status(_res.status || 200).json(_res))
-            .catch(err => res.status(400).json(this.handleError(err)))
     }
 
     create = (req : Request, res : Response) => {
         this.service.create(new UserDTO(req.body as IUserProps))
             .then(_res => res.status(_res.status || 200).json(_res))
-            .catch(err => res.status(400).json(this.handleError(err)))
     }
 
     update = (req : Request, res : Response) => {
         this.service.update(new UserDTO(req.body as IUserProps), req.params.userId)
             .then(_res => res.status(_res.status || 200).json(_res))
-            .catch(err => res.status(400).json(this.handleError(err)))
     }
 
     disable = (req : Request, res : Response) => {
         this.service.disable(req.params.userId)
             .then(_res => res.status(_res.status || 200).json(_res))
-            .catch(err => res.status(400).json(this.handleError(err)))
     }
 
     login = (req : Request, res : Response) => {
         this.service.login(new LoginDTO(req.body as IUserProps))
             .then(_res => res.status(_res.status || 200).json(_res))
-            .catch(err => res.status(400).json(this.handleError(err)))
-    }
-
-    private handleError(err: any) {
-        return new ServerErrorResponse({
-            status : 400,
-            errorMessage : err.message || errors.BASE.message,
-            errorCode : errors.BASE.code 
-        })
     }
 }

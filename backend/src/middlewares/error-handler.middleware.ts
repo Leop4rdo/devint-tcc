@@ -2,27 +2,24 @@ import { NextFunction, Request, Response } from "express";
 import BusinessLogicError from "../handler/BusinessLogicError ";
 import IResponse from "../Responses/IResponse";
 import BadRequestResponse from "../Responses/BadRequestResponse";
+import errors from "../handler/errors.handler";
 
-function handleError(
-  err: TypeError | BusinessLogicError,
+function errorHandlerMiddleware(
+  err: any,
   req: Request,
   res: Response,
   next: NextFunction
 ) {
-  let businessLogicError = err;
-
   if (err instanceof BusinessLogicError) {
-    businessLogicError = new BusinessLogicError(
-      new BadRequestResponse({
-        errorCode: "INTERNAL_SERVER_ERROR",
-        errorMessage: "Internal server error",
-      })
-    );
+    res.status(err.status || 400).json(new BadRequestResponse({...err}))
+    return
   }
 
-  res
-    .status((businessLogicError as BusinessLogicError).status)
-    .send(businessLogicError);
+  res.status(err.status || 400).json(new BadRequestResponse({
+    status : 400,
+    errorMessage : err.message || errors.BASE.message,
+    errorCode : errors.BASE.code
+  }))
 }
 
-export default handleError;
+export default errorHandlerMiddleware;

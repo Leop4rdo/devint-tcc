@@ -10,7 +10,7 @@ const errors = {
     },
 
     USER_EMAIL_ALREADY_IN_USE : {
-        message : 'This email is already in use!',
+        message : 'Email is already in use!',
         code : "UE0001"
     },
 
