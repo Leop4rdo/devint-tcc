@@ -9,5 +9,5 @@ export interface IUserProps {
 
 export const userRoles = {
     DEV : 0,
-    COMPANY : 1
+    COMPANY : 1,
 }

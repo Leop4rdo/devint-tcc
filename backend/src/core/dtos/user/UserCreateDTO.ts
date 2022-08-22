@@ -1,11 +1,20 @@
 import { Timestamp } from "typeorm"
+import { IsInEnum, IsRequired } from "../../../utils/decorators/FieldValidation.decorator"
 import { IUserProps, userRoles } from "../../interfaces/IUser"
 
-export default class UserDTO {
+export default class UserCreateDTO {
+    @IsRequired()
     name : string
+
+    @IsRequired()
     email : string
+
+    @IsRequired()
     password : string
+
+    @IsInEnum(userRoles)
     role : number
+
     createdAt : Timestamp
     updatedAt : Timestamp
 

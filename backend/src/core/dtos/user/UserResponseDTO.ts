@@ -1,12 +1,14 @@
 import { Timestamp } from "typeorm"
-import { IUserProps } from "../../interfaces/IUser"
+import { IsInEnum, IsRequired } from "../../../utils/decorators/FieldValidation.decorator"
+import { IUserProps, userRoles } from "../../interfaces/IUser"
 
-export default class UserDTO {
+export default class UserResponseDTO {
     id : string
     name : string
     email : string
     enabled : boolean
     role : number
+
     createdAt : Timestamp
     updatedAt : Timestamp
 

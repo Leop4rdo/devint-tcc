@@ -1,7 +1,11 @@
+import { IsRequired } from "../../../utils/decorators/FieldValidation.decorator"
 import { IUserProps } from "../../interfaces/IUser"
 
 export default class LoginDTO {
+    @IsRequired()
     email : string
+
+    @IsRequired()
     password : string
 
     constructor(props : IUserProps) {
