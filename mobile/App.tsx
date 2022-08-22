@@ -1,11 +1,11 @@
 import React from 'react';
 import { Platform, SafeAreaView, StyleSheet, Text, View, StatusBar } from 'react-native';
 import { useFonts } from '@expo-google-fonts/poppins';
-import fonts from './src/styles/utils/typography';
 import HomePage from './src/pages/Home';
+import { fontsToImport } from './src/styles/typography';
 
 export default function App() {
-  let [fontsLoaded] = useFonts(fonts);
+  let [fontsLoaded] = useFonts(fontsToImport);
 
   if (!fontsLoaded) return <View><Text>App is loading...</Text></View>
 

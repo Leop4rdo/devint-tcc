@@ -3,9 +3,5 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "strict": true,
-    "baseUrl": "./"
-  },
-  "include": [
-    "./"
-  ]
+  }
 }

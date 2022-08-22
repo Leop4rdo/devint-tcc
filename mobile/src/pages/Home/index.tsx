@@ -1,6 +1,6 @@
 import { Text, View } from "react-native"
-import Hello from "src/components/Hello";
-import styles from "../../styles/pages/Home" ;
+import Hello from "../../components/Hello";
+import styles from "./style" ;
 
 const HomePage : React.FC = () => {
 
