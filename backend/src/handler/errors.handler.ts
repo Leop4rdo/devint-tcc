@@ -18,6 +18,11 @@ const errors = {
         message : 'Invalid user name or password!',
         code : 'UE0002'
     },
+
+    NULL_FIELD : {
+        message : 'Field can not be null',
+        code : 'UE0003'
+    }
 }
 
 export default errors;

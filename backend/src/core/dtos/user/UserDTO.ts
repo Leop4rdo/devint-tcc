@@ -1,5 +1,5 @@
 import { Timestamp } from "typeorm"
-import { IUserProps } from "../../interfaces/IUser"
+import { IUserProps, userRoles } from "../../interfaces/IUser"
 
 export default class UserDTO {
     id : string
@@ -17,6 +17,6 @@ export default class UserDTO {
         this.name = props.name
         this.password = props.password
         this.enabled = props.enabled
-        this.role = props.role
+        this.role = props.role || userRoles.DEV
     }
 }
