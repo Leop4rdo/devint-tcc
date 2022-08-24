@@ -7,7 +7,7 @@ import { fontsToImport } from './src/styles/typography';
 export default function App() {
   let [fontsLoaded] = useFonts(fontsToImport);
 
-  if (!fontsLoaded) return <View><Text>App is loading...</Text></View>
+  if (!fontsLoaded) return <View><Text>App is loading...</Text></View> // TODO : add splash screen
 
   return (
     <View style={styles.container}>
