@@ -18,9 +18,6 @@ export default class UserCreateRequestDTO {
   @IsInEnum(userRoles)
   role: number;
 
-  createdAt: Timestamp;
-  updatedAt: Timestamp;
-
   constructor(props: IUserProps) {
     this.email = props.email;
     this.name = props.name;
