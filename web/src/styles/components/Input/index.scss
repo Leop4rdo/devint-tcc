@@ -1,0 +1,46 @@
+.input-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.icon {
+  position: absolute;
+  padding-left: 12px;
+}
+
+input {
+  border: 1px solid;
+  border-color: $color-gray;
+  border-radius: 8px;
+  padding-left: 12px;
+  background-color: $color-black;
+  color: $color-white;
+  font-size: 12px;
+  font-weight: normal;
+  max-width: 250px;
+  width: 100%;
+  max-height: 40px;
+  height: 32px;
+
+  ::placeholder,
+  ::-webkit-input-placeholder,
+  :-moz-placeholder,
+  ::-moz-placeholder,
+  ::-ms-input-placeholder,
+  :-ms-input-placeholder {
+    color: $color-primary;
+  }
+
+  &:active,
+  &:focus,
+  &:focus-visible {
+    outline: none;
+    border-color: $color-primary;
+  }
+
+  &.error {
+    border-color: $color-red;
+    color: $color-red;
+  }
+}
