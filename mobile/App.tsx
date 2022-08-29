@@ -1,7 +1,7 @@
 import React from 'react';
 import { Platform, SafeAreaView, StyleSheet, Text, View, StatusBar } from 'react-native';
 import { useFonts } from '@expo-google-fonts/poppins';
-import HomePage from './src/pages/Home';
+import LandingPage from './src/pages/Home';
 import { fontsToImport } from './src/styles/typography';
 
 export default function App() {
@@ -14,7 +14,9 @@ export default function App() {
       <SafeAreaView>
         <StatusBar barStyle="dark-content" />
         
-        <HomePage />
+        {/* <HomePage /> */}
+
+    <LandingPage />
 
       </SafeAreaView>
     </View>
