@@ -2,6 +2,7 @@ import React from "react";
 
 interface IButtonProps {
     props?: any,
+    icon?: string,
     type?: "submit" | "button" | "reset",
     children?: React.ReactNode,
     onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
