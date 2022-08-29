@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import LoginDTO from "../core/dtos/user/LoginDTO";
-import UserCreateDTO from "../core/dtos/user/UserCreateDTO";
+import LoginRequestDTO from "../core/dtos/user/LoginRequestDTO";
+import UserCreateRequestDTO from "../core/dtos/user/UserCreateRequestDTO";
 import UserDTO from "../core/dtos/user/UserDTO";
 import UserEntity from "../core/entities/UserEntity";
 import { IUserProps } from "../core/interfaces/IUser";
@@ -29,7 +29,7 @@ export default class UserController {
     }
 
     create = (req : Request, res : Response) => {
-        this.service.create(new UserCreateDTO(req.body as IUserProps))
+        this.service.create(new UserCreateRequestDTO(req.body as IUserProps))
             .then(_res => res.status(_res.status || 200).json(_res))
     }
 
@@ -44,7 +44,7 @@ export default class UserController {
     }
 
     login = (req : Request, res : Response) => {
-        this.service.login(new LoginDTO(req.body as IUserProps))
+        this.service.login(new LoginRequestDTO(req.body as IUserProps))
             .then(_res => res.status(_res.status || 200).json(_res))
     }
 }

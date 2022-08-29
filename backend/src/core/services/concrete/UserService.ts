@@ -88,7 +88,7 @@ export default class UserService extends AbstractService<UserEntity> implements 
             errorMessage : errors.LOGIN_FAILED.message
         }
 
-        if (!user) 
+        if (!user || !user.enabled) 
             return new BadRequestResponse(forbiddenResponseProps)
 
         const isPasswordEquals = await compare(body.password, user.password)
