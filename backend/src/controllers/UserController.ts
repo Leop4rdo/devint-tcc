@@ -23,34 +23,4 @@ export default class UserController {
       .list()
       .then((_res) => res.status(_res.status || 200).json(_res));
   };
-
-  getById = (req: Request, res: Response) => {
-    this.service
-      .findById(req.params.userId)
-      .then((_res) => res.status(_res.status || 200).json(_res));
-  };
-
-  create = (req: Request, res: Response) => {
-    this.service
-      .create(new UserCreateDTO(req.body as IUserProps))
-      .then((_res) => res.status(_res.status || 200).json(_res));
-  };
-
-  update = (req: Request, res: Response) => {
-    this.service
-      .update(new UserDTO(req.body as IUserProps), req.params.userId)
-      .then((_res) => res.status(_res.status || 200).json(_res));
-  };
-
-  disable = (req: Request, res: Response) => {
-    this.service
-      .disable(req.params.userId)
-      .then((_res) => res.status(_res.status || 200).json(_res));
-  };
-
-  login = (req: Request, res: Response) => {
-    this.service
-      .login(new LoginDTO(req.body as IUserProps))
-      .then((_res) => res.status(_res.status || 200).json(_res));
-  };
 }

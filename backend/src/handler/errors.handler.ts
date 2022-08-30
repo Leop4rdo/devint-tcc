@@ -22,6 +22,11 @@ const errors = {
     NULL_FIELD : {
         message : 'Field can not be null',
         code : 'UE0003'
+    },
+
+    USER_CAN_NOT_BE_DELETED : {
+        message : 'User can not be deleted!',
+        code : 'UE0004'
     }
 }
 
