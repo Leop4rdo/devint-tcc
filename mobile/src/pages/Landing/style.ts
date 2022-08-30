@@ -32,7 +32,6 @@ const style = StyleSheet.create({
     },
     message : {
         ...globalStyles.text,
-
         color: colors.WHITE,
         marginBottom: 56
     },
