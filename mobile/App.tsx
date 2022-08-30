@@ -6,7 +6,6 @@ import { fontsToImport } from './src/styles/typography';
 import LoginPage from './src/pages/Login';
 
 import { NavigationContainer } from '@react-navigation/native'
-import { ScreenStack } from 'react-native-screens';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 export default function App() {
@@ -17,23 +16,13 @@ export default function App() {
   const stack = createNativeStackNavigator();
 
   return (
-    <View style={styles.container}>
+    <NavigationContainer>
+      <stack.Navigator initialRouteName='login'screenOptions={{headerShown: false}}>
 
-      <SafeAreaView>
-        <StatusBar barStyle="dark-content" />
-        
-        {/* <HomePage /> */}
-
-        {/* <LoginPage /> */}
-
-        <NavigationContainer>
-          <stack.Navigator>
-
-          </stack.Navigator>
-        </NavigationContainer>
-
-      </SafeAreaView>
-    </View>
+        <stack.Screen name='login' component={LoginPage}/>
+        <stack.Screen name='home' component={HomePage} />
+      </stack.Navigator>
+    </NavigationContainer>
   );
 }
 

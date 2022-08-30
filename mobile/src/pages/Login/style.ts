@@ -8,7 +8,8 @@ const styles = StyleSheet.create({
     page : {
         height : '100%',
         width : '100%',
-        padding: 24,
+        paddingVertical: 56,
+        paddingHorizontal: 24,
 
         backgroundColor : colors.DARK_GRAY,
 

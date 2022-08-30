@@ -1,11 +1,19 @@
+import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useState } from 'react';
 import {View, Text, TextInput, TouchableOpacity} from 'react-native';
 import ButtonComponent from '../../components/utils/Button';
 import FeedbackTextInput from '../../components/utils/FeedbackInput';
 import globalStyles from '../../styles/global';
+import { isEmail, isEmpty } from '../../utils/validation';
 import styles from './style'
 
-const LoginPage : React.FC = () => {
+interface IPageProps {
+    navigation : any
+}
+
+const LoginPage : React.FC<any> = ({navigation}) => {
+    console.log(navigation)
+
     const [formValues, setFormValues] = useState({
         email : "",
         password : ""
@@ -25,16 +33,27 @@ const LoginPage : React.FC = () => {
             <View style={globalStyles.centerItemContainer}>
                 <Text style={styles.title}>Entrar</Text>
 
-                <FeedbackTextInput icon="mail" onChangeText={(text) => handleInputChange(text, 'email')}  placeholder="E-mail" />
+                <FeedbackTextInput 
+                    style={{marginBottom : 40}}
+                    icon="mail" 
+                    onChangeText={(text) => handleInputChange(text, 'email')} 
+                    validate={() => isEmail(formValues.email)}  
+                    placeholder="E-mail" 
+                />
 
-                <FeedbackTextInput  icon="lock-open"  onChangeText={(text) => handleInputChange(text, 'password')}  placeholder="Senha" />
+                <FeedbackTextInput  
+                    isPassword
+                    icon="lock-open" 
+                    onChangeText={(text) => handleInputChange(text, 'password')}  
+                    validate={() => !isEmpty(formValues.password)}  
+                    placeholder="Senha" />
             </View>
 
             <View style={globalStyles.centerItemContainer}>
-                <ButtonComponent text='login' onPress={()=>{}} />
+                <ButtonComponent text='login' onPress={()=>{navigation.navigate('home')}} />
                 <TouchableOpacity
                     activeOpacity={1}
-                    onPress={()=>{}}
+                    onPress={()=>{ alert('WIP'); }}
                     >
                     <Text style={[globalStyles.linkRed, styles.linkPasswordRecover ]}>Esqueci minha senha!</Text>
                 </TouchableOpacity>
