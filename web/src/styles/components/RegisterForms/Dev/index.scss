@@ -1,0 +1,22 @@
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    
+    ::placeholder {
+        color: $color-white;
+    }
+}
+
+.terms-checkbox {
+    label {
+        color: $color-white;
+        margin-left: 8px;
+    }
+}
+
+.button-container {
+    display: flex;
+    gap: 0.4rem;
+}

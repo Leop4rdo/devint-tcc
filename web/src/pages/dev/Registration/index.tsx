@@ -1,8 +1,7 @@
 import React from "react";
 
-import Input from "components/utils/Input";
-import Button from "components/utils/Button";
-import Icon from "components/utils/Icon";
+import DevForm1 from "components/RegisterForms/Dev/Step1";
+import DevForm2 from "components/RegisterForms/Dev/Step2";
 
 const DevRegistrationPage: React.FC = () => {
 
@@ -11,24 +10,16 @@ const DevRegistrationPage: React.FC = () => {
 
             <div className="registration-form-container">
 
-                <div className="dev-registration-form">
-
                     <h2>Sou Dev</h2>
 
-                    <Input icon="account_circle" type="text" placeholder="Nome" onChange={()=>{}} />
+                    {/* <DevForm1 onSubmit={() => {}}/> */}
 
-                    <Input icon="mail" type="text" placeholder="E-mail"onChange={()=>{}} />
-                    
-                    <Input icon="today" type="text" placeholder="Data de nascimento" onChange={()=>{}} />
-                
-                    <Button type="submit" onClick={() => {}} children={["proximo" , <Icon name="arrow_forward" />]}></Button>
-                
-                </div>
+                    <DevForm2 onSubmit={() => {}} />
 
             </div>
 
             <div className="image-container">
-                <img src="assets/images/dev-image.svg" />
+                <img src="assets/images/dev-image.svg" alt="developer on a computer" />
             </div>
 
         </div>
