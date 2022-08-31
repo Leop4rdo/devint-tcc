@@ -1,21 +1,10 @@
-import { hash, compare } from "bcrypt";
-import { Entity } from "typeorm";
-import errors from "../../../handler/errors.handler";
+
 import IRepository from "../../../infra/repositories/abstract/IRepository";
-import BadRequestResponse from "../../../Responses/BadRequestResponse";
 import IResponse from "../../../Responses/IResponse";
-import ServerErrorResponse from "../../../Responses/ServerErrorResponse";
 import SuccessResponse from "../../../Responses/SuccessResponse";
-import LoginDTO from "../../dtos/user/LoginRequestDTO";
-import UserCreateDTO from "../../dtos/user/UserCreateRequestDTO";
 import UserDTO from "../../dtos/user/UserDTO";
-import UserEntity from "../../entities/UserEntity";
 import { IUserProps } from "../../interfaces/IUser";
-import { AbstractService } from "../abstract/AbstractService";
 import IUserService from "../abstract/IUserService";
-import * as jwt from "jsonwebtoken";
-import DevRepository from "../../../infra/repositories/concrete/DevRepository";
-import CompanyRepository from "../../../infra/repositories/concrete/CompanyRepository";
 import DevEntity from "../../entities/DevEntity";
 import CompanyEntity from "../../entities/CompanyEntity";
 

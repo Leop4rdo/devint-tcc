@@ -5,4 +5,5 @@ export default interface IAuthRepository {
     findById : (id : string) => Promise<AuthEntity>
     create : (entity : AuthEntity) => Promise<AuthEntity>
     update : (entity : AuthEntity) => Promise<AuthEntity>
+    remove : (id : string) => Promise<AuthEntity>
 }

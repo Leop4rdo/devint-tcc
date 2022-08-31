@@ -28,13 +28,13 @@ export default class AuthRepository implements IAuthRepository {
     }
 
     create = async (entity: AuthEntity) => {
-        console.log(entity);
-
-        return await this.db.create(entity);
+        return await this.db.save(entity);
     };
 
     update = async (entity: AuthEntity) => {
         return await this.db.update(entity);
     };
+
+    async remove(id:string) { return await this.db.delete({id})}
     
  }

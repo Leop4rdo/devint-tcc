@@ -1,14 +1,6 @@
 import { Request, Response } from "express";
-import LoginDTO from "../core/dtos/user/LoginRequestDTO";
-import UserCreateDTO from "../core/dtos/user/UserCreateRequestDTO";
-import UserDTO from "../core/dtos/user/UserDTO";
-import UserEntity from "../core/entities/UserEntity";
-import { IUserProps } from "../core/interfaces/IUser";
-import IService from "../core/services/abstract/IService";
 import IUserService from "../core/services/abstract/IUserService";
-import errors from "../handler/errors.handler";
 import UserModule from "../modules/UserModule";
-import ServerErrorResponse from "../Responses/ServerErrorResponse";
 
 export default class UserController {
   private service: IUserService;

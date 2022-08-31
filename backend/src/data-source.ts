@@ -3,7 +3,6 @@ import { DataSource } from "typeorm";
 import AuthEntity from "./core/entities/AuthEntity";
 import CompanyEntity from "./core/entities/CompanyEntity";
 import DevEntity from "./core/entities/DevEntity";
-import UserEntity from "./core/entities/UserEntity";
 
 
 export const AppDataSource = new DataSource({

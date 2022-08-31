@@ -17,6 +17,13 @@ import UserCreateRequestDTO from "../../dtos/user/UserCreateRequestDTO";
 import CompanyEntity from "../../entities/CompanyEntity";
 import ServerErrorResponse from "../../../Responses/ServerErrorResponse";
 import AuthEntity from "../../entities/AuthEntity";
+import IDevProps from "../../interfaces/IDev";
+import DevCreateRequestDTO from "../../dtos/user/dev/DevCreateRequestDTO";
+import CompanyCreateRequestDTO from "../../dtos/user/company/CompanyCreateRequestDTO";
+import ICompanyProps from "../../interfaces/ICompany";
+import BusinessLogicError from "../../../handler/BusinessLogicError ";
+import { CompanyResponseDTO } from "../../dtos/user/company/CompanyResponseDTO";
+import DevResponseDTO from "../../dtos/user/dev/DevResponseDTO";
 
 
 export default class AuthService implements IAuthService {
@@ -43,14 +50,20 @@ export default class AuthService implements IAuthService {
         }
 
         body.password = await hash(body.password, 10)
+        body.role = (body.cnpj) ? userRoles.COMPANY : userRoles.DEV
 
         const auth = await this.repo.create(body as unknown as AuthEntity);
 
-        const user = (body.role === userRoles.COMPANY) ? 
-            await this.companyRepo.create(body as unknown as CompanyEntity) 
-            : await this.devRepo.create(body as unknown as DevEntity);
+        if (!auth) return new ServerErrorResponse({errorMessage : "Cannot create user auth", errorCode: "SE000"})
 
-        user.auth = auth
+        const user : any = (body.cnpj) ? 
+            await this.createCompany(body, auth)
+            : await this.createDev(body, auth);
+
+        if (user.hasError) {
+            await this.repo.remove(auth.id)
+            return new ServerErrorResponse({errorMessage : "Cannot create user", errorCode: "SE000"})
+        }
 
         return new SuccessResponse({
             status: 201,
@@ -71,19 +84,28 @@ export default class AuthService implements IAuthService {
             errorMessage: errors.LOGIN_FAILED.message,
         };
 
-        if (!auth || !auth.enabled) return new BadRequestResponse(forbiddenResponseProps);
+        if (!auth || auth.enabled == 0) return new BadRequestResponse(forbiddenResponseProps);
 
         const isPasswordEquals = await compare(body.password, auth.password);
 
         if (!isPasswordEquals)
             return new BadRequestResponse(forbiddenResponseProps);
 
-        const user = (auth.role === userRoles.DEV) ?
-            await this.devRepo.findBy('auth', auth.id)
-        :
-            await this.companyRepo.findBy('auth', auth.id);
 
-        const userRes = new UserDTO({...user, role : auth.role} as unknown as IUserProps);
+        const user = (auth.role == userRoles.COMPANY) ?
+            await this.companyRepo.findBy('auth', auth.id)
+        :
+            await this.devRepo.findBy('auth', auth.id)
+
+        
+
+        if (!user) return new BadRequestResponse(forbiddenResponseProps);
+
+        const userRes = (auth.role == userRoles.COMPANY) ?
+            new CompanyResponseDTO(user as ICompanyProps)
+            : new DevResponseDTO(user as IDevProps) 
+        
+        new UserDTO({...user, role : auth.role} as unknown as IUserProps);
 
         const _token = this.createToken(userRes);
 
@@ -95,7 +117,31 @@ export default class AuthService implements IAuthService {
         });
     }
 
-    private createToken(user: UserDTO) {
+    private createToken(user: CompanyResponseDTO | DevResponseDTO) {
         return jwt.sign({ ...user }, process.env.SECRET, { expiresIn: "1d" });
+    }
+
+    private async createCompany(body : UserCreateRequestDTO, _auth : AuthEntity) : Promise<CompanyEntity | BadRequestResponse> {
+        const dto = new CompanyCreateRequestDTO({
+            name : body.name,
+            cnpj : body.cnpj,
+            auth: _auth
+        } as unknown as ICompanyProps)
+
+        if (dto.name == "") return new BadRequestResponse({})
+
+        return this.companyRepo.create(dto as CompanyEntity)
+    }
+
+    private async createDev(body : UserCreateRequestDTO, _auth : AuthEntity) : Promise<DevEntity | BadRequestResponse>  {
+        const dto = new DevCreateRequestDTO({
+            name : body.name,
+            birthday : body.birthday,
+            auth : _auth
+        } as unknown as IDevProps)
+
+        if (dto.name == "") return new BadRequestResponse({})
+
+        return this.devRepo.create(dto as DevEntity)
     }
 }

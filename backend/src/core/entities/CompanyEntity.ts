@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, CreateDateColumn, Timestamp, UpdateDateColumn } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, CreateDateColumn, Timestamp, UpdateDateColumn, JoinColumn } from "typeorm"
 import AuthEntity from "./AuthEntity"
 
 @Entity('companies')
@@ -9,7 +9,7 @@ export default class CompanyEntity {
     @Column()
     name : string
 
-    @Column({ nullable : true })
+    @Column()
     cnpj : string
 
     @Column({ nullable : true })
@@ -21,7 +21,8 @@ export default class CompanyEntity {
     @Column('jsonb', { nullable : true })
     followers : JSON
 
-    @OneToOne(() => AuthEntity)
+    @OneToOne(() => AuthEntity, { nullable : false})
+    @JoinColumn()
     auth : AuthEntity
 
     @CreateDateColumn({ name: 'created_at', select: false })
