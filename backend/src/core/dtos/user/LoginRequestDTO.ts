@@ -1,6 +1,5 @@
-import { IsEmail, IsEmpty, validate } from "class-validator";
+import { IsEmail, IsEmpty, IsNotEmpty, IsString, validate } from "class-validator";
 import BusinessLogicError from "../../../handler/BusinessLogicError ";
-//import { IsRequired } from "../../../utils/decorators/FieldValidation.decorator";
 import { IUserProps } from "../../interfaces/IUser";
 import ServerErrorResponse from "../../../Responses/ServerErrorResponse";
 import errors from "../../../handler/errors.handler";
@@ -8,9 +7,11 @@ import errors from "../../../handler/errors.handler";
 export default class LoginRequestDTO {
   
   @IsEmail()	
+  @IsNotEmpty()
   email: string;
 
-  
+  @IsNotEmpty()
+  @IsString()
   password: string;
 
   constructor(props: IUserProps) {
