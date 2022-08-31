@@ -1,13 +1,16 @@
 import { StyleSheet } from "react-native"
-import globalStyles from "../../styles/global"
-import fonts from "../../styles/typography"
+import globalStyles from "../../../styles/global"
+import fonts from "../../../styles/typography"
 
-import colors from "../../styles/colors"
+import colors from "../../../styles/colors"
 
 const styles = StyleSheet.create({
     container : {
         height : 48,
         paddingHorizontal : 12,
+        marginVertical : 8,
+        marginHorizontal : 8,
+
         backgroundColor : colors.BLACK,
 
         borderWidth : 2,
@@ -35,8 +38,8 @@ const styles = StyleSheet.create({
     },
 
     input : {
-        height : '100%',
-        width : '100%',
+        flex: 1,
+        paddingHorizontal : 4,
 
         ...globalStyles.text,
         textVerticalAlign: 'center',
