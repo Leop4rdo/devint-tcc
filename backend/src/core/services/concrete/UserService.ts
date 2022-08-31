@@ -14,126 +14,126 @@ import UserEntity from "../../entities/UserEntity";
 import { IUserProps } from "../../interfaces/IUser";
 import { AbstractService } from "../abstract/AbstractService";
 import IUserService from "../abstract/IUserService";
-import * as jwt from 'jsonwebtoken'
-import { validate } from "class-validator";
-import LoginRequestDTO from "../../dtos/user/LoginRequestDTO";
+import * as jwt from "jsonwebtoken";
 
-export default class UserService extends AbstractService<UserEntity> implements IUserService {
-    constructor(_repo : IRepository<UserEntity>) {
-        super(_repo);
+export default class UserService
+  extends AbstractService<UserEntity>
+  implements IUserService
+{
+  constructor(_repo: IRepository<UserEntity>) {
+    super(_repo);
+  }
+
+  override async list(): Promise<IResponse> {
+    const users = await this.repo.list();
+
+    const res = users.map((user) => new UserResponseDTO(user as IUserProps));
+
+    return new SuccessResponse({
+      data: res,
+    });
+  }
+
+  override async findById(id: string): Promise<IResponse> {
+    const user = await this.repo.findById(id);
+
+    return new SuccessResponse({
+      data: new UserResponseDTO(user as IUserProps),
+    });
+  }
+
+  override async create(entity: UserCreateDTO): Promise<IResponse> {
+    if (await this.repo.findBy("email", entity.email)) {
+      return new ServerErrorResponse({
+        errorMessage: errors.USER_EMAIL_ALREADY_IN_USE.message,
+        errorCode: errors.USER_EMAIL_ALREADY_IN_USE.message,
+      });
     }
 
-    override async list() : Promise<IResponse> { 
-        const users = await this.repo.list()
+    entity.password = await hash(entity.password, 10);
 
-        const res = users.map((user) => new UserResponseDTO( user as IUserProps ))
+    const user = await this.repo.create(entity as UserEntity);
 
-        return new SuccessResponse({
-            data : res
-        })
+    return new SuccessResponse({
+      status: 201,
+      data: new UserResponseDTO(user as IUserProps),
+    });
+  }
+
+  override async update(entity: UserDTO, id: string): Promise<IResponse> {
+    const entityExists = await this.repo.findById(id);
+
+    if (!entityExists) {
+      return new BadRequestResponse({
+        errorMessage: errors.ENTITY_NOT_FOUND.message,
+        errorCode: errors.ENTITY_NOT_FOUND.code,
+      });
     }
 
-    override async findById(id: string) : Promise<IResponse> {
-        const user = await this.repo.findById(id)
-
-        return new SuccessResponse({
-            data: new UserResponseDTO(user as IUserProps)
-        })
+    for (const [key, value] of Object.entries(entity)) {
+      entityExists[key] = value;
     }
 
-    override async create(entity: UserCreateDTO) : Promise<IResponse> {
-        if (await this.repo.findBy("email", entity.email)) {
-            return new ServerErrorResponse({ 
-                errorMessage: errors.USER_EMAIL_ALREADY_IN_USE.message,
-                errorCode : errors.USER_EMAIL_ALREADY_IN_USE.message
-            })
-        }
+    await this.repo.update(entityExists);
 
-        entity.password = await hash(entity.password, 10);
+    return new SuccessResponse({
+      status: 204,
+      data: new UserResponseDTO(entityExists as IUserProps),
+    });
+  }
 
-        const user = await this.repo.create(entity as UserEntity)
-
-        return new SuccessResponse({
-            status: 201,
-            data: new UserResponseDTO(user as IUserProps)
-        })
-    }
-
-    override async update(entity: UserDTO, id : string) : Promise<IResponse> {
-        const entityExists = await this.repo.findById(id)
-
-        if (!entityExists) {
-            return new BadRequestResponse({
-                errorMessage: errors.ENTITY_NOT_FOUND.message,
-                errorCode: errors.ENTITY_NOT_FOUND.code
-            })
-        }
-
-        for (const [key, value] of Object.entries(entity)) {
-            entityExists[key] = value
-        }
-
-        await this.repo.update(entityExists)
-
-        return new SuccessResponse({
-            status: 204,
-            data: new UserResponseDTO(entityExists as IUserProps)
-        })
-    } 
-
-    async login(body : LoginRequestDTO) : Promise<IResponse> {
-        const dtoValidateRes = await body.validate()
+  async login(body: LoginDTO): Promise<IResponse> {
+    const dtoValidateRes = await body.validate()
         if (dtoValidateRes) return dtoValidateRes
 
-        const user = await this.repo.findBy("email", body.email)
+    const user = await this.repo.findBy("email", body.email);
 
-        const forbiddenResponseProps = {
-            status : 403,
-            errorCode : errors.LOGIN_FAILED.code,
-            errorMessage : errors.LOGIN_FAILED.message
-        }
+    const forbiddenResponseProps = {
+      status: 403,
+      errorCode: errors.LOGIN_FAILED.code,
+      errorMessage: errors.LOGIN_FAILED.message,
+    };
 
-        if (!user || !user.enabled) 
-            return new BadRequestResponse(forbiddenResponseProps)
+    if (!user) return new BadRequestResponse(forbiddenResponseProps);
 
-        const isPasswordEquals = await compare(body.password, user.password)
+    const isPasswordEquals = await compare(body.password, user.password);
 
-        if (!isPasswordEquals)
-            return new BadRequestResponse(forbiddenResponseProps)
+    if (!isPasswordEquals)
+      return new BadRequestResponse(forbiddenResponseProps);
 
-        const userRes = new UserResponseDTO(user as IUserProps)
+    const userRes = new UserResponseDTO(user as IUserProps);
 
-        const _token = this.createToken(userRes);
+    const _token = this.createToken(userRes);
 
-        return new SuccessResponse({
-            data : {
-                token : _token,
-                user : userRes
-            }
-        })
+    return new SuccessResponse({
+      data: {
+        token: _token,
+        user: userRes,
+      },
+    });
+  }
+
+  async disable(id: string): Promise<IResponse> {
+    const entityExists = await this.repo.findById(id);
+
+    if (!entityExists) {
+      return new BadRequestResponse({
+        errorMessage: errors.ENTITY_NOT_FOUND.message,
+        errorCode: errors.ENTITY_NOT_FOUND.code,
+      });
     }
 
-    async disable(id: string): Promise<IResponse> {
-        const entityExists = await this.repo.findById(id)
+    entityExists.enabled = false;
 
-        if (!entityExists) {
-            return new BadRequestResponse({
-                errorMessage: errors.ENTITY_NOT_FOUND.message,
-                errorCode: errors.ENTITY_NOT_FOUND.code
-            })
-        }
+    await this.repo.update(entityExists);
 
-        entityExists.enabled = false
+    return new SuccessResponse({
+      status: 204,
+      data: `Sucessfully disabled user with id ${id}`,
+    });
+  }
 
-        await this.repo.update(entityExists)
-
-        return new SuccessResponse({
-            status: 204,
-            data: `Sucessfully disabled user with id ${id}`
-        })
-    }
-
-    createToken(user : UserResponseDTO) {
-        return jwt.sign({...user}, process.env.SECRET, { expiresIn : '1d' })
-    }
+  createToken(user: UserResponseDTO) {
+    return jwt.sign({ ...user }, process.env.SECRET, { expiresIn: "1d" });
+  }
 }

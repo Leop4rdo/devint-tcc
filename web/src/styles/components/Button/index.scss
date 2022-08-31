@@ -1,0 +1,36 @@
+button {
+  border: 1px solid;
+  border-radius: 8px;
+  border-color: $color-primary;
+
+  background-color: $color-dark-gray;
+
+  color: $color-primary;
+
+  height: 40px;
+  width: 150px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  text-transform: uppercase;
+
+  transition: all .25s ease-out;
+
+  &:hover {
+    background-color: $color-primary;
+    color: $color-white;
+  }
+
+  &.error {
+    border-color: $color-red;
+    color: $color-red;
+
+    &:hover {
+      background-color: $color-red;
+      color: $color-white;
+    }
+  }
+}

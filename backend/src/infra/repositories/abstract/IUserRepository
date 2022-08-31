@@ -1,0 +1,5 @@
+import IRepository from "./IRepository"
+
+export default interface IUserRepository extends IRepository<UserEntity> {
+    list: (enabled?: boolean) => 
+}

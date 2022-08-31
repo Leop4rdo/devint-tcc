@@ -1,0 +1,68 @@
+.input-container {
+  position: relative;
+
+  height: 40px;
+  width: 300px;
+  padding: 0px 12px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  
+  background-color: $color-black;
+
+  border: 2px solid;
+  border-color: $color-gray;
+  border-radius: 8px;
+  border-style: solid;
+
+  transition: border .25s ease-out;
+
+  .icon {
+    color: $color-gray;
+    font-size: 125%;
+
+    transition: color .5s ease-out;
+  }
+
+  &:focus-within,
+  &:hover {
+    .icon {
+      color: $color-primary;
+    }
+
+    border-color: $color-primary;
+  }
+
+  &.error {
+    border-color: $color-red !important;
+    color: $color-red !important;
+
+    .icon {
+      color: $color-red !important;
+    }
+  }
+
+  input {
+    outline: none;
+    border: none;
+
+    color: $color-white;
+    font-size: clamp(.8rem, 1.5vw, 1.2rem);
+    
+    background-color: $color-black;
+    
+    height: 100%;
+    width: 100%;
+
+    ::placeholder {
+      color: $color-primary;
+    }
+  }
+}
+
+
+
+
