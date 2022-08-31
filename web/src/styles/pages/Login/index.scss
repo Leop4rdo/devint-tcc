@@ -1,14 +1,40 @@
+
+body{
+height: 100%; 
+width: 100%;   
+background-color: $color-dark-gray;
+
+
+
+header{
+    background-color: $color-primary;
+    height: 200px;
+    width: 100% ;
+}
+
+   
+
 .hello-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: $color-light-gray;
+    width: 500px;
+    height: 500px;
+    
+
+   
+
+   
     
     a{
         text-decoration: none;
+        font-size: 12px;
         cursor: pointer;
         margin-top: 8px;
-        margin-left: 7em;
+        margin-bottom: 16px;
+        margin-left: 13.5em;
         
     }
     a:hover {
@@ -16,7 +42,7 @@
     }
 
     h2 {
-        font-size: clamp(40px, 10vw, 64px);
+        font-size: clamp(32px, 10vw, 64px);
         font-weight: $font-bold;
         color: $color-white;
         margin-bottom: 42px;
@@ -39,6 +65,21 @@
         color: $color-light-gray;
     }
 
+    .teste{
+        display: flex;
+        gap: 30px;
+
+        .logins{
+            height: 45px;
+            width: 95px;
+            background-color: $color-black;
+            margin-bottom: 8px;
+        }
+
+    }
+   
+
    
     
+}
 }

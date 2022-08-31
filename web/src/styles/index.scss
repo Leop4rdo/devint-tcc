@@ -15,11 +15,10 @@
   z-index: 0;
 
   // Page Style Imports ->
-  @import "./pages/Home";
   @import "./pages/dev/Registration";
+  @import "./pages/Login/";
 
   // Component Style Imports ->
-  @import "./components/TelaLoguinWeb";
   @import "./components/Input";
   @import "./components/Button";
 }
