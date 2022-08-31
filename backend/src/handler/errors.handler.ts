@@ -13,7 +13,7 @@ const errors = {
         message : 'Email is already in use!',
         code : "UE0001"
     },
-
+    
     LOGIN_FAILED : {
         message : 'Invalid user name or password!',
         code : 'UE0002'

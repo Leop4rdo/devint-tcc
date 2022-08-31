@@ -15,6 +15,8 @@ import { IUserProps } from "../../interfaces/IUser";
 import { AbstractService } from "../abstract/AbstractService";
 import IUserService from "../abstract/IUserService";
 import * as jwt from 'jsonwebtoken'
+import { validate } from "class-validator";
+import LoginRequestDTO from "../../dtos/user/LoginRequestDTO";
 
 export default class UserService extends AbstractService<UserEntity> implements IUserService {
     constructor(_repo : IRepository<UserEntity>) {
@@ -79,7 +81,10 @@ export default class UserService extends AbstractService<UserEntity> implements 
         })
     } 
 
-    async login(body : LoginDTO) : Promise<IResponse> {
+    async login(body : LoginRequestDTO) : Promise<IResponse> {
+        const dtoValidateRes = await body.validate()
+        if (dtoValidateRes) return dtoValidateRes
+
         const user = await this.repo.findBy("email", body.email)
 
         const forbiddenResponseProps = {
