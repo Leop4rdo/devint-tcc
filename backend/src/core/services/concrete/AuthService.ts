@@ -24,22 +24,35 @@ import ICompanyProps from "../../interfaces/ICompany";
 import BusinessLogicError from "../../../handler/BusinessLogicError ";
 import { CompanyResponseDTO } from "../../dtos/user/company/CompanyResponseDTO";
 import DevResponseDTO from "../../dtos/user/dev/DevResponseDTO";
+import IDevRepository from "../../../infra/repositories/abstract/IDevRepository";
+import ICompanyRepository from "../../../infra/repositories/abstract/ICompanyRepository";
 
 
 export default class AuthService implements IAuthService {
     private repo : IAuthRepository
-    private devRepo : IRepository<DevEntity>
-    private companyRepo : IRepository<CompanyEntity>
+    private devRepo : IDevRepository
+    private companyRepo : ICompanyRepository
 
     constructor(
         repo : IAuthRepository, 
-        devRepo : IRepository<DevEntity>, 
-        companyRepo : IRepository<CompanyEntity>) { 
+        devRepo : IDevRepository, 
+        companyRepo : ICompanyRepository) { 
             this.repo = repo; 
             this.companyRepo = companyRepo;
             this.devRepo = devRepo;
     }
-    
+
+    async setEnabled(id: string, value: number): Promise<IResponse> {
+        const auth = await this.repo.findById(id)
+
+        auth.enabled = value;
+
+        this.repo.update(auth);
+
+        return new SuccessResponse({
+            data: `user ${value == 0 ? 'disabled' : 'enabled'} sucessfully!`
+        })
+    }
     
     async create(body: UserCreateRequestDTO): Promise<IResponse> {
         if (await this.repo.findBy("email", body.email)){
@@ -65,14 +78,12 @@ export default class AuthService implements IAuthService {
             return new ServerErrorResponse({errorMessage : "Cannot create user", errorCode: "SE000"})
         }
 
+        user.role = (body.cnpj) ? userRoles.COMPANY : userRoles.DEV
+
         return new SuccessResponse({
             status: 201,
             data : new UserDTO(user as unknown as IUserProps)
         })
-    }
-
-    async disable(id: string): Promise<IResponse> {
-        throw new Error("Not implemented");
     }
 
     async login(body: LoginRequestDTO): Promise<IResponse> {
@@ -93,9 +104,9 @@ export default class AuthService implements IAuthService {
 
 
         const user = (auth.role == userRoles.COMPANY) ?
-            await this.companyRepo.findBy('auth', auth.id)
+            await this.companyRepo.findByAuthId(auth.id)
         :
-            await this.devRepo.findBy('auth', auth.id)
+            await this.devRepo.findByAuthId(auth.id)
 
         
 
@@ -110,10 +121,10 @@ export default class AuthService implements IAuthService {
         const _token = this.createToken(userRes);
 
         return new SuccessResponse({
-        data: {
-            token: _token,
-            user: userRes,
-        },
+            data: {
+                token: _token,
+                user: userRes,
+            },
         });
     }
 

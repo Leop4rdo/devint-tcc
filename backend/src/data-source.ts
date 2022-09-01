@@ -13,6 +13,6 @@ export const AppDataSource = new DataSource({
     password: process.env.DB_PASSWORD || 'root',
     database: process.env.DB_NAME || 'db',
     synchronize: true,
-    logging: ['error', 'warn', 'query'],
+    logging: ['error', 'warn'],
     entities: [AuthEntity, DevEntity, CompanyEntity],
 })

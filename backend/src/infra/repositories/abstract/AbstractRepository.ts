@@ -1,8 +1,9 @@
+import { Repository } from "typeorm"
 import { AppDataSource } from "../../../data-source"
 import IRepository from "./IRepository"
 
 export default abstract class AbstractRepository<T> implements IRepository<T> {
-    protected db: any
+    protected db: Repository< T | any>
 
     constructor(repo: any) {
         this.db = AppDataSource.getRepository<T>(repo)
@@ -14,7 +15,7 @@ export default abstract class AbstractRepository<T> implements IRepository<T> {
 
     async list() { return await this.db.find()}
 
-    async remove(id:string) { return await this.db.delete({id})}
+    async remove(id:string) { return (await this.db.delete({id})) ? true : false}
     
     async findById(id: string){
         return this.db.findOne({
