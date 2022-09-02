@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import colors from "../../styles/colors";
+import colors from "../../../styles/colors";
 
 const base = {
     width : 200,
@@ -19,15 +19,16 @@ const buttonStyles = StyleSheet.create({
         justifyContent: 'center',
         alignItems : 'center',
         flexDirection : 'row',
+        backgroundColor: colors.PRIMARY
     },
 
-    basePressed : { backgroundColor: colors.BLACK },
+    basePressed : { backgroundColor: colors.LIGHT_PURPLE},
 
     text : {
-        color : colors.PRIMARY,
+        color : colors.WHITE,
         textTransform: "uppercase",
         fontSize: 20
-    }
+    },
 })
 
 export default buttonStyles

@@ -1,8 +1,8 @@
-import { Pressable, Text, View } from "react-native";
+import { Pressable, Text, TouchableHighlight, TouchableOpacity, View } from "react-native";
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { Children, useState } from "react";
 import buttonStyles from "./style";
-import colors from "../../styles/colors";
+import colors from "../../../styles/colors";
 
 interface IButtonProps {
     onPress : () => void,
@@ -22,18 +22,15 @@ const ButtonComponent : React.FC<IButtonProps> = ({onPress, style, text, textSty
     const getIconColor = () => (iconColor) ? iconColor : colors.PRIMARY
 
     return (
-        <Pressable 
-            onPress={onPress} 
-            onPressIn={() => setPressed(true)}
-            onPressOut={() => setPressed(false)}
-            style={[
-                style || buttonStyles.base, 
-                (isPressed) ? pressedStyle : buttonStyles.basePressed
-            ]}
-            >
-            { icon && <Ionicons name={icon} size={ iconSize || 24} color={getIconColor()} style={(text) ? {marginRight : 8} : {}}/>}  
-            <Text style={[ buttonStyles.text, textStyle ]}>{text}</Text>
-        </Pressable>
+        <TouchableOpacity
+            activeOpacity={.75}
+            onPress={onPress}
+            style={style || buttonStyles.base}>
+            <View >
+                {icon && <Ionicons name={icon} size={iconSize || 24} color={getIconColor()} style={(text) ? { marginRight: 8 } : {}} />}
+                <Text style={[buttonStyles.text, textStyle]}>{text}</Text>
+            </View>
+        </TouchableOpacity>
     )
 }
 

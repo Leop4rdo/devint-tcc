@@ -2,8 +2,8 @@
     height: 100vh; 
     width: 100vw;   
     background-color: $color-dark-gray;
-    display: grid;
-    grid-template-columns: auto auto;
+    display: flex;
+    flex-direction: column;
    
   
 
@@ -15,92 +15,96 @@
     }
 
     main{
-        justify-self: right;
-        
-        margin-right: 100px;
-    }
-
-    .image-container{
-        justify-self: end;
-    }
-
-    .login-container {
-        display: grid;
+        height: 100%;
         display: flex;
-        flex-direction: column;
         justify-content: center;
         align-items: center;
-        width: 500px;
-        height: 500px;
-        
-        
-        
-        a{
-            text-decoration: none;
-            font-size: 12px;
-            cursor: pointer;
-            margin-top: 8px;
-            margin-bottom: 16px;
-            margin-left: 13.5em;
-            color: $color-primary;
-            text-align: center;
-            
-        }
-        
-        a:hover {
-              text-decoration: underline;   
-        }
-    
-        h1 {
-            font-size: clamp(32px, 10vw, 64px);
-            font-weight: $font-semibold;
-            color: $color-white;
-            margin-bottom: 42px;
-    
-        }
-    
-        span {
-            color: $color-white;
-        }
+        flex-direction: row;
 
-        .btnloguin{
-            width: 160px;
-           font-weight: $font-semibold;
-           font-size: 16px;
-        }
-
-        #txt-new-user{
-            margin-right: 150px;
-        }
-
-        .logins{
-            width: 100%;
-            height: 10vh;
+        .login-wrapper,
+        .image-container {
+            width: 50%;
             display: flex;
-            margin-top: 16px;
             justify-content: center;
-            flex-wrap: wrap;
-            
-            hr{
-                width: 40%;
-                height: 1px;
-                margin-top: 13px;
-                margin-left: 8px;
-                margin-right: 8px;
-                background-color: $color-primary;
-                border: none;
+            align-items: center;
+
+        }
+
+        .login-image {
+            width: clamp(200px, 60%, 700px);
+        }
+
+        .login-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 500px;
+
+            a{
+                text-decoration: none;
+                font-size: 12px;
+                cursor: pointer;
+                margin-top: 8px;
+                margin-bottom: 16px;
+                margin-left: 13.5em;
+                color: $color-primary;
+                text-align: center;
                 
             }
-
-            .login-pairing{
-                margin-left: 10px;
-                width: 82px;
-                height: 40px;
-                background-color: $color-black;
+            
+            a:hover {
+                text-decoration: underline;   
+            }
+        
+            h2 {
+                font-size: clamp(.8rem, 4vw, 3rem);
+                font-weight: $font-semibold;
+                color: $color-white;
+                margin-bottom: 42px;
+        
+            }
+        
+            span {
+                color: $color-white;
             }
 
+            .button-login{
+                width: 10vw;
+                height: 3.4vh;
+                font-weight: $font-semibold;
+                font-size: 18px;
+            }
+
+            .container-new-user{
+              width: 400px;
+              align-items: center;
+             }
+
+            .button-container{
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                margin-top: 16px;
+                justify-content: center;
+                
+
+                .login-pairing{
+                    margin-left: 10px;
+                    width: 82px;
+                    height: 41px;
+                    background-color: $color-black;
+                }
+
+            }
+        
+        }  
+
+        @media screen (){
+            
         }
-    
-    }  
+    }
+
+   
     
 }

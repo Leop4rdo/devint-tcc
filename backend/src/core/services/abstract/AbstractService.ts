@@ -15,11 +15,9 @@ export abstract class  AbstractService<T> implements IService<T> {
 
     async list() : Promise<IResponse> { 
         try {
-
             return new SuccessResponse({
                 data : await this.repo.list()
             })
-
         } catch (e) {
             return new ServerErrorResponse({ 
                 errorMessage: e.errorMessage
@@ -29,11 +27,9 @@ export abstract class  AbstractService<T> implements IService<T> {
 
     async findById(id: string) : Promise<IResponse> {
         try {
-
             return new SuccessResponse({
                 data: await this.repo.findById(id)
             })
-
         } catch (e) {
             return new ServerErrorResponse({ 
                 errorMessage: e.errorMessage
@@ -43,12 +39,10 @@ export abstract class  AbstractService<T> implements IService<T> {
 
     async create(entity: T) : Promise<IResponse> {
         try {
-
             return new SuccessResponse({
                 status: 201,
                 data: await this.repo.create(entity)
             })
-
         } catch (e) {
             return new ServerErrorResponse({ 
                 errorMessage: e.errorMessage
@@ -98,6 +92,12 @@ export abstract class  AbstractService<T> implements IService<T> {
             }
 
             this.repo.remove(id);
+
+            return new SuccessResponse({
+                data: {
+                    message: 'Deleted sucessfully'
+                }
+            })
         } catch (e) {
             return new ServerErrorResponse({ 
                 errorMessage: e.errorMessage
