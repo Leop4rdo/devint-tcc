@@ -149,9 +149,16 @@ export default class AuthService implements IAuthService {
             auth: _auth
         } as unknown as ICompanyProps)
 
+        const dtoValidateRes = await dto.validate()
+
+        if (dtoValidateRes) return new BadRequestResponse({
+            errorCode : errors.INVALID_DATA.code,
+            errorMessage : errors.INVALID_DATA.message
+        })
+
         if (dto.name == "") return new BadRequestResponse({})
 
-        return this.companyRepo.create(dto as CompanyEntity)
+        return this.companyRepo.create(dto as unknown as CompanyEntity)
     }
 
     private async createDev(body : UserCreateRequestDTO, _auth : AuthEntity) : Promise<DevEntity | BadRequestResponse>  {
@@ -161,8 +168,16 @@ export default class AuthService implements IAuthService {
             auth : _auth
         } as unknown as IDevProps)
 
+        const dtoValidateRes = await dto.validate()
+        
+
+        if (dtoValidateRes) return new BadRequestResponse({
+            errorCode : errors.INVALID_DATA.code,
+            errorMessage : errors.INVALID_DATA.message
+        })
+
         if (dto.name == "") return new BadRequestResponse({})
 
-        return this.devRepo.create(dto as DevEntity)
+        return this.devRepo.create(dto as unknown as DevEntity)
     }
 }

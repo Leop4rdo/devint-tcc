@@ -7,6 +7,8 @@ import { IUserProps, userRoles } from "../../interfaces/IUser";
 import IUserService from "../abstract/IUserService";
 import DevEntity from "../../entities/DevEntity";
 import CompanyEntity from "../../entities/CompanyEntity";
+import BadRequestResponse from "../../../Responses/BadRequestResponse";
+import errors from "../../../handler/errors.handler";
 
 export default class UserService implements IUserService {
   private devRepo : IRepository<DevEntity>;
@@ -20,7 +22,14 @@ export default class UserService implements IUserService {
   async getById(id: string): Promise<IResponse> {
     const user : any = await this.devRepo.findById(id) || await this.companyRepo.findById(id)
 
+    if (!user) 
+      return new BadRequestResponse({
+        errorMessage : errors.ENTITY_NOT_FOUND.message,
+        errorCode : errors.ENTITY_NOT_FOUND.code
+      })
+
     const resDTO = new UserDTO({...user, role : (user.cnpj) ? userRoles.COMPANY : userRoles.DEV})
+    console.log(resDTO);
 
     return new SuccessResponse({
       data : resDTO
@@ -28,8 +37,8 @@ export default class UserService implements IUserService {
   }
 
   async list(): Promise<IResponse> {
-    const devs : any[] = await this.devRepo.list()
-    const companies : any[] = await this.companyRepo.list()
+    const devs : any[] = await this.devRepo.list() || []
+    const companies : any[] = await this.companyRepo.list() || []
     
     const users = devs.concat(companies)
 

@@ -37,6 +37,11 @@ const errors = {
     ROUTE_NOT_FOUND : {
         message : 'Are u lost baby girl? read the api docs and find your way!',
         code : 'UE0000'
+    },
+
+    NOT_AUTHENTICATED : {
+        message : 'You need to be authenticated to access this route!',
+        code : "UE0006"
     }
 }
 
