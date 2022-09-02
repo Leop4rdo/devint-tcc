@@ -32,6 +32,11 @@ const errors = {
     INVALID_DATA : {
         message: 'Invalid data',
         code : 'UE0005'
+    },
+    
+    ROUTE_NOT_FOUND : {
+        message : 'Are u lost baby girl? read the api docs and find your way!',
+        code : 'UE0000'
     }
 }
 

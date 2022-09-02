@@ -3,7 +3,6 @@ import { DataSource } from "typeorm";
 import AuthEntity from "./core/entities/AuthEntity";
 import CompanyEntity from "./core/entities/CompanyEntity";
 import DevEntity from "./core/entities/DevEntity";
-import UserEntity from "./core/entities/UserEntity";
 
 
 export const AppDataSource = new DataSource({
@@ -14,6 +13,6 @@ export const AppDataSource = new DataSource({
     password: process.env.DB_PASSWORD || 'root',
     database: process.env.DB_NAME || 'db',
     synchronize: true,
-    logging: ['error', 'warn', 'query'],
+    logging: ['error', 'warn'],
     entities: [AuthEntity, DevEntity, CompanyEntity],
 })

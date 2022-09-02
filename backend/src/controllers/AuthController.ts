@@ -24,4 +24,14 @@ export default class AuthController {
                 res.status(_res.status || 200).json(_res)
             )
     }
+
+    disable = (req : Request, res : Response) => {
+        this.service.setEnabled(req.params.userId, 0)
+            .then((_res) => res.status(_res.status || 200).json(_res))
+    }
+
+    enable = (req : Request, res : Response) => {
+        this.service.setEnabled(req.params.userId, 1)
+            .then((_res) => res.status(_res.status || 200).json(_res))
+    }
 }

@@ -1,14 +1,6 @@
 import { Request, Response } from "express";
-import LoginRequestDTO from "../core/dtos/user/LoginRequestDTO";
-import UserCreateRequestDTO from "../core/dtos/user/UserCreateRequestDTO";
-import UserDTO from "../core/dtos/user/UserDTO";
-import UserEntity from "../core/entities/UserEntity";
-import { IUserProps } from "../core/interfaces/IUser";
-import IService from "../core/services/abstract/IService";
 import IUserService from "../core/services/abstract/IUserService";
-import errors from "../handler/errors.handler";
 import UserModule from "../modules/UserModule";
-import ServerErrorResponse from "../Responses/ServerErrorResponse";
 
 export default class UserController {
   private service: IUserService;
@@ -23,4 +15,11 @@ export default class UserController {
       .list()
       .then((_res) => res.status(_res.status || 200).json(_res));
   };
+
+  getById = (req: Request, res : Response) => {
+    this.service.getById(req.params.userId)
+      .then((_res) => 
+        res.status(_res.status || 200).json(_res)
+    )
+  }
 }

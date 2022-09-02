@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, OneToOne, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm";
 import { genders } from "../interfaces/IDev";
 import AuthEntity from "./AuthEntity";
 
@@ -25,7 +25,8 @@ export default class DevEntity {
     @Column('jsonb', { nullable : true })
     followers : JSON
 
-    @OneToOne(() => AuthEntity)
+    @OneToOne(() => AuthEntity, { nullable : false })
+    @JoinColumn()
     auth : AuthEntity
 
     @CreateDateColumn({ name: 'created_at', select: false })
