@@ -2,21 +2,38 @@
     height: 100vh; 
     width: 100vw;   
     background-color: $color-dark-gray;
+    display: grid;
+    grid-template-columns: auto auto;
+   
+  
 
     header{
         background-color: $color-primary;
         height: 200px;
-        width: 100% ;
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+
+    main{
+        justify-self: right;
+        
+        margin-right: 100px;
+    }
+
+    .image-container{
+        justify-self: end;
     }
 
     .login-container {
+        display: grid;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background-color: $color-light-gray;
         width: 500px;
         height: 500px;
+        
+        
         
         a{
             text-decoration: none;
@@ -25,6 +42,8 @@
             margin-top: 8px;
             margin-bottom: 16px;
             margin-left: 13.5em;
+            color: $color-primary;
+            text-align: center;
             
         }
         
@@ -32,18 +51,26 @@
               text-decoration: underline;   
         }
     
-        h2 {
+        h1 {
             font-size: clamp(32px, 10vw, 64px);
-            font-weight: $font-bold;
+            font-weight: $font-semibold;
             color: $color-white;
             margin-bottom: 42px;
     
         }
     
-        p {
-            font-size: clamp(16px, 8vw, 32px);
-            font-weight: $font-thin;
-            color: $color-light-gray;
+        span {
+            color: $color-white;
+        }
+
+        .btnloguin{
+            width: 160px;
+           font-weight: $font-semibold;
+           font-size: 16px;
+        }
+
+        #txt-new-user{
+            margin-right: 150px;
         }
 
         .logins{
@@ -52,16 +79,24 @@
             display: flex;
             margin-top: 16px;
             justify-content: center;
+            flex-wrap: wrap;
             
             hr{
                 width: 40%;
                 height: 1px;
-                margin-top: 11px;
+                margin-top: 13px;
                 margin-left: 8px;
                 margin-right: 8px;
                 background-color: $color-primary;
                 border: none;
                 
+            }
+
+            .login-pairing{
+                margin-left: 10px;
+                width: 82px;
+                height: 40px;
+                background-color: $color-black;
             }
 
         }

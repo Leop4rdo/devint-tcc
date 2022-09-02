@@ -1,4 +1,5 @@
 import React from "react";
+import Icon from "../Icon";
 
 interface IButtonProps {
     props?: any,
@@ -8,11 +9,13 @@ interface IButtonProps {
     onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
-const Button: React.FC<IButtonProps> = ({ type, children, onClick, ...props }) => {
+const Button: React.FC<IButtonProps> = ({ type, children, onClick, icon , ...props }) => {
 
     return (
-        <button type={type || "button"} onClick={onClick} {...props} >
+        <button type={type || "button"}  onClick={onClick} {...props} >
             {children}
+            
+           
         </button>
     )
 }
