@@ -1,5 +1,5 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm";
-import { genders } from "../interfaces/IDev";
+import { autoDeclaredSeniority, genders, openToWork } from "../interfaces/IDev";
 import AuthEntity from "./AuthEntity";
 
 @Entity('devs')
@@ -37,7 +37,7 @@ export default class DevEntity {
     @Column('jsonb')
     notifications : JSON
 
-    @Column({default : 0 })
+    @Column({ type : 'enum', enum: autoDeclaredSeniority, default: autoDeclaredSeniority.NO})
     autoDeclaredSeniority : boolean
 
     @Column({default : ''})
@@ -46,7 +46,7 @@ export default class DevEntity {
     @Column({nullable : false})
     githubUsername : string
 
-    @Column({default : 0 })
+    @Column({ type : 'enum', enum: openToWork, default: openToWork.NO})
     openToWork : boolean
 
     @Column({ type : 'date', nullable : true })
