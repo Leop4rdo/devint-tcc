@@ -7,7 +7,7 @@ export default class DevEntity {
     @PrimaryGeneratedColumn('uuid')
     id: string
 
-    @Column()
+    @Column({nullable:false})
     name : string
 
     @Column({ default: '', nullable : true })
@@ -16,14 +16,41 @@ export default class DevEntity {
     @Column({ type : 'enum', enum: genders, default: genders.OTHER })
     gender : string
 
-    @Column({ type : 'date', nullable : true })
-    birthday : Date
-
+    @Column({default: ''})
+    status: string
+    
     @Column('jsonb', { nullable : true })
     following : JSON
 
     @Column('jsonb', { nullable : true })
     followers : JSON
+
+    @Column()
+    profilePickUrl : string
+    
+    @Column('jsonb')
+    socialLinks : JSON
+    
+    @Column({default : 0 })
+    comunityRating : number
+
+    @Column('jsonb')
+    notifications : JSON
+
+    @Column({default : 0 })
+    autoDeclaredSeniority : boolean
+
+    @Column({default : ''})
+    currentJob : string
+
+    @Column({nullable : false})
+    githubUsername : string
+
+    @Column({default : 0 })
+    openToWork : boolean
+
+    @Column({ type : 'date', nullable : true })
+    birthday : Date
 
     @OneToOne(() => AuthEntity, { nullable : false })
     @JoinColumn()
