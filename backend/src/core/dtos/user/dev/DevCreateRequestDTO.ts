@@ -9,10 +9,9 @@ export default class DevCreateRequestDTO {
     @IsString()
     name : string;
 
-    
-   
     @IsString()
     birthday : string | Date;
+    
     @IsNotEmpty()
     auth : AuthEntity
 

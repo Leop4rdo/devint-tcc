@@ -16,7 +16,6 @@ export default class CompanyCreateRequestDTO {
         message:
           `CNPJ format is not valid, please don't smash your keyboard `,
       })
-  
     cnpj : string
 
     @IsNotEmpty()
@@ -32,6 +31,7 @@ export default class CompanyCreateRequestDTO {
         const err = await validate(this);
     
         if (err.length > 0){ 
+          console.log('validation failed. errors: ', err);
           return new ServerErrorResponse({
             hasError: true,
             errorCode : errors.BASE.code,
