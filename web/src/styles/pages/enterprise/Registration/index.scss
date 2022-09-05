@@ -1,0 +1,48 @@
+.enterprise-registration-page {
+    width: 100vw;
+    height: 100vh;
+    background-color: $color-dark-gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    
+    .registration-form-container {
+      width: 50%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+    
+      h2 {
+        font-size: 2rem;
+        color: $color-white;
+      }
+    
+      svg {
+        transform: rotate(90deg);
+      }
+    }
+    
+    .image-container {
+      width: 50%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    
+    img {
+      max-width: 400px;
+      height: auto;
+    }
+    
+    .curve {
+      content: "";
+      border-radius: 100% 50%;
+      width: 55%;
+      height: 100%;
+      background-color: hsl(216, 21%, 16%);
+    }
+  }

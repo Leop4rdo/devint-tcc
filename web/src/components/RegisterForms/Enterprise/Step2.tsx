@@ -1,7 +1,7 @@
-//import Button from "components/utils/Button";
-import React, { useState } from "react";
+import React from "react";
+import { useState } from "react";
+
 import Input from "components/utils/Input";
-//import Icon from "components/utils/Icon";
 
 interface IFormProps {
     onSubmit: (data : IFormFields) => void,
@@ -12,7 +12,7 @@ interface IFormFields {
     passwordConfirm: string,
 }
 
-const DevForm2: React.FC<IFormProps> = ({ onSubmit }) => {
+const EnterpriseForm2: React.FC<IFormProps> = ({ onSubmit }) => {
     const [formFields, setFormFields] = useState<IFormFields>({
         password: "",
         passwordConfirm: "",
@@ -30,20 +30,13 @@ const DevForm2: React.FC<IFormProps> = ({ onSubmit }) => {
             <div className="terms-checkbox">
 
                 <input type="checkbox" id="terms-of-acceptance" />
+                
                 <label htmlFor="terms-of-acceptance" >Li e aceito os termos e condições</label>
             
             </div>
-
-            {/* <div className="button-container">
-
-                <Button type="button" children={<Icon name="arrow_back" />} />
-
-                <Button type="submit" children={["cadastrar"]} ></Button>
-
-            </div> */}
 
         </form>
     )
 }
 
-export default DevForm2
+export default EnterpriseForm2;

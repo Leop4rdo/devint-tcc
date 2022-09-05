@@ -17,10 +17,12 @@
   // Page Style Imports ->
   @import "./pages/Home";
   @import "./pages/dev/Registration";
+  @import "./pages/enterprise/Registration/index.scss";
 
   // Component Style Imports ->
   @import "./components/Hello";
   @import "./components/Input";
   @import "./components/Button";
   @import "./components/RegisterForms/Dev/index.scss";
+  @import "./components/RegisterForms/Enterprise/index.scss";
 }
