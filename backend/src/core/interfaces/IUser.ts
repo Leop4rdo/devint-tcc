@@ -3,8 +3,12 @@ export interface IUserProps {
     name : string
     email : string
     password : string
-    enabled : boolean
     role : number
+    cnpj? : string
+    gender? : string
+    birthday? : Date | string
+    following? : JSON
+    followers? : JSON
 }
 
 export const userRoles = {
