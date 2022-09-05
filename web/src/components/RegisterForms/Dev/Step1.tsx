@@ -32,8 +32,6 @@ const DevForm1: React.FC<IForm1Props> = ({ onSubmit }) => {
 
             <Input icon="today" type="text" placeholder="Data de nascimento" onChange={()=>{}}/>
 
-            <Button type="submit" children={["proximo" , <Icon name="arrow_forward" />]} ></Button>
-
         </form>
     )
 }
