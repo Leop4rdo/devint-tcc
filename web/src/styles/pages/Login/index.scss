@@ -7,14 +7,21 @@
 
     header {
         text-align: center;
-        border-collapse: collapse;
-        h1{
-            background-color: $color-light-purple;
-            width: 100%;
-            margin-bottom: -14px;
-            height: auto;
-            
-        } 
+
+        height: clamp(200px, 15vh, 400px);
+        width: 100vw;
+        padding: 0 clamp(24px, 4vw, 80px);
+
+        // MAGIC CODE, DO NOT TOUCH!
+        background-image: url("../../../../public/assets/images/horizontal-wave-bg.png");
+        background-size: 100% 100%;
+
+        display: flex;
+        align-items: center;
+
+        h1 {
+            font-size: clamp(2rem, 4vw, 4rem);
+        }
     }
 
     main {
@@ -84,8 +91,8 @@
             }
 
             .button-login {
-                width: clamp(11rem, 11vw, 40rem);
-                height: 3.5vh;
+                width: clamp(11rem, 10vw, 15rem);
+                height: 3vh;
                 font-weight: $font-semibold;
                 font-size: 18px;
             }

@@ -2,23 +2,14 @@ import React from "react";
 import Input from "components/utils/Input"
 import { Button } from "@mui/material";
 import { Link } from 'react-router-dom'
+import LogoComponent from "components/utils/Logo";
 
 const LoginPage: React.FC = () => {
 
     return (
         <div className="login-page">
             <header>
-
-            <div>
-                <h1>Bem vindo</h1> 
-            </div>
-                <div>
-                    <svg width="100%" height="10%" viewBox="0 0 1308 208" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      
-                        <path d="M1307.01 154.911L1252.55 143.858C1198.09 132.804 1089.17 110.697 980.257 99.6547C871.339 88.6125 762.424 88.6354 653.514 110.788C544.603 132.942 435.698 177.225 326.786 195.713C217.875 213.924 108.959 207.031 54.5002 203.101L0.0419187 199.447L2.08616e-05 0.274964L54.4576 0.263508C108.915 0.252053 217.83 0.229141 326.745 0.20623C435.66 0.183318 544.576 0.160407 653.491 0.137496C762.406 0.114584 871.321 0.0916727 980.236 0.0687613C1089.15 0.0458498 1198.07 0.0229384 1252.52 0.0114827L1306.98 2.69586e-05L1307.01 154.911Z" fill="#A587FA" />
-                    </svg>
-                </div>
-
+                <h1><LogoComponent secondary="#1F252F" primary="#7865FF"/></h1> 
             </header>
 
             <main>
@@ -42,9 +33,7 @@ const LoginPage: React.FC = () => {
                                 <img src="assets/icons/google.svg" alt="" />
                             </Button>
                         </div>
-                        <div className="container-new-user">
-                            <Link to='/register'>Sou novo aqui</Link>
-                        </div>
+                            <Link className="container-new-user" to='/register'>Sou novo aqui</Link>
 
                     </div>
                 </div>
