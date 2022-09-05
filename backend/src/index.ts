@@ -17,6 +17,7 @@ AppDataSource.initialize().then(async () => {
     app.use(express.json())
     app.use(cors())
     app.use(helmet())
+    // app.use(errorHandlerMiddleware)
     
     // loaging routes
     app.use('/api/v1', routes);
