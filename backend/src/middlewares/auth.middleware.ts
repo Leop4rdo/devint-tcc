@@ -5,8 +5,8 @@ import * as jwt from "jsonwebtoken"
 
 const forbiddenResProps = {
     status : 403,
-    errorCode : errors.LOGIN_FAILED.code,
-    errorMessage : errors.LOGIN_FAILED.message
+    errorCode : errors.NOT_AUTHENTICATED.code,
+    errorMessage : errors.NOT_AUTHENTICATED.message
 }
 
 const authMiddleware = (req : Request, res : Response, next : NextFunction) => {

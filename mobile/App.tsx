@@ -2,6 +2,7 @@ import React from 'react';
 import { Platform, SafeAreaView, StyleSheet, Text, View, StatusBar, NativeAppEventEmitter } from 'react-native';
 import { useFonts } from '@expo-google-fonts/poppins';
 import RegisterPage from './src/pages/Register';
+import LandingPage from './src/pages/Landing';
 import { fontsToImport } from './src/styles/typography';
 import LoginPage from './src/pages/Login';
 
@@ -18,8 +19,8 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <stack.Navigator initialRouteName='register'screenOptions={{headerShown: false}}>
-
+      <stack.Navigator initialRouteName='landing'screenOptions={{headerShown: false}}>
+        <stack.Screen name='landing' component={LandingPage}/>
         <stack.Screen name='login' component={LoginPage}/>
         <stack.Screen name='home' component={HomePage} />
         <stack.Screen name='register' component={RegisterPage} />
