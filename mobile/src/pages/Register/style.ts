@@ -1,7 +1,9 @@
+import { cloneElement } from "react";
 import { StyleSheet } from "react-native";
 import colors from "../../styles/colors";
 import globalStyles from "../../styles/global";
 import fonts from "../../styles/typography";
+import { screenHeight, screenWidth } from "../../styles/utils";
 
 export default StyleSheet.create({
     container : {
@@ -25,13 +27,24 @@ export default StyleSheet.create({
         fontSize: 32,
         marginBottom: 40
     },
-    textInput: {
-        fontFamily: fonts.POPPINS_LIGHT,
-        color: colors.WHITE
+    stepDescription: {
+        fontFamily: fonts.POPPINS_MEDIUM,
+        color: colors.WHITE,
+        textAlign: 'center',
+        justifyContent: 'center',
+        width: screenWidth * .5,
+        marginBottom : 32
     },
     input: {
         width: 256,
         marginBottom:40,
+    },
+
+    form: {
+        height: screenHeight * .3,
+        display: 'flex',
+        justifyContent: 'center',
+        alignContent: 'center',
     }
 
 })

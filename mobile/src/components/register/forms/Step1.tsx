@@ -8,16 +8,10 @@ interface IRegisterFormProps {
 
 const RegisterFormStep1 : React.FC<IRegisterFormProps> = ({styles}) => {
     return (
-        <View>
-            <View>
-                <Text style={styles.textInput}>Nome:</Text>
-                <FeedbackTextInput style={styles.input} placeholder="Digite seu nome" icon="person" onChangeText={(text : string) => {}} ></FeedbackTextInput>
-            </View>
+        <View style={styles.form}>
+            <FeedbackTextInput style={styles.input} placeholder="Digite seu nome" icon="person" onChangeText={(text : string) => {}} ></FeedbackTextInput>
 
-            <View>
-                <Text style={styles.textInput}>Email</Text>
-                <FeedbackTextInput style={styles.input} placeholder="Digite um email" icon="mail" onChangeText={(text : string) => {}} ></FeedbackTextInput>
-            </View>       
+            <FeedbackTextInput style={styles.input} placeholder="Digite um email" icon="mail" onChangeText={(text : string) => {}} ></FeedbackTextInput>
         </View>
     )
 }
