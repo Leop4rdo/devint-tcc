@@ -1,7 +1,7 @@
 import React from "react";
 import Input from "components/utils/Input"
 import { Button } from "@mui/material";
-import Icon from "components/utils/Icon";
+import { Link } from 'react-router-dom'
 
 const LoginPage: React.FC = () => {
 
@@ -9,13 +9,12 @@ const LoginPage: React.FC = () => {
         <div className="login-page">
             <header><h1>Bem vindo</h1></header>
 
-            
             <main>
                 <div className="image-container">
-                    <img src="assets/images/imglogin.svg" className="login-image"/>
+                    <img src="assets/images/login.svg" className="login-image" />
                 </div>
-               <div className="login-wrapper">
-                <div className="login-container">
+                <div className="login-wrapper">
+                    <div className="login-container">
                         <h2>Entrar</h2>
                         <Input icon="email" placeholder={"Senha"} onChange={() => { }} type="email" />
                         <Input icon="lock" placeholder={"Email"} onChange={() => { }} type="password" />
@@ -23,21 +22,20 @@ const LoginPage: React.FC = () => {
 
                         <Button className="button-login">Login</Button>
 
-                        <span>ou</span>
-                        
+                        <p>ou</p>
+
                         <div className="button-container">
                             <Button className="login-pairing"> <img src="assets/icons/github.svg" alt="" /></Button>
-                            <Button className="login-pairing" > 
-                            <img src="assets/icons/google.svg" alt="" /> 
-                             </Button>
-                            
+                            <Button className="login-pairing" >
+                                <img src="assets/icons/google.svg" alt="" />
+                            </Button>
                         </div>
-                        <div className="container-new-user"> 
-                            <a href="#">Sou novo aqui</a>
+                        <div className="container-new-user">
+                            <Link to='/register'>Sou novo aqui</Link>
                         </div>
-                        
+
                     </div>
-               </div>
+                </div>
             </main>
 
         </div>

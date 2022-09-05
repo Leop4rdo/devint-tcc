@@ -5,13 +5,9 @@
     display: flex;
     flex-direction: column;
    
-  
-
     header{
         background-color: $color-primary;
         height: 200px;
-        grid-column-start: 1;
-        grid-column-end: 3;
     }
 
     main{
@@ -58,51 +54,70 @@
             }
         
             h2 {
-                font-size: clamp(.8rem, 4vw, 3rem);
+                font-size: clamp(2rem, 4vw, 3rem);
                 font-weight: $font-semibold;
                 color: $color-white;
                 margin-bottom: 42px;
         
             }
-        
-            span {
+           
+            p{
+                margin-top: 16px;
                 color: $color-white;
             }
-
+    
+            p::after ,
+            p::before {
+                content: '';
+                width: 8.4rem;
+                height: 1px;
+                background-color: $color-primary;
+                display: inline-block;
+                margin: 0px 8px 3.7px 8px;
+            }
+            
             .button-login{
-                width: 10vw;
-                height: 3.4vh;
+                width: clamp(11rem, 11vw, 40rem);
+                height: 3.5vh;
                 font-weight: $font-semibold;
                 font-size: 18px;
             }
 
             .container-new-user{
               width: 400px;
+              margin-left: 10px;
               align-items: center;
+              margin-top: 24px;
              }
 
             .button-container{
                 width: 100%;
                 display: flex;
                 flex-direction: row;
-                margin-top: 16px;
                 justify-content: center;
                 
-
                 .login-pairing{
-                    margin-left: 10px;
-                    width: 82px;
+                    margin-left: 24px;
+                    margin-right: 10px;
+                    width: clamp( 2rem , 10vw, 5rem);
                     height: 41px;
                     background-color: $color-black;
+                }
+                img{
+                    width: 25px;
                 }
 
             }
         
         }  
 
-        @media screen (){
-            
-        }
+       @media (max-width: $breakpoint-medium) {
+            .image-container{
+               display: none;
+            }
+       }
+
+       
     }
 
    

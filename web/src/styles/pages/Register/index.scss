@@ -1,0 +1,109 @@
+.register-page {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+
+    main {
+        height: 100%;
+        display: flex;
+
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 50%;
+            height: 100%;
+            background-color: $color-light-purple;
+
+            .register-image {
+                width: clamp(200px, 60%, 700px);
+            }
+
+            h2 {
+                color: $color-white;
+                font-weight: $font-regular;
+                font-size: clamp(1rem, 1.5vw, 1.5rem);
+                width: clamp(12rem, 32vw, 32rem);
+                text-align: center;
+            }
+        }
+
+        .register-container {
+            width: 50%;
+            height: 100vh;
+            background-color: $color-black;
+            display: flex;
+            flex-direction: column;
+
+            .menu-container {
+                margin-top: 32px;
+                display: flex;
+                justify-content: center;
+                flex-basis: 40%;
+
+                a:hover {
+                    text-decoration: underline;
+                }
+
+                nav ul li a {
+                    text-decoration: none;
+                    font-size: clamp(1rem, 2vw, 1.2rem);
+                    cursor: pointer;
+                    color: $color-light-purple;
+                    padding: clamp(0.5rem, 1.5vw, 1.4rem);
+                }
+
+                nav ul li {
+                    list-style: none;
+                    display: inline;
+                }
+
+            }
+
+            .register-user {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                h1 {
+                    color: $color-light-purple;
+                    font-weight: $font-semibold;
+                    font-size: clamp(2rem, 2.5vw, 2.5rem);
+                }
+
+                .button-container {
+                    display: flex;
+                    margin-top: 33px;
+
+                    .register-button {
+                        margin-left: 8px;
+                        background-color: transparent;
+                        font-weight: $font-semibold;
+                        color: $color-light-purple;
+                        height: 32px;
+                        font-size: clamp( 0.8rem , 1vw , 1rem);
+                        width: clamp( 8.3rem , 10vw , 10rem);
+                    }
+                }
+            }
+
+        }
+
+        @media (max-width: $breakpoint-medium) {
+
+            .image-container {
+                display: none;
+
+            }
+
+            .register-container {
+                width: 100%;
+            }
+
+        }
+
+    }
+
+}
