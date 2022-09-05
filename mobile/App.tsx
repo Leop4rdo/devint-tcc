@@ -1,12 +1,13 @@
 import React from 'react';
 import { Platform, SafeAreaView, StyleSheet, Text, View, StatusBar, NativeAppEventEmitter } from 'react-native';
 import { useFonts } from '@expo-google-fonts/poppins';
-import HomePage from './src/pages/Home';
+import LandingPage from './src/pages/Landing';
 import { fontsToImport } from './src/styles/typography';
 import LoginPage from './src/pages/Login';
 
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomePage from './src/pages/Home';
 
 export default function App() {
   let [fontsLoaded] = useFonts(fontsToImport);
