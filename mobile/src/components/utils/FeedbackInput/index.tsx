@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import {View, TextInput, Pressable, Touchable} from 'react-native'
-import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 
 import colors from '../../../styles/colors';
 import StyleBuilder from '../../../styles/StyleBuilder';
@@ -11,7 +11,7 @@ interface IFeedbackTextInput {
     placeholder? : string
     isPassword? : boolean
     style? : any
-    icon? : keyof typeof MaterialIcons.glyphMap 
+    icon? : keyof typeof MaterialIcons.glyphMap
     iconSize? : number
     onChangeText : (text : string) => void
     value?: string
@@ -59,9 +59,9 @@ const FeedbackTextInput : React.FC<IFeedbackTextInput> = ({style, isPassword, pl
 
     return (
         <View style={containerStyles.process(status)}>
-            { icon && <Ionicons name={icon} size={ iconSize || 24} color={getIconColor()} style={{marginRight : 4}}/>}
+            { icon && <MaterialIcons name={icon} size={ iconSize || 24} color={getIconColor()} style={{marginRight : 4}}/>}
             <TextInput
-                secureTextEntry={isPassword && textVisible || false}
+                secureTextEntry={isPassword && !textVisible || false}
                 style={styles.input}
                 placeholder={placeholder}
                 onChangeText={onChangeText}
@@ -73,8 +73,8 @@ const FeedbackTextInput : React.FC<IFeedbackTextInput> = ({style, isPassword, pl
             { isPassword &&
             
                 <Pressable onPress={toggleTextVisible}>
-                    <Ionicons 
-                        name={textVisible ? 'eye' : 'eye-off'} 
+                    <MaterialIcons 
+                        name={textVisible ? 'visibility' : 'visibility-off'} 
                         size={ iconSize || 24} 
                         color={getIconColor()} 
                     />
