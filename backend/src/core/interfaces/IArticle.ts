@@ -1,5 +1,8 @@
 export default interface IArticleProps {
   id : string
-  name : string
-  value : string
+  title : string
+  content : string
+  upVotes : JSON
+  downVotes : JSON
+  comments : JSON
 }

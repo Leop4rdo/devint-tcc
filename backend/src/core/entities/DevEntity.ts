@@ -1,5 +1,5 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm";
-import { autoDeclaredSeniority, genders, openToWork } from "../interfaces/IDev";
+import { genders } from "../interfaces/IDev";
 import AuthEntity from "./AuthEntity";
 
 @Entity('devs')
@@ -25,31 +25,31 @@ export default class DevEntity {
     @Column('jsonb', { nullable : true })
     followers : JSON
 
-    @Column()
-    profilePickUrl : string
+    @Column({name : 'profile_pic_url'})
+    profilePicUrl : string
     
-    @Column('jsonb')
+    @Column('jsonb', {name: 'social_links'})
     socialLinks : JSON
     
-    @Column({default : 0 })
+    @Column({default : 0 , name:'comunity_ratings'})
     comunityRating : number
 
     @Column('jsonb')
     notifications : JSON
 
-    @Column({ type : 'enum', enum: autoDeclaredSeniority, default: autoDeclaredSeniority.NO})
+    @Column({ name : 'auto_declared_seniority' })
     autoDeclaredSeniority : boolean
 
-    @Column({default : ''})
+    @Column({default : '', name : 'current_job'})
     currentJob : string
 
-    @Column({nullable : false})
+    @Column({nullable : false, name : 'github_username', unique : true})
     githubUsername : string
 
-    @Column({ type : 'enum', enum: openToWork, default: openToWork.NO})
+    @Column({name : 'open_to_work'})
     openToWork : boolean
 
-    @Column({ type : 'date', nullable : true })
+    @Column({ type : 'date' })
     birthday : Date
 
     @OneToOne(() => AuthEntity, { nullable : false })

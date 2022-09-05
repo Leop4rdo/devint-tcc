@@ -12,11 +12,11 @@ export default class ArticleEntity {
     @Column({ nullable : false})
     content: string
     
-    @Column()
-    upvotes: number 
+    @Column('jsonb', { name : 'up_votes'})
+    upVotes: JSON 
     
-    @Column()
-    downvotes: number
+    @Column('jsonb', { name : 'down_votes'})
+    downVotes: JSON
     
     @Column('jsonb')
     comments: JSON

@@ -9,7 +9,7 @@ export default interface IDevProps {
     status: string
     following ?: JSON
     followers ?: JSON
-    profilePickUrl : string
+    profilePicUrl : string
     socialLinks : JSON
     comunityRating : number
     notifications : JSON
@@ -25,14 +25,4 @@ export const genders = {
     MALE: "m",
     FEMALE: "f",
     OTHER: "o"
-}
-
-export const openToWork = {
-    NO: false,
-    YES: true
-}
-
-export const autoDeclaredSeniority ={
-    NO: false,
-    YES: true
 }

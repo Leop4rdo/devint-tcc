@@ -1,11 +1,11 @@
 export default interface IProjectProps {
   name : string
-  github_repo_url: string
+  githubRepoUrl: string
   followers: JSON
   license: String
-  accept_donations: boolean
-  help_wanted: boolean
+  acceptDonations: boolean
+  helpWanted: boolean
   desc: string
-  upvotes: number
-  downvotes: number
+  upVotes: JSON
+  downVotes: JSON
 }

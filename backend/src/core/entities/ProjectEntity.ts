@@ -6,8 +6,8 @@ export default class ProjectEntity {
     @Column({ nullable : false})
     name: string
     
-    @Column({ nullable : false})
-    github_repo_url: string
+    @Column({ nullable : false, name : 'github_repo_url'})
+    githubRepoUrl: string
 
     @Column('jsonb')
     followers: JSON
@@ -15,20 +15,20 @@ export default class ProjectEntity {
     @Column()
     license: String
     
-    @Column()
-    accept_donations: boolean
+    @Column({ name : 'accept_donations'})
+    acceptDonations: boolean
    
-    @Column()
-    help_wanted: boolean
+    @Column({ name : 'help_wanted'})
+    helpWanted: boolean
    
     @Column()
     desc: string
    
-    @Column()
-    upvotes: number
+    @Column('jsonb', { name : 'up_votes' })
+    upVotes: JSON
    
-    @Column()
-    downvotes: number
+    @Column('jsonb', { name : 'up_votes' })
+    downVotes: JSON
 
     @CreateDateColumn({ name: 'created_at', select: false })
     createdAt : Timestamp
