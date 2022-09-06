@@ -1,5 +1,7 @@
 import { Button } from "@mui/material";
 import React from "react";
+import Icon from "components/utils/Icon";
+import { Link } from "react-router-dom";
 
 
 const Register: React.FC = () => {
@@ -9,10 +11,10 @@ const Register: React.FC = () => {
 
             <main>
                 <div className="image-container">
-                
+
                     <img src="assets/images/register.svg" className="register-image" />
                     <h2>Crie conexões, tenha seu portfólio online e participe de uma comunidade de desenvolvimento incrivel</h2>
-                
+
                 </div>
 
                 <div className="register-container">
@@ -31,6 +33,12 @@ const Register: React.FC = () => {
                             <Button className="register-button">SOU EMPRESA</Button>
                             <Button className="register-button">SOU DEV</Button>
                         </div>
+                        <Button className="button-keyboard_backspace">
+                            <Link className="" to='/'>
+                                <Icon name="keyboard_backspace" />
+                                Voltar
+                            </Link>
+                        </Button>
                     </div>
                 </div>
             </main>

@@ -14,7 +14,7 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            width: 50%;
+            width: 60%;
             height: 100%;
             background-color: $color-light-purple;
 
@@ -32,31 +32,29 @@
         }
 
         .register-container {
-            width: 80%;
+            width: 100%;
+            min-width: 300px;
             height: 100%;
             background-color: $color-black;
             display: flex;
             flex-direction: column;
-            justify-content: start;
+            align-items: center;
             background-image: url("../../../../public/assets/images/wave-vertical.png");
-            background-size: contain;
+            background-size: clamp(40px, 10vw, 320px) 100%;
             background-repeat: no-repeat;
-
 
             .menu-container {
                 margin-top: 32px;
                 display: flex;
-                margin-right: 10%;
-                justify-content: end;
                 flex-basis: 40%;
-
+                
                 a:hover {
                     text-decoration: underline;
                 }
 
                 nav ul li a {
                     text-decoration: none;
-                    font-size: clamp(1rem, 2vw, 1.2rem);
+                    font-size: clamp(1.2rem, 2vw, 1.3rem);
                     cursor: pointer;
                     color: $color-light-purple;
                     padding: clamp(0.5rem, 1.5vw, 1.4rem);
@@ -72,14 +70,12 @@
             .register-user {
                 display: flex;
                 flex-direction: column;
-                align-items: flex-end;
-                justify-items: center;
-                margin-right: 20%;
-                
+                align-items: center;
+               
                 h1{
                     color: $color-light-purple;
                     font-weight: $font-semibold;
-                    font-size: clamp(2rem, 2.5vw, 2.5rem);
+                    font-size: clamp(3rem, 4vw, 3.2rem);
                 }
 
                 .button-container {
@@ -92,20 +88,36 @@
                         font-weight: $font-semibold;
                         color: $color-light-purple;
                         height: 32px;
-                        font-size: clamp(0.8rem, 1vw, 1rem);
-                        width: clamp(8.3rem, 10vw, 10rem);
+                        font-size: clamp(0.9rem, 2vw, 1rem);
+                        width: clamp(9.4rem, 11vw, 10.6rem);
+                    }
+                }
+
+                .button-keyboard_backspace{
+                    background-color: transparent;
+                    border: none;
+                    width: 20px;
+                    margin-top: 60px;
+                    
+                    a{
+                        text-decoration: none;
+                        font-size: 10px;
+                        cursor: pointer;
+                        color: $color-light-purple;
+                    }
+
+                    a:hover{
+                        text-decoration: underline;
+                    }
+
+                    .icon{
+                        color: $color-light-purple;
+                        font-size: 65px;
+                        
                     }
                 }
             }
 
-            @media (max-width: $breakpoint-desktop){
-                .register-user{
-                    margin-right: 10%;
-                }
-                .menu-container{  
-                    margin-right: 0%;
-                }
-            }
         }
 
         @media (max-width: $breakpoint-laptop) {
@@ -116,7 +128,6 @@
             }
 
             .register-container {
-                width: 100%;
                 background-image: none;
             }
 
