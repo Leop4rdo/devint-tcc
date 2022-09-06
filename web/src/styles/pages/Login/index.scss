@@ -22,6 +22,14 @@
         h1 {
             font-size: clamp(2rem, 4vw, 4rem);
         }
+
+        
+    }
+    @media (max-width: $breakpoint-medium) {
+
+        header{
+         display: block;
+        }
     }
 
     main {
@@ -129,6 +137,10 @@
         @media (max-width: $breakpoint-medium) {
             .image-container {
                 display: none;
+            }
+
+            header{
+                justify-content: center;
             }
         }
 
