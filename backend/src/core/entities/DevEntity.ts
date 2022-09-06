@@ -29,28 +29,28 @@ export default class DevEntity {
     @Column('jsonb', { nullable : true })
     followers : JSON
 
-    @Column({name : 'profile_pic_url'})
+    @Column({name : 'profile_pic_url', nullable : true })
     profilePicUrl : string
     
-    @Column('jsonb', {name: 'social_links'})
+    @Column('jsonb', {name: 'social_links', nullable : true})
     socialLinks : JSON
     
     @Column({default : 0 , name:'comunity_ratings'})
     comunityRating : number
 
-    @Column('jsonb')
+    @Column('jsonb', { nullable : true })
     notifications : JSON
 
-    @Column({ name : 'auto_declared_seniority' })
-    autoDeclaredSeniority : boolean
+    @Column({ name : 'auto_declared_seniority', default : "JUNIOR"}) // TODO move this to enum
+    autoDeclaredSeniority : string
 
-    @Column({default : '', name : 'current_job'})
+    @Column({default : '', name : 'current_job', nullable : true})
     currentJob : string
 
-    @Column({nullable : false, name : 'github_username', unique : true})
+    @Column({nullable : true, name : 'github_username', unique : true})
     githubUsername : string
 
-    @Column({name : 'open_to_work'})
+    @Column({name : 'open_to_work', default : false})
     openToWork : boolean
 
     @Column({ type : 'date' })

@@ -4,6 +4,8 @@ import PostEntity from "./PostEntity"
 
 @Entity('projects')
 export default class ProjectEntity {
+    @PrimaryGeneratedColumn('uuid')
+    id : string
     
     @Column({ nullable : false})
     name: string
@@ -29,7 +31,7 @@ export default class ProjectEntity {
     @Column('jsonb', { name : 'up_votes' })
     upVotes: JSON
    
-    @Column('jsonb', { name : 'up_votes' })
+    @Column('jsonb', { name : 'down_votes' })
     downVotes: JSON
 
     @CreateDateColumn({ name : 'created_at', select: false })
@@ -37,5 +39,4 @@ export default class ProjectEntity {
 
     @UpdateDateColumn({ name : 'updated_at' })
     updatedAt : Timestamp
-
 }

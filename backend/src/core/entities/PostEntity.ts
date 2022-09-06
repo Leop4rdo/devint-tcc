@@ -6,11 +6,11 @@ export default class PostEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string
 
-  @Column({})
+  @Column()
   content: string
 
-  @Column({})
-  attachment: string[]
+  // @Column({})
+  // attachment: string[]
   
   @Column('jsonb')
   reports: JSON
@@ -21,7 +21,7 @@ export default class PostEntity {
   @Column('jsonb')
   upVotes: JSON
 
-  @Column('jsonb')
+  @Column('jsonb', { name: "down_votes" })
   downVotes: JSON
 
   @CreateDateColumn({select:false})
