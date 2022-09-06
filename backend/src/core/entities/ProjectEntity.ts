@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm"
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm"
+import DevEntity from "./DevEntity"
 
 @Entity('projects')
 export default class ProjectEntity {
@@ -35,4 +36,7 @@ export default class ProjectEntity {
 
     @UpdateDateColumn({ name : 'updated_at' })
     updatedAt : Timestamp
+
+    @ManyToOne(() => DevEntity, (dev) => dev.projects)
+    projects: User
 }

@@ -1,6 +1,9 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm";
 import { genders } from "../interfaces/IDev";
 import AuthEntity from "./AuthEntity";
+import BadgeEntity from "./BadgeEntity";
+import ProjectEntity from "./ProjectEntity";
+import SkillEntity from "./SkillEntity";
 
 @Entity('devs')
 export default class DevEntity {
@@ -61,4 +64,15 @@ export default class DevEntity {
 
     @UpdateDateColumn({ name : 'updated_at' })
     updatedAt : Timestamp
+
+    @ManyToMany(()=> SkillEntity)
+    @JoinTable()
+    skills: SkillEntity[]
+
+    @ManyToMany(()=> BadgeEntity)
+    @JoinTable()
+    badges: BadgeEntity[]
+
+    @OneToMany(()=> ProjectEntity, (projects) => projects.dev)
+    project: ProjectEntity[]
 }
