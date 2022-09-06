@@ -5,6 +5,7 @@ export default class ServerErrorResponse implements IResponse  {
     hasError: boolean;
     errorCode: string;
     errorMessage: string;
+    length: number;
 
     constructor(props: IResponse) {
     
