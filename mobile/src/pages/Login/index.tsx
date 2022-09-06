@@ -7,9 +7,7 @@ import globalStyles from '../../styles/global';
 import { isEmail, isEmpty } from '../../utils/validation';
 import styles from './style'
 
-interface IPageProps {
-    navigation : any
-}
+
 
 const LoginPage : React.FC<any> = ({navigation}) => {
     console.log(navigation)

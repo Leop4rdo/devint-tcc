@@ -1,7 +1,7 @@
 import { Text, View } from "react-native"
-import FeedbackTextInput from "../../components/FeedbackInput";
+import FeedbackTextInput from "../../components/utils/FeedbackInput";
 import styles from "./style" ;
-import ButtonComponent from "../../components/Button";
+import ButtonComponent from "../../components/utils/Button";
 import colors from "../../styles/colors";
 
 const LandingPage : React.FC = () => {
