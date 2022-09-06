@@ -1,7 +1,9 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm";
 import { genders } from "../interfaces/IDev";
+import ArticleEntity from "./ArticleEntity";
 import AuthEntity from "./AuthEntity";
 import BadgeEntity from "./BadgeEntity";
+import CareerFocusEntity from "./CareerFocusEntity";
 import PostEntity from "./PostEntity";
 import ProjectEntity from "./ProjectEntity";
 import SkillEntity from "./SkillEntity";
@@ -76,4 +78,12 @@ export default class DevEntity {
 
     @OneToMany(()=> PostEntity, (posts) => posts.writter)
     posts: ProjectEntity[]
+
+    @OneToMany(()=> ArticleEntity, (articles) => articles.writter)
+    articles: ArticleEntity[]
+
+    @OneToMany(()=> CareerFocusEntity ,(carrerFocus) => carrerFocus.dev)
+    @JoinColumn({name: 'carrers_focus'})   
+    careerFocus : CareerFocusEntity[]
+
 }

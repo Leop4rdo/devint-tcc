@@ -1,5 +1,6 @@
 import internal from "stream"
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm"
+import { Column, CreateDateColumn, Entity, ManyToMany, ManyToOne, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm"
+import DevEntity from "./DevEntity"
 
 @Entity('articles')
 export default class ArticleEntity {
@@ -26,4 +27,7 @@ export default class ArticleEntity {
 
     @UpdateDateColumn({ name : 'updated_at' })
     updatedAt : Timestamp
+
+    @ManyToOne(()=> DevEntity, (writter) => writter.articles)
+    writter : DevEntity
 }
