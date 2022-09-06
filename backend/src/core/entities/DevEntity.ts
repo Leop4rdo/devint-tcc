@@ -2,6 +2,7 @@ import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, On
 import { genders } from "../interfaces/IDev";
 import AuthEntity from "./AuthEntity";
 import BadgeEntity from "./BadgeEntity";
+import PostEntity from "./PostEntity";
 import ProjectEntity from "./ProjectEntity";
 import SkillEntity from "./SkillEntity";
 
@@ -73,6 +74,6 @@ export default class DevEntity {
     @JoinTable()
     badges: BadgeEntity[]
 
-    @OneToMany(()=> ProjectEntity, (projects) => projects.dev)
-    project: ProjectEntity[]
+    @OneToMany(()=> PostEntity, (posts) => posts.writter)
+    posts: ProjectEntity[]
 }

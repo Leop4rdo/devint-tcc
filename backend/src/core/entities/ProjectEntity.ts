@@ -1,5 +1,6 @@
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm"
 import DevEntity from "./DevEntity"
+import PostEntity from "./PostEntity"
 
 @Entity('projects')
 export default class ProjectEntity {
@@ -31,12 +32,10 @@ export default class ProjectEntity {
     @Column('jsonb', { name : 'up_votes' })
     downVotes: JSON
 
-    @CreateDateColumn({ name: 'created_at', select: false })
+    @CreateDateColumn({ name : 'created_at', select: false })
     createdAt : Timestamp
 
     @UpdateDateColumn({ name : 'updated_at' })
     updatedAt : Timestamp
 
-    @ManyToOne(() => DevEntity, (dev) => dev.projects)
-    projects: User
 }
