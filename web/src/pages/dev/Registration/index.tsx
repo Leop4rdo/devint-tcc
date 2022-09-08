@@ -8,17 +8,31 @@ import Icon from "components/utils/Icon";
 
 const DevRegistrationPage: React.FC = () => {
 
-    const [step, setStep] = useState(1);
+    const [currentStep, setCurrentStep] = useState(0);
 
-    let currentStep = () => {
-        if (step === 1) {
-            return <DevForm1 onSubmit={() => { }} />
-        }
+    const steps = [
+        {desc : "", component : <DevForm1 onSubmit={() => { }} />},
+        {desc : "", component : <DevForm2 onSubmit={() => { }} />},
+    ]
 
-        if (step === 2) {
-            return <DevForm2 onSubmit={() => { }} />
-        }
+    const onConfirmButtonPress = () => {
+        if (currentStep >= steps.length -1)
+            return
+        else 
+            setCurrentStep(currentStep+1)    
     }
+
+    // const [step, setStep] = useState(1);
+
+    // let currentStep = () => {
+    //     if (step === 1) {
+    //         return <DevForm1 onSubmit={() => { }} />
+    //     }
+
+    //     if (step === 2) {
+    //         return <DevForm2 onSubmit={() => { }} />
+    //     }
+    // }
 
     return (
         <div className="dev-registration-page">
@@ -26,20 +40,20 @@ const DevRegistrationPage: React.FC = () => {
             <div className="registration-form-container">
 
                 <h2>Sou Dev</h2>
-                {currentStep()}
+                {steps[currentStep].component}
 
                 <div className="button-container">
 
-                    <Button type="button" children={<Icon name="arrow_back" />} onClick={(e) => setStep(1)} style={{ display: step == 1 ? 'none' : 'block' }}/>
+                    {/* <Button type="button" children={<Icon name="arrow_back" />} onClick={(e) => setStep(1)} style={{ display: step == 1 ? 'none' : 'block' }}/> */}
 
-                    <Button type="submit" children={ step == 1 ? ["proximo", <Icon name="arrow_forward" />] : "cadastrar"} onClick={(e) => setStep(2)} ></Button>
+                    <Button type="submit" children={(currentStep >= steps.length - 1) ? 'cadastrar' : 'proximo'} onClick={onConfirmButtonPress} ></Button>
 
                 </div>
 
             </div>
 
             <div className="image-container">
-                <img src="assets/images/dev-image.svg" alt="developer on a computer" />
+                <img src="assets/images/dev-img.svg" alt="developer on a computer" />
             </div>
 
         </div>

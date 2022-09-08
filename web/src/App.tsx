@@ -12,6 +12,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Login />}></Route>
           <Route path='/register' element={<Register />}></Route>
+          <Route path='/dev-register' element={<DevRegistrationPage />}></Route>
         </Routes>
 
       </Router>

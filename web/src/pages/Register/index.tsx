@@ -30,8 +30,14 @@ const Register: React.FC = () => {
                     <div className="register-user">
                         <h1>Cadastre-se</h1>
                         <div className="button-container">
-                            <Button className="register-button">SOU EMPRESA</Button>
-                            <Button className="register-button">SOU DEV</Button>
+                            <Button className="register-button">
+                                SOU EMPRESA
+                            </Button>
+                            <Button className="register-button">
+                                <Link className="" to='/dev-register'>
+                                    SOU DEV
+                                </Link>    
+                            </Button>
                         </div>
                         <Button className="button-keyboard_backspace">
                             <Link className="" to='/'>
