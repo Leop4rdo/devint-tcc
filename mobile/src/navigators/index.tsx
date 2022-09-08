@@ -1,6 +1,6 @@
 import {NavigationContainer} from '@react-navigation/native'
-import React from 'react'
-import AuthProvider from '../store/context/Auth.context'
+import React, { useContext } from 'react'
+import { AuthContext, AuthProvider } from '../store/context/Auth.context'
 import PublicNavigator from './Public.navigator'
     
 export interface IPageProps {
@@ -9,12 +9,14 @@ export interface IPageProps {
 
 
 const AppNavigator : React.FC = () => {
+    const authContext = useContext(AuthContext);
+
     return (
         <NavigationContainer>
-            <AuthProvider>
-                { /* show public routes only if not authenticated */ }
-                <PublicNavigator />
-            </AuthProvider>
+                { authContext?.signed ?
+                    <></>
+                :
+                    <PublicNavigator />}
         </NavigationContainer>
     )
 }

@@ -3,11 +3,13 @@ import { View, Text, Animated } from "react-native"
 import FeedbackTextInput from "../../utils/FeedbackInput"
 
 
-interface IRegisterFormProps {
-    styles : any
+export interface IRegisterFormProps {
+    styles : any,
+    formData : any
+    onChange : (value : string, key : any) => void
 }
 
-const RegisterFormStep1 : React.FC<IRegisterFormProps> = ({styles}) => {
+const RegisterFormStep1 : React.FC<IRegisterFormProps> = ({styles, formData, onChange}) => {
     const fadeInAnimation = useRef(new Animated.Value(0)).current
 
     useEffect(() => {
@@ -16,17 +18,17 @@ const RegisterFormStep1 : React.FC<IRegisterFormProps> = ({styles}) => {
             {
                 toValue: 1,
                 useNativeDriver : true,
-                duration: 250
+                duration: 750
             }
         ).start()
     }, [fadeInAnimation])
 
     return (
-        <View style={styles.form}>
-            <FeedbackTextInput style={styles.input} placeholder="Digite seu nome" icon="person" onChangeText={(text : string) => {}} ></FeedbackTextInput>
+        <Animated.View style={{...styles.form, opacity : fadeInAnimation}}>
+            <FeedbackTextInput style={styles.input} placeholder="Digite seu nome" icon="person" onChangeText={(text : string) => onChange(text, "name")} ></FeedbackTextInput>
 
-            <FeedbackTextInput style={styles.input} placeholder="Digite um email" icon="mail" onChangeText={(text : string) => {}} ></FeedbackTextInput>
-        </View>
+            <FeedbackTextInput style={styles.input} placeholder="Digite um email" icon="mail" onChangeText={(text : string) => onChange(text, "email")} ></FeedbackTextInput>
+        </Animated.View>
     )
 }
 

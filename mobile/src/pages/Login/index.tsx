@@ -1,8 +1,9 @@
 import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import {View, Text, TextInput, TouchableOpacity} from 'react-native';
 import ButtonComponent from '../../components/utils/Button';
 import FeedbackTextInput from '../../components/utils/FeedbackInput';
+import { AuthContext } from '../../store/context/Auth.context';
 import globalStyles from '../../styles/global';
 import { isEmail, isEmpty } from '../../utils/validation';
 import styles from './style'
@@ -10,11 +11,14 @@ import styles from './style'
 
 
 const LoginPage : React.FC<any> = ({navigation}) => {
-    console.log(navigation)
+    const authContext = useContext(AuthContext)
+
+    const [warning, setWarning] = useState("")
+
 
     const [formValues, setFormValues] = useState({
         email : "",
-        password : ""
+        password : "",
     })
 
     const handleInputChange = (text : string, key : keyof typeof formValues) => {
@@ -22,6 +26,15 @@ const LoginPage : React.FC<any> = ({navigation}) => {
             ...formValues,
             [key] : text
         })
+    }
+
+    const onSubmit = async () => {
+        if(!isEmail(formValues.email) || isEmpty(formValues.password)) 
+            return setWarning("Confira se os campos foram preenchidos corretamente!")
+
+        const res = await authContext?.signIn(formValues.email, formValues.password)
+
+        if (res.hasError) setWarning("Usuário ou senha invalidos!")
     }
 
     return (
@@ -45,10 +58,12 @@ const LoginPage : React.FC<any> = ({navigation}) => {
                     onChangeText={(text) => handleInputChange(text, 'password')}  
                     validate={() => !isEmpty(formValues.password)}  
                     placeholder="Senha" />
+
+                <Text style={styles.warning}>{warning}</Text>
             </View>
 
             <View style={globalStyles.centerItemContainer}>
-                <ButtonComponent text='login' onPress={()=>{navigation.navigate('home')}} />
+                <ButtonComponent text='login' onPress={() => onSubmit()} />
                 <TouchableOpacity
                     activeOpacity={1}
                     onPress={()=>{ alert('WIP'); }}

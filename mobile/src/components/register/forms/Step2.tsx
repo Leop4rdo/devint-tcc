@@ -1,15 +1,18 @@
 import { View, Text } from "react-native"
 import FeedbackTextInput from "../../utils/FeedbackInput"
+import { IRegisterFormProps } from "./Step1"
 
 
-interface IRegisterFormProps {
-    styles : any
-}
 
-const RegisterFormStep2 : React.FC<IRegisterFormProps> = ({styles}) => {
+
+const RegisterFormStep2 : React.FC<IRegisterFormProps> = ({styles, formData, onChange}) => {
     return(
         <View style={styles.form}>
-            <FeedbackTextInput style={styles.input} placeholder="" icon="calendar-today" onChangeText={(text : string) => {}} ></FeedbackTextInput>
+            <FeedbackTextInput 
+                style={styles.input} 
+                placeholder="" 
+                icon="calendar-today" 
+                onChangeText={(text : string) => onChange(text, 'birthday') } ></FeedbackTextInput>
         </View>
     )
 }
