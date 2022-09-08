@@ -5,7 +5,7 @@ import globalStyles from "../../styles/global";
 
 const style = StyleSheet.create({
     container : {
-        backgroundColor : colors.BLACK,
+        backgroundColor : colors.DARK_GRAY,
         width: '100%',
         height: '100%',
         display: 'flex',
