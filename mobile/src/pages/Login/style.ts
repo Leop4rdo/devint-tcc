@@ -29,6 +29,13 @@ const styles = StyleSheet.create({
 
     linkPasswordRecover : {
         marginTop: 16
+    },
+
+    warning : {
+        ...globalStyles.text,
+        textAlign: 'center',
+        marginTop : 24,
+        color : colors.RED
     }
 })
 
