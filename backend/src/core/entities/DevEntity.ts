@@ -6,6 +6,7 @@ import BadgeEntity from "./BadgeEntity";
 import CareerFocusEntity from "./CareerFocusEntity";
 import PostEntity from "./PostEntity";
 import ProjectEntity from "./ProjectEntity";
+import SeniorityEntity from "./SeniorityEntity";
 import SkillEntity from "./SkillEntity";
 
 @Entity('devs')
@@ -43,9 +44,6 @@ export default class DevEntity {
     @Column('jsonb')
     notifications : JSON
 
-    @Column({ name : 'auto_declared_seniority' })
-    autoDeclaredSeniority : boolean
-
     @Column({default : '', name : 'current_job'})
     currentJob : string
 
@@ -61,12 +59,6 @@ export default class DevEntity {
     @OneToOne(() => AuthEntity, { nullable : false })
     @JoinColumn()
     auth : AuthEntity
-
-    @CreateDateColumn({ name: 'created_at', select: false })
-    createdAt : Timestamp
-
-    @UpdateDateColumn({ name : 'updated_at' })
-    updatedAt : Timestamp
 
     @ManyToMany(()=> SkillEntity)
     @JoinTable()
@@ -86,4 +78,13 @@ export default class DevEntity {
     @JoinColumn({name: 'carrers_focus'})   
     careerFocus : CareerFocusEntity[]
 
+    // @ManyToOne(()=> SeniorityEntity, (senior) => senior.SSeniority)
+    // @JoinColumn({name:'auto_declared_seniority'})
+    // autoDeclaredSeniority : SeniorityEntity[]
+
+    @CreateDateColumn({ name: 'created_at', select: false })
+    createdAt : Timestamp
+
+    @UpdateDateColumn({ name : 'updated_at' })
+    updatedAt : Timestamp
 }
