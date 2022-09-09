@@ -6,7 +6,7 @@ interface IButtonProps {
     icon?: string,
     type?: "submit" | "button" | "reset",
     children?: React.ReactNode,
-    onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+    onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
 const Button: React.FC<IButtonProps> = ({ type, children, onClick, icon , ...props }) => {
