@@ -33,14 +33,6 @@ const DevForm2: React.FC<IFormProps> = ({ onSubmit }) => {
             <label htmlFor="terms-of-acceptance" >Li e aceito os termos e condições</label>
             </div>
 
-            {/* <div className="button-container">
-
-                <Button type="button" children={<Icon name="arrow_back" />} />
-
-                <Button type="submit" children={["cadastrar"]} ></Button>
-
-            </div> */}
-
         </form>
     )
 }

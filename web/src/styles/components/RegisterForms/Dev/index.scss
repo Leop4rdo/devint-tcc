@@ -2,7 +2,11 @@ form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1rem;
+
+    .input-container{
+        width: clamp( 270px ,30vw , 300px);
+    }
     
     ::placeholder {
         color: $color-white;
@@ -19,4 +23,11 @@ form {
 .button-container {
     display: flex;
     gap: 0.4rem;
+
+    .button-register{
+        font-weight: $font-medium;
+        background-color: $color-black;
+        color: $color-light-purple;
+        width: clamp(8.9rem, 10vw, 9.9rem);;
+    }
 }

@@ -42,7 +42,6 @@ const Register: React.FC = () => {
                         <Button className="button-keyboard_backspace">
                             <Link className="" to='/'>
                                 <Icon name="keyboard_backspace" />
-                                Voltar
                             </Link>
                         </Button>
                     </div>
