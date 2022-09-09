@@ -34,6 +34,8 @@ const DevRegistrationPage: React.FC = () => {
 
                     <Button type="submit" children={step == 1 ? ["proximo", <Icon name="arrow_forward" />] : "cadastrar"} onClick={(e) => setStep(2)} ></Button>
 
+                    <Button></Button>
+
                 </div>
 
             </div>
