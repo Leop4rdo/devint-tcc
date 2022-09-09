@@ -65,7 +65,7 @@ export default class DevEntity {
     skills: SkillEntity[]
 
     @ManyToMany(()=> BadgeEntity)
-    @JoinTable()
+    @JoinColumn({})
     badges: BadgeEntity[]
 
     @OneToMany(()=> PostEntity, (posts) => posts.writter)
@@ -78,9 +78,9 @@ export default class DevEntity {
     @JoinColumn({name: 'carrers_focus'})   
     careerFocus : CareerFocusEntity[]
 
-    // @ManyToOne(()=> SeniorityEntity, (senior) => senior.SSeniority)
-    // @JoinColumn({name:'auto_declared_seniority'})
-    // autoDeclaredSeniority : SeniorityEntity[]
+    @ManyToOne(()=> SeniorityEntity, (senior) => senior.devs)
+    @JoinColumn({name:'auto_declared_seniority'})
+    autoDeclaredSeniority : SeniorityEntity
 
     @CreateDateColumn({ name: 'created_at', select: false })
     createdAt : Timestamp

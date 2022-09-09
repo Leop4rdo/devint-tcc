@@ -124,7 +124,7 @@ export default class AuthService implements IAuthService {
 
         const userRes = (auth.role == userRoles.COMPANY) ?
             new CompanyResponseDTO(user as ICompanyProps)
-            : new DevResponseDTO(user as IDevProps) 
+            : new DevResponseDTO(user as unknown as IDevProps) 
         
         new UserDTO({...user, role : auth.role} as unknown as IUserProps);
 

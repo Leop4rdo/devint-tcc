@@ -10,15 +10,13 @@ export default class SeniorityEntity {
   @Column({nullable:false})
   names: string
 
+  @OneToMany(()=> DevEntity, (dev) => dev.autoDeclaredSeniority)
+  devs: DevEntity[]
+  
   @CreateDateColumn({ name : 'created_at', select: false })
   createdAt : Timestamp
 
   @UpdateDateColumn({ name : 'updated_at' })
   updatedAt : Timestamp
-
-  // @OneToMany(()=> DevEntity)
-  // @JoinColumn()
-  // devs: DevEntity
-
-
+  
 }

@@ -1,5 +1,6 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm";
 import DevEntity from "./DevEntity";
+import PostAttachmentEntity from "./PostAttachmentEntity";
 
 @Entity('posts')
 export default class PostEntity {
@@ -8,9 +9,6 @@ export default class PostEntity {
 
   @Column({})
   content: string
-
-  @Column({})
-  attachment: string[]
   
   @Column('jsonb')
   reports: JSON
@@ -24,13 +22,17 @@ export default class PostEntity {
   @Column('jsonb')
   downVotes: JSON
 
+  @OneToMany(() => PostAttachmentEntity, (postAttachments) => postAttachments.post)
+  @JoinColumn({name: 'post_attachment'}) 
+  postAttachment: PostAttachmentEntity[]
+  
+  @ManyToOne(() => DevEntity, (writter) => writter.posts)
+  writter: DevEntity
+
   @CreateDateColumn({select:false})
   createdAt : Timestamp
   
   @UpdateDateColumn({})
   updateAt : Timestamp
-
-  @ManyToOne(() => DevEntity, (writter) => writter.posts)
-  writter: DevEntity
 
 }

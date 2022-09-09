@@ -1,5 +1,4 @@
-import internal from "stream"
-import { Column, CreateDateColumn, Entity, ManyToMany, ManyToOne, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm"
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToMany, ManyToOne, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm"
 import DevEntity from "./DevEntity"
 
 @Entity('articles')
@@ -21,6 +20,10 @@ export default class ArticleEntity {
     
     @Column('jsonb')
     comments: JSON
+    
+    @ManyToOne(()=> DevEntity, (dev) => dev.articles)
+    @JoinColumn()
+    writter : DevEntity
 
     @CreateDateColumn({ name: 'created_at', select: false })
     createdAt : Timestamp
@@ -28,6 +31,4 @@ export default class ArticleEntity {
     @UpdateDateColumn({ name : 'updated_at' })
     updatedAt : Timestamp
 
-    @ManyToOne(()=> DevEntity, (writter) => writter.articles)
-    writter : DevEntity
 }

@@ -9,12 +9,13 @@ export default class CareerFocusEntity {
     @Column({ nullable : false})
     name: string
     
+    @ManyToOne(()=> DevEntity, (dev) => dev.careerFocus)
+    dev: DevEntity
+
     @CreateDateColumn({ name: 'created_at', select: false })
     createdAt : Timestamp
 
     @UpdateDateColumn({ name : 'updated_at' })
     updatedAt : Timestamp
-
-    @ManyToOne(()=> DevEntity, (dev) => dev.careerFocus)
-    dev: DevEntity
+    
 }
