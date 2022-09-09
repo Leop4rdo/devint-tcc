@@ -12,7 +12,7 @@ interface IFormFields {
     passwordConfirm: string,
 }
 
-const EnterpriseForm2: React.FC<IFormProps> = ({ onSubmit }) => {
+const CompanyForm2: React.FC<IFormProps> = ({ onSubmit }) => {
     const [formFields, setFormFields] = useState<IFormFields>({
         password: "",
         passwordConfirm: "",
@@ -39,4 +39,4 @@ const EnterpriseForm2: React.FC<IFormProps> = ({ onSubmit }) => {
     )
 }
 
-export default EnterpriseForm2;
+export default CompanyForm2;

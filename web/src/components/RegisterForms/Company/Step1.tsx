@@ -13,7 +13,7 @@ interface IFormFields {
     cnpj : string,
 }
 
-const EnterpriseForm1: React.FC<IForm1Props> = ({ onSubmit }) => {
+const CompanyForm1: React.FC<IForm1Props> = ({ onSubmit }) => {
     const [formFields, setFormFields] = useState<IFormFields>({
         name : "",
         email: "",
@@ -35,4 +35,4 @@ const EnterpriseForm1: React.FC<IForm1Props> = ({ onSubmit }) => {
     )
 }
 
-export default EnterpriseForm1;
+export default CompanyForm1;
