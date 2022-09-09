@@ -9,7 +9,7 @@ export interface IResponse {
 }
 
 
-export const baseUrl = "http://192.168.0.113:8080/api/v1"
+export const baseUrl = "http://10.107.144.21:8080/api/v1"
 
 const api = axios.create({
     baseURL : baseUrl
