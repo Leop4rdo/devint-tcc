@@ -34,14 +34,6 @@ const DevForm2: React.FC<IFormProps> = ({ onSubmit }) => {
             
             </div>
 
-            {/* <div className="button-container">
-
-                <Button type="button" children={<Icon name="arrow_back" />} />
-
-                <Button type="submit" children={["cadastrar"]} ></Button>
-
-            </div> */}
-
         </form>
     )
 }

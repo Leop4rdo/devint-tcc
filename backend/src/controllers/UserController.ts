@@ -1,50 +1,22 @@
 import { Request, Response } from "express";
-import LoginDTO from "../core/dtos/user/LoginDTO";
-import UserCreateDTO from "../core/dtos/user/UserCreateDTO";
-import UserDTO from "../core/dtos/user/UserDTO";
-import UserEntity from "../core/entities/UserEntity";
-import { IUserProps } from "../core/interfaces/IUser";
-import IService from "../core/services/abstract/IService";
 import IUserService from "../core/services/abstract/IUserService";
-import errors from "../handler/errors.handler";
 import UserModule from "../modules/UserModule";
-import ServerErrorResponse from "../Responses/ServerErrorResponse";
 
 export default class UserController {
-    private service : IUserService
+  private service: IUserService;
 
-    constructor() {
-        const dep = new UserModule();   
-        this.service = dep.getUserService()
-    }
+  constructor() {
+    const dep = new UserModule();
+    this.service = dep.getUserService();
+  }
 
-    list = (req : Request, res : Response) => {
-        this.service.list()
-            .then(_res => res.status(_res.status || 200).json(_res))
-    }
+  list = (req: Request, res: Response) => {
+    this.service.list()
+      .then((_res) => res.status(_res.status || 200).json(_res));
+  };
 
-    getById = (req : Request, res : Response) => {
-        this.service.findById(req.params.userId)
-            .then(_res => res.status(_res.status || 200).json(_res))
-    }
-
-    create = (req : Request, res : Response) => {
-        this.service.create(new UserCreateDTO(req.body as IUserProps))
-            .then(_res => res.status(_res.status || 200).json(_res))
-    }
-
-    update = (req : Request, res : Response) => {
-        this.service.update(new UserDTO(req.body as IUserProps), req.params.userId)
-            .then(_res => res.status(_res.status || 200).json(_res))
-    }
-
-    disable = (req : Request, res : Response) => {
-        this.service.disable(req.params.userId)
-            .then(_res => res.status(_res.status || 200).json(_res))
-    }
-
-    login = (req : Request, res : Response) => {
-        this.service.login(new LoginDTO(req.body as IUserProps))
-            .then(_res => res.status(_res.status || 200).json(_res))
-    }
+  getById = (req: Request, res : Response) => {
+    this.service.getById(req.params.userId)
+      .then((_res) => res.status(_res.status || 200).json(_res))
+  }
 }

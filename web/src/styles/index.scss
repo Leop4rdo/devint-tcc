@@ -15,12 +15,12 @@
   z-index: 0;
 
   // Page Style Imports ->
-  @import "./pages/Home";
+  @import "./pages/Login";
+  @import "./pages/Register";
   @import "./pages/dev/Registration";
   @import "./pages/enterprise/Registration/index.scss";
 
   // Component Style Imports ->
-  @import "./components/Hello";
   @import "./components/Input";
   @import "./components/Button";
   @import "./components/RegisterForms/Dev/index.scss";

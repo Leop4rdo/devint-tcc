@@ -5,16 +5,27 @@ import BadRequestResponse from "../Responses/BadRequestResponse";
 import errors from "../handler/errors.handler";
 
 function errorHandlerMiddleware(
-  err: any,
+  // err: Error | BusinessLogicError,
   req: Request,
   res: Response,
   next: NextFunction
 ) {
-  res.status(err.status || 400).json(new BadRequestResponse({
-    status : 400,
-    errorMessage : err.message || errors.BASE.message,
-    errorCode : err.errorCode || errors.BASE.code
-  }))
+  try{
+    next()
+  } catch(err) {
+    res.status(400).json(new BadRequestResponse({
+        status : 400,
+        errorMessage : err.message || errors.BASE.message,
+        errorCode : errors.BASE.code
+      }))
+  }
+
+
+  // res.status(400).json(new BadRequestResponse({
+  //   status : 400,
+  //   errorMessage : err.message || errors.BASE.message,
+  //   errorCode : errors.BASE.code
+  // }))
 }
 
 export default errorHandlerMiddleware;

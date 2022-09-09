@@ -1,13 +1,22 @@
 import DevRegistrationPage from 'pages/dev/Registration';
-import EnterpriseRegistrationPage from 'pages/enterprise/Registration';
-import HomePage from 'pages/Home';
+import Login from './pages/Login';
 import React from 'react';
+import Register from 'pages/Register';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 function App() {
   return (
-    <div className="App">
-      <EnterpriseRegistrationPage />
-    </div>
+    
+      <Router>
+
+        <Routes>
+          <Route path='/' element={<Login />}></Route>
+          <Route path='/register' element={<Register />}></Route>
+          <Route path='/dev-register' element={<DevRegistrationPage />}></Route>
+        </Routes>
+
+      </Router>
+    
   );
 }
 

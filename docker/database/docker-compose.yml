@@ -1,12 +1,13 @@
 version: '3.1'
 services:
-  db:
-    image: mysql
+  pgdb:
+    image: postgres
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
       MYSQL_DATABASE: tcc_db
     ports:
-      - 3307:3306
+      - 5432:5432
     volumes:
-      - $HOME/database/mysql:/var/lib/mysql
+      - $HOME/database/pg:/var/lib/postgresql/data

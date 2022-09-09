@@ -1,8 +1,9 @@
-import React from 'react';
-import { Platform, SafeAreaView, StyleSheet, Text, View, StatusBar } from 'react-native';
+import { Text, View } from 'react-native';
 import { useFonts } from '@expo-google-fonts/poppins';
-import HomePage from './src/pages/Home';
 import { fontsToImport } from './src/styles/typography';
+
+import AppNavigator from './src/navigators';
+import { AuthProvider } from './src/store/context/Auth.context';
 
 export default function App() {
   let [fontsLoaded] = useFonts(fontsToImport);
@@ -10,23 +11,12 @@ export default function App() {
   if (!fontsLoaded) return <View><Text>App is loading...</Text></View> // TODO : add splash screen
 
   return (
-    <View style={styles.container}>
-      <SafeAreaView>
-        <StatusBar barStyle="dark-content" />
-        
-        <HomePage />
-
-      </SafeAreaView>
-    </View>
+    <AuthProvider>
+      <AppNavigator />
+    </AuthProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    zIndex: 1,
-    paddingTop: Platform.OS === "ios" ? StatusBar.currentHeight : 0,
-    width: '100%',
-    height: '100%',
-    backgroundColor: '#fff',
-  },
-});
+
+
+
