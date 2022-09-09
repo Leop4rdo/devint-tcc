@@ -1,17 +1,23 @@
-import { View, Text, TextInput } from "react-native"
+import { useEffect } from "react"
+import { View, Text, TextInput, Animated } from "react-native"
+import useAnimation from "../../../hooks/useAnimation"
 import FeedbackTextInput from "../../utils/FeedbackInput"
+import { IRegisterFormProps } from "./Step1"
 
 
-interface IRegisterFormProps {
-    styles : any
-}
 
-const RegisterFormStep3 : React.FC<IRegisterFormProps> = ({styles}) => {
+const RegisterFormStep3 : React.FC<IRegisterFormProps> = ({styles, onChange, formData}) => {
+    const opacityAnim = useAnimation(0, 1)
+
+    useEffect(() => {
+        opacityAnim.start();
+    }, [opacityAnim.prop])
+
     return(
-        <View style={styles.form}>
+        <Animated.View style={styles.form}>
+            <FeedbackTextInput isPassword style={styles.input} placeholder="" icon="lock" onChangeText={(text : string) => onChange(text, "password")} ></FeedbackTextInput>
             <FeedbackTextInput isPassword style={styles.input} placeholder="" icon="lock" onChangeText={(text : string) => {}} ></FeedbackTextInput>
-            <FeedbackTextInput isPassword style={styles.input} placeholder="" icon="lock" onChangeText={(text : string) => {}} ></FeedbackTextInput>
-        </View>
+        </Animated.View>
     )
 }
 

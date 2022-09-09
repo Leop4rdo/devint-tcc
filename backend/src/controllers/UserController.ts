@@ -11,15 +11,12 @@ export default class UserController {
   }
 
   list = (req: Request, res: Response) => {
-    this.service
-      .list()
+    this.service.list()
       .then((_res) => res.status(_res.status || 200).json(_res));
   };
 
   getById = (req: Request, res : Response) => {
     this.service.getById(req.params.userId)
-      .then((_res) => 
-        res.status(_res.status || 200).json(_res)
-    )
+      .then((_res) => res.status(_res.status || 200).json(_res))
   }
 }

@@ -17,13 +17,12 @@ AppDataSource.initialize().then(async () => {
     app.use(express.json())
     app.use(cors())
     app.use(helmet())
-    // app.use(errorHandlerMiddleware)
-    
+    app.use(errorHandlerMiddleware)
+
     // loaging routes
     app.use('/api/v1', routes);
     
     app.use(errorHandlerMiddleware)
-    app.use('*', notFoundMiddleware)
     
     app.listen(PORT, () => {
         console.log(`Api is currently running on port ${PORT}`)
