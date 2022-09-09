@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import DevForm1 from "components/RegisterForms/Dev/Step1";
 import DevForm2 from "components/RegisterForms/Dev/Step2";
-import { Button } from "@mui/material";
+import Button from "components/utils/Button";
 import Icon from "components/utils/Icon";
 
 const DevRegistrationPage: React.FC = () => {
@@ -38,16 +38,13 @@ const DevRegistrationPage: React.FC = () => {
         <div className="dev-registration-page">
 
             <div className="registration-form-container">
-
                 <h2>Sou Dev</h2>
+
                 {steps[currentStep].component}
 
                 <div className="button-container">
-
                     <Button type="submit" children={(currentStep >= steps.length - 1) ? 'Cadastrar' : ["Proximo" , <Icon name="arrow_forward" />]} onClick={onConfirmButtonPress} className="button-register" ></Button>
-
                 </div>
-
             </div>
 
             <div className="image-container">

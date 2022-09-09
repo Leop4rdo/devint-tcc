@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
+import { useState } from "react";
 
-//import Button from "components/utils/Button";
 import Input from "components/utils/Input";
-//import Icon from "components/utils/Icon";
 
 interface IForm1Props {
     onSubmit: (data : IFormFields) => void,
@@ -11,14 +10,14 @@ interface IForm1Props {
 interface IFormFields {
     name : string,
     email: string,
-    birthday : string,
+    cnpj : string,
 }
 
-const DevForm1: React.FC<IForm1Props> = ({ onSubmit }) => {
+const EnterpriseForm1: React.FC<IForm1Props> = ({ onSubmit }) => {
     const [formFields, setFormFields] = useState<IFormFields>({
         name : "",
         email: "",
-        birthday: "",
+        cnpj: "",
     })
 
 
@@ -30,10 +29,10 @@ const DevForm1: React.FC<IForm1Props> = ({ onSubmit }) => {
 
             <Input icon="mail" type="text" placeholder="E-mail"onChange={()=>{}} />
 
-            <Input icon="today" type="text" placeholder="Data de nascimento" onChange={()=>{}}/>
+            <Input icon="badge" type="text" placeholder="CNPJ" onChange={()=>{}}/>
 
         </form>
     )
 }
 
-export default DevForm1
+export default EnterpriseForm1;
