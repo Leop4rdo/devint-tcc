@@ -44,7 +44,7 @@ const DevRegistrationPage: React.FC = () => {
 
                 <div className="button-container">
 
-                    <Button type="submit" children={(currentStep >= steps.length - 1) ? 'cadastrar' : 'proximo'} onClick={onConfirmButtonPress} className="button-register" ></Button>
+                    <Button type="submit" children={(currentStep >= steps.length - 1) ? 'Cadastrar' : ["Proximo" , <Icon name="arrow_forward" />]} onClick={onConfirmButtonPress} className="button-register" ></Button>
 
                 </div>
 

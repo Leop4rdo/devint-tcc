@@ -32,11 +32,11 @@
     background-repeat: no-repeat;
 
     img {
-      width: clamp(400px, 75%, 500px);
+      width: clamp(110px, 65%, 500px);
     }
 
   }
-  @media (max-width: $breakpoint-laptop) {
+  @media (max-width: $breakpoint-medium) {
     
     img{
       display: none;
