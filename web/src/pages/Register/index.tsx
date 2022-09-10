@@ -34,7 +34,7 @@ const Register: React.FC = () => {
                                 SOU EMPRESA
                             </Button>
                             <Button className="register-button">
-                                <Link className="" to='/dev-register'>
+                                <Link className="" to='dev'>
                                     SOU DEV
                                 </Link>    
                             </Button>

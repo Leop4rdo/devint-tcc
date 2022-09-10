@@ -2,27 +2,27 @@ import React from "react";
 
 import { useState } from "react";
 
-import EnterpriseForm1 from "components/RegisterForms/Enterprise/Step1";
-import EnterpriseForm2 from "components/RegisterForms/Enterprise/Step2";
+import CompanyForm1 from "components/RegisterForms/Company/Step1";
+import CompanyForm2 from "components/RegisterForms/Company/Step2";
 import Button from "components/utils/Button";
 import Icon from "components/utils/Icon";
 
-const EnterpriseRegistrationPage: React.FC = () => {
+const CompanyRegistrationPage: React.FC = () => {
 
     const [step, setStep] = useState(1);
 
     let currentStep = () => {
         if (step === 1) {
-            return <EnterpriseForm1 onSubmit={() => { }} />
+            return <CompanyForm1 onSubmit={() => { }} />
         }
 
         if (step === 2) {
-            return <EnterpriseForm2 onSubmit={() => { }} />
+            return <CompanyForm2 onSubmit={() => { }} />
         }
     }
 
     return (
-        <div className="enterprise-registration-page">
+        <div className="company-registration-page">
 
             <div className="registration-form-container">
 
@@ -49,4 +49,4 @@ const EnterpriseRegistrationPage: React.FC = () => {
     )
 };
 
-export default EnterpriseRegistrationPage;
+export default CompanyRegistrationPage;
