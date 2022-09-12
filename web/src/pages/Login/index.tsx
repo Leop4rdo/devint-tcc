@@ -1,10 +1,30 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import Input from "components/utils/Input"
-import { Button } from "@mui/material";
+import { Alert, Button } from "@mui/material";
 import { Link } from 'react-router-dom'
 import LogoComponent from "components/utils/Logo";
+import { AuthContext } from "store/context/Auth.context";
 
 const LoginPage: React.FC = () => {
+    const authContext = useContext(AuthContext);
+
+    const [formValues, setFormValues] = useState({
+        email : "",
+        password : ""
+    })
+
+    const handleChange = (e : any) => {
+        setFormValues({
+            ...formValues,
+            [e.target.name] : e.target.value
+        })
+    }  
+
+    const login = async () => {
+        const res = await authContext?.signIn(formValues.email, formValues.password)
+
+        if (res.hasError) alert("Usuário ou senha invalidos!")
+    }
 
     return (
         <div className="login-page">
@@ -29,11 +49,11 @@ const LoginPage: React.FC = () => {
                 <div className="login-wrapper">
                     <div className="login-container">
                         <h2>Entrar</h2>
-                        <Input icon="email" placeholder={"Email"} onChange={() => { }} type="email" />
-                        <Input icon="lock" placeholder={"Senha"} onChange={() => { }} type="password" />
+                        <Input icon="email" placeholder={"Email"} onChange={handleChange} name="email" type="email" />
+                        <Input icon="lock" placeholder={"Senha"} onChange={handleChange} name="password" type="password" />
                         <a href="#">Esqueci minha senha</a>
 
-                        <Button className="button-login">Login</Button>
+                        <Button className="button-login" onClick={login}>Login</Button>
 
                         <p>ou</p>
 
