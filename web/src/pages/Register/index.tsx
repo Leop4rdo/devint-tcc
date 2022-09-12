@@ -14,7 +14,7 @@ const Register: React.FC = () => {
             <main>
                 <div className="image-container">
 
-                    <img src="assets/images/register.svg" className="register-image" />
+                    <img src="../assets/images/Svg/register.svg" className="register-image" />
                     <h2>Crie conexões, tenha seu portfólio online e participe de uma comunidade de desenvolvimento incrivel</h2>
 
                 </div>

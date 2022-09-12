@@ -53,7 +53,7 @@ const DevRegistrationPage: React.FC = () => {
             </div>
 
             <div className="image-container">
-                <img src="assets/images/dev-img.svg" alt="developer on a computer" />
+                <img src="../assets/images/Svg/dev-img.svg" alt="developer on a computer" />
             </div>
 
         </div>

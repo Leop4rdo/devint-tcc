@@ -51,8 +51,8 @@ const CompanyRegistrationPage: React.FC = () => {
             </div>
 
             <div className="image-container">
-
-                <img src="assets/images/company-img.svg" alt="developer on a computer" />
+                
+                <img src="../assets/images/Svg/company-img.svg" alt="developer on a computer" />
 
             </div>
 
