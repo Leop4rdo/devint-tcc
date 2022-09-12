@@ -1,6 +1,8 @@
 //import Button from "components/utils/Button";
 import React, { useState } from "react";
 import Input from "components/utils/Input";
+import Button from "components/utils/Button";
+import Icon from "components/utils/Icon";
 //import Icon from "components/utils/Icon";
 
 interface IFormProps {
@@ -18,14 +20,31 @@ const DevForm2: React.FC<IFormProps> = ({ onSubmit }) => {
         passwordConfirm: "",
     })
 
+    const [passwordShown, setPasswordShown] = useState(false);
+
+    const togglePassword = () => {
+        setPasswordShown(!passwordShown);
+    }
 
     return (
 
         <form className="form" onSubmit={() => onSubmit(formFields)}>
 
-            <Input icon="lock" type="text" placeholder="Senha" onChange={()=>{}} />
+            <div className="password-container">
 
-            <Input icon="lock" type="text" placeholder="Confirme a senha"onChange={()=>{}} />
+                <Input icon="lock" placeholder="Senha" onChange={() => { }} type={passwordShown ? "text" : "password"} />
+
+                <Button className="btn-toggle-password" onClick={togglePassword} children={<Icon name={passwordShown ? "visibility_off" : "visibility"} />}></Button>
+
+            </div>
+
+            <div className="password-container">
+
+                <Input icon="lock" placeholder="Confirmar senha" onChange={() => { }} type={passwordShown ? "text" : "password"} />
+
+                <Button className="btn-toggle-password" onClick={togglePassword} children={<Icon name={passwordShown ? "visibility_off" : "visibility"} />}></Button>
+
+            </div>
 
             <div className="terms-checkbox">
 
