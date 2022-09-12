@@ -1,25 +1,41 @@
 button {
   border: 1px solid;
   border-radius: 8px;
-  border-color: $color-primary;
   cursor: pointer;
-  background-color: $color-primary;
 
-  color: $color-white;
-
-  height: 40px;
-  width: 150px;
+  width: clamp(11rem, 10vw, 15rem);
+  height: 2rem;
+  font-weight: $font-semibold;
+  font-size: 18px;
 
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 8px;
 
-  text-transform: uppercase;
-  transition: all .25s ease-out;
+  transition: background-color 0.5s ease-out;
 
-  margin-top: 16px;
+  &.btn-primary {
+    background-color: $color-dark-gray;
+    border-color: $color-primary;
+    color: $color-primary;
 
+    &:hover {
+      background-color: $color-primary;
+      color: $color-white;
+    }
+  }
+
+  &.btn-secondary {
+    background-color: $color-dark-gray;
+    border-color: $color-light-purple;
+    color: $color-light-purple;
+
+    &:hover {
+      background-color: $color-light-purple;
+      color: $color-white;
+    }
+  }
 
   &.error {
     border-color: $color-red;
@@ -32,14 +48,31 @@ button {
   }
 
   &.btn-previous {
+    width: 4rem;
+
     &.step {
-      &-1 {
+      &-0 {
         display: none;
       }
 
-      &-2 {
-        display: block;
+      &-1 {
+        display: flex;
       }
+    }
+  }
+
+  &.btn-toggle-password {
+    width: fit-content;
+    height: auto;
+    background-color: transparent;
+    border: none;
+    color: $color-white;
+    position: absolute;
+    top: 9px;
+    left: 270px;
+
+    &:hover {
+      color: $color-primary;
     }
   }
 }

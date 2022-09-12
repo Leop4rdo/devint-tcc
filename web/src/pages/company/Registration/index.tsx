@@ -9,15 +9,25 @@ import Icon from "components/utils/Icon";
 
 const CompanyRegistrationPage: React.FC = () => {
 
-    const [step, setStep] = useState(1);
+    const [currentStep, setCurrentStep] = useState(0);
 
-    let currentStep = () => {
-        if (step === 1) {
-            return <CompanyForm1 onSubmit={() => { }} />
-        }
+    const steps = [
+        { desc: "", component: <CompanyForm1 onSubmit={() => { }} /> },
+        { desc: "", component: <CompanyForm2 onSubmit={() => { }} /> },
+    ]
 
-        if (step === 2) {
-            return <CompanyForm2 onSubmit={() => { }} />
+    const onConfirmButtonPress = () => {
+
+        if (currentStep >= steps.length - 1)
+            return
+        else
+            setCurrentStep(currentStep + 1)
+    }
+
+    const onPreviousButtonPress = () => {
+
+        if (currentStep >= 1) {
+            setCurrentStep(currentStep - 1)
         }
     }
 
@@ -27,13 +37,14 @@ const CompanyRegistrationPage: React.FC = () => {
             <div className="registration-form-container">
 
                 <h2>Sou Empresa</h2>
-                {currentStep()}
+                
+                {steps[currentStep].component}
 
                 <div className="button-container">
 
-                    <Button type="button" children={<Icon name="arrow_back" />} onClick={(e) => setStep(1)} className={"btn-previous step-" + step} />
+                <Button type="button" children={<Icon name="arrow_back"/>} className={"btn-previous btn-primary step-" + currentStep} onClick={onPreviousButtonPress} ></Button>
 
-                    <Button type="submit" children={step == 1 ? ["proximo", <Icon name="arrow_forward" />] : "cadastrar"} onClick={(e) => setStep(2)} ></Button>
+                <Button type="submit" children={(currentStep >= steps.length - 1) ? 'Cadastrar' : ["Proximo", <Icon name="arrow_forward" />]} onClick={onConfirmButtonPress} className="btn-primary" ></Button>
 
                 </div>
 

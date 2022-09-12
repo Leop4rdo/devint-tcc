@@ -40,7 +40,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background-image: url("../../../../public/assets/images/Png/wave-vertical.png");
+            background-image: url("../../../../public/assets/images/wave-vertical.png");
             background-size: clamp(40px, 10vw, 320px) 100%;
             background-repeat: no-repeat;
 
@@ -87,12 +87,10 @@
 
                     .register-button {
                         margin-left: 8px;
-                        background-color: transparent;
                         font-weight: $font-semibold;
-                        color: $color-light-purple;
-                        height: 32px;
+                        //height: 32px;
                         font-size: clamp(0.9rem, 2vw, 1rem);
-                        width: clamp(9.4rem, 11vw, 10.6rem);
+                        //width: clamp(9.4rem, 11vw, 10.6rem);
                     }
                 }
 
