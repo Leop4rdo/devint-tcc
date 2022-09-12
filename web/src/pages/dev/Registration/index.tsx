@@ -22,18 +22,6 @@ const DevRegistrationPage: React.FC = () => {
             setCurrentStep(currentStep+1)    
     }
 
-    // const [step, setStep] = useState(1);
-
-    // let currentStep = () => {
-    //     if (step === 1) {
-    //         return <DevForm1 onSubmit={() => { }} />
-    //     }
-
-    //     if (step === 2) {
-    //         return <DevForm2 onSubmit={() => { }} />
-    //     }
-    // }
-
     return (
         <div className="dev-registration-page">
 
