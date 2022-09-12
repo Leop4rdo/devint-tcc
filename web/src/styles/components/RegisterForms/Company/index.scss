@@ -3,10 +3,6 @@ form {
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
-    
-    ::placeholder {
-        color: $color-white;
-    }
 }
 
 .terms-checkbox {
@@ -20,3 +16,10 @@ form {
     display: flex;
     gap: 0.4rem;
 }
+
+.password-container {
+    width: fit-content;
+    height: auto;
+    display: flex;
+    position: relative;
+  }

@@ -1,8 +1,8 @@
-import React, { useContext, useState } from "react";
-import Input from "components/utils/Input"
-import { Alert, Button } from "@mui/material";
-import { Link } from 'react-router-dom'
+import Button from "components/utils/Button";
+import Input from "components/utils/Input";
 import LogoComponent from "components/utils/Logo";
+import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import { AuthContext } from "store/context/Auth.context";
 
 const LoginPage: React.FC = () => {
@@ -24,6 +24,12 @@ const LoginPage: React.FC = () => {
         const res = await authContext?.signIn(formValues.email, formValues.password)
 
         if (res.hasError) alert("Usuário ou senha invalidos!")
+    }
+
+    const [passwordShown, setPasswordShown] = useState(false);
+
+    const togglePassword = () => {
+        setPasswordShown(!passwordShown);
     }
 
     return (
@@ -48,6 +54,7 @@ const LoginPage: React.FC = () => {
                 </div>
                 <div className="login-wrapper">
                     <div className="login-container">
+
                         <h2>Entrar</h2>
                         <Input icon="email" placeholder={"Email"} onChange={handleChange} name="email" type="email" />
                         <Input icon="lock" placeholder={"Senha"} onChange={handleChange} name="password" type="password" />
@@ -58,9 +65,9 @@ const LoginPage: React.FC = () => {
                         <p>ou</p>
 
                         <div className="button-container">
-                            <Button className="login-pairing"> <img id="icon-github" src="../assets/icons/github.svg" alt="" /></Button>
-                            <Button className="login-pairing" >
-                                <img src="../assets/icons/google.svg" alt="" />
+                            <Button className="login-pairing btn-primary"> <img src="assets/icons/github.svg" alt="" /></Button>
+                            <Button className="login-pairing btn-primary" >
+                                <img src="assets/icons/google.svg" alt="" />
                             </Button>
                         </div>
                         <Link className="container-new-user" to='/register'>Sou novo aqui</Link>
