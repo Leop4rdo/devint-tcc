@@ -55,8 +55,8 @@ const LoginPage: React.FC = () => {
                         <p>ou</p>
 
                         <div className="button-container">
-                            <Button className="login-pairing btn-primary"> <img src="assets/icons/github.svg" alt="" /></Button>
-                            <Button className="login-pairing btn-primary" >
+                            <Button className="login-pairing btn-secondary"> <img src="assets/icons/github.svg" alt="" /></Button>
+                            <Button className="login-pairing btn-secondary" >
                                 <img src="assets/icons/google.svg" alt="" />
                             </Button>
                         </div>

@@ -70,13 +70,14 @@
             }
 
             .register-user {
+                position: relative;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 margin-left: 64px;
 
                 h1 {
-                    color: $color-light-purple;
+                    color: $color-primary;
                     font-weight: $font-semibold;
                     font-size: clamp(3rem, 4vw, 3.2rem);
                 }
@@ -98,12 +99,14 @@
                     background-color: transparent;
                     border: none;
                     width: 20px;
-                    margin-top: 60px;
+                    position: absolute;
+                    top: 56px;
+                    left: 16px;
 
                     .icon {
-                        color: $color-light-purple;
+                        color: $color-primary;
                         font-size: 65px;
-
+                        padding-bottom: 64px;
                     }
                 }
             }
