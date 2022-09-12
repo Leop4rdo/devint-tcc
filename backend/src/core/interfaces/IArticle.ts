@@ -1,3 +1,5 @@
+import DevEntity from "../entities/DevEntity"
+
 export default interface IArticleProps {
   id : string
   title : string
@@ -5,4 +7,5 @@ export default interface IArticleProps {
   upVotes : JSON
   downVotes : JSON
   comments : JSON
+  writter : DevEntity
 }

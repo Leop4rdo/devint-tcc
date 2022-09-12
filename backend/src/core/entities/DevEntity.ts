@@ -8,6 +8,7 @@ import PostEntity from "./PostEntity";
 import ProjectEntity from "./ProjectEntity";
 import SeniorityEntity from "./SeniorityEntity";
 import SkillEntity from "./SkillEntity";
+import SocialLinkEntity from "./SocialLinkEntity";
 
 @Entity('devs')
 export default class DevEntity {
@@ -35,9 +36,6 @@ export default class DevEntity {
     @Column({name : 'profile_pic_url', nullable : true })
     profilePicUrl : string
     
-    @Column('jsonb', {name: 'social_links', nullable : true})
-    socialLinks : JSON
-    
     @Column({default : 0 , name:'comunity_ratings'})
     comunityRating : number
 
@@ -55,18 +53,11 @@ export default class DevEntity {
 
     @Column({ type : 'date' })
     birthday : Date
-
+    
     @OneToOne(() => AuthEntity, { nullable : false })
     @JoinColumn()
     auth : AuthEntity
 
-    @ManyToMany(()=> SkillEntity)
-    @JoinTable()
-    skills: SkillEntity[]
-
-    @ManyToMany(()=> BadgeEntity)
-    @JoinColumn()
-    badges: BadgeEntity[]
 
     @OneToMany(()=> PostEntity, (posts) => posts.writter)
     posts: ProjectEntity[]
@@ -74,13 +65,29 @@ export default class DevEntity {
     @OneToMany(()=> ArticleEntity, (articles) => articles.writter)
     articles: ArticleEntity[]
 
-    @OneToMany(()=> CareerFocusEntity ,(careerFocus) => careerFocus.dev)
-    @JoinColumn({name: 'carrers_focus'})   
-    careerFocus : CareerFocusEntity[]
+    @OneToMany(()=> SocialLinkEntity ,(social) => social.value)
+    @JoinColumn({name: 'social_links'})   
+    socialLinks : SocialLinkEntity[]
 
+    @OneToMany(()=> CareerFocusEntity ,(carrerFocus) => carrerFocus.dev)
+    @JoinColumn({name: 'careers_focus'})   
+    careerFocus : CareerFocusEntity[]
+    
     @ManyToOne(()=> SeniorityEntity, (senior) => senior.devs)
     @JoinColumn({name:'auto_declared_seniority'})
     autoDeclaredSeniority : SeniorityEntity
+
+    @ManyToMany(()=> SkillEntity)
+    @JoinTable()
+    skills: SkillEntity[]
+
+    @ManyToMany(()=> ProjectEntity)
+    @JoinTable()
+    projects: ProjectEntity[]
+
+    @ManyToMany(()=> BadgeEntity)
+    @JoinTable()
+    badges: BadgeEntity[]   
 
     @CreateDateColumn({ name: 'created_at', select: false })
     createdAt : Timestamp
