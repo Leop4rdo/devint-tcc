@@ -69,11 +69,11 @@ export default class DevEntity {
     @JoinColumn({name: 'social_links'})   
     socialLinks : SocialLinkEntity[]
 
-    @OneToMany(()=> CareerFocusEntity ,(carrerFocus) => carrerFocus.dev)
+    @ManyToOne(()=> CareerFocusEntity ,(careerFocus) => careerFocus.dev)
     @JoinColumn({name: 'careers_focus'})   
     careerFocus : CareerFocusEntity[]
     
-    @ManyToOne(()=> SeniorityEntity, (senior) => senior.devs)
+    @OneToMany(()=> SeniorityEntity, (senior) => senior.devs)
     @JoinColumn({name:'auto_declared_seniority'})
     autoDeclaredSeniority : SeniorityEntity
 
