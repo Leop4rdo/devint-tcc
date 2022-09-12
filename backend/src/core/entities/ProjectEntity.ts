@@ -2,9 +2,8 @@ import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, Ti
 
 @Entity('projects')
 export default class ProjectEntity {
-    
     @PrimaryGeneratedColumn('uuid')
-    id: string
+    id : string
 
     @Column({ nullable : false})
     name: string
@@ -38,5 +37,4 @@ export default class ProjectEntity {
 
     @UpdateDateColumn({ name : 'updated_at' })
     updatedAt : Timestamp
-
 }

@@ -7,7 +7,7 @@ export default class PostEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string
 
-  @Column({})
+  @Column()
   content: string
   
   @Column('jsonb')
@@ -16,10 +16,10 @@ export default class PostEntity {
   @Column('jsonb')
   comments: JSON
 
-  @Column('jsonb')
+  @Column('jsonb', { name : 'up_votes' })
   upVotes: JSON
 
-  @Column('jsonb')
+  @Column('jsonb', { name: "down_votes" })
   downVotes: JSON
 
   @OneToMany(() => PostAttachmentEntity, (postAttachments) => postAttachments.post)

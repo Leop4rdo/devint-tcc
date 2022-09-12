@@ -1,10 +1,11 @@
 import { Text, View } from "react-native"
-import FeedbackTextInput from "../../components/FeedbackInput";
+import FeedbackTextInput from "../../components/utils/FeedbackInput";
 import styles from "./style" ;
-import ButtonComponent from "../../components/Button";
+import ButtonComponent from "../../components/utils/Button";
 import colors from "../../styles/colors";
+import { IPageProps } from "../../navigators";
 
-const LandingPage : React.FC = () => {
+const LandingPage : React.FC< IPageProps >  = ({ navigation }) => {
 
     return (
          <View style={styles.container}>
@@ -14,8 +15,8 @@ const LandingPage : React.FC = () => {
                 <Text style={styles.message}>Dev Int conecta todos no processo de aprimoramento pessoal e em equipe </Text>
             </View>
             <View>
-                <ButtonComponent text="login" onPress={() => {}}/>
-                <ButtonComponent text="cadastrar" onPress={() => {}}></ButtonComponent>
+                <ButtonComponent text="login" onPress={() => navigation.navigate('login')}/>
+                <ButtonComponent text="cadastrar" onPress={() => navigation.navigate('register')}></ButtonComponent>
             </View>
         </View>
         

@@ -30,4 +30,16 @@ button {
       color: $color-white;
     }
   }
+
+  &.btn-previous {
+    &.step {
+      &-1 {
+        display: none;
+      }
+
+      &-2 {
+        display: block;
+      }
+    }
+  }
 }

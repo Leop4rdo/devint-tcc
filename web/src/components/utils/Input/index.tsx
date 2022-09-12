@@ -1,13 +1,13 @@
 import Icon from "components/utils/Icon";
 import React from "react";
 
-
 interface IInputProps {
-    type?: "text" | "password" | "email",
+    type?: "text" | "password" | "email" ,
     placeholder?: string,
     icon?: string,
     onChange: (event: any) => void,
     value?: string,
+    mask?: string
 }
 
 const Input: React.FC<IInputProps> = ({ type, placeholder, value, onChange, icon }) => {
