@@ -31,7 +31,7 @@ const CompanyForm2: React.FC<IFormProps> = ({ onSubmit }) => {
 
                 <input type="checkbox" id="terms-of-acceptance" />
                 
-                <label htmlFor="terms-of-acceptance" >Li e aceito os termos e condições</label>
+                <label htmlFor="terms-of-acceptance" className="terms-acceptance" >Li e aceito os termos e condições</label>
             
             </div>
 
