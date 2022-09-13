@@ -1,7 +1,8 @@
 import Icon from "components/utils/Icon";
-import React from "react";
+import React, { useState } from "react";
 
 interface IInputProps {
+    isPassword? : boolean,
     type?: "text" | "password" | "email" ,
     placeholder?: string,
     icon?: string,
@@ -11,6 +12,10 @@ interface IInputProps {
 }
 
 const Input: React.FC<IInputProps> = ({ type, placeholder, value, onChange, icon }) => {
+
+    const [textVisible, setVisible] = useState(false)
+
+    const togglePasswordVisibility = () => (!textVisible)
 
     return (
         <div className={`input-container`}>
