@@ -7,7 +7,6 @@
 
     header {
         text-align: center;
-        position: absolute;
         height: clamp(200px, 15vh, 400px);
         width: 100vw;
         padding: 0 clamp(24px, 4vw, 80px);
@@ -124,9 +123,9 @@
       p::after,
       p::before {
         content: "";
-        width: 8.4rem;
+        width: clamp( 7rem , 9vw , 8.4rem);
         height: 1px;
-        background-color: $color-white;
+        background-color: $color-primary;
         display: inline-block;
         margin: 0px 8px 3.7px 8px;
       }
