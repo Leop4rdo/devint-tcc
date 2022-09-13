@@ -5,6 +5,7 @@ import DevForm1 from "components/RegisterForms/Dev/Step1";
 import DevForm2 from "components/RegisterForms/Dev/Step2";
 import Button from "components/utils/Button";
 import Icon from "components/utils/Icon";
+import { Link } from "react-router-dom";
 
 const DevRegistrationPage: React.FC = () => {
 
@@ -34,7 +35,11 @@ const DevRegistrationPage: React.FC = () => {
         <div className="dev-registration-page">
 
             <div className="registration-form-container">
+                <div className="dev-user">
+                <Link to={'/register'}><Icon name="arrow_back"/></Link>
                 <h2>Sou Dev</h2>
+                </div>
+                
 
                 {steps[currentStep].component}
 
@@ -53,7 +58,7 @@ const DevRegistrationPage: React.FC = () => {
             </div>
 
             <div className="image-container">
-                <img src="../assets/images/Svg/dev-img.svg" alt="developer on a computer" />
+                <img src="../assets/images/svg/dev-img.svg" alt="developer on a computer" />
             </div>
 
         </div>

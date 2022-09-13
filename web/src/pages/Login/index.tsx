@@ -42,7 +42,7 @@ const LoginPage: React.FC = () => {
 
             <main>
                 <div className="image-container">
-                    <img src="../assets/images/Svg/login.svg" className="login-image" />
+                    <img src="../assets/images/svg/login.svg" className="login-image" />
                 </div>
                 <div className="login-wrapper">
 
@@ -63,15 +63,15 @@ const LoginPage: React.FC = () => {
                         <Input icon="lock" placeholder={"Senha"} onChange={handleChange} name="password" type="password" />
                         <a href="#">Esqueci minha senha</a>
 
-                        <Button className="button-login" onClick={login}>Login</Button>
+                        <button className="btn-primary" onClick={login}>LOGIN</button>
 
                         <p>ou</p>
 
                         <div className="button-container">
-                            <Button className="login-pairing btn-primary"> <img src="assets/icons/github.svg" alt="" /></Button>
-                            <Button className="login-pairing btn-primary" >
+                            <button className="login-pairing btn-primary"> <img src="assets/icons/github.svg" alt="" /></button>
+                            <button className="login-pairing btn-primary" >
                                 <img src="assets/icons/google.svg" alt="" />
-                            </Button>
+                            </button>
                         </div>
    
                         <Link className="container-new-user" to='/register'>Sou novo aqui</Link>

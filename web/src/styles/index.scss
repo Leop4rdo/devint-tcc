@@ -19,7 +19,7 @@ a {
   &:before, &:after {
     content: '';
     position: absolute;
-    transition: transform .5s ease;
+    transition: transform .6s ease;
   }
 
   &:before {

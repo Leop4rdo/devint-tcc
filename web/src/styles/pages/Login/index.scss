@@ -29,7 +29,7 @@
          justify-content: center;
         }
         header h1 {
-            margin-top: 20px;
+            margin-top: 0px;
         }
         
     }
@@ -130,11 +130,10 @@
         margin: 0px 8px 3.7px 8px;
       }
 
-            .button-login {
+            button {
                 width: clamp(11rem, 10vw, 15rem);
-                height: 32px;
+                height: 34px;
                 font-weight: $font-semibold;
-                font-size: 18px;
             }
 
             .container-new-user {
@@ -152,7 +151,7 @@
         justify-content: center;
 
         .login-pairing {
-          width: clamp(2rem, 10vw, 5rem);
+          width: clamp(3rem, 10vw, 5rem);
           height: 41px;
           margin-top: 24px;
         }
