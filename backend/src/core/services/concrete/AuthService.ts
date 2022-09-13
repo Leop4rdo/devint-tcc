@@ -26,20 +26,24 @@ import { CompanyResponseDTO } from "../../dtos/user/company/CompanyResponseDTO";
 import DevResponseDTO from "../../dtos/user/dev/DevResponseDTO";
 import IDevRepository from "../../../infra/repositories/abstract/IDevRepository";
 import ICompanyRepository from "../../../infra/repositories/abstract/ICompanyRepository";
+import PasswordResetTokenEntity from "../../entities/PasswordResetTokenEntity";
 
 
 export default class AuthService implements IAuthService {
     private repo : IAuthRepository
     private devRepo : IDevRepository
     private companyRepo : ICompanyRepository
+    private passResetTokenRepo : IRepository<PasswordResetTokenEntity>
 
     constructor(
         repo : IAuthRepository, 
         devRepo : IDevRepository, 
-        companyRepo : ICompanyRepository) { 
+        companyRepo : ICompanyRepository,
+        passResetTokenRepo : IRepository<PasswordResetTokenEntity>) { 
             this.repo = repo; 
             this.companyRepo = companyRepo;
             this.devRepo = devRepo;
+            this.passResetTokenRepo = passResetTokenRepo;
     }
 
     async setEnabled(id: string, value: number): Promise<IResponse> {
@@ -180,4 +184,37 @@ export default class AuthService implements IAuthService {
 
         return this.devRepo.create(dto as unknown as DevEntity)
     }
+
+    async requestPasswordRecovery(email : string): Promise<IResponse> {
+        const user = await this.repo.findBy('email', email)
+
+        if (!user || user.enabled == 0) 
+            return new BadRequestResponse({
+                errorMessage : errors.ENTITY_NOT_FOUND.message,
+                errorCode: errors.ENTITY_NOT_FOUND.code
+            })
+        
+        const passResetToken = new PasswordResetTokenEntity();
+        passResetToken.token = this.generateToken()
+        passResetToken.owner = user;
+
+        this.passResetTokenRepo.create(passResetToken);
+
+        // emailService.send({}, EmailTemplates.PASSWORD_RECOVERY)
+    }
+
+
+    private generateToken() {
+        const chars ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+        let token = ""
+
+        for (let i = 0; i < 32; i++) {
+            token += chars.charAt(Math.floor(Math.random() * chars.length))
+        }
+
+        return token
+    }
+
+
 }
