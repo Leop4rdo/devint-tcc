@@ -4,6 +4,7 @@ import BadgeEntity from "../entities/BadgeEntity"
 import ProjectEntity from "../entities/ProjectEntity"
 import SeniorityEntity from "../entities/SeniorityEntity"
 import SkillEntity from "../entities/SkillEntity"
+import SocialLinkEntity from "../entities/SocialLinkEntity"
 import IAuthProps from "./IAuth"
 
 export default interface IDevProps {
@@ -15,7 +16,7 @@ export default interface IDevProps {
     following ?: JSON
     followers ?: JSON
     profilePicUrl : string
-    socialLinks : JSON
+    socialLinks : SocialLinkEntity[]
     comunityRating : number
     notifications : JSON
     currentJob : string
