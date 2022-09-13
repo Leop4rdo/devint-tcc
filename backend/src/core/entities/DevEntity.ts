@@ -25,13 +25,7 @@ export default class DevEntity {
     gender : string
 
     @Column({default: ''})
-    status: string
-    
-    @Column('jsonb', { nullable : true })
-    following : JSON
-
-    @Column('jsonb', { nullable : true })
-    followers : JSON
+    status: string 
 
     @Column({name : 'profile_pic_url', nullable : true })
     profilePicUrl : string
@@ -41,7 +35,7 @@ export default class DevEntity {
 
     @Column('jsonb', { nullable : true })
     notifications : JSON
-
+    
     @Column({default : '', name : 'current_job'})
     currentJob : string
 
@@ -51,13 +45,16 @@ export default class DevEntity {
     @Column({name : 'open_to_work', default : false})
     openToWork : boolean
 
-    @Column({ type : 'date' })
+    @Column({type : 'date' })
     birthday : Date
-    
+
+    @ManyToMany(()=> DevEntity, (devs) => devs.followers)
+    @JoinTable({name:'devs_follow_dev'})
+    followers: DevEntity[]
+
     @OneToOne(() => AuthEntity, { nullable : false })
     @JoinColumn()
     auth : AuthEntity
-
 
     @OneToMany(()=> PostEntity, (posts) => posts.writter)
     posts: ProjectEntity[]
@@ -74,19 +71,19 @@ export default class DevEntity {
     careerFocus : CareerFocusEntity[]
     
     @OneToMany(()=> SeniorityEntity, (senior) => senior.devs)
-    @JoinColumn({name:'auto_declared_seniority'})
+    @JoinColumn({name: 'auto_declared_seniority'})
     autoDeclaredSeniority : SeniorityEntity
 
     @ManyToMany(()=> SkillEntity)
-    @JoinTable()
+    @JoinTable({name: 'devs_skills'})
     skills: SkillEntity[]
 
     @ManyToMany(()=> ProjectEntity)
-    @JoinTable()
+    @JoinTable({name: 'devs_projects'})
     projects: ProjectEntity[]
 
     @ManyToMany(()=> BadgeEntity)
-    @JoinTable()
+    @JoinTable({name: 'devs_badges'})
     badges: BadgeEntity[]   
 
     @CreateDateColumn({ name: 'created_at', select: false })
