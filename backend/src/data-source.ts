@@ -6,8 +6,10 @@ import BadgeEntity from "./core/entities/BadgeEntity";
 import CareerFocusEntity from "./core/entities/CareerFocusEntity";
 import CompanyEntity from "./core/entities/CompanyEntity";
 import DevEntity from "./core/entities/DevEntity";
+import PostAttachmentEntity from "./core/entities/PostAttachmentEntity";
 import PostEntity from "./core/entities/PostEntity";
 import ProjectEntity from "./core/entities/ProjectEntity";
+import SeniorityEntity from "./core/entities/SeniorityEntity";
 import SkillEntity from "./core/entities/SkillEntity";
 import SocialLinkEntity from "./core/entities/SocialLinkEntity";
 
@@ -23,5 +25,5 @@ export const AppDataSource = new DataSource({
     logging: ['error', 'warn'],
     entities: [AuthEntity, DevEntity, CompanyEntity, SkillEntity, 
         ArticleEntity, BadgeEntity, CareerFocusEntity, PostEntity, 
-        ProjectEntity, SocialLinkEntity],
+        ProjectEntity, SocialLinkEntity, SeniorityEntity, PostAttachmentEntity],
 })
