@@ -27,6 +27,8 @@ import DevResponseDTO from "../../dtos/user/dev/DevResponseDTO";
 import IDevRepository from "../../../infra/repositories/abstract/IDevRepository";
 import ICompanyRepository from "../../../infra/repositories/abstract/ICompanyRepository";
 import PasswordResetTokenEntity from "../../entities/PasswordResetTokenEntity";
+import IEmailService from "../abstract/IEmailService";
+import { EmailTemplates } from "./EmailService";
 
 
 export default class AuthService implements IAuthService {
@@ -34,16 +36,19 @@ export default class AuthService implements IAuthService {
     private devRepo : IDevRepository
     private companyRepo : ICompanyRepository
     private passResetTokenRepo : IRepository<PasswordResetTokenEntity>
+    private emailService : IEmailService
 
     constructor(
         repo : IAuthRepository, 
         devRepo : IDevRepository, 
         companyRepo : ICompanyRepository,
-        passResetTokenRepo : IRepository<PasswordResetTokenEntity>) { 
+        passResetTokenRepo : IRepository<PasswordResetTokenEntity>,
+        emailService : IEmailService) { 
             this.repo = repo; 
             this.companyRepo = companyRepo;
             this.devRepo = devRepo;
             this.passResetTokenRepo = passResetTokenRepo;
+            this.emailService = emailService;
     }
 
     async setEnabled(id: string, value: number): Promise<IResponse> {
@@ -128,7 +133,7 @@ export default class AuthService implements IAuthService {
 
         const userRes = (auth.role == userRoles.COMPANY) ?
             new CompanyResponseDTO(user as ICompanyProps)
-            : new DevResponseDTO(user as IDevProps) 
+            : new DevResponseDTO(user as unknown as IDevProps) 
         
         new UserDTO({...user, role : auth.role} as unknown as IUserProps);
 
@@ -186,21 +191,42 @@ export default class AuthService implements IAuthService {
     }
 
     async requestPasswordRecovery(email : string): Promise<IResponse> {
-        const user = await this.repo.findBy('email', email)
-
-        if (!user || user.enabled == 0) 
+        const auth = await this.repo.findBy('email', email)
+        
+        if (!auth || auth.enabled == 0) 
             return new BadRequestResponse({
                 errorMessage : errors.ENTITY_NOT_FOUND.message,
                 errorCode: errors.ENTITY_NOT_FOUND.code
             })
         
+        const user = (auth.role == userRoles.COMPANY) ?
+            await this.companyRepo.findByAuthId(auth.id)
+        :
+            await this.devRepo.findByAuthId(auth.id)
+
+        const token = this.generateToken()
+
         const passResetToken = new PasswordResetTokenEntity();
-        passResetToken.token = this.generateToken()
-        passResetToken.owner = user;
+        passResetToken.token = await hash(token, 10)
+        passResetToken.owner = auth;
 
-        this.passResetTokenRepo.create(passResetToken);
+        await this.passResetTokenRepo.create(passResetToken);
 
-        // emailService.send({}, EmailTemplates.PASSWORD_RECOVERY)
+        await this.emailService.send({
+            to : auth.email,
+            subject : 'Recuperação de senha',
+            values : {
+                USER : user.name,
+                LINK : passResetToken.token
+            }
+        }, EmailTemplates.PASSWORD_RECOVERY)
+
+        return new SuccessResponse({
+            status : 200,
+            data : {
+                message : 'Success'
+            }
+        })
     }
 
 

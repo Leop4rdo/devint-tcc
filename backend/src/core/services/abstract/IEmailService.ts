@@ -2,9 +2,9 @@ import IResponse from "../../../Responses/IResponse"
 
 export type EmailData = {
     to : string,
-    values : object
+    values ?: object
     subject : string
-    body : string
+    body ?: string
 }
 
 export default interface IEmailService {

@@ -2,7 +2,9 @@ import CompanyEntity from "../core/entities/CompanyEntity";
 import DevEntity from "../core/entities/DevEntity";
 import PasswordResetTokenEntity from "../core/entities/PasswordResetTokenEntity";
 import IAuthService from "../core/services/abstract/IAuthService";
+import IEmailService from "../core/services/abstract/IEmailService";
 import AuthService from "../core/services/concrete/AuthService";
+import EmailService from "../core/services/concrete/EmailService";
 import AbstractRepository from "../infra/repositories/abstract/AbstractRepository";
 import IAuthRepository from "../infra/repositories/abstract/IAuthRepository";
 import ICompanyRepository from "../infra/repositories/abstract/ICompanyRepository";
@@ -18,6 +20,7 @@ export default class AuthModule {
     private devRepo : IDevRepository
     private companyRepo : ICompanyRepository
     private passResetTokenRepo : IRepository<PasswordResetTokenEntity>
+    private emailService : IEmailService
 
     private authService : IAuthService
 
@@ -26,8 +29,9 @@ export default class AuthModule {
         this.devRepo = new DevRepository();
         this.companyRepo = new CompanyRepository();
         this.passResetTokenRepo = new PasswordResetTokenRepository();
-        
-        this.authService = new AuthService(this.authRepo, this.devRepo, this.companyRepo, this.passResetTokenRepo);
+        this.emailService = new EmailService();
+
+        this.authService = new AuthService(this.authRepo, this.devRepo, this.companyRepo, this.passResetTokenRepo, this.emailService);
     }
 
     getAuthService = () => this.authService
