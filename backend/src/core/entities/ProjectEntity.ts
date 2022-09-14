@@ -1,12 +1,10 @@
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm"
-import DevEntity from "./DevEntity"
-import PostEntity from "./PostEntity"
 
 @Entity('projects')
 export default class ProjectEntity {
     @PrimaryGeneratedColumn('uuid')
     id : string
-    
+
     @Column({ nullable : false})
     name: string
     
