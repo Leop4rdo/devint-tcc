@@ -1,26 +1,23 @@
 .login-page {
-    height: 100vh;
-    width: 100vw;
-    background-color: $color-black;
-    display: flex;
-    flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  background-color: $color-black;
+  display: flex;
+  flex-direction: column;
 
     header {
         text-align: center;
-
         height: clamp(200px, 15vh, 400px);
         width: 100vw;
         padding: 0 clamp(24px, 4vw, 80px);
-
         // MAGIC CODE, DO NOT TOUCH!
-        background-image: url("../../../../public/assets/images/horizontal-wave-bg.png");
+        background-image: url("../../../../public/assets/images/horizontal-wave-login-bg.png");
         background-size: 100% 100%;
-
         display: flex;
         align-items: center;
 
         h1 {
-            font-size: clamp(2rem, 4vw, 4rem);
+            font-size: clamp(3rem, 4vw, 4rem);
         }
 
         
@@ -29,123 +26,164 @@
 
         header{
          display: block;
+         justify-content: center;
         }
-    }
-
-    main {
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: row;
-
-        .login-wrapper,
-        .image-container {
-            width: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
+        header h1 {
+            margin-top: 20px;
         }
         
-        .login-image {
-            width: clamp(200px, 60%, 700px);
+    }
+
+    .menu-container{
+        top: 12rem;
+        display: flex;
+        position: absolute;
+        align-items: flex-end;
+        justify-content: end;
+  
+
+        nav ul li a {
+            
+            font-size: clamp(0.9rem, 2vw, 1.3rem);
+            cursor: pointer;
+            color: $color-light-purple;
+            padding: clamp(0.4rem, 1.5vw, 1.4rem);
         }
 
-        .login-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 500px;
+        nav ul li {
+            list-style: none;
+            display: inline;
+        }
+    }
+    @media (max-width: $breakpoint-medium) {
+        .menu-container{
+            top: 14rem;
+            margin-bottom: -20px;
 
-            a {
-                text-decoration: none;
-                font-size: 12px;
-                cursor: pointer;
-                margin-top: 8px;
-                margin-bottom: 16px;
-                margin-left: 13.5em;
-                color: $color-primary;
-                text-align: center;
+            nav ul li a {
+              padding-bottom: 15px;           
+          }
 
-            }
+        }
+       
+        
+    }
 
-            a:hover {
-                text-decoration: underline;
-            }
+  main {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
 
-            h2 {
-                font-size: clamp(2.7rem, 4vw, 3rem);
-                font-weight: $font-semibold;
-                color: $color-white;
-                margin-bottom: 42px;
-            }
+    .login-wrapper,
+    .image-container {
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-            p {
-                margin-top: 16px;
-                color: $color-white;
-            }
+    .login-image {
+      width: clamp(200px, 60%, 700px);
+    }
 
-            p::after,
-            p::before {
-                content: '';
-                width: 8.4rem;
-                height: 1px;
-                background-color: $color-primary;
-                display: inline-block;
-                margin: 0px 8px 3.7px 8px;
-            }
+    .login-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 500px;
+
+      a {
+        text-decoration: none;
+        font-size: 12px;
+        cursor: pointer;
+        margin-top: 8px;
+        margin-left: 13.5em;
+        color: $color-primary;
+        text-align: center;
+        padding-bottom: 15px;
+      }
+
+      
+
+      h2 {
+        font-size: clamp(2.7rem, 4vw, 3rem);
+        font-weight: $font-semibold;
+        color: $color-white;
+        margin-bottom: 42px;
+      }
+
+      p {
+        margin-top: 16px;
+        color: $color-white;
+      }
+
+      p::after,
+      p::before {
+        content: "";
+        width: clamp( 7rem , 9vw , 8.4rem);
+        height: 1px;
+        background-color: $color-primary;
+        display: inline-block;
+        margin: 0px 8px 3.7px 8px;
+      }
 
             .button-login {
                 width: clamp(11rem, 10vw, 15rem);
-                height: 3vh;
+                height: 32px;
                 font-weight: $font-semibold;
                 font-size: 18px;
             }
 
             .container-new-user {
-                width: 400px;
                 margin-left: 10px;
                 align-items: center;
                 margin-top: 24px;
+                
+                
             }
 
-            .button-container {
-                width: 100%;
-                display: flex;
-                flex-direction: row;
-                justify-content: center;
+      .button-container {
+        width: 100%;
+        display: flex;
+        gap: 24px;
+        justify-content: center;
 
-                .login-pairing {
-                    margin-left: 24px;
-                    margin-right: 10px;
-                    width: clamp(2rem, 10vw, 5rem);
-                    height: 41px;
-                    background-color: $color-black;
-                }
-
-                img {
-                    width: 25px;
-                }
-
-            }
-
+        .login-pairing {
+          width: clamp(2rem, 10vw, 5rem);
+          height: 41px;
+          margin-top: 24px;
         }
 
-        @media (max-width: $breakpoint-medium) {
-            .image-container {
-                display: none;
-            }
-
-            header{
-                justify-content: center;
-            }
+        img {
+          width: 24px;
+          height: 24px;   
         }
+                #icon-github{
+                    width: 23.8px;
+                }
 
-
+      }
     }
 
+    @media (max-width: $breakpoint-medium) {
+      .image-container {
+        display: none;
+      }
+      .login-container {
+        margin-top: -20px;
+      }
+    }
 
+  }
+  
+  .password-container {
+    width: fit-content;
+    height: auto;
+    display: flex;
+    position: relative;
+  }
 
 }

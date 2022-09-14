@@ -16,15 +16,15 @@ export default class UserCreateRequestDTO {
   @IsNotEmpty()
   @IsString()
   password: string;
-
+  
+  @IsEnum(userRoles)
+  role: number;
+  
   // Optional properties
   cnpj : string
   gender : string;
   birthday : Date | string;
-
-  @IsEnum(userRoles)
-  role: number;
-
+  githubUsername : string;
 
   constructor(props: IUserProps) {
     this.email = props.email;
@@ -34,6 +34,7 @@ export default class UserCreateRequestDTO {
     this.cnpj = props.cnpj
     this.gender = props.gender
     this.birthday = props.birthday
+    this.githubUsername = props.githubUsername
   }
 
   async validate() {

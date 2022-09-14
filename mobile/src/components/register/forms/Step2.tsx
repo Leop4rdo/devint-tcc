@@ -16,11 +16,15 @@ const RegisterFormStep2 : React.FC<IRegisterFormProps> = ({styles, formData, onC
 
     return(
         <Animated.View style={{...styles.form, opacity : opacityAnim.prop}}>
+            {/* colorcar mascara para data no formato de dd/mm/aaaa */}
             <FeedbackTextInput 
                 style={styles.input} 
                 placeholder="" 
+                
                 icon="calendar-today" 
                 onChangeText={(text : string) => onChange(text, 'birthday') } ></FeedbackTextInput>
+
+            {/* colocar um input para o usuario no github */}
         </Animated.View>
     )
 }

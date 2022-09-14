@@ -11,28 +11,24 @@ const DevRegistrationPage: React.FC = () => {
     const [currentStep, setCurrentStep] = useState(0);
 
     const steps = [
-        {desc : "", component : <DevForm1 onSubmit={() => { }} />},
-        {desc : "", component : <DevForm2 onSubmit={() => { }} />},
+        { desc: "", component: <DevForm1 onSubmit={() => { }} /> },
+        { desc: "", component: <DevForm2 onSubmit={() => { }} /> },
     ]
 
     const onConfirmButtonPress = () => {
-        if (currentStep >= steps.length -1)
+
+        if (currentStep >= steps.length - 1)
             return
-        else 
-            setCurrentStep(currentStep+1)    
+        else
+            setCurrentStep(currentStep + 1)
     }
 
-    // const [step, setStep] = useState(1);
+    const onPreviousButtonPress = () => {
 
-    // let currentStep = () => {
-    //     if (step === 1) {
-    //         return <DevForm1 onSubmit={() => { }} />
-    //     }
-
-    //     if (step === 2) {
-    //         return <DevForm2 onSubmit={() => { }} />
-    //     }
-    // }
+        if (currentStep >= 1) {
+            setCurrentStep(currentStep - 1)
+        }
+    }
 
     return (
         <div className="dev-registration-page">
@@ -43,12 +39,21 @@ const DevRegistrationPage: React.FC = () => {
                 {steps[currentStep].component}
 
                 <div className="button-container">
-                    <Button type="submit" children={(currentStep >= steps.length - 1) ? 'Cadastrar' : ["Proximo" , <Icon name="arrow_forward" />]} onClick={onConfirmButtonPress} className="button-register" ></Button>
+                    
+                    <Button type="button" children={<Icon name="arrow_back"/>} className={"btn-previous btn-primary step-" + currentStep} onClick={onPreviousButtonPress} ></Button>
+
+                    <Button type="submit" children={(currentStep >= steps.length - 1) ? 'Cadastrar' : ["Proximo", <Icon name="arrow_forward" />]} onClick={onConfirmButtonPress} className="btn-primary" ></Button>
+
                 </div>
+
+                <p>ou</p>
+
+                <Button type="button" className="btn-primary github-register" children={[<img src="../../../assets/icons/github.svg" alt="GitHub logo" />, "Cadatrar-se como GitHub"]}></Button>
+
             </div>
 
             <div className="image-container">
-                <img src="assets/images/dev-img.svg" alt="developer on a computer" />
+                <img src="../assets/images/Svg/dev-img.svg" alt="developer on a computer" />
             </div>
 
         </div>

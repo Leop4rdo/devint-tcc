@@ -75,7 +75,7 @@ const RegisterPage : React.FC = () => {
             name : formValues.name,
             email : formValues.email,
             password : formValues.password,
-            birthday : formValues.birthday,
+            birthday : formValues.birthday, // formatar para aaaa/mm/dd
             githubProfileUrl : formValues.github
         }
 

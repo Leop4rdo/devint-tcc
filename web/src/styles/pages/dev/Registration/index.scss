@@ -12,6 +12,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 1.5rem;
 
     h2 {
       font-size: clamp( 2.3rem , 4vw , 3rem);
@@ -32,7 +33,9 @@
     background-repeat: no-repeat;
 
     img {
-      width: clamp(110px, 65%, 500px);
+      margin-left: 64px;
+      margin-right: -30px;
+      width: clamp(110px, 65%, 450px);
     }
 
   }
@@ -49,5 +52,25 @@
     }
 
   }
- 
+  
+  p {
+    color: $color-white;
+  }
+
+  p::after,
+  p::before {
+    content: "";
+    width: 8.4rem;
+    height: 1px;
+    background-color: $color-primary;
+    display: inline-block;
+    margin: 0px 8px 3.7px 8px;
+  }
+
+  .github-register {
+    width: fit-content;
+    height: 2.5rem;
+    padding: 16px;
+  }
+
 }
