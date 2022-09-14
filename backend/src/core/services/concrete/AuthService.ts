@@ -1,35 +1,32 @@
-import { compare, hash } from "bcrypt";
-import errors from "../../../handler/errors.handler";
-import IAuthRepository from "../../../infra/repositories/abstract/IAuthRepository";
-import IRepository from "../../../infra/repositories/abstract/IRepository";
-import CompanyRepository from "../../../infra/repositories/concrete/CompanyRepository";
-import BadRequestResponse from "../../../Responses/BadRequestResponse";
-import IResponse from "../../../Responses/IResponse";
-import SuccessResponse from "../../../Responses/SuccessResponse";
-import LoginRequestDTO from "../../dtos/user/LoginRequestDTO";
-import UserDTO from "../../dtos/user/UserDTO";
-import DevEntity from "../../entities/DevEntity";
-import { IUserProps, userRoles } from "../../interfaces/IUser";
-import IAuthService from "../abstract/IAuthService";
-
-import * as jwt from "jsonwebtoken";
-import UserCreateRequestDTO from "../../dtos/user/UserCreateRequestDTO";
-import CompanyEntity from "../../entities/CompanyEntity";
-import ServerErrorResponse from "../../../Responses/ServerErrorResponse";
-import AuthEntity from "../../entities/AuthEntity";
-import IDevProps from "../../interfaces/IDev";
-import DevCreateRequestDTO from "../../dtos/user/dev/DevCreateRequestDTO";
-import CompanyCreateRequestDTO from "../../dtos/user/company/CompanyCreateRequestDTO";
-import ICompanyProps from "../../interfaces/ICompany";
-import BusinessLogicError from "../../../handler/BusinessLogicError ";
-import { CompanyResponseDTO } from "../../dtos/user/company/CompanyResponseDTO";
-import DevResponseDTO from "../../dtos/user/dev/DevResponseDTO";
-import IDevRepository from "../../../infra/repositories/abstract/IDevRepository";
-import ICompanyRepository from "../../../infra/repositories/abstract/ICompanyRepository";
-import PasswordResetTokenEntity from "../../entities/PasswordResetTokenEntity";
-import IEmailService from "../abstract/IEmailService";
-import { EmailTemplates } from "./EmailService";
-
+import { hash, compare } from "bcrypt"
+import errors from "../../../handler/errors.handler"
+import IAuthRepository from "../../../infra/repositories/abstract/IAuthRepository"
+import ICompanyRepository from "../../../infra/repositories/abstract/ICompanyRepository"
+import IDevRepository from "../../../infra/repositories/abstract/IDevRepository"
+import IRepository from "../../../infra/repositories/abstract/IRepository"
+import BadRequestResponse from "../../../Responses/BadRequestResponse"
+import IResponse from "../../../Responses/IResponse"
+import ServerErrorResponse from "../../../Responses/ServerErrorResponse"
+import SuccessResponse from "../../../Responses/SuccessResponse"
+import CompanyCreateRequestDTO from "../../dtos/user/company/CompanyCreateRequestDTO"
+import { CompanyResponseDTO } from "../../dtos/user/company/CompanyResponseDTO"
+import DevCreateRequestDTO from "../../dtos/user/dev/DevCreateRequestDTO"
+import DevResponseDTO from "../../dtos/user/dev/DevResponseDTO"
+import LoginRequestDTO from "../../dtos/user/LoginRequestDTO"
+import UserCreateRequestDTO from "../../dtos/user/UserCreateRequestDTO"
+import UserDTO from "../../dtos/user/UserDTO"
+import AuthEntity from "../../entities/AuthEntity"
+import CompanyEntity from "../../entities/CompanyEntity"
+import DevEntity from "../../entities/DevEntity"
+import PasswordResetTokenEntity from "../../entities/PasswordResetTokenEntity"
+import ICompanyProps from "../../interfaces/ICompany"
+import IDevProps from "../../interfaces/IDev"
+import { userRoles, IUserProps } from "../../interfaces/IUser"
+import IAuthService from "../abstract/IAuthService"
+import { IDevService } from "../abstract/IDevService"
+import IEmailService from "../abstract/IEmailService"
+import { EmailTemplates } from "./EmailService"
+import * as jwt from "jsonwebtoken"
 
 export default class AuthService implements IAuthService {
     private repo : IAuthRepository
@@ -37,18 +34,21 @@ export default class AuthService implements IAuthService {
     private companyRepo : ICompanyRepository
     private passResetTokenRepo : IRepository<PasswordResetTokenEntity>
     private emailService : IEmailService
+    private devService : IDevService
 
     constructor(
         repo : IAuthRepository, 
         devRepo : IDevRepository, 
         companyRepo : ICompanyRepository,
         passResetTokenRepo : IRepository<PasswordResetTokenEntity>,
-        emailService : IEmailService) { 
+        emailService : IEmailService,
+        devService : IDevService) { 
             this.repo = repo; 
             this.companyRepo = companyRepo;
             this.devRepo = devRepo;
             this.passResetTokenRepo = passResetTokenRepo;
             this.emailService = emailService;
+            this.devService = devService;
     }
 
     async setEnabled(id: string, value: number): Promise<IResponse> {
@@ -165,8 +165,6 @@ export default class AuthService implements IAuthService {
             errorMessage : errors.INVALID_DATA.message
         })
 
-        if (dto.name == "") return new BadRequestResponse({})
-
         return this.companyRepo.create(dto as unknown as CompanyEntity)
     }
 
@@ -174,20 +172,18 @@ export default class AuthService implements IAuthService {
         const dto = new DevCreateRequestDTO({
             name : body.name,
             birthday : body.birthday,
+            githubUsername : body.githubUsername,
             auth : _auth
         } as unknown as IDevProps)
 
-        const dtoValidateRes = await dto.validate()
-        
+        console.log(`dev create dto :`, dto)
 
-        if (dtoValidateRes) return new BadRequestResponse({
-            errorCode : errors.INVALID_DATA.code,
-            errorMessage : errors.INVALID_DATA.message
-        })
+        const res = await this.devService.create(dto)
 
-        if (dto.name == "") return new BadRequestResponse({})
-
-        return this.devRepo.create(dto as unknown as DevEntity)
+        if (res.hasError) 
+            return res as BadRequestResponse
+        else 
+            return res.data
     }
 
     async requestPasswordRecovery(email : string): Promise<IResponse> {
@@ -209,6 +205,7 @@ export default class AuthService implements IAuthService {
         const passResetToken = new PasswordResetTokenEntity();
         passResetToken.token = await hash(token, 10)
         passResetToken.owner = auth;
+        passResetToken.expirationDate = new Date(Date.now() + 3600000);
 
         await this.passResetTokenRepo.create(passResetToken);
 

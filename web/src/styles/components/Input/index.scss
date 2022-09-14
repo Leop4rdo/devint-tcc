@@ -1,15 +1,15 @@
 .input-container {
   position: relative;
-
+  margin-bottom: 16px;
   height: 40px;
   width: 300px;
-  padding: 0px 12px;
+  padding: 0px 8px;
 
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 18px;
   
   background-color: $color-black;
 
@@ -21,7 +21,7 @@
   transition: border .25s ease-out;
 
   .icon {
-    color: $color-gray;
+    color: $color-white;
     font-size: 125%;
 
     transition: color .5s ease-out;
@@ -50,10 +50,10 @@
     border: none;
 
     color: $color-white;
-    font-size: clamp(.8rem, 1.5vw, 1.2rem);
+    font-size: clamp(.8rem, 1.5vw, 1.0rem);
     
     background-color: $color-black;
-    
+  
     height: 100%;
     width: 100%;
 
@@ -62,7 +62,3 @@
     }
   }
 }
-
-
-
-

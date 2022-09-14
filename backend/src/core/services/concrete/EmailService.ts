@@ -23,12 +23,12 @@ export default class EmailService implements IEmailService {
                 console.log('error readig template :', err);
                 return err;
             }
-
+            console.log(data)
             return data
         });
     }
 }
 
 export const EmailTemplates = {
-    PASSWORD_RECOVERY : 'resources/email/password-recovery.html'
+    PASSWORD_RECOVERY : '../../../resources/email/password-recovery.html'
 }

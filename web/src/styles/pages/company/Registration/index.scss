@@ -1,0 +1,63 @@
+.company-registration-page {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  
+  .registration-form-container {
+    width: 50%;
+    background-color: $color-white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    order: 2;
+    border: none;
+    
+    .terms-acceptance{
+      color: black;
+    }
+
+    h2 {
+      font-size: clamp( 2rem , 4vw, 2.8rem);
+      color: $color-light-purple;
+      font-weight: $font-semibold;
+    }
+
+    svg {
+      transform: rotate(90deg);
+    }
+  }
+
+  .image-container {
+    width: 65%;
+    height: 100%;
+    display: flex;
+    padding-left: 6%;
+    background-color: $color-black;
+    background-image: url("../../../../../public/assets/images/horizontal-wave-white-Company.png");
+    background-size: clamp(40px, 10vw, 390px) 100%;
+    background-repeat: no-repeat;
+    background-position: 101% -1px;
+    
+    img {
+      width: clamp(400px, 75%, 700px);
+      height: auto;
+    }
+  
+
+  }
+  @media (max-width: $breakpoint-laptop) {
+    
+    .image-container{
+      display: none;
+    }
+    .registration-form-container{
+      width: 100%;
+    }
+
+  }
+
+  
+}

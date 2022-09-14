@@ -1,21 +1,28 @@
 import Icon from "components/utils/Icon";
-import React from "react";
+import React, { useState } from "react";
 
-
-interface IInputProps {
-    type?: "text" | "password" | "email",
-    placeholder?: string,
+interface IInputProps extends React.HTMLProps<HTMLInputElement> {
     icon?: string,
-    onChange: (event: any) => void,
-    value?: string,
+    validate ?: (name ?: string) => boolean
 }
 
-const Input: React.FC<IInputProps> = ({ type, placeholder, value, onChange, icon }) => {
+const Input: React.FC<IInputProps> = (props) => {
+    const [isValid, setValid] = useState(true);
+
+    const validate = () => {
+        if (!props.validate) return
+        
+        setValid(props.validate(props.name))
+    }
+
+    const [textVisible, setTextVisible] = useState(false);
+
+    const toggleVisibility = () => setTextVisible(!textVisible);
 
     return (
-        <div className={`input-container`}>
-            {icon && <Icon name={icon}/>}
-            <input className={(icon) ? 'icon-input' : ''}type={type || "text"} placeholder={placeholder} value={value} onChange={onChange} />
+        <div className={`input-container ${!isValid ? 'error' : ''}`} onBlur={validate}>
+            {props.icon && <Icon name={props.icon}/>}
+            <input className={(props.icon) ? 'icon-input' : ''} {...props} />
         </div>
     )
 }
