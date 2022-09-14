@@ -1,6 +1,5 @@
 import React from "react";
 import { useState } from "react";
-
 import DevForm1 from "components/RegisterForms/Dev/Step1";
 import DevForm2 from "components/RegisterForms/Dev/Step2";
 import Button from "components/utils/Button";
@@ -36,7 +35,7 @@ const DevRegistrationPage: React.FC = () => {
 
             <div className="registration-form-container">
                 <div className="dev-user">
-                <Link to={'/register'}><Icon name="arrow_back"/></Link>
+                <Button children={(currentStep >= steps.length - 1) ? <Icon name="arrow_back" /> : [<Link to={'/register'}><Icon name="arrow_back" /></Link>]} onClick={onPreviousButtonPress} ></Button>
                 <h2>Sou Dev</h2>
                 </div>
                 
@@ -44,8 +43,6 @@ const DevRegistrationPage: React.FC = () => {
                 {steps[currentStep].component}
 
                 <div className="button-container">
-                    
-                    <Button type="button" children={<Icon name="arrow_back"/>} className={"btn-previous btn-primary step-" + currentStep} onClick={onPreviousButtonPress} ></Button>
 
                     <Button type="submit" children={(currentStep >= steps.length - 1) ? 'Cadastrar' : ["Proximo", <Icon name="arrow_forward" />]} onClick={onConfirmButtonPress} className="btn-primary" ></Button>
 

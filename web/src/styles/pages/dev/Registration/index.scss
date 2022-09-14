@@ -23,17 +23,21 @@
         color: $color-white;
         margin-bottom: 24px;
         font-weight: $font-semibold;
-        margin-left: 2rem;
+        margin-left: clamp( 6rem, 6vw , 5.1rem);
       }
 
-      .icon{
-        color: $color-white;
-        font-size: clamp( 2.3rem , 4vw , 3rem);
-        margin-top: 10px;
-        margin-left: clamp( 2.4rem , 4vw , 2rem );
-      }
-      .icon:hover{
-        cursor: pointer;
+      button{
+        border: none;
+        background-color: transparent;  
+        width: 0px;
+        .icon{
+          color: $color-white;
+          font-size: clamp( 2.3rem , 4vw , 3rem);
+          margin-top: clamp( 1.9rem , 4vw , 3rem);
+        }
+        .icon:hover{
+          cursor: pointer;
+        }
       }
   
     }

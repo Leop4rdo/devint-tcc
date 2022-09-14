@@ -1,12 +1,27 @@
-import Button from "components/utils/Button";
-import Input from "components/utils/Input";
+
 import LogoComponent from "components/utils/Logo";
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
 import { AuthContext } from "store/context/Auth.context";
+import Step2 from "../../components/RegisterForms/Login/Step2"
+import Step1 from "../../components/RegisterForms/Login/Step1"
 
 const LoginPage: React.FC = () => {
+
     const authContext = useContext(AuthContext);
+
+    const [currentStep ,  setCurrentStep] = useState(0)
+
+    const steps=[
+        {component: <Step1 />},
+        {component:<Step2 />},
+    ]
+
+    const onPreviousButtonPress = () => {
+
+        if (currentStep >= 1) {
+            setCurrentStep(currentStep - 1)
+        }
+    }
 
     const [formValues, setFormValues] = useState({
         email : "",
@@ -32,13 +47,13 @@ const LoginPage: React.FC = () => {
         setPasswordShown(!passwordShown);
     }
 
+
+
     return (
         <div className="login-page">
             <header>
                 <h1><LogoComponent secondary="#1F252F" primary="#7865FF" /></h1>
             </header>
-
-
 
             <main>
                 <div className="image-container">
@@ -55,28 +70,9 @@ const LoginPage: React.FC = () => {
                             </ul>
                         </nav>
                     </div>
-
-                    <div className="login-container">
-
-                        <h2>Entrar</h2>
-                        <Input icon="email" placeholder={"Email"} onChange={handleChange} name="email" type="email" />
-                        <Input icon="lock" placeholder={"Senha"} onChange={handleChange} name="password" type="password" />
-                        <a href="#">Esqueci minha senha</a>
-
-                        <button className="btn-primary" onClick={login}>LOGIN</button>
-
-                        <p>ou</p>
-
-                        <div className="button-container">
-                            <button className="login-pairing btn-primary"> <img src="assets/icons/github.svg" alt="" /></button>
-                            <button className="login-pairing btn-primary" >
-                                <img src="assets/icons/google.svg" alt="" />
-                            </button>
-                        </div>
-   
-                        <Link className="container-new-user" to='/register'>Sou novo aqui</Link>
-
-                    </div>
+                    
+                    {steps[currentStep].component}
+                
                 </div>
             </main>
 
