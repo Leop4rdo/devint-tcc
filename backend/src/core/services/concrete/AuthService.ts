@@ -26,20 +26,26 @@ import { CompanyResponseDTO } from "../../dtos/user/company/CompanyResponseDTO";
 import DevResponseDTO from "../../dtos/user/dev/DevResponseDTO";
 import IDevRepository from "../../../infra/repositories/abstract/IDevRepository";
 import ICompanyRepository from "../../../infra/repositories/abstract/ICompanyRepository";
+import DevService from "./DevService";
+import IService from "../abstract/IService";
+import { IDevService } from "../abstract/IDevService";
 
 
 export default class AuthService implements IAuthService {
     private repo : IAuthRepository
     private devRepo : IDevRepository
     private companyRepo : ICompanyRepository
+    private devService : IDevService
 
     constructor(
         repo : IAuthRepository, 
         devRepo : IDevRepository, 
-        companyRepo : ICompanyRepository) { 
+        companyRepo : ICompanyRepository,
+        devService : IDevService) { 
             this.repo = repo; 
             this.companyRepo = companyRepo;
             this.devRepo = devRepo;
+            this.devService = devService;
     }
 
     async setEnabled(id: string, value: number): Promise<IResponse> {
@@ -124,7 +130,7 @@ export default class AuthService implements IAuthService {
 
         const userRes = (auth.role == userRoles.COMPANY) ?
             new CompanyResponseDTO(user as ICompanyProps)
-            : new DevResponseDTO(user as IDevProps) 
+            : new DevResponseDTO(user as unknown as IDevProps) 
         
         new UserDTO({...user, role : auth.role} as unknown as IUserProps);
 
@@ -156,8 +162,6 @@ export default class AuthService implements IAuthService {
             errorMessage : errors.INVALID_DATA.message
         })
 
-        if (dto.name == "") return new BadRequestResponse({})
-
         return this.companyRepo.create(dto as unknown as CompanyEntity)
     }
 
@@ -165,19 +169,17 @@ export default class AuthService implements IAuthService {
         const dto = new DevCreateRequestDTO({
             name : body.name,
             birthday : body.birthday,
+            githubUsername : body.githubUsername,
             auth : _auth
         } as unknown as IDevProps)
 
-        const dtoValidateRes = await dto.validate()
-        
+        console.log(`dev create dto :`, dto)
 
-        if (dtoValidateRes) return new BadRequestResponse({
-            errorCode : errors.INVALID_DATA.code,
-            errorMessage : errors.INVALID_DATA.message
-        })
+        const res = await this.devService.create(dto)
 
-        if (dto.name == "") return new BadRequestResponse({})
-
-        return this.devRepo.create(dto as unknown as DevEntity)
+        if (res.hasError) 
+            return res as BadRequestResponse
+        else 
+            return res.data
     }
 }
