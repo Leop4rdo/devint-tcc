@@ -5,30 +5,81 @@ import DevForm1 from "components/RegisterForms/Dev/Step1";
 import DevForm2 from "components/RegisterForms/Dev/Step2";
 import Button from "components/utils/Button";
 import Icon from "components/utils/Icon";
+import { isValidBirthday, isValidEmail } from "utils/validations";
+import * as AuthService from "services/auth.service";
+import { AuthContext } from "store/context/Auth.context";
 
 const DevRegistrationPage: React.FC = () => {
+
+    const [formValues, setFormValues] = useState ({
+        name: "",
+        email: "",
+        birthday: "",
+        password: "",
+        confirmPassword: "",
+    })
 
     const [currentStep, setCurrentStep] = useState(0);
 
     const steps = [
-        { desc: "", component: <DevForm1 onSubmit={() => { }} /> },
+        { desc: "", component: <DevForm1 onSubmit={() => { }} formData={formValues} /> },
         { desc: "", component: <DevForm2 onSubmit={() => { }} /> },
     ]
 
-    const onConfirmButtonPress = () => {
+    const isFormValid = () => {
 
-        if (currentStep >= steps.length - 1)
-            return
-        else
-            setCurrentStep(currentStep + 1)
+        if (!isValidEmail(formValues.email)) return false;
+
+        if (formValues.name.length < 3) return false;
+
+        if (!isValidBirthday(formValues.birthday)) return false;
+
+        if (formValues.birthday !== formValues.confirmPassword) return false;
+
+        return true;
+
     }
 
+    const onConfirmButtonPress = () => {
+        
+        if (currentStep >= steps.length - 1)
+        return
+        else
+        setCurrentStep(currentStep + 1)
+        
+        if (!isFormValid())
+        return alert("Por favor, verifique se os dados estão corretos!")    
+        
+        register()    
+    }
+
+    const register = async () => {
+
+        const body = {
+            name: formValues.name,
+            email: formValues.email,
+            birthday: formValues.birthday,
+            password: formValues.password,
+        }
+
+        const res = await AuthService.register(body)
+
+        console.log(res)
+
+        if (res.hasError) 
+            return alert ("Por favor, verifique se os dados estão corretos!")
+
+        //AuthContext?.signIn(body.email, body.password);    
+        
+    }
+    
     const onPreviousButtonPress = () => {
 
         if (currentStep >= 1) {
             setCurrentStep(currentStep - 1)
         }
     }
+
 
     return (
         <div className="dev-registration-page">

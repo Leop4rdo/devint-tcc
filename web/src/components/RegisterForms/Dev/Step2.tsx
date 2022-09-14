@@ -20,6 +20,12 @@ const DevForm2: React.FC<IFormProps> = ({ onSubmit }) => {
         passwordConfirm: "",
     })
 
+    const isMatchingPasswords = (password: string, confirmPassword: string) => {
+       if (password === confirmPassword) {
+        
+       }
+    }
+
     const [passwordShown, setPasswordShown] = useState(false);
 
     const togglePassword = () => {

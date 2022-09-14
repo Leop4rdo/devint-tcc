@@ -6,15 +6,17 @@ import Input from "components/utils/Input";
 
 interface IForm1Props {
     onSubmit: (data : IFormFields) => void,
+    formData: any,
 }
 
 interface IFormFields {
     name : string,
     email: string,
     birthday : string,
+    
 }
 
-const DevForm1: React.FC<IForm1Props> = ({ onSubmit }) => {
+const DevForm1: React.FC<IForm1Props> = ({ onSubmit, formData}) => {
     const [formFields, setFormFields] = useState<IFormFields>({
         name : "",
         email: "",
