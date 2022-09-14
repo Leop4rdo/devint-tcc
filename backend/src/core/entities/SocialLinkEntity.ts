@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm"
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm"
+import DevEntity from "./DevEntity"
 
 @Entity('social_links')
 export default class SocialLinkEntity {
@@ -9,9 +10,12 @@ export default class SocialLinkEntity {
     @Column({ nullable : false})
     name: string
     
-    @Column({ nullable : false})
-    value: string
+    // @Column({ nullable : false})
+    // value: string
 
+    @ManyToOne(()=> DevEntity, (dev) => dev.socialLinks)
+    value : DevEntity
+    
     @CreateDateColumn({ name: 'created_at', select: false })
     createdAt : Timestamp
 

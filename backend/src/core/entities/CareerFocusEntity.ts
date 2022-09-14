@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm"
+import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm"
+import DevEntity from "./DevEntity"
 
 @Entity('carrers_focus')
 export default class CareerFocusEntity {
@@ -8,9 +9,13 @@ export default class CareerFocusEntity {
     @Column({ nullable : false})
     name: string
     
+    @ManyToOne(()=> DevEntity, (dev) => dev.careerFocus)
+    dev: DevEntity
+
     @CreateDateColumn({ name: 'created_at', select: false })
     createdAt : Timestamp
 
     @UpdateDateColumn({ name : 'updated_at' })
     updatedAt : Timestamp
+    
 }

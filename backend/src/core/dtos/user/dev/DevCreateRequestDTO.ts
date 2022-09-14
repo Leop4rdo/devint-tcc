@@ -15,11 +15,17 @@ export default class DevCreateRequestDTO {
     @IsNotEmpty()
     auth : AuthEntity
 
+    @IsString()
+    @IsNotEmpty()
+    githubUsername : string
+
     constructor(props : IDevProps) {
         this.name = props.name;
         this.birthday = props.birthday;
         this.auth = props.auth;
+        this.githubUsername = props.githubUsername;
     }
+
     async validate() {
         const err = await validate(this);
     
