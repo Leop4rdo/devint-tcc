@@ -30,9 +30,15 @@ const Register: React.FC = () => {
                         </nav>
                     </div>
                     <div className="register-user">
-                        <Button className="button-keyboard_backspace btn-primary" children={<Icon name="keyboard_backspace" />} onClick={() => navigate("/")} ></Button>
+                        <div className="register-and-go-back"> 
                         
+                            <button className="button-keyboard_backspace btn-primary" onClick={() => navigate("/")} >
+                                <Icon name="keyboard_backspace" />
+                            </button>
+                            
                             <h1>Cadastre-se</h1>
+
+                        </div>
 
                             <div className="button-container">
 

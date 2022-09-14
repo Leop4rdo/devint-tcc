@@ -1,13 +1,13 @@
 import React from 'react';
 
-interface IIconProps {
+interface IIconProps extends React.HTMLProps<HTMLSpanElement> {
     name : string
 }
 
-const Icon: React.FC<IIconProps> = ({name}) => {
+const Icon: React.FC<IIconProps> = (props) => {
     return (
-        <span className="icon material-symbols-rounded">
-            {name}
+        <span {...props} className="icon material-symbols-rounded">
+            {props.name}
         </span>
     )
 }
