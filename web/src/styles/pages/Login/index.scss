@@ -19,8 +19,6 @@
         h1 {
             font-size: clamp(3rem, 4vw, 4rem);
         }
-
-        
     }
     @media (max-width: $breakpoint-medium) {
 
@@ -57,7 +55,7 @@
     }
     @media (max-width: $breakpoint-medium) {
         .menu-container{
-            top: 14rem;
+            top: 12rem;
             margin-bottom: -20px;
 
             nav ul li a {
@@ -83,12 +81,10 @@
       justify-content: center;
       align-items: center;
     }
-
+    
     .login-image {
       width: clamp(200px, 60%, 700px);
     }
-
-    
 
     @media (max-width: $breakpoint-medium) {
       .image-container {

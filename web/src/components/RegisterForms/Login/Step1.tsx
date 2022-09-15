@@ -2,14 +2,19 @@ import Input from "components/utils/Input";
 import React from "react";
 import { Link } from "react-router-dom"
 
-const ContainerLoginUser: React.FC = () => {
+
+interface ILoginUserProps{
+    OnClick?: any,
+}
+
+const ContainerLoginUser: React.FC<ILoginUserProps> = ({OnClick}) => {
     return (
         <div className="login-container">
 
             <h2>Entrar</h2>
             <Input icon="email" placeholder={"Email"} name="email" type="email" />
             <Input icon="lock" placeholder={"Senha"} name="password" type="password" />
-            
+            <a onClick={OnClick}>Esqueci minha senha</a>
 
             <button className="btn-primary">LOGIN</button>
 

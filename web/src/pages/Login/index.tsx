@@ -2,26 +2,29 @@
 import LogoComponent from "components/utils/Logo";
 import React, { useContext, useState } from "react";
 import { AuthContext } from "store/context/Auth.context";
-import Step2 from "../../components/RegisterForms/Login/Step2"
 import Step1 from "../../components/RegisterForms/Login/Step1"
+import Step2 from "../../components/RegisterForms/Login/Step2"
+import Step3 from "../../components/RegisterForms/Login/Step3"
 
 const LoginPage: React.FC = () => {
 
     const authContext = useContext(AuthContext);
 
     const [currentStep ,  setCurrentStep] = useState(0)
+    
+    const onConfirmButtonPress = () => {
+
+        if (currentStep >= steps.length - 1)
+            return
+        else
+            setCurrentStep(currentStep + 1)
+    }
 
     const steps=[
-        {component: <Step1 />},
-        {component:<Step2 />},
+        {component: <Step1 OnClick={onConfirmButtonPress}/>},
+        {component: <Step2 OnClick={onConfirmButtonPress}/>},
+        {component: <Step3  />},
     ]
-
-    const onPreviousButtonPress = () => {
-
-        if (currentStep >= 1) {
-            setCurrentStep(currentStep - 1)
-        }
-    }
 
     const [formValues, setFormValues] = useState({
         email : "",
@@ -70,9 +73,11 @@ const LoginPage: React.FC = () => {
                             </ul>
                         </nav>
                     </div>
+
                     
                     {steps[currentStep].component}
-                
+                    
+
                 </div>
             </main>
 
