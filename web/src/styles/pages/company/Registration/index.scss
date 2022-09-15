@@ -14,15 +14,38 @@
     gap: 1.5rem;
     order: 2;
     border: none;
-    
-    .terms-acceptance{
-      color: black;
-    }
 
-    h2 {
-      font-size: clamp( 2rem , 4vw, 2.8rem);
-      color: $color-light-purple;
-      font-weight: $font-semibold;
+    .terms-checkbox label{
+        color: black;
+    }
+   
+    .dev-user{
+      display: flex;
+      width: clamp( 29.4rem , 45vw , 35rem);
+      
+      h2 {
+        font-size: clamp( 2.3rem , 4vw , 3rem);
+        color: $color-light-purple;
+        margin-bottom: 24px;
+        font-weight: $font-semibold;
+        margin-left: 7rem;
+      }
+
+      button{
+        border: none;
+        background-color: transparent;  
+        width: 0px;
+        .icon{
+          color: $color-light-purple;
+          font-size: clamp( 2.3rem , 4vw , 3rem);
+          margin-top: clamp( 1.9rem , 4vw , 3rem);
+          margin-right: -64px;
+        }
+        .icon:hover{
+          cursor: pointer;
+        }
+      }
+     
     }
 
     svg {
