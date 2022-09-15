@@ -5,6 +5,7 @@ import Input from "components/utils/Input";
 //import Icon from "components/utils/Icon";
 
 interface IForm1Props {
+    onChange? : any;
     onSubmit: (data : IFormFields) => void,
     formData: any,
 }

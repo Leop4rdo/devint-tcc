@@ -21,12 +21,21 @@ const DevRegistrationPage: React.FC = () => {
 
     const [currentStep, setCurrentStep] = useState(0);
 
+    const handleChange = (text: string, key: keyof typeof formValues) => {
+        setFormValues({
+            ...formValues,
+            [key] : text
+        })
+    }
+
     const steps = [
-        { desc: "", component: <DevForm1 onSubmit={() => { }} formData={formValues} /> },
-        { desc: "", component: <DevForm2 onSubmit={() => { }} /> },
+        { desc: "", component: <DevForm1 onSubmit={() => { }} formData={setFormValues} onChange={handleChange} /> },
+        { desc: "", component: <DevForm2 onSubmit={() => { }} formData={setFormValues} onChange={handleChange} /> },
     ]
 
     const isFormValid = () => {
+
+        console.log(formValues);
 
         if (!isValidEmail(formValues.email)) return false;
 
@@ -41,20 +50,23 @@ const DevRegistrationPage: React.FC = () => {
     }
 
     const onConfirmButtonPress = () => {
+
+        if (!isFormValid())
+            return alert("Por favor, verifique se os dados estão corretos!")    
         
         if (currentStep >= steps.length - 1)
-        return
+            return
         else
-        setCurrentStep(currentStep + 1)
+            setCurrentStep(currentStep + 1)
         
-        if (!isFormValid())
-        return alert("Por favor, verifique se os dados estão corretos!")    
         
         register()    
     }
 
     const register = async () => {
 
+        console.log("teste");
+        
         const body = {
             name: formValues.name,
             email: formValues.email,
@@ -64,7 +76,6 @@ const DevRegistrationPage: React.FC = () => {
 
         const res = await AuthService.register(body)
 
-        console.log(res)
 
         if (res.hasError) 
             return alert ("Por favor, verifique se os dados estão corretos!")
