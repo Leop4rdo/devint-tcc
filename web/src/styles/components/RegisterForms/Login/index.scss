@@ -26,18 +26,20 @@
     font-weight: $font-regular;
   }
 
-  .come-back-login{
-    button{
+  .come-back-login {
+    button {
       border: none;
-      background-color: transparent;  
+      background-color: transparent;
       width: 0px;
-      .icon{
+
+      .icon {
         color: $color-white;
-        font-size: clamp( 2.3rem , 4vw , 3rem);
+        font-size: clamp(2.3rem, 4vw, 3rem);
         margin-top: 3rem;
-       
+
       }
-      .icon:hover{
+
+      .icon:hover {
         cursor: pointer;
       }
     }
@@ -143,5 +145,25 @@
     font-size: clamp(0.8rem, 1vw, 0.9rem);
     text-align: center;
   }
+
+  button {
+
+    border: none;
+    background-color: transparent;
+    width: 0px;
+
+    .icon {
+      color: $color-white;
+      font-size: clamp(2.3rem, 4vw, 3rem);
+      margin-top: 12rem;
+
+    }
+
+    .icon:hover {
+      cursor: pointer;
+    }
+  }
+
+
 
 }

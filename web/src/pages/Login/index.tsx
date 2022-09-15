@@ -20,10 +20,21 @@ const LoginPage: React.FC = () => {
             setCurrentStep(currentStep + 1)
     }
 
+    const onPreviousButtonPress = () => {
+
+        if (currentStep >= 1) {
+            setCurrentStep(currentStep - 1)
+        }
+        if(currentStep === 2){
+            setCurrentStep(currentStep - 2 )
+        }
+        
+    }
+
     const steps=[
         {component: <Step1 OnClick={onConfirmButtonPress}/>},
-        {component: <Step2 OnClick={onConfirmButtonPress}/>},
-        {component: <Step3  />},
+        {component: <Step2 OnClickButton={onConfirmButtonPress} OnClickComeBack={onPreviousButtonPress}/>},
+        {component: <Step3 OnClickComeBack={onPreviousButtonPress}/>},
     ]
 
     const [formValues, setFormValues] = useState({
