@@ -5,7 +5,7 @@ import DevForm1 from "components/RegisterForms/Dev/Step1";
 import DevForm2 from "components/RegisterForms/Dev/Step2";
 import Button from "components/utils/Button";
 import Icon from "components/utils/Icon";
-import { isValidBirthday, isValidEmail } from "utils/validations";
+import { isValidDate, isValidEmail } from "utils/validations";
 import * as AuthService from "services/auth.service";
 import { AuthContext } from "store/context/Auth.context";
 
@@ -19,18 +19,21 @@ const DevRegistrationPage: React.FC = () => {
         confirmPassword: "",
     })
 
+    console.log(formValues)
+
+
     const [currentStep, setCurrentStep] = useState(0);
 
-    const handleChange = (text: string, key: keyof typeof formValues) => {
+    const handleChange = (e : any) => {
         setFormValues({
             ...formValues,
-            [key] : text
+            [e.target.name] : e.target.value
         })
     }
 
     const steps = [
-        { desc: "", component: <DevForm1 onSubmit={() => { }} formData={setFormValues} onChange={handleChange} /> },
-        { desc: "", component: <DevForm2 onSubmit={() => { }} formData={setFormValues} onChange={handleChange} /> },
+        { desc: "", component: <DevForm1 onSubmit={() => { }} formData={formValues} onChange={handleChange} /> },
+        { desc: "", component: <DevForm2 onSubmit={() => { }} formData={formValues} onChange={handleChange} /> },
     ]
 
     const isFormValid = () => {
@@ -41,7 +44,7 @@ const DevRegistrationPage: React.FC = () => {
 
         if (formValues.name.length < 3) return false;
 
-        if (!isValidBirthday(formValues.birthday)) return false;
+        if (!isValidDate(formValues.birthday)) return false;
 
         if (formValues.birthday !== formValues.confirmPassword) return false;
 
@@ -60,7 +63,7 @@ const DevRegistrationPage: React.FC = () => {
             setCurrentStep(currentStep + 1)
         
         
-        register()    
+            // register()    
     }
 
     const register = async () => {
