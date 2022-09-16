@@ -63,13 +63,13 @@ const LoginPage: React.FC = () => {
                         <Input icon="lock" placeholder={"Senha"} onChange={handleChange} name="password" type="password" />
                         <a href="#">Esqueci minha senha</a>
 
-                        <Button className="button-login" onClick={login}>Login</Button>
+                        <Button className="button-login btn-primary" onClick={login}>Login</Button>
 
                         <p>ou</p>
 
                         <div className="button-container">
-                            <Button className="login-pairing btn-primary"> <img src="assets/icons/github.svg" alt="" /></Button>
-                            <Button className="login-pairing btn-primary" >
+                            <Button className="login-pairing btn-secondary"> <img src="assets/icons/github.svg" alt="" /></Button>
+                            <Button className="login-pairing btn-secondary" >
                                 <img src="assets/icons/google.svg" alt="" />
                             </Button>
                         </div>

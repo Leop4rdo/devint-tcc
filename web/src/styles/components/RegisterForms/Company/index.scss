@@ -2,12 +2,12 @@ form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1rem;
 }
 
 .terms-checkbox {
     label {
-        color: $color-white;
+        color: $color-black;
         margin-left: 8px;
     }
 }
