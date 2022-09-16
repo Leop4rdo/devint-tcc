@@ -32,6 +32,8 @@ const DevForm2: React.FC<IFormProps> = ({ onSubmit, formData }) => {
 
         <form className="form" onSubmit={() => onSubmit(formFields)}>
 
+            <Input type="text" placeholder="Usuário do GitHub (opcional)" onChange={() => {}} />
+
             <div className="password-container">
 
                 <Input icon="lock" placeholder="Senha" onChange={() => { }} type={passwordShown ? "text" : "password"} />
