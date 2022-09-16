@@ -22,12 +22,12 @@ const DevRegistrationPage: React.FC = () => {
         confirmPassword: "",
     })
 
-    console.log(formValues)
 
 
     const [currentStep, setCurrentStep] = useState(0);
 
     const handleChange = (e : any) => {
+        console.log(formValues)
         setFormValues({
             ...formValues,
             [e.target.name] : e.target.value

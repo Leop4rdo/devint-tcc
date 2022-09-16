@@ -13,7 +13,6 @@ interface IForm1Props {
 
 const DevForm1: React.FC<IForm1Props> = ({ onSubmit, formData, onChange}) => {
     
-    console.log(!isEmpty(formData.name))
     return (
 
         <form className="form" onSubmit={onSubmit}>
