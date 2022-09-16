@@ -102,11 +102,14 @@ const DevRegistrationPage: React.FC = () => {
         <div className="dev-registration-page">
 
             <div className="registration-form-container">
+
                 <div className="dev-user">
+
                 <Button children={(currentStep >= steps.length - 1) ? <Icon name="arrow_back" /> : [<Link to={'/register'}><Icon name="arrow_back" /></Link>]} onClick={onPreviousButtonPress} ></Button>
+
                 <h2>Sou Dev</h2>
-                </div>
                 
+                </div>
 
                 {steps[currentStep].component}
 
