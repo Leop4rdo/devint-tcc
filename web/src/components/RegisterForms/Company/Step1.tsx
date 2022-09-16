@@ -14,6 +14,7 @@ interface IFormFields {
 }
 
 const CompanyForm1: React.FC<IForm1Props> = ({ onSubmit }) => {
+    
     const [formFields, setFormFields] = useState<IFormFields>({
         name : "",
         email: "",
