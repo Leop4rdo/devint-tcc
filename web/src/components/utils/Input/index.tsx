@@ -30,7 +30,7 @@ const Input: React.FC<IInputProps> = (props) => {
     return (
         <div className={`input-container ${!isValid ? 'error' : ''}`} onBlur={validate}>
             {props.icon && <Icon name={props.icon} />}
-            <input className={(props.icon) ? 'icon-input' : ''} type={(props.isPassword) ? ((textVisible) ? "text" : "password") : (props.type)} />
+            <input {...props} className={(props.icon) ? 'icon-input' : ''} type={(props.isPassword) ? ((textVisible) ? "text" : "password") : (props.type)} />
             {   
                 props.isPassword &&
                 <Icon name={textVisible ? "visibility" : "visibility_off" }  onClick={toggleVisibility} />

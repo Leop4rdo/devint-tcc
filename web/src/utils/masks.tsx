@@ -1,4 +1,4 @@
-export const maskDate = (value: string) => {
+export const dateMask = (value: string) => {
     return value
       .replace(/\D/g, "")
       .replace(/(\d{2})(\d)/, "$1/$2")

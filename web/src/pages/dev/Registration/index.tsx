@@ -127,6 +127,6 @@ const DevRegistrationPage: React.FC = () => {
 
         </div>
     )
-};
+}; 
 
 export default DevRegistrationPage;
