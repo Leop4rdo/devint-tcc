@@ -2,16 +2,18 @@
 import LogoComponent from "components/utils/Logo";
 import React, { useContext, useState } from "react";
 import { AuthContext } from "store/context/Auth.context";
-import Step1 from "../../components/RegisterForms/Login/Step1"
-import Step2 from "../../components/RegisterForms/Login/Step2"
+
 import Step3 from "../../components/RegisterForms/Login/Step3"
+import Step4 from "../../components/RegisterForms/Login/Step4"
+import Input from "components/utils/Input";
+import { Link } from "react-router-dom"
 
 const LoginPage: React.FC = () => {
 
     const authContext = useContext(AuthContext);
 
-    const [currentStep ,  setCurrentStep] = useState(0)
-    
+    const [currentStep, setCurrentStep] = useState(0)
+
     const onConfirmButtonPress = () => {
 
         if (currentStep >= steps.length - 1)
@@ -25,29 +27,29 @@ const LoginPage: React.FC = () => {
         if (currentStep >= 1) {
             setCurrentStep(currentStep - 1)
         }
-        if(currentStep === 2){
-            setCurrentStep(currentStep - 2 )
+        if (currentStep === 2) {
+            setCurrentStep(currentStep - 2)
         }
-        
+
     }
 
-    const steps=[
-        {component: <Step1 OnClick={onConfirmButtonPress}/>},
-        {component: <Step2 OnClickButton={onConfirmButtonPress} OnClickComeBack={onPreviousButtonPress}/>},
-        {component: <Step3 OnClickComeBack={onPreviousButtonPress}/>},
+    const steps = [
+        { component: <Step3 OnClickComeBack={onPreviousButtonPress} /> },
+        { component: <Step4 /> },
+
     ]
 
     const [formValues, setFormValues] = useState({
-        email : "",
-        password : ""
+        email: "",
+        password: ""
     })
 
-    const handleChange = (e : any) => {
+    const handleChange = (e: any) => {
         setFormValues({
             ...formValues,
-            [e.target.name] : e.target.value
+            [e.target.name]: e.target.value
         })
-    }  
+    }
 
     const login = async () => {
         const res = await authContext?.signIn(formValues.email, formValues.password)
@@ -85,9 +87,29 @@ const LoginPage: React.FC = () => {
                         </nav>
                     </div>
 
-                    
-                    {steps[currentStep].component}
-                    
+
+                    <div className="login-container">
+
+                        <h2>Entrar</h2>
+                        <Input icon="email" placeholder={"Email"} name="email" type="email" />
+                        <Input icon="lock" placeholder={"Senha"} name="password" type="password" />
+                        <Link className="container-new-user" to='/loginwapper'>Esqueci minha senha</Link>
+
+                        <button className="register-button btn-secondary">LOGIN</button>
+
+                        <p>ou</p>
+
+                        <div className="button-container">
+                            <button className="register-button btn-secondary"> <img src="assets/icons/github.svg" alt="" /></button>
+                            <button className="register-button btn-secondary" >
+                                <img src="assets/icons/google.svg" alt="" />
+                            </button>
+                        </div>
+
+                        <Link className="container-new-user" to='/register'>Sou novo aqui</Link>
+
+                    </div>
+
 
                 </div>
             </main>
