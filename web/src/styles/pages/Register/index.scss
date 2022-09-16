@@ -14,7 +14,7 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            width: 60%;
+            width: 75%;
             height: 100%;
             background-color: $color-light-purple;
             gap: 64px;
@@ -56,7 +56,8 @@
                     font-size: clamp(1rem, 2vw, 1.3rem);
                     cursor: pointer;
                     color: $color-light-purple;
-                    padding: clamp(0.5rem, 1.5vw, 1.4rem);
+                    padding: clamp(0.9rem, 1.5vw, 1.4rem);
+                    
                 }
 
                 nav ul li {
@@ -102,6 +103,10 @@
 
                     .icon {
                         color: $color-primary;
+                        font-size: 65px;
+                    }
+                    .icon:hover{
+                        transform: scale(1.1);
                         font-size: clamp(34px, 4vw, 48px);
                     }
                 }

@@ -14,13 +14,38 @@
     justify-content: center;
     gap: 1rem;
 
-    h2 {
-      font-size: clamp( 2.3rem , 4vw , 3rem);
-      color: $color-white;
-      font-weight: $font-semibold;
+    .dev-user{
+      display: flex;
+      width: clamp( 22.4rem , 26vw , 24.4rem);
+      
+      h2 {
+        font-size: clamp( 2.3rem , 4vw , 3rem);
+        color: $color-white;
+        margin-bottom: 24px;
+        font-weight: $font-semibold;
+        margin-left: clamp( 6rem, 6vw , 5.1rem);
+      }
+
+      button{
+        border: none;
+        background-color: transparent;  
+        width: 0px;
+        .icon{
+          color: $color-white;
+          font-size: clamp( 2.3rem , 4vw , 3rem);
+          margin-top: clamp( 1.9rem , 4vw , 3rem);
+        }
+        .icon:hover{
+          cursor: pointer;
+          transform: scale(1.1);
+        }
+      }
+  
     }
 
+   
   }
+  
 
   .image-container {
     width: 70%;
