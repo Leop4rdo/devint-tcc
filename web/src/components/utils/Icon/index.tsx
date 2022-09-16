@@ -1,14 +1,15 @@
 import React from 'react';
 
-interface IIconProps {
+interface IIconProps extends React.HTMLProps<HTMLSpanElement> {
     name : string
     onClick? : any
 }
 
-const Icon: React.FC<IIconProps> = ({name, onClick}) => {
+
+const Icon: React.FC<IIconProps> = (props) => {
     return (
-        <span className="icon material-symbols-rounded" onClick={onClick}>
-            {name}
+        <span {...props} className="icon material-symbols-rounded">
+            {props.name}
         </span>
     )
 }

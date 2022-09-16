@@ -1,7 +1,6 @@
 import React from "react";
-
 import { useState } from "react";
-
+import { Link } from "react-router-dom";
 import CompanyForm1 from "components/RegisterForms/Company/Step1";
 import CompanyForm2 from "components/RegisterForms/Company/Step2";
 import Button from "components/utils/Button";
@@ -36,13 +35,14 @@ const CompanyRegistrationPage: React.FC = () => {
 
             <div className="registration-form-container">
 
-                <h2>Sou Empresa</h2>
+            <div className="dev-user">
+                <Button children={(currentStep >= steps.length - 1) ? <Icon name="arrow_back" /> : [<Link to={'/register'}><Icon name="arrow_back" /></Link>]} onClick={onPreviousButtonPress} ></Button>
+                <h2>Sou empresa</h2>
+                </div>
                 
                 {steps[currentStep].component}
 
                 <div className="button-container">
-
-                <Button type="button" children={<Icon name="arrow_back"/>} className={"btn-previous btn-primary step-" + currentStep} onClick={onPreviousButtonPress} ></Button>
 
                 <Button type="submit" children={(currentStep >= steps.length - 1) ? 'Cadastrar' : ["Proximo", <Icon name="arrow_forward" />]} onClick={onConfirmButtonPress} className="btn-primary" ></Button>
 
@@ -52,7 +52,7 @@ const CompanyRegistrationPage: React.FC = () => {
 
             <div className="image-container">
                 
-                <img src="../assets/images/Svg/company-img.svg" alt="developer on a computer" />
+                <img src="../assets/images/svg/company-img.svg" alt="developer on a computer" />
 
             </div>
 
