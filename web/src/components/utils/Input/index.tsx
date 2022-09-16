@@ -20,7 +20,7 @@ const Input: React.FC<IInputProps> = (props) => {
     const toggleVisibility = () => setTextVisible(!textVisible);
 
     return (
-        <div className={`input-container ${!isValid ? 'error' : ''}`} onBlur={validate}>
+        <div className={`input-container ${!isValid ? 'error' : ''}`} onBlur={validate} >
             {props.icon && <Icon name={props.icon}/>}
             <input className={(props.icon) ? 'icon-input' : ''} {...props} />
         </div>

@@ -6,7 +6,9 @@ import Icon from "components/utils/Icon";
 //import Icon from "components/utils/Icon";
 
 interface IFormProps {
+    onChange? : any;
     onSubmit: (data : IFormFields) => void,
+    formData: any;
 }
 
 interface IFormFields {
@@ -14,7 +16,7 @@ interface IFormFields {
     passwordConfirm: string,
 }
 
-const DevForm2: React.FC<IFormProps> = ({ onSubmit }) => {
+const DevForm2: React.FC<IFormProps> = ({ onSubmit, formData }) => {
     const [formFields, setFormFields] = useState<IFormFields>({
         password: "",
         passwordConfirm: "",
