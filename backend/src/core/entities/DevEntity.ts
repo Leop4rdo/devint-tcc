@@ -48,9 +48,9 @@ export default class DevEntity {
     @Column({type : 'date' })
     birthday : Date
 
-    @ManyToMany(()=> DevEntity, (devs) => devs.followers)
-    @JoinTable({name:'devs_follow_dev'})
-    followers: DevEntity[]
+    @ManyToMany(()=> DevEntity, (devs) => devs.following)
+    @JoinTable({name:'follows'})
+    following: DevEntity[]
 
     @OneToOne(() => AuthEntity, { nullable : false })
     @JoinColumn()
