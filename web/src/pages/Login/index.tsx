@@ -85,9 +85,7 @@ const LoginPage: React.FC = () => {
                         </nav>
                     </div>
 
-                    
                     {steps[currentStep].component}
-                    
 
                 </div>
             </main>
