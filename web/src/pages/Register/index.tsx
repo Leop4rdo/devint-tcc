@@ -30,23 +30,26 @@ const Register: React.FC = () => {
                         </nav>
                     </div>
                     <div className="register-user">
-                        <h1>Cadastre-se</h1>
-                        <div className="button-container">
-
-                            <Button className="register-button btn-secondary" onClick={() => navigate("company")}>
-                                SOU EMPRESA
-                            </Button>
-                            
-                            <Button className="register-button btn-secondary" onClick={() => navigate("dev")}>
-                                SOU DEV
-                            </Button>
-                    
-                        </div>
-                        <Button className="button-keyboard_backspace">
-                            <Link className="" to='/'>
+                        <div className="register-and-go-back"> 
+                        
+                            <button className="button-keyboard_backspace btn-primary" onClick={() => navigate("/")} >
                                 <Icon name="keyboard_backspace" />
-                            </Link>
-                        </Button>
+                            </button>
+                            
+                            <h1>Cadastre-se</h1>
+
+                        </div>
+
+                            <div className="button-container">
+
+                                <Button className="register-button btn-secondary" onClick={() => navigate("company")}>
+                                    SOU EMPRESA
+                                </Button>
+                                
+                                <Button className="register-button btn-secondary" onClick={() => navigate("dev")}>
+                                    SOU DEV
+                                </Button>
+                            </div>
                     </div>
                 </div>
             </main>

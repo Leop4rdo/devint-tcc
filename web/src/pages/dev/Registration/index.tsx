@@ -48,10 +48,6 @@ const DevRegistrationPage: React.FC = () => {
 
                 </div>
 
-                <p>ou</p>
-
-                <Button type="button" className="btn-primary github-register" children={[<img src="../../../assets/icons/github.svg" alt="GitHub logo" />, "Cadatrar-se como GitHub"]}></Button>
-
             </div>
 
             <div className="image-container">
