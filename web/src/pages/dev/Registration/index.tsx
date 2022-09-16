@@ -22,9 +22,6 @@ const DevRegistrationPage: React.FC = () => {
         confirmPassword: "",
     })
 
-    console.log(formValues)
-
-
     const [currentStep, setCurrentStep] = useState(0);
 
     const handleChange = (e : any) => {
@@ -40,8 +37,6 @@ const DevRegistrationPage: React.FC = () => {
     ]
 
     const isFormValid = () => {
-
-        console.log(formValues);
 
         if (!isValidEmail(formValues.email)) return false;
 
@@ -71,8 +66,6 @@ const DevRegistrationPage: React.FC = () => {
 
     const register = async () => {
 
-        console.log("teste");
-        
         const body = {
             name: formValues.name,
             email: formValues.email,
