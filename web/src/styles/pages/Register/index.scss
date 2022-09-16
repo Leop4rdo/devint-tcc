@@ -56,7 +56,8 @@
                     font-size: clamp(1rem, 2vw, 1.3rem);
                     cursor: pointer;
                     color: $color-light-purple;
-                    padding: clamp(0.5rem, 1.5vw, 1.4rem);
+                    padding: clamp(0.9rem, 1.5vw, 1.4rem);
+                    
                 }
 
                 nav ul li {
@@ -100,7 +101,9 @@
                     .icon {
                         color: $color-light-purple;
                         font-size: 65px;
-
+                    }
+                    .icon:hover{
+                        transform: scale(1.1);
                     }
                 }
             }
