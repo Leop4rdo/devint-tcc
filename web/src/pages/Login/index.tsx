@@ -2,11 +2,15 @@
 import LogoComponent from "components/utils/Logo";
 import React, { useContext, useState } from "react";
 import { AuthContext } from "store/context/Auth.context";
-
 import Step3 from "../../components/RegisterForms/Login/Step3"
 import Step4 from "../../components/RegisterForms/Login/Step4"
-import Input from "components/utils/Input";
 import { Link } from "react-router-dom"
+import LinkWrapper from "../../components/LoginWrapper/index"
+import Input from "components/utils/Input";
+import Button from "components/utils/Button";
+import Icon from "components/utils/Icon";
+
+
 
 const LoginPage: React.FC = () => {
 
@@ -93,7 +97,7 @@ const LoginPage: React.FC = () => {
                         <h2>Entrar</h2>
                         <Input icon="email" placeholder={"Email"} name="email" type="email" />
                         <Input icon="lock" placeholder={"Senha"} name="password" type="password" />
-                        <Link className="container-new-user" to='/loginwapper'>Esqueci minha senha</Link>
+                        <Link  to='/loginwrapper'>Esqueci minha senha</Link>
 
                         <button className="register-button btn-secondary">LOGIN</button>
 
@@ -109,6 +113,12 @@ const LoginPage: React.FC = () => {
                         <Link className="container-new-user" to='/register'>Sou novo aqui</Link>
 
                     </div>
+
+                   {/* 
+                        <LinkWrapper>
+                            <div className="teste"></div>
+                        </LinkWrapper> */}
+                    
 
 
                 </div>

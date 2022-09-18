@@ -1,7 +1,7 @@
 import CompanyRegistrationPage from "pages/company/Registration";
 import DevRegistrationPage from "pages/dev/Registration";
 import LoginPage from "pages/Login";
-import LoginWapper from "components/LoginWapper";
+import LoginWapper from "components/LoginWrapper";
 import Register from "pages/Register";
 import React from "react"
 import { Routes, Route } from "react-router-dom"

@@ -86,20 +86,23 @@
       width: clamp(200px, 60%, 700px);
     }
 
+    .Login-wrapper-none{
+      display: none;
+    }
+
     .login-container {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       width: 500px;
-    
-    
+
       a {
         text-decoration: none;
         font-size: 12px;
         cursor: pointer;
         margin-top: 8px;
-   
+        margin-left: 13.5em;
         color: $color-primary;
         text-align: center;
         padding-bottom: 15px;

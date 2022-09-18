@@ -33,9 +33,9 @@ const LoginWapper: React.FC<ILoginWapper> = (props) => {
                     </div>
 
 
-                    <div className="login-container">
+                    
                         {props.children}
-                    </div>
+                    
                 </div>
             </main>
         </div>
