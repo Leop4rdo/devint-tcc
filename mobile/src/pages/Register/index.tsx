@@ -6,7 +6,7 @@ import RegisterFormStep1 from "../../components/register/forms/Step1";
 import RegisterFormStep2 from "../../components/register/forms/Step2";
 import RegisterFormStep3 from "../../components/register/forms/Step3";
 import { useCallback, useContext, useState } from "react";
-import { isEmail, isEmpty } from "../../utils/validation";
+import { isEmail, isEmpty, isValidDate } from "../../utils/validation";
 import { getStateFromPath } from "@react-navigation/native";
 import * as AuthService from "../../services/auth.service";
 import { AuthContext } from "../../store/context/Auth.context";
@@ -41,7 +41,7 @@ const RegisterPage : React.FC = () => {
         {
             desc : "Quando você nasceu?", 
             component : <RegisterFormStep2 formData={formValues} onChange={handleChange} styles={styles} />,
-            isValid : () => !isEmpty(formValues.birthday)
+            isValid : () => isValidDate(formValues.birthday)
         },
         {
             desc : "Qual vai ser a sua senha?", 
@@ -79,18 +79,19 @@ const RegisterPage : React.FC = () => {
     }
 
     const register = async () => {
+        const birthdayAsArray = formValues.birthday.split('/')
+        const birthday = [birthdayAsArray[2], birthdayAsArray[1], birthdayAsArray[0]].join('/')
+        
         const body = {
             name : formValues.name,
             email : formValues.email,
             password : formValues.password,
-            birthday : formValues.birthday, // formatar para aaaa/mm/dd
+            birthday : birthday, // formatar para aaaa/mm/dd
             githubProfileUrl : formValues.github
         }
 
         const res = await AuthService.register(body)
         
-        console.log(res)
-
         if (res.hasError)
             return alert("Por favor verifique se os dados estão corretos")
 
