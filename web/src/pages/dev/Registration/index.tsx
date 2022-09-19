@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import DevForm1 from "components/RegisterForms/Dev/Step1";
 import DevForm2 from "components/RegisterForms/Dev/Step2";
@@ -13,6 +13,8 @@ import { Link } from "react-router-dom";
 
 
 const DevRegistrationPage: React.FC = () => {
+    const authContext = useContext(AuthContext)
+
 
     const [formValues, setFormValues] = useState({
         name: "",
@@ -63,18 +65,13 @@ const DevRegistrationPage: React.FC = () => {
     }
 
     const onConfirmButtonPress = () => {
-
-        if (!isFormValid()) {
+        if (!isFormValid()) 
             return alert("Por favor, verifique se os dados estão corretos!")
-        }
 
-        if (currentStep >= steps.length - 1)
-            return
-        else
+        if (currentStep < steps.length -1)
             setCurrentStep(currentStep + 1)
-        
-        
-        register()    
+        else
+            register()
     }
 
     const register = async () => {
@@ -88,11 +85,10 @@ const DevRegistrationPage: React.FC = () => {
 
         const res = await AuthService.register(body)
 
-
         if (res.hasError)
-            return alert("2 - Por favor, verifique se os dados estão corretos!")
+            return alert("Por favor, verifique se os dados estão corretos!")
 
-        AuthContext?.signIn(body.email, body.password);    
+        authContext?.signIn(body.email, body.password);    
         
     }
 
