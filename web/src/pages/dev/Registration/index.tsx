@@ -2,8 +2,8 @@ import React from "react";
 import { useState } from "react";
 import DevForm1 from "components/RegisterForms/Dev/Step1";
 import DevForm2 from "components/RegisterForms/Dev/Step2";
-import Button from "components/utils/Button";
-import Icon from "components/utils/Icon";
+import Button from "components/shared/Button";
+import Icon from "components/shared/Icon";
 
 import { isValidDate, isValidEmail } from "utils/validations";
 import * as AuthService from "services/auth.service";

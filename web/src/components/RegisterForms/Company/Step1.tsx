@@ -1,8 +1,8 @@
 import React from "react";
 
-import Input from "components/utils/Input";
 import { isEmpty, isValidEmail } from "utils/validations";
 import { cnpjMask } from "utils/masks";
+import Input from "components/shared/Input";
 
 interface IForm1Props {
     onChange?: any;

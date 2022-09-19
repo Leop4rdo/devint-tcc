@@ -1,6 +1,6 @@
 //import Button from "components/utils/Button";
 import React, { useState } from "react";
-import Input from "components/utils/Input";
+import Input from "components/shared/Input";
 import { isEmpty } from "utils/validations";
 
 interface IFormProps {

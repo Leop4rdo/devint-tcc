@@ -1,7 +1,7 @@
 import {useEffect, useRef} from "react"
 import { View, Text, Animated, Easing } from "react-native"
 import useAnimation from "../../../hooks/useAnimation"
-import FeedbackTextInput from "../../utils/FeedbackInput"
+import FeedbackTextInput from "../../shared/FeedbackInput"
 
 
 export interface IRegisterFormProps {
