@@ -1,6 +1,6 @@
-import Button from "components/utils/Button";
+import Button from "components/shared/Button";
 import React from "react";
-import Icon from "components/utils/Icon";
+import Icon from "components/shared/Icon";
 import { Link, useNavigate } from "react-router-dom";
 
 

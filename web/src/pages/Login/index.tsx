@@ -1,5 +1,5 @@
 
-import LogoComponent from "components/utils/Logo";
+import LogoComponent from "components/shared/Logo";
 import React, { useContext, useState } from "react";
 import { AuthContext } from "store/context/Auth.context";
 import Step1 from "../../components/RegisterForms/Login/Step1"
@@ -54,15 +54,6 @@ const LoginPage: React.FC = () => {
 
         if (res.hasError) alert("Usuário ou senha invalidos!")
     }
-
-    const [passwordShown, setPasswordShown] = useState(false);
-
-    const togglePassword = () => {
-        setPasswordShown(!passwordShown);
-    }
-
-
-
     return (
         <div className="login-page">
             <header>
@@ -86,7 +77,6 @@ const LoginPage: React.FC = () => {
                     </div>
 
                     {steps[currentStep].component}
-
                 </div>
             </main>
 

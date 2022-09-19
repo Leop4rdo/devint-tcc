@@ -3,8 +3,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import CompanyForm1 from "components/RegisterForms/Company/Step1";
 import CompanyForm2 from "components/RegisterForms/Company/Step2";
-import Button from "components/utils/Button";
-import Icon from "components/utils/Icon";
+import Button from "components/shared/Button";
+import Icon from "components/shared/Icon";
 
 const CompanyRegistrationPage: React.FC = () => {
 

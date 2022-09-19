@@ -1,6 +1,6 @@
 import React from "react";
-import Button from "components/utils/Button";
-import Icon from "components/utils/Icon";
+import Button from "components/shared/Button";
+import Icon from "components/shared/Icon";
 
 
 interface IForgetPasswordProps {

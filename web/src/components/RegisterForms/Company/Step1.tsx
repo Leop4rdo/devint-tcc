@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-import Input from "components/utils/Input";
+import Input from "components/shared/Input";
 
 interface IForm1Props {
     onSubmit: (data : IFormFields) => void,

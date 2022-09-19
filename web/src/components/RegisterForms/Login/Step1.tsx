@@ -1,4 +1,4 @@
-import Input from "components/utils/Input";
+import Input from "components/shared/Input";
 import React from "react";
 import { Link } from "react-router-dom"
 

@@ -1,4 +1,4 @@
-import Icon from "components/utils/Icon";
+import Icon from "components/shared/Icon";
 import React, { useState } from "react";
 
 interface IInputProps extends React.HTMLProps<HTMLInputElement> {

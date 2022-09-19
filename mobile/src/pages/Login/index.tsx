@@ -1,8 +1,8 @@
 import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useContext, useState } from 'react';
 import {View, Text, TextInput, TouchableOpacity} from 'react-native';
-import ButtonComponent from '../../components/utils/Button';
-import FeedbackTextInput from '../../components/utils/FeedbackInput';
+import ButtonComponent from '../../components/shared/Button';
+import FeedbackTextInput from '../../components/shared/FeedbackInput';
 import { AuthContext } from '../../store/context/Auth.context';
 import globalStyles from '../../styles/global';
 import { isEmail, isEmpty } from '../../utils/validation';
@@ -52,24 +52,27 @@ const LoginPage : React.FC<any> = ({navigation}) => {
                     placeholder="E-mail" 
                 />
 
-                <FeedbackTextInput  
-                    isPassword
-                    icon="lock-open" 
-                    onChangeText={(text) => handleInputChange(text, 'password')}  
-                    validate={() => !isEmpty(formValues.password)}  
-                    placeholder="Senha" />
+                <View style={{width: '100%', alignItems : 'flex-end'}}>
+                    <FeedbackTextInput  
+                        isPassword
+                        icon="lock-open" 
+                        onChangeText={(text) => handleInputChange(text, 'password')}  
+                        validate={() => !isEmpty(formValues.password)}  
+                        placeholder="Senha" />
+
+                    <TouchableOpacity
+                        activeOpacity={1}
+                        onPress={()=>{ alert('WIP'); }}
+                        >
+                        <Text style={[globalStyles.linkRed, styles.linkPasswordRecover ]}>Esqueci minha senha!</Text>
+                    </TouchableOpacity>
+                </View>
 
                 <Text style={styles.warning}>{warning}</Text>
             </View>
 
             <View style={globalStyles.centerItemContainer}>
                 <ButtonComponent text='login' onPress={() => onSubmit()} />
-                <TouchableOpacity
-                    activeOpacity={1}
-                    onPress={()=>{ alert('WIP'); }}
-                    >
-                    <Text style={[globalStyles.linkRed, styles.linkPasswordRecover ]}>Esqueci minha senha!</Text>
-                </TouchableOpacity>
             </View>
         </View>
     )
