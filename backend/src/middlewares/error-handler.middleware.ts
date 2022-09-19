@@ -5,7 +5,7 @@ import BadRequestResponse from "../Responses/BadRequestResponse";
 import errors from "../handler/errors.handler";
 
 function errorHandlerMiddleware(
-  // err: Error | BusinessLogicError,
+  err: Error | BusinessLogicError,
   req: Request,
   res: Response,
   next: NextFunction
