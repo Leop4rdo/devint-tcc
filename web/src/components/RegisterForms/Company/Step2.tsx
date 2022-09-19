@@ -1,9 +1,9 @@
 import React from "react";
 import { useState } from "react";
 
-import Input from "components/utils/Input";
-import Button from "components/utils/Button";
-import Icon from "components/utils/Icon";
+import Input from "components/shared/Input";
+import Button from "components/shared/Button";
+import Icon from "components/shared/Icon";
 
 interface IFormProps {
     onSubmit: (data: IFormFields) => void,

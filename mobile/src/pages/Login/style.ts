@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     },
 
     linkPasswordRecover : {
-        marginTop: 16
+        margin: 16
     },
 
     warning : {

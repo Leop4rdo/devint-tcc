@@ -15,8 +15,6 @@ export default class DevCreateRequestDTO {
     @IsNotEmpty()
     auth : AuthEntity
 
-    @IsString()
-    @IsNotEmpty()
     githubUsername : string
 
     constructor(props : IDevProps) {

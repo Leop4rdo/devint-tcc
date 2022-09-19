@@ -1,7 +1,7 @@
 import { Text, View} from "react-native"
 import Hello from "../../components/Hello";
 import styles from "./style" ;
-import ButtonComponent from "../../components/utils/Button";
+import ButtonComponent from "../../components/shared/Button";
 import RegisterFormStep1 from "../../components/register/forms/Step1";
 import RegisterFormStep2 from "../../components/register/forms/Step2";
 import RegisterFormStep3 from "../../components/register/forms/Step3";
@@ -19,7 +19,8 @@ const RegisterPage : React.FC = () => {
         email : "",
         birthday : "",
         github : "",
-        password : ""
+        password : "",
+        confirmPassword : ""
     }) 
 
     const [currentStep, setCurrentStep] = useState(0);
@@ -34,35 +35,42 @@ const RegisterPage : React.FC = () => {
     const steps = [
         {
             desc : "Vamos começar com seu nome e email", 
-            component : <RegisterFormStep1 formData={formValues} onChange={handleChange} styles={styles} />
+            component : <RegisterFormStep1 formData={formValues} onChange={handleChange} styles={styles} />,
+            isValid : () => formValues.name.length > 2 && isEmail(formValues.email)
         },
         {
             desc : "Quando você nasceu?", 
-            component : <RegisterFormStep2 formData={formValues} onChange={handleChange} styles={styles} />
+            component : <RegisterFormStep2 formData={formValues} onChange={handleChange} styles={styles} />,
+            isValid : () => !isEmpty(formValues.birthday)
         },
         {
             desc : "Qual vai ser a sua senha?", 
-            component : <RegisterFormStep3 formData={formValues} onChange={handleChange} styles={styles} />
+            component : <RegisterFormStep3 formData={formValues} onChange={handleChange} styles={styles} />,
+            isValid : () => !isEmpty(formValues.password) && formValues.password === formValues.confirmPassword
         }
     ]
 
     const isFormValid = () => {
-        if (!isEmail(formValues.email)) return false
+        let res = true;
 
-        if (formValues.name.length < 3) return false
+        for (const step of steps) {
+            if (!res) break;
 
-        if (isEmpty(formValues.birthday)) return false
+            res = step.isValid()
+        }
 
-        // if (isEmpty(formValues.github)) return false
-
-        if (isEmpty(formValues.password)) return false
-
-        return true
+        return res
     }
 
     const onConfirmButtonPress = () => {
-        if (currentStep < steps.length-1)
-            return setCurrentStep(currentStep + 1)
+        if (currentStep < steps.length-1){
+            if (!steps[currentStep].isValid())
+                return alert("Por favor verifique se os dados estão corretos")
+
+            setCurrentStep(currentStep + 1)
+
+            return
+        }
 
         if (!isFormValid()) 
             return alert("Por favor verifique se os dados estão corretos")

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 //import Button from "components/utils/Button";
-import Input from "components/utils/Input";
+import Input from "components/shared/Input";
 import { isEmpty, isValidDate, isValidEmail } from "utils/validations";
 import { dateMask } from "utils/masks";
 //import Icon from "components/utils/Icon";
