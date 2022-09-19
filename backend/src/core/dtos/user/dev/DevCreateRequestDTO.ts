@@ -15,8 +15,7 @@ export default class DevCreateRequestDTO {
     @IsNotEmpty()
     auth : AuthEntity
 
-    @IsString()
-    @IsNotEmpty()
+
     githubUsername : string
 
     constructor(props : IDevProps) {
@@ -30,7 +29,7 @@ export default class DevCreateRequestDTO {
         const err = await validate(this);
     
         if (err.length > 0){ 
-            console.log('validation failed (ERRRRRROOOU). errors: ', err);
+            //console.log('validation failed (ERRRRRROOOU). errors: ', err);
           return new ServerErrorResponse({
             hasError: true,
             errorCode : errors.BASE.code,
