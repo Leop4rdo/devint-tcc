@@ -14,20 +14,21 @@ import { Link } from "react-router-dom";
 
 const DevRegistrationPage: React.FC = () => {
 
-    const [formValues, setFormValues] = useState ({
+    const [formValues, setFormValues] = useState({
         name: "",
         email: "",
         birthday: "",
         password: "",
         confirmPassword: "",
+        termsOfAcceptance: "",
     })
 
     const [currentStep, setCurrentStep] = useState(0);
 
-    const handleChange = (e : any) => {
+    const handleChange = (e: any) => {
         setFormValues({
             ...formValues,
-            [e.target.name] : e.target.value
+            [e.target.name]: e.target.value
         })
     }
 
@@ -37,14 +38,25 @@ const DevRegistrationPage: React.FC = () => {
     ]
 
     const isFormValid = () => {
+        if (currentStep == 0) {
+            if (!isValidEmail(formValues.email)) return false;
 
-        if (!isValidEmail(formValues.email)) return false;
+            if (formValues.name.length < 3) return false;
 
-        if (formValues.name.length < 3) return false;
+            if (!isValidDate(formValues.birthday)) return false;
+        }
 
-        if (!isValidDate(formValues.birthday)) return false;
+        if (currentStep == 1) {
 
-        if (formValues.birthday !== formValues.confirmPassword) return false;
+            if (formValues.password.length <= 0 ) return false
+
+            if (formValues.confirmPassword.length <= 0 ) return false
+
+            if (formValues.password !== formValues.confirmPassword) return false;
+
+            if (formValues.termsOfAcceptance == 'off') return false;
+
+        }
 
         return true;
 
@@ -52,9 +64,10 @@ const DevRegistrationPage: React.FC = () => {
 
     const onConfirmButtonPress = () => {
 
-        if (!isFormValid())
-            return alert("Por favor, verifique se os dados estão corretos!")    
-        
+        if (!isFormValid()) {
+            return alert("Por favor, verifique se os dados estão corretos!")
+        }
+
         if (currentStep >= steps.length - 1)
             return
         else
@@ -76,13 +89,13 @@ const DevRegistrationPage: React.FC = () => {
         const res = await AuthService.register(body)
 
 
-        if (res.hasError) 
-            return alert ("Por favor, verifique se os dados estão corretos!")
+        if (res.hasError)
+            return alert("2 - Por favor, verifique se os dados estão corretos!")
 
         AuthContext?.signIn(body.email, body.password);    
         
     }
-    
+
     const onPreviousButtonPress = () => {
 
         if (currentStep >= 1) {
@@ -98,10 +111,10 @@ const DevRegistrationPage: React.FC = () => {
 
                 <div className="dev-user">
 
-                <Button children={(currentStep >= steps.length - 1) ? <Icon name="arrow_back" /> : [<Link to={'/register'}><Icon name="arrow_back" /></Link>]} onClick={onPreviousButtonPress} ></Button>
+                    <Button children={(currentStep >= steps.length - 1) ? <Icon name="arrow_back" /> : [<Link to={'/register'}><Icon name="arrow_back" /></Link>]} onClick={onPreviousButtonPress} ></Button>
 
-                <h2>Sou Dev</h2>
-                
+                    <h2>Sou Dev</h2>
+
                 </div>
 
                 {steps[currentStep].component}
@@ -120,6 +133,6 @@ const DevRegistrationPage: React.FC = () => {
 
         </div>
     )
-}; 
+};
 
 export default DevRegistrationPage;

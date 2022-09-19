@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 interface IInputProps extends React.HTMLProps<HTMLInputElement> {
     icon?: string,
-    isPassword ?: boolean
+    isPassword?: boolean
     validate?: (name?: string) => boolean
 }
 
@@ -17,23 +17,15 @@ const Input: React.FC<IInputProps> = (props) => {
         setValid(props.validate(props.name))
     }
 
-
-    // const isPassword = (props : any) => {
-    //     if (props.type == "password") {
-    //         <Icon name={textVisible ? "visibility" : "visibility_off" }/>
-            
-    //     }
-    // }
-
     const toggleVisibility = () => setTextVisible(!textVisible);
 
     return (
         <div className={`input-container ${!isValid ? 'error' : ''}`} onBlur={validate}>
             {props.icon && <Icon name={props.icon} />}
-            <input {...props} className={(props.icon) ? 'icon-input' : ''} type={(props.isPassword) ? ((textVisible) ? "text" : "password") : (props.type)} />
-            {   
-                props.isPassword &&
-                <Icon name={textVisible ? "visibility" : "visibility_off" }  onClick={toggleVisibility} />
+            <input {...props} className={(props.icon) ? 'icon-input' : ''} type={(props.type == "password") ? ((textVisible) ? "text" : "password") : (props.type)} />
+            {
+                props.type == "password" &&
+                <Icon name={textVisible ? "visibility" : "visibility_off"} onClick={toggleVisibility} />
             }
         </div>
     )

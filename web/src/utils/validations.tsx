@@ -1,7 +1,8 @@
 import React from "react";
 
 export const isValidEmail = (email: string) => {
-    return new RegExp('/\S+@\S+\.\S+/').test(email);
+    const regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
+    return regexEmail.test(email)
 }
 
 export const isValidDate = (date: any) => {
