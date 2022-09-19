@@ -19,11 +19,13 @@ interface IRegisterRequestBody {
     name : string,
     password : string,
     email : string,
+    gender ?: string
     birthday ?: string,
     cnpj ?: string,
 }
 
 export const register = async (body : IRegisterRequestBody) => {
+
     try {  
         const { data } = await api.post("/users", body)
 

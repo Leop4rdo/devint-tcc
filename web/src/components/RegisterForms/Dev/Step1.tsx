@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import Input from "components/shared/Input";
 import { isEmpty, isValidDate, isValidEmail } from "utils/validations";
 import { dateMask } from "utils/masks";
-//import Icon from "components/utils/Icon";
 
 interface IForm1Props {
     onChange?: any;
@@ -13,13 +12,6 @@ interface IForm1Props {
 }
 
 const DevForm1: React.FC<IForm1Props> = ({ onSubmit, formData, onChange }) => {
-
-    const [currentGender, setCurrentGender] = useState("");
-
-    const genderSelection = (gender: string) => {
-        setCurrentGender(gender)
-    }
-
     return (
 
         <form className="form" onSubmit={onSubmit}>
@@ -30,10 +22,14 @@ const DevForm1: React.FC<IForm1Props> = ({ onSubmit, formData, onChange }) => {
 
             <Input icon="today" type="text" placeholder="Data de nascimento" onChange={onChange} maxLength={10} value={dateMask(formData.birthday)} name="birthday" validate={() => isValidDate(formData.birthday)} />
 
-            <select className="gender" defaultValue="Selecione" onChange={(e) => genderSelection(e.target.value)} value={currentGender}>
+            <select name="gender" onChange={onChange} value={formData.gender}>
+
                 <option value="f">Feminino</option>
+
                 <option value="m">Masculino</option>
+                
                 <option value="o">Outro</option>
+
             </select>
 
         </form>

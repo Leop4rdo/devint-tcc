@@ -20,9 +20,11 @@ const DevRegistrationPage: React.FC = () => {
         name: "",
         email: "",
         birthday: "",
+        gender: "",
         password: "",
         confirmPassword: "",
         termsOfAcceptance: "",
+        githubUser: "",
     })
 
     const [currentStep, setCurrentStep] = useState(0);
@@ -64,29 +66,37 @@ const DevRegistrationPage: React.FC = () => {
 
     }
 
+    
     const onConfirmButtonPress = () => {
+        
         if (!isFormValid()) 
-            return alert("Por favor, verifique se os dados estão corretos!")
-
+        return alert("Por favor, verifique se os dados estão corretos!")
+        
         if (currentStep < steps.length -1)
-            setCurrentStep(currentStep + 1)
+        setCurrentStep(currentStep + 1)
         else
-            register()
+        register()
     }
-
+    
     const register = async () => {
 
+        const birthdayAsArray = formValues.birthday.split('/')
+        const birthday = [birthdayAsArray[2], birthdayAsArray[1], birthdayAsArray[0]].join('/') 
+        
         const body = {
             name: formValues.name,
             email: formValues.email,
-            birthday: formValues.birthday,
+            birthday: birthday,
+            gender: formValues.gender,
             password: formValues.password,
+            githubUser: formValues.githubUser,
         }
+        
 
         const res = await AuthService.register(body)
 
         if (res.hasError)
-            return alert("Por favor, verifique se os dados estão corretos!")
+            return alert("Por favor, verifique se os dados estão corretos!")    
 
         authContext?.signIn(body.email, body.password);    
         
