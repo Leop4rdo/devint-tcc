@@ -8,10 +8,10 @@ interface ILoginWapper {
     children?: React.ReactNode
 }
 
-const LoginWapper: React.FC<ILoginWapper> = (props) => {
+const LoginWrapper: React.FC<ILoginWapper> = (props) => {
 
     return(
-        <div className="login-page">
+        <div className="login-wrapper">
             <header>
                 <h1><LogoComponent secondary="#1F252F" primary="#7865FF" /></h1>
             </header>
@@ -31,10 +31,10 @@ const LoginWapper: React.FC<ILoginWapper> = (props) => {
                             </ul>
                         </nav>
                     </div>
-
-
                     
-                        {props.children}
+                    {
+                        props.children
+                    }
                     
                 </div>
             </main>
@@ -43,7 +43,7 @@ const LoginWapper: React.FC<ILoginWapper> = (props) => {
 
 }
 
-export default LoginWapper
+export default LoginWrapper
 
 {/* <loginPage>
     <LoginWrapper>

@@ -39,10 +39,11 @@ a {
   z-index: 0;
 
   // Page Style Imports ->
-  @import "./pages/Login";
-  @import "./pages/Register";
-  @import "./pages/dev/Registration";
-  @import "./pages/company/Registration/index.scss";
+  @import "./pages/public/Login/index.scss";
+  @import "./pages/public/Register/index.scss";
+  @import "./pages/public/dev/Registration";
+  @import "./pages/public/company/Registration/index.scss";
+  @import "./pages/public/ForgotMyPasswordPage/index.scss";
  
 
   // Component Style Imports ->
@@ -50,6 +51,5 @@ a {
   @import "./components/Button";
   @import "./components/RegisterForms/Dev/index.scss";
   @import "./components/RegisterForms/Company/index.scss";
-  @import "./components/LoginWrapper/index.scss";
  
 }

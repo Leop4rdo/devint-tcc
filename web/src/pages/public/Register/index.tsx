@@ -1,7 +1,7 @@
 import Button from "components/utils/Button";
 import React from "react";
 import Icon from "components/utils/Icon";
-import { Link, useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 
 
 const Register: React.FC = () => {
@@ -14,7 +14,7 @@ const Register: React.FC = () => {
             <main>
                 <div className="image-container">
 
-                    <img src="../assets/images/svg/register.Svg" className="register-image" />
+                    <img src="../../assets/images/svg/register.svg" className="register-image" />
                     <h2>Crie conexões, tenha seu portfólio online e participe de uma comunidade de desenvolvimento incrivel</h2>
 
                 </div>
