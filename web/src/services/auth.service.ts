@@ -19,7 +19,8 @@ interface IRegisterRequestBody {
     name : string,
     password : string,
     email : string,
-    birthday : string
+    birthday ?: string,
+    cnpj ?: string,
 }
 
 export const register = async (body : IRegisterRequestBody) => {

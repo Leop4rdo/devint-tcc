@@ -61,7 +61,7 @@ const DevRegistrationPage: React.FC = () => {
             setCurrentStep(currentStep + 1)
         
         
-            // register()    
+        register()    
     }
 
     const register = async () => {
@@ -79,7 +79,7 @@ const DevRegistrationPage: React.FC = () => {
         if (res.hasError) 
             return alert ("Por favor, verifique se os dados estão corretos!")
 
-        //AuthContext?.signIn(body.email, body.password);    
+        AuthContext?.signIn(body.email, body.password);    
         
     }
     
