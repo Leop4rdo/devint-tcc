@@ -21,6 +21,7 @@ const DevRegistrationPage: React.FC = () => {
         password: "",
         confirmPassword: "",
         termsOfAcceptance: "",
+        githubUser: "",
     })
 
     const [currentStep, setCurrentStep] = useState(0);
@@ -73,7 +74,7 @@ const DevRegistrationPage: React.FC = () => {
         else
             setCurrentStep(currentStep + 1)
 
-        // register()    
+        register()    
     }
 
     const register = async () => {
@@ -83,13 +84,15 @@ const DevRegistrationPage: React.FC = () => {
             email: formValues.email,
             birthday: formValues.birthday,
             password: formValues.password,
+            termsOfAcceptance: formValues.termsOfAcceptance,
+            githubUser: formValues.githubUser,
         }
 
         const res = await AuthService.register(body)
 
 
         if (res.hasError)
-            return alert("2 - Por favor, verifique se os dados estão corretos!")
+            return alert("Por favor, verifique se os dados estão corretos!")
 
         //AuthContext?.signIn(body.email, body.password);    
 
