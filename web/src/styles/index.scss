@@ -13,21 +13,21 @@
 
 a {
   position: relative;
-  color: inherit;
+  color: $color-primary;
   text-decoration: none;
   line-height: 24px;
-  &:before, &:after {
-    content: '';
-    position: absolute;
-    transition: transform .5s ease;
-  }
 
   &:before {
+    content: '';
+    position: absolute;
+    transition: transform .25s ease;
+
     left: 0;
-    bottom: 10px;
+    bottom: 16px;
     width: 100%;
     height: 2px;
-    background: $color-light-purple;
+    border-radius: 10px;
+    background: $color-primary;
     transform:  scaleX(0);
   }
   &:hover:before {
@@ -39,14 +39,17 @@ a {
   z-index: 0;
 
   // Page Style Imports ->
-  @import "./pages/Login";
-  @import "./pages/Register";
-  @import "./pages/dev/Registration";
-  @import "./pages/company/Registration/index.scss";
+  @import "./pages/public/Login/index.scss";
+  @import "./pages/public/Register/index.scss";
+  @import "./pages/public/Register/Dev.scss";
+  @import "./pages/public/Register/Company.scss";
+  @import "./pages/public/ForgotMyPasswordPage/index.scss";
+ 
 
   // Component Style Imports ->
   @import "./components/Input";
   @import "./components/Button";
   @import "./components/RegisterForms/Dev/index.scss";
   @import "./components/RegisterForms/Company/index.scss";
+ 
 }

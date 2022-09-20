@@ -10,6 +10,7 @@ const authCtrl = new AuthController();
 userRouter.post("/auth", authCtrl.login)
 userRouter.post("/users", authCtrl.create)
 userRouter.post("/request-password-recovery", authCtrl.requestPasswordRecovery)
+userRouter.patch("/change-password", authCtrl.changePassword)
 
 userRouter.use(authMiddleware)
 

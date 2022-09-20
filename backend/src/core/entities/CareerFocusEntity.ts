@@ -1,7 +1,7 @@
 import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm"
 import DevEntity from "./DevEntity"
 
-@Entity('carrers_focus')
+@Entity('careers_focus')
 export default class CareerFocusEntity {
     @PrimaryGeneratedColumn('uuid')
     id: string

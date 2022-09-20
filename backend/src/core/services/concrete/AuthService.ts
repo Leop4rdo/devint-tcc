@@ -173,6 +173,7 @@ export default class AuthService implements IAuthService {
             name : body.name,
             birthday : body.birthday,
             githubUsername : body.githubUsername,
+            gender : body.gender,
             auth : _auth
         } as unknown as IDevProps)
 
@@ -214,7 +215,7 @@ export default class AuthService implements IAuthService {
             subject : 'Recuperação de senha',
             values : {
                 USER : user.name,
-                LINK : token
+                LINK : `${process.env.FRONTEND_URL}/change-my-password?token=${token}`
             }
         }, EmailTemplates.PASSWORD_RECOVERY)
 
@@ -224,6 +225,37 @@ export default class AuthService implements IAuthService {
                 message : 'Success'
             }
         })
+    }
+
+    async changePassword(password, token) : Promise<IResponse>{
+        const errorRes = new BadRequestResponse({
+            errorMessage : errors.ENTITY_NOT_FOUND.message,
+            errorCode: errors.ENTITY_NOT_FOUND.code
+        })
+
+        const reqPassRecoveryToken = await this.passResetTokenRepo.findBy('token', token);
+
+        if (!reqPassRecoveryToken)
+            return errorRes
+
+        const tokenMatches = await compare(token, reqPassRecoveryToken.token)
+
+        if (!tokenMatches)
+            return errorRes
+
+        await this.repo.update({
+            ...reqPassRecoveryToken.owner,
+            password : password
+        })
+
+        this.passResetTokenRepo.remove(reqPassRecoveryToken.id)
+           
+        return new SuccessResponse({
+            status : 200,
+            data : {
+                message : 'Success'
+            }
+        }) 
     }
 
 
@@ -241,3 +273,7 @@ export default class AuthService implements IAuthService {
 
 
 }
+function changePassword(password: any, token: any) {
+    throw new Error("Function not implemented.")
+}
+

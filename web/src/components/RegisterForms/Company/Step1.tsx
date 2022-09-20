@@ -1,35 +1,26 @@
 import React from "react";
-import { useState } from "react";
 
-import Input from "components/utils/Input";
+import { isEmpty, isValidEmail } from "utils/validations";
+import { cnpjMask } from "utils/masks";
+import Input from "components/shared/Input";
 
 interface IForm1Props {
-    onSubmit: (data : IFormFields) => void,
+    onChange?: any;
+    onSubmit: () => void,
+    formData: any,
 }
 
-interface IFormFields {
-    name : string,
-    email: string,
-    cnpj : string,
-}
-
-const CompanyForm1: React.FC<IForm1Props> = ({ onSubmit }) => {
-    const [formFields, setFormFields] = useState<IFormFields>({
-        name : "",
-        email: "",
-        cnpj: "",
-    })
-
-
+const CompanyForm1: React.FC<IForm1Props> = ({ onSubmit, formData, onChange }) => {
+    
     return (
 
-        <form className="form" onSubmit={() => onSubmit(formFields)}>
+        <form className="form" onSubmit={onSubmit}>
 
-            <Input icon="account_circle" type="text" placeholder="Nome" onChange={()=>{}} />
+            <Input icon="account_circle" type="text" placeholder="Nome" name="name" onChange={onChange} validate={() => !isEmpty(formData.name)}/>
 
-            <Input icon="mail" type="text" placeholder="E-mail"onChange={()=>{}} />
+            <Input icon="mail" type="text" placeholder="E-mail" name="email" onChange={onChange} value={formData.email} validate={() => isValidEmail(formData.email)} />
 
-            <Input icon="badge" type="text" placeholder="CNPJ" onChange={()=>{}}/>
+            <Input icon="badge" type="text" placeholder="CNPJ" name="cnpj" onChange={onChange} value={cnpjMask(formData.cnpj)} validate={() => !isEmpty(formData.cnpj)} />
 
         </form>
     )
