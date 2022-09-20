@@ -36,12 +36,12 @@
   }
 
   .menu-container {
-    top: 13rem;
-    
+    top: 10rem; 
     display: flex;
     position: absolute;
     align-items: flex-end;
     justify-content: end;
+    
 
 
     nav ul li a {
@@ -60,8 +60,8 @@
 
   @media (max-width: $breakpoint-medium) {
     .menu-container {
-      top: 14rem;
-      margin-bottom: -20px;
+      top: 13rem;
+      
 
       nav ul li a {
         padding-bottom: 15px;
