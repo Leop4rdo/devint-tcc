@@ -1,15 +1,15 @@
 import { Text, View} from "react-native"
-import Hello from "../../components/Hello";
+import Hello from "../../../components/Hello";
 import styles from "./style" ;
-import ButtonComponent from "../../components/shared/Button";
-import RegisterFormStep1 from "../../components/register/forms/Step1";
-import RegisterFormStep2 from "../../components/register/forms/Step2";
-import RegisterFormStep3 from "../../components/register/forms/Step3";
+import ButtonComponent from "../../../components/shared/Button";
+import RegisterFormStep1 from "../../../components/register/forms/Step1";
+import RegisterFormStep2 from "../../../components/register/forms/Step2";
+import RegisterFormStep3 from "../../../components/register/forms/Step3";
 import { useCallback, useContext, useState } from "react";
-import { isEmail, isEmpty, isValidDate } from "../../utils/validation";
+import { isEmail, isEmpty, isValidDate } from "../../../utils/validation";
 import { getStateFromPath } from "@react-navigation/native";
-import * as AuthService from "../../services/auth.service";
-import { AuthContext } from "../../store/context/Auth.context";
+import * as AuthService from "../../../services/auth.service";
+import { AuthContext } from "../../../store/context/Auth.context";
 
 const RegisterPage : React.FC = () => {
     const authContext = useContext(AuthContext)

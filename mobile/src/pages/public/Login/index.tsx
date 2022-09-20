@@ -1,11 +1,11 @@
 import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useContext, useState } from 'react';
 import {View, Text, TextInput, TouchableOpacity} from 'react-native';
-import ButtonComponent from '../../components/shared/Button';
-import FeedbackTextInput from '../../components/shared/FeedbackInput';
-import { AuthContext } from '../../store/context/Auth.context';
-import globalStyles from '../../styles/global';
-import { isEmail, isEmpty } from '../../utils/validation';
+import ButtonComponent from '../../../components/shared/Button';
+import FeedbackTextInput from '../../../components/shared/FeedbackInput';
+import { AuthContext } from '../../../store/context/Auth.context';
+import globalStyles from '../../../styles/global';
+import { isEmail, isEmpty } from '../../../utils/validation';
 import styles from './style'
 
 

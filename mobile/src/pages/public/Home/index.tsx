@@ -1,7 +1,7 @@
 import { Text, View } from "react-native"
-import Hello from "../../components/Hello";
-import FeedbackTextInput from "../../components/shared/FeedbackInput";
-import ButtonComponent from "../../components/shared/Button";
+import Hello from "../../../components/Hello";
+import FeedbackTextInput from "../../../components/shared/FeedbackInput";
+import ButtonComponent from "../../../components/shared/Button";
 
 const HomePage : React.FC = () => {
 

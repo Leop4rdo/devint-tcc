@@ -1,9 +1,9 @@
 import { Text, View } from "react-native"
-import FeedbackTextInput from "../../components/shared/FeedbackInput";
+import FeedbackTextInput from "../../../components/shared/FeedbackInput";
 import styles from "./style" ;
-import ButtonComponent from "../../components/shared/Button";
-import colors from "../../styles/colors";
-import { IPageProps } from "../../navigators";
+import ButtonComponent from "../../../components/shared/Button";
+import colors from "../../../styles/colors";
+import { IPageProps } from "../../../navigators";
 
 const LandingPage : React.FC< IPageProps >  = ({ navigation }) => {
 

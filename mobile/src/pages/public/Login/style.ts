@@ -1,8 +1,8 @@
 import { StyleSheet } from "react-native"
 
-import colors from "../../styles/colors"
-import globalStyles from "../../styles/global"
-import fonts from "../../styles/typography"
+import colors from "../../../styles/colors"
+import globalStyles from "../../../styles/global"
+import fonts from "../../../styles/typography"
 
 const styles = StyleSheet.create({
     page : {
