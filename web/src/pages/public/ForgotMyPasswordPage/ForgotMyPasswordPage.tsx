@@ -10,7 +10,7 @@ import Step3 from "../../../components/RegisterForms/ForgetMyPasswordPage/Step3"
 
 const ForgotMyPasswordPage: React.FC = () => {
 
-    const [currentStep ,  setCurrentStep] = useState(2)
+    const [currentStep ,  setCurrentStep] = useState(0)
 
     const onConfirmButtonPress = () => {
 

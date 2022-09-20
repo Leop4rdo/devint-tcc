@@ -1,7 +1,7 @@
 import React from "react";
-import Button from "components/utils/Button";
-import Icon from "components/utils/Icon";
 import { useNavigate } from "react-router-dom";
+import Button from "components/shared/Button";
+import Icon from "components/shared/Icon";
 
 
 const ContainerConfirmationUser: React.FC = () => {

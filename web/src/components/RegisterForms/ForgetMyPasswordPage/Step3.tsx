@@ -1,5 +1,5 @@
 import React from "react";
-import Input from "components/utils/Input";
+import Input from "components/shared/Input";
 import { useNavigate } from "react-router-dom";
 
 

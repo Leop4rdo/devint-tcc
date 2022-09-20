@@ -1,58 +1,39 @@
 //import Button from "components/utils/Button";
 import React, { useState } from "react";
-import Input from "components/utils/Input";
-import Button from "components/utils/Button";
-import Icon from "components/utils/Icon";
-//import Icon from "components/utils/Icon";
+import Input from "components/shared/Input";
+import { isEmpty } from "utils/validations";
 
 interface IFormProps {
-    onSubmit: (data : IFormFields) => void,
+    onChange?: any;
+    onSubmit: () => void,
+    formData: any;
 }
 
-interface IFormFields {
-    password : string,
-    passwordConfirm: string,
-}
+const DevForm2: React.FC<IFormProps> = ({ onSubmit, formData, onChange }) => {
 
-const DevForm2: React.FC<IFormProps> = ({ onSubmit }) => {
-    const [formFields, setFormFields] = useState<IFormFields>({
-        password: "",
-        passwordConfirm: "",
-    })
+    const [checked, setChecked] = useState('off');
 
-    const [passwordShown, setPasswordShown] = useState(false);
-
-    const togglePassword = () => {
-        setPasswordShown(!passwordShown);
+    const handleChecked = () => {
+        if (checked == 'off') setChecked('on')
+        if (checked == 'on') setChecked('off')
     }
 
     return (
 
-        <form className="form" onSubmit={() => onSubmit(formFields)}>
+        <form className="form" onSubmit={onSubmit}>
 
-            <Input type="text" placeholder="Usuário do GitHub (opcional)" onChange={() => {}} />
+            <Input type="text" placeholder="Usuário do GitHub (opcional)" onChange={onChange} name="githubUser" />
 
-            <div className="password-container">
+                <Input icon="lock" placeholder="Senha" onChange={onChange} name="password" type="password" validate={() => !isEmpty(formData.password)}/>
 
-                <Input icon="lock" placeholder="Senha" onChange={() => { }} type={passwordShown ? "text" : "password"} />
-
-                <Button className="btn-toggle-password" onClick={togglePassword} children={<Icon name={passwordShown ? "visibility_off" : "visibility"} />}></Button>
-
-            </div>
-
-            <div className="password-container">
-
-                <Input icon="lock" placeholder="Confirmar senha" onChange={() => { }} type={passwordShown ? "text" : "password"} />
-
-                <Button className="btn-toggle-password" onClick={togglePassword} children={<Icon name={passwordShown ? "visibility_off" : "visibility"} />}></Button>
-
-            </div>
+                <Input icon="lock" placeholder="Confirmar senha" onChange={onChange} name="confirmPassword" type="password" validate={() => !isEmpty(formData.confirmPassword)} />
 
             <div className="terms-checkbox">
 
-                <input type="checkbox" id="terms-of-acceptance" />
+                <input type="checkbox" id="terms-of-acceptance" value={checked == 'on' ? 'off' : 'on'} name="termsOfAcceptance" onChange={onChange} onClick={handleChecked} />
+                
                 <label htmlFor="terms-of-acceptance" >Li e aceito os termos e condições</label>
-            
+
             </div>
 
         </form>

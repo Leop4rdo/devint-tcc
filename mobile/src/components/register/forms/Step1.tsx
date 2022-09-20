@@ -1,7 +1,7 @@
 import {useEffect, useRef} from "react"
 import { View, Text, Animated, Easing } from "react-native"
 import useAnimation from "../../../hooks/useAnimation"
-import FeedbackTextInput from "../../utils/FeedbackInput"
+import FeedbackTextInput from "../../shared/FeedbackInput"
 
 
 export interface IRegisterFormProps {
@@ -21,7 +21,7 @@ const RegisterFormStep1 : React.FC<IRegisterFormProps> = ({styles, formData, onC
         <Animated.View style={{...styles.form, opacity : opacityAnim.prop}}>
             <FeedbackTextInput style={styles.input} placeholder="Digite seu nome" icon="person" onChangeText={(text : string) => onChange(text, "name")} ></FeedbackTextInput>
 
-            <FeedbackTextInput style={styles.input} placeholder="Digite um email" icon="mail" onChangeText={(text : string) => onChange(text, "email")} ></FeedbackTextInput>
+            <FeedbackTextInput style={styles.input} placeholder="Digite um email" icon="mail" onChangeText={(text : string) => onChange(text, "email")} keyboardType="email-address"></FeedbackTextInput>
         </Animated.View>
     )
 }

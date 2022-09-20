@@ -19,7 +19,7 @@
         color: black;
     }
    
-    .dev-user{
+    .company-user{
       display: flex;
       width: clamp( 29.4rem , 45vw , 35rem);
       
@@ -36,10 +36,9 @@
         background-color: transparent;  
         width: 0px;
         .icon{
-          color: $color-light-purple;
+          color: $color-primary;
           font-size: clamp( 2.3rem , 4vw , 3rem);
           margin-top: clamp( 1.9rem , 4vw , 3rem);
-          margin-right: -64px;
         }
         .icon:hover{
           cursor: pointer;

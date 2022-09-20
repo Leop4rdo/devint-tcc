@@ -32,6 +32,8 @@ export default class DevService implements IDevService {
 
     async create(body: DevCreateRequestDTO): Promise<IResponse> {
         const dtoValidateRes = await body.validate()
+
+        console.log(body.auth)
         
 
         if (dtoValidateRes) return new BadRequestResponse({

@@ -1,9 +1,8 @@
 
-
 import React from "react";
-import Input from "components/utils/Input";
-import Button from "components/utils/Button";
-import Icon from "components/utils/Icon";
+import Input from "components/shared/Input";
+import Button from "components/shared/Button";
+import Icon from "components/shared/Icon";
 import { useNavigate } from "react-router-dom";
 
 interface IForgetPasswordProps {
