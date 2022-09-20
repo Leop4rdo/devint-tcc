@@ -7,28 +7,32 @@ import { error } from "console";
 
 export default class EmailService implements IEmailService {
     async send(data: EmailData, template: string) {
+        console.log('[INFO] sending email with template', template);
+   
         const reqBody = {
             ...data,
             body : await this.getTemplate(template)
+        }  
+
+        try {
+             const mailRes = await axios.post(`${process.env.MAIL_SERVICE_URL}/send`, reqBody)
+
+            return mailRes.data as IResponse
+        } catch (e) {
+            console.error(e)
+            return e.response.body
         }
-
-        console.log(reqBody)
-
-        return (await (axios.post(`${process.env.MAIL_SERVICE_URL}/send`, data))).data as IResponse;
     };
 
     private async getTemplate(src : string) {
-        return await fs.readFile(src, (err, data) => {
-            if (err) {
-                console.log('error readig template :', err);
-                return err;
-            }
-            console.log(data)
-            return data
-        });
+        return new Promise((resolve,reject)=>{
+            fs.readFile(src, 'utf-8', (err, data) =>
+                (err) ? reject(err) : resolve(data)
+            );
+        })
     }
 }
 
 export const EmailTemplates = {
-    PASSWORD_RECOVERY : '../../../resources/email/password-recovery.html'
+    PASSWORD_RECOVERY : 'res/email/password-recovery.html'
 }

@@ -214,7 +214,7 @@ export default class AuthService implements IAuthService {
             subject : 'Recuperação de senha',
             values : {
                 USER : user.name,
-                LINK : passResetToken.token
+                LINK : token
             }
         }, EmailTemplates.PASSWORD_RECOVERY)
 

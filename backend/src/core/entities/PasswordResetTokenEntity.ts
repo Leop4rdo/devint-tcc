@@ -13,6 +13,9 @@ export default class PasswordResetTokenEntity {
     @Column({ name : 'expiration_date' })
     expirationDate : Date
 
+    @Column({ default : true })
+    active : boolean
+
     @ManyToOne(() => AuthEntity)
     owner : AuthEntity
 
