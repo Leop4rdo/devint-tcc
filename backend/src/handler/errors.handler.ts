@@ -4,6 +4,12 @@ const errors = {
         code : "SE0001"
     },
 
+    AUTH_SERVICE : {
+        message : 'tem um erro ai',
+        code : "DVS_001"
+    },
+    
+
     ENTITY_NOT_FOUND : {
         message : 'Requested entity was not found!',
         code : "SE0002"

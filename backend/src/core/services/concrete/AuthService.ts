@@ -64,8 +64,8 @@ export default class AuthService implements IAuthService {
         const dtoValidateRes = await body.validate()
 
         if (dtoValidateRes) return new BadRequestResponse({
-            errorCode : errors.INVALID_DATA.code,
-            errorMessage : errors.INVALID_DATA.message
+            errorCode : errors.AUTH_SERVICE.code,
+            errorMessage : errors.AUTH_SERVICE.message
         })
 
         if (await this.repo.findBy("email", body.email)){
