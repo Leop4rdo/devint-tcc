@@ -1,9 +1,9 @@
 import { useEffect } from "react"
 import { View, Text, Animated } from "react-native"
 import useAnimation from "../../../hooks/useAnimation"
+import { applyDateMask } from "../../../utils/masks"
 import FeedbackTextInput from "../../shared/FeedbackInput"
 import { IRegisterFormProps } from "./Step1"
-
 
 
 
@@ -22,6 +22,7 @@ const RegisterFormStep2 : React.FC<IRegisterFormProps> = ({styles, formData, onC
                 placeholder="" 
                 value={formData.birthday}
                 icon="calendar-today" 
+                keyboardType="numeric"
                 onChangeText={(text : string) => onChange(applyDateMask(text), 'birthday') } ></FeedbackTextInput>
 
             {/* colocar um input para o usuario no github */}

@@ -21,7 +21,7 @@ export default class DevEntity {
     @Column({ default: '', nullable : true })
     bio : string
 
-    @Column({ type : 'enum', enum: genders, default: genders.OTHER })
+    @Column()
     gender : string
 
     @Column({default: ''})
