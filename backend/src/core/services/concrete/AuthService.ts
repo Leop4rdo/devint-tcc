@@ -233,7 +233,7 @@ export default class AuthService implements IAuthService {
             errorCode: errors.ENTITY_NOT_FOUND.code
         })
 
-        const reqPassRecoveryToken = await this.passResetTokenRepo.findBy('token', token);
+        const reqPassRecoveryToken = await this.passResetTokenRepo.findBy('token', token); // yep boy, the token will never be the same
 
         if (!reqPassRecoveryToken)
             return errorRes
