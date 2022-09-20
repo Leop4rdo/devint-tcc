@@ -48,6 +48,8 @@ const DevRegistrationPage: React.FC = () => {
             if (formValues.name.length < 3) return false;
 
             if (!isValidDate(formValues.birthday)) return false;
+
+            if (formValues.gender.length > 1) return false;
         }
 
         if (currentStep == 1) {
@@ -91,7 +93,6 @@ const DevRegistrationPage: React.FC = () => {
             password: formValues.password,
             githubUser: formValues.githubUser,
         }
-        
 
         const res = await AuthService.register(body)
 

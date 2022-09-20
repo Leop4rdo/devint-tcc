@@ -4,9 +4,10 @@ import React, { useState } from "react";
 import Input from "components/shared/Input";
 import { isEmpty, isValidDate, isValidEmail } from "utils/validations";
 import { dateMask } from "utils/masks";
+import Select from "components/shared/Select";
 
 interface IForm1Props {
-    onChange?: any;
+    onChange: any;
     onSubmit: () => void,
     formData: any,
 }
@@ -22,15 +23,16 @@ const DevForm1: React.FC<IForm1Props> = ({ onSubmit, formData, onChange }) => {
 
             <Input icon="today" type="text" placeholder="Data de nascimento" onChange={onChange} maxLength={10} value={dateMask(formData.birthday)} name="birthday" validate={() => isValidDate(formData.birthday)} />
 
-            <select name="gender" onChange={onChange} value={formData.gender}>
+            <Select name="gender" onChange={onChange} value={formData.gender} icon="transgender">
+                <option selected value="default">Selecione um gênero</option>
 
                 <option value="f">Feminino</option>
 
                 <option value="m">Masculino</option>
-                
-                <option value="o">Outro</option>
 
-            </select>
+                <option value="o">Outro</option>
+            </Select>
+
 
         </form>
     )
