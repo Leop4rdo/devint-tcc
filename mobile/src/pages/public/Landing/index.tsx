@@ -9,16 +9,17 @@ const LandingPage: React.FC<IPageProps> = ({ navigation }) => {
 
         <View style={styles.container}>
                 {/* isso vai ser um componente */}
-                <View style={styles.containerlogoSymbols}>
-                <ImageBackground source={require('../../../../assets/horizontal-wave-login-bg.png')} style={styles.horizontalWaveLogin} /> 
-                   
-                </View>
-
-                <View style={styles.teste}>
+                <View style={styles.containerLogo}>
                 <Text style={styles.logoSymbols}>&#60;</Text>
                     <Text style={styles.logo}>  DevInt  </Text>
                     <Text style={styles.logoSymbols}>_</Text>
                 </View>
+
+                <View style={styles.containerImage}>
+                <ImageBackground source={require('../../../../assets/horizontal-wave-login-bg.png')} style={styles.horizontalWaveLogin} /> 
+                </View>
+
+                
 
             <View>
                 <View>

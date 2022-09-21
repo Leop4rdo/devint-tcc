@@ -1,9 +1,9 @@
-import { cloneElement } from "react";
+
 import { StyleSheet } from "react-native";
 import colors from "../../../styles/colors";
-import globalStyles from "../../../styles/global";
+
 import fonts from "../../../styles/typography";
-import { screenHeight, screenWidth } from "../../../styles/utils";
+
 
 export default StyleSheet.create({
     container: {
@@ -15,42 +15,54 @@ export default StyleSheet.create({
 
     },
 
-    containerlogoSymbols: {
-        flexBasis: 180,
+    containerImage: {
+        flexBasis: 110,
         display: 'flex',
-        flexDirection: "row",
         width: '100%',
-        backgroundColor: 'aqua',
+        
+        
+        
     },
 
     horizontalWaveLogin:{
         flex: 1,
-        resizeMode: "center",
-        justifyContent: "center",
-        alignItems: "center"
+        height: 60,
+        
+        
     },
 
-    teste:{
-        top:20,
-        position:'absolute',
+    containerLogo:{
+        width: '100%',
         display: 'flex',
+        height: 100,
         flexDirection: "row",
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: colors.LIGHT_PURPLE,
+        marginBottom: -8
+    
+        
+        
     },
     logoSymbols: {
         fontSize: 50,
-        color: colors.PRIMARY,
-        marginTop: -16,
+        color: colors.BLACK,
+        marginTop:22,
+        fontFamily: fonts.POPPINS_MEDIUM
+       
     },
     logo: {
         fontSize: 40,
         color: colors.WHITE,
-        margin: -10,
+        marginLeft: -20,
+        marginRight: -20,
         fontFamily: fonts.POPPINS_REGULAR,
+        marginTop: 30
         
     },
 
     textWelcome: {
-        fontSize: 32,
+        fontSize: 40,
         color: colors.LIGHT_PURPLE,
         textAlign: 'center',
         marginBottom: 75,
@@ -69,6 +81,9 @@ export default StyleSheet.create({
     containerButtons: {
         display: 'flex',
         alignItems: 'center'
-    }
+    },
+
+   
+
 
 })
