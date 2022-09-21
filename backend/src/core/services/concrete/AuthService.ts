@@ -1,8 +1,6 @@
 import { compare, hash } from "bcrypt";
 import errors from "../../../handler/errors.handler";
 import IAuthRepository from "../../../infra/repositories/abstract/IAuthRepository";
-import IRepository from "../../../infra/repositories/abstract/IRepository";
-import CompanyRepository from "../../../infra/repositories/concrete/CompanyRepository";
 import BadRequestResponse from "../../../Responses/BadRequestResponse";
 import IResponse from "../../../Responses/IResponse";
 import SuccessResponse from "../../../Responses/SuccessResponse";
@@ -26,8 +24,6 @@ import { CompanyResponseDTO } from "../../dtos/user/company/CompanyResponseDTO";
 import DevResponseDTO from "../../dtos/user/dev/DevResponseDTO";
 import IDevRepository from "../../../infra/repositories/abstract/IDevRepository";
 import ICompanyRepository from "../../../infra/repositories/abstract/ICompanyRepository";
-import DevService from "./DevService";
-import IService from "../abstract/IService";
 import { IDevService } from "../abstract/IDevService";
 
 
@@ -61,12 +57,9 @@ export default class AuthService implements IAuthService {
     }
     
     async create(body: UserCreateRequestDTO): Promise<IResponse> {
-        const dtoValidateRes = await body.validate()
+        const dtoValidationErrors = await body.validate()
 
-        if (dtoValidateRes) return new BadRequestResponse({
-            errorCode : errors.AUTH_SERVICE.code,
-            errorMessage : errors.AUTH_SERVICE.message
-        })
+        if (dtoValidationErrors.length > 0) throw new BusinessLogicError(dtoValidationErrors)
 
         if (await this.repo.findBy("email", body.email)){
             return new ServerErrorResponse({
@@ -100,8 +93,9 @@ export default class AuthService implements IAuthService {
     }
 
     async login(body: LoginRequestDTO): Promise<IResponse> {
-        const dtoValidateRes = await body.validate()
-        if (dtoValidateRes) return dtoValidateRes
+        const dtoValidationErrors = await body.validate()
+
+        if (dtoValidationErrors.length > 0) throw new BusinessLogicError(dtoValidationErrors)
 
         const auth = await this.repo.findBy("email", body.email);
 
@@ -155,12 +149,9 @@ export default class AuthService implements IAuthService {
             auth: _auth
         } as unknown as ICompanyProps)
 
-        const dtoValidateRes = await dto.validate()
+        const dtoValidationErrors = await body.validate()
 
-        if (dtoValidateRes) return new BadRequestResponse({
-            errorCode : errors.INVALID_DATA.code,
-            errorMessage : errors.INVALID_DATA.message
-        })
+        if (dtoValidationErrors.length > 0) throw new BusinessLogicError(dtoValidationErrors)
 
         return this.companyRepo.create(dto as unknown as CompanyEntity)
     }
