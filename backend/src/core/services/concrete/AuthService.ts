@@ -170,6 +170,7 @@ export default class AuthService implements IAuthService {
             name : body.name,
             birthday : body.birthday,
             githubUsername : body.githubUsername,
+            gender : body.gender,
             auth : _auth
         } as unknown as IDevProps)
 

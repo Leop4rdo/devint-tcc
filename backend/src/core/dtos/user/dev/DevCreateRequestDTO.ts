@@ -15,14 +15,15 @@ export default class DevCreateRequestDTO {
     @IsNotEmpty()
     auth : AuthEntity
 
-    @IsString()
-    @IsNotEmpty()
+    gender : string 
+
     githubUsername : string
 
     constructor(props : IDevProps) {
         this.name = props.name;
         this.birthday = props.birthday;
         this.auth = props.auth;
+        this.gender = props.gender
         this.githubUsername = props.githubUsername;
     }
 

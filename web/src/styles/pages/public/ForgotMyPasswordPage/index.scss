@@ -1,0 +1,121 @@
+.container-forget-password {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  
+  
+    h1 {
+      color: $color-white;
+      margin-bottom: 8px;
+      font-size: clamp(2rem, 3vw, 2.6rem);
+      width: clamp(22rem, 35vw, 28rem);
+      text-align: center;
+      margin-left: 14px;
+      font-weight: $font-semibold;
+    }
+  
+    p {
+      color: $color-light-gray;
+      margin-bottom: 32px;
+      font-size: clamp(0.8rem, 1vw, 0.9rem);
+      text-align: center;
+    }
+  
+    button {
+      margin-top: 32px;
+      font-weight: $font-regular;
+    }
+  
+    .come-back-login {
+      button {
+        border: none;
+        background-color: transparent;
+        width: 0px;
+  
+        .icon {
+          color: $color-white;
+          font-size: clamp(2.3rem, 4vw, 3rem);
+          margin-top: 3rem;
+  
+        }
+  
+        .icon:hover {
+          cursor: pointer;
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
+
+  .container-comfirmation-user {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  
+    h1 {
+      color: $color-white;
+      margin-bottom: 8px;
+      font-size: clamp(1.6rem, 3vw, 2rem);
+      width: clamp(22rem, 45vw, 53rem);
+      text-align: center;
+      margin-left: 14px;
+      font-weight: $font-semibold;
+    }
+  
+    p {
+      color: $color-light-gray;
+      font-size: clamp(0.8rem, 1vw, 0.9rem);
+      text-align: center;
+    }
+  
+    button {
+  
+      border: none;
+      background-color: transparent;
+      width: 0px;
+  
+      .icon {
+        color: $color-white;
+        font-size: clamp(2.3rem, 4vw, 3rem);
+        margin-top: 12rem;
+  
+      }
+  
+      .icon:hover {
+        cursor: pointer;
+        transform: scale(1.1);
+      }
+    }
+  
+  
+  
+  }
+
+  .container-new-password{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    h1 {
+        color: $color-white;
+        margin-bottom: 8px;
+        font-size: clamp(2rem, 4vw, 2.4rem);
+        width: clamp(24rem, 45vw, 53rem);
+        text-align: center;
+        margin-left: 14px;
+        font-weight: $font-semibold;
+      }
+
+      p {
+      color: $color-light-gray;
+      margin-bottom: 32px;
+      font-size: clamp(0.8rem, 1vw, 0.9rem);
+      text-align: center;
+      }
+      button {
+        margin-top: 32px;
+        font-weight: $font-regular;
+      }
+
+     
+  }

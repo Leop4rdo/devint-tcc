@@ -12,15 +12,6 @@ export default class CompanyEntity {
     @Column()
     cnpj : string
 
-    @Column({ nullable : true })
-    bio : string
-
-    @Column('jsonb', { nullable : true })
-    following : JSON
-
-    @Column('jsonb', { nullable : true })
-    followers : JSON
-
     @OneToOne(() => AuthEntity, { nullable : false})
     @JoinColumn()
     auth : AuthEntity
