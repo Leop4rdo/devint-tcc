@@ -73,12 +73,12 @@ const DevRegistrationPage: React.FC = () => {
     const onConfirmButtonPress = () => {
         
         if (!isFormValid()) 
-        return alert("Por favor, verifique se os dados estão corretos!")
+            return alert("Por favor, verifique se os dados estão corretos!")
         
         if (currentStep < steps.length -1)
-        setCurrentStep(currentStep + 1)
+            setCurrentStep(currentStep + 1)
         else
-        register()
+            register()
     }
     
     const register = async () => {
