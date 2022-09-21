@@ -84,11 +84,9 @@ export default class AuthService implements IAuthService {
 
         if (!auth) return new ServerErrorResponse({errorMessage : "Cannot create user auth", errorCode: "SE000"})
 
-        const user : any = (body.cnpj) ? 
-            await this.createCompany(body, auth)
-            : await this.createDev(body, auth);
+        const user : any = (body.cnpj) ? await this.createCompany(body, auth) : await this.createDev(body, auth);
 
-        if (user.hasError) {
+        if (user.hasError || !user) {
             await this.repo.remove(auth.id)
             return new ServerErrorResponse({errorMessage : "Cannot create user", errorCode: "SE000"})
         }
@@ -255,7 +253,6 @@ export default class AuthService implements IAuthService {
         }) 
     }
 
-
     private generateToken() {
         const chars ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
@@ -267,10 +264,6 @@ export default class AuthService implements IAuthService {
 
         return token
     }
-
-
 }
-function changePassword(password: any, token: any) {
-    throw new Error("Function not implemented.")
-}
+
 
