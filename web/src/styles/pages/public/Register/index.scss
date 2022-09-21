@@ -103,8 +103,16 @@
 
                     .icon {
                         color: $color-primary;
+<<<<<<< HEAD
                         font-size: clamp(24px, 4vw, 48px);
+=======
+                        font-size: 48px;
+>>>>>>> 28ee4afda2b3e053962b86cc5bc8095f9f3d8e90
                     }
+                    // .icon:hover{
+                    //     transform: scale(1);
+                    //     font-size: clamp(34px, 4vw, 48px);
+                    // }
                 }
 
                 .register-and-go-back {
