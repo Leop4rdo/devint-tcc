@@ -34,4 +34,14 @@ export default class AuthController {
         this.service.setEnabled(req.params.userId, 1)
             .then((_res) => res.status(_res.status || 200).json(_res))
     }
+
+    requestPasswordRecovery = (req : Request, res : Response) => {
+        this.service.requestPasswordRecovery(req.body.email)
+            .then((_res) => res.status(_res.status || 200).json(_res))
+    }
+
+    changePassword = (req : Request, res : Response) => {
+        this.service.changePassword(req.body.password, req.body.token)
+            .then((_res) => res.status(_res.status || 200).json(_res))
+    }
 }

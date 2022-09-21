@@ -40,10 +40,6 @@
           font-size: clamp( 2.3rem , 4vw , 3rem);
           margin-top: clamp( 1.9rem , 4vw , 3rem);
         }
-        .icon:hover{
-          cursor: pointer;
-          transform: scale(1.1);
-        }
       }
      
     }
@@ -59,7 +55,7 @@
     display: flex;
     padding-left: 6%;
     background-color: $color-black;
-    background-image: url("../../../../../../public/assets/images/horizontal-wave-white-Company.png");
+    background-image: url("../../../../../public/assets/images/horizontal-wave-white-Company.png");
     background-size: clamp(40px, 10vw, 390px) 100%;
     background-repeat: no-repeat;
     background-position: 101% -1px;
