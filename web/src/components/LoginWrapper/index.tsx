@@ -10,7 +10,7 @@ const LoginWrapper: React.FC<ILoginWapper> = (props) => {
     return(
         <div className="login-wrapper">
             <header>
-                <h1><LogoComponent secondary="#1F252F" primary="#7865FF" /></h1>
+                <h1><LogoComponent secondary="#fff" primary="#273140" /></h1>
             </header>
 
             <main>

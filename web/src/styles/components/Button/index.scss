@@ -13,7 +13,7 @@ button {
   align-items: center;
   gap: 8px;
 
-  transition: background-color 1.5s ease-out;
+  transition: background-color .25s ease-out;
 
   &.btn-primary {
     background-color: $color-primary;

@@ -42,7 +42,7 @@ export default class DevEntity {
     @Column({nullable : true, name : 'github_username', unique : true})
     githubUsername : string
 
-    @Column({name : 'open_to_work', default : false})
+    @Column({name : 'open_to_work', default: false})
     openToWork : boolean
 
     @Column({type : 'date' })
@@ -52,7 +52,7 @@ export default class DevEntity {
     @JoinTable({name:'follows'})
     following: DevEntity[]
 
-    @OneToOne(() => AuthEntity, { nullable : false })
+    @OneToOne(() => AuthEntity, { nullable : false, onDelete : 'CASCADE'})
     @JoinColumn()
     auth : AuthEntity
 

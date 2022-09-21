@@ -9,10 +9,11 @@ import { isValidDate, isValidEmail } from "utils/validations";
 import * as AuthService from "services/auth.service";
 import { AuthContext } from "store/context/Auth.context";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const DevRegistrationPage: React.FC = () => {
+    const navigate = useNavigate()
     const authContext = useContext(AuthContext)
 
 
@@ -104,9 +105,10 @@ const DevRegistrationPage: React.FC = () => {
     }
 
     const onPreviousButtonPress = () => {
-
-        if (currentStep >= 1) {
+        if (currentStep > 0 && currentStep < steps.length) {
             setCurrentStep(currentStep - 1)
+        } else {
+            navigate("/register")
         }
     }
 
@@ -118,7 +120,9 @@ const DevRegistrationPage: React.FC = () => {
 
                 <div className="dev-user">
 
-                    <Button children={(currentStep >= steps.length - 1) ? <Icon name="arrow_back" /> : [<Link to={'/register'}><Icon name="arrow_back" /></Link>]} onClick={onPreviousButtonPress} ></Button>
+                    <Button onClick={onPreviousButtonPress} >
+                        <Icon name="arrow_back" />
+                    </Button>
 
                     <h2>Sou Dev</h2>
 
