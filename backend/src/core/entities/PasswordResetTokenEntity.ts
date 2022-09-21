@@ -10,7 +10,7 @@ export default class PasswordResetTokenEntity {
     @Column()
     token : string
 
-    @Column({ name : 'expiration_date' })
+    @Column({ type : "bigint", name : 'expiration_date' })
     expirationDate : number
 
     @Column({ default : true })

@@ -199,7 +199,7 @@ export default class AuthService implements IAuthService {
             subject : 'Recuperação de senha',
             values : {
                 USER : user.name,
-                LINK : `${process.env.FRONTEND_URL}/change-my-password?token=${passResetToken.token}`
+                LINK : `${process.env.FRONTEND_URL}/change-my-password/${passResetToken.token}`
             }
         }, EmailTemplates.PASSWORD_RECOVERY)
 
