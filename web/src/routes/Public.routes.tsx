@@ -13,7 +13,7 @@ const PublicRouter : React.FC = () => {
         <Routes>
             <Route index element={<LoginPage />} />
             <Route path="forgot-my-password" element={<ForgotMyPasswordPage />} />
-            <Route path="change-my-password" element={<ChangeMyPasswordPage />} />
+            <Route path="change-my-password/:token" element={<ChangeMyPasswordPage />} />
             <Route path="register">
                 <Route index element={<Register />} />
                 <Route path="dev" element={<DevRegistrationPage />} />
