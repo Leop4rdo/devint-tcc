@@ -54,6 +54,6 @@ export default class DevService implements IDevService {
         // TODO : auto follow github followers
         // TODO : auto favorite projects from starred github repositories
         
-        this.repo.update(id, dev)
+        this.repo.update(dev)
     }
 }

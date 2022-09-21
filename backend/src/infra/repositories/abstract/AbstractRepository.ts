@@ -9,7 +9,7 @@ export default abstract class AbstractRepository<T> implements IRepository<T> {
         this.db = AppDataSource.getRepository<T>(repo)
     }
 
-    async update(id : string, entity: T) { return await this.db.update({ id }, entity)}
+    async update(entity: T) { return await this.db.save(entity)}
 
     async create(entity: T) { return await this.db.save(entity)}
 
