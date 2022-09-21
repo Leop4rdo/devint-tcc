@@ -4,7 +4,7 @@ import Button from "components/shared/Button";
 import Icon from "components/shared/Icon";
 
 
-const ContainerConfirmationUser: React.FC = () => {
+const ForgotMyPasswordStep2: React.FC = () => {
     let navigate = useNavigate()
     return (
         <div className="container-comfirmation-user">
@@ -16,4 +16,4 @@ const ContainerConfirmationUser: React.FC = () => {
     )
 }
 
-export default ContainerConfirmationUser
+export default ForgotMyPasswordStep2

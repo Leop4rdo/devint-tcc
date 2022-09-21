@@ -36,4 +36,14 @@ export default class AuthController {
             .then((_res) => res.status(_res.status || 200).json(_res))  
             .catch((err) => res.status(err.status || 500).json(err))
     }
+
+    requestPasswordRecovery = (req : Request, res : Response) => {
+        this.service.requestPasswordRecovery(req.body.email)
+            .then((_res) => res.status(_res.status || 200).json(_res))
+    }
+
+    changePassword = (req : Request, res : Response) => {
+        this.service.changePassword(req.body.password, req.body.token)
+            .then((_res) => res.status(_res.status || 200).json(_res))
+    }
 }

@@ -1,46 +1,55 @@
-import { compare, hash } from "bcrypt";
+import { hash, compare } from "bcrypt";
+import * as jwt from "jsonwebtoken";
+import BusinessLogicError from "../../../handler/BusinessLogicError ";
 import errors from "../../../handler/errors.handler";
 import IAuthRepository from "../../../infra/repositories/abstract/IAuthRepository";
+import ICompanyRepository from "../../../infra/repositories/abstract/ICompanyRepository";
+import IDevRepository from "../../../infra/repositories/abstract/IDevRepository";
+import IRepository from "../../../infra/repositories/abstract/IRepository";
 import BadRequestResponse from "../../../Responses/BadRequestResponse";
 import IResponse from "../../../Responses/IResponse";
-import SuccessResponse from "../../../Responses/SuccessResponse";
-import LoginRequestDTO from "../../dtos/user/LoginRequestDTO";
-import UserDTO from "../../dtos/user/UserDTO";
-import DevEntity from "../../entities/DevEntity";
-import { IUserProps, userRoles } from "../../interfaces/IUser";
-import IAuthService from "../abstract/IAuthService";
-
-import * as jwt from "jsonwebtoken";
-import UserCreateRequestDTO from "../../dtos/user/UserCreateRequestDTO";
-import CompanyEntity from "../../entities/CompanyEntity";
 import ServerErrorResponse from "../../../Responses/ServerErrorResponse";
-import AuthEntity from "../../entities/AuthEntity";
-import IDevProps from "../../interfaces/IDev";
-import DevCreateRequestDTO from "../../dtos/user/dev/DevCreateRequestDTO";
+import SuccessResponse from "../../../Responses/SuccessResponse";
 import CompanyCreateRequestDTO from "../../dtos/user/company/CompanyCreateRequestDTO";
-import ICompanyProps from "../../interfaces/ICompany";
-import BusinessLogicError from "../../../handler/BusinessLogicError ";
 import { CompanyResponseDTO } from "../../dtos/user/company/CompanyResponseDTO";
+import DevCreateRequestDTO from "../../dtos/user/dev/DevCreateRequestDTO";
 import DevResponseDTO from "../../dtos/user/dev/DevResponseDTO";
-import IDevRepository from "../../../infra/repositories/abstract/IDevRepository";
-import ICompanyRepository from "../../../infra/repositories/abstract/ICompanyRepository";
+import LoginRequestDTO from "../../dtos/user/LoginRequestDTO";
+import UserCreateRequestDTO from "../../dtos/user/UserCreateRequestDTO";
+import UserDTO from "../../dtos/user/UserDTO";
+import AuthEntity from "../../entities/AuthEntity";
+import CompanyEntity from "../../entities/CompanyEntity";
+import DevEntity from "../../entities/DevEntity";
+import PasswordResetTokenEntity from "../../entities/PasswordResetTokenEntity";
+import ICompanyProps from "../../interfaces/ICompany";
+import IDevProps from "../../interfaces/IDev";
+import { userRoles, IUserProps } from "../../interfaces/IUser";
+import IAuthService from "../abstract/IAuthService";
 import { IDevService } from "../abstract/IDevService";
+import IEmailService from "../abstract/IEmailService";
+import { EmailTemplates } from "./EmailService";
 
 
 export default class AuthService implements IAuthService {
     private repo : IAuthRepository
     private devRepo : IDevRepository
     private companyRepo : ICompanyRepository
+    private passResetTokenRepo : IRepository<PasswordResetTokenEntity>
+    private emailService : IEmailService
     private devService : IDevService
 
     constructor(
         repo : IAuthRepository, 
         devRepo : IDevRepository, 
         companyRepo : ICompanyRepository,
+        passResetTokenRepo : IRepository<PasswordResetTokenEntity>,
+        emailService : IEmailService,
         devService : IDevService) { 
             this.repo = repo; 
             this.companyRepo = companyRepo;
             this.devRepo = devRepo;
+            this.passResetTokenRepo = passResetTokenRepo;
+            this.emailService = emailService;
             this.devService = devService;
     }
 
@@ -174,4 +183,94 @@ export default class AuthService implements IAuthService {
         else 
             return res.data
     }
+
+    async requestPasswordRecovery(email : string): Promise<IResponse> {
+        const auth = await this.repo.findBy('email', email)
+        
+        if (!auth || auth.enabled == 0) 
+            return new BadRequestResponse({
+                errorMessage : errors.ENTITY_NOT_FOUND.message,
+                errorCode: errors.ENTITY_NOT_FOUND.code
+            })
+        
+        const user = (auth.role == userRoles.COMPANY) ?
+            await this.companyRepo.findByAuthId(auth.id)
+        :
+            await this.devRepo.findByAuthId(auth.id)
+
+        const token = this.generateToken()
+
+        const passResetToken = new PasswordResetTokenEntity();
+        passResetToken.token = await hash(token, 10)
+        passResetToken.owner = auth;
+        passResetToken.expirationDate = new Date(Date.now() + 3600000);
+
+        await this.passResetTokenRepo.create(passResetToken);
+
+        await this.emailService.send({
+            to : auth.email,
+            subject : 'Recuperação de senha',
+            values : {
+                USER : user.name,
+                LINK : `${process.env.FRONTEND_URL}/change-my-password?token=${token}`
+            }
+        }, EmailTemplates.PASSWORD_RECOVERY)
+
+        return new SuccessResponse({
+            status : 200,
+            data : {
+                message : 'Success'
+            }
+        })
+    }
+
+    async changePassword(password, token) : Promise<IResponse>{
+        const errorRes = new BadRequestResponse({
+            errorMessage : errors.ENTITY_NOT_FOUND.message,
+            errorCode: errors.ENTITY_NOT_FOUND.code
+        })
+
+        const reqPassRecoveryToken = await this.passResetTokenRepo.findBy('token', token); // yep boy, the token will never be the same
+
+        if (!reqPassRecoveryToken)
+            return errorRes
+
+        const tokenMatches = await compare(token, reqPassRecoveryToken.token)
+
+        if (!tokenMatches)
+            return errorRes
+
+        await this.repo.update({
+            ...reqPassRecoveryToken.owner,
+            password : password
+        })
+
+        this.passResetTokenRepo.remove(reqPassRecoveryToken.id)
+           
+        return new SuccessResponse({
+            status : 200,
+            data : {
+                message : 'Success'
+            }
+        }) 
+    }
+
+
+    private generateToken() {
+        const chars ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+        let token = ""
+
+        for (let i = 0; i < 32; i++) {
+            token += chars.charAt(Math.floor(Math.random() * chars.length))
+        }
+
+        return token
+    }
+
+
 }
+function changePassword(password: any, token: any) {
+    throw new Error("Function not implemented.")
+}
+

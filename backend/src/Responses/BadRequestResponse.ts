@@ -4,7 +4,7 @@ export default class BadRequestResponse implements IResponse  {
     status: number;
     hasError: boolean;
     errorCode: string;
-    errorMessage: string;
+    errorMessage: string | object | object[];
 
     constructor(props: IResponse) {
     

@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CompanyForm1 from "components/RegisterForms/Company/Step1";
 import CompanyForm2 from "components/RegisterForms/Company/Step2";
 import { isValidEmail } from "utils/validations";
@@ -12,6 +12,7 @@ import Icon from "components/shared/Icon";
 
 
 const CompanyRegistrationPage: React.FC = () => {
+    const navigate = useNavigate()
 
     const [formValues, setFormValues] = useState({
         name: "",
@@ -97,9 +98,10 @@ const CompanyRegistrationPage: React.FC = () => {
     }
 
     const onPreviousButtonPress = () => {
-
-        if (currentStep >= 1) {
+        if (currentStep > 0 && currentStep < steps.length) {
             setCurrentStep(currentStep - 1)
+        } else {
+            navigate("/register")
         }
     }
 
@@ -110,7 +112,9 @@ const CompanyRegistrationPage: React.FC = () => {
 
                 <div className="company-user">
 
-                    <Button children={(currentStep >= steps.length - 1) ? <Icon name="arrow_back" /> : [<Link to={'/register'}><Icon name="arrow_back" /></Link>]} onClick={onPreviousButtonPress} ></Button>
+                <Button onClick={onPreviousButtonPress} >
+                    <Icon name="arrow_back" />
+                </Button>
 
                     <h2>Sou empresa</h2>
 
