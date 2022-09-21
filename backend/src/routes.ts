@@ -1,28 +1,17 @@
 import { Request, Response, Router } from "express";
 import BusinessLogicError from "./handler/BusinessLogicError ";
 import authMiddleware from "./middlewares/auth.middleware";
-import userRouter from "./routes/UserRoutes";
+import { publicUserRoutes } from "./routes/UserRoutes";
 
 const routes = Router();
 
+// public routes -> 
 routes.get('/health-check', (req : Request, res : Response) => res.json({message: 'Api is working properly!'}));
+routes.use("/", publicUserRoutes)
 
-routes.get("/throw-error", (req : Request, res : Response) => {
-  try {
-    throw new BusinessLogicError({
-      errorMessage : "error error error many errors"
-    })
-  } catch (err) {
-    res.status(501).send(err.message)
-  }
-})
+routes.use(authMiddleware)
 
-// public routes
-routes.use("/", userRouter)
-
-// routes.use(authMiddleware)
-
-
-// secure routes
+// secure routes ->
+routes.use("/users", publicUserRoutes)
 
 export default routes

@@ -225,20 +225,14 @@ export default class AuthService implements IAuthService {
     }
 
     async changePassword(password, token) : Promise<IResponse>{
-        const errorRes = new BadRequestResponse({
-            errorMessage : errors.ENTITY_NOT_FOUND.message,
-            errorCode: errors.ENTITY_NOT_FOUND.code
-        })
-
-        const reqPassRecoveryToken = await this.passResetTokenRepo.findBy('token', token); // yep boy, the token will never be the same
+        const hashedToken = await hash(token, 10)
+        const reqPassRecoveryToken = await this.passResetTokenRepo.findBy('token', hashedToken);
 
         if (!reqPassRecoveryToken)
-            return errorRes
-
-        const tokenMatches = await compare(token, reqPassRecoveryToken.token)
-
-        if (!tokenMatches)
-            return errorRes
+            return new BadRequestResponse({
+                errorMessage : errors.ENTITY_NOT_FOUND.message,
+                errorCode: errors.ENTITY_NOT_FOUND.code
+            })
 
         await this.repo.update({
             ...reqPassRecoveryToken.owner,
