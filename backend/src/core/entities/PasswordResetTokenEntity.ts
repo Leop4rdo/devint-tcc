@@ -1,4 +1,4 @@
-import {Column, CreateDateColumn, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn} from "typeorm";
+import {Column, CreateDateColumn, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn} from "typeorm";
 import AuthEntity from "./AuthEntity";
 
 
@@ -16,7 +16,7 @@ export default class PasswordResetTokenEntity {
     @Column({ default : true })
     active : boolean
 
-    @ManyToOne(() => AuthEntity, { onDelete : 'CASCADE' })
+    @ManyToOne(() => AuthEntity, { onDelete : 'CASCADE', eager : true })
     owner : AuthEntity
 
     @CreateDateColumn({ name : 'created_at', select : false })

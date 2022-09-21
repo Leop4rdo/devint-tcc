@@ -219,11 +219,11 @@ export default class AuthService implements IAuthService {
                 errorMessage : errors.ENTITY_NOT_FOUND.message,
                 errorCode: errors.ENTITY_NOT_FOUND.code
             })
-
-        await this.repo.update({
-            ...passRecoveryToken.owner,
-            password : password
-        })
+        
+        const updated = passRecoveryToken.owner
+        updated.password = await hash(password, 10)
+        
+        await this.repo.update(updated)
 
         this.passResetTokenRepo.remove(passRecoveryToken.id)
            
