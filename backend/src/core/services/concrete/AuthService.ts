@@ -224,7 +224,7 @@ export default class AuthService implements IAuthService {
         updated.password = await hash(password, 10)
         
         console.log(updated)
-        await this.repo.update(updated)
+        await this.repo.update(updated.id, updated)
 
         this.passResetTokenRepo.remove(passRecoveryToken.id)
            
