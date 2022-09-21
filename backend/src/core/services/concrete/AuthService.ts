@@ -179,8 +179,7 @@ export default class AuthService implements IAuthService {
         
         const user = (auth.role == userRoles.COMPANY) ?
             await this.companyRepo.findByAuthId(auth.id)
-        :
-            await this.devRepo.findByAuthId(auth.id)
+            :await this.devRepo.findByAuthId(auth.id)
 
         if (!user) 
             return new BadRequestResponse({
@@ -188,12 +187,10 @@ export default class AuthService implements IAuthService {
                 errorCode: errors.ENTITY_NOT_FOUND.code
             })
 
-        const token = this.generateToken()
-
         const passResetToken = new PasswordResetTokenEntity();
-        passResetToken.token = await hash(token, 10)
+        passResetToken.token = this.generateToken()
         passResetToken.owner = auth;
-        passResetToken.expirationDate = new Date(Date.now() + 3600000);
+        passResetToken.expirationDate = Date.now() + 3600000;
 
         await this.passResetTokenRepo.create(passResetToken);
 
@@ -202,7 +199,7 @@ export default class AuthService implements IAuthService {
             subject : 'Recuperação de senha',
             values : {
                 USER : user.name,
-                LINK : `${process.env.FRONTEND_URL}/change-my-password?token=${token}`
+                LINK : `${process.env.FRONTEND_URL}/change-my-password?token=${passResetToken.token}`
             }
         }, EmailTemplates.PASSWORD_RECOVERY)
 
@@ -215,21 +212,20 @@ export default class AuthService implements IAuthService {
     }
 
     async changePassword(password, token) : Promise<IResponse>{
-        const hashedToken = await hash(token, 10)
-        const reqPassRecoveryToken = await this.passResetTokenRepo.findBy('token', hashedToken);
+        const passRecoveryToken = await this.passResetTokenRepo.findBy('token', token);
 
-        if (!reqPassRecoveryToken)
+        if (!passRecoveryToken || passRecoveryToken.expirationDate < Date.now())
             return new BadRequestResponse({
                 errorMessage : errors.ENTITY_NOT_FOUND.message,
                 errorCode: errors.ENTITY_NOT_FOUND.code
             })
 
         await this.repo.update({
-            ...reqPassRecoveryToken.owner,
+            ...passRecoveryToken.owner,
             password : password
         })
 
-        this.passResetTokenRepo.remove(reqPassRecoveryToken.id)
+        this.passResetTokenRepo.remove(passRecoveryToken.id)
            
         return new SuccessResponse({
             status : 200,

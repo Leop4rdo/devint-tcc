@@ -11,7 +11,7 @@ export default class PasswordResetTokenEntity {
     token : string
 
     @Column({ name : 'expiration_date' })
-    expirationDate : Date
+    expirationDate : number
 
     @Column({ default : true })
     active : boolean
