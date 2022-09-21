@@ -44,7 +44,7 @@ const CompanyRegistrationPage: React.FC = () => {
 
             if (formValues.name.length < 3) return false;
 
-            if (formValues.cnpj.length < 14) return false;
+            if (formValues.cnpj.length < 18) return false;
         }
 
         if (currentStep == 1) {
