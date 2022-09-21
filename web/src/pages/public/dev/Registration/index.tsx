@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import DevForm1 from "components/RegisterForms/Dev/Step1";
 import DevForm2 from "components/RegisterForms/Dev/Step2";
@@ -13,11 +13,14 @@ import { Link } from "react-router-dom";
 
 
 const DevRegistrationPage: React.FC = () => {
+    const authContext = useContext(AuthContext)
+
 
     const [formValues, setFormValues] = useState({
         name: "",
         email: "",
         birthday: "",
+        gender: "",
         password: "",
         confirmPassword: "",
         termsOfAcceptance: "",
@@ -45,6 +48,8 @@ const DevRegistrationPage: React.FC = () => {
             if (formValues.name.length < 3) return false;
 
             if (!isValidDate(formValues.birthday)) return false;
+
+            if (formValues.gender.length > 1) return false;
         }
 
         if (currentStep == 1) {
@@ -63,39 +68,39 @@ const DevRegistrationPage: React.FC = () => {
 
     }
 
+    
     const onConfirmButtonPress = () => {
-
-        if (!isFormValid()) {
-            return alert("Por favor, verifique se os dados estão corretos!")
-        }
-
-        if (currentStep >= steps.length - 1)
-            return
+        
+        if (!isFormValid()) 
+        return alert("Por favor, verifique se os dados estão corretos!")
+        
+        if (currentStep < steps.length -1)
+        setCurrentStep(currentStep + 1)
         else
-            setCurrentStep(currentStep + 1)
-
-        register()    
+        register()
     }
-
+    
     const register = async () => {
 
+        const birthdayAsArray = formValues.birthday.split('/')
+        const birthday = [birthdayAsArray[2], birthdayAsArray[1], birthdayAsArray[0]].join('/') 
+        
         const body = {
             name: formValues.name,
             email: formValues.email,
-            birthday: formValues.birthday,
+            birthday: birthday,
+            gender: formValues.gender,
             password: formValues.password,
-            termsOfAcceptance: formValues.termsOfAcceptance,
             githubUser: formValues.githubUser,
         }
 
         const res = await AuthService.register(body)
 
-
         if (res.hasError)
-            return alert("Por favor, verifique se os dados estão corretos!")
+            return alert("Por favor, verifique se os dados estão corretos!")    
 
-        //AuthContext?.signIn(body.email, body.password);    
-
+        authContext?.signIn(body.email, body.password);    
+        
     }
 
     const onPreviousButtonPress = () => {

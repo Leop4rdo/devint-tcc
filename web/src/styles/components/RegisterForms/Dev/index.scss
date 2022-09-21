@@ -27,3 +27,23 @@ form {
   display: flex;
   position: relative;
 }
+
+select {
+  height: 40px;
+  width: 300px;
+  padding: 0px 8px;
+
+  background-color: $color-black;
+
+  border: 2px solid;
+  border-color: $color-gray;
+  border-radius: 8px;
+  border-style: solid;
+  
+  color: $color-light-gray;
+  font-size: clamp(.8rem, 1.5vw, 1.0rem);
+
+  &:invalid {
+    color: $color-gray;
+  }
+}
