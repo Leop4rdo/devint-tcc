@@ -31,9 +31,7 @@ export default class DevService implements IDevService {
     }
 
     async create(body: DevCreateRequestDTO): Promise<IResponse> {
-        const dtoValidationErrors = await body.validate()
-
-        if (dtoValidationErrors.length > 0) throw new BusinessLogicError(dtoValidationErrors)
+        await body.validate()
 
         const dev = await this.repo.create(body as unknown as DevEntity)
 

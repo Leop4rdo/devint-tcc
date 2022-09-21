@@ -3,43 +3,24 @@ import errors from "../../../../handler/errors.handler"
 import ServerErrorResponse from "../../../../Responses/ServerErrorResponse"
 import AuthEntity from "../../../entities/AuthEntity"
 import ICompanyProps from "../../../interfaces/ICompany"
+import DTO from "../../DTO"
 
-export default class CompanyCreateRequestDTO {
+export default class CompanyCreateRequestDTO extends DTO {
     @IsString()
     @IsNotEmpty()
     name : string
 
     @IsString()
     @IsNotEmpty()
-    // todo : add cnpj regex
-    @Matches(/^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/, {
-        message:
-          `CNPJ format is not valid, please don't smash your keyboard `,
-      })
     cnpj : string
 
     @IsNotEmpty()
     auth : AuthEntity
 
     constructor(props : ICompanyProps) {
+        super()
         this.name = props.name
         this.cnpj = props.cnpj
         this.auth = props.auth
     }
-
-    async validate() {
-        const err = await validate(this);
-    
-        if (err.length > 0){ 
-          console.log('validation failed. errors: ', err);
-          return new ServerErrorResponse({
-            hasError: true,
-            errorCode : errors.BASE.code,
-            errorMessage : errors.BASE.message
-          })
-        }
-    
-        return null
-      }
-
 }
