@@ -198,6 +198,12 @@ export default class AuthService implements IAuthService {
         :
             await this.devRepo.findByAuthId(auth.id)
 
+        if (!user) 
+            return new BadRequestResponse({
+                errorMessage : errors.ENTITY_NOT_FOUND.message,
+                errorCode: errors.ENTITY_NOT_FOUND.code
+            })
+
         const token = this.generateToken()
 
         const passResetToken = new PasswordResetTokenEntity();
