@@ -38,16 +38,6 @@ export default class UserCreateRequestDTO {
   }
 
   async validate() {
-    const err = await validate(this);
-
-    if (err.length > 0){ 
-      return new ServerErrorResponse({
-        hasError: true,
-        errorCode : errors.BASE.code,
-        errorMessage : errors.BASE.message
-      })
-    }
-
-    return null
+    return await validate(this);
   }
 }

@@ -8,7 +8,7 @@ export default class BadRequestResponse implements IResponse  {
 
     constructor(props: IResponse) {
     
-        this.status = props.status || 400;
+        this.status = props.status || 430;
         this.hasError = true;
         this.errorCode = props.errorCode;
         this.errorMessage = props.errorMessage;

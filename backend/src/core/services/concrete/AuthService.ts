@@ -1,32 +1,34 @@
-import { hash, compare } from "bcrypt"
-import errors from "../../../handler/errors.handler"
-import IAuthRepository from "../../../infra/repositories/abstract/IAuthRepository"
-import ICompanyRepository from "../../../infra/repositories/abstract/ICompanyRepository"
-import IDevRepository from "../../../infra/repositories/abstract/IDevRepository"
-import IRepository from "../../../infra/repositories/abstract/IRepository"
-import BadRequestResponse from "../../../Responses/BadRequestResponse"
-import IResponse from "../../../Responses/IResponse"
-import ServerErrorResponse from "../../../Responses/ServerErrorResponse"
-import SuccessResponse from "../../../Responses/SuccessResponse"
-import CompanyCreateRequestDTO from "../../dtos/user/company/CompanyCreateRequestDTO"
-import { CompanyResponseDTO } from "../../dtos/user/company/CompanyResponseDTO"
-import DevCreateRequestDTO from "../../dtos/user/dev/DevCreateRequestDTO"
-import DevResponseDTO from "../../dtos/user/dev/DevResponseDTO"
-import LoginRequestDTO from "../../dtos/user/LoginRequestDTO"
-import UserCreateRequestDTO from "../../dtos/user/UserCreateRequestDTO"
-import UserDTO from "../../dtos/user/UserDTO"
-import AuthEntity from "../../entities/AuthEntity"
-import CompanyEntity from "../../entities/CompanyEntity"
-import DevEntity from "../../entities/DevEntity"
-import PasswordResetTokenEntity from "../../entities/PasswordResetTokenEntity"
-import ICompanyProps from "../../interfaces/ICompany"
-import IDevProps from "../../interfaces/IDev"
-import { userRoles, IUserProps } from "../../interfaces/IUser"
-import IAuthService from "../abstract/IAuthService"
-import { IDevService } from "../abstract/IDevService"
-import IEmailService from "../abstract/IEmailService"
-import { EmailTemplates } from "./EmailService"
-import * as jwt from "jsonwebtoken"
+import { hash, compare } from "bcrypt";
+import * as jwt from "jsonwebtoken";
+import BusinessLogicError from "../../../handler/BusinessLogicError ";
+import errors from "../../../handler/errors.handler";
+import IAuthRepository from "../../../infra/repositories/abstract/IAuthRepository";
+import ICompanyRepository from "../../../infra/repositories/abstract/ICompanyRepository";
+import IDevRepository from "../../../infra/repositories/abstract/IDevRepository";
+import IRepository from "../../../infra/repositories/abstract/IRepository";
+import BadRequestResponse from "../../../Responses/BadRequestResponse";
+import IResponse from "../../../Responses/IResponse";
+import ServerErrorResponse from "../../../Responses/ServerErrorResponse";
+import SuccessResponse from "../../../Responses/SuccessResponse";
+import CompanyCreateRequestDTO from "../../dtos/user/company/CompanyCreateRequestDTO";
+import { CompanyResponseDTO } from "../../dtos/user/company/CompanyResponseDTO";
+import DevCreateRequestDTO from "../../dtos/user/dev/DevCreateRequestDTO";
+import DevResponseDTO from "../../dtos/user/dev/DevResponseDTO";
+import LoginRequestDTO from "../../dtos/user/LoginRequestDTO";
+import UserCreateRequestDTO from "../../dtos/user/UserCreateRequestDTO";
+import UserDTO from "../../dtos/user/UserDTO";
+import AuthEntity from "../../entities/AuthEntity";
+import CompanyEntity from "../../entities/CompanyEntity";
+import DevEntity from "../../entities/DevEntity";
+import PasswordResetTokenEntity from "../../entities/PasswordResetTokenEntity";
+import ICompanyProps from "../../interfaces/ICompany";
+import IDevProps from "../../interfaces/IDev";
+import { userRoles, IUserProps } from "../../interfaces/IUser";
+import IAuthService from "../abstract/IAuthService";
+import { IDevService } from "../abstract/IDevService";
+import IEmailService from "../abstract/IEmailService";
+import { EmailTemplates } from "./EmailService";
+
 
 export default class AuthService implements IAuthService {
     private repo : IAuthRepository
@@ -64,12 +66,9 @@ export default class AuthService implements IAuthService {
     }
     
     async create(body: UserCreateRequestDTO): Promise<IResponse> {
-        const dtoValidateRes = await body.validate()
+        const dtoValidationErrors = await body.validate()
 
-        if (dtoValidateRes) return new BadRequestResponse({
-            errorCode : errors.INVALID_DATA.code,
-            errorMessage : errors.INVALID_DATA.message
-        })
+        if (dtoValidationErrors.length > 0) throw new BusinessLogicError(dtoValidationErrors)
 
         if (await this.repo.findBy("email", body.email)){
             return new ServerErrorResponse({
@@ -103,8 +102,9 @@ export default class AuthService implements IAuthService {
     }
 
     async login(body: LoginRequestDTO): Promise<IResponse> {
-        const dtoValidateRes = await body.validate()
-        if (dtoValidateRes) return dtoValidateRes
+        const dtoValidationErrors = await body.validate()
+
+        if (dtoValidationErrors.length > 0) throw new BusinessLogicError(dtoValidationErrors)
 
         const auth = await this.repo.findBy("email", body.email);
 
@@ -158,12 +158,9 @@ export default class AuthService implements IAuthService {
             auth: _auth
         } as unknown as ICompanyProps)
 
-        const dtoValidateRes = await dto.validate()
+        const dtoValidationErrors = await body.validate()
 
-        if (dtoValidateRes) return new BadRequestResponse({
-            errorCode : errors.INVALID_DATA.code,
-            errorMessage : errors.INVALID_DATA.message
-        })
+        if (dtoValidationErrors.length > 0) throw new BusinessLogicError(dtoValidationErrors)
 
         return this.companyRepo.create(dto as unknown as CompanyEntity)
     }
