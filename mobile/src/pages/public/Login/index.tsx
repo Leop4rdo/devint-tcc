@@ -39,7 +39,7 @@ const LoginPage : React.FC<any> = ({navigation}) => {
 
     return (
         <View style={styles.page}>
-            <Text style={globalStyles.appTitle_medium}>AppName</Text>
+            <Text style={globalStyles.appTitle_medium}>DevInt</Text>
             
             <View style={globalStyles.centerItemContainer}>
                 <Text style={styles.title}>Entrar</Text>
@@ -58,11 +58,11 @@ const LoginPage : React.FC<any> = ({navigation}) => {
                         icon="lock-open" 
                         onChangeText={(text) => handleInputChange(text, 'password')}  
                         validate={() => !isEmpty(formValues.password)}  
-                        placeholder="Senha" />
+                        placeholder="Senha"/>
 
                     <TouchableOpacity
                         activeOpacity={1}
-                        onPress={()=>{ alert('WIP'); }}
+                        onPress={()=>{navigation.navigate('loginwrapper')}}
                         >
                         <Text style={[globalStyles.linkRed, styles.linkPasswordRecover ]}>Esqueci minha senha!</Text>
                     </TouchableOpacity>
