@@ -3,7 +3,8 @@ import { IUserProps, userRoles } from "../../interfaces/IUser";
 import {IsEmail, IsNotEmpty, IsString,IsEnum, validate} from "class-validator"
 import errors from "../../../handler/errors.handler"
 import ServerErrorResponse from "../../../Responses/ServerErrorResponse";
-export default class UserCreateRequestDTO {
+import DTO from "../DTO";
+export default class UserCreateRequestDTO extends DTO{
   
   @IsString()
   name: string;
@@ -27,6 +28,7 @@ export default class UserCreateRequestDTO {
   githubUsername : string;
 
   constructor(props: IUserProps) {
+    super()
     this.email = props.email;
     this.name = props.name;
     this.password = props.password;
@@ -37,7 +39,5 @@ export default class UserCreateRequestDTO {
     this.githubUsername = props.githubUsername
   }
 
-  async validate() {
-    return await validate(this);
-  }
+  
 }
