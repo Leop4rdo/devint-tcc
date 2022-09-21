@@ -10,7 +10,7 @@ export const auth = async (body : IAuthRequestBody) : Promise<IResponse> => {
         const { data } = await api.post("/auth", body)
         return data as IResponse;
     } catch (err : any) {
-        console.log(err)
+        console.log(err.response.data)
         return err.response.data as IResponse
     }
 }
@@ -28,7 +28,7 @@ export const register = async (body : IRegisterRequestBody) => {
 
         return data as IResponse
     } catch (err : any) {
-        console.log(err)
+        console.log(err.response.data)
         console.log("error endpoint: /users")
         return err.response.data as IResponse
     }
