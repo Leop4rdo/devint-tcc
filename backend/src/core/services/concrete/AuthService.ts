@@ -222,8 +222,6 @@ export default class AuthService implements IAuthService {
         
         const updated = passRecoveryToken.owner
         updated.password = await hash(password, 10)
-        
-        console.log(updated)
         await this.repo.update(updated)
 
         this.passResetTokenRepo.remove(passRecoveryToken.id)
