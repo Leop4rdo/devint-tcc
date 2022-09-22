@@ -10,6 +10,8 @@ import DevRepository from "../../adapters/database/repositories/DevRepository";
 import PasswordResetTokenRepository from "../../adapters/database/repositories/PasswordResetTokenRepository";
 import EmailService, { EmailTemplates } from "../../adapters/mail/EmailService";
 import BadRequestResponse from "../../application/Responses/BadRequestResponse";
+import ForbiddenResponse from "../../application/Responses/ForbiddenResponse";
+import forbiddenResponse from "../../application/Responses/ForbiddenResponse";
 import IResponse from "../../application/Responses/IResponse";
 import ServerErrorResponse from "../../application/Responses/ServerErrorResponse";
 import SuccessResponse from "../../application/Responses/SuccessResponse";
@@ -93,24 +95,19 @@ export default class AuthService {
 
         const auth = await this.repo.findBy("email", body.email);
 
-        const forbiddenResponseProps = {
-            status: 403,
-            message: errors.LOGIN_FAILED,
-        };
-
-        if (!auth || auth.enabled == 0) return new BadRequestResponse(forbiddenResponseProps);
+        if (!auth || auth.enabled == 0) return new ForbiddenResponse();
 
         const isPasswordEquals = await compare(body.password, auth.password);
 
         if (!isPasswordEquals)
-            return new BadRequestResponse(forbiddenResponseProps);
+            return new forbiddenResponse();
 
         const user = (auth.role == userRoles.COMPANY) ?
             await this.companyRepo.findByAuthId(auth.id)
         :
             await this.devRepo.findByAuthId(auth.id)
 
-        if (!user) return new BadRequestResponse(forbiddenResponseProps);
+        if (!user) return new forbiddenResponse();
 
         const userRes = (auth.role == userRoles.COMPANY) ?
             new CompanyOutput(user as ICompanyProps)
