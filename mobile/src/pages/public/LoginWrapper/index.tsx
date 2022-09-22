@@ -2,8 +2,6 @@ import {View, Text, TextInput} from 'react-native';
 import Logo from '../../../components/shared/Logo';
 import { IPageProps } from "../../../navigators"
 import styles from './style'
-import FeedbackTextInput from '../../../components/shared/FeedbackInput';
-import ButtonComponent from '../../../components/shared/Button';
 import LoginFormStep1 from '../../../components/login/forms/Step1'
 import LoginFormStep2 from '../../../components/login/forms/Step2'
 import { useState } from 'react';
@@ -11,23 +9,31 @@ import { useState } from 'react';
 const LandingPage: React.FC<IPageProps> = () => {
 
     const [currentStep, setCurrentStep] = useState(0);
-        const steps = [
-            {
-                desc: 'Por favor insira seu email',
-                component: <LoginFormStep1 styles={styles} />
-            },
-            {
-                desc: 'Acesse seu e-mail e entre diretamente pelo link enviado',
-                component: <LoginFormStep2 />
-            },
-
-        ]
-
+      
         const onConfirmButtonPress = () => {
             if (currentStep < steps.length-1){
                 setCurrentStep(currentStep + 1)
             } 
         }
+
+        const onPreviousButtonPress = () => {
+
+            if (currentStep >= 1) {
+                setCurrentStep(currentStep - 1)
+            }
+        }
+
+        const steps = [
+            {
+                desc: 'Por favor insira seu email',
+                component: <LoginFormStep1 styles={styles} onClick={onConfirmButtonPress} />
+            },
+            {
+                desc: 'Acesse seu e-mail e entre diretamente pelo link enviado',
+                component: <LoginFormStep2 styles={styles} onClick={onPreviousButtonPress} />
+            },
+
+        ]
 
     return(
        <View style={styles.container}>

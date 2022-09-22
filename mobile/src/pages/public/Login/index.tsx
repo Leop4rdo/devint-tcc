@@ -1,8 +1,9 @@
-import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
+
 import { useContext, useState } from 'react';
 import {View, Text, TextInput, TouchableOpacity} from 'react-native';
 import ButtonComponent from '../../../components/shared/Button';
 import FeedbackTextInput from '../../../components/shared/FeedbackInput';
+import Logo from '../../../components/shared/Logo';
 import { AuthContext } from '../../../store/context/Auth.context';
 import globalStyles from '../../../styles/global';
 import { isEmail, isEmpty } from '../../../utils/validation';
@@ -39,9 +40,8 @@ const LoginPage : React.FC<any> = ({navigation}) => {
 
     return (
         <View style={styles.page}>
-            <Text style={globalStyles.appTitle_medium}>DevInt</Text>
-            
-            <View style={globalStyles.centerItemContainer}>
+           <Logo/>
+            <View style={styles.ContainerLogin}>
                 <Text style={styles.title}>Entrar</Text>
 
                 <FeedbackTextInput 
