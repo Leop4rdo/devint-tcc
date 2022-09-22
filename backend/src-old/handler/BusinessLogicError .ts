@@ -1,4 +1,3 @@
-import IResponse from "../Responses/IResponse";
 
 export default class BusinessLogicError extends Error {
   message : string;

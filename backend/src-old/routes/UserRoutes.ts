@@ -3,9 +3,10 @@ import AuthController from "../controllers/AuthController";
 import UserController from "../controllers/UserController";
 import authMiddleware from "../middlewares/auth.middleware";
 
-export const publicUserRoutes = Router();
 const userCtrl = new UserController();
 const authCtrl = new AuthController();
+
+export const publicUserRoutes = Router();
 
 publicUserRoutes.post("/auth", authCtrl.login)
 publicUserRoutes.post("/users", authCtrl.create)
@@ -18,5 +19,3 @@ securedUserRoutes.patch("/disable/:userId", authCtrl.disable)
 securedUserRoutes.patch("/enable/:userId", authCtrl.enable)
 securedUserRoutes.get("/", userCtrl.list)
 securedUserRoutes.get("/", userCtrl.getById);
-
-// publicUserRoutes.put("/users/:userId", ctrl.update);
