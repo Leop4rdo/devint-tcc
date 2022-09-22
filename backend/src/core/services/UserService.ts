@@ -1,5 +1,3 @@
-import UserDTO from "../../../src-old/core/dtos/user/UserDTO";
-import IUserService from "../../../src-old/core/services/abstract/IUserService";
 import CompanyEntity from "../../adapters/database/entities/CompanyEntity";
 import DevEntity from "../../adapters/database/entities/DevEntity";
 import IRepository from "../../adapters/database/repositories/IRepository";
@@ -8,9 +6,11 @@ import IResponse from "../../application/Responses/IResponse";
 import SuccessResponse from "../../application/Responses/SuccessResponse";
 import errors from "../../helpers/errors";
 import { userRoles, IUserProps } from "../../interfaces/IUser";
+import DevOutput from "../../ports/output/user/DevOutput";
+import UserOutput from "../../ports/output/user/UserOutput";
 
 
-export default class UserService implements IUserService {
+export default class UserService {
   private devRepo : IRepository<DevEntity>;
   private companyRepo : IRepository<CompanyEntity>;
 
@@ -23,16 +23,12 @@ export default class UserService implements IUserService {
     const user : any = await this.devRepo.findById(id) || await this.companyRepo.findById(id)
 
     if (!user) 
-      return new BadRequestResponse({
-        errorMessage : errors.ENTITY_NOT_FOUND.message,
-        errorCode : errors.ENTITY_NOT_FOUND.code
-      })
+      return new BadRequestResponse({ message : errors.ENTITY_NOT_FOUND })
 
-    const resDTO = new UserDTO({...user, role : (user.cnpj) ? userRoles.COMPANY : userRoles.DEV})
-    console.log(resDTO);
+    const res = new DevOutput({...user, role : (user.cnpj) ? userRoles.COMPANY : userRoles.DEV})
 
     return new SuccessResponse({
-      data : resDTO
+      data : res
     })
   }
 

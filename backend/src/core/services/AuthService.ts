@@ -14,9 +14,17 @@ import IResponse from "../../application/Responses/IResponse";
 import ServerErrorResponse from "../../application/Responses/ServerErrorResponse";
 import SuccessResponse from "../../application/Responses/SuccessResponse";
 import errors from "../../helpers/errors";
+import { generateToken } from "../../helpers/utils";
 import ICompanyProps from "../../interfaces/ICompany";
 import IDevProps from "../../interfaces/IDev";
 import { userRoles, IUserProps } from "../../interfaces/IUser";
+import CompanyCreateInput from "../../ports/input/user/company/CompanyCreateInput";
+import DevCreateInput from "../../ports/input/user/dev/DevCreateInput";
+import LoginInput from "../../ports/input/user/LoginInput";
+import UserCreateInput from "../../ports/input/user/UserCreateInput";
+import CompanyOutput from "../../ports/output/user/CompanyOutput";
+import DevOutput from "../../ports/output/user/DevOutput";
+import UserOutput from "../../ports/output/user/UserOutput";
 import DevService from "./DevService";
 
 export default class AuthService {
@@ -28,12 +36,12 @@ export default class AuthService {
     private devService : DevService
 
     constructor(
-        repo : IAuthRepository, 
-        devRepo : IDevRepository, 
-        companyRepo : ICompanyRepository,
-        passResetTokenRepo : IRepository<PasswordResetTokenEntity>,
-        emailService : IEmailService,
-        devService : IDevService) { 
+        repo : AuthRepository, 
+        devRepo : DevRepository, 
+        companyRepo : CompanyRepository,
+        passResetTokenRepo : PasswordResetTokenRepository,
+        emailService : EmailService,
+        devService : DevService) { 
             this.repo = repo; 
             this.companyRepo = companyRepo;
             this.devRepo = devRepo;
@@ -52,28 +60,24 @@ export default class AuthService {
         })
     }
     
-    async create(body: UserCreateRequestDTO): Promise<IResponse> {
+    async create(body: UserCreateInput): Promise<IResponse> {
         await body.validate()
 
-        if (await this.repo.findBy("email", body.email)){
-            return new ServerErrorResponse({
-                errorMessage: errors.USER_EMAIL_ALREADY_IN_USE.message,
-                errorCode: errors.USER_EMAIL_ALREADY_IN_USE.message,
-              });
-        }
+        if (await this.repo.findBy("email", body.email))
+            return new ServerErrorResponse({ message: errors.USER_EMAIL_ALREADY_IN_USE });
 
         body.password = await hash(body.password, 10)
         body.role = (body.cnpj) ? userRoles.COMPANY : userRoles.DEV
 
         const auth = await this.repo.create(body as unknown as AuthEntity);
 
-        if (!auth) return new ServerErrorResponse({errorMessage : "Cannot create user auth", errorCode: "SE000"})
+        if (!auth) return new ServerErrorResponse({message : "Cannot create user auth" })
 
         const user : any = (body.cnpj) ? await this.createCompany(body, auth) : await this.createDev(body, auth);
 
         if (user.hasError || !user) {
             await this.repo.remove(auth.id)
-            return new ServerErrorResponse({errorMessage : "Cannot create user", errorCode: "SE000"})
+            return new ServerErrorResponse({message : "Cannot create user" })
         }
 
         user.role = (body.cnpj) ? userRoles.COMPANY : userRoles.DEV
@@ -84,15 +88,14 @@ export default class AuthService {
         })
     }
 
-    async login(body: LoginRequestDTO): Promise<IResponse> {
+    async login(body: LoginInput): Promise<IResponse> {
         await body.validate()
 
         const auth = await this.repo.findBy("email", body.email);
 
         const forbiddenResponseProps = {
             status: 403,
-            errorCode: errors.LOGIN_FAILED.code,
-            errorMessage: errors.LOGIN_FAILED.message,
+            message: errors.LOGIN_FAILED,
         };
 
         if (!auth || auth.enabled == 0) return new BadRequestResponse(forbiddenResponseProps);
@@ -110,8 +113,8 @@ export default class AuthService {
         if (!user) return new BadRequestResponse(forbiddenResponseProps);
 
         const userRes = (auth.role == userRoles.COMPANY) ?
-            new CompanyResponseDTO(user as ICompanyProps)
-            : new DevResponseDTO(user as unknown as IDevProps) 
+            new CompanyOutput(user as ICompanyProps)
+            : new DevOutput(user as unknown as IDevProps) 
         
         new UserOutput({...user, role : auth.role} as unknown as IUserProps);
 
@@ -125,12 +128,12 @@ export default class AuthService {
         });
     }
 
-    private createToken(user: CompanyResponseDTO | DevResponseDTO) {
+    private createToken(user: CompanyOutput | DevOutput) {
         return jwt.sign({ ...user }, process.env.SECRET, { expiresIn: "1d" });
     }
 
-    private async createCompany(body : UserCreateRequestDTO, _auth : AuthEntity) : Promise<CompanyEntity | BadRequestResponse> {
-        const dto = new CompanyCreateRequestDTO({
+    private async createCompany(body : UserCreateInput, _auth : AuthEntity) : Promise<CompanyEntity | BadRequestResponse> {
+        const dto = new CompanyCreateInput({
             name : body.name,
             cnpj : body.cnpj,
             auth: _auth
@@ -141,8 +144,8 @@ export default class AuthService {
         return this.companyRepo.create(dto as unknown as CompanyEntity)
     }
 
-    private async createDev(body : UserCreateRequestDTO, _auth : AuthEntity) : Promise<DevEntity | BadRequestResponse>  {
-        const dto = new DevCreateRequestDTO({
+    private async createDev(body : UserCreateInput, _auth : AuthEntity) : Promise<DevEntity | BadRequestResponse>  {
+        const dto = new DevCreateInput({
             name : body.name,
             birthday : body.birthday,
             githubUsername : body.githubUsername,
@@ -159,23 +162,17 @@ export default class AuthService {
         const auth = await this.repo.findBy('email', email)
         
         if (!auth || auth.enabled == 0) 
-            return new BadRequestResponse({
-                errorMessage : errors.ENTITY_NOT_FOUND.message,
-                errorCode: errors.ENTITY_NOT_FOUND.code
-            })
+            return new BadRequestResponse({ message : errors.ENTITY_NOT_FOUND })
         
         const user = (auth.role == userRoles.COMPANY) ?
             await this.companyRepo.findByAuthId(auth.id)
             :await this.devRepo.findByAuthId(auth.id)
 
         if (!user) 
-            return new BadRequestResponse({
-                errorMessage : errors.ENTITY_NOT_FOUND.message,
-                errorCode: errors.ENTITY_NOT_FOUND.code
-            })
+            return new BadRequestResponse({ message : errors.ENTITY_NOT_FOUND })
 
         const passResetToken = new PasswordResetTokenEntity();
-        passResetToken.token = this.generateToken()
+        passResetToken.token = generateToken()
         passResetToken.owner = auth;
         passResetToken.expirationDate = Date.now() + 3600000;
 
@@ -202,10 +199,7 @@ export default class AuthService {
         const passRecoveryToken = await this.passResetTokenRepo.findBy('token', token);
 
         if (!passRecoveryToken || passRecoveryToken.expirationDate < Date.now())
-            return new BadRequestResponse({
-                errorMessage : errors.ENTITY_NOT_FOUND.message,
-                errorCode: errors.ENTITY_NOT_FOUND.code
-            })
+            return new BadRequestResponse({ message : errors.ENTITY_NOT_FOUND })
         
         const updated = passRecoveryToken.owner
         updated.password = await hash(password, 10)
@@ -219,18 +213,6 @@ export default class AuthService {
                 message : 'Success'
             }
         }) 
-    }
-
-    private generateToken() {
-        const chars ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-
-        let token = ""
-
-        for (let i = 0; i < 32; i++) {
-            token += chars.charAt(Math.floor(Math.random() * chars.length))
-        }
-
-        return token
     }
 }
 

@@ -1,13 +1,19 @@
 import { Request, Response } from "express";
-import IUserService from "../core/services/abstract/IUserService";
-import UserModule from "../modules/UserModule";
+import CompanyRepository from "../../adapters/database/repositories/CompanyRepository";
+import DevRepository from "../../adapters/database/repositories/DevRepository";
+import UserService from "../../core/services/UserService";
+
 
 export default class UserController {
-  private service: IUserService;
+  private service: UserService
+  private devRepo: DevRepository
+  private companyRepo : CompanyRepository
 
   constructor() {
-    const dep = new UserModule();
-    this.service = dep.getUserService();
+    this.devRepo = new DevRepository()
+    this.companyRepo = new CompanyRepository()
+
+    this.service = new UserService(this.devRepo, this.companyRepo);
   }
 
   list = (req: Request, res: Response) => {

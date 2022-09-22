@@ -1,12 +1,11 @@
 import { NextFunction, Request, Response } from "express";
-import errors from "../handler/errors.handler";
 import BadRequestResponse from "../Responses/BadRequestResponse";
 import * as jwt from "jsonwebtoken"
+import errors from "../../helpers/errors";
 
 const forbiddenResProps = {
     status : 403,
-    errorCode : errors.NOT_AUTHENTICATED.code,
-    errorMessage : errors.NOT_AUTHENTICATED.message
+    message : errors.NOT_AUTHENTICATED
 }
 
 const authMiddleware = (req : Request, res : Response, next : NextFunction) => {

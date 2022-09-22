@@ -3,14 +3,13 @@ import IResponse from "./IResponse";
 export default class BadRequestResponse implements IResponse  {
     status: number;
     hasError: boolean;
-    errorCode: string;
-    errorMessage: string | object | object[];
+    errors: any | any[];
+    message: string;
 
     constructor(props: IResponse) {
-    
-        this.status = props.status || 430;
-        this.hasError = true;
-        this.errorCode = props.errorCode;
-        this.errorMessage = props.errorMessage;
+        this.status = props.status | 400;
+        this.hasError = true
+        this.errors = props.errors;
+        this.message = props.message;
     }
 }

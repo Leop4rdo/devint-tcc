@@ -1,11 +1,16 @@
 import { MetadataAlreadyExistsError } from "typeorm";
-import IResponse from "../../../Responses/IResponse";
-import IEmailService, { EmailData } from "../abstract/IEmailService";
 import axios from "axios";
 import fs from "fs";
 import { error } from "console";
+import IResponse from "../../application/Responses/IResponse";
 
-export default class EmailService implements IEmailService {
+export type EmailData = {
+    to : string,
+    values ?: object
+    subject : string
+    body ?: string
+}
+export default class EmailService {
     async send(data: EmailData, template: string) {
         console.log('[INFO] sending email with template', template);
    

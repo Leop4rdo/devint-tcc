@@ -1,8 +1,7 @@
 export default interface IResponse {
     status? : number
     hasError? : boolean
-
-    errorCode?: string
-    errorMessage?: string | Object | Object[]
+    errors ?: any | any[]
+    message?: string 
     data?: any
 }

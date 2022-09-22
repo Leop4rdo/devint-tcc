@@ -19,9 +19,7 @@ export abstract class  AbstractService<T> {
                 data : await this.repo.list()
             })
         } catch (e) {
-            return new ServerErrorResponse({ 
-                errorMessage: e.errorMessage
-            })
+            return new ServerErrorResponse({ message : e.message })
         }
     }
 
@@ -31,9 +29,7 @@ export abstract class  AbstractService<T> {
                 data: await this.repo.findById(id)
             })
         } catch (e) {
-            return new ServerErrorResponse({ 
-                errorMessage: e.errorMessage
-            })
+            return new ServerErrorResponse({ message : e.message })
         }
     }
 
@@ -44,9 +40,7 @@ export abstract class  AbstractService<T> {
                 data: await this.repo.create(entity)
             })
         } catch (e) {
-            return new ServerErrorResponse({ 
-                errorMessage: e.errorMessage
-            })
+            return new ServerErrorResponse({ message : e.message })
         }
     }
 
@@ -55,16 +49,10 @@ export abstract class  AbstractService<T> {
 
             const entityExists = await this.repo.findById(id)
 
-            if (!entityExists) {
-                return new BadRequestResponse({
-                    errorMessage: errors.ENTITY_NOT_FOUND.message,
-                    errorCode: errors.ENTITY_NOT_FOUND.code
-                })
-            }
+            if (!entityExists) 
+                return new BadRequestResponse({ message: errors.ENTITY_NOT_FOUND })
 
-            for (const [key, value] of Object.entries(entity)) {
-                entityExists[key] = value
-            }
+            Object.assign(entityExists, entity)
 
             await this.repo.update(entityExists)
 
@@ -74,9 +62,7 @@ export abstract class  AbstractService<T> {
             })
 
         } catch (e) {
-            return new ServerErrorResponse({ 
-                errorMessage: e.errorMessage
-            })
+            return new ServerErrorResponse({ message : e.message })
         }
     }
 
@@ -84,12 +70,8 @@ export abstract class  AbstractService<T> {
         try {
             const entityExists = await this.repo.findById(id)
 
-            if (!entityExists) {
-                return new BadRequestResponse({
-                    errorMessage: errors.ENTITY_NOT_FOUND.message,
-                    errorCode: errors.ENTITY_NOT_FOUND.code
-                })
-            }
+            if (!entityExists) 
+                return new BadRequestResponse({ message: errors.ENTITY_NOT_FOUND })
 
             this.repo.remove(id);
 
@@ -99,9 +81,7 @@ export abstract class  AbstractService<T> {
                 }
             })
         } catch (e) {
-            return new ServerErrorResponse({ 
-                errorMessage: e.errorMessage
-            })
+            return new ServerErrorResponse({ message: e.message })
         }
     }
 }

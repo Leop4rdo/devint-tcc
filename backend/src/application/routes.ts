@@ -1,5 +1,4 @@
 import { Request, Response, Router } from "express";
-import BusinessLogicError from "./handler/BusinessLogicError ";
 import authMiddleware from "./middlewares/auth.middleware";
 import { publicUserRoutes } from "./routes/UserRoutes";
 

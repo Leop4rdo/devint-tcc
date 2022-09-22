@@ -1,12 +1,14 @@
 import { Request, Response } from "express";
-import CompanyRepository from "../../../src-old/infra/repositories/concrete/CompanyRepository";
 import AuthRepository from "../../adapters/database/repositories/AuthRepository";
+import CompanyRepository from "../../adapters/database/repositories/CompanyRepository";
 import DevRepository from "../../adapters/database/repositories/DevRepository";
 import PasswordResetTokenRepository from "../../adapters/database/repositories/PasswordResetTokenRepository";
 import EmailService from "../../adapters/mail/EmailService";
 import AuthService from "../../core/services/AuthService";
 import DevService from "../../core/services/DevService";
 import { IUserProps } from "../../interfaces/IUser";
+import LoginInput from "../../ports/input/user/LoginInput";
+import UserCreateInput from "../../ports/input/user/UserCreateInput";
 
 export default class AuthController {
     private authRepo : AuthRepository
@@ -29,13 +31,13 @@ export default class AuthController {
     }
 
     login = (req : Request, res : Response) => {
-        this.authService.login(new LoginRequestDTO(req.body))
+        this.authService.login(new LoginInput(req.body))
             .then((response) => res.status(response.status || 200).json(response))
             .catch((err) => res.status(err.status || 500).json(err))
     }
 
     create = (req : Request, res : Response) => {
-        this.authService.create(new UserCreateRequestDTO(req.body))
+        this.authService.create(new UserCreateInput(req.body))
             .then((_res) => res.status(_res.status || 200).json(_res))
             .catch((err) => res.status(err.status || 500).json(err))
     }
