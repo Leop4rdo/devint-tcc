@@ -4,7 +4,6 @@ import LoginWrapper from "../pages/public/LoginWrapper";
 import LandingPage from "../pages/public/Landing";
 import LoginPage from "../pages/public/Login";
 import RegisterPage from "../pages/public/Register";
-import Logo from "../components/shared/Logo";
 
 
 

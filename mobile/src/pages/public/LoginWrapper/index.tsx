@@ -6,7 +6,7 @@ import LoginFormStep1 from '../../../components/loginwrapper/forms/Step1'
 import LoginFormStep2 from '../../../components/loginwrapper/forms/Step2'
 import { useState } from 'react';
 
-const LandingPage: React.FC<IPageProps> = () => {
+const LandingPage: React.FC<IPageProps> = ({navigation}) => {
 
     const [currentStep, setCurrentStep] = useState(0);
       
@@ -37,7 +37,7 @@ const LandingPage: React.FC<IPageProps> = () => {
 
     return(
        <View style={styles.container}>
-            <Logo />
+            <Logo onPressIcon={onPreviousButtonPress}/>
             <View style={styles.containerTexts}>
                <Text style={styles.TextForgetPassword}>Esqueci minha senha</Text>
                <Text style={styles.TextinsertEmail}>{steps[currentStep].desc}</Text>
