@@ -66,9 +66,7 @@ export default class AuthService implements IAuthService {
     }
     
     async create(body: UserCreateRequestDTO): Promise<IResponse> {
-        const dtoValidationErrors = await body.validate()
-
-        if (dtoValidationErrors.length > 0) throw new BusinessLogicError(dtoValidationErrors)
+        await body.validate()
 
         if (await this.repo.findBy("email", body.email)){
             return new ServerErrorResponse({
@@ -84,11 +82,9 @@ export default class AuthService implements IAuthService {
 
         if (!auth) return new ServerErrorResponse({errorMessage : "Cannot create user auth", errorCode: "SE000"})
 
-        const user : any = (body.cnpj) ? 
-            await this.createCompany(body, auth)
-            : await this.createDev(body, auth);
+        const user : any = (body.cnpj) ? await this.createCompany(body, auth) : await this.createDev(body, auth);
 
-        if (user.hasError) {
+        if (user.hasError || !user) {
             await this.repo.remove(auth.id)
             return new ServerErrorResponse({errorMessage : "Cannot create user", errorCode: "SE000"})
         }
@@ -102,9 +98,7 @@ export default class AuthService implements IAuthService {
     }
 
     async login(body: LoginRequestDTO): Promise<IResponse> {
-        const dtoValidationErrors = await body.validate()
-
-        if (dtoValidationErrors.length > 0) throw new BusinessLogicError(dtoValidationErrors)
+        await body.validate()
 
         const auth = await this.repo.findBy("email", body.email);
 
@@ -121,13 +115,10 @@ export default class AuthService implements IAuthService {
         if (!isPasswordEquals)
             return new BadRequestResponse(forbiddenResponseProps);
 
-
         const user = (auth.role == userRoles.COMPANY) ?
             await this.companyRepo.findByAuthId(auth.id)
         :
             await this.devRepo.findByAuthId(auth.id)
-
-        
 
         if (!user) return new BadRequestResponse(forbiddenResponseProps);
 
@@ -158,9 +149,7 @@ export default class AuthService implements IAuthService {
             auth: _auth
         } as unknown as ICompanyProps)
 
-        const dtoValidationErrors = await body.validate()
-
-        if (dtoValidationErrors.length > 0) throw new BusinessLogicError(dtoValidationErrors)
+        await body.validate()
 
         return this.companyRepo.create(dto as unknown as CompanyEntity)
     }
@@ -174,14 +163,9 @@ export default class AuthService implements IAuthService {
             auth : _auth
         } as unknown as IDevProps)
 
-        console.log(`dev create dto :`, dto)
-
         const res = await this.devService.create(dto)
 
-        if (res.hasError) 
-            return res as BadRequestResponse
-        else 
-            return res.data
+        return (res.hasError) ? res as BadRequestResponse : res.data
     }
 
     async requestPasswordRecovery(email : string): Promise<IResponse> {
@@ -195,15 +179,18 @@ export default class AuthService implements IAuthService {
         
         const user = (auth.role == userRoles.COMPANY) ?
             await this.companyRepo.findByAuthId(auth.id)
-        :
-            await this.devRepo.findByAuthId(auth.id)
+            :await this.devRepo.findByAuthId(auth.id)
 
-        const token = this.generateToken()
+        if (!user) 
+            return new BadRequestResponse({
+                errorMessage : errors.ENTITY_NOT_FOUND.message,
+                errorCode: errors.ENTITY_NOT_FOUND.code
+            })
 
         const passResetToken = new PasswordResetTokenEntity();
-        passResetToken.token = await hash(token, 10)
+        passResetToken.token = this.generateToken()
         passResetToken.owner = auth;
-        passResetToken.expirationDate = new Date(Date.now() + 3600000);
+        passResetToken.expirationDate = Date.now() + 3600000;
 
         await this.passResetTokenRepo.create(passResetToken);
 
@@ -212,7 +199,7 @@ export default class AuthService implements IAuthService {
             subject : 'Recuperação de senha',
             values : {
                 USER : user.name,
-                LINK : `${process.env.FRONTEND_URL}/change-my-password?token=${token}`
+                LINK : `${process.env.FRONTEND_URL}/change-my-password/${passResetToken.token}`
             }
         }, EmailTemplates.PASSWORD_RECOVERY)
 
@@ -225,21 +212,19 @@ export default class AuthService implements IAuthService {
     }
 
     async changePassword(password, token) : Promise<IResponse>{
-        const hashedToken = await hash(token, 10)
-        const reqPassRecoveryToken = await this.passResetTokenRepo.findBy('token', hashedToken);
+        const passRecoveryToken = await this.passResetTokenRepo.findBy('token', token);
 
-        if (!reqPassRecoveryToken)
+        if (!passRecoveryToken || passRecoveryToken.expirationDate < Date.now())
             return new BadRequestResponse({
                 errorMessage : errors.ENTITY_NOT_FOUND.message,
                 errorCode: errors.ENTITY_NOT_FOUND.code
             })
+        
+        const updated = passRecoveryToken.owner
+        updated.password = await hash(password, 10)
+        await this.repo.update(updated)
 
-        await this.repo.update({
-            ...reqPassRecoveryToken.owner,
-            password : password
-        })
-
-        this.passResetTokenRepo.remove(reqPassRecoveryToken.id)
+        this.passResetTokenRepo.remove(passRecoveryToken.id)
            
         return new SuccessResponse({
             status : 200,
@@ -248,7 +233,6 @@ export default class AuthService implements IAuthService {
             }
         }) 
     }
-
 
     private generateToken() {
         const chars ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -261,10 +245,6 @@ export default class AuthService implements IAuthService {
 
         return token
     }
-
-
 }
-function changePassword(password: any, token: any) {
-    throw new Error("Function not implemented.")
-}
+
 

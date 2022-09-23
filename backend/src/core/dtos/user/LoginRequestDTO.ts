@@ -3,8 +3,9 @@ import BusinessLogicError from "../../../handler/BusinessLogicError ";
 import { IUserProps } from "../../interfaces/IUser";
 import ServerErrorResponse from "../../../Responses/ServerErrorResponse";
 import errors from "../../../handler/errors.handler";
+import DTO from "../DTO";
 
-export default class LoginRequestDTO {
+export default class LoginRequestDTO extends DTO {
   
   @IsEmail()	
   @IsNotEmpty()
@@ -15,21 +16,8 @@ export default class LoginRequestDTO {
   password: string;
 
   constructor(props: IUserProps) {
+    super()
     this.email = props.email;
     this.password = props.password;
-  }
-
-  async validate() {
-    const err = await validate(this);
-
-    if (err.length > 0){ 
-      return new ServerErrorResponse({
-        hasError: true,
-        errorCode : errors.BASE.code,
-        errorMessage : errors.BASE.message
-      })
-    }
-
-    return null
   }
 }
