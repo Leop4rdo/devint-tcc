@@ -5,21 +5,16 @@ import globalStyles from "../../../styles/global";
 import fonts from "../../../styles/typography";
 import { screenHeight, screenWidth } from "../../../styles/utils";
 
-const styles = StyleSheet.create({
-    containerRegister : {
+export default StyleSheet.create({
+    container : {
         backgroundColor : colors.DARK_GRAY,
         width: '100%',
         height: '100%',
         display: 'flex',
-       
-    },
-
-    containerRegisterForm:{
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center', 
+        alignItems: 'center',
     },
-
     logo : {
         fontSize: 32,
         color: colors.WHITE,
@@ -53,5 +48,3 @@ const styles = StyleSheet.create({
     }
 
 })
-
-export default styles

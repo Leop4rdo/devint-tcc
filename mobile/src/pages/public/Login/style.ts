@@ -8,13 +8,12 @@ const styles = StyleSheet.create({
     page : {
         height : '100%',
         width : '100%',
-        paddingVertical: 56,
-        paddingHorizontal: 24,
+       
 
         backgroundColor : colors.DARK_GRAY,
 
-        alignItems : 'center',
-        justifyContent: "space-between"
+        
+       
     },
 
     title : {
@@ -36,6 +35,11 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginTop : 24,
         color : colors.RED
+    },
+
+    ContainerLogin:{
+        paddingVertical: 56,
+        paddingHorizontal: 24,
     }
 })
 
