@@ -3,12 +3,11 @@ import { useContext, useState } from 'react';
 import {View, Text, TextInput, TouchableOpacity} from 'react-native';
 import ButtonComponent from '../../../components/shared/Button';
 import FeedbackTextInput from '../../../components/shared/FeedbackInput';
-import Logo from '../../../components/shared/Logo';
+import Header from '../../../components/shared/Header/index';
 import { AuthContext } from '../../../store/context/Auth.context';
 import globalStyles from '../../../styles/global';
 import { isEmail, isEmpty } from '../../../utils/validation';
 import styles from './style'
-
 
 
 const LoginPage : React.FC<any> = ({navigation}) => {
@@ -40,7 +39,7 @@ const LoginPage : React.FC<any> = ({navigation}) => {
 
     return (
         <View style={styles.page}>
-           <Logo/>
+           <Header showIcon={false} onPressIcon={() => navigation.navigate('landing')}/>
             <View style={styles.ContainerLogin}>
                 <Text style={styles.title}>Entrar</Text>
 

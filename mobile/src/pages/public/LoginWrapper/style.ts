@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
 
     containerTexts:{
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
     },
 
     TextForgetPassword:{
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     TextinsertEmail:{
         color: colors.WHITE,
         fontSize:16,
-        marginBottom: 100,
+        marginBottom: 80,
         textAlign: 'center',
         width: 300
     },
@@ -50,17 +50,6 @@ const styles = StyleSheet.create({
         marginTop: 50
         
     },
-
-    warning : {
-        ...globalStyles.text,
-        textAlign: 'center',
-        marginTop : 24,
-        color : colors.RED
-    },
-
-
-
-
 
 })
 

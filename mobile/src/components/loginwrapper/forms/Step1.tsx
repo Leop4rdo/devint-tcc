@@ -1,4 +1,4 @@
-import { View , Text } from "react-native"
+import { View , Text, Alert } from "react-native"
 import FeedbackTextInput from '../../../components/shared/FeedbackInput';
 import ButtonComponent from '../../../components/shared/Button';
 import { useState , useContext} from 'react';
@@ -27,7 +27,7 @@ const LoginFormStep1 :  React.FC<ILoginFormProps> = ({styles, onClickStep }) => 
 
     const onSubmit = () => {
         if(!isEmail(formValues.email)){
-            return setWarning("Confira se os campos foram preenchidos corretamente!")
+            return alert("Confira se os campos foram preenchidos corretamente!")
         }
         else{
             onClickStep()
@@ -47,7 +47,6 @@ const LoginFormStep1 :  React.FC<ILoginFormProps> = ({styles, onClickStep }) => 
                  placeholder="E-mail" 
                  validate={() => isEmail(formValues.email)}
                />
-               <Text style={styles.warning}>{warning}</Text>
                 <ButtonComponent text='Proximo' onPress={onSubmit} />
            </View>
         </View>
