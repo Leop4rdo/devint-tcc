@@ -24,7 +24,7 @@
     color: $color-white;
     font-size: 125%;
 
-    transition: color .5s ease-out;
+    transition: color .25s ease-out;
   }
 
   &:focus-within,
@@ -58,7 +58,7 @@
     width: 100%;
 
     ::placeholder {
-      color: $color-primary;
+      color: $color-gray;
     }
   }
 }

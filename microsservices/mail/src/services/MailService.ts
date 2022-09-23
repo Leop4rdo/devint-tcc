@@ -26,7 +26,7 @@ const processTemplate = (values : Object, template : String) => {
     let proccessedTemplate = template;
 
     valueEntries.forEach(([key, value]) => {
-        proccessedTemplate = proccessedTemplate.replace(key, value)
+        proccessedTemplate = proccessedTemplate.replace('${'+key+'}', value)
     })
 
     return proccessedTemplate;

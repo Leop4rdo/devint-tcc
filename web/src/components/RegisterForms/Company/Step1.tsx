@@ -20,7 +20,7 @@ const CompanyForm1: React.FC<IForm1Props> = ({ onSubmit, formData, onChange }) =
 
             <Input icon="mail" type="text" placeholder="E-mail" name="email" onChange={onChange} value={formData.email} validate={() => isValidEmail(formData.email)} />
 
-            <Input icon="badge" type="text" placeholder="CNPJ" name="cnpj" onChange={onChange} value={cnpjMask(formData.cnpj)} validate={() => !isEmpty(formData.cnpj)} />
+            <Input icon="badge" type="text" placeholder="CNPJ" name="cnpj" onChange={onChange} maxLength={18} value={cnpjMask(formData.cnpj)} validate={() => !isEmpty(formData.cnpj)} />
 
         </form>
     )

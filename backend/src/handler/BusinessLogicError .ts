@@ -1,15 +1,14 @@
-import errors from "./errors.handler";
 import IResponse from "../Responses/IResponse";
 
 export default class BusinessLogicError extends Error {
-  errorCode: string;
-  status: number;
-  message: string;
+  message : string;
+  status : number
+  errors : any 
 
-  constructor(props: IResponse) {
-    super(props.errorMessage);
-    this.errorCode = props.errorCode;
-    this.status = 400;
+  constructor(data, message ?: string, status ?: number) {
+    super(message || "")
+    this.message = message || ""
+    this.status = status || 400;
+    this.errors = data
   }
-  
 }

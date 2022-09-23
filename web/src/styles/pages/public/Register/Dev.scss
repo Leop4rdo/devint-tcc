@@ -26,7 +26,7 @@
         margin-left: clamp( 6rem, 6vw , 5.1rem);
       }
 
-      button{
+      button {
         border: none;
         background-color: transparent;  
         width: 0px;
@@ -35,12 +35,8 @@
           font-size: clamp( 2.3rem , 4vw , 3rem);
           margin-top: clamp( 1.9rem , 4vw , 3rem);
         }
-        .icon:hover{
-          cursor: pointer;
-          transform: scale(1.1);
-        }
       }
-  
+
     }
 
    
@@ -52,7 +48,7 @@
     height: 100%;
     display: flex;
     justify-content: center;
-    background-image: url("../../../../../../public/assets/images/wave-vertical.png");
+    background-image: url("../../../../../public/assets/images/wave-vertical.png");
     background-size: clamp(40px, 10vw, 320px) 100%;
     background-repeat: no-repeat;
 

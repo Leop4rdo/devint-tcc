@@ -32,7 +32,7 @@ export default class AuthRepository implements IAuthRepository {
     };
 
     update = async (entity: AuthEntity) => {
-        return await this.db.update(entity);
+        return await this.db.save(entity);
     };
 
     async remove(id:string) { return await this.db.delete({id})}

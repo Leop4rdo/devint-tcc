@@ -1,50 +1,55 @@
-import { compare, hash } from "bcrypt";
+import { hash, compare } from "bcrypt";
+import * as jwt from "jsonwebtoken";
+import BusinessLogicError from "../../../handler/BusinessLogicError ";
 import errors from "../../../handler/errors.handler";
 import IAuthRepository from "../../../infra/repositories/abstract/IAuthRepository";
+import ICompanyRepository from "../../../infra/repositories/abstract/ICompanyRepository";
+import IDevRepository from "../../../infra/repositories/abstract/IDevRepository";
 import IRepository from "../../../infra/repositories/abstract/IRepository";
-import CompanyRepository from "../../../infra/repositories/concrete/CompanyRepository";
 import BadRequestResponse from "../../../Responses/BadRequestResponse";
 import IResponse from "../../../Responses/IResponse";
-import SuccessResponse from "../../../Responses/SuccessResponse";
-import LoginRequestDTO from "../../dtos/user/LoginRequestDTO";
-import UserDTO from "../../dtos/user/UserDTO";
-import DevEntity from "../../entities/DevEntity";
-import { IUserProps, userRoles } from "../../interfaces/IUser";
-import IAuthService from "../abstract/IAuthService";
-
-import * as jwt from "jsonwebtoken";
-import UserCreateRequestDTO from "../../dtos/user/UserCreateRequestDTO";
-import CompanyEntity from "../../entities/CompanyEntity";
 import ServerErrorResponse from "../../../Responses/ServerErrorResponse";
-import AuthEntity from "../../entities/AuthEntity";
-import IDevProps from "../../interfaces/IDev";
-import DevCreateRequestDTO from "../../dtos/user/dev/DevCreateRequestDTO";
+import SuccessResponse from "../../../Responses/SuccessResponse";
 import CompanyCreateRequestDTO from "../../dtos/user/company/CompanyCreateRequestDTO";
-import ICompanyProps from "../../interfaces/ICompany";
-import BusinessLogicError from "../../../handler/BusinessLogicError ";
 import { CompanyResponseDTO } from "../../dtos/user/company/CompanyResponseDTO";
+import DevCreateRequestDTO from "../../dtos/user/dev/DevCreateRequestDTO";
 import DevResponseDTO from "../../dtos/user/dev/DevResponseDTO";
-import IDevRepository from "../../../infra/repositories/abstract/IDevRepository";
-import ICompanyRepository from "../../../infra/repositories/abstract/ICompanyRepository";
-import DevService from "./DevService";
-import IService from "../abstract/IService";
+import LoginRequestDTO from "../../dtos/user/LoginRequestDTO";
+import UserCreateRequestDTO from "../../dtos/user/UserCreateRequestDTO";
+import UserDTO from "../../dtos/user/UserDTO";
+import AuthEntity from "../../entities/AuthEntity";
+import CompanyEntity from "../../entities/CompanyEntity";
+import DevEntity from "../../entities/DevEntity";
+import PasswordResetTokenEntity from "../../entities/PasswordResetTokenEntity";
+import ICompanyProps from "../../interfaces/ICompany";
+import IDevProps from "../../interfaces/IDev";
+import { userRoles, IUserProps } from "../../interfaces/IUser";
+import IAuthService from "../abstract/IAuthService";
 import { IDevService } from "../abstract/IDevService";
+import IEmailService from "../abstract/IEmailService";
+import { EmailTemplates } from "./EmailService";
 
 
 export default class AuthService implements IAuthService {
     private repo : IAuthRepository
     private devRepo : IDevRepository
     private companyRepo : ICompanyRepository
+    private passResetTokenRepo : IRepository<PasswordResetTokenEntity>
+    private emailService : IEmailService
     private devService : IDevService
 
     constructor(
         repo : IAuthRepository, 
         devRepo : IDevRepository, 
         companyRepo : ICompanyRepository,
+        passResetTokenRepo : IRepository<PasswordResetTokenEntity>,
+        emailService : IEmailService,
         devService : IDevService) { 
             this.repo = repo; 
             this.companyRepo = companyRepo;
             this.devRepo = devRepo;
+            this.passResetTokenRepo = passResetTokenRepo;
+            this.emailService = emailService;
             this.devService = devService;
     }
 
@@ -61,12 +66,7 @@ export default class AuthService implements IAuthService {
     }
     
     async create(body: UserCreateRequestDTO): Promise<IResponse> {
-        const dtoValidateRes = await body.validate()
-
-        if (dtoValidateRes) return new BadRequestResponse({
-            errorCode : errors.INVALID_DATA.code,
-            errorMessage : errors.INVALID_DATA.message
-        })
+        await body.validate()
 
         if (await this.repo.findBy("email", body.email)){
             return new ServerErrorResponse({
@@ -82,11 +82,9 @@ export default class AuthService implements IAuthService {
 
         if (!auth) return new ServerErrorResponse({errorMessage : "Cannot create user auth", errorCode: "SE000"})
 
-        const user : any = (body.cnpj) ? 
-            await this.createCompany(body, auth)
-            : await this.createDev(body, auth);
+        const user : any = (body.cnpj) ? await this.createCompany(body, auth) : await this.createDev(body, auth);
 
-        if (user.hasError) {
+        if (user.hasError || !user) {
             await this.repo.remove(auth.id)
             return new ServerErrorResponse({errorMessage : "Cannot create user", errorCode: "SE000"})
         }
@@ -100,8 +98,7 @@ export default class AuthService implements IAuthService {
     }
 
     async login(body: LoginRequestDTO): Promise<IResponse> {
-        const dtoValidateRes = await body.validate()
-        if (dtoValidateRes) return dtoValidateRes
+        await body.validate()
 
         const auth = await this.repo.findBy("email", body.email);
 
@@ -118,13 +115,10 @@ export default class AuthService implements IAuthService {
         if (!isPasswordEquals)
             return new BadRequestResponse(forbiddenResponseProps);
 
-
         const user = (auth.role == userRoles.COMPANY) ?
             await this.companyRepo.findByAuthId(auth.id)
         :
             await this.devRepo.findByAuthId(auth.id)
-
-        
 
         if (!user) return new BadRequestResponse(forbiddenResponseProps);
 
@@ -155,12 +149,7 @@ export default class AuthService implements IAuthService {
             auth: _auth
         } as unknown as ICompanyProps)
 
-        const dtoValidateRes = await dto.validate()
-
-        if (dtoValidateRes) return new BadRequestResponse({
-            errorCode : errors.INVALID_DATA.code,
-            errorMessage : errors.INVALID_DATA.message
-        })
+        await body.validate()
 
         return this.companyRepo.create(dto as unknown as CompanyEntity)
     }
@@ -174,13 +163,88 @@ export default class AuthService implements IAuthService {
             auth : _auth
         } as unknown as IDevProps)
 
-        console.log(`dev create dto :`, dto)
-
         const res = await this.devService.create(dto)
 
-        if (res.hasError) 
-            return res as BadRequestResponse
-        else 
-            return res.data
+        return (res.hasError) ? res as BadRequestResponse : res.data
+    }
+
+    async requestPasswordRecovery(email : string): Promise<IResponse> {
+        const auth = await this.repo.findBy('email', email)
+        
+        if (!auth || auth.enabled == 0) 
+            return new BadRequestResponse({
+                errorMessage : errors.ENTITY_NOT_FOUND.message,
+                errorCode: errors.ENTITY_NOT_FOUND.code
+            })
+        
+        const user = (auth.role == userRoles.COMPANY) ?
+            await this.companyRepo.findByAuthId(auth.id)
+            :await this.devRepo.findByAuthId(auth.id)
+
+        if (!user) 
+            return new BadRequestResponse({
+                errorMessage : errors.ENTITY_NOT_FOUND.message,
+                errorCode: errors.ENTITY_NOT_FOUND.code
+            })
+
+        const passResetToken = new PasswordResetTokenEntity();
+        passResetToken.token = this.generateToken()
+        passResetToken.owner = auth;
+        passResetToken.expirationDate = Date.now() + 3600000;
+
+        await this.passResetTokenRepo.create(passResetToken);
+
+        await this.emailService.send({
+            to : auth.email,
+            subject : 'Recuperação de senha',
+            values : {
+                USER : user.name,
+                LINK : `${process.env.FRONTEND_URL}/change-my-password/${passResetToken.token}`
+            }
+        }, EmailTemplates.PASSWORD_RECOVERY)
+
+        return new SuccessResponse({
+            status : 200,
+            data : {
+                message : 'Success'
+            }
+        })
+    }
+
+    async changePassword(password, token) : Promise<IResponse>{
+        const passRecoveryToken = await this.passResetTokenRepo.findBy('token', token);
+
+        if (!passRecoveryToken || passRecoveryToken.expirationDate < Date.now())
+            return new BadRequestResponse({
+                errorMessage : errors.ENTITY_NOT_FOUND.message,
+                errorCode: errors.ENTITY_NOT_FOUND.code
+            })
+        
+        const updated = passRecoveryToken.owner
+        updated.password = await hash(password, 10)
+        await this.repo.update(updated)
+
+        this.passResetTokenRepo.remove(passRecoveryToken.id)
+           
+        return new SuccessResponse({
+            status : 200,
+            data : {
+                message : 'Success'
+            }
+        }) 
+    }
+
+    private generateToken() {
+        const chars ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+        let token = ""
+
+        for (let i = 0; i < 32; i++) {
+            token += chars.charAt(Math.floor(Math.random() * chars.length))
+        }
+
+        return token
     }
 }
+
+

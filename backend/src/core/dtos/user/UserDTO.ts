@@ -1,7 +1,8 @@
 import { Timestamp } from "typeorm"
 import { IUserProps, userRoles } from "../../interfaces/IUser"
+import DTO from "../DTO"
 
-export default class UserDTO {
+export default class UserDTO extends DTO{
     id : string
     name : string
     following : JSON
@@ -11,6 +12,7 @@ export default class UserDTO {
     updatedAt : Timestamp
 
     constructor(props : IUserProps) {
+        super()
         this.id = props.id
         this.name = props.name
         this.following = props.following

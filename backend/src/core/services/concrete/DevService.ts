@@ -31,33 +31,18 @@ export default class DevService implements IDevService {
     }
 
     async create(body: DevCreateRequestDTO): Promise<IResponse> {
-        const dtoValidateRes = await body.validate()
+        await body.validate()
 
-        console.log(body.auth)
-        
+        const dev = await this.repo.create(body as unknown as DevEntity)
 
-        if (dtoValidateRes) return new BadRequestResponse({
-            errorCode : errors.INVALID_DATA.code,
-            errorMessage : errors.INVALID_DATA.message
-        })  
+        const res = new SuccessResponse({
+            status: 201,
+            data: dev
+        })
 
-        try {
-            const dev = await this.repo.create(body as unknown as DevEntity)
+        this.populateProfile(dev.githubUsername, dev.id)
 
-            const res = new SuccessResponse({
-                status: 201,
-                data: dev
-            })
-    
-            this.populateProfile(dev.githubUsername, dev.id)
-
-            return res
-
-        } catch (err) {
-            return new ServerErrorResponse({ 
-                errorMessage: err.message
-            })
-        }
+        return res
     }
     
     private async populateProfile(githubUsername : string, id : string) {

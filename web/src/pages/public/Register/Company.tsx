@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CompanyForm1 from "components/RegisterForms/Company/Step1";
 import CompanyForm2 from "components/RegisterForms/Company/Step2";
 import { isValidEmail } from "utils/validations";
-import { register } from "services/auth.service";
 import * as AuthService from "services/auth.service";
 import { AuthContext } from "store/context/Auth.context";
 import Button from "components/shared/Button";
@@ -12,6 +11,9 @@ import Icon from "components/shared/Icon";
 
 
 const CompanyRegistrationPage: React.FC = () => {
+    const navigate = useNavigate()
+
+    const authContext = useContext(AuthContext)
 
     const [formValues, setFormValues] = useState({
         name: "",
@@ -43,7 +45,7 @@ const CompanyRegistrationPage: React.FC = () => {
 
             if (formValues.name.length < 3) return false;
 
-            if (formValues.cnpj.length < 14) return false;
+            if (formValues.cnpj.length < 18) return false;
         }
 
         if (currentStep == 1) {
@@ -64,21 +66,21 @@ const CompanyRegistrationPage: React.FC = () => {
 
     const onConfirmButtonPress = () => {
 
-        if (!isFormValid()) {
+        console.log(formValues);
+        
+
+        if (!isFormValid()) 
             return alert("Por favor, verifique se os dados estão corretos!")
-        }
-
-        if (currentStep >= steps.length - 1)
-            return
-        else
+        
+        if (currentStep < steps.length -1)
             setCurrentStep(currentStep + 1)
-
-        register()
+        else
+            register()
     }
 
     const register = async () => {
 
-       /*  const body = {
+        const body = {
             name: formValues.name,
             email: formValues.email,
             cnpj: formValues.cnpj,
@@ -92,14 +94,15 @@ const CompanyRegistrationPage: React.FC = () => {
         if (res.hasError)
             return alert("Por favor, verifique se os dados estão corretos!")
 
-        //AuthContext?.signIn(body.email, body.password);    */ 
+        authContext?.signIn(body.email, body.password); 
 
     }
 
     const onPreviousButtonPress = () => {
-
-        if (currentStep >= 1) {
+        if (currentStep > 0 && currentStep < steps.length) {
             setCurrentStep(currentStep - 1)
+        } else {
+            navigate("/register")
         }
     }
 
@@ -110,7 +113,9 @@ const CompanyRegistrationPage: React.FC = () => {
 
                 <div className="company-user">
 
-                    <Button children={(currentStep >= steps.length - 1) ? <Icon name="arrow_back" /> : [<Link to={'/register'}><Icon name="arrow_back" /></Link>]} onClick={onPreviousButtonPress} ></Button>
+                <Button onClick={onPreviousButtonPress} >
+                    <Icon name="arrow_back" />
+                </Button>
 
                     <h2>Sou empresa</h2>
 

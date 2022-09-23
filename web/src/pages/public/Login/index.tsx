@@ -40,7 +40,7 @@ const LoginPage: React.FC = () => {
                     <Input icon="lock" placeholder={"Senha"} name="password" type="password" onChange={handleChange}/>
                     <Link  to='/forgot-my-password'>Esqueci minha senha</Link>
 
-                    <button className="register-button btn-secondary">LOGIN</button>
+                    <button className="register-button btn-primary" onClick={login}>LOGIN</button>
 
                     <p>ou</p>
 
