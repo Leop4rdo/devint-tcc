@@ -7,10 +7,10 @@ import { AuthContext } from '../../../store/context/Auth.context';
 
  interface ILoginFormProps {
     styles : any,
-    onClick?: any
+    onClickStep?: any
 }
 
-const LoginFormStep1 :  React.FC<ILoginFormProps> = ({styles, onClick }) => {
+const LoginFormStep1 :  React.FC<ILoginFormProps> = ({styles, onClickStep }) => {
     
     const [warning, setWarning] = useState("")
 
@@ -26,8 +26,14 @@ const LoginFormStep1 :  React.FC<ILoginFormProps> = ({styles, onClick }) => {
     }
 
     const onSubmit = () => {
-        if(!isEmail(formValues.email)) 
+        if(!isEmail(formValues.email)){
             return setWarning("Confira se os campos foram preenchidos corretamente!")
+        }
+        else{
+            onClickStep()
+        } 
+            
+
     }
 
 

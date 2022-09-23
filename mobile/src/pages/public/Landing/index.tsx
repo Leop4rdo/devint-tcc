@@ -10,7 +10,7 @@ const LandingPage: React.FC<IPageProps> = ({ navigation }) => {
 
         <View style={styles.container}>
             
-        <Logo />
+        <Logo styleIcon="Iconinvisible"/>
 
             <View>
                 <View>

@@ -10,18 +10,18 @@ const styles = StyleSheet.create({
         display: 'flex',
         height: 100,
         flexDirection: "row",
-        justifyContent: 'center',
+        justifyContent:"center",
         alignItems: 'center',
         backgroundColor: colors.LIGHT_PURPLE,
-        marginBottom: -8   
+        marginBottom: -8,
     },
     logoSymbols: {
         fontSize: 50,
         color: colors.BLACK,
         marginTop:22,
-        fontFamily: fonts.POPPINS_MEDIUM
-       
+        fontFamily: fonts.POPPINS_MEDIUM,
     },
+
     logo: {
         fontSize: 40,
         color: colors.WHITE,
@@ -31,21 +31,35 @@ const styles = StyleSheet.create({
         marginTop: 30
         
     },
+
     containerImage: {
         flexBasis: 110,
         display: 'flex',
         width: '100%',
-        
-        
-        
     },
+
     horizontalWaveLogin:{
         flex: 1,
-        height: 60,
-        
-        
+        height: 60,  
+    },
+
+    IconVisible:{
+        fontSize: 40,
+        color: colors.WHITE,
+        marginTop:16,
+        marginRight:54,
+        marginLeft:-64
+         
+    },
+
+    Iconinvisible:{
+        color: 'transparent',
+        with:0,
+        height:0
     }
 
+    
+    
 })
 
 export default styles

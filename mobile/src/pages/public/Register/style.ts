@@ -6,15 +6,20 @@ import fonts from "../../../styles/typography";
 import { screenHeight, screenWidth } from "../../../styles/utils";
 
 export default StyleSheet.create({
-    container : {
+    containerRegister : {
         backgroundColor : colors.DARK_GRAY,
         width: '100%',
         height: '100%',
         display: 'flex',
+       
+    },
+
+    containerRegisterForm:{
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'center', 
     },
+
     logo : {
         fontSize: 32,
         color: colors.WHITE,

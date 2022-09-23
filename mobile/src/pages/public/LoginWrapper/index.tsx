@@ -2,8 +2,8 @@ import {View, Text, TextInput} from 'react-native';
 import Logo from '../../../components/shared/Logo';
 import { IPageProps } from "../../../navigators"
 import styles from './style'
-import LoginFormStep1 from '../../../components/login/forms/Step1'
-import LoginFormStep2 from '../../../components/login/forms/Step2'
+import LoginFormStep1 from '../../../components/loginwrapper/forms/Step1'
+import LoginFormStep2 from '../../../components/loginwrapper/forms/Step2'
 import { useState } from 'react';
 
 const LandingPage: React.FC<IPageProps> = () => {
@@ -26,11 +26,11 @@ const LandingPage: React.FC<IPageProps> = () => {
         const steps = [
             {
                 desc: 'Por favor insira seu email',
-                component: <LoginFormStep1 styles={styles} onClick={onConfirmButtonPress} />
+                component: <LoginFormStep1 styles={styles} onClickStep={onConfirmButtonPress} />
             },
             {
                 desc: 'Acesse seu e-mail e entre diretamente pelo link enviado',
-                component: <LoginFormStep2 styles={styles} onClick={onPreviousButtonPress} />
+                component: <LoginFormStep2 styles={styles} onClickStep={onPreviousButtonPress} />
             },
 
         ]
