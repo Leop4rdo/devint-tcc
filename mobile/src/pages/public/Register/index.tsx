@@ -9,9 +9,10 @@ import { useContext, useState } from "react";
 import { isEmail, isEmpty, isValidDate } from "../../../utils/validation";
 import * as AuthService from "../../../services/auth.service";
 import { AuthContext } from "../../../store/context/Auth.context";
-import Logo from "../../../components/shared/Logo";
+import Header from "../../../components/shared/Header";
+import { IPageProps } from "../../../navigators"
 
-const RegisterPage: React.FC = () => {
+const RegisterPage: React.FC<IPageProps> = ({navigation}) => {
     const authContext = useContext(AuthContext)
 
     const [formValues, setFormValues] = useState({
@@ -78,6 +79,13 @@ const RegisterPage: React.FC = () => {
         register()
     }
 
+    const onPreviousButtonPress = () => {
+
+        if (currentStep >= 1) {
+            setCurrentStep(currentStep - 1)
+        }
+    }
+
     const register = async () => {
         const birthdayAsArray = formValues.birthday.split('/')
         const birthday = [birthdayAsArray[2], birthdayAsArray[1], birthdayAsArray[0]].join('/')
@@ -100,7 +108,7 @@ const RegisterPage: React.FC = () => {
 
     return (
         <View style={styles.containerRegister}>
-            <Logo />
+            <Header showIcon={false} onPressIcon={currentStep >= 1 ? onPreviousButtonPress : () => navigation.navigate('landing')}/>
 
             <View style={styles.containerRegisterForm}>
                 <Text style={styles.signUp}>Cadastre-se</Text>

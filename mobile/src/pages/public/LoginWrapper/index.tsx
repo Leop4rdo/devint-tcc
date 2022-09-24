@@ -1,5 +1,5 @@
 import {View, Text, TextInput} from 'react-native';
-import Logo from '../../../components/shared/Logo';
+import Header from '../../../components/shared/Header';
 import { IPageProps } from "../../../navigators"
 import styles from './style'
 import LoginFormStep1 from '../../../components/loginwrapper/forms/Step1'
@@ -37,7 +37,7 @@ const LandingPage: React.FC<IPageProps> = ({navigation}) => {
 
     return(
        <View style={styles.container}>
-            <Logo onPressIcon={onPreviousButtonPress}/>
+            <Header showIcon={false} onPressIcon={ currentStep >=1 ? onPreviousButtonPress : () => navigation.navigate('login') }/>
             <View style={styles.containerTexts}>
                <Text style={styles.TextForgetPassword}>Esqueci minha senha</Text>
                <Text style={styles.TextinsertEmail}>{steps[currentStep].desc}</Text>
