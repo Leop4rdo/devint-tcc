@@ -11,7 +11,7 @@ interface IButtonProps {
     textStyle? : object | object[]
     icon? : keyof typeof MaterialIcons.glyphMap 
     iconSize? : number,
-    iconColor? : string
+    iconColor? : string,
     text? : string,
 }
 
