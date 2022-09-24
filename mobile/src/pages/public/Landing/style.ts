@@ -1,9 +1,6 @@
-
 import { StyleSheet } from "react-native";
 import colors from "../../../styles/colors";
-
 import fonts from "../../../styles/typography";
-
 
 export default StyleSheet.create({
     container: {
@@ -16,7 +13,7 @@ export default StyleSheet.create({
    
     textWelcome: {
         fontSize: 40,
-        color: colors.LIGHT_PURPLE,
+        color: colors.PRIMARY,
         textAlign: 'center',
         marginBottom: 75,
         fontFamily: fonts.POPPINS_SEMIBOLD
@@ -34,8 +31,4 @@ export default StyleSheet.create({
         display: 'flex',
         alignItems: 'center'
     },
-
-   
-
-
 })

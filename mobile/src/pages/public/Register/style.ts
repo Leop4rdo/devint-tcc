@@ -5,7 +5,7 @@ import globalStyles from "../../../styles/global";
 import fonts from "../../../styles/typography";
 import { screenHeight, screenWidth } from "../../../styles/utils";
 
-export default StyleSheet.create({
+const styles = StyleSheet.create({
     containerRegister : {
         backgroundColor : colors.DARK_GRAY,
         width: '100%',
@@ -53,3 +53,5 @@ export default StyleSheet.create({
     }
 
 })
+
+export default styles
