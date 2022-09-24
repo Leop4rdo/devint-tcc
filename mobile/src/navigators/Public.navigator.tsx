@@ -1,6 +1,6 @@
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import React from "react";
-import LoginWrapper from "../pages/public/LoginWrapper";
+import LoginWrapper from "../pages/public/ForgotMyPassword";
 import LandingPage from "../pages/public/Landing";
 import LoginPage from "../pages/public/Login";
 import RegisterPage from "../pages/public/Register";

@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     signUp: {
         ...globalStyles.text,
         fontFamily: fonts.POPPINS_BOLD,
-        color: colors.LIGHT_PURPLE,
+        color: colors.PRIMARY,
         fontSize: 32,
         marginBottom: 40
     },
