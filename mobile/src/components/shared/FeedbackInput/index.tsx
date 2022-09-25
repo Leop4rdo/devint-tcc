@@ -13,7 +13,7 @@ interface IFeedbackTextInput {
     style? : any
     icon? : keyof typeof MaterialIcons.glyphMap
     iconSize? : number
-    keyboardType ?: "default" | "numeric" | "email-address"
+    keyboardType ?: "default" | "numeric" | "email-address" | "user"
     onChangeText : (text : string) => void
     value?: string
     validate? : () => boolean

@@ -6,15 +6,15 @@ import { Children, PropsWithChildren, useState } from "react";
 import colors from '../../../styles/colors';
 import styles from './style';
 
-interface IPickerProps extends PropsWithChildren{
+interface IPickerProps extends PropsWithChildren {
     icon?: keyof typeof MaterialIcons.glyphMap,
     iconSize?: number,
     iconColor?: string,
-    value ?: string
-    onChange ?: (value : string) => void 
+    value?: string,
+    onChange?: (value: string) => void
 }
 
-const PickerComponent: React.FC<IPickerProps> = ({icon, iconSize, iconColor, children, onChange, value}) => {
+const PickerComponent: React.FC<IPickerProps> = ({ icon, iconSize, iconColor, children, onChange, value }) => {
 
     const getIconColor = () => (iconColor) ? iconColor : colors.PRIMARY
 
