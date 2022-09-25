@@ -1,20 +1,20 @@
+
 import { StyleSheet } from "react-native";
 import colors from "../../../styles/colors";
 import globalStyles from "../../../styles/global";
 import fonts from "../../../styles/typography";
 
 const styles = StyleSheet.create({
-
     containerLogo:{
         width: '100%',
         display: 'flex',
         height: 100,
         flexDirection: "row",
+      
         alignItems: 'center',
         backgroundColor: colors.LIGHT_PURPLE,
         marginBottom: -8,
     },
-
     logoSymbols: {
         fontSize: 50,
         color: colors.BLACK,
@@ -32,9 +32,35 @@ const styles = StyleSheet.create({
         
     },
 
+    containerImage: {
+        flexBasis: 110,
+        display: 'flex',
+        width: '100%',
+    },
 
+    horizontalWaveLogin:{
+        flex: 1,
+        height: 60,  
+    },
 
+    IconVisible:{
+        fontSize: 40,
+        color: colors.WHITE,
+        marginTop:16,
+        marginRight:54,
+        marginLeft: 15
+         
+    },
+
+    Iconinvisible:{
+        color: 'transparent',
+        marginLeft: 94,
+        with:0,
+        height:0
+    },
+
+    
+    
 })
 
 export default styles
-
