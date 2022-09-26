@@ -39,5 +39,6 @@ export default class EmailService {
 }
 
 export const EmailTemplates = {
-    PASSWORD_RECOVERY : 'res/email/password-recovery.html'
+    PASSWORD_RECOVERY : 'res/email/password-recovery.html',
+    EMAIL_CONFIRM : 'res/email/email-confirm.html'
 }
