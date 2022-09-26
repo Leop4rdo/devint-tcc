@@ -16,10 +16,12 @@ export const auth = async (body : IAuthRequestBody) : Promise<IResponse> => {
 }
 
 interface IRegisterRequestBody {
-    name : string,
-    password : string,
-    email : string,
-    birthday : string
+    name: string,
+    email: string,
+    birthday: string,
+    githubUsername: string,
+    gender : string,
+    password: string,
 }
 
 export const register = async (body : IRegisterRequestBody) => {
@@ -30,6 +32,36 @@ export const register = async (body : IRegisterRequestBody) => {
     } catch (err : any) {
         console.log(err.response.data)
         console.log("error endpoint: /users")
+        return err.response.data as IResponse
+    }
+}
+
+export const requestPasswordRecovery = async (email : string) => {
+    try {
+        const { data } = await api.post("request-password-recovery", {email : email})
+
+        return data as IResponse
+    } catch (err : any) {
+        console.log(err)
+        console.log("error endpoint: /request-password-recovery")
+        return err.response.data as IResponse
+    }
+}
+
+interface IChangePasswordRequestBody {
+    password : string,
+    token : string
+}
+
+export const changePassword = async (body : IChangePasswordRequestBody) => {
+    try {
+        const { data } = await api.patch("change-password", body)
+        console.log(data)
+
+        return data as IResponse
+    } catch (err : any) {
+        console.log(err)
+        console.log("error endpoint: /change-password")
         return err.response.data as IResponse
     }
 }

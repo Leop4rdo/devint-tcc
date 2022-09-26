@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
 
     TextForgetPassword:{
         fontSize: 32,
-        color: colors.LIGHT_PURPLE,
+        color: colors.PRIMARY,
         width: 250,
         textAlign: 'center',
         fontFamily: fonts.POPPINS_SEMIBOLD,

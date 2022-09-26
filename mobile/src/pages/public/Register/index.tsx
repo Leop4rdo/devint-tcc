@@ -1,5 +1,4 @@
 import { Text, View } from "react-native"
-import Hello from "../../../components/Hello";
 import styles from "./style";
 import ButtonComponent from "../../../components/shared/Button";
 import RegisterFormStep1 from "../../../components/register/forms/Step1";
@@ -20,9 +19,9 @@ const RegisterPage: React.FC<IPageProps> = ({navigation}) => {
         email: "",
         birthday: "",
         github: "",
+        gender : "o",
         password: "",
         confirmPassword: "",
-        gender: "",
     })
 
     const [currentStep, setCurrentStep] = useState(0);
@@ -95,9 +94,9 @@ const RegisterPage: React.FC<IPageProps> = ({navigation}) => {
             name: formValues.name,
             email: formValues.email,
             password: formValues.password,
-            birthday: birthday, // formatar para aaaa/mm/dd
-            githubProfileUrl: formValues.github,
-            gender: formValues.gender
+            birthday: birthday,
+            gender : formValues.gender,
+            githubUsername: formValues.github,
         }
 
         const res = await AuthService.register(body)

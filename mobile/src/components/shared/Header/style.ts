@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
       
         alignItems: 'center',
-        backgroundColor: colors.LIGHT_PURPLE,
+        backgroundColor: colors.PRIMARY,
         marginBottom: -8,
     },
     logoSymbols: {

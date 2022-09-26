@@ -1,5 +1,5 @@
 import { View , Text } from "react-native"
-import globalStyles from '../../../styles/global';
+import globalStyles from "../../styles/global"
 interface ILoginFormProps{
     styles?: any,
     onClickStep: any
