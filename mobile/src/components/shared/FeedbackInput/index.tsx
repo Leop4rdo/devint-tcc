@@ -17,6 +17,7 @@ interface IFeedbackTextInput {
     onChangeText : (text : string) => void
     value?: string
     validate? : () => boolean
+    maxLength? : number
 }
 
 export const inputStatus = {
@@ -25,7 +26,7 @@ export const inputStatus = {
     INVALID: 2
 }
 
-const FeedbackTextInput : React.FC<IFeedbackTextInput> = ({style, isPassword, placeholder, icon, iconSize, onChangeText, value, validate, keyboardType}) => {
+const FeedbackTextInput : React.FC<IFeedbackTextInput> = ({style, isPassword, placeholder, icon, iconSize, onChangeText, value, validate, keyboardType, maxLength}) => {
     const [status, setStatus] = useState(inputStatus.NEUTRAL);
     const [textVisible, setTextVisible] = useState(false);
 
@@ -71,6 +72,7 @@ const FeedbackTextInput : React.FC<IFeedbackTextInput> = ({style, isPassword, pl
                 placeholderTextColor={colors.GRAY}
                 onFocus={() => status != inputStatus.INVALID && setStatus(inputStatus.FOCUSED)}
                 onBlur={onBlur}
+                maxLength={maxLength}
             />
             { isPassword &&
             
