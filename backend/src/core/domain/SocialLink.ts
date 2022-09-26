@@ -1,6 +1,6 @@
 import { Timestamp } from "typeorm";
-import DevEntity from "../../adapters/database/entities/DevEntity";
-import ISocialLinkProps from "../../interfaces/ISocialLink";
+import DevEntity from "@entities/DevEntity";
+import ISocialLinkProps from "@src/interfaces/ISocialLink";
 
 export default class socialLink {
     id: string

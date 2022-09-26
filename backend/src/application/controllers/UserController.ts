@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import CompanyRepository from "../../adapters/database/repositories/CompanyRepository";
-import DevRepository from "../../adapters/database/repositories/DevRepository";
-import UserService from "../../core/services/UserService";
+import CompanyRepository from "@repositories/CompanyRepository";
+import DevRepository from "@repositories/DevRepository";
+import UserService from "@services/UserService";
 
 
 export default class UserController {

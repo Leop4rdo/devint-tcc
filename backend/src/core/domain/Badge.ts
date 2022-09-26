@@ -1,5 +1,5 @@
 import { Timestamp } from "typeorm"
-import IBadgeProps from "../../interfaces/IBadge"
+import IBadgeProps from "@src/interfaces/IBadge"
 
 export default class Badge {
     id: string

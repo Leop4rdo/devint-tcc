@@ -1,18 +1,18 @@
 import "reflect-metadata"
 import { DataSource } from "typeorm";
-import ArticleEntity from "./entities/ArticleEntity";
-import AuthEntity from "./entities/AuthEntity";
-import BadgeEntity from "./entities/BadgeEntity";
-import CareerFocusEntity from "./entities/CareerFocusEntity";
-import CompanyEntity from "./entities/CompanyEntity";
-import DevEntity from "./entities/DevEntity";
-import PasswordResetTokenEntity from "./entities/PasswordResetTokenEntity";
-import PostAttachmentEntity from "./entities/PostAttachmentEntity";
-import PostEntity from "./entities/PostEntity";
-import ProjectEntity from "./entities/ProjectEntity";
-import SeniorityEntity from "./entities/SeniorityEntity";
-import SkillEntity from "./entities/SkillEntity";
-import SocialLinkEntity from "./entities/SocialLinkEntity";
+import ArticleEntity from "@entities/ArticleEntity";
+import AuthEntity from "@entities/AuthEntity";
+import BadgeEntity from "@entities/BadgeEntity";
+import CareerFocusEntity from "@entities/CareerFocusEntity";
+import CompanyEntity from "@entities/CompanyEntity";
+import DevEntity from "@entities/DevEntity";
+import PasswordResetTokenEntity from "@entities/PasswordResetTokenEntity";
+import PostAttachmentEntity from "@entities/PostAttachmentEntity";
+import PostEntity from "@entities/PostEntity";
+import ProjectEntity from "@entities/ProjectEntity";
+import SeniorityEntity from "@entities/SeniorityEntity";
+import SkillEntity from "@entities/SkillEntity";
+import SocialLinkEntity from "@entities/SocialLinkEntity";
 
 
 

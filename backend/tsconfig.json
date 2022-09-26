@@ -13,5 +13,17 @@
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
       "sourceMap": true,
+      "baseUrl": ".",
+      "paths": {
+         "@src/*" : ["./src/*"],
+         "@ports/*" : ["./src/ports/*"],
+         "@adapters/*" : ["./src/adapters/*"],
+         "@domains/*" : ["./src/core/domain/*"],
+         "@services/*" : ["./src/core/services/*"],
+         "@controllers/*" : ["./src/application/controllers/*"],
+         "@routes/*" : ["./src/application/routes/*"],
+         "@repositories/*" : ["./src/adapters/database/repositories/*"],
+         "@entities/*" : ["./src/adapters/database/entities/*"]
+      }
    }
 }

@@ -1,5 +1,5 @@
 import { Timestamp } from "typeorm"
-import DevEntity from "../../adapters/database/entities/DevEntity"
+import DevEntity from "@entities/DevEntity"
 
 export default class CareerFocus {
     id: string    

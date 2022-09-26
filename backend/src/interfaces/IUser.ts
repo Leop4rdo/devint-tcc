@@ -1,9 +1,9 @@
-import ArticleEntity from "../adapters/database/entities/ArticleEntity"
-import BadgeEntity from "../adapters/database/entities/BadgeEntity"
-import ProjectEntity from "../adapters/database/entities/ProjectEntity"
-import SkillEntity from "../adapters/database/entities/SkillEntity"
-import SocialLinkEntity from "../adapters/database/entities/SocialLinkEntity"
-import SeniorityEntity from "../core/domain/SeniorityEntity"
+import ArticleEntity from "@entities/ArticleEntity"
+import BadgeEntity from "@entities/BadgeEntity"
+import ProjectEntity from "@entities/ProjectEntity"
+import SkillEntity from "@entities/SkillEntity"
+import SocialLinkEntity from "@entities/SocialLinkEntity"
+import SeniorityEntity from "@entities/SeniorityEntity"
 export interface IUserProps {
     id? : string
     name : string

@@ -1,13 +1,13 @@
-import CompanyEntity from "../../adapters/database/entities/CompanyEntity";
-import DevEntity from "../../adapters/database/entities/DevEntity";
-import IRepository from "../../adapters/database/repositories/IRepository";
-import BadRequestResponse from "../../application/Responses/BadRequestResponse";
-import IResponse from "../../application/Responses/IResponse";
-import SuccessResponse from "../../application/Responses/SuccessResponse";
-import errors from "../../helpers/errors";
-import { userRoles, IUserProps } from "../../interfaces/IUser";
-import DevOutput from "../../ports/output/user/DevOutput";
-import UserOutput from "../../ports/output/user/UserOutput";
+import CompanyEntity from "@entities/CompanyEntity";
+import DevEntity from "@entities/DevEntity";
+import IRepository from "@repositories/IRepository";
+import BadRequestResponse from "@src/application/Responses/BadRequestResponse";
+import IResponse from "@src/application/Responses/IResponse";
+import SuccessResponse from "@src/application/Responses/SuccessResponse";
+import errors from "@src/helpers/errors";
+import { userRoles, IUserProps } from "@src/interfaces/IUser";
+import DevOutput from "@ports/output/user/DevOutput";
+import UserOutput from "@ports/output/user/UserOutput";
 
 
 export default class UserService {

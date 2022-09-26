@@ -1,6 +1,6 @@
 import { Timestamp } from "typeorm"
-import AuthEntity from "../../adapters/database/entities/AuthEntity"
-import { IPasswordResetToken } from "../../interfaces/IPasswordResetToken"
+import AuthEntity from "@entities/AuthEntity"
+import { IPasswordResetToken } from "@src/interfaces/IPasswordResetToken"
 
 export default class PasswordResetToken {
     id : string

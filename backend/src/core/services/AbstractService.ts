@@ -1,9 +1,9 @@
-import IRepository from "../../adapters/database/repositories/IRepository"
-import BadRequestResponse from "../../application/Responses/BadRequestResponse"
-import IResponse from "../../application/Responses/IResponse"
-import ServerErrorResponse from "../../application/Responses/ServerErrorResponse"
-import SuccessResponse from "../../application/Responses/SuccessResponse"
-import errors from "../../helpers/errors"
+import IRepository from "@repositories/IRepository"
+import BadRequestResponse from "@src/application/Responses/BadRequestResponse"
+import IResponse from "@src/application/Responses/IResponse"
+import ServerErrorResponse from "@src/application/Responses/ServerErrorResponse"
+import SuccessResponse from "@src/application/Responses/SuccessResponse"
+import errors from "@src/helpers/errors"
 
 
 export abstract class  AbstractService<T> {
