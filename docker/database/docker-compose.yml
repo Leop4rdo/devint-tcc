@@ -6,7 +6,7 @@ services:
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
-      MYSQL_DATABASE: tcc_db
+      POSTGRES_DB : devint_db
     ports:
       - 5432:5432
     volumes:

@@ -16,7 +16,7 @@
             flex-direction: column;
             width: 75%;
             height: 100%;
-            background-color: $color-light-purple;
+            background-color: $color-primary;
             gap: 64px;
 
             .register-image {
@@ -57,7 +57,7 @@
                     text-decoration: none;
                     font-size: clamp(1rem, 2vw, 1.3rem);
                     cursor: pointer;
-                    color: $color-light-purple;
+                    color: $color-primary;
                     padding: clamp(0.9rem, 1.5vw, 1.4rem);
                     
                 }

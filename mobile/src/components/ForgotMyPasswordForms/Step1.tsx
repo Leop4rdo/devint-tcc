@@ -1,16 +1,16 @@
 import { View , Text, Alert } from "react-native"
-import FeedbackTextInput from '../../../components/shared/FeedbackInput';
-import ButtonComponent from '../../../components/shared/Button';
+import FeedbackTextInput from '../shared/FeedbackInput';
+import ButtonComponent from '../shared/Button';
 import { useState , useContext} from 'react';
-import { isEmail, isEmpty } from '../../../utils/validation';
-import { AuthContext } from '../../../store/context/Auth.context';
+import { isEmail, isEmpty } from '../../utils/validation';
+import * as authService from "../../services/auth.service";
 
  interface ILoginFormProps {
     styles : any,
-    onClickStep?: any
+    next: () => void
 }
 
-const LoginFormStep1 :  React.FC<ILoginFormProps> = ({styles, onClickStep }) => {
+const LoginFormStep1 :  React.FC<ILoginFormProps> = ({styles, next }) => {
     
     const [warning, setWarning] = useState("")
 
@@ -26,14 +26,16 @@ const LoginFormStep1 :  React.FC<ILoginFormProps> = ({styles, onClickStep }) => 
     }
 
     const onSubmit = () => {
-        if(!isEmail(formValues.email)){
-            return alert("Confira se os campos foram preenchidos corretamente!")
+        const onSubmit = async () => {
+            if (!isEmail(formValues.email)) return
+    
+            const res = await authService.requestPasswordRecovery(formValues.email)
+    
+            if (res.hasError)
+                alert('Um erro inesperado aconteceu, tente novamente mais tarde')
+            else
+                next()
         }
-        else{
-            onClickStep()
-        } 
-            
-
     }
 
 
