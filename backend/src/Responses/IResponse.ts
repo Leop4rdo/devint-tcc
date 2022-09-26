@@ -3,6 +3,6 @@ export default interface IResponse {
     hasError? : boolean
 
     errorCode?: string
-    errorMessage?: string
+    errorMessage?: string | Object | Object[]
     data?: any
 }

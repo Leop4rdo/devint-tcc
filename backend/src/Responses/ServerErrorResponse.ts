@@ -4,7 +4,8 @@ export default class ServerErrorResponse implements IResponse  {
     status: number;
     hasError: boolean;
     errorCode: string;
-    errorMessage: string;
+    errorMessage: string | object | object[];
+    length: number;
 
     constructor(props: IResponse) {
     

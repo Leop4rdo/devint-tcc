@@ -1,22 +1,22 @@
 import { Timestamp } from "typeorm"
-import { IUserProps } from "../../interfaces/IUser"
+import { IUserProps, userRoles } from "../../interfaces/IUser"
+import DTO from "../DTO"
 
-export default class UserDTO {
+export default class UserDTO extends DTO{
     id : string
     name : string
-    email : string
-    password : string
-    enabled : boolean
+    following : JSON
+    followers : JSON
     role : number
     createdAt : Timestamp
     updatedAt : Timestamp
 
     constructor(props : IUserProps) {
+        super()
         this.id = props.id
-        this.email = props.email
         this.name = props.name
-        this.password = props.password
-        this.enabled = props.enabled
-        this.role = props.role
+        this.following = props.following
+        this.followers = props.followers
+        this.role = props.role || userRoles.DEV
     }
 }

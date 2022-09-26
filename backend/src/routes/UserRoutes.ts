@@ -1,14 +1,22 @@
 import { Router } from "express";
+import AuthController from "../controllers/AuthController";
 import UserController from "../controllers/UserController";
+import authMiddleware from "../middlewares/auth.middleware";
 
-const userRouter = Router();
-const ctrl = new UserController();
+export const publicUserRoutes = Router();
+const userCtrl = new UserController();
+const authCtrl = new AuthController();
 
+publicUserRoutes.post("/auth", authCtrl.login)
+publicUserRoutes.post("/users", authCtrl.create)
+publicUserRoutes.post("/request-password-recovery", authCtrl.requestPasswordRecovery)
+publicUserRoutes.patch("/change-password", authCtrl.changePassword)
 
-userRouter.get("/users", ctrl.list)
-userRouter.get("/users/:userId", ctrl.getById);
-userRouter.post("/users", ctrl.create);
-userRouter.put("/users/:userId", ctrl.update);
-// userRouter.post("/auth", ctrl.login)
+export const securedUserRoutes = Router();
 
-export default userRouter;
+securedUserRoutes.patch("/disable/:userId", authCtrl.disable)
+securedUserRoutes.patch("/enable/:userId", authCtrl.enable)
+securedUserRoutes.get("/", userCtrl.list)
+securedUserRoutes.get("/", userCtrl.getById);
+
+// publicUserRoutes.put("/users/:userId", ctrl.update);

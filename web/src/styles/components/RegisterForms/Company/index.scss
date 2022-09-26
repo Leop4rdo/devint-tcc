@@ -1,0 +1,25 @@
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.terms-checkbox {
+    label {
+        color: $color-black;
+        margin-left: 8px;
+    }
+}
+
+.button-container {
+    display: flex;
+    gap: 0.4rem;
+}
+
+.password-container {
+    width: fit-content;
+    height: auto;
+    display: flex;
+    position: relative;
+  }

@@ -1,0 +1,49 @@
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  .input-container {
+    width: clamp(300px, 35vw, 305px);
+  }
+}
+
+.terms-checkbox {
+  label {
+    color: $color-white;
+    margin-left: 8px;
+  }
+}
+
+.button-container {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.password-container {
+  width: fit-content;
+  height: auto;
+  display: flex;
+  position: relative;
+}
+
+select {
+  height: 40px;
+  width: 300px;
+  padding: 0px 8px;
+
+  background-color: $color-black;
+
+  border: 2px solid;
+  border-color: $color-gray;
+  border-radius: 8px;
+  border-style: solid;
+  
+  color: $color-light-gray;
+  font-size: clamp(.8rem, 1.5vw, 1.0rem);
+
+  &:invalid {
+    color: $color-gray;
+  }
+}

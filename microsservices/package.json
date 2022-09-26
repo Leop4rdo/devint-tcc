@@ -1,0 +1,17 @@
+{
+  "name": "microservices",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run install-all && concurrently \"npm run mail\"",
+    "mail": "cd ./mail && npm run start",
+    "install-all": "cd ./mail && npm i"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^7.3.0"
+  }
+
+}
