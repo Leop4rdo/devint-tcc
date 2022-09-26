@@ -3,7 +3,6 @@ import { View, Text, Animated } from "react-native"
 import useAnimation from "../../../hooks/useAnimation"
 import { applyDateMask } from "../../../utils/masks"
 import FeedbackTextInput from "../../shared/FeedbackInput"
-import Picker from "../../shared/Picker"
 import PickerComponent from "../../shared/Picker"
 import { Picker } from "@react-native-picker/picker"
 
@@ -26,12 +25,12 @@ const RegisterFormStep2: React.FC<IRegisterFormProps> = ({ styles, formData, onC
                 keyboardType="numeric"
                 onChangeText={(text: string) => onChange(applyDateMask(text), 'birthday')} ></FeedbackTextInput>
 
-            {/* <PickerComponent icon="group" value={formData.gender} onChange={(value: string) => onChange(value, "gender")}>
-                <Picker.Item label="Gênero" value="" enabled="false" />
+            <PickerComponent icon="group" value={formData.gender} onChange={(value: string) => onChange(value, "gender")}>
+                <Picker.Item label="Gênero" value="" enabled={false} />
                 <Picker.Item label="Feminino" value="f" />
                 <Picker.Item label="Masculino" value="m" />
                 <Picker.Item label="Outro" value="o" />
-            </PickerComponent> */}
+            </PickerComponent>
         </Animated.View>
     )
 }

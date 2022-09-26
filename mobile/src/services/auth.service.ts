@@ -16,10 +16,12 @@ export const auth = async (body : IAuthRequestBody) : Promise<IResponse> => {
 }
 
 interface IRegisterRequestBody {
-    name : string,
-    password : string,
-    email : string,
-    birthday : string
+    name: string,
+    email: string,
+    birthday: string,
+    githubUsername: string,
+    gender : string,
+    password: string,
 }
 
 export const register = async (body : IRegisterRequestBody) => {

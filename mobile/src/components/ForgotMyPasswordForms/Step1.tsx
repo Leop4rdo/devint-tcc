@@ -25,17 +25,15 @@ const LoginFormStep1 :  React.FC<ILoginFormProps> = ({styles, next }) => {
         })
     }
 
-    const onSubmit = () => {
-        const onSubmit = async () => {
-            if (!isEmail(formValues.email)) return
-    
-            const res = await authService.requestPasswordRecovery(formValues.email)
-    
-            if (res.hasError)
-                alert('Um erro inesperado aconteceu, tente novamente mais tarde')
-            else
-                next()
-        }
+    const onSubmit = async () => {
+        if (!isEmail(formValues.email)) return
+
+        const res = await authService.requestPasswordRecovery(formValues.email)
+
+        if (res.hasError)
+            alert('Um erro inesperado aconteceu, tente novamente mais tarde')
+        else
+            next()
     }
 
 
