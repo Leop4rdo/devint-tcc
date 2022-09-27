@@ -25,7 +25,7 @@ export default class EmailService {
             return mailRes.data as IResponse
         } catch (e) {
             console.error(e)
-            return e.response.body
+            return e.response.data
         }
     };
 
