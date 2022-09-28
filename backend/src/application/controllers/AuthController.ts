@@ -65,4 +65,9 @@ export default class AuthController {
             .then((_res) => res.status(_res.status || 200).json(_res))
             .catch((err) => res.status(err.status || 500).json(err))
     }
+    emailConfirm = (req : Request, res : Response) => {
+        this.authService.emailConfirm(req.body.id)
+            .then((_res) => res.status(_res.status || 200).json(_res))
+            .catch((err) => res.status(err.status || 500).json(err))   
+    }
 }

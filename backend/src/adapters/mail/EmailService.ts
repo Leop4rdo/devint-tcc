@@ -25,7 +25,7 @@ export default class EmailService {
             return mailRes.data as IResponse
         } catch (e) {
             console.error(e)
-            return e.response.body
+            return e.response.data
         }
     };
 
@@ -39,5 +39,6 @@ export default class EmailService {
 }
 
 export const EmailTemplates = {
-    PASSWORD_RECOVERY : 'res/email/password-recovery.html'
+    PASSWORD_RECOVERY : 'res/email/password-recovery.html',
+    EMAIL_CONFIRM : 'res/email/email-confirm.html'
 }
