@@ -19,14 +19,15 @@ const RegisterFormStep2: React.FC<IRegisterFormProps> = ({ styles, formData, onC
         <Animated.View style={{ ...styles.form, opacity: opacityAnim.prop }}>
             <FeedbackTextInput
                 style={styles.input}
-                placeholder=""
+                maxLength={10}
+                placeholder="dd/mm/aaaa"
                 value={formData.birthday}
                 icon="calendar-today"
                 keyboardType="numeric"
                 onChangeText={(text: string) => onChange(applyDateMask(text), 'birthday')} ></FeedbackTextInput>
 
             <PickerComponent icon="group" value={formData.gender} onChange={(value: string) => onChange(value, "gender")}>
-                <Picker.Item label="Gênero" value="" enabled={false} />
+                <Picker.Item label="Gênero" value=""  enabled={false}/>
                 <Picker.Item label="Feminino" value="f" />
                 <Picker.Item label="Masculino" value="m" />
                 <Picker.Item label="Outro" value="o" />

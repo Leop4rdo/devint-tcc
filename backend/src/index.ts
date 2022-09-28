@@ -1,11 +1,12 @@
+import "module-alias/register"
 import "./config/env"
 
-import { AppDataSource } from "./data-source"
+import { AppDataSource } from "@adapters/database/data-source"
 import express from "express"
 import cors from "cors"
 import helmet from "helmet"
-import routes from "./routes";
-import logMiddleware from "./middlewares/log.middleware"
+import routes from "@src/application/routes";
+import logMiddleware from "@src/application/middlewares/log.middleware"
 
 const PORT = process.env.SE_PORT || 8080;
 
@@ -24,7 +25,7 @@ AppDataSource.initialize().then(async () => {
     app.use('/api/v1', routes);
     
     app.listen(PORT, () => {
-        console.log(`Api is currently running on port ${PORT}`)
+        console.log(`[INFO] <DevInt_ Api is currently running on http://localhost:${PORT}/api/v1`)
     })
     
 }).catch(error => console.warn(error))
