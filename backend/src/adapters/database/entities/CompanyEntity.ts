@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, CreateDateColumn, Timestamp, UpdateDateColumn, JoinColumn } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, CreateDateColumn, Timestamp, UpdateDateColumn, JoinColumn, Index } from "typeorm"
 import AuthEntity from "./AuthEntity"
 
 @Entity('companies')
@@ -7,9 +7,11 @@ export default class CompanyEntity {
     id: string
 
     @Column()
+    @Index()
     name : string
 
-    @Column()
+    @Column({unique: true})
+    @Index({unique: true})
     cnpj : string
 
     @OneToOne(() => AuthEntity, { nullable : false})

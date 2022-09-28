@@ -1,10 +1,10 @@
 import axios from "axios";
-import DevEntity from "../../adapters/database/entities/DevEntity";
-import DevRepository from "../../adapters/database/repositories/DevRepository";
-import { getGithubUserProfile } from "../../adapters/github/GithubService";
-import IResponse from "../../application/Responses/IResponse";
-import SuccessResponse from "../../application/Responses/SuccessResponse";
-import DevCreateInput from "../../ports/input/user/dev/DevCreateInput";
+import DevEntity from "@entities/DevEntity";
+import DevRepository from "@repositories/DevRepository";
+import { getGithubUserProfile } from "@adapters/github/GithubService";
+import IResponse from "@src/application/Responses/IResponse";
+import SuccessResponse from "@src/application/Responses/SuccessResponse";
+import DevCreateInput from "@ports/input/user/dev/DevCreateInput";
 
 export default class DevService {
     private repo : DevRepository

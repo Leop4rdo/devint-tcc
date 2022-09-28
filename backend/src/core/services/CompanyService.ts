@@ -1,9 +1,9 @@
 import { error } from "console";
-import CompanyEntity from "../../adapters/database/entities/CompanyEntity";
-import CompanyRepository from "../../adapters/database/repositories/CompanyRepository";
-import IResponse from "../../application/Responses/IResponse";
-import BusinessLogicError from "../../helpers/BusinessLogicError ";
-import errors from "../../helpers/errors";
+import CompanyEntity from "@entities/CompanyEntity";
+import CompanyRepository from "@repositories/CompanyRepository";
+import IResponse from "@src/application/Responses/IResponse";
+import BusinessLogicError from "@src/helpers/BusinessLogicError ";
+import errors from "@src/helpers/errors";
 import { AbstractService } from "./AbstractService";
 
 

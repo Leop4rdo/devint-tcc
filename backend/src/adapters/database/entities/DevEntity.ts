@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, Index, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm";
 import ArticleEntity from "./ArticleEntity";
 import AuthEntity from "./AuthEntity";
 import BadgeEntity from "./BadgeEntity";
@@ -15,6 +15,7 @@ export default class DevEntity {
     id: string
 
     @Column({nullable:false})
+    @Index()
     name : string
 
     @Column({ default: '', nullable : true })
@@ -39,9 +40,11 @@ export default class DevEntity {
     currentJob : string
 
     @Column({nullable : true, name : 'github_username', unique : true})
+    @Index({ unique : true })
     githubUsername : string
 
     @Column({name : 'open_to_work', default: false})
+    @Index()
     openToWork : boolean
 
     @Column({type : 'date' })
@@ -66,7 +69,8 @@ export default class DevEntity {
     socialLinks : SocialLinkEntity[]
 
     @ManyToOne(()=> CareerFocusEntity ,(careerFocus) => careerFocus.dev)
-    @JoinColumn({name: 'careers_focus'})   
+    @JoinColumn({name: 'careers_focus'}) 
+    @Index()  
     careerFocus : CareerFocusEntity[]
     
     @OneToMany(()=> SeniorityEntity, (senior) => senior.devs)

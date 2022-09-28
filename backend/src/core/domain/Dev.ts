@@ -1,14 +1,15 @@
+import ArticleEntity from "@entities/ArticleEntity"
+import AuthEntity from "@entities/AuthEntity"
+import BadgeEntity from "@entities/BadgeEntity"
+import CareerFocusEntity from "@entities/CareerFocusEntity"
+import DevEntity from "@entities/DevEntity"
+import ProjectEntity from "@entities/ProjectEntity"
+import SkillEntity from "@entities/SkillEntity"
+import SocialLinkEntity from "@entities/SocialLinkEntity"
+import IDevProps from "@src/interfaces/IDev"
 import { Timestamp } from "typeorm"
-import ArticleEntity from "../../adapters/database/entities/ArticleEntity"
-import AuthEntity from "../../adapters/database/entities/AuthEntity"
-import BadgeEntity from "../../adapters/database/entities/BadgeEntity"
-import CareerFocusEntity from "../../adapters/database/entities/CareerFocusEntity"
-import DevEntity from "../../adapters/database/entities/DevEntity"
-import ProjectEntity from "../../adapters/database/entities/ProjectEntity"
-import SeniorityEntity from "../../adapters/database/entities/SeniorityEntity"
-import SkillEntity from "../../adapters/database/entities/SkillEntity"
-import SocialLinkEntity from "../../adapters/database/entities/SocialLinkEntity"
-import IDevProps from "../../interfaces/IDev"
+import SeniorityEntity from "./SeniorityEntity"
+
 
 export default class Dev {
     id: string

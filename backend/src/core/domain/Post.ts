@@ -1,6 +1,6 @@
 import { Timestamp } from "typeorm";
-import PostEntity from "../../adapters/database/entities/PostEntity";
-import IPostProps from "../../interfaces/IPost";
+import PostEntity from "@entities/PostEntity";
+import IPostProps from "@src/interfaces/IPost";
 
 export default class Post {
     id: string

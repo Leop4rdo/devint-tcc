@@ -1,4 +1,4 @@
-import {Column, CreateDateColumn, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn} from "typeorm";
+import {Column, CreateDateColumn, Entity, Index, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn} from "typeorm";
 import AuthEntity from "./AuthEntity";
 
 
@@ -8,6 +8,7 @@ export default class PasswordResetTokenEntity {
     id : string
 
     @Column()
+    @Index()
     token : string
 
     @Column({ type : "bigint",name : 'expiration_date' })

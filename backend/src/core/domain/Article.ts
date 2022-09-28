@@ -1,6 +1,6 @@
 import { Timestamp } from "typeorm"
-import DevEntity from "../../adapters/database/entities/DevEntity"
-import IArticleProps from "../../interfaces/IArticle"
+import DevEntity from "@entities/DevEntity"
+import IArticleProps from "@src/interfaces/IArticle"
 
 export default class Article {
     id: string

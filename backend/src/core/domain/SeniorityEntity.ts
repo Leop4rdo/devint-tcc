@@ -1,6 +1,6 @@
 import { Timestamp } from "typeorm"
-import DevEntity from "../../adapters/database/entities/DevEntity"
-import ISeniorityProps from "../../interfaces/ISeniority"
+import DevEntity from "@entities/DevEntity"
+import ISeniorityProps from "@src/interfaces/ISeniority"
 
 export default class Seniority {
     id: string
