@@ -21,7 +21,7 @@ const RegisterPage: React.FC<IPageProps> = ({navigation}) => {
         github: "",
         gender : "o",
         password: "",
-        confirmPassword: ""
+        confirmPassword: "",
     })
 
     const [currentStep, setCurrentStep] = useState(0);
@@ -40,7 +40,7 @@ const RegisterPage: React.FC<IPageProps> = ({navigation}) => {
             isValid: () => formValues.name.length > 2 && isEmail(formValues.email)
         },
         {
-            desc: "Quando você nasceu?",
+            desc: "Quando você nasceu e qual o seu gênero?",
             component: <RegisterFormStep2 formData={formValues} onChange={handleChange} styles={styles} />,
             isValid: () => isValidDate(formValues.birthday)
         },

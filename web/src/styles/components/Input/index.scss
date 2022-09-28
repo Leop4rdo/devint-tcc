@@ -27,6 +27,15 @@
     transition: color .25s ease-out;
   }
 
+  img {
+    width: 20px;
+    height: 20px;
+
+    &hover path {
+      fill: #fce57e;
+    }
+  }
+
   &:focus-within,
   &:hover {
     .icon {
