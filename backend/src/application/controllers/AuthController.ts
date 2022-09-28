@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
-import AuthRepository from "../../adapters/database/repositories/AuthRepository";
-import CompanyRepository from "../../adapters/database/repositories/CompanyRepository";
-import DevRepository from "../../adapters/database/repositories/DevRepository";
-import PasswordResetTokenRepository from "../../adapters/database/repositories/PasswordResetTokenRepository";
-import EmailService from "../../adapters/mail/EmailService";
-import AuthService from "../../core/services/AuthService";
-import DevService from "../../core/services/DevService";
-import { IUserProps } from "../../interfaces/IUser";
+import AuthRepository from "@repositories/AuthRepository";
+import CompanyRepository from "@repositories/CompanyRepository";
+import DevRepository from "@repositories/DevRepository";
+import PasswordResetTokenRepository from "@repositories/PasswordResetTokenRepository";
+import EmailService from "@adapters/mail/EmailService";
+import AuthService from "@services/AuthService";
+import DevService from "@services/DevService";
+import { IUserProps } from "@src/interfaces/IUser";
 import LoginInput from "../../ports/input/user/LoginInput";
 import UserCreateInput from "../../ports/input/user/UserCreateInput";
 

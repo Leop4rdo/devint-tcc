@@ -1,6 +1,6 @@
 import { StringifyOptions } from "querystring"
 import { Timestamp } from "typeorm"
-import IAuthProps from "../../interfaces/IAuth"
+import IAuthProps from "@src/interfaces/IAuth"
 
 export default class Auth {
     id : string

@@ -1,32 +1,32 @@
 import { hash, compare } from "bcrypt";
 import * as jwt from "jsonwebtoken";
-import AuthEntity from "../../adapters/database/entities/AuthEntity";
-import CompanyEntity from "../../adapters/database/entities/CompanyEntity";
-import DevEntity from "../../adapters/database/entities/DevEntity";
-import PasswordResetTokenEntity from "../../adapters/database/entities/PasswordResetTokenEntity";
-import AuthRepository from "../../adapters/database/repositories/AuthRepository";
-import CompanyRepository from "../../adapters/database/repositories/CompanyRepository";
-import DevRepository from "../../adapters/database/repositories/DevRepository";
-import PasswordResetTokenRepository from "../../adapters/database/repositories/PasswordResetTokenRepository";
-import EmailService, { EmailTemplates } from "../../adapters/mail/EmailService";
-import BadRequestResponse from "../../application/Responses/BadRequestResponse";
-import ForbiddenResponse from "../../application/Responses/ForbiddenResponse";
-import forbiddenResponse from "../../application/Responses/ForbiddenResponse";
-import IResponse from "../../application/Responses/IResponse";
-import ServerErrorResponse from "../../application/Responses/ServerErrorResponse";
-import SuccessResponse from "../../application/Responses/SuccessResponse";
-import errors from "../../helpers/errors";
-import { generateToken } from "../../helpers/utils";
-import ICompanyProps from "../../interfaces/ICompany";
-import IDevProps from "../../interfaces/IDev";
-import { userRoles, IUserProps } from "../../interfaces/IUser";
-import CompanyCreateInput from "../../ports/input/user/company/CompanyCreateInput";
-import DevCreateInput from "../../ports/input/user/dev/DevCreateInput";
-import LoginInput from "../../ports/input/user/LoginInput";
-import UserCreateInput from "../../ports/input/user/UserCreateInput";
-import CompanyOutput from "../../ports/output/user/CompanyOutput";
-import DevOutput from "../../ports/output/user/DevOutput";
-import UserOutput from "../../ports/output/user/UserOutput";
+import AuthEntity from "@entities/AuthEntity";
+import CompanyEntity from "@entities/CompanyEntity";
+import DevEntity from "@entities/DevEntity";
+import PasswordResetTokenEntity from "@entities/PasswordResetTokenEntity";
+import AuthRepository from "@repositories/AuthRepository";
+import CompanyRepository from "@repositories/CompanyRepository";
+import DevRepository from "@repositories/DevRepository";
+import PasswordResetTokenRepository from "@repositories/PasswordResetTokenRepository";
+import EmailService, { EmailTemplates } from "@adapters/mail/EmailService";
+import BadRequestResponse from "@src/application/Responses/BadRequestResponse";
+import ForbiddenResponse from "@src/application/Responses/ForbiddenResponse";
+import forbiddenResponse from "@src/application/Responses/ForbiddenResponse";
+import IResponse from "@src/application/Responses/IResponse";
+import ServerErrorResponse from "@src/application/Responses/ServerErrorResponse";
+import SuccessResponse from "@src/application/Responses/SuccessResponse";
+import errors from "@src/helpers/errors";
+import { generateToken } from "@src/helpers/utils";
+import ICompanyProps from "@src/interfaces/ICompany";
+import IDevProps from "@src/interfaces/IDev";
+import { userRoles, IUserProps } from "@src/interfaces/IUser";
+import CompanyCreateInput from "@ports/input/user/company/CompanyCreateInput";
+import DevCreateInput from "@ports/input/user/dev/DevCreateInput";
+import LoginInput from "@ports/input/user/LoginInput";
+import UserCreateInput from "@ports/input/user/UserCreateInput";
+import CompanyOutput from "@ports/output/user/CompanyOutput";
+import DevOutput from "@ports/output/user/DevOutput";
+import UserOutput from "@ports/output/user/UserOutput";
 import DevService from "./DevService";
 
 export default class AuthService {
@@ -75,12 +75,21 @@ export default class AuthService {
 
         if (!auth) return new ServerErrorResponse({message : "Cannot create user auth" })
 
-        const user : any = (body.cnpj) ? await this.createCompany(body, auth) : await this.createDev(body, auth);
+        try {
 
-        if (user.hasError || !user) {
+            const user : any = (body.cnpj) ? await this.createCompany(body, auth) : await this.createDev(body, auth);
+            
+            user.role = (body.cnpj) ? userRoles.COMPANY : userRoles.DEV
+            
+            return new SuccessResponse({
+                status: 201,
+                data : new UserOutput(user as unknown as IUserProps)
+            })
+        } catch (e) {
             await this.repo.remove(auth.id)
             return new ServerErrorResponse({message : "Cannot create user" })
         }
+
 
         user.role = (body.cnpj) ? userRoles.COMPANY : userRoles.DEV
 

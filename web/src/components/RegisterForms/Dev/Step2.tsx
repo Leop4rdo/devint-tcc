@@ -22,11 +22,11 @@ const DevForm2: React.FC<IFormProps> = ({ onSubmit, formData, onChange }) => {
 
         <form className="form" onSubmit={onSubmit}>
 
-            <Input type="text" placeholder="Usuário do GitHub (opcional)" onChange={onChange} name="githubUser" />
+            <Input type="text" placeholder="Usuário do GitHub (opcional)" onChange={onChange} name="githubUser" image="/assets/icons/github.svg" />
 
-                <Input icon="lock" placeholder="Senha" onChange={onChange} name="password" type="password" validate={() => !isEmpty(formData.password)}/>
+            <Input icon="lock" placeholder="Senha" onChange={onChange} name="password" type="password" validate={() => !isEmpty(formData.password)}/>
 
-                <Input icon="lock" placeholder="Confirmar senha" onChange={onChange} name="confirmPassword" type="password" validate={() => !isEmpty(formData.confirmPassword)} />
+            <Input icon="lock" placeholder="Confirmar senha" onChange={onChange} name="confirmPassword" type="password" validate={() => !isEmpty(formData.confirmPassword)} />
 
             <div className="terms-checkbox">
 

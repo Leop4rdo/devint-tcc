@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import {View, TextInput, Pressable, Touchable} from 'react-native'
+import {View, TextInput, Pressable, Touchable, Image} from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons';
 
 import colors from '../../../styles/colors';
@@ -13,10 +13,13 @@ interface IFeedbackTextInput {
     style? : any
     icon? : keyof typeof MaterialIcons.glyphMap
     iconSize? : number
-    keyboardType ?: "default" | "numeric" | "email-address"
+    keyboardType ?: "default" | "numeric" | "email-address" | "user"
     onChangeText : (text : string) => void
     value?: string
     validate? : () => boolean
+    maxLength? : number
+    image? : any,
+    focusImage ?: string
 }
 
 export const inputStatus = {
@@ -25,7 +28,7 @@ export const inputStatus = {
     INVALID: 2
 }
 
-const FeedbackTextInput : React.FC<IFeedbackTextInput> = ({style, isPassword, placeholder, icon, iconSize, onChangeText, value, validate, keyboardType}) => {
+const FeedbackTextInput : React.FC<IFeedbackTextInput> = ({style, isPassword, placeholder, icon, iconSize, onChangeText, value, validate, keyboardType, maxLength, image, focusImage}) => {
     const [status, setStatus] = useState(inputStatus.NEUTRAL);
     const [textVisible, setTextVisible] = useState(false);
 
@@ -58,8 +61,10 @@ const FeedbackTextInput : React.FC<IFeedbackTextInput> = ({style, isPassword, pl
 
     const toggleTextVisible = () => setTextVisible(!textVisible)
 
+    
     return (
         <View style={containerStyles.process(status)}>
+            {image && <Image source={(status === inputStatus.FOCUSED && focusImage) ? focusImage : image} />}
             { icon && <MaterialIcons name={icon} size={ iconSize || 24} color={getIconColor()} style={{marginRight : 4}}/>}
             <TextInput
                 secureTextEntry={isPassword && !textVisible || false}
@@ -71,6 +76,7 @@ const FeedbackTextInput : React.FC<IFeedbackTextInput> = ({style, isPassword, pl
                 placeholderTextColor={colors.GRAY}
                 onFocus={() => status != inputStatus.INVALID && setStatus(inputStatus.FOCUSED)}
                 onBlur={onBlur}
+                maxLength={maxLength}
             />
             { isPassword &&
             

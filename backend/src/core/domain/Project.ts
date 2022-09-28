@@ -1,5 +1,5 @@
 import { Timestamp } from "typeorm";
-import IProjectProps from "../../interfaces/IProject";
+import IProjectProps from "@src/interfaces/IProject";
 
 export default class Project {
     id : string

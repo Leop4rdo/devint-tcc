@@ -22,8 +22,6 @@ const buttonStyles = StyleSheet.create({
         backgroundColor: colors.PRIMARY
     },
 
-    basePressed : { backgroundColor: colors.LIGHT_PURPLE},
-
     text : {
         color : colors.WHITE,
         textTransform: "uppercase",

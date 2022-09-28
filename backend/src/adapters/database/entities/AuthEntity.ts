@@ -1,12 +1,13 @@
 import internal from "stream";
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, Index, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm";
 
 @Entity('auth')
 export default class AuthEntity {
     @PrimaryGeneratedColumn('uuid')
     id : string
 
-    @Column()
+    @Index({ unique: true })
+    @Column({ unique : true })
     email : string
 
     @Column({name: 'email_confirmed', default:false})

@@ -1,7 +1,7 @@
 
 const colors = {
-    PRIMARY : '#7865FF',
-    LIGHT_PURPLE : '#A587FA',
+    DARK_PURPLE : '#7865FF',
+    PRIMARY : '#A587FA',
     BLUE : '#3E50F2',
 
     BLACK : '#1F252F',

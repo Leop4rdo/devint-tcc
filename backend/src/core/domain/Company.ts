@@ -1,6 +1,6 @@
 import { Timestamp } from "typeorm"
-import AuthEntity from "../../adapters/database/entities/AuthEntity"
-import ICompanyProps from "../../interfaces/ICompany"
+import AuthEntity from "@entities/AuthEntity"
+import ICompanyProps from "@src/interfaces/ICompany"
 
 export default class Company {
     id: string

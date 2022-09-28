@@ -5,16 +5,21 @@ import globalStyles from "../../../styles/global";
 import fonts from "../../../styles/typography";
 import { screenHeight, screenWidth } from "../../../styles/utils";
 
-export default StyleSheet.create({
-    container : {
+const styles = StyleSheet.create({
+    containerRegister : {
         backgroundColor : colors.DARK_GRAY,
         width: '100%',
         height: '100%',
         display: 'flex',
+       
+    },
+
+    containerRegisterForm:{
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'center', 
     },
+
     logo : {
         fontSize: 32,
         color: colors.WHITE,
@@ -23,7 +28,7 @@ export default StyleSheet.create({
     signUp: {
         ...globalStyles.text,
         fontFamily: fonts.POPPINS_BOLD,
-        color: colors.LIGHT_PURPLE,
+        color: colors.PRIMARY,
         fontSize: 32,
         marginBottom: 40
     },
@@ -48,3 +53,5 @@ export default StyleSheet.create({
     }
 
 })
+
+export default styles
