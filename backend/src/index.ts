@@ -1,11 +1,11 @@
 import "./config/env"
 
-import { AppDataSource } from "./data-source"
+import { AppDataSource } from "./adapters/database/data-source"
 import express from "express"
 import cors from "cors"
 import helmet from "helmet"
-import routes from "./routes";
-import logMiddleware from "./middlewares/log.middleware"
+import routes from "./application/routes";
+import logMiddleware from "./application/middlewares/log.middleware"
 
 const PORT = process.env.SE_PORT || 8080;
 
