@@ -89,6 +89,23 @@ export default class AuthService {
             await this.repo.remove(auth.id)
             return new ServerErrorResponse({message : "Cannot create user" })
         }
+
+
+        user.role = (body.cnpj) ? userRoles.COMPANY : userRoles.DEV
+
+        this.emailService.send({
+            to : auth.email,
+            subject : 'Confirmação de email',
+            values : {
+                USER : user.name,
+                LINK : `${process.env.FRONTEND_URL}/email-confirm/${auth.email}`
+            }
+        }, EmailTemplates.EMAIL_CONFIRM)
+
+        return new SuccessResponse({
+            status: 201,
+            data : new UserOutput(user as unknown as IUserProps)
+        })
     }
 
     async login(body: LoginInput): Promise<IResponse> {
@@ -191,6 +208,19 @@ export default class AuthService {
                 message : 'Success'
             }
         })
+    }
+
+    async emailConfirm(id : string): Promise<IResponse>{
+        const auth = await this.repo.findById(id) 
+
+        auth.emailConfirmed = true; // set it to true
+    
+        this.repo.update(auth); // update auth
+        
+        return new SuccessResponse({
+            data: `user email confirm se to ${auth.emailConfirmed == true ? 'true' : 'false'} sucessfully!`
+        })
+        
     }
 
     async changePassword(password, token) : Promise<IResponse>{

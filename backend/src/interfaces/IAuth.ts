@@ -6,6 +6,7 @@ export const userRoles = {
 export default interface IAuthProps {
     id : string
     email : string
+    emailConfirmed : boolean
     password : string
     role : number
     enabled : number

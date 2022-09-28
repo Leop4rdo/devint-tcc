@@ -10,6 +10,9 @@ export default class AuthEntity {
     @Column({ unique : true })
     email : string
 
+    @Column({name: 'email_confirmed', default:false})
+    emailConfirmed : boolean
+
     @Column()
     password : string
 
