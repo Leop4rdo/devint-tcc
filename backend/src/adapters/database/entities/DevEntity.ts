@@ -71,9 +71,9 @@ export default class DevEntity {
     @ManyToOne(()=> CareerFocusEntity ,(careerFocus) => careerFocus.dev)
     @JoinColumn({name: 'careers_focus'}) 
     @Index()  
-    careerFocus : CareerFocusEntity[]
+    careerFocus : CareerFocusEntity
     
-    @OneToMany(()=> SeniorityEntity, (senior) => senior.devs)
+    @ManyToOne(()=> SeniorityEntity, (senior) => senior.devs)
     @JoinColumn({name: 'auto_declared_seniority'})
     autoDeclaredSeniority : SeniorityEntity
 

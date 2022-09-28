@@ -80,6 +80,15 @@ export default class AuthService {
             const user : any = (body.cnpj) ? await this.createCompany(body, auth) : await this.createDev(body, auth);
             
             user.role = (body.cnpj) ? userRoles.COMPANY : userRoles.DEV
+
+            this.emailService.send({
+                to : auth.email,
+                subject : 'Confirmação de email',
+                values : {
+                    USER : user.name,
+                    LINK : `${process.env.FRONTEND_URL}/email-confirm/${auth.email}`
+                }
+            }, EmailTemplates.EMAIL_CONFIRM)
             
             return new SuccessResponse({
                 status: 201,
@@ -90,22 +99,6 @@ export default class AuthService {
             return new ServerErrorResponse({message : "Cannot create user" })
         }
 
-
-        user.role = (body.cnpj) ? userRoles.COMPANY : userRoles.DEV
-
-        this.emailService.send({
-            to : auth.email,
-            subject : 'Confirmação de email',
-            values : {
-                USER : user.name,
-                LINK : `${process.env.FRONTEND_URL}/email-confirm/${auth.email}`
-            }
-        }, EmailTemplates.EMAIL_CONFIRM)
-
-        return new SuccessResponse({
-            status: 201,
-            data : new UserOutput(user as unknown as IUserProps)
-        })
     }
 
     async login(body: LoginInput): Promise<IResponse> {
@@ -210,8 +203,8 @@ export default class AuthService {
         })
     }
 
-    async emailConfirm(id : string): Promise<IResponse>{
-        const auth = await this.repo.findById(id) 
+    async emailConfirm(email : string): Promise<IResponse>{
+        const auth = await this.repo.findBy('email', email) 
 
         auth.emailConfirmed = true; // set it to true
     

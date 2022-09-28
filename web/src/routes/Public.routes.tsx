@@ -6,6 +6,7 @@ import React from "react"
 import { Route, Routes } from "react-router-dom"
 import ForgotMyPasswordPage from "../pages/public/ForgotMyPassword/ForgotMyPasswordPage"
 import ChangeMyPasswordPage from "pages/public/ChangeMyPassword";
+import EmailConfirmPage from "pages/public/EmailConfirm/EmailConfirmPage";
 
 
 const PublicRouter : React.FC = () => {
@@ -19,7 +20,7 @@ const PublicRouter : React.FC = () => {
                 <Route path="dev" element={<DevRegistrationPage />} />
                 <Route path="company" element={<CompanyRegistrationPage />} />
             </Route>
-           {/*  <Route path="email-confirm" element={<EmailConfirm />} /> */}
+            <Route path="email-confirm" element={<EmailConfirmPage />} />
         </Routes>
     )
 }
