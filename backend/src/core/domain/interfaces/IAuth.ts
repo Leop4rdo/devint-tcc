@@ -9,5 +9,5 @@ export default interface IAuthProps {
     emailConfirmed : boolean
     password : string
     role : number
-    enabled : number
+    enabled : boolean
 }

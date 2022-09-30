@@ -1,14 +1,14 @@
-import ArticleEntity from "@entities/ArticleEntity"
-import AuthEntity from "@entities/AuthEntity"
-import BadgeEntity from "@entities/BadgeEntity"
-import CareerFocusEntity from "@entities/CareerFocusEntity"
-import DevEntity from "@entities/DevEntity"
-import ProjectEntity from "@entities/ProjectEntity"
-import SkillEntity from "@entities/SkillEntity"
-import SocialLinkEntity from "@entities/SocialLinkEntity"
-import IDevProps from "@src/interfaces/IDev"
+import IDevProps from "@src/core/domain/interfaces/IDev"
 import { Timestamp } from "typeorm"
-import SeniorityEntity from "./SeniorityEntity"
+import Article from "./Article"
+import Auth from "./Auth"
+import Badge from "./Badge"
+import CareerFocus from "./CareerFocus"
+import Post from "./Post"
+import Project from "./Project"
+import Seniority from "./Seniority"
+import Skill from "./Skill"
+import SocialLink from "./SocialLink"
 
 
 export default class Dev {
@@ -24,16 +24,15 @@ export default class Dev {
     githubUsername : string
     openToWork : boolean
     birthday : Date
-    following: DevEntity[]
-    auth : AuthEntity
-    posts: ProjectEntity[]
-    articles: ArticleEntity[]
-    socialLinks : SocialLinkEntity[]
-    careerFocus : CareerFocusEntity[]
-    autoDeclaredSeniority : SeniorityEntity
-    skills: SkillEntity[]
-    projects: ProjectEntity[]
-    badges: BadgeEntity[]   
+    auth : Auth
+    posts: Post[]
+    articles: Article[]
+    socialLinks : SocialLink[]
+    careerFocus : CareerFocus
+    autoDeclaredSeniority : Seniority
+    skills: Skill[]
+    projects: Project[]
+    badges: Badge[]   
     createdAt : Timestamp
     updatedAt : Timestamp
 

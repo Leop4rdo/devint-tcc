@@ -5,7 +5,7 @@ import BadRequestResponse from "@src/application/Responses/BadRequestResponse";
 import IResponse from "@src/application/Responses/IResponse";
 import SuccessResponse from "@src/application/Responses/SuccessResponse";
 import errors from "@src/helpers/errors";
-import { userRoles, IUserProps } from "@src/interfaces/IUser";
+import { userRoles, IUserProps } from "@src/core/domain/interfaces/IUser";
 import DevOutput from "@ports/output/user/DevOutput";
 import UserOutput from "@ports/output/user/UserOutput";
 

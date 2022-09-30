@@ -6,7 +6,7 @@ import PasswordResetTokenRepository from "@repositories/PasswordResetTokenReposi
 import EmailService from "@adapters/mail/EmailService";
 import AuthService from "@services/AuthService";
 import DevService from "@services/DevService";
-import { IUserProps } from "@src/interfaces/IUser";
+import { IUserProps } from "@src/core/domain/interfaces/IUser";
 import LoginInput from "../../ports/input/user/LoginInput";
 import UserCreateInput from "../../ports/input/user/UserCreateInput";
 

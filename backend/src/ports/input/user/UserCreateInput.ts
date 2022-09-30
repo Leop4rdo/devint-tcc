@@ -1,5 +1,5 @@
 import { IsString, IsNotEmpty, IsEmail, IsEnum } from "class-validator";
-import { IUserProps, userRoles } from "../../../interfaces/IUser";
+import { IUserProps, userRoles } from "../../../core/domain/interfaces/IUser";
 import InputPort from "../InputPort"
 
 export default class UserCreateInput extends InputPort {

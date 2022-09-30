@@ -1,12 +1,12 @@
 import { Timestamp } from "typeorm"
-import AuthEntity from "@entities/AuthEntity"
-import ICompanyProps from "@src/interfaces/ICompany"
+import ICompanyProps from "@src/core/domain/interfaces/ICompany"
+import Auth from "./Auth"
 
 export default class Company {
     id: string
     name : string
     cnpj : string
-    auth : AuthEntity
+    auth : Auth
     createdAt : Timestamp
     updatedAt : Timestamp
 

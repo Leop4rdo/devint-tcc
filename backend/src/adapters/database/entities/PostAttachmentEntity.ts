@@ -4,19 +4,19 @@ import PostEntity from "./PostEntity";
 @Entity('post_attachments')
 export default class PostAttachmentEntity {
 
-  @PrimaryGeneratedColumn('uuid')
-  id: string
+    @PrimaryGeneratedColumn('uuid')
+    id: string
+    
+    @Column({})
+    uri: string
   
-  @Column({})
-  url: string
- 
-  @ManyToOne(() => PostEntity, (attachment) => attachment.postAttachment)
-  post: PostEntity
+    @ManyToOne(() => PostEntity, (attachment) => attachment.postAttachment)
+    post: PostEntity
 
-  @CreateDateColumn({select:false})
-  createdAt : Timestamp
-  
-  @UpdateDateColumn({})
-  updateAt : Timestamp
+    @CreateDateColumn({select:false, name: 'created_at' })
+    createdAt : Timestamp
+    
+    @UpdateDateColumn({ name : 'updated_at' })
+    updateAt : Timestamp
 
 }

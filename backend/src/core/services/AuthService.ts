@@ -17,9 +17,9 @@ import ServerErrorResponse from "@src/application/Responses/ServerErrorResponse"
 import SuccessResponse from "@src/application/Responses/SuccessResponse";
 import errors from "@src/helpers/errors";
 import { generateToken } from "@src/helpers/utils";
-import ICompanyProps from "@src/interfaces/ICompany";
-import IDevProps from "@src/interfaces/IDev";
-import { userRoles, IUserProps } from "@src/interfaces/IUser";
+import ICompanyProps from "@src/core/domain/interfaces/ICompany";
+import IDevProps from "@src/core/domain/interfaces/IDev";
+import { userRoles, IUserProps } from "@src/core/domain/interfaces/IUser";
 import CompanyCreateInput from "@ports/input/user/company/CompanyCreateInput";
 import DevCreateInput from "@ports/input/user/dev/DevCreateInput";
 import LoginInput from "@ports/input/user/LoginInput";
@@ -89,23 +89,6 @@ export default class AuthService {
             await this.repo.remove(auth.id)
             return new ServerErrorResponse({message : "Cannot create user" })
         }
-
-
-        user.role = (body.cnpj) ? userRoles.COMPANY : userRoles.DEV
-
-        this.emailService.send({
-            to : auth.email,
-            subject : 'Confirmação de email',
-            values : {
-                USER : user.name,
-                LINK : `${process.env.FRONTEND_URL}/email-confirm/${auth.email}`
-            }
-        }, EmailTemplates.EMAIL_CONFIRM)
-
-        return new SuccessResponse({
-            status: 201,
-            data : new UserOutput(user as unknown as IUserProps)
-        })
     }
 
     async login(body: LoginInput): Promise<IResponse> {
@@ -128,7 +111,7 @@ export default class AuthService {
         if (!user) return new forbiddenResponse();
 
         const userRes = (auth.role == userRoles.COMPANY) ?
-            new CompanyOutput(user as ICompanyProps)
+            new CompanyOutput(user as unknown as ICompanyProps)
             : new DevOutput(user as unknown as IDevProps) 
         
         new UserOutput({...user, role : auth.role} as unknown as IUserProps);

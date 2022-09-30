@@ -7,13 +7,13 @@ export default class AuthEntity {
     id : string
 
     @Index({ unique: true })
-    @Column({ unique : true })
+    @Column({ unique : true, nullable: false })
     email : string
 
     @Column({name: 'email_confirmed', default:false})
     emailConfirmed : boolean
 
-    @Column()
+    @Column({ nullable : false})
     password : string
 
     @Column({default : 0})

@@ -1,5 +1,5 @@
 import { Timestamp } from "typeorm";
-import IProjectProps from "@src/interfaces/IProject";
+import IProjectProps from "@src/core/domain/interfaces/IProject";
 
 export default class Project {
     id : string
@@ -14,7 +14,7 @@ export default class Project {
     downVotes: JSON
     createdAt : Timestamp
     updatedAt : Timestamp
-
+    
     constructor(props : IProjectProps) {
         Object.assign(this, props)
     }
