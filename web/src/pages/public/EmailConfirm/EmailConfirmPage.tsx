@@ -1,17 +1,19 @@
 import React, { useEffect } from "react"
-import { emailConfirm } from "services/auth.service"
+import { useParams, useNavigate } from "react-router-dom"
+import * as authService from "services/auth.service"
 
 const EmailConfirmPage: React.FC = () => {
-
+  const { email } = useParams()
+  const navigate = useNavigate()
   useEffect(() => {
-    // requisição na service de auth para confirmar email
-    {/*} const EmailConfirm = emailConfirm
+    authService.emailConfirm(email ?? "")
+      .then((res) => {
+        if (res.hasError)
+          alert('Um erro inesperado aconteceu ao confirmar o E-mail!')
 
-       axios
-        .get("/email-confirm")
-  .then(response => setUsers(response.data)); */}
-  }, []
-  )
+        navigate('/')
+      })
+  }, [email])
 
   return (
     <div>

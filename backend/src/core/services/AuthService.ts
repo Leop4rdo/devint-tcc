@@ -30,26 +30,26 @@ import UserOutput from "@ports/output/user/UserOutput";
 import DevService from "./DevService";
 
 export default class AuthService {
-    private repo : AuthRepository
-    private devRepo : DevRepository
-    private companyRepo : CompanyRepository
-    private passResetTokenRepo : PasswordResetTokenRepository
-    private emailService : EmailService
-    private devService : DevService
+    private repo: AuthRepository
+    private devRepo: DevRepository
+    private companyRepo: CompanyRepository
+    private passResetTokenRepo: PasswordResetTokenRepository
+    private emailService: EmailService
+    private devService: DevService
 
     constructor(
-        repo : AuthRepository, 
-        devRepo : DevRepository, 
-        companyRepo : CompanyRepository,
-        passResetTokenRepo : PasswordResetTokenRepository,
-        emailService : EmailService,
-        devService : DevService) { 
-            this.repo = repo; 
-            this.companyRepo = companyRepo;
-            this.devRepo = devRepo;
-            this.passResetTokenRepo = passResetTokenRepo;
-            this.emailService = emailService;
-            this.devService = devService;
+        repo: AuthRepository,
+        devRepo: DevRepository,
+        companyRepo: CompanyRepository,
+        passResetTokenRepo: PasswordResetTokenRepository,
+        emailService: EmailService,
+        devService: DevService) {
+        this.repo = repo;
+        this.companyRepo = companyRepo;
+        this.devRepo = devRepo;
+        this.passResetTokenRepo = passResetTokenRepo;
+        this.emailService = emailService;
+        this.devService = devService;
     }
 
     async setEnabled(id: string, value: number): Promise<IResponse> {
@@ -61,7 +61,7 @@ export default class AuthService {
             data: `user ${value == 0 ? 'disabled' : 'enabled'} sucessfully!`
         })
     }
-    
+
     async create(body: UserCreateInput): Promise<IResponse> {
         await body.validate()
 
@@ -73,30 +73,30 @@ export default class AuthService {
 
         const auth = await this.repo.create(body as unknown as AuthEntity);
 
-        if (!auth) return new ServerErrorResponse({message : "Cannot create user auth" })
+        if (!auth) return new ServerErrorResponse({ message: "Cannot create user auth" })
 
         try {
 
-            const user : any = (body.cnpj) ? await this.createCompany(body, auth) : await this.createDev(body, auth);
-            
+            const user: any = (body.cnpj) ? await this.createCompany(body, auth) : await this.createDev(body, auth);
+
             user.role = (body.cnpj) ? userRoles.COMPANY : userRoles.DEV
 
             this.emailService.send({
-                to : auth.email,
-                subject : 'Confirmação de email',
-                values : {
-                    USER : user.name,
-                    LINK : `${process.env.FRONTEND_URL}/email-confirm/${auth.email}`
+                to: auth.email,
+                subject: 'Confirmação de email',
+                values: {
+                    USER: user.name,
+                    LINK: `${process.env.FRONTEND_URL}/email-confirm/${auth.email}`
                 }
             }, EmailTemplates.EMAIL_CONFIRM)
-            
+
             return new SuccessResponse({
                 status: 201,
-                data : new UserOutput(user as unknown as IUserProps)
+                data: new UserOutput(user as unknown as IUserProps)
             })
         } catch (e) {
             await this.repo.remove(auth.id)
-            return new ServerErrorResponse({message : "Cannot create user" })
+            return new ServerErrorResponse({ message: "Cannot create user" })
         }
 
     }
@@ -115,16 +115,16 @@ export default class AuthService {
 
         const user = (auth.role == userRoles.COMPANY) ?
             await this.companyRepo.findByAuthId(auth.id)
-        :
+            :
             await this.devRepo.findByAuthId(auth.id)
 
         if (!user) return new forbiddenResponse();
 
         const userRes = (auth.role == userRoles.COMPANY) ?
             new CompanyOutput(user as ICompanyProps)
-            : new DevOutput(user as unknown as IDevProps) 
-        
-        new UserOutput({...user, role : auth.role} as unknown as IUserProps);
+            : new DevOutput(user as unknown as IDevProps)
+
+        new UserOutput({ ...user, role: auth.role } as unknown as IUserProps);
 
         const _token = this.createToken(userRes);
 
@@ -140,10 +140,10 @@ export default class AuthService {
         return jwt.sign({ ...user }, process.env.SECRET, { expiresIn: "1d" });
     }
 
-    private async createCompany(body : UserCreateInput, _auth : AuthEntity) : Promise<CompanyEntity | BadRequestResponse> {
+    private async createCompany(body: UserCreateInput, _auth: AuthEntity): Promise<CompanyEntity | BadRequestResponse> {
         const dto = new CompanyCreateInput({
-            name : body.name,
-            cnpj : body.cnpj,
+            name: body.name,
+            cnpj: body.cnpj,
             auth: _auth
         } as unknown as ICompanyProps)
 
@@ -152,13 +152,13 @@ export default class AuthService {
         return this.companyRepo.create(dto as unknown as CompanyEntity)
     }
 
-    private async createDev(body : UserCreateInput, _auth : AuthEntity) : Promise<DevEntity | BadRequestResponse>  {
+    private async createDev(body: UserCreateInput, _auth: AuthEntity): Promise<DevEntity | BadRequestResponse> {
         const dto = new DevCreateInput({
-            name : body.name,
-            birthday : body.birthday,
-            githubUsername : body.githubUsername,
-            gender : body.gender,
-            auth : _auth
+            name: body.name,
+            birthday: body.birthday,
+            githubUsername: body.githubUsername,
+            gender: body.gender,
+            auth: _auth
         } as unknown as IDevProps)
 
         const res = await this.devService.create(dto)
@@ -166,18 +166,18 @@ export default class AuthService {
         return (res.hasError) ? res as BadRequestResponse : res.data
     }
 
-    async requestPasswordRecovery(email : string): Promise<IResponse> {
+    async requestPasswordRecovery(email: string): Promise<IResponse> {
         const auth = await this.repo.findBy('email', email)
-        
-        if (!auth || auth.enabled == 0) 
-            return new BadRequestResponse({ message : errors.ENTITY_NOT_FOUND })
-        
+
+        if (!auth || auth.enabled == 0)
+            return new BadRequestResponse({ message: errors.ENTITY_NOT_FOUND })
+
         const user = (auth.role == userRoles.COMPANY) ?
             await this.companyRepo.findByAuthId(auth.id)
-            :await this.devRepo.findByAuthId(auth.id)
+            : await this.devRepo.findByAuthId(auth.id)
 
-        if (!user) 
-            return new BadRequestResponse({ message : errors.ENTITY_NOT_FOUND })
+        if (!user)
+            return new BadRequestResponse({ message: errors.ENTITY_NOT_FOUND })
 
         const passResetToken = new PasswordResetTokenEntity();
         passResetToken.token = generateToken()
@@ -187,53 +187,53 @@ export default class AuthService {
         await this.passResetTokenRepo.create(passResetToken);
 
         await this.emailService.send({
-            to : auth.email,
-            subject : 'Recuperação de senha',
-            values : {
-                USER : user.name,
-                LINK : `${process.env.FRONTEND_URL}/change-my-password/${passResetToken.token}`
+            to: auth.email,
+            subject: 'Recuperação de senha',
+            values: {
+                USER: user.name,
+                LINK: `${process.env.FRONTEND_URL}/change-my-password/${passResetToken.token}`
             }
         }, EmailTemplates.PASSWORD_RECOVERY)
 
         return new SuccessResponse({
-            status : 200,
-            data : {
-                message : 'Success'
+            status: 200,
+            data: {
+                message: 'Success'
             }
         })
     }
 
-    async emailConfirm(email : string): Promise<IResponse>{
-        const auth = await this.repo.findBy('email', email) 
+    async emailConfirm(email: string): Promise<IResponse> {
+        const auth = await this.repo.findBy('email', email)
 
-        auth.emailConfirmed = true; // set it to true
-    
-        this.repo.update(auth); // update auth
-        
+        auth.emailConfirmed = true
+
+        this.repo.update(auth)
+
         return new SuccessResponse({
-            data: `user email confirm se to ${auth.emailConfirmed == true ? 'true' : 'false'} sucessfully!`
+            data: `Email Confirmed sucessfully!`
         })
-        
+
     }
 
-    async changePassword(password, token) : Promise<IResponse>{
+    async changePassword(password, token): Promise<IResponse> {
         const passRecoveryToken = await this.passResetTokenRepo.findBy('token', token);
 
         if (!passRecoveryToken || passRecoveryToken.expirationDate < Date.now())
-            return new BadRequestResponse({ message : errors.ENTITY_NOT_FOUND })
-        
+            return new BadRequestResponse({ message: errors.ENTITY_NOT_FOUND })
+
         const updated = passRecoveryToken.owner
         updated.password = await hash(password, 10)
         await this.repo.update(updated)
 
         this.passResetTokenRepo.remove(passRecoveryToken.id)
-           
+
         return new SuccessResponse({
-            status : 200,
-            data : {
-                message : 'Success'
+            status: 200,
+            data: {
+                message: 'Success'
             }
-        }) 
+        })
     }
 }
 

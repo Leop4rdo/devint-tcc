@@ -70,7 +70,7 @@ export const changePassword = async (body: IChangePasswordRequestBody) => {
 
 export const emailConfirm = async (email: string) => {
     try {
-        const { data } = await api.patch("email-confirm", email)
+        const { data } = await api.patch("email-confirm", { email: email })
         console.log(data)
 
         return data as IResponse

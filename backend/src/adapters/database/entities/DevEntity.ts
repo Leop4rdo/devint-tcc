@@ -14,84 +14,84 @@ export default class DevEntity {
     @PrimaryGeneratedColumn('uuid')
     id: string
 
-    @Column({nullable:false})
+    @Column({ nullable: false })
     @Index()
-    name : string
+    name: string
 
-    @Column({ default: '', nullable : true })
-    bio : string
+    @Column({ default: '', nullable: true })
+    bio: string
 
     @Column()
-    gender : string
+    gender: string
 
-    @Column({default: ''})
-    status: string 
+    @Column({ default: '' })
+    status: string
 
-    @Column({name : 'profile_pic_url', nullable : true })
-    profilePicUrl : string
-    
-    @Column({default : 0 , name:'comunity_ratings'})
-    comunityRating : number
+    @Column({ name: 'profile_pic_url', nullable: true })
+    profilePicUrl: string
 
-    @Column('jsonb', { nullable : true })
-    notifications : JSON
-    
-    @Column({default : '', name : 'current_job'})
-    currentJob : string
+    @Column({ default: 0, name: 'comunity_ratings' })
+    comunityRating: number
 
-    @Column({nullable : true, name : 'github_username', unique : true})
-    @Index({ unique : true })
-    githubUsername : string
+    @Column('jsonb', { nullable: true })
+    notifications: JSON
 
-    @Column({name : 'open_to_work', default: false})
+    @Column({ default: '', name: 'current_job' })
+    currentJob: string
+
+    @Column({ nullable: true, name: 'github_username', unique: true })
+    @Index({ unique: true })
+    githubUsername: string
+
+    @Column({ name: 'open_to_work', default: false })
     @Index()
-    openToWork : boolean
+    openToWork: boolean
 
-    @Column({type : 'date' })
-    birthday : Date
+    @Column({ type: 'date' })
+    birthday: Date
 
-    @ManyToMany(()=> DevEntity, (devs) => devs.following)
-    @JoinTable({name:'follows'})
+    @ManyToMany(() => DevEntity, (devs) => devs.following)
+    @JoinTable({ name: 'follows' })
     following: DevEntity[]
 
-    @OneToOne(() => AuthEntity, { nullable : false, onDelete : 'CASCADE'})
+    @OneToOne(() => AuthEntity, { nullable: false, onDelete: 'CASCADE' })
     @JoinColumn()
-    auth : AuthEntity
+    auth: AuthEntity
 
-    @OneToMany(()=> PostEntity, (posts) => posts.writter)
-    posts: ProjectEntity[]
+    @OneToMany(() => PostEntity, (posts) => posts.writter)
+    posts: PostEntity[]
 
-    @OneToMany(()=> ArticleEntity, (articles) => articles.writter)
+    @OneToMany(() => ArticleEntity, (articles) => articles.writter)
     articles: ArticleEntity[]
 
-    @OneToMany(()=> SocialLinkEntity ,(social) => social.value)
-    @JoinColumn({name: 'social_links'})   
-    socialLinks : SocialLinkEntity[]
+    @OneToMany(() => SocialLinkEntity, (social) => social.value)
+    @JoinColumn({ name: 'social_links' })
+    socialLinks: SocialLinkEntity[]
 
-    @ManyToOne(()=> CareerFocusEntity ,(careerFocus) => careerFocus.dev)
-    @JoinColumn({name: 'careers_focus'}) 
-    @Index()  
-    careerFocus : CareerFocusEntity
-    
-    @ManyToOne(()=> SeniorityEntity, (senior) => senior.devs)
-    @JoinColumn({name: 'auto_declared_seniority'})
-    autoDeclaredSeniority : SeniorityEntity
+    @ManyToOne(() => CareerFocusEntity, (careerFocus) => careerFocus.dev)
+    @JoinColumn({ name: 'careers_focus' })
+    @Index()
+    careerFocus: CareerFocusEntity
 
-    @ManyToMany(()=> SkillEntity)
-    @JoinTable({name: 'devs_skills'})
+    @ManyToOne(() => SeniorityEntity, (senior) => senior.devs)
+    @JoinColumn({ name: 'auto_declared_seniority' })
+    autoDeclaredSeniority: SeniorityEntity
+
+    @ManyToMany(() => SkillEntity)
+    @JoinTable({ name: 'devs_skills' })
     skills: SkillEntity[]
 
-    @ManyToMany(()=> ProjectEntity)
-    @JoinTable({name: 'devs_projects'})
+    @ManyToMany(() => ProjectEntity)
+    @JoinTable({ name: 'devs_projects' })
     projects: ProjectEntity[]
 
-    @ManyToMany(()=> BadgeEntity)
-    @JoinTable({name: 'devs_badges'})
-    badges: BadgeEntity[]   
+    @ManyToMany(() => BadgeEntity)
+    @JoinTable({ name: 'devs_badges' })
+    badges: BadgeEntity[]
 
     @CreateDateColumn({ name: 'created_at', select: false })
-    createdAt : Timestamp
+    createdAt: Timestamp
 
-    @UpdateDateColumn({ name : 'updated_at' })
-    updatedAt : Timestamp
+    @UpdateDateColumn({ name: 'updated_at' })
+    updatedAt: Timestamp
 }
