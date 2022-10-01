@@ -15,7 +15,6 @@ export default class UserCreateInput extends InputPort {
     @IsString()
     password: string;
     
-    @IsEnum(userRoles)
     role: number;
     
     // Optional properties

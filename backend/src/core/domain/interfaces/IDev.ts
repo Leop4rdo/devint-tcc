@@ -18,7 +18,7 @@ import ISkillProps from "./ISkill"
 import ISocialLinkProps from "./ISocialLink"
 
 export default interface IDevProps {
-    id: string
+    id ?: string
     name : string
     bio : string
     gender : string

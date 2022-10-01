@@ -1,5 +1,5 @@
 export default interface IProjectProps {
-  id: string
+  id ?: string
   name : string
   githubRepoUrl : string
   followers : JSON

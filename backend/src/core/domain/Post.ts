@@ -2,7 +2,6 @@ import { Timestamp } from "typeorm";
 import PostEntity from "@entities/PostEntity";
 import IPostProps from "@src/core/domain/interfaces/IPost";
 import Dev from "./Dev";
-import PostAttachment from "./PostAttachment";
 
 export default class Post {
     id: string
@@ -10,7 +9,7 @@ export default class Post {
     reports: JSON
     comments: JSON
     hearts : JSON
-    postAttachment: PostAttachment[]
+    attachments: JSON
     writter: Dev
     createdAt : Timestamp
     updateAt : Timestamp

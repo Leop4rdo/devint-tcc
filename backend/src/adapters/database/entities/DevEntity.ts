@@ -64,7 +64,7 @@ export default class DevEntity {
     @JoinColumn({name: 'social_links'})   
     socialLinks : SocialLinkEntity[]
 
-    @ManyToOne(()=> CareerFocusEntity ,(careerFocus) => careerFocus.dev)
+    @ManyToOne(()=> CareerFocusEntity)
     @JoinColumn({name: 'careers_focus'}) 
     @Index()  
     careerFocus : CareerFocusEntity

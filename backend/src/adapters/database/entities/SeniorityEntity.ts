@@ -8,7 +8,7 @@ export default class SeniorityEntity {
   id: string
 
   @Column({nullable:false})
-  names: string
+  name: string
 
   @OneToMany(()=> DevEntity, (dev) => dev.autoDeclaredSeniority)
   devs: DevEntity[]

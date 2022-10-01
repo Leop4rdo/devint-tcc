@@ -22,8 +22,9 @@ export default class DevOutput {
     githubUsername : string
     openToWork : boolean
     birthday : Date
-    auth : Auth
+    email : string
     posts: Post[]
+    private auth : Auth
     articles: Article[]
     socialLinks : SocialLink[]
     careerFocus : CareerFocus
@@ -35,5 +36,7 @@ export default class DevOutput {
 
     constructor(props : IDevProps) {
         Object.assign(this, props);
+        this.auth = undefined
+        this.email = props.auth.email
     }
 }
