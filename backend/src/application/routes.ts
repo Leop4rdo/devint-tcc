@@ -6,13 +6,13 @@ import { publicUserRoutes } from "./routes/UserRoutes";
 const routes = Router();
 
 // public routes -> 
-routes.get('/health-check', (req : Request, res : Response) => res.json({message: 'Api is working properly!'}));
+routes.get('/health-check', (req: Request, res: Response) => res.json({ message: 'Api is working properly!' }));
 routes.use("/", publicUserRoutes)
 
 routes.use(authMiddleware)
 
 // secure routes ->
 routes.use("/users", publicUserRoutes)
-routes.use("/posts", postRouter)
+routes.use("/", postRouter)
 
 export default routes
