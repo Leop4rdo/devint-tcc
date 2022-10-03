@@ -50,7 +50,7 @@ export default class DevEntity {
     @Column({type : 'date' })
     birthday : Date
 
-    @OneToOne(() => AuthEntity, { nullable : false, onDelete : 'CASCADE'})
+    @OneToOne(() => AuthEntity, { nullable : false, onDelete : 'CASCADE', eager : true })
     @JoinColumn()
     auth : AuthEntity
 

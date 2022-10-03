@@ -9,19 +9,19 @@ export default class PostEntity {
     @Column()
     content: string
       
-    @Column('jsonb')
+    @Column('jsonb', { default : []})
     reports: JSON
     
-    @Column('jsonb')
+    @Column('jsonb', { default : [] })
     comments: JSON
     
-    @Column('jsonb')
+    @Column('jsonb', { default : []})
     hearts : JSON
     
     @Column('jsonb')
     attachments: JSON
       
-    @ManyToOne(() => DevEntity, (writter) => writter.posts)
+    @ManyToOne(() => DevEntity, (writter) => writter.posts, { eager : true})
     writter: DevEntity
     
     @CreateDateColumn({select:false, name : 'created_at'})
