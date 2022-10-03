@@ -14,8 +14,6 @@ export default class PostController {
     }
 
     create = (req : Request, res : Response) => {
-        console.log(this)
-
         this.service.create(new PostCreateInput(req.body), req.body.userData.id)
             .then((_res) => res.status(_res.status || 200).json(_res))
             .catch((err) => res.status(err.status || 500).json(err))
@@ -29,6 +27,12 @@ export default class PostController {
 
     list = (req : Request, res : Response) => {
         this.service.list()
+            .then((_res) => res.status(_res.status || 200).json(_res))
+            .catch((err) => res.status(err.status || 500).json(err))
+    }
+
+    addHeart = (req : Request, res : Response) => {
+        this.service.addHeart(req.params.id, req.body.userData.id) 
             .then((_res) => res.status(_res.status || 200).json(_res))
             .catch((err) => res.status(err.status || 500).json(err))
     }

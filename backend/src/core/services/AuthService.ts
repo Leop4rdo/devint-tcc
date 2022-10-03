@@ -108,8 +108,6 @@ export default class AuthService {
         :
             await this.devRepo.findByAuthId(auth.id)
 
-        console.log(user)
-
         if (!user) return new forbiddenResponse();
 
         const userRes = (auth.role == userRoles.COMPANY) ?

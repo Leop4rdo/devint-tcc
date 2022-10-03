@@ -18,4 +18,4 @@ export const securedUserRoutes = Router();
 securedUserRoutes.patch("/disable/:userId", authCtrl.disable)
 securedUserRoutes.patch("/enable/:userId", authCtrl.enable)
 securedUserRoutes.get("/", userCtrl.list)
-securedUserRoutes.get("/", userCtrl.getById);
+// securedUserRoutes.get("/:userId", userCtrl.getById);

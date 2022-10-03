@@ -14,8 +14,5 @@ app.use(cors())
 app.use(mailController);
 
 app.listen(PORT, () => {
-    console.log("user", process.env.MAIL_USER)
-    console.log("pass", process.env.MAIL_PASSWORD)
-    console.log("")
     console.log('Mail microservice listening on port ' + PORT);
 })
