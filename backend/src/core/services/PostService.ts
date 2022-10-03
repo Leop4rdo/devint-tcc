@@ -7,6 +7,9 @@ import errors from "@src/helpers/errors"
 import SuccessResponse from "@src/application/Responses/SuccessResponse"
 import AddCommentInput from "@src/ports/input/posts/AddCommentInput"
 import BadRequestResponse from "@src/application/Responses/BadRequestResponse"
+import PostOutput from "@src/ports/output/posts/PostOutput"
+import DevMinimalOutput from "@src/ports/output/user/DevMinimalOutput"
+import IDevProps from "../domain/interfaces/IDev"
 
 export default class PostService {
     _ : PostRepository
@@ -26,7 +29,7 @@ export default class PostService {
         if (!post) 
             return new ServerErrorResponse({ message : errors.CAN_NOT_CREATE_ENTITY})
         else
-            return new SuccessResponse({status : 201, message : 'Entity created successfully', data : post})
+            return new SuccessResponse({status : 201, message : 'Post created successfully', data : new PostOutput(post as IPostProps)})
     }
 
     async addComment(comment : AddCommentInput, postId : string, writter : any) {
@@ -37,12 +40,7 @@ export default class PostService {
 
         const commentBody = {
             ...comment,
-            writter : {
-                id : writter.id,
-                name : writter.name,
-                profilePicUrl : writter.profilePicUrl,
-                githubUsername : writter.githubUsername
-            }
+            writter : new DevMinimalOutput(writter as IDevProps)
         }
 
         post.comments.push(commentBody)
