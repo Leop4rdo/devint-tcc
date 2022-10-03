@@ -7,6 +7,7 @@ const errors = {
     INVALID_DATA : 'Invalid data',
     ROUTE_NOT_FOUND : 'Are u lost baby girl? read the api docs and find your way!',
     NOT_AUTHENTICATED : 'You need to be authenticated to access this route!',
+    CAN_NOT_CREATE_ENTITY : 'There was an error and the requested entity was not created!'
 }
 
 export default errors;

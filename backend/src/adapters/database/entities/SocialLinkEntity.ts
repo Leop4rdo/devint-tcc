@@ -11,7 +11,7 @@ export default class SocialLinkEntity {
     name: string
 
     @Column({ nullable : false})
-    value: string
+    url: string
 
     @ManyToOne(()=> DevEntity, (dev) => dev.socialLinks)
     owner : DevEntity

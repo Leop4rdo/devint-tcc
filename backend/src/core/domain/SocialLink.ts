@@ -1,15 +1,14 @@
 import { Timestamp } from "typeorm";
-import DevEntity from "@entities/DevEntity";
-import ISocialLinkProps from "@src/interfaces/ISocialLink";
+import ISocialLinkProps from "@src/core/domain/interfaces/ISocialLink";
+import Dev from "./Dev";
 
 export default class socialLink {
     id: string
     name: string
-    value: string
-    owner : DevEntity
+    url: string
+    owner : Dev
     createdAt : Timestamp
     updatedAt : Timestamp
-    
 
     constructor(props : ISocialLinkProps) {
         Object.assign(this, props)

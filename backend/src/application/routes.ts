@@ -1,5 +1,6 @@
 import { Request, Response, Router } from "express";
 import authMiddleware from "./middlewares/auth.middleware";
+import postRouter from "./routes/PostRoutes";
 import { publicUserRoutes } from "./routes/UserRoutes";
 
 const routes = Router();
@@ -12,5 +13,6 @@ routes.use(authMiddleware)
 
 // secure routes ->
 routes.use("/users", publicUserRoutes)
+routes.use("/posts", postRouter)
 
 export default routes

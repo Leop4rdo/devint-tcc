@@ -6,7 +6,7 @@ import PasswordResetTokenRepository from "@repositories/PasswordResetTokenReposi
 import EmailService from "@adapters/mail/EmailService";
 import AuthService from "@services/AuthService";
 import DevService from "@services/DevService";
-import { IUserProps } from "@src/interfaces/IUser";
+import { IUserProps } from "@src/core/domain/interfaces/IUser";
 import LoginInput from "../../ports/input/user/LoginInput";
 import UserCreateInput from "../../ports/input/user/UserCreateInput";
 
@@ -33,7 +33,7 @@ export default class AuthController {
     login = (req : Request, res : Response) => {
         this.authService.login(new LoginInput(req.body))
             .then((response) => res.status(response.status || 200).json(response))
-            .catch((err) => res.status(err.status || 500).json(err))
+            .catch((err) => { res.status(err.status || 500).json(err); console.log(err) })
     }
 
     create = (req : Request, res : Response) => {
@@ -65,6 +65,7 @@ export default class AuthController {
             .then((_res) => res.status(_res.status || 200).json(_res))
             .catch((err) => res.status(err.status || 500).json(err))
     }
+
     emailConfirm = (req : Request, res : Response) => {
         this.authService.emailConfirm(req.body.id)
             .then((_res) => res.status(_res.status || 200).json(_res))

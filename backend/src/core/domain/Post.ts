@@ -1,11 +1,16 @@
 import { Timestamp } from "typeorm";
 import PostEntity from "@entities/PostEntity";
-import IPostProps from "@src/interfaces/IPost";
+import IPostProps from "@src/core/domain/interfaces/IPost";
+import Dev from "./Dev";
 
 export default class Post {
     id: string
-    url: string
-    post: PostEntity
+    content: string
+    reports: JSON
+    comments: JSON
+    hearts : JSON
+    attachments: JSON
+    writter: Dev
     createdAt : Timestamp
     updateAt : Timestamp
 

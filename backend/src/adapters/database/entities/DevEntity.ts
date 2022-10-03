@@ -50,30 +50,26 @@ export default class DevEntity {
     @Column({type : 'date' })
     birthday : Date
 
-    @ManyToMany(()=> DevEntity, (devs) => devs.following)
-    @JoinTable({name:'follows'})
-    following: DevEntity[]
-
-    @OneToOne(() => AuthEntity, { nullable : false, onDelete : 'CASCADE'})
+    @OneToOne(() => AuthEntity, { nullable : false, onDelete : 'CASCADE', eager : true })
     @JoinColumn()
     auth : AuthEntity
 
     @OneToMany(()=> PostEntity, (posts) => posts.writter)
-    posts: ProjectEntity[]
+    posts: PostEntity[]
 
     @OneToMany(()=> ArticleEntity, (articles) => articles.writter)
     articles: ArticleEntity[]
 
-    @OneToMany(()=> SocialLinkEntity ,(social) => social.value)
+    @OneToMany(()=> SocialLinkEntity ,(social) => social.owner)
     @JoinColumn({name: 'social_links'})   
     socialLinks : SocialLinkEntity[]
 
-    @ManyToOne(()=> CareerFocusEntity ,(careerFocus) => careerFocus.dev)
+    @ManyToOne(()=> CareerFocusEntity)
     @JoinColumn({name: 'careers_focus'}) 
     @Index()  
-    careerFocus : CareerFocusEntity[]
+    careerFocus : CareerFocusEntity
     
-    @OneToMany(()=> SeniorityEntity, (senior) => senior.devs)
+    @ManyToOne(()=> SeniorityEntity, (senior) => senior.devs)
     @JoinColumn({name: 'auto_declared_seniority'})
     autoDeclaredSeniority : SeniorityEntity
 

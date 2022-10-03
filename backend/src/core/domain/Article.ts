@@ -1,6 +1,6 @@
 import { Timestamp } from "typeorm"
-import DevEntity from "@entities/DevEntity"
-import IArticleProps from "@src/interfaces/IArticle"
+import IArticleProps from "@src/core/domain/interfaces/IArticle"
+import Dev from "./Dev"
 
 export default class Article {
     id: string
@@ -9,7 +9,7 @@ export default class Article {
     upVotes: JSON 
     downVotes: JSON
     comments: JSON
-    writter : DevEntity
+    writter : Dev
     createdAt : Timestamp
     updatedAt : Timestamp
 

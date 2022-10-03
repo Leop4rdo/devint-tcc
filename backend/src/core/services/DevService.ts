@@ -5,6 +5,7 @@ import { getGithubUserProfile } from "@adapters/github/GithubService";
 import IResponse from "@src/application/Responses/IResponse";
 import SuccessResponse from "@src/application/Responses/SuccessResponse";
 import DevCreateInput from "@ports/input/user/dev/DevCreateInput";
+import DevOutput from "@src/ports/output/user/DevOutput";
 
 export default class DevService {
     private repo : DevRepository
@@ -28,7 +29,7 @@ export default class DevService {
 
         const res = new SuccessResponse({
             status: 201,
-            data: dev
+            data: new DevOutput(dev)
         })
 
         this.populateProfile(dev.githubUsername, dev.id)

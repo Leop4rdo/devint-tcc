@@ -1,10 +1,14 @@
 import { Timestamp } from "typeorm"
-import DevEntity from "@entities/DevEntity"
+import Dev from "./Dev"
+import ICareerProps from "./interfaces/ICareerFocus"
 
 export default class CareerFocus {
     id: string    
     name: string    
-    dev: DevEntity
     createdAt : Timestamp
     updatedAt : Timestamp
+
+    constructor(props : ICareerProps) {
+        Object.assign(this, props)
+    }
 }

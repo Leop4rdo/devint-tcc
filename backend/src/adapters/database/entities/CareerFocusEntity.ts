@@ -8,9 +8,6 @@ export default class CareerFocusEntity {
     
     @Column({ nullable : false})
     name: string
-    
-    @ManyToOne(()=> DevEntity, (dev) => dev.careerFocus)
-    dev: DevEntity
 
     @CreateDateColumn({ name: 'created_at', select: false })
     createdAt : Timestamp
