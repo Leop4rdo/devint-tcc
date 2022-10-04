@@ -56,7 +56,7 @@ export default class PostService {
         if (!post)
             return new ServerErrorResponse({ message: errors.CAN_NOT_CREATE_ENTITY })
         else
-            return new SuccessResponse({ status: 201, message: 'Post created successfully', data: new PostOutput(post as IPostProps) })
+            return new SuccessResponse({ status: 201, message: 'Post created successfully', data: { id: post.id, writter: post.writter, content: post.content, attachments: post.attachments } })
     }
 
     async addComment(comment: AddCommentInput, postId: string, writter: any) {
@@ -80,7 +80,30 @@ export default class PostService {
         })
     }
 
+    async addHeart(postId: string, userId: string) {
+        const post = await this._.findById(postId)
+
+        if (!post)
+            return new BadRequestResponse({ message: errors.ENTITY_NOT_FOUND })
+
+        if (post.hearts.includes(userId))
+            return new SuccessResponse({ status: 200, message: 'You already gave a heart in this post' })
+
+        post.hearts.push(userId)
+
+        await this._.update(post)
+
+        return new SuccessResponse({
+            status: 200,
+            data: new PostOutput(post)
+        })
+    }
+
     async list() {
-        return new SuccessResponse({ data: await this._.list() })
+        const posts = await this._.list()
+
+        const mapped = posts.map((post: Post) => new PostOutput(post))
+
+        return new SuccessResponse({ data: mapped })
     }
 }
