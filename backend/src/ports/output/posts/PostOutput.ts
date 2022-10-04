@@ -4,14 +4,14 @@ import { Timestamp } from "typeorm";
 import DevMinimalOutput from "../user/DevMinimalOutput";
 
 export default class PostOutput {
-    id : string
-    content : string
-    reports : JSON
-    comments : JSON
-    hearts : number
-    writter : DevMinimalOutput
+    id: string
+    content: string
+    reports: JSON
+    comments: JSON
+    hearts: number
+    writter: DevMinimalOutput
 
-    constructor(props : IPostProps) {
+    constructor(props: IPostProps) {
         this.id = props.id
         this.content = props.content
         this.reports = props.reports
