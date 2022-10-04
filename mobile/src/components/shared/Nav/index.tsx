@@ -3,11 +3,15 @@ import { Pressable, StyleSheet, View } from "react-native"
 import Logo from "../Logo"
 import styles from "./styles"
 
-const NavBar : React.FC = () => {
+interface INavBarProps {
+    toggleSidebar : () => void
+}
+
+const NavBar : React.FC<INavBarProps> = ({toggleSidebar}) => {
 
     return (
         <View style={styles.navBar}>
-            <Pressable style={styles.menuItem}>
+            <Pressable style={styles.menuItem} onPress={ toggleSidebar }>
                 <MaterialIcons name="menu" size={24} color="#FFF" />
             </Pressable>
 

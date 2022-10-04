@@ -1,15 +1,12 @@
 import { Text, View } from "react-native"
-import FeedbackTextInput from "../../../components/shared/FeedbackInput";
-import ButtonComponent from "../../../components/shared/Button";
-import styles from "./style";
-import NavBar from "../../../components/shared/Nav";
+import LayoutWrapper from "../../../components/shared/LayoutWrapper";
 
-const HomePage : React.FC = () => {
-
+const HomePage : React.FC<{ navigation : any }> = ({navigation}) => {
+    console.log('home')
     return (
-        <View style={styles.page}>
-            <NavBar />
-        </View>
+        <LayoutWrapper navigation={navigation}>
+            <Text>Caramelo</Text>
+        </LayoutWrapper>
     )
 }
 

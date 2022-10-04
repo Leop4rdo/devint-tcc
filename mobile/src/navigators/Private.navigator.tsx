@@ -1,15 +1,15 @@
-import {createNativeStackNavigator} from "@react-navigation/native-stack"
+import { createDrawerNavigator } from "@react-navigation/drawer"
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomePage from "../pages/private/Home"
 
 
 const PrivateNavigator : React.FC = () => {
-    const PrivateStack = createNativeStackNavigator()
-
+    const Stack = createNativeStackNavigator()
 
     return (
-        <PrivateStack.Navigator screenOptions={{ headerShown : false, animation : 'fade_from_bottom' }} initialRouteName="home">
-            <PrivateStack.Screen name="home" component={HomePage} />
-        </PrivateStack.Navigator>
+        <Stack.Navigator initialRouteName="home" screenOptions={{ headerShown : false, animation : 'fade_from_bottom'}}>
+            <Stack.Screen name="home" component={HomePage} />
+        </Stack.Navigator>
     )
 }
 
