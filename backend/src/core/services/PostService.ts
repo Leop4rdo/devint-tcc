@@ -11,6 +11,7 @@ import PostOutput from "@src/ports/output/posts/PostOutput"
 import DevMinimalOutput from "@src/ports/output/user/DevMinimalOutput"
 import IDevProps from "../domain/interfaces/IDev"
 import IResponse from "@src/application/Responses/IResponse"
+import PostEntity from "@src/adapters/database/entities/PostEntity"
 
 export default class PostService {
     _: PostRepository
@@ -102,7 +103,9 @@ export default class PostService {
     async list() {
         const posts = await this._.list()
 
-        const mapped = posts.map((post: Post) => new PostOutput(post))
+        const mapped = posts.map((_post_: Post) => {
+            console.log('writter ->', _post_.writter)
+        })
 
         return new SuccessResponse({ data: mapped })
     }

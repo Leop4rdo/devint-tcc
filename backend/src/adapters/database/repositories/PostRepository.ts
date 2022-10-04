@@ -5,7 +5,6 @@ import AbstractRepository from "./AbstractRepository"
 export default class PostRepository extends AbstractRepository<PostEntity> {
     constructor() {
         super(PostEntity);
-        this.db = AppDataSource.getRepository<PostEntity>(PostEntity)
     }
 
     async findByWritter(_id: string): Promise<PostEntity[]> {
@@ -16,6 +15,19 @@ export default class PostRepository extends AbstractRepository<PostEntity> {
                 }
             }
         })
+    }
+
+    override async list(): Promise<PostEntity[]> {
+        // user query builder para selecionar em ordem aleatoria
+        // todos os posts
+
+        // extra : paginação
+
+        return await this.db.createQueryBuilder('posts')
+            .innerJoin("posts.writter", "devs")
+            .orderBy("RANDOM()")
+            .getMany()
+
     }
 
 }

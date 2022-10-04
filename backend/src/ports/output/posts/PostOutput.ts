@@ -9,6 +9,7 @@ export default class PostOutput {
     reports: JSON
     comments: JSON
     hearts: number
+    attachments: JSON
     writter: DevMinimalOutput
 
     constructor(props: IPostProps) {
