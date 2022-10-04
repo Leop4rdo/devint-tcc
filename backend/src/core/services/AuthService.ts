@@ -203,14 +203,14 @@ export default class AuthService {
     }
 
     async emailConfirm(email: string): Promise<IResponse> {
-        const auth = await this.repo.findBy("email", email)
+        const auth = await this.repo.findBy('email', email)
 
-        auth.emailConfirmed = true; // set it to true
+        auth.emailConfirmed = true
 
-        this.repo.update(auth); // update auth
+        this.repo.update(auth)
 
         return new SuccessResponse({
-            data: ` User confirmed email sucessfully!`
+            data: `Email Confirmed sucessfully!`
         })
 
     }
