@@ -1,6 +1,7 @@
+import Auth from "@src/core/domain/Auth"
 import { IsString, IsNotEmpty } from "class-validator"
 import AuthEntity from "../../../../adapters/database/entities/AuthEntity"
-import ICompanyProps from "../../../../interfaces/ICompany"
+import ICompanyProps from "../../../../core/domain/interfaces/ICompany"
 import InputPort from "../../InputPort"
 
 export default class CompanyCreateInput extends InputPort {
@@ -13,7 +14,7 @@ export default class CompanyCreateInput extends InputPort {
     cnpj : string
 
     @IsNotEmpty()
-    auth : AuthEntity
+    auth : Auth
 
     constructor(props : ICompanyProps) {
         super()

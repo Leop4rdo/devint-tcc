@@ -1,11 +1,11 @@
 import { Timestamp } from "typeorm"
-import DevEntity from "@entities/DevEntity"
-import ISeniorityProps from "@src/interfaces/ISeniority"
+import ISeniorityProps from "@src/core/domain/interfaces/ISeniority"
+import Dev from "./Dev"
 
 export default class Seniority {
     id: string
-    names: string
-    devs: DevEntity[]
+    name: string
+    devs: Dev[]
     createdAt : Timestamp
     updatedAt : Timestamp
 

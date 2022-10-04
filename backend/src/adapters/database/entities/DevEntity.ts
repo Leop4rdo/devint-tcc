@@ -1,3 +1,4 @@
+import Seniority from "@src/core/domain/Seniority";
 import { Column, CreateDateColumn, Entity, Index, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm";
 import ArticleEntity from "./ArticleEntity";
 import AuthEntity from "./AuthEntity";
@@ -50,11 +51,7 @@ export default class DevEntity {
     @Column({ type: 'date' })
     birthday: Date
 
-    @ManyToMany(() => DevEntity, (devs) => devs.following)
-    @JoinTable({ name: 'follows' })
-    following: DevEntity[]
-
-    @OneToOne(() => AuthEntity, { nullable: false, onDelete: 'CASCADE' })
+    @OneToOne(() => AuthEntity, { nullable: false, onDelete: 'CASCADE', eager: true })
     @JoinColumn()
     auth: AuthEntity
 
@@ -64,16 +61,16 @@ export default class DevEntity {
     @OneToMany(() => ArticleEntity, (articles) => articles.writter)
     articles: ArticleEntity[]
 
-    @OneToMany(() => SocialLinkEntity, (social) => social.value)
+    @OneToMany(() => SocialLinkEntity, (social) => social.owner)
     @JoinColumn({ name: 'social_links' })
     socialLinks: SocialLinkEntity[]
 
-    @ManyToOne(() => CareerFocusEntity, (careerFocus) => careerFocus.dev)
+    @ManyToOne(() => CareerFocusEntity)
     @JoinColumn({ name: 'careers_focus' })
     @Index()
     careerFocus: CareerFocusEntity
 
-    @ManyToOne(() => SeniorityEntity, (senior) => senior.devs)
+    @ManyToOne(() => SeniorityEntity, (seniority) => seniority.devs)
     @JoinColumn({ name: 'auto_declared_seniority' })
     autoDeclaredSeniority: SeniorityEntity
 

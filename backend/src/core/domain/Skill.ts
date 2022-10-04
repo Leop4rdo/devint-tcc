@@ -1,5 +1,5 @@
 import { Timestamp } from "typeorm"
-import ISkillProps from "@src/interfaces/ISkill"
+import ISkillProps from "@src/core/domain/interfaces/ISkill"
 
 export default class Skill {
     id: string

@@ -1,4 +1,4 @@
-import ICompanyProps from "../../../interfaces/ICompany";
+import ICompanyProps from "../../../core/domain/interfaces/ICompany";
 
 export default class CompanyOutput {
     id : string

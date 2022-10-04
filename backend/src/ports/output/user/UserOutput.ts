@@ -1,5 +1,5 @@
 import { Timestamp } from "typeorm"
-import { IUserProps } from "../../../interfaces/IUser"
+import { IUserProps } from "../../../core/domain/interfaces/IUser"
 
 export default class UserOutput {
     id : string
