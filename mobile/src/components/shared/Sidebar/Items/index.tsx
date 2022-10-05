@@ -1,6 +1,5 @@
 import { MaterialIcons } from "@expo/vector-icons"
 import { Pressable, Text, View } from "react-native"
-import { color } from "react-native-reanimated"
 import colors from "../../../../styles/colors"
 import styles from "./style"
 
@@ -16,7 +15,7 @@ const SidebarItem : React.FC<ISidebarItemProps> = ({ icon, name, onPress, active
     return (
         <Pressable style={{...styles.sidebarItem, backgroundColor : (active) ? colors.PRIMARY : colors.BLACK}}>
             <MaterialIcons name={icon} size={32} color="#FFF" />
-            <Text style={styles.label} >{name}</Text>
+            <Text style={{...styles.label, color : (active) ? '#FFF' : colors.GRAY}} >{name}</Text>
         </Pressable>
     )
 }

@@ -7,11 +7,14 @@ const Sidebar : React.FC = () => {
 
     return (
         <View style={styles.sidebar}>
-            <View style={{width : '80%'}}>
-                <View>
+            <View style={styles.topItemContainer}>
+                <View style={styles.profileContainer}>
                     <Image source={{ uri : 'https://avatars.githubusercontent.com/u/51890537?v=4'}} />
-                    <Text>Usuário</Text>
+                    <Text style={styles.username}>Usuário</Text>
                 </View>
+
+                <View style={styles.divisor}></View>
+
                 <SidebarItem active icon="home" name="Home" />
                 <SidebarItem icon="home" name="Home" />
                 <SidebarItem icon="home" name="Home" />

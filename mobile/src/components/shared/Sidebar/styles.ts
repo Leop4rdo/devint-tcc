@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     },
 
     exitContainer : {
-        width : '75%',
+        width : '100%',
         height : 48,
         flexDirection : 'row',
         alignItems : 'center',
@@ -33,6 +33,29 @@ const styles = StyleSheet.create({
         fontFamily : fonts.POPPINS_REGULAR,
         color : colors.LIGHT_GRAY,
         fontSize : 20
+    },
+
+    topItemContainer : {
+        width : '100%',
+    },
+
+    divisor : {
+        height : 2, 
+        backgroundColor : colors.GRAY,
+        marginVertical : 16
+    },
+
+    profileContainer : {
+        width : '100%',
+        justifyContent : 'center',
+        alignItems : 'center',
+    },
+
+    username : {
+        fontFamily : fonts.POPPINS_REGULAR,
+        fontSize : 16,
+        textAlign: 'center',
+        color : colors.PRIMARY
     }
 })
 

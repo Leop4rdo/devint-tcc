@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
         color : colors.LIGHT_GRAY,
         fontSize : 20,
         marginLeft : 16
-    }
+    },
 })
 
 export default styles
