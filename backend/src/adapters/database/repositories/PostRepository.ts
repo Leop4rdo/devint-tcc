@@ -1,3 +1,4 @@
+import PaginateListInput from "@src/ports/input/PaginateListInput";
 import { AppDataSource } from "../data-source";
 import PostEntity from "../entities/PostEntity";
 import AbstractRepository from "./AbstractRepository"
@@ -17,17 +18,13 @@ export default class PostRepository extends AbstractRepository<PostEntity> {
         })
     }
 
-    override async list(): Promise<PostEntity[]> {
-        // user query builder para selecionar em ordem aleatoria
-        // todos os posts
-
-        // extra : paginação
-
+    async listByFilters(filters : PaginateListInput): Promise<PostEntity[]> {
         return await this.db.createQueryBuilder('posts')
-            .innerJoin("posts.writter", "devs")
+            .leftJoinAndSelect('posts.writter', 'devs')
             .orderBy("RANDOM()")
+            .limit(filters.limit)
+            .offset(filters.offset)
             .getMany()
-
     }
 
 }

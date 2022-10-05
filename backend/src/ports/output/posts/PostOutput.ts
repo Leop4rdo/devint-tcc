@@ -18,6 +18,7 @@ export default class PostOutput {
         this.reports = props.reports
         this.comments = props.comments
         this.hearts = JSON.parse(JSON.stringify(props.hearts)).length
+        this.attachments = props.attachments
         this.writter = new DevMinimalOutput(props.writter)
     }
 }

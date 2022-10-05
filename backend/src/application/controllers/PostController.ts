@@ -1,5 +1,6 @@
 import PostRepository from "@src/adapters/database/repositories/PostRepository";
 import PostService from "@src/core/services/PostService";
+import PaginateListInput from "@src/ports/input/PaginateListInput";
 import AddCommentInput from "@src/ports/input/posts/AddCommentInput";
 import PostCreateInput from "@src/ports/input/posts/PostCreateInput";
 import { Request, Response } from "express";
@@ -38,7 +39,7 @@ export default class PostController {
     }
 
     list = (req: Request, res: Response) => {
-        this.service.list()
+        this.service.list(new PaginateListInput(req.query))
             .then((_res) => res.status(_res.status || 200).json(_res))
             .catch((err) => res.status(err.status || 500).json(err))
     }
