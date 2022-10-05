@@ -8,9 +8,9 @@ interface ILogoProps {
 const LogoComponent : React.FC<ILogoProps> = ({ primary, secondary }) => {
 
     return (
-        <div className="logo" style={{color : secondary || '#F5F9FF'}}>
+        <div style={{color : secondary || '#F5F9FF'}}>
             <span style={{color : primary || "#7865FF"}}>&#60;</span>
-            DevInt
+           <span>DevInt</span> 
             <span style={{color : primary || "#7865FF"}}>_</span>
         </div>
     )

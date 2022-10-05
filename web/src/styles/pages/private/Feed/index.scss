@@ -1,0 +1,44 @@
+.container-nav-bar {
+
+    header {
+        width: 100vw;
+        background-color: $color-primary;
+        height: 56px;
+        display: flex;
+        justify-content: space-between;
+        
+
+        h1 {
+            margin-left: 20px;
+            font-size: 2rem;
+            padding-top: 3px;
+        }
+
+        .container-search {
+            margin-top: 8px;
+            display: flex;
+            justify-content: space-around;
+            width: 25rem;
+
+           .container-input{
+               display: flex;
+               
+                .icon{
+                    font-size: 32px;
+                    color: $color-light-gray;
+                }
+           }
+           
+           .container-icon-notifications{
+               .icon{
+                   font-size: 32px;
+                   margin-top: 3px;
+               }
+           }
+        }
+
+
+    }
+
+
+}

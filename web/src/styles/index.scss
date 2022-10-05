@@ -11,6 +11,8 @@
   font-family: $base-font-family;
 }
 
+
+
 a {
   position: relative;
   color: $color-primary;
@@ -44,10 +46,12 @@ a {
   @import "./pages/public/Register/Dev.scss";
   @import "./pages/public/Register/Company.scss";
   @import "./pages/public/ForgotMyPasswordPage/index.scss";
+  @import "./pages/private/Feed/index.scss";
  
 
   // Component Style Imports ->
   @import "./components/Input";
+  @import "./components/Input-Search/index.scss";
   @import "./components/Button";
   @import "./components/RegisterForms/Company/index.scss";
   @import "./components/RegisterForms/Dev/index.scss";
