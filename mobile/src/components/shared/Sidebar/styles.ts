@@ -1,16 +1,24 @@
 import { StyleSheet } from "react-native";
 import colors from "../../../styles/colors";
 import fonts from "../../../styles/typography";
+import {screenHeight, screenWidth} from "../../../styles/utils";
 
 const styles = StyleSheet.create({
     sidebar : {
-        width : '75%',
+        width : '80%',
         height : '100%',
         backgroundColor : colors.BLACK,
-        position : 'absolute',
         padding : 24,
         alignItems : 'center',
         justifyContent : 'space-between',
+    },
+
+    sidebarBg : {
+        position : 'absolute',
+        height : screenHeight,
+        width : screenWidth,
+        backgroundColor : '#0007',
+        flexDirection : 'row'
     },
 
     exitContainer : {
@@ -41,7 +49,7 @@ const styles = StyleSheet.create({
 
     divisor : {
         height : 2, 
-        backgroundColor : colors.GRAY,
+        backgroundColor : colors.PRIMARY,
         marginVertical : 16
     },
 
@@ -56,6 +64,20 @@ const styles = StyleSheet.create({
         fontSize : 16,
         textAlign: 'center',
         color : colors.PRIMARY
+    },
+
+    profileImage : {
+        width : 80,
+        height : 80,
+        marginBottom : 16,
+        borderRadius : 40,
+        borderWidth : 1,
+        borderColor : colors.PRIMARY
+    },
+    
+    blankSpace : {
+        width : '100%',
+        height : '100%',
     }
 })
 

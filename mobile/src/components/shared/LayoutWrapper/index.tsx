@@ -15,7 +15,7 @@ const LayoutWrapper : React.FC<ILayoutWrapperProps> = ({ navigation, children })
         <View style={{flex : 1}}>
             <NavBar toggleSidebar={() => setSidebarVisible(!isSidebarVisible)} />
             { children }
-            <Sidebar />
+            <Sidebar visible={isSidebarVisible} onClose={() => setSidebarVisible(!isSidebarVisible)}/>
         </View>
     )
 }
