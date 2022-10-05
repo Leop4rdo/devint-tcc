@@ -1,3 +1,4 @@
+import PaginateListInput from "@src/ports/input/PaginateListInput";
 import { AppDataSource } from "../data-source";
 import PostEntity from "../entities/PostEntity";
 import AbstractRepository from "./AbstractRepository"
@@ -5,7 +6,6 @@ import AbstractRepository from "./AbstractRepository"
 export default class PostRepository extends AbstractRepository<PostEntity> {
     constructor() {
         super(PostEntity);
-        this.db = AppDataSource.getRepository<PostEntity>(PostEntity)
     }
 
     async findByWritter(_id: string): Promise<PostEntity[]> {
@@ -16,6 +16,15 @@ export default class PostRepository extends AbstractRepository<PostEntity> {
                 }
             }
         })
+    }
+
+    async listByFilters(filters : PaginateListInput): Promise<PostEntity[]> {
+        return await this.db.createQueryBuilder('posts')
+            .leftJoinAndSelect('posts.writter', 'devs')
+            .orderBy("RANDOM()")
+            .limit(filters.limit)
+            .offset(filters.offset)
+            .getMany()
     }
 
 }
