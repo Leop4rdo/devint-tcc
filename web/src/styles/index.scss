@@ -44,7 +44,7 @@ a {
   @import "./pages/public/Register/Dev.scss";
   @import "./pages/public/Register/Company.scss";
   @import "./pages/public/ForgotMyPasswordPage/index.scss";
- 
+  @import "./pages/private/Feed";
 
   // Component Style Imports ->
   @import "./components/Input";
@@ -52,4 +52,5 @@ a {
   @import "./components/RegisterForms/Company/index.scss";
   @import "./components/RegisterForms/Dev/index.scss";
   @import "./components/Select/index.scss";
+  @import "./components/Post/index.scss";
 }
