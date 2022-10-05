@@ -8,12 +8,7 @@ const styles = StyleSheet.create({
     page : {
         height : '100%',
         width : '100%',
-       
-
         backgroundColor : colors.DARK_GRAY,
-
-        
-       
     },
 
     title : {
@@ -23,7 +18,7 @@ const styles = StyleSheet.create({
 
         textAlign: "center",
 
-        marginBottom: 24
+        marginBottom: 16
     },
 
     linkPasswordRecover : {
@@ -38,7 +33,6 @@ const styles = StyleSheet.create({
     },
 
     ContainerLogin:{
-        paddingVertical: 56,
         paddingHorizontal: 24,
     }
 })
