@@ -1,6 +1,7 @@
 import IPost from "interfaces/IPost";
 import React from "react"
 import Button from "../Button";
+import Carousel, { CarouselItem } from "../Carousel";
 import Icon from "../Icon";
 
 interface IPostProps {
@@ -8,7 +9,7 @@ interface IPostProps {
 }
 
 const Post: React.FC<IPostProps> = ({ data }) => {
-    
+
     let commentAuthors = data.comments.map(function(item){
         return item.writter.profilePicUrl;
     })
@@ -28,7 +29,11 @@ const Post: React.FC<IPostProps> = ({ data }) => {
             <div className="post-content">
                 <p>{data.content}</p>
                 <div className="post-images">
-                    <img src={data.attachments[0]} />
+                    <Carousel>
+                        <CarouselItem><img src={data.attachments[0]}/></CarouselItem>
+                        <CarouselItem>item2</CarouselItem>
+                        <CarouselItem>item3</CarouselItem>
+                    </Carousel>
                 </div>
             </div>
             <div className="post-footer">
@@ -39,7 +44,9 @@ const Post: React.FC<IPostProps> = ({ data }) => {
                 </div>
                 <div className="hearts">
                     {data.hearts}
-                    <Icon name="favorite"/>
+                    <Button>
+                        <Icon name="favorite"/>
+                    </Button>
                 </div>
             </div>
         </div>
