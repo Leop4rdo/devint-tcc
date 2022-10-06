@@ -2,12 +2,13 @@ import { Timestamp } from "typeorm";
 import PostEntity from "@entities/PostEntity";
 import IPostProps from "@src/core/domain/interfaces/IPost";
 import Dev from "./Dev";
+import Comment from "./Comment";
 
 export default class Post {
     id: string
     content: string
     reports: JSON
-    comments: JSON
+    comments: Comment[]
     hearts : JSON
     attachments: JSON
     writter: Dev

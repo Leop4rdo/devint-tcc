@@ -3,14 +3,13 @@
     header {
         width: 100vw;
         background-color: $color-primary;
-        height: 56px;
+        height: 90px;
         display: flex;
         justify-content: space-between;
-        
-
+        align-items: center;
         h1 {
             margin-left: 20px;
-            font-size: 2rem;
+            font-size: clamp( 3.5rem , 5vw, 4rem);
             padding-top: 3px;
         }
 
@@ -27,6 +26,7 @@
                     font-size: 32px;
                     color: $color-light-gray;
                     cursor: pointer;
+
                 }
            }
            
@@ -37,6 +37,7 @@
                    cursor: pointer;
                    margin-left: 30px;
                    margin-right: 30px;
+                   color: $color-white;
                }
            }
         }

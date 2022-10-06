@@ -12,6 +12,7 @@ import ProjectEntity from "@entities/ProjectEntity";
 import SeniorityEntity from "@entities/SeniorityEntity";
 import SkillEntity from "@entities/SkillEntity";
 import SocialLinkEntity from "@entities/SocialLinkEntity";
+import CommentEntity from "./entities/CommentEntity";
 
 
 
@@ -26,5 +27,6 @@ export const AppDataSource = new DataSource({
     logging: ['error', 'warn'],
     entities: [AuthEntity, DevEntity, CompanyEntity, SkillEntity, 
         ArticleEntity, BadgeEntity, CareerFocusEntity, PostEntity, 
-        ProjectEntity, SocialLinkEntity, SeniorityEntity, PasswordResetTokenEntity],
+        ProjectEntity, SocialLinkEntity, SeniorityEntity, PasswordResetTokenEntity,
+        CommentEntity],
 })
