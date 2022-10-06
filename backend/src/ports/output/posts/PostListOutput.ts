@@ -1,13 +1,11 @@
-import Comment from "@src/core/domain/Comment";
+import IDevProps from "@src/core/domain/interfaces/IDev";
 import IPostProps from "@src/core/domain/interfaces/IPost"
 import DevMinimalOutput from "../user/DevMinimalOutput";
-import CommentOutput from "./CommentOutput";
 
-export default class PostOutput {
+export default class PostListOutput {
     id: string
     content: string
-    comments: CommentOutput[]
-    reports: JSON
+    comments: number
     hearts: number
     attachments: JSON
     writter: DevMinimalOutput
@@ -15,10 +13,9 @@ export default class PostOutput {
     constructor(props: IPostProps) {
         this.id = props.id
         this.content = props.content
-        this.comments = props.comments.map((comment : Comment) => new CommentOutput(comment))
+        this.comments = props.comments.length
         this.hearts = JSON.parse(JSON.stringify(props.hearts)).length
-        this.reports = props.reports
         this.attachments = props.attachments
-        this.writter = new DevMinimalOutput(props.writter)
+        this.writter = new DevMinimalOutput(props.writter as IDevProps)
     }
 }
