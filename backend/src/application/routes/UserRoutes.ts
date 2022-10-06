@@ -11,7 +11,7 @@ publicUserRoutes.post("/auth", authCtrl.login)
 publicUserRoutes.post("/users", authCtrl.create)
 publicUserRoutes.post("/request-password-recovery", authCtrl.requestPasswordRecovery)
 publicUserRoutes.patch("/change-password", authCtrl.changePassword)
-publicUserRoutes.patch("/email-confirm",authCtrl.emailConfirm)
+publicUserRoutes.patch("/email-confirm", authCtrl.emailConfirm)
 
 export const securedUserRoutes = Router();
 

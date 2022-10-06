@@ -1,4 +1,5 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm";
+import CommentEntity from "./CommentEntity";
 import DevEntity from "./DevEntity";
 
 @Entity('posts')
@@ -12,8 +13,8 @@ export default class PostEntity {
     @Column('jsonb', { default : []})
     reports: JSON
     
-    @Column('jsonb', { default : [] })
-    comments: JSON
+    @OneToMany(() => CommentEntity, (comment) => comment.post, { eager : true })
+    comments : CommentEntity[]
     
     @Column('jsonb', { default : []})
     hearts : JSON
