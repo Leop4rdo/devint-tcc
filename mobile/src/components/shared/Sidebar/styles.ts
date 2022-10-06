@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
         position : 'absolute',
         height : screenHeight,
         width : screenWidth,
-        backgroundColor : '#0007',
         flexDirection : 'row'
     },
 
@@ -78,6 +77,7 @@ const styles = StyleSheet.create({
     blankSpace : {
         width : '100%',
         height : '100%',
+        backgroundColor : '#000',
     }
 })
 
