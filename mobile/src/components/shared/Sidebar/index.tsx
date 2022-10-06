@@ -1,7 +1,8 @@
-import {useEffect} from "react"
+import {useContext, useEffect} from "react"
 import { Image, Pressable, Text, View } from "react-native"
 import { TextInput } from "react-native-gesture-handler"
 import Animated, {useAnimatedStyle, useSharedValue, withDelay, withTiming} from "react-native-reanimated"
+import {AuthContext} from "../../../store/context/Auth.context"
 import {screenWidth} from "../../../styles/utils"
 import SidebarItem from "./Items"
 import styles from "./styles"
@@ -14,6 +15,8 @@ interface ISidebarProps {
 const Sidebar : React.FC<ISidebarProps> = ({ visible, onClose }) => {
     const animOffset = useSharedValue(-screenWidth)
     const bgFade = useSharedValue(0)
+
+    const authContext = useContext(AuthContext)
 
     const animatedStyle = useAnimatedStyle(() => {
         return {
@@ -55,7 +58,7 @@ const Sidebar : React.FC<ISidebarProps> = ({ visible, onClose }) => {
                     <SidebarItem icon="settings" name="Home" />
                 </View>
 
-                <Pressable style={styles.exitContainer}>
+                <Pressable style={styles.exitContainer} onPress={authContext?.signOut}>
                     <Text style={styles.exitIcon}>:q</Text>
                     <Text style={styles.exitText}>sair</Text>
                 </Pressable>
