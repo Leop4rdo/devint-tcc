@@ -15,7 +15,7 @@ const SidebarItem : React.FC<ISidebarItemProps> = ({ icon, name, onPress, active
     return (
         <Pressable style={{...styles.sidebarItem, backgroundColor : (active) ? colors.PRIMARY : colors.BLACK}}>
             <MaterialIcons name={icon} size={32} color="#FFF" />
-            <Text style={{...styles.label, color : (active) ? '#FFF' : colors.GRAY}} >{name}</Text>
+            <Text style={{...styles.label, color : (active) ? '#FFF' : colors.LIGHT_GRAY}} >{name}</Text>
         </Pressable>
     )
 }

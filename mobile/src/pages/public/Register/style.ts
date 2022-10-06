@@ -16,7 +16,9 @@ const styles = StyleSheet.create({
 
     containerRegisterForm:{
         flexDirection: 'column',
-        justifyContent: 'center',
+        flex : 1,
+        paddingVertical : 24,
+        justifyContent: 'space-between',
         alignItems: 'center', 
     },
 
@@ -30,7 +32,6 @@ const styles = StyleSheet.create({
         fontFamily: fonts.POPPINS_BOLD,
         color: colors.PRIMARY,
         fontSize: 32,
-        marginBottom: 40
     },
     stepDescription: {
         fontFamily: fonts.POPPINS_MEDIUM,
@@ -41,14 +42,13 @@ const styles = StyleSheet.create({
         marginBottom : 32
     },
     input: {
-        width: 256,
-        marginBottom:40,
+        width : '75%'
     },
 
     form: {
-        height: screenHeight * .3,
+        flex : 1,
         display: 'flex',
-        justifyContent: 'center',
+        justifyContent: 'space-around',
         alignContent: 'center',
     }
 
