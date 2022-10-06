@@ -32,12 +32,6 @@ export default class PostController {
             .catch((err) => res.status(err.status || 500).json(err))
     }
 
-    addComment = (req: Request, res: Response) => {
-        this.service.addComment(new AddCommentInput(req.body), req.params.postId, req.body.userData)
-            .then((_res) => res.status(_res.status || 200).json(_res))
-            .catch((err) => res.status(err.status || 500).json(err))
-    }
-
     list = (req: Request, res: Response) => {
         this.service.list(new PaginateListInput(req.query))
             .then((_res) => res.status(_res.status || 200).json(_res))

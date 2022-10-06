@@ -20,7 +20,8 @@ export default class PostRepository extends AbstractRepository<PostEntity> {
 
     async listByFilters(filters : PaginateListInput): Promise<PostEntity[]> {
         return await this.db.createQueryBuilder('posts')
-            .leftJoinAndSelect('posts.writter', 'devs')
+            .innerJoinAndSelect('posts.writter', 'devs')
+            .leftJoinAndSelect('posts.comments', 'comments')
             .orderBy("RANDOM()")
             .limit(filters.limit)
             .offset(filters.offset)

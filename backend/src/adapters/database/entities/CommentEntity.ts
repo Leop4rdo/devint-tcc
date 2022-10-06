@@ -7,20 +7,18 @@ export default class CommentEntity{
     @PrimaryGeneratedColumn('uuid')
     id: string
 
-    @ManyToOne(() => DevEntity)
+    @ManyToOne(() => DevEntity, { eager : true })
     writter: DevEntity
 
-    @ManyToOne(() => PostEntity)
+    @Column('jsonb', { default : [] })
+    answers : JSON
+
+    @ManyToOne(() => PostEntity, (post) => post.comments)
     post: PostEntity
+
+    @Column('jsonb', {default:[]})
+    hearts : JSON
 
     @Column()
     content: string
 }
-
-/*
-
-id : string
-writter : dev -> ManyToOne
-post : post -> ManyToOne
-content : string
-*/
