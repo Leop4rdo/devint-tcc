@@ -1,11 +1,13 @@
 
 import { useContext, useState } from 'react';
-import {View, Text, TextInput, TouchableOpacity} from 'react-native';
+import {View, Text, TextInput, TouchableOpacity, KeyboardAvoidingView, SafeAreaView} from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import ButtonComponent from '../../../components/shared/Button';
 import FeedbackTextInput from '../../../components/shared/FeedbackInput';
 import Header from '../../../components/shared/Header/index';
 import { AuthContext } from '../../../store/context/Auth.context';
 import globalStyles from '../../../styles/global';
+import { clamp, screenHeight } from '../../../styles/utils';
 import { isEmail, isEmpty } from '../../../utils/validation';
 import styles from './style'
 
@@ -38,42 +40,45 @@ const LoginPage : React.FC<any> = ({navigation}) => {
     }
 
     return (
-        <View style={styles.page}>
-           <Header showIcon={false} onPressIcon={() => navigation.navigate('landing')}/>
-            <View style={styles.ContainerLogin}>
-                <Text style={styles.title}>Entrar</Text>
+        <KeyboardAvoidingView style={styles.page}>
+            <Header showIcon={false} onPressIcon={() => navigation.navigate('landing')}/>
+            <ScrollView style={{flex : 1}}>
+                <View style={styles.ContainerLogin}>
+                    <Text style={styles.title}>Entrar</Text>
 
-                <FeedbackTextInput 
-                    style={{marginBottom : 40}}
-                    icon="mail" 
-                    onChangeText={(text) => handleInputChange(text, 'email')} 
-                    validate={() => isEmail(formValues.email)}  
-                    placeholder="E-mail" 
-                />
+                    <FeedbackTextInput 
+                        style={{marginBottom : 40}}
+                        icon="mail" 
+                        onChangeText={(text) => handleInputChange(text, 'email')} 
+                        validate={() => isEmail(formValues.email)}  
+                        placeholder="E-mail" 
+                        />
 
-                <View style={{width: '100%', alignItems : 'flex-end'}}>
-                    <FeedbackTextInput  
-                        isPassword
-                        icon="lock-open" 
-                        onChangeText={(text) => handleInputChange(text, 'password')}  
-                        validate={() => !isEmpty(formValues.password)}  
-                        placeholder="Senha"/>
+                    <View style={{width: '100%', alignItems : 'flex-end'}}>
+                        <FeedbackTextInput  
+                            isPassword
+                            icon="lock-open" 
+                            onChangeText={(text) => handleInputChange(text, 'password')}  
+                            validate={() => !isEmpty(formValues.password)}  
+                            placeholder="Senha"/>
 
-                    <TouchableOpacity
-                        activeOpacity={1}
-                        onPress={()=>{navigation.navigate('loginwrapper')}}
-                        >
-                        <Text style={[globalStyles.linkRed, styles.linkPasswordRecover ]}>Esqueci minha senha!</Text>
-                    </TouchableOpacity>
+                        <TouchableOpacity
+                            activeOpacity={1}
+                            onPress={()=>{navigation.navigate('loginwrapper')}}
+                            >
+                            <Text style={[globalStyles.linkRed, styles.linkPasswordRecover ]}>Esqueci minha senha!</Text>
+                        </TouchableOpacity>
+                    </View>
+
+                    <Text style={styles.warning}>{warning}</Text>
                 </View>
 
-                <Text style={styles.warning}>{warning}</Text>
-            </View>
+                <View style={globalStyles.centerItemContainer}>
+                    <ButtonComponent text='login' onPress={() => onSubmit()} />
+                </View>
+            </ScrollView>
 
-            <View style={globalStyles.centerItemContainer}>
-                <ButtonComponent text='login' onPress={() => onSubmit()} />
-            </View>
-        </View>
+        </KeyboardAvoidingView>
     )
 }   
 

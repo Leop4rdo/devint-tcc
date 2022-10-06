@@ -1,4 +1,4 @@
-import { Text, View } from "react-native"
+import { KeyboardAvoidingView, ScrollView, Text, View } from "react-native"
 import styles from "./style";
 import ButtonComponent from "../../../components/shared/Button";
 import RegisterFormStep1 from "../../../components/register/forms/Step1";
@@ -108,21 +108,22 @@ const RegisterPage: React.FC<IPageProps> = ({navigation}) => {
     }
 
     return (
-        <View style={styles.containerRegister}>
+        <KeyboardAvoidingView style={styles.containerRegister}>
             <Header showIcon={false} onPressIcon={currentStep >= 1 ? onPreviousButtonPress : () => navigation.navigate('landing')}/>
 
-            <View style={styles.containerRegisterForm}>
-                <Text style={styles.signUp}>Cadastre-se</Text>
-                <Text style={styles.stepDescription}>{steps[currentStep].desc}</Text>
+            <ScrollView>
+                <View style={styles.containerRegisterForm}>
+                    <View>
+                        <Text style={styles.signUp}>Cadastre-se</Text>
+                        <Text style={styles.stepDescription}>{steps[currentStep].desc}</Text>
+                    </View>
 
-                {steps[currentStep].component}
+                    {steps[currentStep].component}
 
-                <View>
                     <ButtonComponent text={(currentStep >= steps.length - 1) ? 'cadastrar' : 'proximo'} onPress={onConfirmButtonPress}></ButtonComponent>
                 </View>
-            </View>
-
-        </View>
+            </ScrollView>
+        </KeyboardAvoidingView>
     )
 }
 
