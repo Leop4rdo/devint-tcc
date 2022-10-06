@@ -4,7 +4,7 @@ import InputSearch from "components/shared/Input-Search";
 import Icon from "components/shared/Icon";
 import { useState } from "react";
 
-const Feed: React.FC = () => {
+const NavBar: React.FC = () => {
 
     return (
         <div className="container-nav-bar">
@@ -25,5 +25,5 @@ const Feed: React.FC = () => {
     )
 }
 
-export default Feed
+export default NavBar
 
