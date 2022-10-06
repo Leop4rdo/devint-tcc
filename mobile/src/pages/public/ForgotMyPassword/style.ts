@@ -15,21 +15,25 @@ const styles = StyleSheet.create({
     containerTexts:{
         display: 'flex',
         alignItems: 'center',
+        paddingBottom : 48
     },
 
     TextForgetPassword:{
         fontSize: 32,
         color: colors.PRIMARY,
-        width: 250,
         textAlign: 'center',
         fontFamily: fonts.POPPINS_SEMIBOLD,
-        marginBottom: 16
+    },
+
+    formContainer : {
+        flex : 1,
+        justifyContent: 'center',
+        paddingVertical : 16
     },
 
     TextinsertEmail:{
         color: colors.WHITE,
         fontSize:16,
-        marginBottom: 80,
         textAlign: 'center',
         width: 300
     },

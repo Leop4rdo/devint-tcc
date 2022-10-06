@@ -5,6 +5,7 @@ import styles from './style'
 import LoginFormStep1 from '../../../components/ForgotMyPasswordForms/Step1'
 import LoginFormStep2 from '../../../components/ForgotMyPasswordForms/Step2'
 import { useState } from 'react';
+import ButtonComponent from '../../../components/shared/Button';
 
 const LandingPage: React.FC<IPageProps> = ({navigation}) => {
 
@@ -38,11 +39,13 @@ const LandingPage: React.FC<IPageProps> = ({navigation}) => {
     return(
        <View style={styles.container}>
             <Header showIcon={false} onPressIcon={ currentStep >=1 ? onPreviousButtonPress : () => navigation.navigate('login') }/>
-            <View style={styles.containerTexts}>
-               <Text style={styles.TextForgetPassword}>Esqueci minha senha</Text>
-               <Text style={styles.TextinsertEmail}>{steps[currentStep].desc}</Text>
-           </View>
-            {steps[currentStep].component}
+            <View style={styles.formContainer}>
+                <View style={styles.containerTexts}>
+                    <Text style={styles.TextForgetPassword}>Esqueci minha senha</Text>
+                    <Text style={styles.TextinsertEmail}>{steps[currentStep].desc}</Text>
+                </View>
+                {steps[currentStep].component}
+            </View>
        </View>
     )
 
