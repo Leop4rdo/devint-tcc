@@ -1,16 +1,13 @@
 .input-search-container {
     position: relative;
-    margin-bottom: 16px;
     height: 40px;
-    width: 300px;
+    width: clamp(15rem, 22vw, 20rem);
     padding: 0px 8px;
-  
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     gap: 18px;
-    
     background-color: $color-black;
   
     border: 2px solid;
