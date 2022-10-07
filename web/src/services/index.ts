@@ -8,8 +8,6 @@ export interface IResponse {
     data?: any
 }
 
-
-// export const baseUrl = "http://localhost:8082/api/v1"
 export const baseUrl = "http://localhost:8080/api/v1"
 
 const api = axios.create({
