@@ -1,6 +1,6 @@
 import React, { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { auth } from "../../services/auth.service";
-import { setOnLocalStorage } from "../../utils/localStorage";
+import { getFromLocalStorage, setOnLocalStorage } from "../../utils/localStorage";
 
 
 
@@ -30,6 +30,8 @@ export const AuthProvider : React.FC<{ children : ReactNode }> = ({ children }) 
             token: res.data?.token || "",
             userData : res.data?.user || null
         })
+
+        setOnLocalStorage('devint-login', JSON.stringify({ email, password }))
     }
 
     const handleSignOut = () => {
@@ -43,6 +45,16 @@ export const AuthProvider : React.FC<{ children : ReactNode }> = ({ children }) 
     useEffect(() => {
         setOnLocalStorage('devint-authorization', authData.token)
     }, [authData])
+
+    useEffect(() => {
+        getFromLocalStorage('devint-login').then((data) => {
+            if (!data) return
+
+            const login = JSON.parse(data)
+
+            handleAuth(login.email, login.password)
+        })
+    }, [])
 
 
     return (
