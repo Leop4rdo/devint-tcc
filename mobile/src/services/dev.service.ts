@@ -7,8 +7,6 @@ interface IDevListRequest {
 
 export const list = async (query ?: IDevListRequest) : Promise<IResponse> => {
     try {
-
-
         const { data } = await api.get(
             (query) ? `/devs?${buildQuery(query)}` : '/devs',
             { headers: { Authorization: `Baerer ${ await getToken()}` } }

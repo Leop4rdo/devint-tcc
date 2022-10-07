@@ -31,6 +31,7 @@ export const AuthProvider : React.FC<{ children : ReactNode }> = ({ children }) 
             userData : res.data?.user || null
         })
 
+        setOnLocalStorage('devint-authorization', res.data?.token || "")
         setOnLocalStorage('devint-login', JSON.stringify({ email, password }))
     }
 
@@ -40,11 +41,9 @@ export const AuthProvider : React.FC<{ children : ReactNode }> = ({ children }) 
             token : "",
             userData : null
         })
-    }
 
-    useEffect(() => {
         setOnLocalStorage('devint-authorization', authData.token)
-    }, [authData])
+    }
 
     useEffect(() => {
         getFromLocalStorage('devint-login').then((data) => {
