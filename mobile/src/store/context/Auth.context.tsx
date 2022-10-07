@@ -1,6 +1,6 @@
 import React, { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { auth } from "../../services/auth.service";
-import { getFromLocalStorage, setOnLocalStorage } from "../../utils/localStorage";
+import { deleteFromLocalStorage, getFromLocalStorage, setOnLocalStorage } from "../../utils/localStorage";
 
 
 
@@ -43,6 +43,7 @@ export const AuthProvider : React.FC<{ children : ReactNode }> = ({ children }) 
         })
 
         setOnLocalStorage('devint-authorization', authData.token)
+        deleteFromLocalStorage('devint-login')
     }
 
     useEffect(() => {
