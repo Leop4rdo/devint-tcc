@@ -28,7 +28,7 @@ export default class DevEntity {
     @Column({ default: '' })
     status: string
 
-    @Column({ name: 'profile_pic_url', nullable: true })
+    @Column({ name: 'profile_pic_url', default : 'https://st2.depositphotos.com/19428878/44645/v/450/depositphotos_446453832-stock-illustration-default-avatar-profile-icon-social.jpg' })
     profilePicUrl: string
 
     @Column({ default: 0, name: 'comunity_ratings' })
