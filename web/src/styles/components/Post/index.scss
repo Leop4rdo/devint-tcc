@@ -27,15 +27,19 @@
         margin-top: 1em;
         display: flex;
         justify-content: space-between;
+
+        h2 {
+            color: $color-white;
+        }
+    
+        button {
+            width: clamp(6em, 5vw, 2em);
+            background-color: $color-primary;
+            color: $color-white;
+            border: none;
+        }
     }
 
-    h2 {
-        color: $color-white;
-    }
-
-    button {
-        width: clamp(6em, 5vw, 2em);
-    }
 
     
 
@@ -87,18 +91,6 @@
         p {
             font-size: 1em;
             color: $color-white;
-        }
-
-        button {
-            border: none;
-            background-color: transparent;  
-            width: fit-content;
-            height: auto;
-            .icon{
-              color: $color-white;
-              font-size: clamp( 2.5rem , 4vw , 3rem);
-              margin-top: clamp( 1.9rem , 4vw , 3rem);
-            }
         }
     }
 

@@ -1,5 +1,5 @@
 import IPost from "interfaces/IPost";
-import React from "react"
+import React, { useState } from "react"
 import Button from "../Button";
 import Carousel, { CarouselItem } from "../Carousel";
 import Icon from "../Icon";
@@ -23,7 +23,7 @@ const Post: React.FC<IPostProps> = ({ data }) => {
                     <img src={data.writter.profilePicUrl} />
                     <h2>{data.writter.name}</h2>
                 </div>
-                <Button children={[<Icon name="done"/> , "Seguir"]}/>
+                <Button className="follow-button" children={[<Icon name="add"/> , "Seguir"]}/>
             </div>
 
             <div className="post-content">
