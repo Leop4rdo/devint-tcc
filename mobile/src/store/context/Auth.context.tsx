@@ -33,6 +33,8 @@ export const AuthProvider : React.FC<{ children : ReactNode }> = ({ children }) 
 
         setOnLocalStorage('devint-authorization', res.data?.token || "")
         setOnLocalStorage('devint-login', JSON.stringify({ email, password }))
+
+        return res
     }
 
     const handleSignOut = () => {
