@@ -24,6 +24,24 @@ const Feed: React.FC = () => {
                     <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
                     <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
                     <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
+                    <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
+                    <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
+                    <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
+                    <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
+                    <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
+                    <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
+                    <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
+                    <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
+                    <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
+                    <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
+                    <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
+                    <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
+                    <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
+                    <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
+                    <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
+                    <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
+                    <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
+                    <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
                 </div>
             </div>
             {
