@@ -20,7 +20,7 @@ const DevCarousel : React.FC = () => {
         <View style={styles.carousel}>
             <ScrollView horizontal>
                 {devs?.map((dev) => 
-                    <Image source={{uri : dev.profilePicUrl}} style={styles.item}/>
+                    <Image key={dev.id} source={{uri : dev.profilePicUrl}} style={styles.item}/>
                 )}
             </ScrollView>
         </View>
