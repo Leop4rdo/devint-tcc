@@ -46,8 +46,7 @@ a {
   @import "./pages/public/Register/Dev.scss";
   @import "./pages/public/Register/Company.scss";
   @import "./pages/public/ForgotMyPasswordPage/index.scss";
-  @import "./components/Feed/NavBar/index.scss";
-  @import "./components/Feed/SadBar/index.scss";
+  
 
  
 
@@ -58,4 +57,7 @@ a {
   @import "./components/RegisterForms/Company/index.scss";
   @import "./components/RegisterForms/Dev/index.scss";
   @import "./components/Select/index.scss";
+  @import "./components/Feed/NavBar/index.scss";
+  @import "./components/Feed/SideBar/index.scss";
+  @import "./components/Feed/MenuWrapper/index.scss";
 }
