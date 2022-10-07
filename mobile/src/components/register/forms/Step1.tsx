@@ -13,7 +13,6 @@ export interface IRegisterFormProps {
 }
 
 const RegisterFormStep1: React.FC<IRegisterFormProps> = ({ styles, formData, onChange }) => {
-
     const opacityAnim = useAnimation(0, 1)
 
     useEffect(() => {
