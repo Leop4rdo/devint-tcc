@@ -1,65 +1,70 @@
-
-
-
-.container-sad-bar {
+.container-side-bar{
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 300px;
-    height: 100vh;
+    width: clamp( 15rem ,  19vw , 18rem);
+    height: 92vh;
     background-color: $color-black;
-    
-
-
 
     .container-user {
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        margin-top: 50px;
         flex-basis: 300px;
 
 
         .container-image-face {
+            display: flex;
             width: 100px;
             height: 100px;
-            background-color: aqua;
             border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            img{
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
+            }
         }
 
         h2 {
-            font-size: clamp(1.5rem, 3vw, 1.8rem);
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            margin-top: 16px;
             color: $color-white;
             font-weight: $font-regular;
         }
     }
 
     .container-itens {
-        
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
         justify-content: space-between;
-        gap: 30rem;
+        height: 100%;
 
         .container-nav {
-           
+
             ul li a {
                 font-size: clamp(1rem, 2vw, 1.2rem);
                 cursor: pointer;
-                color: $color-white;
+                color: $color-light-gray;
                 padding-bottom: 20px;
 
                 &:hover::before {
                     transform: scaleX(0);
-                }
 
+                }
             }
 
             ul li {
                 list-style: none;
+            }
 
+            ul .icon {
+                color: $color-white;
+                font-size: clamp(1.5rem, 3vw, 1.8rem);
             }
 
             ul {
@@ -77,23 +82,19 @@
                     border-radius: 12px;
                     cursor: pointer;
 
+                    a {
+                        color: $color-white;
+                    }
 
                 }
             }
 
-            ul .icon {
-                color: $color-white;
-                font-size: clamp(1.7rem, 3vw, 2rem);
-
-            }
         }
 
-
         .logout-icon {
-            
             .icon {
                 color: $color-white;
-                font-size: 40px;
+                font-size: clamp(1.8rem, 3vw, 2rem);
                 transform: rotate(180deg);
                 cursor: pointer;
             }
@@ -101,6 +102,9 @@
 
     }
 
-    
+
+
+
+
 
 }

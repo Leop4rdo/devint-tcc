@@ -1,0 +1,9 @@
+.container-global{
+
+    
+    @media (max-width: $breakpoint-laptop) {
+        .effect-side-bar{
+            display: none;
+        }
+    }
+}

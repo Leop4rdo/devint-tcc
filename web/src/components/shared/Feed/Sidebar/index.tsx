@@ -1,28 +1,22 @@
 import React from "react";
-import LogoComponent from "components/shared/Logo";
-import InputSearch from "components/shared/Input-Search";
+
 import Icon from "components/shared/Icon";
-import NavBar from "components/shared/Feed/NavBar"
-import Button from "components/shared/Button";
 
 
 
 const Sidebar: React.FC = () => {
     return (
-        <>
-            <div className="a">
-                <NavBar/>
-            </div>
-             <div className="container-sad-bar">
-                
+            <div className="container-side-bar">
+
                 <div className="container-user">
                     <div className="container-image-face">
-                       {/*  <img src="public/assets/images/Svg/dev-img" alt="" /> */}
+                    <img src="assets/images/Tony.jpg" alt="Tony Cauntry" />
                     </div>
                     <h2>User name</h2>
                 </div>
 
                 <div className="container-itens">
+
 
                     <nav className="container-nav">
                         <ul>
@@ -43,21 +37,16 @@ const Sidebar: React.FC = () => {
                     </nav>
 
                     <div className="logout-icon">
-                    <Icon name="logout" />
-                     </div>  
+                        <Icon name="logout" />
+                    </div>
 
                 </div>
 
-                
+            </div>
 
-            </div> 
+
         
-        
-        
-        
-        
-        </>
-           
+
 
     )
 }

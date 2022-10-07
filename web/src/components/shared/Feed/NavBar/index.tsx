@@ -1,14 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import LogoComponent from "components/shared/Logo";
 import InputSearch from "components/shared/Input-Search";
 import Icon from "components/shared/Icon";
-import { useState } from "react";
 
-const NavBar: React.FC = () => {
+interface INavBarProps{
+    onClick?: any 
+}
+
+
+const NavBar: React.FC<INavBarProps> = ({onClick}) => {
+
+    
+
+    
 
     return (
-        <div className="container-nav-bar">
+        <div className="container-nav-bar" onClick={onClick}>
+
             <header>
+                <div className="menu-toggle">
+                    <div className="one"></div>
+                    <div className="two"></div>
+                    <div className="three"></div>
+                </div>
                 <h1><LogoComponent primary="#1F252F" /></h1>
                 <div className="container-search">
                     <div className="container-input" >
@@ -21,6 +35,10 @@ const NavBar: React.FC = () => {
                 </div>
 
             </header>
+
+            
+                
+
         </div>
     )
 }
