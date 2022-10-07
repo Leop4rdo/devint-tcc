@@ -16,12 +16,14 @@ interface IPickerProps extends PropsWithChildren {
 
 const PickerComponent: React.FC<IPickerProps> = ({ icon, iconSize, iconColor, children, onChange, value }) => {
 
-    const getIconColor = () => (iconColor) ? iconColor : colors.PRIMARY
+    const getIconColor = () => (iconColor) ? iconColor : colors.GRAY
 
     return (
         <View style={styles.container}>
             {icon && <MaterialIcons name={icon} size={iconSize || 24} color={getIconColor()} style={{ marginRight: 4 }} />}
-            <Picker style={styles.picker} selectedValue={value} onValueChange={onChange}>
+            <Picker style={styles.picker} selectedValue={value} 
+            dropdownIconColor={colors.GRAY}
+            onValueChange={onChange}>
                 {children}
             </Picker>
         </View>
