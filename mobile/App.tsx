@@ -13,7 +13,7 @@ export default function App() {
   if (!fontsLoaded) return <View><Text>App is loading...</Text></View> // TODO : add splash screen
 
   return (
-    <View style={{ flex : 1, backgroundColor : colors.PRIMARY}}>
+    <View style={{ width : '100%', height : '100%', backgroundColor : colors.PRIMARY}}>
       <SafeAreaProvider>
         <AuthProvider>
           <AppNavigator />

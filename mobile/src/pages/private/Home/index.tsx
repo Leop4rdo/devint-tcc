@@ -1,11 +1,18 @@
 import { Text, View } from "react-native"
+import DevCarousel from "../../../components/DevCarousel";
 import LayoutWrapper from "../../../components/shared/LayoutWrapper";
+import { getToken } from "../../../services";
+import styles from "./style";
 
 const HomePage : React.FC<{ navigation : any }> = ({navigation}) => {
-    console.log('home')
+    
+    getToken().then((res) => console.log('token ->', res))
+
     return (
         <LayoutWrapper navigation={navigation}>
-            <Text>Caramelo</Text>
+            <View style={styles.page}>
+                <DevCarousel />
+            </View>
         </LayoutWrapper>
     )
 }
