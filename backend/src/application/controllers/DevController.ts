@@ -14,7 +14,6 @@ export default class DevController {
     }
     
     listByFilters = (req : Request, res: Response) => {
-        console.log(this)
         this.service.list(new PaginateListInput(req.query))
             .then((_res) => res.status(_res.status || 200).json(_res))
             .catch((err) => res.status(err.status || 500).json(err))

@@ -28,13 +28,11 @@ export default class PostService {
         if (!post)
             return new BadRequestResponse({ message: errors.ENTITY_NOT_FOUND })
 
-        try {
-            const res = new PostOutput(post)
+        const res = new PostOutput(post)
 
-            return new SuccessResponse({
-                data: res
-            })
-        } catch(err) { console.log(err)}
+        return new SuccessResponse({
+            data: res
+        })
     }
 
     async getByWritter(id: string): Promise<IResponse> {
