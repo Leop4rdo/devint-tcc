@@ -1,4 +1,5 @@
 import {StyleSheet} from "react-native";
+import { ceil } from "react-native-reanimated";
 import colors from "../../../../styles/colors";
 import fonts from "../../../../styles/typography";
 
@@ -18,7 +19,9 @@ const styles = StyleSheet.create({
         flexDirection : "row",
         justifyContent : 'space-between',
         alignItems: 'center',
-        paddingHorizontal : 16
+        paddingHorizontal : 16,
+
+        backgroundColor : colors.BLACK
     },
     
     headerLeftContainer : {
@@ -33,7 +36,7 @@ const styles = StyleSheet.create({
         fontSize : 18,
     },
 
-    publishButton : {
+    publishButtonDisabled : {
         height : 32,
         width : 100,
 
@@ -45,10 +48,82 @@ const styles = StyleSheet.create({
         borderRadius : 12,
     },
 
-    publishButtonText : {
+    publishButton : {
+        height : 32,
+        width : 100,
+
+        justifyContent : 'center',
+        alignItems : 'center',
+
+        backgroundColor: colors.PRIMARY,
+        borderRadius: 12
+    },
+
+    publishButtonTextDisabled : {
         color : colors.GRAY,
         fontFamily : fonts.POPPINS_MEDIUM,
         fontSize : 14
+    },
+
+    publishButtonText : {
+        color : '#FFF',
+        fontFamily : fonts.POPPINS_MEDIUM,
+        fontSize : 14
+    },
+
+    profileContainer : {
+        width: '100%',
+        padding : 16,
+
+        flexDirection : 'row',
+        alignItems : "center"
+    },
+
+    profileImg : {
+        width : 48,
+        height : 48,
+        borderRadius : 64,
+        marginRight : 16
+    },
+
+    username : {
+        fontFamily : fonts.POPPINS_MEDIUM,
+        color : '#FFF',
+        fontSize : 20
+    },
+
+    textArea : {
+        flex : 1,
+        fontFamily : fonts.POPPINS_REGULAR,
+        color: '#FFF',
+        padding : 16,
+        fontSize : 16,
+
+        textAlignVertical : "top"
+    },
+
+    footer : {
+        width : '100%',
+        paddingVertical : 8,
+        paddingHorizontal : 24,
+        flexDirection : 'row',
+        justifyContent : "space-evenly",
+        alignItems : "center",
+        backgroundColor : colors.BLACK
+    },
+
+    imgContainer : {
+        width : '100%',
+        flexDirection : 'row',
+        justifyContent : 'center',
+        alignItems : "center",
+    },
+
+    imgPreview : {
+        height : 80,
+        width : 45,
+        marginVertical : 4,
+        marginHorizontal : 12
     }
 })
 

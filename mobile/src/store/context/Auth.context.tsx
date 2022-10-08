@@ -1,4 +1,5 @@
 import React, { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { IDevMinimal } from "../../interfaces/IDev";
 import { auth } from "../../services/auth.service";
 import { deleteFromLocalStorage, getFromLocalStorage, setOnLocalStorage } from "../../utils/localStorage";
 
@@ -7,7 +8,7 @@ import { deleteFromLocalStorage, getFromLocalStorage, setOnLocalStorage } from "
 interface IAuthContextProps {
     signed : boolean;
     token ?: string;
-    userData ?: object | null
+    userData ?: IDevMinimal
     signIn : (email: string, password: string) => Promise<any>
     signOut : () => void
 }
