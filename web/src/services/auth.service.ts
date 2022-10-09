@@ -57,7 +57,6 @@ interface IChangePasswordRequestBody {
 export const changePassword = async (body: IChangePasswordRequestBody) => {
     try {
         const { data } = await api.patch("change-password", body)
-        console.log(data)
 
         return data as IResponse
     } catch (err: any) {
@@ -71,7 +70,6 @@ export const changePassword = async (body: IChangePasswordRequestBody) => {
 export const emailConfirm = async (email: string) => {
     try {
         const { data } = await api.patch("email-confirm", { email: email })
-        console.log(data)
 
         return data as IResponse
     } catch (err: any) {

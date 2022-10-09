@@ -1,13 +1,14 @@
 import React, { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { IDevMinimal } from "../../interfaces/IDev";
 import { auth } from "../../services/auth.service";
-import { setOnLocalStorage } from "../../utils/localStorage";
+import { deleteFromLocalStorage, getFromLocalStorage, setOnLocalStorage } from "../../utils/localStorage";
 
 
 
 interface IAuthContextProps {
     signed : boolean;
     token ?: string;
-    userData ?: object | null
+    userData ?: IDevMinimal
     signIn : (email: string, password: string) => Promise<any>
     signOut : () => void
 }
@@ -30,6 +31,11 @@ export const AuthProvider : React.FC<{ children : ReactNode }> = ({ children }) 
             token: res.data?.token || "",
             userData : res.data?.user || null
         })
+
+        setOnLocalStorage('devint-authorization', res.data?.token || "")
+        setOnLocalStorage('devint-login', JSON.stringify({ email, password }))
+
+        return res
     }
 
     const handleSignOut = () => {
@@ -38,11 +44,20 @@ export const AuthProvider : React.FC<{ children : ReactNode }> = ({ children }) 
             token : "",
             userData : null
         })
+
+        setOnLocalStorage('devint-authorization', authData.token)
+        deleteFromLocalStorage('devint-login')
     }
 
     useEffect(() => {
-        setOnLocalStorage('devint-authorization', authData.token)
-    }, [authData])
+        getFromLocalStorage('devint-login').then((data) => {
+            if (!data) return
+
+            const login = JSON.parse(data)
+
+            handleAuth(login.email, login.password)
+        })
+    }, [])
 
 
     return (
