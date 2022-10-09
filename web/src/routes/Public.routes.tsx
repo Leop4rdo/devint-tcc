@@ -9,6 +9,7 @@ import ForgotMyPasswordPage from "../pages/public/ForgotMyPassword/ForgotMyPassw
 import ChangeMyPasswordPage from "pages/public/ChangeMyPassword";
 import EmailConfirmPage from "pages/public/EmailConfirm/EmailConfirmPage";
 import MenuWrapper from "components/shared/Feed/MenuWrapper";
+import Feed from "pages/private/Feed";
 
 
 const PublicRouter: React.FC = () => {

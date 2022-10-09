@@ -46,13 +46,7 @@ a {
   @import "./pages/public/Register/Dev.scss";
   @import "./pages/public/Register/Company.scss";
   @import "./pages/public/ForgotMyPasswordPage/index.scss";
-<<<<<<< HEAD
-  
-
- 
-=======
   @import "./pages/private/Feed";
->>>>>>> f8e10491b2fb5eb59b1e549e41a72c9e0dab88bb
 
   // Component Style Imports ->
   @import "./components/Input";
@@ -61,12 +55,9 @@ a {
   @import "./components/RegisterForms/Company/index.scss";
   @import "./components/RegisterForms/Dev/index.scss";
   @import "./components/Select/index.scss";
-<<<<<<< HEAD
   @import "./components/Feed/NavBar/index.scss";
   @import "./components/Feed/SideBar/index.scss";
   @import "./components/Feed/MenuWrapper/index.scss";
-=======
   @import "./components/Post/index.scss";
   @import "./components/Carousel/index.scss";
->>>>>>> f8e10491b2fb5eb59b1e549e41a72c9e0dab88bb
 }
