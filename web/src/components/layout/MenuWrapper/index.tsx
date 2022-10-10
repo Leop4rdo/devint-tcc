@@ -1,6 +1,6 @@
 import React, {useState} from "react";
-import SideBar from "components/shared/Feed/Sidebar"
-import NavBar from "../NavBar"
+import SideBar from "components/layout/Sidebar"
+import NavBar from "../NavBar/index"
 
 
 const MenuWapper : React.FC = () => {

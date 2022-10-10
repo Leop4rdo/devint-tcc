@@ -1,5 +1,5 @@
 import React from "react";
-import LogoComponent from "components/shared/Logo";
+import LogoComponent from "components/layout/Logo";
 
 interface ILoginWapper {
     children?: React.ReactNode
