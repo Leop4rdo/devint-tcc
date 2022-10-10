@@ -1,4 +1,3 @@
-import PostDetails from "components/ModalPostDetails";
 import Post from "components/shared/Post";
 import IPost from "interfaces/IPost";
 import React, { useEffect, useState } from "react";  
