@@ -42,11 +42,13 @@ const Feed: React.FC = () => {
                     <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
                 </div>
             </div>
+
             {
                 posts.map((post : IPost) => 
                     <Post data={post} />
                 )
             }
+
         </div>
     );
 }

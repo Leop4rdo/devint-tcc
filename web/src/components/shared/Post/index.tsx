@@ -1,8 +1,8 @@
 import IPost from "interfaces/IPost";
 import React, { useState } from "react"
 import Button from "../Button";
-import Carousel, { CarouselItem } from "../Carousel";
 import Icon from "../Icon";
+import {Swiper, SwiperProps, SwiperSlide} from "swiper/react"
 
 interface IPostProps {
     data : IPost
@@ -29,11 +29,9 @@ const Post: React.FC<IPostProps> = ({ data }) => {
             <div className="post-content">
                 <p>{data.content}</p>
                 <div className="post-images">
-                    <Carousel>
-                        <CarouselItem><img src={data.attachments[0]}/></CarouselItem>
-                        <CarouselItem>item2</CarouselItem>
-                        <CarouselItem>item3</CarouselItem>
-                    </Carousel>
+                    <Swiper>
+                        <SwiperSlide>{data.attachments}</SwiperSlide>
+                    </Swiper>
                 </div>
             </div>
             <div className="post-footer">
