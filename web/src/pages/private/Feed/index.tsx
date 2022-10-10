@@ -1,4 +1,4 @@
-import Post from "components/shared/Post";
+import Post from "components/Post";
 import IPost from "interfaces/IPost";
 import React, { useEffect, useState } from "react";  
 import POSTS_DATA from "../../../DATA/posts-get-response.json"
