@@ -1,11 +1,8 @@
-import api, { buildQuery, getToken, IResponse } from '.'
+import api, { buildQuery, getToken, IResponse, PaginationQuery } from '.'
 
-interface IDevListRequest {
-    limit ?: number
-    offset ?: number
-}
 
-export const list = async (query ?: IDevListRequest) : Promise<IResponse> => {
+
+export const list = async (query ?: PaginationQuery) : Promise<IResponse> => {
     try {
         const { data } = await api.get(
             (query) ? `/devs?${buildQuery(query)}` : '/devs',

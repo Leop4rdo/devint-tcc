@@ -1,4 +1,4 @@
-import api, { getToken, IResponse } from "."
+import api, { buildQuery, getToken, IResponse, PaginationQuery } from "."
 
 interface createPostRequestBody {
     content : string,
@@ -17,5 +17,20 @@ export const create = async (body : createPostRequestBody) => {
     } catch (err : any) {
         console.log(err)
         return err.response?.data as IResponse 
+    }
+}
+
+export const list = async (query ?: PaginationQuery) : Promise<IResponse> => {
+    try {
+        const { data } = await api.get(
+            (query) ? `/posts?${buildQuery(query)}` : '/posts',
+            { headers: { Authorization: `Baerer ${ await getToken()}` } }
+        )
+
+        return data as IResponse
+    } catch (err : any) {
+        console.log('error at post list')
+        console.log(err)
+        return err.response.data as IResponse
     }
 }
