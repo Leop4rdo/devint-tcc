@@ -40,6 +40,10 @@ a {
 #root {
   z-index: 0;
 
+  //Styles Libraries Imports ->
+  @import 'swiper/scss';
+  @import 'swiper/scss/pagination';
+
   // Page Style Imports ->
   @import "./pages/public/Login/index.scss";
   @import "./pages/public/Register/index.scss";
@@ -49,17 +53,20 @@ a {
   @import "./pages/private/Feed";
 
   // Component Style Imports ->
+
   @import "swiper/css/bundle";
-  @import "./components/Input";
+  @import "./components/layout/NavBar/index.scss";
+  @import "./components/layout/SideBar/index.scss";
+  @import "./components/layout/MenuWrapper/index.scss";
+  @import "./components/layout/ModalPost/index.scss";
+  @import "./components/layout/RegisterForms/Company/index.scss";
+  @import "./components/layout/RegisterForms/Dev/index.scss";
+  @import "./components/layout/Post/index.scss";
+  @import "./components/shared/Input/index.scss";
+  @import "./components/shared/Button/index.scss";
+  @import "./components/shared/Select/index.scss";
   @import "./components/Input-Search/index.scss";
-  @import "./components/Button";
-  @import "./components/RegisterForms/Company/index.scss";
-  @import "./components/RegisterForms/Dev/index.scss";
-  @import "./components/Select/index.scss";
-  @import "./components/Feed/NavBar/index.scss";
-  @import "./components/Feed/SideBar/index.scss";
-  @import "./components/Feed/MenuWrapper/index.scss";
-  @import "./components/ModalPost/index.scss";
-  @import "./components/Post/index.scss";
-  @import "./components/Input-Comment/index.scss";
+
+ 
+ 
 }

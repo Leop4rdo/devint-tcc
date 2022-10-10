@@ -1,21 +1,15 @@
 import React from "react";
-import {SwiperProps , SwiperSlide} from 'swiper/react'
-import Button from "../Button";
-import Icon from "../Icon";
-import InputComment from "../Input-Comment";
-import Slider from "../Slider/index"
+import {SwiperProps , SwiperSlide , Swiper} from 'swiper/react'
+import Button from "../../../shared/Button";
+import Icon from "../../../shared/Icon";
+import InputComment from "../../../shared/Input";
+
+import {Pagination , A11y} from 'swiper'
+
 
 
 
 const ModalPost: React.FC = () => {
-
-    const settings: SwiperProps ={
-        spaceBetween: 50,
-        slidesPerView: 1,
-        pagination: {
-            clickable: true
-        }
-    }
 
     return (
         <div className="container-modal-post">
@@ -53,7 +47,7 @@ const ModalPost: React.FC = () => {
                         <div className="comment">
                         <div className="users-faces-comment"><img></img></div>
                         <span>Flavin</span> 
-                        <InputComment placeholder="Escreva um comentário..." icon="send"/> 
+                        <InputComment placeholder="Escreva um comentário..." icon="send" /> 
                         
                         </div>
                         <div className="comment">
@@ -75,8 +69,12 @@ const ModalPost: React.FC = () => {
                     <Icon name="close"/>
                     <div className="carousel-image">
                         
-                        <Slider settings={settings}>
-                        
+                        <Swiper  modules={[Pagination, A11y]} 
+                            spaceBetween={50}
+                            slidesPerView = {1}
+                            navigation
+                            pagination={{ clickable: true }}
+                        >
                             <SwiperSlide>
                                 <img src="assets/images/teste.png" alt="" />
                             </SwiperSlide>
@@ -84,7 +82,7 @@ const ModalPost: React.FC = () => {
                             <img src="assets/images/Tony.jpg" alt="" />
                             </SwiperSlide>
                             
-                        </Slider>
+                        </Swiper>
                     </div>
                 </div>
 
