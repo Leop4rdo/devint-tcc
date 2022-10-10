@@ -11,6 +11,8 @@
   font-family: $base-font-family;
 }
 
+
+
 a {
   position: relative;
   color: $color-primary;
@@ -48,10 +50,17 @@ a {
 
   // Component Style Imports ->
   @import "./components/Input";
+  @import "./components/Input-Search/index.scss";
   @import "./components/Button";
   @import "./components/RegisterForms/Company/index.scss";
   @import "./components/RegisterForms/Dev/index.scss";
   @import "./components/Select/index.scss";
+  @import "./components/Feed/NavBar/index.scss";
+  @import "./components/Feed/SideBar/index.scss";
+  @import "./components/Feed/MenuWrapper/index.scss";
+  @import "./components/ModalPost/index.scss";
   @import "./components/Post/index.scss";
   @import "./components/Carousel/index.scss";
+  @import "./components/Slider/index.scss";
+  @import "./components/Input-Comment/index.scss";
 }

@@ -7,8 +7,6 @@ import POSTS_DATA from "../../../DATA/posts-get-response.json"
 
 const Feed: React.FC = () => {
 
-
-
     const [posts, setPosts] = useState<IPost[]>(POSTS_DATA.data as unknown as IPost[]);
     
     console.log(posts);
