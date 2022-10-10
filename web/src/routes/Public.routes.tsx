@@ -9,14 +9,12 @@ import ForgotMyPasswordPage from "../pages/public/ForgotMyPassword/ForgotMyPassw
 import ChangeMyPasswordPage from "pages/public/ChangeMyPassword";
 import EmailConfirmPage from "pages/public/EmailConfirm/EmailConfirmPage";
 
-import ModalPost from "../components/shared/ModalPost"
-import Feed from "pages/private/Feed";
 
 
 const PublicRouter: React.FC = () => {
     return (
         <Routes>
-            <Route index element={<ModalPost/>} />
+            <Route index element={<LoginPage />} />
             <Route path="forgot-my-password" element={<ForgotMyPasswordPage />} />
             <Route path="change-my-password/:token" element={<ChangeMyPasswordPage />} />
             <Route path="register">
