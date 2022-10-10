@@ -49,6 +49,7 @@ a {
   @import "./pages/private/Feed";
 
   // Component Style Imports ->
+  @import "swiper/css/bundle";
   @import "./components/Input";
   @import "./components/Input-Search/index.scss";
   @import "./components/Button";
@@ -61,5 +62,4 @@ a {
   @import "./components/ModalPost/index.scss";
   @import "./components/Post/index.scss";
   @import "./components/Input-Comment/index.scss";
-  @import "swiper/css/bundle";
 }
