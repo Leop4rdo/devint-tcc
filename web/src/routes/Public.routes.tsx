@@ -8,14 +8,15 @@ import { Route, Routes } from "react-router-dom"
 import ForgotMyPasswordPage from "../pages/public/ForgotMyPassword/ForgotMyPasswordPage"
 import ChangeMyPasswordPage from "pages/public/ChangeMyPassword";
 import EmailConfirmPage from "pages/public/EmailConfirm/EmailConfirmPage";
-import MenuWrapper from "components/shared/Feed/MenuWrapper";
+
+import ModalPost from "../components/shared/ModalPost"
 import Feed from "pages/private/Feed";
 
 
 const PublicRouter: React.FC = () => {
     return (
         <Routes>
-            <Route index element={<MenuWrapper/>} />
+            <Route index element={<ModalPost/>} />
             <Route path="forgot-my-password" element={<ForgotMyPasswordPage />} />
             <Route path="change-my-password/:token" element={<ChangeMyPasswordPage />} />
             <Route path="register">

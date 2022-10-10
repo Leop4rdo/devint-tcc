@@ -1,0 +1,39 @@
+.input-comment-container {
+    position: relative;
+    height: 40px;
+    width: 250px;
+    padding: 0px 8px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 28px;
+    background-color: $color-dark-gray;
+
+
+    .icon-input{
+        order: 1;
+    }
+    .icon {
+      
+      order: 2;
+      
+    }
+  
+    input {
+      outline: none;
+      border: none;
+      order: 1;
+      color: $color-white;
+      font-size: 1.0rem;
+      background-color: $color-dark-gray;
+      height: 100%;
+      width: 300px;
+      margin-left: 20px;
+     
+      
+  
+      
+    }
+  }
+  
