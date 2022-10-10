@@ -42,11 +42,11 @@ const Post : React.FC<IPostProps> = ({ data }) =>{
             <View style={styles.footer}>
                 <Pressable style={styles.footerButtonContainer}>
                     <MaterialIcons name='forum' size={24} color={colors.LIGHT_GRAY} />
-                    <Text style={styles.footerButtonLabel}>10 comentários</Text>
+                    <Text style={styles.footerButtonLabel}>{data.comments} comentários</Text>
                 </Pressable>
 
                 <Pressable style={styles.footerButtonContainer}>
-                    <Text style={styles.footerButtonLabel}>10</Text>
+                    <Text style={styles.footerButtonLabel}>{data.hearts}</Text>
                     <MaterialIcons name='favorite' size={24} color={colors.PRIMARY} />
                 </Pressable>
             </View>
