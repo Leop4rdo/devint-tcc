@@ -39,10 +39,7 @@
             border: none;
         }
     }
-
-
     
-
     .comments {
         display: flex;
         align-items: center;
@@ -106,4 +103,34 @@
             height: auto;
         }
     }
+    
+    .swiper-pagination-bullet{
+        width: 0.5em;
+        height: 0.5em;
+        background-color: $color-primary;
+    }
+
+    .swiper-button-next{
+        width: 0.5em;
+        height: 0.5em;
+        color: $color-primary;
+    }
+
+    .swiper-button-prev{
+        width: 0.5em;
+        height: 0.5em;
+        color: $color-primary;
+    }
+
+    .image-swiper {
+        background-color: chocolate;
+    }
 }
+
+// <SwiperSlide className="image-swiper">
+// {
+//     data.attachments.map((attachment) => 
+//         <img src={attachment}/>
+//     )
+// }
+// </SwiperSlide>
