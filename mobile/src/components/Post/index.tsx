@@ -1,9 +1,11 @@
-import {Image,View, Text, Pressable, } from "react-native"
+import {Image,View, Text, Pressable, FlatList, LayoutChangeEvent, } from "react-native"
 import styles from "./styles"
 import ButtonComponent from "../shared/Button"
 import {MaterialIcons} from "@expo/vector-icons"
 import colors from "../../styles/colors"
 import IPostListItem from "../../interfaces/IPost"
+import { useState } from "react"
+import AttachmentCarousel from "./AttachmentCarousel"
 
 
 interface IPostProps {
@@ -11,6 +13,8 @@ interface IPostProps {
 }
 
 const Post : React.FC<IPostProps> = ({ data }) =>{
+
+    
 
     return(
         <View style={styles.cardPost}>
@@ -29,6 +33,11 @@ const Post : React.FC<IPostProps> = ({ data }) =>{
                     }
                 </Text>
             </View>
+
+            { 
+                data.attachments.length > 0 && 
+                <AttachmentCarousel data={data.attachments}/> 
+            }
 
             <View style={styles.footer}>
                 <Pressable style={styles.footerButtonContainer}>
