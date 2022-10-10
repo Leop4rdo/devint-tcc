@@ -1,3 +1,4 @@
+import MenuWapper from "components/layout/MenuWrapper";
 import Post from "components/Post";
 import IPost from "interfaces/IPost";
 import React, { useEffect, useState } from "react";  
@@ -10,16 +11,11 @@ const Feed: React.FC = () => {
     
     console.log(posts);
     return (
+        <MenuWapper>
         <div className="feed">
-            <div>
+            <div className="outstanding-container">
                 <h2>Devs em destaque</h2>
                 <div className="outstanding-users">
-                    <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
-                    <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
-                    <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
-                    <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
-                    <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
-                    <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
                     <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
                     <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
                     <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
@@ -50,6 +46,7 @@ const Feed: React.FC = () => {
             }
 
         </div>
+        </MenuWapper>
     );
 }
 

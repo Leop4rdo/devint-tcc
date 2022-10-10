@@ -4,8 +4,16 @@
     align-items: center;
     gap: 1em;
 
+    h2 {
+        color: $color-primary;
+    }
+
+    .outstanding-container {
+        width: clamp(40em, 20vw, 60em);;
+    }
+
     .outstanding-users {
-        width: 500px;
+        width: 100%;
         display: flex;
         gap: 1em;
         overflow-x: scroll;

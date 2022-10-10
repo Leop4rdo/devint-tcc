@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useState } from "react";
-import DevForm1 from "components/layout/RegisterForms/Dev/Step1";
-import DevForm2 from "components/layout/RegisterForms/Dev/Step2";
+import DevForm1 from "components/RegisterForms/Dev/Step1";
+import DevForm2 from "components/RegisterForms/Dev/Step2";
 import Button from "components/shared/Button";
 import Icon from "components/shared/Icon";
 
