@@ -1,20 +1,16 @@
 import IPost from "interfaces/IPost";
 import React, { useState } from "react"
-import Button from "../Button";
-import Icon from "../Icon";
-import {Swiper, SwiperProps, SwiperSlide} from "swiper/react"
+import Button from "../shared/Button";
+import Icon from "../shared/Icon";
+import { Swiper, SwiperProps, SwiperSlide } from "swiper/react"
 
+import 'swiper/css';
+import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
 interface IPostProps {
-    data : IPost
+    data: IPost
 }
 
 const Post: React.FC<IPostProps> = ({ data }) => {
-
-    let commentAuthors = data.comments.map(function(item){
-        return item.writter.profilePicUrl;
-    })
-    
-    commentAuthors.length = 2;
 
     return (
         <div className="postcard" key={data.id}>
@@ -23,27 +19,39 @@ const Post: React.FC<IPostProps> = ({ data }) => {
                     <img src={data.writter.profilePicUrl} />
                     <h2>{data.writter.name}</h2>
                 </div>
-                <Button className="follow-button" children={[<Icon name="add"/> , "Seguir"]}/>
+                <Button className="follow-button" children={[<Icon name="add" />, "Seguir"]} />
             </div>
 
             <div className="post-content">
                 <p>{data.content}</p>
                 <div className="post-images">
-                    <Swiper>
-                        <SwiperSlide>{data.attachments}</SwiperSlide>
+                    <Swiper
+                        modules={[Navigation, Pagination, Scrollbar, A11y]}
+                        spaceBetween={50}
+                        slidesPerView={1}
+                        navigation
+                        pagination={{ clickable: true }}
+                    >
+                            {
+                                data.attachments.map((attachment) => 
+                                <SwiperSlide><img src={attachment}/></SwiperSlide>
+                                )
+                            }
+                        
                     </Swiper>
+                    
                 </div>
             </div>
             <div className="post-footer">
                 <div className="comments">
-                    <img src={commentAuthors[0]} />
-                    <img src={commentAuthors[1]} />
+                    <img src={data.comments[0].writter.profilePicUrl} />
+                    <img src={data.comments[1].writter.profilePicUrl} />
                     <span>10 comentários</span>
                 </div>
                 <div className="hearts">
                     {data.hearts}
                     <Button>
-                        <Icon name="favorite"/>
+                        <Icon name="favorite" />
                     </Button>
                 </div>
             </div>
