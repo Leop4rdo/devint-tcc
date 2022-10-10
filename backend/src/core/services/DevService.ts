@@ -6,6 +6,9 @@ import IResponse from "@src/application/Responses/IResponse";
 import SuccessResponse from "@src/application/Responses/SuccessResponse";
 import DevCreateInput from "@ports/input/user/dev/DevCreateInput";
 import DevOutput from "@src/ports/output/user/DevOutput";
+import PaginateListInput from "@src/ports/input/PaginateListInput";
+import DevMinimalOutput from "@src/ports/output/user/DevMinimalOutput";
+import IDevProps from "../domain/interfaces/IDev";
 
 export default class DevService {
     private repo : DevRepository
@@ -15,11 +18,16 @@ export default class DevService {
     }
 
 
-    list(): Promise<IResponse> {
-        throw new Error("Method not implemented.");
-    }
     findById(id: string): Promise<IResponse> {
         throw new Error("Method not implemented.");
+    }
+
+    async list(filters : PaginateListInput) : Promise<IResponse> {
+        const devs = await this.repo.listByFilters(filters);
+    
+        const mapped = devs.map((dev) => new DevMinimalOutput(dev as IDevProps))
+
+        return new SuccessResponse({ data : mapped })
     }
 
     async create(body: DevCreateInput): Promise<IResponse> {

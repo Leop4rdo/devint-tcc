@@ -13,12 +13,10 @@ const Header: React.FC<ILogo> = ({onPressIcon , showIcon = true }) => {
 
     return (
         <View >
-
             <View style={styles.containerLogo}>
                 <Icon name='arrowleft' style={showIcon ? styles.Iconinvisible : styles.IconVisible} onPress={onPressIcon} />
                <Logo/>
             </View>
-
             <View style={styles.containerImage}>
                 <ImageBackground source={require('../../../../assets/horizontal-wave-login-bg.png')} style={styles.horizontalWaveLogin} />
             </View>

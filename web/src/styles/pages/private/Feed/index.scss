@@ -1,0 +1,33 @@
+.feed {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+
+    .outstanding-users {
+        width: 500px;
+        display: flex;
+        gap: 1em;
+        overflow-x: scroll;
+
+        ::-webkit-scrollbar {
+            width: 3px;
+            height: 3px; 
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+            padding: 10px
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #000;
+        }
+
+        img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+    }
+}

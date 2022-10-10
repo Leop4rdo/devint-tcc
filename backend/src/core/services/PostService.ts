@@ -5,12 +5,15 @@ import Post from "../domain/Post"
 import ServerErrorResponse from "@src/application/Responses/ServerErrorResponse"
 import errors from "@src/helpers/errors"
 import SuccessResponse from "@src/application/Responses/SuccessResponse"
-import AddCommentInput from "@src/ports/input/posts/AddCommentInput"
+import AddCommentInput from "@ports/input/posts/AddCommentInput"
 import BadRequestResponse from "@src/application/Responses/BadRequestResponse"
-import PostOutput from "@src/ports/output/posts/PostOutput"
-import DevMinimalOutput from "@src/ports/output/user/DevMinimalOutput"
+import PostListOutput from "@ports/output/posts/PostListOutput"
+import DevMinimalOutput from "@ports/output/user/DevMinimalOutput"
 import IDevProps from "../domain/interfaces/IDev"
 import IResponse from "@src/application/Responses/IResponse"
+import PostEntity from "@src/adapters/database/entities/PostEntity"
+import PaginateListInput from "@ports/input/PaginateListInput"
+import PostOutput from "@ports/output/posts/PostOutput"
 
 export default class PostService {
     _: PostRepository
@@ -38,7 +41,7 @@ export default class PostService {
         if (!posts)
             return new BadRequestResponse({ message: errors.ENTITY_NOT_FOUND })
 
-        const res = posts.map(post => new PostOutput(post));
+        const res = posts.map(post => new PostListOutput(post));
 
         return new SuccessResponse({
             data: res
@@ -59,27 +62,6 @@ export default class PostService {
             return new SuccessResponse({ status: 201, message: 'Post created successfully', data: { id: post.id, writter: post.writter, content: post.content, attachments: post.attachments } })
     }
 
-    async addComment(comment: AddCommentInput, postId: string, writter: any) {
-        const post = await this._.findById(postId)
-
-        if (!post)
-            return new BadRequestResponse({ message: errors.ENTITY_NOT_FOUND })
-
-        const commentBody = {
-            ...comment,
-            writter: new DevMinimalOutput(writter as IDevProps)
-        }
-
-        post.comments.push(commentBody)
-
-        await this._.update(post)
-
-        return new SuccessResponse({
-            status: 201,
-            data: post
-        })
-    }
-
     async addHeart(postId: string, userId: string) {
         const post = await this._.findById(postId)
 
@@ -95,14 +77,14 @@ export default class PostService {
 
         return new SuccessResponse({
             status: 200,
-            data: new PostOutput(post)
+            data: new PostListOutput(post)
         })
     }
 
-    async list() {
-        const posts = await this._.list()
+    async list(filter ?: PaginateListInput) {
+        const posts = await this._.listByFilters(filter)
 
-        const mapped = posts.map((post: Post) => new PostOutput(post))
+        const mapped = posts.map(( post : Post ) => new PostListOutput(post))
 
         return new SuccessResponse({ data: mapped })
     }

@@ -15,13 +15,12 @@ const authMiddleware = (req : Request, res : Response, next : NextFunction) => {
 
     jwt.verify(token, process.env.SECRET, (err: any, decoded: any) => {
         if (err) {
-            console.warn(err.message)
+            console.warn('[WARN] Forbidden access! ->', err.message)
             return res.status(403).json(new forbiddenResponse())
         }
         req.body.userData = decoded;
+        next()
     })
-
-    next()
 }
 
 export default authMiddleware

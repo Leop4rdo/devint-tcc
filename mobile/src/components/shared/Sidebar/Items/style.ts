@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
 
     label : {
         fontFamily : fonts.POPPINS_REGULAR,
-        color : colors.LIGHT_GRAY,
         fontSize : 20,
         marginLeft : 16
     },

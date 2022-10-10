@@ -1,0 +1,83 @@
+.container-nav-bar {
+
+
+
+    @media (min-width: $breakpoint-laptop) {
+        .side-bar-menu{
+            display: none;
+        }
+    }
+
+    header {
+        width: 100%;
+        background-color: $color-primary;
+        display: flex;
+        align-items: center;
+
+        
+        
+        h1 {
+           margin-left: 20px;
+            font-size: clamp(2.4rem , 5vw, 3rem);
+            padding-top: 3px;
+            flex-basis: 80%;
+            
+        } 
+        
+        .container-search {
+            margin-top: 8px;
+            display: flex;
+            justify-content: space-around;
+
+           .container-input{
+               display: flex;
+               
+               
+                .icon{
+                    font-size: 32px;
+                    color: $color-light-gray;
+                    cursor: pointer;
+
+                }
+           }
+           
+           .container-icon-notifications{
+               .icon{
+                   font-size: 32px;
+                   margin-top: 3px;
+                   cursor: pointer;
+                   margin-left: 50px;
+                   margin-right: 50px;
+                   color: $color-white;
+               }
+               @media (max-width : $breakpoint-laptop) {
+                    .icon{
+                        margin-left: 10px;
+                        margin-right: 10px;
+                    }
+               }
+           }
+        }
+    }
+    @media (max-width : $breakpoint-laptop) {
+
+        .menu-toggle{
+            width: 60px;
+            height: 30px;
+            margin-left: 20px;
+            cursor: pointer;
+            
+            .one,
+            .two,
+            .three{
+             background-color: white;
+             height: 5px;
+             width: 37px;
+             margin: 6px auto; 
+             transition-duration: 0.3s;
+            }
+        }    
+    }
+
+
+}

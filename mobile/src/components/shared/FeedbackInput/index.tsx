@@ -62,7 +62,7 @@ const FeedbackTextInput : React.FC<IFeedbackTextInput> = ({style, isPassword, pl
     
     return (
         <View style={containerStyles.process(status)}>
-            {image && <Image source={(status === inputStatus.FOCUSED && focusImage) ? focusImage : image} />}
+            {image && <Image style={styles.iconImage} source={(status === inputStatus.FOCUSED && focusImage) ? focusImage : image} />}
             { icon && <MaterialIcons name={icon} size={ iconSize || 24} color={getIconColor()} style={{marginRight : 4}}/>}
             <TextInput
                 secureTextEntry={isPassword && !textVisible || false}
@@ -75,6 +75,8 @@ const FeedbackTextInput : React.FC<IFeedbackTextInput> = ({style, isPassword, pl
                 onFocus={() => status != inputStatus.INVALID && setStatus(inputStatus.FOCUSED)}
                 onBlur={onBlur}
                 maxLength={maxLength}
+
+                
             />
             { isPassword &&
             

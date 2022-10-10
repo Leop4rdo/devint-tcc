@@ -3,10 +3,12 @@ import DevRegistrationPage from "pages/public/Register/Dev";
 import LoginPage from "pages/public/Login";
 import Register from "pages/public/Register";
 import React from "react"
+
 import { Route, Routes } from "react-router-dom"
 import ForgotMyPasswordPage from "../pages/public/ForgotMyPassword/ForgotMyPasswordPage"
 import ChangeMyPasswordPage from "pages/public/ChangeMyPassword";
 import EmailConfirmPage from "pages/public/EmailConfirm/EmailConfirmPage";
+
 
 
 const PublicRouter: React.FC = () => {
