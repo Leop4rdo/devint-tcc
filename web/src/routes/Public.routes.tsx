@@ -8,11 +8,12 @@ import { Route, Routes } from "react-router-dom"
 import ForgotMyPasswordPage from "../pages/public/ForgotMyPassword/ForgotMyPasswordPage"
 import ChangeMyPasswordPage from "pages/public/ChangeMyPassword";
 import EmailConfirmPage from "pages/public/EmailConfirm/EmailConfirmPage";
+import NavBar from "components/layout/NavBar";
 
 const PublicRouter: React.FC = () => {
     return (
         <Routes>
-            <Route index element={< ModalPost/>} />
+            <Route index element={< NavBar/>} />
             <Route path="forgot-my-password" element={<ForgotMyPasswordPage />} />
             <Route path="change-my-password/:token" element={<ChangeMyPasswordPage />} />
             <Route path="register">

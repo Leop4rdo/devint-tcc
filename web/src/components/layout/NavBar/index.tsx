@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import LogoComponent from "components/layout/Logo";
-import InputSearch from "components/shared/Input-Search";
+import Input from "components/shared/Input";
 import Icon from "components/shared/Icon";
 import Sidebar from "../Sidebar/index";
 
@@ -32,9 +32,9 @@ const NavBar: React.FC<INavBarProps> = ({ onClick }) => {
                 </div>
                 <h1><LogoComponent primary="#1F252F" /></h1>
                 <div className="container-search">
-                    <div className="container-input" >
-                        <InputSearch icon="search" type="search" placeholder="Pesquisar..." />
-                    </div>
+                    
+                        <Input icon="search" type="search" placeholder="Pesquisar..." />
+                    
                     <div className="container-icon-notifications">
                         <Icon name="notifications" />
                     </div>
