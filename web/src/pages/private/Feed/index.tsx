@@ -1,3 +1,4 @@
+import PostDetails from "components/ModalPostDetails";
 import Post from "components/shared/Post";
 import IPost from "interfaces/IPost";
 import React, { useEffect, useState } from "react";  
@@ -44,11 +45,13 @@ const Feed: React.FC = () => {
                     <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
                 </div>
             </div>
+
             {
                 posts.map((post : IPost) => 
                     <Post data={post} />
                 )
             }
+
         </div>
     );
 }

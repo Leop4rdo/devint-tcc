@@ -1,23 +1,20 @@
+import Button from "components/shared/Button";
+import Icon from "components/shared/Icon";
 import IPost from "interfaces/IPost";
-import React, { useState } from "react"
-import Button from "../Button";
-import Carousel, { CarouselItem } from "../Carousel";
-import Icon from "../Icon";
+import React from "react";
 
-interface IPostProps {
-    data : IPost
+interface IPostDetails {
+    data: IPost
 }
 
-const Post: React.FC<IPostProps> = ({ data }) => {
+const PostDetails: React.FC<IPostDetails> = ({ data }) => {
 
     let commentAuthors = data.comments.map(function(item){
         return item.writter.profilePicUrl;
     })
-    
-    commentAuthors.length = 2;
 
-    return (
-        <div className="postcard" key={data.id}>
+    return(
+        <div className="post-details">
             <div className="post-header">
                 <div className="user-info">
                     <img src={data.writter.profilePicUrl} />
@@ -25,15 +22,7 @@ const Post: React.FC<IPostProps> = ({ data }) => {
                 </div>
                 <Button className="follow-button" children={[<Icon name="add"/> , "Seguir"]}/>
             </div>
-
-            <div className="post-content">
-                <p>{data.content}</p>
-                <div className="post-images">
-                    <Carousel>
-                        <CarouselItem><img src={data.attachments[0]}/></CarouselItem>
-                    </Carousel>
-                </div>
-            </div>
+            <p>{data.content}</p>
             <div className="post-footer">
                 <div className="comments">
                     <img src={commentAuthors[0]} />
@@ -47,12 +36,10 @@ const Post: React.FC<IPostProps> = ({ data }) => {
                     </Button>
                 </div>
             </div>
+
+            <Comment data={data} />
         </div>
-    );
+    )
 }
 
-// passo 1 -> pegar o array
-// passo 2 -> quebrar o array nos 3 primeiros index
-// passo 3 -> mapear os 3 primeiros index para uma <img>2
-
-export default Post;
+export default PostDetails;

@@ -10,6 +10,20 @@
         gap: 1em;
         overflow-x: scroll;
 
+        ::-webkit-scrollbar {
+            width: 3px;
+            height: 3px; 
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+            padding: 2px
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #000;
+        }
+
         img {
             width: 40px;
             height: 40px;
