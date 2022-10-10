@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import CompanyForm1 from "components/RegisterForms/Company/Step1";
-import CompanyForm2 from "components/RegisterForms/Company/Step2";
+import CompanyForm1 from "components/layout/RegisterForms/Company/Step1";
+import CompanyForm2 from "components/layout/RegisterForms/Company/Step2";
 import { isValidEmail } from "utils/validations";
 import * as AuthService from "services/auth.service";
 import { AuthContext } from "store/context/Auth.context";

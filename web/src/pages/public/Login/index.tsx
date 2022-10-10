@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "store/context/Auth.context";
 import { Link, Navigate, useNavigate } from "react-router-dom"
 import Input from "components/shared/Input";
-import LoginWrapper from "../../../components/LoginWrapper/index";
+import LoginWrapper from "../../../components/layout/LoginWrapper/index";
 
 
 
