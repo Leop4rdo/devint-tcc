@@ -1,9 +1,10 @@
 .container-modal-post {
-    width: 100vw;
     height: 100vh;
+    width: 100vw;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    
 
     .modal-post {
         width: 1200px;
@@ -132,7 +133,7 @@
                     width: 100%;
                     margin-top: 16px;
                     background-color: $color-dark-gray;
-                    height: 50px;
+                    height: auto;
                     display: flex;
                     align-items: center;
                     border-radius: 8px;
@@ -170,10 +171,20 @@
                         margin-right: 10px;
                     }
 
-                    p {
-                        font-size:1.0rem;
-                        
-                        
+                    textarea{
+                        background-color: $color-dark-gray ;
+                        border: none;
+                        color: $color-white;
+                        text-decoration: none;
+                        justify-items: center;
+                        height: auto;
+                        min-height: 100%;
+                        font-size: 16px;
+                        width: 100%;
+                        outline:none;
+                        resize:none;
+                        overflow-y: scroll;
+                        overflow-y: hidden;
                     }
 
                     .users-faces-comment {
@@ -182,6 +193,7 @@
                         background-color: aliceblue;
                         border-radius: 50px;
                         margin-left: 16px;
+
                     }
 
 

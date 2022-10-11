@@ -47,6 +47,7 @@
 
         span {
             margin-left: 8px;
+            cursor: pointer;
         }
     }
 
@@ -103,6 +104,12 @@
             height: auto;
         }
     }
+
+    .swiper-slide {
+        img{
+            cursor: pointer;
+        }
+    }   
     
     .swiper-pagination-bullet{
         width: 0.5em;

@@ -1,6 +1,5 @@
 .container-nav-bar {
-
-
+    
 
     @media (min-width: $breakpoint-laptop) {
         .side-bar-menu{
@@ -13,6 +12,8 @@
         background-color: $color-primary;
         display: flex;
         align-items: center;
+        position: fixed;
+        z-index: 3;
 
         
         
@@ -25,21 +26,36 @@
         } 
         
         .container-search {
-            margin-top: 8px;
+            margin-top: 20px;
             display: flex;
             justify-content: space-around;
+            
+               
+               .input-container {
+                align-items: center;
+                display: flex;
+                width: clamp(15rem, 22vw, 20rem);
 
-           .container-input{
-               display: flex;
-               
-               
+                .icon{
+                    order: 2;
+                    color: $color-light-gray;
+                    margin-left: -10px;
+                    font-size: 24px;
+                }
+
+                input{
+                    border-right: 1px $color-gray solid;
+                }
+
+               }
+
                 .icon{
                     font-size: 32px;
                     color: $color-light-gray;
                     cursor: pointer;
 
                 }
-           }
+           
            
            .container-icon-notifications{
                .icon{

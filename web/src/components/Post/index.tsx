@@ -2,15 +2,18 @@ import IPost from "interfaces/IPost";
 import React, { useState } from "react"
 import Button from "../shared/Button";
 import Icon from "../shared/Icon";
-import { Swiper, SwiperProps, SwiperSlide } from "swiper/react"
-
+import { Swiper, SwiperSlide } from "swiper/react"
+import {useNavigate } from "react-router-dom";
 import 'swiper/css';
 import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
-interface IPostProps {
+
+ interface IPostProps {
     data: IPost
+    
 }
 
-const Post: React.FC<IPostProps> = ({ data }) => {
+const Post: React.FC<IPostProps> = ({ data}) => {
+    const navigate = useNavigate(); 
 
     return (
         <div className="postcard" key={data.id}>
@@ -32,9 +35,12 @@ const Post: React.FC<IPostProps> = ({ data }) => {
                         navigation
                         pagination={{ clickable: true }}
                     >
+
+                        
                             {
-                                data.attachments.map((attachment) => 
-                                <SwiperSlide><img src={attachment}/></SwiperSlide>
+                                data.attachments.map((attachment , index) => (
+                                    <SwiperSlide><img onClick={() => navigate(`posts/${data.id}`)} src={attachment} alt="" /></SwiperSlide>
+                                )
                                 )
                             }
                         
@@ -46,7 +52,7 @@ const Post: React.FC<IPostProps> = ({ data }) => {
                 <div className="comments">
                     <img src={data.comments[0].writter.profilePicUrl} />
                     <img src={data.comments[1].writter.profilePicUrl} />
-                    <span>10 comentários</span>
+                    <span  onClick={() => navigate(`posts`)} >10 comentários</span>
                 </div>
                 <div className="hearts">
                     {data.hearts}
