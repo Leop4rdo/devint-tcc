@@ -8,7 +8,6 @@ import ForgotMyPasswordPage from "../pages/public/ForgotMyPassword/ForgotMyPassw
 import ChangeMyPasswordPage from "pages/public/ChangeMyPassword";
 import EmailConfirmPage from "pages/public/EmailConfirm/EmailConfirmPage";
 
-
 const PublicRouter: React.FC = () => {
     return (
         <Routes>
