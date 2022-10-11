@@ -3,11 +3,7 @@ import SideBar from "components/layout/Sidebar"
 import NavBar from "../NavBar/index"
 
 
-const MenuWapper : React.FC = () => {
-
-    
-
-   
+const MenuWapper : React.FC<React.PropsWithChildren> = ({ children }) => {
 
     return (
         <div className="container-global">
@@ -18,7 +14,7 @@ const MenuWapper : React.FC = () => {
         </div>  
         
         <main>
-
+            {children}
         </main>
         </div>
     )

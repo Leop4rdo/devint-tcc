@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import LogoComponent from "components/layout/Logo";
+import LogoComponent from "components/shared/Logo";
 import InputSearch from "components/shared/Input-Search";
 import Icon from "components/shared/Icon";
 import Sidebar from "../Sidebar/index";
