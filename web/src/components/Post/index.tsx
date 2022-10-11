@@ -52,7 +52,7 @@ const Post: React.FC<IPostProps> = ({ data}) => {
                 <div className="comments">
                     <img src={data.comments[0].writter.profilePicUrl} />
                     <img src={data.comments[1].writter.profilePicUrl} />
-                    <span  onClick={() => navigate(`posts`)} >10 comentários</span>
+                    <span  onClick={() => navigate(`posts/${data.id}`)} >10 comentários</span>
                 </div>
                 <div className="hearts">
                     {data.hearts}

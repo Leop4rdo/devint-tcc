@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import Icon from "components/shared/Icon";
+import { AuthContext } from "store/context/Auth.context";
 
 
 
 const Sidebar: React.FC = () => {
+    const authContext = useContext(AuthContext)
+    
+    /* SADBAR FOTO ACESSO authContext?.userData.profilePicUrl */
+
     return (
             <div className="container-side-bar">
 

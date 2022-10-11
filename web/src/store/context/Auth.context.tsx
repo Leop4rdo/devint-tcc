@@ -6,7 +6,7 @@ import { auth } from "../../services/auth.service";
 interface IAuthContextProps {
     signed : boolean;
     token ?: string;
-    userData ?: object | null
+    userData ?: any
     signIn : (email: string, password: string) => Promise<any>
     signOut : () => void
 }
