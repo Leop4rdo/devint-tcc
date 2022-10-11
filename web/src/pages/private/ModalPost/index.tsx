@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { SwiperProps, SwiperSlide, Swiper } from 'swiper/react'
-import Button from "../../shared/Button";
-import Icon from "../../shared/Icon";
-import InputComment from "../../shared/Input";
+import Button from "../../../components/shared/Button";
+import Icon from "../../../components/shared/Icon";
+import InputComment from "../../../components/shared/Input";
 import MenuWapper from "components/layout/MenuWrapper";
 import { Pagination, A11y } from 'swiper'
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import IPost from "interfaces/IPost";
 import POSTS_DATA from "../../../DATA/posts-get-response.json"
 import { useState } from "react";
@@ -16,16 +16,18 @@ import IComment from "interfaces/IComment";
 
 
 const ModalPost: React.FC = () => {
-    const { state } = useLocation()
+    const { id } = useParams()
 
-    console.log(state)
+    const [post, setPost] = useState<IPost>()
 
-    const [posts, setPosts] = useState<IPost[]>(POSTS_DATA.data as unknown as IPost[]);
-    const [comment, setComment] = useState<IComment[]>(POSTS_DATA.data as unknown as IComment[]);
+    console.log(post?.attachments)
 
-    
+    const navigate = useNavigate()
 
-    let navigate = useNavigate()
+    useEffect(() => {
+        setPost(POSTS_DATA.data.find((post)=> post.id == id ) as unknown as IPost)
+    }, [id])
+
     return (
         <MenuWapper>
             <div className="container-modal-post">
@@ -73,7 +75,7 @@ const ModalPost: React.FC = () => {
                             </div>
                             <div className="comment">
                                 <div className="users-faces-comment"><img></img></div>
-                                <span>Flavin</span><p>aaaaaaaaaaaaaaaaaaaaa</p>
+                                <span>Flavin</span><textarea></textarea>
 
                             </div>
 
@@ -83,7 +85,7 @@ const ModalPost: React.FC = () => {
 
 
                     <div className="container-carousel">
-                        <Icon name="close" onClick={() => navigate("/")} />
+                        <Icon name="close" onClick={() => navigate(-1)} />
                         <div className="carousel-image" >
 
                             <Swiper modules={[Pagination, A11y]}
@@ -92,12 +94,14 @@ const ModalPost: React.FC = () => {
                                 pagination={{ clickable: true }}
                             >
 
-                                <SwiperSlide><img src={`${state}`}/>
-                                </SwiperSlide>
-
-
-                                
-
+                            
+                                 {
+                                    post?.attachments.map((attachment , index) => (
+                                        <SwiperSlide><img src={attachment} alt="" /></SwiperSlide>
+                                    )
+                                    )
+                                }
+                            
 
                             </Swiper>
                         </div>

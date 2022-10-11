@@ -1,5 +1,5 @@
 import MenuWapper from "components/layout/MenuWrapper";
-import ModalPost from "components/Modals/ModalPost";
+import ModalPost from "pages/private/ModalPost";
 import Post from "components/Post";
 import IPost from "interfaces/IPost";
 import React, { useEffect, useState } from "react";  
