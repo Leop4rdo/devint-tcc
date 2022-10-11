@@ -20,6 +20,8 @@ export default StyleSheet.create({
         padding : 12,
 
         borderRadius : 100,
-        backgroundColor : colors.PRIMARY
+        backgroundColor : colors.PRIMARY,
+
+        zIndex : 2
     },
 })
