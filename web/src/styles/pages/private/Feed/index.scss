@@ -1,11 +1,27 @@
 .feed {
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1em;
-
+    overflow-y: scroll;
     h2 {
         color: $color-primary;
+    }
+
+    &::-webkit-scrollbar {
+        height: 5px; 
+        &:hover {
+            background-color: $color-gray;
+        }
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 8px;
+        
+        &:hover {
+            background-color: $color-primary;
+        }
     }
 
     .outstanding-container {
