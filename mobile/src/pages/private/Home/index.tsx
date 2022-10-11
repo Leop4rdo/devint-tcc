@@ -7,6 +7,7 @@ import styles from "./style";
 import {useEffect, useState} from "react";
 import IPostListItem from "../../../interfaces/IPost";
 import * as postService from "../../../services/post.service"
+import {screenHeight} from "../../../styles/utils";
 
 const HomePage : React.FC<{ navigation : any }> = ({navigation}) => {
     const [posts, setPosts] = useState<IPostListItem[]>([])
@@ -28,6 +29,8 @@ const HomePage : React.FC<{ navigation : any }> = ({navigation}) => {
 
                 <FlatList
                     data={posts}
+                    showsVerticalScrollIndicator={false}
+                    contentContainerStyle={{paddingBottom: screenHeight * .25}}
                     ListHeaderComponent={<DevCarousel />}
                     renderItem={({ item }) => (
                         <Post data={item} key={item.id}/>
