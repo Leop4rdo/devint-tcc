@@ -38,7 +38,7 @@ export const list = async (query ?: PaginationQuery) : Promise<IResponse> => {
 export const addHeart = async (id : string) => {
     try {
         const { data } = await api.patch(
-            `/posts/${id}/add-heart`,
+            `/posts/${id}/toggle-heart`,
             {},
             { headers: { Authorization: `Baerer ${ await getToken()}` } }
         )

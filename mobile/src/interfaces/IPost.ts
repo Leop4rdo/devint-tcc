@@ -7,4 +7,5 @@ export default interface IPostListItem {
     hearts : number
     attachments : string[]
     writter : IDevMinimal
+    alreadyHearted : boolean
 }
