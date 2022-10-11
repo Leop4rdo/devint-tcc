@@ -1,8 +1,8 @@
 import React from "react";
 import {SwiperProps , SwiperSlide , Swiper} from 'swiper/react'
-import Button from "../../../shared/Button";
-import Icon from "../../../shared/Icon";
-import InputComment from "../../../shared/Input";
+import Button from "../../shared/Button";
+import Icon from "../../shared/Icon";
+import InputComment from "../../shared/Input";
 
 import {Pagination , A11y} from 'swiper'
 
