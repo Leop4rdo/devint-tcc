@@ -28,9 +28,7 @@ const HomePage : React.FC<{ navigation : any }> = ({navigation}) => {
 
                 <FlatList
                     data={posts}
-                    StickyHeaderComponent={<DevCarousel />}
-                    stickyHeaderIndices={[0]}
-                    stickyHeaderHiddenOnScroll
+                    ListHeaderComponent={<DevCarousel />}
                     renderItem={({ item }) => (
                         <Post data={item} key={item.id}/>
                     )}

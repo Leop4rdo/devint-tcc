@@ -34,3 +34,19 @@ export const list = async (query ?: PaginationQuery) : Promise<IResponse> => {
         return err.response.data as IResponse
     }
 }
+
+export const addHeart = async (id : string) => {
+    try {
+        const { data } = await api.patch(
+            `/posts/${id}/add-heart`,
+            {},
+            { headers: { Authorization: `Baerer ${ await getToken()}` } }
+        )
+
+        return data as IResponse
+    } catch (err : any) {
+        console.log('error at post list')
+        console.log(err)
+        return err.response.data as IResponse
+    }
+}
