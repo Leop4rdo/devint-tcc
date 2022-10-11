@@ -1,5 +1,10 @@
-.feed {
+.feed-page {
+    width: 100vw;
     height: 100vh;
+}
+
+.feed {
+    height: 90vh;
     display: flex;
     flex-direction: column;
     align-items: center;
