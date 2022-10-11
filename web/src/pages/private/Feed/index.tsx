@@ -47,8 +47,9 @@ const Feed: React.FC = () => {
                 )
             }
 
-        </div>
-        </MenuWapper>
+                </div>
+            </MenuWapper>
+        
     );
 }
 

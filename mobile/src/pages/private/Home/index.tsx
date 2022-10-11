@@ -1,20 +1,40 @@
 import {MaterialIcons} from "@expo/vector-icons";
-import { Pressable, Text, View } from "react-native"
+import { FlatList, Pressable, Text, View } from "react-native"
 import DevCarousel from "../../../components/DevCarousel";
 import LayoutWrapper from "../../../components/shared/LayoutWrapper";
-import { getToken } from "../../../services";
+import Post from "../../../components/Post";
 import styles from "./style";
+import {useEffect, useState} from "react";
+import IPostListItem from "../../../interfaces/IPost";
+import * as postService from "../../../services/post.service"
 
 const HomePage : React.FC<{ navigation : any }> = ({navigation}) => {
+    const [posts, setPosts] = useState<IPostListItem[]>([])
+
+    const getPosts = async () => {
+        const { data }= await postService.list({ offset : 0, limit : 10 })
+
+        setPosts(data ?? [])
+    }
+
+    useEffect(() => { getPosts() }, [])
 
     return (
         <LayoutWrapper navigation={navigation}>
             <View style={styles.page}>
-                <DevCarousel />
-
                 <Pressable onPress={() => navigation.navigate('post-register')}style={styles.floatingButton}>
                     <MaterialIcons name="edit" size={24} color="#FFF"/>
                 </Pressable>
+
+                <FlatList
+                    data={posts}
+                    StickyHeaderComponent={<DevCarousel />}
+                    stickyHeaderIndices={[0]}
+                    stickyHeaderHiddenOnScroll
+                    renderItem={({ item }) => (
+                        <Post data={item} key={item.id}/>
+                    )}
+                    />
             </View>
         </LayoutWrapper>
     )

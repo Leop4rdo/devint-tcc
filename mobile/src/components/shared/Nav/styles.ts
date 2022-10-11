@@ -14,6 +14,11 @@ const styles = StyleSheet.create({
 
     menuItem : {
         marginHorizontal : 8
+    },
+
+    searchInput : {
+        width: '50%',
+        height: 40,
     }
 })
 

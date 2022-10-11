@@ -1,10 +1,8 @@
 import { useState } from 'react';
-import {View, TextInput, Pressable, Touchable, Image} from 'react-native'
+import {View, TextInput, Pressable, Touchable, Image} from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-
 import colors from '../../../styles/colors';
 import StyleBuilder from '../../../styles/StyleBuilder';
-
 import styles from "./style";
 
 interface IFeedbackTextInput {
