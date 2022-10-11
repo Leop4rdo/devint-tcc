@@ -7,7 +7,9 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
+  p {
+    color: $color-white;
+  }
   font-family: $base-font-family;
 }
 
@@ -54,7 +56,7 @@ a {
 
   // Component Style Imports ->
 
-  
+  @import "swiper/css/bundle";
   @import "./components/layout/NavBar/index.scss";
   @import "./components/layout/SideBar/index.scss";
   @import "./components/layout/MenuWrapper/index.scss";

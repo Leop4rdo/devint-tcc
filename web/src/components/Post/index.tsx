@@ -2,15 +2,24 @@ import IPost from "interfaces/IPost";
 import React, { useState } from "react"
 import Button from "../shared/Button";
 import Icon from "../shared/Icon";
-import { Swiper, SwiperProps, SwiperSlide } from "swiper/react"
-
+import { Swiper, SwiperSlide } from "swiper/react"
+import {useNavigate } from "react-router-dom";
 import 'swiper/css';
 import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
-interface IPostProps {
+import ModalPost from "components/Modals/ModalPost";
+ interface IPostProps {
     data: IPost
+    teste?: IPost
 }
 
-const Post: React.FC<IPostProps> = ({ data }) => {
+const Post: React.FC<IPostProps> = ({ data , teste }) => {
+
+    
+    let navigate = useNavigate(); 
+
+    const ModalPostComments = (attachment : string) => {
+         navigate('modal-details-post', {state : attachment})  
+    }
 
     return (
         <div className="postcard" key={data.id}>
@@ -34,7 +43,7 @@ const Post: React.FC<IPostProps> = ({ data }) => {
                     >
                             {
                                 data.attachments.map((attachment) => 
-                                <SwiperSlide><img src={attachment}/></SwiperSlide>
+                                    <SwiperSlide><img onClick={() => ModalPostComments(attachment)} src={attachment}/></SwiperSlide>
                                 )
                             }
                         
@@ -46,7 +55,7 @@ const Post: React.FC<IPostProps> = ({ data }) => {
                 <div className="comments">
                     <img src={data.comments[0].writter.profilePicUrl} />
                     <img src={data.comments[1].writter.profilePicUrl} />
-                    <span>10 comentários</span>
+                    <span  onClick={() => navigate("modal-details-post")} >10 comentários</span>
                 </div>
                 <div className="hearts">
                     {data.hearts}
