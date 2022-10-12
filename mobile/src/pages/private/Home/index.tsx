@@ -1,5 +1,5 @@
 import {MaterialIcons} from "@expo/vector-icons";
-import { FlatList, Pressable, Text, View } from "react-native"
+import { ActivityIndicator, FlatList, Pressable, RefreshControl, Text, View } from "react-native"
 import DevCarousel from "../../../components/DevCarousel";
 import LayoutWrapper from "../../../components/shared/LayoutWrapper";
 import Post from "../../../components/Post";
@@ -8,14 +8,31 @@ import {useEffect, useState} from "react";
 import IPostListItem from "../../../interfaces/IPost";
 import * as postService from "../../../services/post.service"
 import {screenHeight} from "../../../styles/utils";
+import CommentModal from "../../../components/CommentModal";
 
 const HomePage : React.FC<{ navigation : any }> = ({navigation}) => {
     const [posts, setPosts] = useState<IPostListItem[]>([])
+    const [isLoading, setLoading] = useState(true)
+    const [isRefreshing, setRefreshing] = useState(false)
 
     const getPosts = async () => {
-        const { data }= await postService.list({ offset : 0, limit : 10 })
+        setLoading(true)
 
-        setPosts(data ?? [])
+        const { data }= await postService.list({ offset : posts.length, limit : 24 })
+
+        setPosts([...posts, ...data])
+
+        setLoading(false)
+    }
+
+    const refreshPosts = async () => {
+        setRefreshing(true)
+
+
+        const { data }= await postService.list({ limit : 24 })
+        setPosts(data)
+
+        setRefreshing(false)
     }
 
     useEffect(() => { getPosts() }, [])
@@ -27,15 +44,22 @@ const HomePage : React.FC<{ navigation : any }> = ({navigation}) => {
                     <MaterialIcons name="edit" size={24} color="#FFF"/>
                 </Pressable>
 
-                <FlatList
+                {/* <FlatList
                     data={posts}
+                    onRefresh={refreshPosts}
+                    refreshing={isRefreshing}
                     showsVerticalScrollIndicator={false}
-                    contentContainerStyle={{paddingBottom: screenHeight * .25}}
+                    contentContainerStyle={{paddingBottom: screenHeight * .1}}
+                    onEndReached={getPosts}
+                    onEndReachedThreshold={.1}
                     ListHeaderComponent={<DevCarousel />}
+                    ListFooterComponent={<ActivityIndicator />}
                     renderItem={({ item }) => (
-                        <Post data={item} key={item.id}/>
+                        <Post data={item} key={`${item.id}-${Math.random()**999}`}/>
                     )}
-                    />
+                    /> */}
+
+                <CommentModal />
             </View>
         </LayoutWrapper>
     )

@@ -1,5 +1,5 @@
-import { useState } from "react"
-import { View, FlatList, Image, LayoutChangeEvent, Text } from "react-native"
+import { useCallback, useRef, useState } from "react"
+import { View, FlatList, Image, LayoutChangeEvent, Text, NativeSyntheticEvent, NativeScrollEvent } from "react-native"
 import styles from "./styles"
 
 const AttachmentCarousel : React.FC<{data: string[]}> = ({data}) => {

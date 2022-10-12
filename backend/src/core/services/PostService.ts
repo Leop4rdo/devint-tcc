@@ -53,7 +53,8 @@ export default class PostService {
 
         const post = await this._.create(new Post({
             ...postInput,
-            writter: { id: owner }
+            writter: { id: owner },
+            order : Math.floor(Math.random() * 999999)
         } as unknown as IPostProps))
 
         if (!post)
