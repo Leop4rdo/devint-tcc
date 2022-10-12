@@ -9,10 +9,11 @@ import AttachmentCarousel from "./AttachmentCarousel"
 import * as postService from "../../services/post.service"
 
 interface IPostProps {
-    data : IPostListItem
+    data : IPostListItem,
+    openComments : () => void
 }
 
-const Post : React.FC<IPostProps> = ({ data }) =>{
+const Post : React.FC<IPostProps> = ({ data, openComments }) =>{
     const [liked, setLiked] = useState(data.alreadyHearted)
 
     const giveLike = async () => {
@@ -45,7 +46,7 @@ const Post : React.FC<IPostProps> = ({ data }) =>{
             }
 
             <View style={styles.footer}>
-                <Pressable style={styles.footerButtonContainer}>
+                <Pressable style={styles.footerButtonContainer} onPress={openComments}>
                     <MaterialIcons name='forum' size={24} color={colors.LIGHT_GRAY} />
                     <Text style={styles.footerButtonLabel}>{data.comments} comentários</Text>
                 </Pressable>

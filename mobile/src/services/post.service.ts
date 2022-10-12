@@ -50,3 +50,18 @@ export const addHeart = async (id : string) => {
         return err.response.data as IResponse
     }
 }
+
+export const getById = async (id : string) => {
+    try {
+        const { data } = await api.get(
+            `/posts/${id}`,
+            { headers: { Authorization: `Baerer ${ await getToken()}` } }
+        )
+
+        return data as IResponse
+    } catch (err : any) {
+        console.log('error at get post by id')
+        console.log(err)
+        return err.response.data as IResponse
+    }
+}

@@ -45,7 +45,10 @@ export default StyleSheet.create({
         flexDirection : 'row',
         justifyContent : "space-between",
         alignItems : "center",
-        marginBottom : 8
+        borderBottomColor : colors.GRAY,
+        borderBottomWidth : 1,
+        marginBottom : 8,
+        paddingBottom : 8
     },
 
     profilePic : {
@@ -57,5 +60,9 @@ export default StyleSheet.create({
     newCommentInput : {
         flex : 1,
         marginHorizontal : 12
+    },
+
+    comment : {
+        marginVertical : 16
     }
 })

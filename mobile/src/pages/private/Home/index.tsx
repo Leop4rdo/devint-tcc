@@ -12,22 +12,17 @@ import CommentModal from "../../../components/CommentModal";
 
 const HomePage : React.FC<{ navigation : any }> = ({navigation}) => {
     const [posts, setPosts] = useState<IPostListItem[]>([])
-    const [isLoading, setLoading] = useState(true)
     const [isRefreshing, setRefreshing] = useState(false)
+    const [selectedPostId, setSelectedPostId] = useState("")
 
     const getPosts = async () => {
-        setLoading(true)
-
         const { data }= await postService.list({ offset : posts.length, limit : 24 })
 
         setPosts([...posts, ...data])
-
-        setLoading(false)
     }
 
     const refreshPosts = async () => {
         setRefreshing(true)
-
 
         const { data }= await postService.list({ limit : 24 })
         setPosts(data)
@@ -44,7 +39,7 @@ const HomePage : React.FC<{ navigation : any }> = ({navigation}) => {
                     <MaterialIcons name="edit" size={24} color="#FFF"/>
                 </Pressable>
 
-                {/* <FlatList
+                <FlatList
                     data={posts}
                     onRefresh={refreshPosts}
                     refreshing={isRefreshing}
@@ -55,11 +50,15 @@ const HomePage : React.FC<{ navigation : any }> = ({navigation}) => {
                     ListHeaderComponent={<DevCarousel />}
                     ListFooterComponent={<ActivityIndicator />}
                     renderItem={({ item }) => (
-                        <Post data={item} key={`${item.id}-${Math.random()**999}`}/>
+                        <Post 
+                            openComments={() => setSelectedPostId(item.id)} 
+                            data={item} 
+                            key={`${item.id}-${Math.random()**999}`}
+                        />
                     )}
-                    /> */}
+                    />
 
-                <CommentModal />
+                { selectedPostId && <CommentModal postId={selectedPostId} onClose={() => setSelectedPostId('')}/>}
             </View>
         </LayoutWrapper>
     )
