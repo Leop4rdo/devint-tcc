@@ -14,8 +14,8 @@ export interface PaginationQuery {
 }
 
 
-// export const baseUrl = "http://localhost:8082/api/v1"
-export const baseUrl = "http://10.107.144.4:8080/api/v1"
+export const baseUrl = "http://localhost:8080/api/v1"
+// export const baseUrl = "http://10.107.144.4:8080/api/v1"
 
 export const getToken = () => {
     return localStorage.getItem("devint-auth")

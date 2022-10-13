@@ -1,15 +1,22 @@
-export default interface IPost {
+export default interface IPostListItem {
     id : string
     content : string
     reports : any[]
-    comments : {
-        content : string,
-        writter : IWritter
-    }[]
+    comments : number
     hearts : number
     attachments : string[]
     writter : IWritter
 }
+
+export default interface IPost {
+    id : string
+    content : string
+    reports : any[]
+    hearts : number
+    attachments : string[]
+    writter : IWritter
+}
+
 
 interface IWritter {
     id : string

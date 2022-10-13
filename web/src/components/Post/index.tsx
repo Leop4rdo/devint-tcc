@@ -6,9 +6,10 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import {useNavigate } from "react-router-dom";
 import 'swiper/css';
 import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
+import IPostListItem from "interfaces/IPost";
 
  interface IPostProps {
-    data: IPost
+    data: IPostListItem
     
 }
 
@@ -35,24 +36,20 @@ const Post: React.FC<IPostProps> = ({ data}) => {
                         navigation
                         pagination={{ clickable: true }}
                     >
-
-                        
-                            {
-                                data.attachments.map((attachment , index) => (
-                                    <SwiperSlide><img onClick={() => navigate(`posts/${data.id}`)} src={attachment} alt="" /></SwiperSlide>
-                                )
-                                )
-                            }
-                        
+                        {
+                            data.attachments.map((attachment , index) => 
+                                <SwiperSlide>
+                                    <img onClick={() => navigate(`posts/${data.id}`)} src={attachment} alt="" />
+                                </SwiperSlide>
+                            )
+                        }
                     </Swiper>
                     
                 </div>
             </div>
             <div className="post-footer">
                 <div className="comments">
-                    <img src={data.comments[0].writter.profilePicUrl} />
-                    <img src={data.comments[1].writter.profilePicUrl} />
-                    <span  onClick={() => navigate(`posts`)} >10 comentários</span>
+                    <span onClick={() => navigate(`posts`)} >{data.comments} comentários</span>
                 </div>
                 <div className="hearts">
                     {data.hearts}

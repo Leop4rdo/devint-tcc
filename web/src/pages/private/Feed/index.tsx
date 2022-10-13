@@ -3,13 +3,21 @@ import ModalPost from "pages/private/ModalPost";
 import Post from "components/Post";
 import IPost from "interfaces/IPost";
 import React, { useEffect, useState } from "react";  
-import POSTS_DATA from "../../../DATA/posts-get-response.json"
+import * as postService from 'services/post.service'
+import IPostListItem from "interfaces/IPost";
 
 const Feed: React.FC = () => {
     
-    const [posts, setPosts] = useState<IPost[]>(POSTS_DATA.data as unknown as IPost[]);
+    const [posts, setPosts] = useState<IPostListItem[]>([]);
+
+    const getPosts = async () => {
+        const { data } = await postService.list({ offset : posts.length, limit : 48 })
+
+        setPosts([...posts, ...data])
+    }
+
+    useEffect(() => { getPosts() }, [])
     
-    console.log(posts);
     return (
         <MenuWapper>
         <div className="feed" >
@@ -39,17 +47,11 @@ const Feed: React.FC = () => {
                 </div>
             </div>
 
-            {
-                posts.map((post : IPost) => 
-                    <Post data={post} />
-                    
-                    
-                )
-            }
-
-                </div>
-            </MenuWapper>
-        
+            {posts.map((post) => 
+                <Post data={post} />
+            )}
+        </div>
+        </MenuWapper>
     );
 }
 
