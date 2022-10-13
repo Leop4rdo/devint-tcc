@@ -13,12 +13,12 @@ interface IPostProps {
 }
 
 const Post : React.FC<IPostProps> = ({ data }) =>{
-    const [liked, setLiked] = useState(false)
+    const [liked, setLiked] = useState(data.alreadyHearted)
 
     const giveLike = async () => {
         const res = await postService.addHeart(data.id)
 
-        setLiked(true)
+        setLiked(!liked)
     }
 
     return(
@@ -51,7 +51,7 @@ const Post : React.FC<IPostProps> = ({ data }) =>{
                 </Pressable>
 
                 <Pressable style={styles.footerButtonContainer} onPress={giveLike}>
-                    <Text style={styles.footerButtonLabel}>{(liked) ? data.hearts+1 : data.hearts}</Text>
+                    <Text style={styles.footerButtonLabel}>{(liked && !data.alreadyHearted) ? data.hearts+1 : (!liked && data.alreadyHearted) ? data.hearts-1: data.hearts}</Text>
                     <MaterialIcons name='favorite' size={24} color={(liked) ? colors.PRIMARY : colors.LIGHT_GRAY} />
                 </Pressable>
             </View>

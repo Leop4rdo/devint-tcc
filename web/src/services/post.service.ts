@@ -10,7 +10,7 @@ export const create = async (body : createPostRequestBody) => {
         const { data } = await api.post(
             '/posts',
             body,
-            { headers: { Authorization: `Baerer ${ await getToken()}` } }
+            { headers: { Authorization: `Baerer ${getToken()}` } }
         )
 
         return data as IResponse
@@ -24,7 +24,7 @@ export const list = async (query ?: PaginationQuery) : Promise<IResponse> => {
     try {
         const { data } = await api.get(
             (query) ? `/posts?${buildQuery(query)}` : '/posts',
-            { headers: { Authorization: `Baerer ${ await getToken()}` } }
+            { headers: { Authorization: `Baerer ${getToken()}` } }
         )
 
         return data as IResponse
@@ -40,7 +40,7 @@ export const addHeart = async (id : string) => {
         const { data } = await api.patch(
             `/posts/${id}/toggle-heart`,
             {},
-            { headers: { Authorization: `Baerer ${ await getToken()}` } }
+            { headers: { Authorization: `Baerer ${getToken()}` } }
         )
 
         return data as IResponse

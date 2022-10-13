@@ -19,7 +19,7 @@ export default class PostEntity {
     @Column('jsonb', { default : []})
     hearts : JSON
     
-    @Column('jsonb')
+    @Column('jsonb', {default : []})
     attachments: JSON
       
     @ManyToOne(() => DevEntity, (writter) => writter.posts, { eager : true})
