@@ -16,14 +16,16 @@
   }
 
   &::-webkit-scrollbar {
-    height: 5px;
+    width: 8px;
+
     &:hover {
       background-color: $color-gray;
+      transition-delay: 1s;
     }
   }
 
   &::-webkit-scrollbar-thumb {
-    border-radius: 8px;
+    border-radius: 16px;
 
     &:hover {
       background-color: $color-primary;
@@ -37,19 +39,33 @@
   .outstanding-users {
     width: 100%;
     display: flex;
-    gap: 1em;
-    overflow-x: scroll;
 
-    &::-webkit-scrollbar {
-      height: 8px;
+    .swiper {
+      width: 100%;
+      height: 100px;
     }
 
-    &::-webkit-scrollbar-thumb {
-      border-radius: 8px;
+    .swiper-button-next {
+      color: $color-primary;
 
-      &:hover {
-        background-color: $color-primary;
-      }
+    }
+
+    .swiper-button-prev {
+      color: $color-primary;
+    }
+
+    .swiper-slide {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100px;
+      height: 100px;
+    }
+
+    .swiper-pagination-bullet {
+      width: 12px;
+      height: 12px;
+      background-color: $color-primary;
     }
 
     img {

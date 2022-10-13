@@ -21,6 +21,12 @@
       flex-direction: column;
       gap: 1em;
       margin-top: 2em;
+
+      img {
+        border-radius: 50%;
+        width: 1.5em;
+        height: 1.5em;
+      }
     }
   }
 }

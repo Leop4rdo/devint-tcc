@@ -7,6 +7,9 @@ import POSTS_DATA from "../../../DATA/posts-get-response.json"
 import SideCard from "components/shared/SideCard";
 import Icon from "components/shared/Icon";
 import NewPost from "components/shared/NewPost";
+import 'swiper/css';
+import { Swiper, SwiperSlide } from "swiper/react"
+import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
 
 const FeedPage: React.FC = () => {
 
@@ -20,26 +23,31 @@ const FeedPage: React.FC = () => {
                 <div className="outstanding-container">
                     <h2>Devs em destaque</h2>
                     <div className="outstanding-users">
-                        <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
-                        <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
-                        <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
-                        <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
-                        <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
-                        <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
-                        <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
-                        <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
-                        <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
-                        <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
-                        <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
-                        <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
-                        <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
-                        <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
-                        <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
-                        <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
-                        <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
-                        <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
-                        <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
-                        <img src="https://avatars.githubusercontent.com/u/5909549?v=4" />
+                        <Swiper
+                            modules={[Navigation, Pagination, Scrollbar, A11y]}
+                            spaceBetween={50}
+                            slidesPerView={10}
+                            navigation
+                            pagination={{ clickable: true }}>
+                            
+                            <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
+                            <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>    
+                            <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide> 
+                            <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
+                            <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
+                            <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
+                            <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
+                            <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>    
+                            <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide> 
+                            <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
+                            <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
+                            <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
+                            <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
+                            <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
+                            <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
+                            <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
+                                
+                        </Swiper>
                     </div>
                 </div>
 
