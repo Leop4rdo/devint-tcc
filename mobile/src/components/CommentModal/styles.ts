@@ -4,6 +4,21 @@ import fonts from "../../styles/typography";
 import { screenHeight, screenWidth } from "../../styles/utils";
 
 export default StyleSheet.create({
+    wrapper : {
+        width : screenWidth,
+        height : screenHeight,
+        position : 'absolute',
+        top : 0,
+        left : 0,
+        zIndex : 89,
+    },
+
+    outsidePressHandler : {
+        flex : 1,
+        backgroundColor : colors.BLACK,
+        opacity : .2
+    },
+    
     modal : {
         width : screenWidth,
         height : '90%',
@@ -57,12 +72,24 @@ export default StyleSheet.create({
         borderRadius : 32
     },
 
-    newCommentInput : {
+    fakeInput : {
         flex : 1,
-        marginHorizontal : 12
+        marginLeft : 16,
+        height : 48,
+        paddingHorizontal : 16,
+
+        justifyContent : 'center',
+
+        backgroundColor : colors.DARK_GRAY,
+
+        borderWidth : 1,
+        borderColor : colors.GRAY,
+        borderRadius : 16
     },
 
-    comment : {
-        marginVertical : 16
-    }
+    fakeInputText : {
+        fontFamily : fonts.POPPINS_REGULAR,
+        fontSize : 16,
+        color : colors.GRAY
+    },  
 })

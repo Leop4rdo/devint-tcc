@@ -34,6 +34,7 @@ const HomePage : React.FC<{ navigation : any }> = ({navigation}) => {
 
     return (
         <LayoutWrapper navigation={navigation}>
+
             <View style={styles.page}>
                 <Pressable onPress={() => navigation.navigate('post-register')}style={styles.floatingButton}>
                     <MaterialIcons name="edit" size={24} color="#FFF"/>
