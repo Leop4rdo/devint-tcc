@@ -35,10 +35,8 @@ const Post: React.FC<IPostProps> = ({ data}) => {
                         navigation
                         pagination={{ clickable: true }}
                     >
-
-                        
                             {
-                                data.attachments.map((attachment , index) => (
+                                data.attachments.map((attachment) => (
                                     <SwiperSlide><img onClick={() => navigate(`posts/${data.id}`)} src={attachment} alt="" /></SwiperSlide>
                                 )
                                 )
@@ -50,9 +48,15 @@ const Post: React.FC<IPostProps> = ({ data}) => {
             </div>
             <div className="post-footer">
                 <div className="comments">
+
+                    {data.comments.length == 1 ? <img src={data.comments[0].writter.profilePicUrl} /> : 
+                    <div>
                     <img src={data.comments[0].writter.profilePicUrl} />
                     <img src={data.comments[1].writter.profilePicUrl} />
-                    <span  onClick={() => navigate(`posts/${data.id}`)} >10 comentários</span>
+                    </div>
+                    }
+                   
+                    <span  onClick={() => navigate(`posts/${data.id}`)}>{data.comments.length} Comentários</span>
                 </div>
                 <div className="hearts">
                     {data.hearts}

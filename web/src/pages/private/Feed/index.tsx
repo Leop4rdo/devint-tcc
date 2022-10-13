@@ -1,8 +1,7 @@
 import MenuWapper from "components/layout/MenuWrapper";
-import ModalPost from "pages/private/ModalPost";
 import Post from "components/Post";
 import IPost from "interfaces/IPost";
-import React, { useEffect, useState } from "react";  
+import React, {  useState } from "react";  
 import POSTS_DATA from "../../../DATA/posts-get-response.json"
 
 const Feed: React.FC = () => {
@@ -42,7 +41,6 @@ const Feed: React.FC = () => {
             {
                 posts.map((post : IPost) => 
                     <Post data={post} />
-                    
                     
                 )
             }
