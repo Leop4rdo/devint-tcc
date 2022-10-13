@@ -1,60 +1,61 @@
 .feed-page {
-    width: 100vw;
-    height: 100vh;
+  width: 100vw;
+  height: 100vh;
 }
 
 .feed {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1em;
-    overflow-y: scroll;
-    h2 {
-        color: $color-primary;
+  height: 100vh;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+  overflow-y: scroll;
+  h2 {
+    color: $color-primary;
+  }
+
+  &::-webkit-scrollbar {
+    height: 5px;
+    &:hover {
+      background-color: $color-gray;
     }
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+
+    &:hover {
+      background-color: $color-primary;
+    }
+  }
+
+  .outstanding-container {
+    width: clamp(40em, 20vw, 60em);
+  }
+
+  .outstanding-users {
+    width: 100%;
+    display: flex;
+    gap: 1em;
+    overflow-x: scroll;
 
     &::-webkit-scrollbar {
-        height: 5px; 
-        &:hover {
-            background-color: $color-gray;
-        }
+      height: 8px;
     }
 
     &::-webkit-scrollbar-thumb {
-        border-radius: 8px;
-        
-        &:hover {
-            background-color: $color-primary;
-        }
+      border-radius: 8px;
+
+      &:hover {
+        background-color: $color-primary;
+      }
     }
 
-    .outstanding-container {
-        width: clamp(40em, 20vw, 60em);;
+    img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
     }
-
-    .outstanding-users {
-        width: 100%;
-        display: flex;
-        gap: 1em;
-        overflow-x: scroll;
-
-        &::-webkit-scrollbar {
-            height: 8px; 
-        }
-
-        &::-webkit-scrollbar-thumb {
-            border-radius: 8px;
-
-            &:hover {
-                background-color: $color-primary;
-            }
-        }
-
-        img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-        }
-    }
+  }
 }

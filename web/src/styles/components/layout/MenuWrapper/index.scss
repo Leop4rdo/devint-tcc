@@ -1,20 +1,26 @@
-.container-global{
-    max-width: 100vw;
-    max-height: 100vh;
-    background-color: aquamarine;
-    
-    @media (max-width: $breakpoint-laptop) {
-        .effect-side-bar{
-            display: none;
-        }
-    }
+.container-global {
+  max-width: 100vw;
+  max-height: 100vh;
 
-    
-
-    main {
-        width: 100%;
-        min-height: calc(100%-80px);
-        overflow: auto;
-        background-color: $color-dark-gray;
+  @media (max-width: $breakpoint-laptop) {
+    .effect-side-bar {
+      display: none;
     }
+  }
+
+  main {
+    width: 100%;
+    min-height: calc(100%-80px);
+    overflow: auto;
+    background-color: $color-dark-gray;
+    display: flex;
+    flex-direction: row;
+
+    .side-card-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+      margin-top: 2em;
+    }
+  }
 }

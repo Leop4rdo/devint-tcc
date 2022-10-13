@@ -7,7 +7,7 @@ import PagePostDetailsPage from "pages/private/ModalPost"
 const PrivateRouter: React.FC = () => {
     return (
         <Routes>
-            <Route index element={<Feed />}/>
+            {/* <Route index element={<FeedPage />} /> */}
             <Route path="posts/:id" element={<PagePostDetailsPage />} />
         </Routes>
     );
