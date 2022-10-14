@@ -4,12 +4,16 @@ import Icon from "components/shared/Icon";
 import { AuthContext } from "store/context/Auth.context";
 
 
+interface ISidebarProps {
+    open : boolean
+}
 
-const Sidebar: React.FC = () => {
+const Sidebar: React.FC<ISidebarProps> = ({open}) => {
     const authContext = useContext(AuthContext)
 
     return (
-            <div className="container-side-bar">
+            // <div className="container-side-bar effect-side-bar ">
+            <div className={`container-side-bar effect-side-bar ${open ? 'open' : ''}`}>
 
                 <div className="container-user">
                     <div className="container-image-face">

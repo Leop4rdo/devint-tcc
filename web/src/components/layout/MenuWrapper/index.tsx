@@ -5,17 +5,17 @@ import SideCard from "components/shared/SideCard";
 
 
 const MenuWapper: React.FC<React.PropsWithChildren> = ({ children }) => {
+    const [sidebarOpen, setSidebarOpen] = useState(false)
+
 
     return (
         <div className="container-global">
-            <NavBar />
+            <NavBar toggleSidebar={() => setSidebarOpen(!sidebarOpen)}/>
 
-            <div className="effect-side-bar">
-                <SideBar />
-            </div>
+            <SideBar open={sidebarOpen}/>
             <main className="main">
                 {children}
-                <div className="side-card-container">
+                {/* <div className="side-card-container">
                     <SideCard title="Seguindo" >
                         <a href=""><img src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
                         <a href=""><img src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
@@ -33,9 +33,8 @@ const MenuWapper: React.FC<React.PropsWithChildren> = ({ children }) => {
                         <a>Juninhos</a>
                         <a>Um empreguinho por favor</a>
                     </SideCard>
-                </div>
+                </div> */}
             </main>
-
         </div>
     )
 }
