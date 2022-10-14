@@ -1,6 +1,8 @@
 .container-nav-bar {
-  width: 100%;
-  height: 8vh;
+  grid-column-start: 1;
+  grid-column-end: 3;
+
+  display: flex;
 
   @media (min-width: $breakpoint-laptop) {
     .side-bar-menu {
@@ -10,6 +12,7 @@
 
   header {
     width: 100%;
+    height: 80px;
     background-color: $color-primary;
     display: flex;
     align-items: center;

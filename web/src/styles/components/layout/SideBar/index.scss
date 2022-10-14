@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: clamp(15rem, 19vw, 18rem);
+  grid-column: 1;
   background-color: $color-black;
 
   .container-user {

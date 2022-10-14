@@ -10,10 +10,10 @@ const MenuWapper: React.FC<React.PropsWithChildren> = ({ children }) => {
         <div className="container-global">
             <NavBar />
 
+            <SideBar />
             <main className="main">
-                <SideBar />
                 {children}
-                <div className="side-card-container">
+                {/* <div className="side-card-container">
                     <SideCard title="Seguindo" >
                         <a href=""><img src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
                         <a href=""><img src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
@@ -31,9 +31,8 @@ const MenuWapper: React.FC<React.PropsWithChildren> = ({ children }) => {
                         <a>Juninhos</a>
                         <a>Um empreguinho por favor</a>
                     </SideCard>
-                </div>
+                </div> */}
             </main>
-
         </div>
     )
 }

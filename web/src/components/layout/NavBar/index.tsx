@@ -43,12 +43,12 @@ const NavBar: React.FC<INavBarProps> = ({ onClick }) => {
 
             </header>
             
-            <div className="side-bar-menu">
+            {/* <div className="side-bar-menu">
                 {sideBar && (
                     <Sidebar />
                 )}
 
-            </div>
+            </div> */}
 
 
 
