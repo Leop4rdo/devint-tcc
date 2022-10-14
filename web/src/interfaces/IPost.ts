@@ -6,6 +6,7 @@ export default interface IPostListItem {
     hearts : number
     attachments : string[]
     writter : IWritter
+    alreadyHearted : boolean
 }
 
 export default interface IPost {

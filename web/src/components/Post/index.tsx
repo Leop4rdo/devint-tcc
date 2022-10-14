@@ -7,14 +7,24 @@ import {useNavigate } from "react-router-dom";
 import 'swiper/css';
 import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
 import IPostListItem from "interfaces/IPost";
+import * as postService from "../../services/post.service"
 
  interface IPostProps {
     data: IPostListItem
     
 }
 
-const Post: React.FC<IPostProps> = ({ data}) => {
+const Post: React.FC<IPostProps> = ({ data }) => {
     const navigate = useNavigate(); 
+
+    const [liked, setLiked] = useState(data.alreadyHearted)
+
+    const giveLike = async () => {
+
+        const res = await postService.addHeart(data.id)
+
+        setLiked(!liked)
+    }
 
     return (
         <div className="postcard" key={data.id}>
@@ -52,7 +62,7 @@ const Post: React.FC<IPostProps> = ({ data}) => {
                     <span onClick={() => navigate(`posts`)} >{data.comments} comentários</span>
                 </div>
                 <div className="hearts">
-                    {data.hearts}
+                    {(liked && !data.alreadyHearted) ? data.hearts+1 : (!liked && data.alreadyHearted) ? data.hearts-1 : data.hearts}
                     <Button>
                         <Icon name="favorite" />
                     </Button>
