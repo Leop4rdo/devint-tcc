@@ -5,12 +5,14 @@ import SideCard from "components/shared/SideCard";
 
 
 const MenuWapper: React.FC<React.PropsWithChildren> = ({ children }) => {
+    const [sidebarOpen, setSidebarOpen] = useState(false)
+
 
     return (
         <div className="container-global">
-            <NavBar />
+            <NavBar toggleSidebar={() => setSidebarOpen(!sidebarOpen)}/>
 
-            <SideBar />
+            <SideBar open={sidebarOpen}/>
             <main className="main">
                 {children}
                 {/* <div className="side-card-container">

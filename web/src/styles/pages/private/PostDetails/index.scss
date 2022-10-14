@@ -1,21 +1,42 @@
+.container-global{
+
+    .container-nav-bar {
+
+        header{
+            
+            position: static;
+            z-index: 0;
+        }
+    }
+
+    .main{
+       overflow: hidden;
+
+       .side-card-container{
+        display: none;
+    }
+    }  
+
+}   
+  
+
 .container-modal-post {
     height: 100vh;
     width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
-    
 
     .modal-post {
-        width: 1200px;
-        height: 750px;
+        width:  clamp( 56rem, 75vw,75rem);
+        height: clamp( 40rem , 48vw , 47rem);
         background-color: $color-black;
         display: flex;
         border-radius: 16px;
 
 
         .container-itens {
-            width: 400px;
+            width: 500px;
             height: 700px;
             margin-top: 30px;
             margin-left: 16px;
@@ -30,10 +51,9 @@
                     display: flex;
                     align-items: center;
 
-                    .user-face {
+                    img {
                         width: 50px;
                         height: 50px;
-                        background-color: $color-white;
                         border-radius: 50%;
                         margin-right: 16px;
                     }
@@ -77,6 +97,16 @@
                     align-items: center;
                     gap: 8px;
 
+
+
+                    img {
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 50%;
+                        margin-right: -10px;
+
+                    }
+
                     .users-faces {
                         width: 40px;
                         height: 40px;
@@ -86,6 +116,7 @@
                     }
 
                     span {
+                        margin-left: 25px;
                         font-weight: $font-regular;
                         color: $color-white;
                         font-size: 16px;
@@ -93,6 +124,16 @@
                 }
 
                 .hearts {
+                    display: flex;
+
+
+                    p {
+                        
+                        color: $color-white;
+                        font-size: 16px;
+                        margin-right: 8px;
+                    }
+
                     button {
                         width: fit-content;
                         height: auto;
@@ -130,40 +171,26 @@
                 }
 
                 .comment {
-                    width: 100%;
                     margin-top: 16px;
                     background-color: $color-dark-gray;
                     height: auto;
                     display: flex;
-                    align-items: center;
+                    justify-content: left;
                     border-radius: 8px;
-
+                    padding-right: 8px;
                     
-                    .input-container {
-                        border: hidden;
-                        background-color: $color-dark-gray;
-                        margin: 0px;
-                        width: 258px;
-                        height: 30px;
-                        
-                        input{
-                            background-color: $color-dark-gray;
 
-                        }
+                   
 
-                        .icon{
-                            order: 2;
-                            font-size: 24px;
-                            width: 0px;
-                           
-                            
-                        }
-
+                    .text-comment {
+                        font-size: 16px;
+                        margin-top: 3px;
+                        width: 230px;
+                        height: auto;
                     }
-                    
 
                     span {
-                        
+
                         font-size: 16px;
                         font-weight: $font-medium;
                         color: $color-primary;
@@ -171,30 +198,43 @@
                         margin-right: 10px;
                     }
 
-                    textarea{
-                        background-color: $color-dark-gray ;
-                        border: none;
-                        color: $color-white;
-                        text-decoration: none;
-                        justify-items: center;
-                        height: auto;
-                        min-height: 100%;
-                        font-size: 16px;
-                        width: 100%;
-                        outline:none;
-                        resize:none;
-                        overflow-y: scroll;
-                        overflow-y: hidden;
-                    }
+                    
+                    
 
-                    .users-faces-comment {
+                    img {
                         width: 40px;
                         height: 40px;
-                        background-color: aliceblue;
-                        border-radius: 50px;
-                        margin-left: 16px;
-
+                        border-radius: 50%;
                     }
+
+                    .container-user-dice {
+                        display: flex;
+                        margin-top: 8px;
+                        height: auto;
+                        word-wrap:break-word;
+                        width: 100%;
+                        
+                        .users-faces-comment {
+                            margin-left: 16px;
+                        }
+
+                        textarea {
+                            padding: 8px;
+                            border-radius: 8px;
+                            background-color: $color-gray;
+                            border: 1px solid $color-dark-gray;
+                            color: $color-white;
+                            text-decoration: none;
+                            font-size: 16px;
+                            width: 260px;
+                            outline: none;
+                            resize: none;
+                            overflow-y: scroll;
+                            overflow-y: hidden;
+                            
+                        }
+                    }
+
 
 
 
@@ -211,27 +251,31 @@
             justify-content: center;
 
             .swiper {
-                width: 550px;
-                height: 600px;
+                width: clamp( 23rem ,34vw , 34rem);
+                height: clamp( 28rem , 38vw, 37.2rem);
+                
+               
             }
-            
+
             .swiper-slide {
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 width: 500px;
                 height: 500px;
+                border-radius: 8px;
+                overflow: hidden;
                 
-               
-                
-                img{
+                img {
+                    width: 100%;
+                    height: auto;
                     object-fit: cover;
                     border-radius: 8px;
                 }
-            
+
             }
-            
-            .swiper-pagination-bullet{
+
+            .swiper-pagination-bullet {
                 width: 12px;
                 height: 12px;
                 background-color: $color-primary;
@@ -242,8 +286,8 @@
                 font-size: 40px;
                 height: 40px;
                 order: 2;
-                margin-top: 24px;
-                margin-right: -60px;
+                margin-top: 40px;
+                margin-right: -30px;
                 cursor: pointer;
 
             }

@@ -1,21 +1,26 @@
 import MenuWapper from "components/layout/MenuWrapper";
-import ModalPost from "pages/private/ModalPost";
 import Post from "components/Post";
 import IPost from "interfaces/IPost";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";  
+import * as postService from 'services/post.service'
+import IPostListItem from "interfaces/IPost";
 import POSTS_DATA from "../../../DATA/posts-get-response.json"
-import SideCard from "components/shared/SideCard";
-import Icon from "components/shared/Icon";
 import NewPost from "components/shared/NewPost";
-import 'swiper/css';
-import { Swiper, SwiperSlide } from "swiper/react"
+import { Swiper, SwiperSlide } from "swiper/react";
 import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
 
 const FeedPage: React.FC = () => {
-
+    
     const [posts, setPosts] = useState<IPost[]>(POSTS_DATA.data as unknown as IPost[]);
 
-    console.log(posts);
+   /*  const getPosts = async () => {
+        const { data } = await postService.list({ offset : posts.length, limit : 48 })
+
+        setPosts([...posts, ...data])
+    } */
+
+    /* useEffect(() => { getPosts() }, []) */
+    
     return (
         <MenuWapper>
             <div className="feed" >
@@ -51,15 +56,15 @@ const FeedPage: React.FC = () => {
                     </div>
                 </div>
 
-                {
-                    posts.map((post: IPost) =>
-                        <Post data={post} />
-                    )
-                }
+            {
+                posts.map((post : IPost) => 
+                    <Post data={post} />
+                    
+                )
+            }
 
             </div>
         </MenuWapper>
-
     );
 }
 

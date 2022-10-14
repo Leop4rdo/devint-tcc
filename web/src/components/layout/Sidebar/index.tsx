@@ -1,18 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import Icon from "components/shared/Icon";
+import { AuthContext } from "store/context/Auth.context";
 
 
 
 const Sidebar: React.FC = () => {
+    const authContext = useContext(AuthContext)
+
     return (
             <div className="container-side-bar">
 
                 <div className="container-user">
                     <div className="container-image-face">
-                    <img src="assets/images/Tony.jpg" alt="Tony Cauntry" />
+                    <img src="../assets/images/Tony.jpg" alt="Tony Cauntry" />
                     </div>
-                    <h2>User name</h2>
+                    <h2>{authContext?.signIn.name}</h2>
                 </div>
 
                 <div className="container-itens">

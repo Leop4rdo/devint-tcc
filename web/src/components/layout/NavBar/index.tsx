@@ -13,7 +13,7 @@ const NavBar: React.FC<INavBarProps> = ({ onClick }) => {
 
     const [sideBar, setSideBar] = useState(true)
 
-    const teste = () => {
+    const EffectSideBar = () => {
         if (sideBar)
             setSideBar(false)
         else
@@ -25,7 +25,7 @@ const NavBar: React.FC<INavBarProps> = ({ onClick }) => {
         <div className="container-nav-bar" >
 
             <header>
-                <div className="menu-toggle" onClick={teste}>
+                <div className="menu-toggle" onClick={EffectSideBar}>
                     <div className="one"></div>
                     <div className="two"></div>
                     <div className="three"></div>
