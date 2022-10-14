@@ -6,9 +6,10 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import {useNavigate } from "react-router-dom";
 import 'swiper/css';
 import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
+import IPostListItem from "interfaces/IPost";
 
  interface IPostProps {
-    data: IPost
+    data: IPostListItem
     
 }
 

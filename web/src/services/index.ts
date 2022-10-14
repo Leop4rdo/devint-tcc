@@ -15,7 +15,8 @@ export interface PaginationQuery {
 
 
 // export const baseUrl = "http://localhost:8082/api/v1"
-export const baseUrl = "http://10.107.144.4:8080/api/v1"
+//export const baseUrl = "http://10.107.144.4:8080/api/v1"
+export const baseUrl = "http://7a72-187-84-34-232.sa.ngrok.io/api/v1"
 
 export const getToken = () => {
     return localStorage.getItem("devint-auth")
