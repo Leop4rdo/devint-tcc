@@ -5,27 +5,17 @@ import Icon from "components/shared/Icon";
 import Sidebar from "../Sidebar/index";
 
 interface INavBarProps {
-    onClick?: any
+    toggleSidebar : () => void
 }
 
 
-const NavBar: React.FC<INavBarProps> = ({ onClick }) => {
-
-    const [sideBar, setSideBar] = useState(true)
-
-    const EffectSideBar = () => {
-        if (sideBar)
-            setSideBar(false)
-        else
-            setSideBar(true)
-
-    }
+const NavBar: React.FC<INavBarProps> = ({ toggleSidebar }) => {
 
     return (
         <div className="container-nav-bar" >
 
             <header>
-                <div className="menu-toggle" onClick={EffectSideBar}>
+                <div className="menu-toggle" onClick={toggleSidebar}>
                     <div className="one"></div>
                     <div className="two"></div>
                     <div className="three"></div>
@@ -42,17 +32,6 @@ const NavBar: React.FC<INavBarProps> = ({ onClick }) => {
                 </div>
 
             </header>
-            
-            {/* <div className="side-bar-menu">
-                {sideBar && (
-                    <Sidebar />
-                )}
-
-            </div> */}
-
-
-
-
         </div>
     )
 }
