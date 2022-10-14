@@ -4,21 +4,22 @@ import IPost from "interfaces/IPost";
 import React, { useEffect, useState } from "react";  
 import * as postService from 'services/post.service'
 import IPostListItem from "interfaces/IPost";
+import POSTS_DATA from "../../../DATA/posts-get-response.json"
 import NewPost from "components/shared/NewPost";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
 
 const FeedPage: React.FC = () => {
     
-    const [posts, setPosts] = useState<IPostListItem[]>([]);
+    const [posts, setPosts] = useState<IPost[]>(POSTS_DATA.data as unknown as IPost[]);
 
-    const getPosts = async () => {
+   /*  const getPosts = async () => {
         const { data } = await postService.list({ offset : posts.length, limit : 48 })
 
         setPosts([...posts, ...data])
-    }
+    } */
 
-    useEffect(() => { getPosts() }, [])
+    /* useEffect(() => { getPosts() }, []) */
     
     return (
         <MenuWapper>

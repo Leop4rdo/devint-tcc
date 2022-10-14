@@ -67,8 +67,8 @@ const PostDetails: React.FC = () => {
                             </div>
 
                             {
-                                post?.comments.length == 1 && 
-                                    post.comments.map((comment?) => (
+                                
+                                    post?.comments.map((comment?) => (
 
                                         <div className="comment" >
                                             <div className="container-user-dice">
