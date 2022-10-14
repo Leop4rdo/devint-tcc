@@ -4,7 +4,10 @@
   align-items: center;
   width: clamp(15rem, 19vw, 18rem);
   background-color: $color-black;
-
+  height: 94%;
+  position: absolute;
+  z-index: 3;
+ 
   .container-user {
     display: flex;
     justify-content: center;

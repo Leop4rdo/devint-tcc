@@ -53,6 +53,7 @@ a {
   @import "./pages/public/Register/Company.scss";
   @import "./pages/public/ForgotMyPasswordPage/index.scss";
   @import "./pages/private/Feed";
+  @import "./pages/private/PostDetails/index.scss";
 
   // Component Style Imports ->
 
@@ -60,14 +61,12 @@ a {
   @import "./components/layout/NavBar/index.scss";
   @import "./components/layout/SideBar/index.scss";
   @import "./components/layout/MenuWrapper/index.scss";
-  @import "./components/layout/ModalPost/index.scss";
-  @import "./components/layout/RegisterForms/Company/index.scss";
-  @import "./components/layout/RegisterForms/Dev/index.scss";
-  @import "./components/layout/Post/index.scss";
+  @import "./components/RegisterForms/Company/index.scss";
+  @import "./components/RegisterForms/Dev/index.scss";
+  @import "./components/Post/index.scss";
   @import "./components/shared/Input/index.scss";
   @import "./components/shared/Button/index.scss";
   @import "./components/shared/Select/index.scss";
-  @import "./components/Input-Search/index.scss";
   @import "./components/shared/SideCard/index.scss";
   @import "./components/shared/NewPost/index.scss";
  
