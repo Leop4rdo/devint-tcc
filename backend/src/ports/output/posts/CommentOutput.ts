@@ -7,12 +7,14 @@ export default class CommentOutput {
     hearts : number
     answers : JSON
     writter : DevMinimalOutput
+    alreadyHearted
 
-    constructor(props : ICommentProps) {
+    constructor(props : ICommentProps, devId) {
         this.id = props.id
         this.content = props.content
         this.hearts = JSON.parse(JSON.stringify(props.hearts)).length
         this.writter = new DevMinimalOutput(props.writter)
         this.answers = props.answers
+        this.alreadyHearted = JSON.parse(JSON.stringify(props.hearts)).includes(devId)
     }
 }

@@ -18,10 +18,13 @@ interface ICommentModalProps {
 
 const CommentModal : React.FC<ICommentModalProps> = ({ postId, onClose }) => {
     const [comments, setComments] = useState<IComment[]>([])
-    const [writting, setWritting] = useState(false)
+    const [currentModal, setCurrentModal] = useState<{ visible : boolean, parentId : string, parentType : 'POST' | 'COMMENT'}>({
+        visible : false,
+        parentId : '',
+        parentType : 'POST'
+    })
 
     const getComments = async () => {
-        console.log(postId )
         const res = await postService.getById(postId)
 
         if (res.hasError !== false)
@@ -40,32 +43,43 @@ const CommentModal : React.FC<ICommentModalProps> = ({ postId, onClose }) => {
                 <View style={styles.header}>
                     <View style={{flexDirection : 'row', alignItems : 'center'}}>
                         <Text style={styles.boldText}>Comentários</Text>
-                        <Text style={styles.commentAmount}>9999</Text>
+                        <Text style={styles.commentAmount}>{comments.length}</Text>
                     </View>
 
                     <Pressable onPress={onClose}>
                         <MaterialIcons name="close" size={32} color='#FFF'/>
                     </Pressable>
                 </View>
+                <Pressable style={styles.newCommentContainer} onPress={() => setCurrentModal({visible : true, parentId : postId, parentType : 'POST'})}>
+                    <Image source={{ uri : 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/1024px-Cat03.jpg'}} style={styles.profilePic}/>
+                    <View style={styles.fakeInput}>
+                        <Text style={styles.fakeInputText}>Adicione um comentário</Text>
+                    </View>
+                </Pressable>
 
                 <FlatList 
-                    contentContainerStyle={{flex : 1}}
-                    ListHeaderComponent={
-                        <Pressable style={styles.newCommentContainer} onPress={() => setWritting(true)}>
-                            <Image source={{ uri : 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/1024px-Cat03.jpg'}} style={styles.profilePic}/>
-                            <View style={styles.fakeInput}>
-                                <Text style={styles.fakeInputText}>Adicione um comentário</Text>
-                            </View>
-                        </Pressable>
-                    }
                     data={comments}
                     renderItem={({item}) => 
-                        <Comment key={`comment${item.id}-${Math.random()*999}`} data={item} />
+                        <Comment 
+                            key={`comment${item.id}-${Math.random()*999}`} 
+                            data={item} 
+                            onAnswer={() => setCurrentModal({visible : true, parentId : item.id, parentType : 'COMMENT'})}
+                        />
                     }
                     />
             </View>
 
-            { writting && <AddCommentModal onClose={() => setWritting(false)} /> }
+            { 
+                currentModal.visible && 
+                <AddCommentModal 
+                    parentId={currentModal.parentId} 
+                    parentType={currentModal.parentType} 
+                    onClose={() => { 
+                        setCurrentModal({...currentModal, visible : false}); 
+                        getComments() 
+                    }} 
+                /> 
+            }
         </View>
     )
 }

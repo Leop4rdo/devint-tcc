@@ -16,11 +16,19 @@ export default StyleSheet.create({
         paddingHorizontal : 16,
         paddingVertical : 8,
         borderRadius : 16,
+
+        width : '75%'
     },
 
     comment : {
         marginVertical : 16,
         flexDirection : 'row'
+    },
+
+    commentOptions : {
+        flexDirection : 'row',
+        alignItems : 'center',
+        justifyContent : 'space-between'
     },
 
     writterName : {
@@ -37,6 +45,7 @@ export default StyleSheet.create({
     },
 
     optionText : {
+        marginRight : 8,
         color : colors.PRIMARY,
         fontSize : 12,
         fontFamily : fonts.POPPINS_REGULAR

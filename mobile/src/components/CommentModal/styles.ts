@@ -6,7 +6,7 @@ import { screenHeight, screenWidth } from "../../styles/utils";
 export default StyleSheet.create({
     wrapper : {
         width : screenWidth,
-        height : screenHeight,
+        height : '100%',
         position : 'absolute',
         top : 0,
         left : 0,
@@ -14,21 +14,18 @@ export default StyleSheet.create({
     },
 
     outsidePressHandler : {
-        flex : 1,
+        height : '10%',
         backgroundColor : colors.BLACK,
         opacity : .2
     },
     
     modal : {
-        width : screenWidth,
+        width : '100%',
         height : '90%',
         paddingTop : 16,
         paddingHorizontal : 16,
 
         backgroundColor : colors.BLACK,
-
-        position : 'absolute',
-        bottom : 0,
 
         borderTopRightRadius : 16,
         borderTopLeftRadius : 16,
