@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
 
     imgPreview : {
         height : 80,
-        width : 45,
+        aspectRatio : 1,
         marginVertical : 4,
         marginHorizontal : 12
     }

@@ -17,14 +17,17 @@ const HomePage : React.FC<{ navigation : any }> = ({navigation}) => {
 
     const getPosts = async () => {
         const { data }= await postService.list({ offset : posts.length, limit : 24 })
+        
+        const newPosts = data.filter((post : IPostListItem) => posts.find((_) => post.id === _.id))
 
-        setPosts([...posts, ...data])
+        setPosts([...posts, ...newPosts])
     }
 
     const refreshPosts = async () => {
         setRefreshing(true)
 
-        const { data }= await postService.list({ limit : 24 })
+        const { data } = await postService.list({ limit : 24 })
+
         setPosts(data)
 
         setRefreshing(false)

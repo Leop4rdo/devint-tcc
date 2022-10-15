@@ -51,11 +51,11 @@ const Sidebar : React.FC<ISidebarProps> = ({ visible, onClose }) => {
                     <View style={styles.divisor}></View>
 
                     <SidebarItem active icon="home" name="Home" />
-                    <SidebarItem icon="trending-up" name="Home" />
-                    <SidebarItem icon="article" name="Home" />
-                    <SidebarItem icon="watch-later" name="Home" />
-                    <SidebarItem icon="chat" name="Home" />
-                    <SidebarItem icon="settings" name="Home" />
+                    <SidebarItem icon="trending-up" name="Em alta" />
+                    <SidebarItem icon="article" name="Artigos" />
+                    <SidebarItem icon="watch-later" name="Itens salvos" />
+                    <SidebarItem icon="chat" name="Chat" />
+                    <SidebarItem icon="settings" name="Configurações" />
                 </View>
 
                 <Pressable style={styles.exitContainer} onPress={authContext?.signOut}>
