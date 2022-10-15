@@ -1,32 +1,27 @@
 import React, { useEffect } from "react";
-import { SwiperProps, SwiperSlide, Swiper } from 'swiper/react'
+import { SwiperSlide, Swiper } from 'swiper/react'
 import Button from "../../../components/shared/Button";
 import Icon from "../../../components/shared/Icon";
-import InputComment from "../../../components/shared/Input";
 import MenuWapper from "components/layout/MenuWrapper";
 import { Pagination, A11y } from 'swiper'
-import { useNavigate, useLocation, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import IPost from "interfaces/IPost";
 import POSTS_DATA from "../../../DATA/posts-get-response.json"
 import { useState } from "react";
-import Comment from "components/shared/Comment";
-import IComment from "interfaces/IComment";
+import AutoTextArea from "components/shared/TextArea";
 
-
-
-
-const ModalPost: React.FC = () => {
+const PostDetails: React.FC = () => {
     const { id } = useParams()
 
     const [post, setPost] = useState<IPost>()
 
-    console.log(post?.attachments)
-
     const navigate = useNavigate()
 
     useEffect(() => {
-        setPost(POSTS_DATA.data.find((post)=> post.id == id ) as unknown as IPost)
+        setPost(POSTS_DATA.data.find((post) => post.id == id) as unknown as IPost)
     }, [id])
+
+    console.log(post?.comments)
 
     return (
         <MenuWapper>
@@ -36,24 +31,25 @@ const ModalPost: React.FC = () => {
                     <div className="container-itens">
 
                         <div className="user-info">
-
                             <div className="dice-user">
-                                <div className="user-face"><img></img></div>
-                                <h2>Name user</h2>
+                                <img src={post?.writter.profilePicUrl} />
+                                <h2>{post?.writter.name}</h2>
                             </div>
 
                             <Button className="follow-button" children={[<Icon name="add" />, "Seguir"]} />
                         </div>
 
-                        <p>loremipsumaskdçlaskjlkdjsalkjdlasjklads</p>
+                        <p>{post?.content}</p>
 
                         <div className="post-footer">
                             <div className="comment-user">
-                                <div className="users-faces"><img></img></div>
-                                <span>10 Comentarios</span>
+                                <img src={post?.comments[0].writter.profilePicUrl} />
+                                <img className="user-name-comment" src={post?.comments[1].writter.profilePicUrl} />
+                                <span>{post?.comments.length} Comentarios</span>
                             </div>
 
                             <div className="hearts">
+                                <p>{post?.hearts}</p>
                                 <Button>
                                     <Icon name="favorite" />
                                 </Button>
@@ -63,21 +59,30 @@ const ModalPost: React.FC = () => {
 
                         <div className="container-comments">
                             <div className="comment">
-                                <div className="users-faces-comment"><img></img></div>
-                                <span>Flavin</span>
-                                <InputComment placeholder="Escreva um comentário..." icon="send" />
+                                <div className="container-user-dice">
+                                    <div className="users-faces-comment"><img src={post?.comments[0].writter.profilePicUrl} alt="" /></div>
+                                    <span>Flavin</span>
+                                    <AutoTextArea />
+                                </div>
+                            </div>
+
+                            {
+                                
+                                    post?.comments.map((comment?) => (
+
+                                        <div className="comment" >
+                                            <div className="container-user-dice">
+                                                <div className="users-faces-comment"><img src={comment.writter.profilePicUrl} alt="" /></div>
+                                                <span>{comment.writter.name}</span>
+                                                <p className="text-comment">{comment.content}</p>
+                                            </div>
+    
+                                        </div>
+                                    ))
                                 
 
-                            </div>
-                            <div className="comment">
-                                <div className="users-faces-comment"><img></img></div>
-                                <span>Flavin</span>
-                            </div>
-                            <div className="comment">
-                                <div className="users-faces-comment"><img></img></div>
-                                <span>Flavin</span><textarea></textarea>
 
-                            </div>
+                            }
 
                         </div>
 
@@ -94,14 +99,14 @@ const ModalPost: React.FC = () => {
                                 pagination={{ clickable: true }}
                             >
 
-                            
-                                 {
-                                    post?.attachments.map((attachment , index) => (
+
+                                {
+                                    post?.attachments.map((attachment) => (
                                         <SwiperSlide><img src={attachment} alt="" /></SwiperSlide>
                                     )
                                     )
                                 }
-                            
+
 
                             </Swiper>
                         </div>
@@ -110,15 +115,10 @@ const ModalPost: React.FC = () => {
                 </div>
             </div>
 
-        </MenuWapper>
+        </MenuWapper >
     )
 }
 
-export default ModalPost
+export default PostDetails
 
 
-/* {
-    posts.map((post : IPost , index) => 
-    <SwiperSlide><img key={index} src={post.attachments[0]}/></SwiperSlide>
-    ) 
-  }    */

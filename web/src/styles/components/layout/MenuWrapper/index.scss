@@ -1,20 +1,52 @@
-.container-global{
-    max-width: 100vw;
-    max-height: 100vh;
-    background-color: aquamarine;
-    
-    @media (max-width: $breakpoint-laptop) {
-        .effect-side-bar{
-            display: none;
-        }
+.container-global {
+  max-width: 100vw;
+  max-height: 100vh;
+
+  display: grid;
+  grid-template-columns: clamp(15rem, 19vw, 18rem) 1fr;
+  grid-template-rows: 80px 1fr;
+
+  main {
+
+    grid-column: 2;
+    grid-row: 2;
+    overflow: auto;
+    background-color: $color-dark-gray;
+    display: flex;
+    flex-direction: row;
+
+    .side-card-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+      margin-top: 2em;
+
+      img {
+        border-radius: 50%;
+        width: 1.5em;
+        height: 1.5em;
+      }
     }
+  }
 
-    
-
+  @media (max-width: $breakpoint-laptop) {
     main {
-        width: 100%;
-        min-height: calc(100%-80px);
-        overflow: auto;
-        background-color: $color-dark-gray;
+      grid-column: 1 / 3;
     }
+
+    .effect-side-bar {
+      transition: all 0.25s ease-out;
+
+      position: absolute;
+      left: clamp(-15rem, -19vw, -18rem);
+      height: calc(100vh - 80px);
+      bottom: 0;
+
+
+      &.open {
+        left: 0;
+        
+      }
+    }
+  }
 }
