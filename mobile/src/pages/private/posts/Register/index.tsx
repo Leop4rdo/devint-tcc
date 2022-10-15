@@ -29,7 +29,7 @@ const PostRegisterPage : React.FC<{ navigation : any }> = ({navigation}) => {
     const getRandomPlaceholder = () => placeholders[Math.floor(Math.random() * placeholders.length)]
 
     const pickImage = async () => {
-        if (uploading) Alert.alert('Ainda estamos fazendo upload, aguarde alguns segundos!')
+        if (uploading) return
 
         const result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -56,8 +56,6 @@ const PostRegisterPage : React.FC<{ navigation : any }> = ({navigation}) => {
                 ...attachments,    
                 await uploaded.ref.getDownloadURL()
             ])
-            
-            Alert.alert('Upload realizado com sucesso!')
         } catch (err) {
             console.log(err)
             Alert.alert('Houve um erro inesperado ao fazer upload!')
@@ -123,8 +121,8 @@ const PostRegisterPage : React.FC<{ navigation : any }> = ({navigation}) => {
                 <ScrollView horizontal centerContent>
                     {
                         attachments.map((_uri : string, idx : number) =>
-                            <Pressable onPress={() => removeImage(_uri)}>
-                                <Image source={{uri : _uri}} key={`${_uri}-${idx}`} style={styles.imgPreview}/>
+                            <Pressable onPress={() => removeImage(_uri)} key={`${_uri}-${idx}`} >
+                                <Image source={{uri : _uri}} resizeMode="contain" style={styles.imgPreview}/>
                             </Pressable>
                         )
                     }
@@ -133,7 +131,7 @@ const PostRegisterPage : React.FC<{ navigation : any }> = ({navigation}) => {
 
             <View style={styles.footer}>
                 <Pressable onPress={pickImage}>
-                    <MaterialIcons name="image" size={32} color={colors.PRIMARY}/>
+                    <MaterialIcons name="image" size={32} color={(uploading) ? colors.GRAY : colors.PRIMARY}/>
                 </Pressable>
             </View>
         </KeyboardAvoidingView>
