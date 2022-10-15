@@ -18,8 +18,8 @@ export default class CommentController {
             .catch((err) => res.status(err.status || 500).json(err))
     }
 
-    addHeart = (req: Request, res: Response) => {
-        this.service.addHeart(req.params.id, req.body.userData.id)
+    toggleHeart = (req: Request, res: Response) => {
+        this.service.toggleHeart(req.params.id, req.body.userData.id)
             .then((_res) => res.status(_res.status || 200).json(_res))
             .catch((err) => res.status(err.status || 500).json(err))
     }

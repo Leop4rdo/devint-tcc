@@ -22,13 +22,13 @@ export default class PostService {
         this._ = repo
     }
 
-    async getById(id: string): Promise<IResponse> {
+    async getById(id: string, devId : string): Promise<IResponse> {
         const post = await this._.findById(id)
 
         if (!post)
             return new BadRequestResponse({ message: errors.ENTITY_NOT_FOUND })
 
-        const res = new PostOutput(post)
+        const res = new PostOutput(post, devId)
 
         return new SuccessResponse({
             data: res
@@ -53,7 +53,8 @@ export default class PostService {
 
         const post = await this._.create(new Post({
             ...postInput,
-            writter: { id: owner }
+            writter: { id: owner },
+            order : Math.floor(Math.random() * 999999)
         } as unknown as IPostProps))
 
         if (!post)

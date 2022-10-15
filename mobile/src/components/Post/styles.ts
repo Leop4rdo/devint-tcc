@@ -88,9 +88,7 @@ const styles = StyleSheet.create({
     },
 
     carouselFooter : {
-        width : 24,
-        height : 24,
-
+        padding : 4,
         backgroundColor : colors.BLACK,
         opacity : .75,
         zIndex : 2,

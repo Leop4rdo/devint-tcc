@@ -11,6 +11,7 @@ export default class Post {
     comments: Comment[]
     hearts : JSON
     attachments: JSON
+    order : number
     writter: Dev
     createdAt : Timestamp
     updateAt : Timestamp

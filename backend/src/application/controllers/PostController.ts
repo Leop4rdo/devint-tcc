@@ -15,7 +15,7 @@ export default class PostController {
     }
 
     getById = (req: Request, res: Response) => {
-        this.service.getById(req.params.postId)
+        this.service.getById(req.params.postId, req.body.userData.id)
             .then((_res) => res.status(_res.status || 200).json(_res))
             .catch((err) => res.status(err.status || 500).json(err))
     }
