@@ -18,7 +18,7 @@ const HomePage : React.FC<{ navigation : any }> = ({navigation}) => {
     const getPosts = async () => {
         const { data }= await postService.list({ offset : posts.length, limit : 24 })
         
-        const newPosts = data.filter((post : IPostListItem) => posts.find((_) => post.id === _.id))
+        const newPosts = data.filter((post : IPostListItem) => !posts.find((_) => post.id === _.id))
 
         setPosts([...posts, ...newPosts])
     }

@@ -7,9 +7,9 @@ import colors from "../../styles/colors"
 import FeedbackTextInput from "../shared/FeedbackInput"
 import styles from "./styles"
 import * as postService from '../../services/post.service'
-import Comment from "./Comment"
 import { withDecay } from "react-native-reanimated"
 import AddCommentModal from "./AddComment"
+import Comment from "./Comment"
 
 interface ICommentModalProps {
     postId : string
