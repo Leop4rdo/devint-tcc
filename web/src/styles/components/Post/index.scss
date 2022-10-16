@@ -3,13 +3,12 @@
     width: clamp(30rem, 30vw, 50rem);
     //height: clamp(30rem, 20vw, 50rem);
     height: auto;
-    margin-bottom: 50px;
     border-radius: 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    gap: 1em;
+    gap: 1rem;
 
     img{
         width: 2rem;

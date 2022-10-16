@@ -50,12 +50,11 @@ const Post: React.FC<IPostProps> = ({ data}) => {
             <div className="post-footer">
                 <div className="comments">
 
-                    {data.comments.length == 1 ? <img src={data.comments[0].writter.profilePicUrl} /> : 
                     <div>
-                    <img src={data.comments[0].writter.profilePicUrl} />
-                    <img src={data.comments[1].writter.profilePicUrl} />
+                        {data.comments.length >= 1 ? <img src={data.comments[0].writter.profilePicUrl} /> : <></>}
+                        {data.comments.length >= 2 ? <img src={data.comments[1].writter.profilePicUrl} /> : <></>}
                     </div>
-                    }
+
                    
                     <span  onClick={() => navigate(`posts/${data.id}`)}>{data.comments.length} Comentários</span>
                 </div>

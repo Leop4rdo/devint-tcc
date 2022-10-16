@@ -11,16 +11,15 @@ import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
 import SideCard from "components/shared/SideCard";
 
 const FeedPage: React.FC = () => {
+    const [posts, setPosts] = useState<IPostListItem[]>([])
 
-    const [posts, setPosts] = useState<IPost[]>(POSTS_DATA.data as unknown as IPost[]);
-
-    /*  const getPosts = async () => {
+    const getPosts = async () => {
          const { data } = await postService.list({ offset : posts.length, limit : 48 })
  
          setPosts([...posts, ...data])
-     } */
+     }
 
-    /* useEffect(() => { getPosts() }, []) */
+    useEffect(() => { getPosts() }, [])
 
     return (
         <MenuWapper>
@@ -58,12 +57,15 @@ const FeedPage: React.FC = () => {
                     </div>
                 </div>
 
-                {
-                    posts.map((post: IPost) =>
-                        <Post data={post} />
+                <div className="post-container">
+                    {
+                        posts.map((post: IPost) =>
+                            <Post data={post} />
 
-                    )
-                }
+                        )
+                    }
+                </div>
+
 
                 <div className="side-card-container">
                     <SideCard title="Seguindo" >

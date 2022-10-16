@@ -27,6 +27,12 @@
     }
   }
 
+  .post-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
   .outstanding-container {
     width: clamp(40em, 20vw, 60em);
   }
