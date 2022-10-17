@@ -112,6 +112,7 @@
             justify-content: space-between;
 
             .attachment-load-options {
+                #attachment-input { display:  none; }
                 .icon {
                     font-size: clamp(1.5rem, 4vw, 2.5rem);
                     color: white;

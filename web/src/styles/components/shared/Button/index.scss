@@ -47,6 +47,18 @@ button {
     }
   }
 
+  &.disabled, :disabled {
+    border-color: $color-light-gray;
+    color: $color-light-gray;
+    background-color: #0000;
+
+    cursor: not-allowed;
+    &:hover {
+      background-color: #0000;
+      color: $color-light-gray;
+    }
+  }
+
   &.btn-previous {
     width: 4rem;
 
