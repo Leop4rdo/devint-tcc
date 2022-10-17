@@ -16,6 +16,8 @@ const FeedPage: React.FC = () => {
   
     const getPosts = async () => {
         const { data } =  await postService.list({ offset : posts.length, limit : 48 })
+        
+        setPosts([...posts, ...data ])
     }
 
     useEffect(() => { getPosts() }, []) 
