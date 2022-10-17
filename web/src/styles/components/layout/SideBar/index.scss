@@ -77,13 +77,14 @@
         padding-left: 10px;
         height: 40px;
         width: 13rem;
+        transition: background  0.25s ease-out;
+        border-radius: 12px;
 
         &:hover {
           background-color: $color-primary;
           background-color: $color-primary;
-          border-radius: 12px;
           cursor: pointer;
-          transition: all 0.5s ease-out;
+          
 
           a {
             color: $color-white;
