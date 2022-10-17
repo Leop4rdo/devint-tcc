@@ -1,5 +1,5 @@
 import { MaterialIcons } from "@expo/vector-icons"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Alert, Image, Pressable, Text, View } from "react-native"
 import { FlatList } from "react-native-gesture-handler"
 import IComment from "../../interfaces/IComment"
@@ -10,6 +10,7 @@ import * as postService from '../../services/post.service'
 import { withDecay } from "react-native-reanimated"
 import AddCommentModal from "./AddComment"
 import Comment from "./Comment"
+import { AuthContext } from "../../store/context/Auth.context"
 
 interface ICommentModalProps {
     postId : string
@@ -17,6 +18,8 @@ interface ICommentModalProps {
 }
 
 const CommentModal : React.FC<ICommentModalProps> = ({ postId, onClose }) => {
+    const authContext = useContext(AuthContext)
+
     const [comments, setComments] = useState<IComment[]>([])
     const [currentModal, setCurrentModal] = useState<{ visible : boolean, parentId : string, parentType : 'POST' | 'COMMENT'}>({
         visible : false,
@@ -51,7 +54,7 @@ const CommentModal : React.FC<ICommentModalProps> = ({ postId, onClose }) => {
                     </Pressable>
                 </View>
                 <Pressable style={styles.newCommentContainer} onPress={() => setCurrentModal({visible : true, parentId : postId, parentType : 'POST'})}>
-                    <Image source={{ uri : 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/1024px-Cat03.jpg'}} style={styles.profilePic}/>
+                    <Image source={{ uri : authContext?.userData?.profilePicUrl}} style={styles.profilePic}/>
                     <View style={styles.fakeInput}>
                         <Text style={styles.fakeInputText}>Adicione um comentário</Text>
                     </View>
