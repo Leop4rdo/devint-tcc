@@ -12,30 +12,37 @@ import * as postService from 'services/post.service'
 
 interface IModalPostProps {
     postId: string
+    onClick : any
 }
 
-const ModalPost: React.FC<IModalPostProps> = ({ postId }) => {
+const ModalPost: React.FC<IModalPostProps> = ({ postId , onClick }) => {
 
-   /*  const [posts, setPosts] = useState<IPostListItem[]>([])
+    const [post, setPost] = useState<IPostListItem | null>(null)
  
-    const getPosts = async () => {
-        const { data } = await postService.findById({ offset : posts.length, limit : 48 }))
+    const getPost = async () => {
+        const { data } = await postService.findById(postId)
+        setPost(data )
     }
  
-    useEffect(() => { getPosts() }, [postId])
+    useEffect(() => { getPost() }, [postId])
 
-    console.log(posts) */
+    
+    console.log(post?.comments)
+
+    
 
     return (
-        <ModalWrapper>
-           {/*  <div className="container-modal-post">
+        <ModalWrapper onClick={onClick}>
+
+            
+             <div className="container-modal-post">
 
                 <div className="modal-post">
                     <div className="container-itens">
 
                         <div className="user-info">
                             <div className="dice-user">
-                                <img src={posts.writter.profilePicUrl} />
+                                <img src={post?.writter.profilePicUrl} />
                                 <h2>{post?.writter.name}</h2>
                             </div>
 
@@ -46,8 +53,8 @@ const ModalPost: React.FC<IModalPostProps> = ({ postId }) => {
 
                         <div className="post-footer">
                             <div className="comment-user">
-                                <img src={post?.comments[0].writter.profilePicUrl} />
-                                <img src={post?.comments[1].writter.profilePicUrl} />
+                                <img src="https://i.imgur.com/dv8Pbcg.png" />
+                                <img src="https://i.imgur.com/dv8Pbcg.png" />
                                 <span>{post?.comments.length} Comentarios</span>
                             </div>
 
@@ -103,7 +110,7 @@ const ModalPost: React.FC<IModalPostProps> = ({ postId }) => {
 
                 </div>
             </div>
- */}
+ 
 
 
         </ModalWrapper>

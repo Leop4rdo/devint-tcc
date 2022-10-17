@@ -53,7 +53,7 @@ a {
   @import "./pages/public/Register/Company.scss";
   @import "./pages/public/ForgotMyPasswordPage/index.scss";
   @import "./pages/private/Feed";
-  @import "./pages/private/PostDetails/index.scss";
+ 
 
   // Component Style Imports ->
   @import "swiper/css/bundle";
@@ -71,6 +71,7 @@ a {
   @import "./components/shared/Comment/index.scss";
   @import "./components/shared/CreateComment/index.scss";
   @import "./components/layout/Modals/ModalWrapper/index.scss";
+  @import "./components/layout/Modals/ModalPost/index.scss";
 
  
 }

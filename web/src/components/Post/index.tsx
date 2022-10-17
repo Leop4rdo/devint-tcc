@@ -14,12 +14,9 @@ import IPostListItem from "interfaces/IPost";
 }
 
 const Post: React.FC<IPostProps> = ({ data , onClick}) => {
-    const navigate = useNavigate(); 
-
     
-
     return (
-        <div className="postcard" key={data.id}>
+        <div className="postcard" key={data.id} onClick={onClick}>
             <div className="post-header">
                 <div className="user-info">
                     <img src={data.writter.profilePicUrl} />
@@ -40,7 +37,7 @@ const Post: React.FC<IPostProps> = ({ data , onClick}) => {
                     >
                             {
                                 data.attachments.map((attachment) => (
-                                    <SwiperSlide><img onClick={onClick} src={attachment} alt="" /></SwiperSlide>
+                                    <SwiperSlide><img src={attachment} alt="" /></SwiperSlide>
                                 )
                                 )
                             }
@@ -58,7 +55,7 @@ const Post: React.FC<IPostProps> = ({ data , onClick}) => {
                     </div>
 
                    
-                    <span  onClick={() => navigate(`posts/${data.id}`)}>{data.comments.length} Comentários</span>
+                    <span >{data.comments.length} Comentários</span>
                 </div>
                 <div className="hearts">
                     {data.hearts}

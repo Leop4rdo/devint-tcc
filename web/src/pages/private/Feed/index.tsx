@@ -23,12 +23,17 @@ const FeedPage: React.FC = () => {
  
     const getPosts = async () => {
         const { data } = await postService.list({ offset : posts.length, limit : 48 })
-
         setPosts([...posts, ...data])
     }
  
     useEffect(() => { getPosts() }, [])
 
+
+    
+
+
+
+    console.log(posts)
      
 
 
@@ -72,9 +77,10 @@ const FeedPage: React.FC = () => {
 
                         <div className="post-container">
                             {
-                                posts.map((post: IPost) =>
-                                    <Post data={post} />
-
+                                posts.map((post: IPost) => (
+                                    <Post data={post} onClick={() => setSelectedPostId(post.id)} />
+                                )
+                                   
                                 )
                             }
                         </div>
@@ -103,8 +109,9 @@ const FeedPage: React.FC = () => {
             </div>
 
 
-            {selectedPostId &&
-            <ModalPost postId={selectedPostId} />
+            {
+                selectedPostId &&
+                <ModalPost postId={selectedPostId} onClick={() => setSelectedPostId('')} />
             }
 
         </MenuWapper>
