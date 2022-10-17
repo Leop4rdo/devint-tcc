@@ -35,73 +35,76 @@ const FeedPage: React.FC = () => {
     return (
         <MenuWapper>
             <div className="feed" >
-                <NewPost />
-                <div className="outstanding-container">
-                    <h2>Devs em destaque</h2>
-                    <div className="outstanding-users">
-                        <Swiper
-                            modules={[Navigation, Pagination, Scrollbar, A11y]}
-                            spaceBetween={50}
-                            slidesPerView={10}
-                            navigation
-                            pagination={{ clickable: true }}>
+                <div className="feed-components-container">
+                    <div className="feed-center">
+                        <NewPost />
+                        <div className="outstanding-container">
+                            <h2>Devs em destaque</h2>
+                            <div className="outstanding-users">
+                                <Swiper
+                                    modules={[Navigation, Pagination, Scrollbar, A11y]}
+                                    spaceBetween={50}
+                                    slidesPerView={10}
+                                    navigation
+                                    slidesPerGroup={10}>
 
-                            <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                            <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                            <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                            <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                            <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                            <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                            <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                            <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                            <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                            <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                            <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                            <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                            <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                            <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                            <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                            <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
+                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
+                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
+                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
+                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
+                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
+                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
+                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
+                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
+                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
+                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
+                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
+                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
+                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
+                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
+                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
+                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
 
-                        </Swiper>
+                                </Swiper>
 
+                            </div>
+                        </div>
+
+                        <div className="post-container">
+                            {
+                                posts.map((post: IPost) =>
+                                    <Post data={post} />
+
+                                )
+                            }
+                        </div>
+                    </div>
+
+                    <div className="side-card-container">
+                        <SideCard title="Seguindo" >
+                            <a href=""><img src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
+                            <a href=""><img src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
+                            <a href=""><img src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
+                            <a href=""><img src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
+                            <a href=""><img src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
+                        </SideCard>
+                        <SideCard title="Artigos em alta">
+                            <a>Stop complaining about PHP</a>
+                            <a>Start your React App</a>
+                            <a>Improve your CSS Skills</a>
+                            <a>Development Performance</a>
+                        </SideCard>
+                        <SideCard title="Meus grupos">
+                            <a>Juninhos</a>
+                            <a>Um empreguinho por favor</a>
+                        </SideCard>
                     </div>
                 </div>
-
-                <div className="post-container">
-                    {
-                        posts.map((post: IPost) =>
-                            <Post data={post} onClick={() => setSelectedPostId(post.id)} />
-                        )
-                    }
-                </div>
-
-
-                <div className="side-card-container">
-                    <SideCard title="Seguindo" >
-                        <a href=""><img src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
-                        <a href=""><img src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
-                        <a href=""><img src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
-                        <a href=""><img src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
-                        <a href=""><img src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
-                    </SideCard>
-                    <SideCard title="Artigos em alta">
-                        <a>Stop complaining about PHP</a>
-                        <a>Start your React App</a>
-                        <a>Improve your CSS Skills</a>
-                        <a>Development Performance</a>
-                    </SideCard>
-                    <SideCard title="Meus grupos">
-                        <a>Juninhos</a>
-                        <a>Um empreguinho por favor</a>
-                    </SideCard>
-                </div>
-
             </div>
 
 
             {selectedPostId &&
-            <ModalPost idPost={selectedPostId} />
+            <ModalPost postId={selectedPostId} />
             }
 
         </MenuWapper>

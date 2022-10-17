@@ -16,7 +16,7 @@ interface IModalPostProps {
 
 const ModalPost: React.FC<IModalPostProps> = ({ postId }) => {
 
-    const [posts, setPosts] = useState<IPostListItem[]>([])
+   /*  const [posts, setPosts] = useState<IPostListItem[]>([])
  
     const getPosts = async () => {
         const { data } = await postService.findById({ offset : posts.length, limit : 48 }))
@@ -24,11 +24,11 @@ const ModalPost: React.FC<IModalPostProps> = ({ postId }) => {
  
     useEffect(() => { getPosts() }, [postId])
 
-    console.log(posts)
+    console.log(posts) */
 
     return (
         <ModalWrapper>
-            <div className="container-modal-post">
+           {/*  <div className="container-modal-post">
 
                 <div className="modal-post">
                     <div className="container-itens">
@@ -103,7 +103,7 @@ const ModalPost: React.FC<IModalPostProps> = ({ postId }) => {
 
                 </div>
             </div>
-
+ */}
 
 
         </ModalWrapper>
