@@ -11,15 +11,15 @@ import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
 import SideCard from "components/shared/SideCard";
 
 const FeedPage: React.FC = () => {
-    // const [posts, setPosts] = useState<IPostListItem[]>([])
-    const [posts, setPosts] = useState<IPost[]>(POSTS_DATA.data as unknown as IPost[]);
-    // const getPosts = async () => {
-    //     const { data } = await postService.list({ offset: posts.length, limit: 48 })
 
-    // }
+    const [ posts, setPosts] = useState<IPostListItem[]>([])
+  
+    const getPosts = async () => {
+        const { data } =  await postService.list({ offset : posts.length, limit : 48 })
+    }
 
-    // useEffect(() => { getPosts() }, [])
-
+    useEffect(() => { getPosts() }, []) 
+    
     return (
         <MenuWapper>
             <div className="feed" >
@@ -89,6 +89,10 @@ const FeedPage: React.FC = () => {
                     </div>
                 </div>
             </div>
+
+
+    
+               
         </MenuWapper>
     );
 }

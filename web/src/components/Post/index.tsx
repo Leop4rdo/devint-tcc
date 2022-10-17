@@ -3,8 +3,7 @@ import React, { useState } from "react"
 import Button from "../shared/Button";
 import Icon from "../shared/Icon";
 import { Swiper, SwiperSlide } from "swiper/react"
-import {useNavigate } from "react-router-dom";
-import 'swiper/css';
+import { useNavigate } from "react-router-dom";
 import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
 import IPostListItem from "interfaces/IPost";
 
@@ -15,6 +14,8 @@ import IPostListItem from "interfaces/IPost";
 
 const Post: React.FC<IPostProps> = ({ data}) => {
     const navigate = useNavigate(); 
+
+    
 
     return (
         <div className="postcard" key={data.id}>
