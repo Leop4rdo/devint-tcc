@@ -6,6 +6,12 @@
   align-items: center;
   gap: 1em;
   overflow-y: scroll;
+
+  .feed-components-container {
+    width: 100%;
+    display: flex;
+  }
+
   h2 {
     color: $color-primary;
   }
@@ -27,6 +33,14 @@
     }
   }
 
+  .feed-center {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2em;
+  }
+
   .post-container {
     display: flex;
     flex-direction: column;
@@ -34,7 +48,11 @@
   }
 
   .outstanding-container {
-    width: clamp(40em, 20vw, 60em);
+    width: clamp(15em, 45vw, 60em);
+
+    .swiper-button-next, .swiper-button-prev {
+      top: 45%
+    }
   }
 
   .outstanding-users {
