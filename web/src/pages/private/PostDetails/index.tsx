@@ -3,12 +3,15 @@ import { SwiperSlide, Swiper } from 'swiper/react'
 import Button from "../../../components/shared/Button";
 import Icon from "../../../components/shared/Icon";
 import MenuWapper from "components/layout/MenuWrapper";
-import { Pagination, A11y } from 'swiper'
+
 import { useNavigate, useParams } from "react-router-dom";
 import IPost from "interfaces/IPost";
 import POSTS_DATA from "../../../DATA/posts-get-response.json"
 import { useState } from "react";
-import AutoTextArea from "components/shared/TextArea";
+import Comment from "components/shared/Comment";
+import CreateComment from "components/shared/CreateComment";
+import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
+
 
 const PostDetails: React.FC = () => {
     const { id } = useParams()
@@ -21,7 +24,7 @@ const PostDetails: React.FC = () => {
         setPost(POSTS_DATA.data.find((post) => post.id == id) as unknown as IPost)
     }, [id])
 
-    console.log(post?.comments)
+    console.log(post)
 
     return (
         <MenuWapper>
@@ -39,12 +42,12 @@ const PostDetails: React.FC = () => {
                             <Button className="follow-button" children={[<Icon name="add" />, "Seguir"]} />
                         </div>
 
-                        <p>{post?.content}</p>
+                        <p className="content">{post?.content}</p>
 
                         <div className="post-footer">
                             <div className="comment-user">
                                 <img src={post?.comments[0].writter.profilePicUrl} />
-                                <img className="user-name-comment" src={post?.comments[1].writter.profilePicUrl} />
+                                <img src={post?.comments[1].writter.profilePicUrl} />
                                 <span>{post?.comments.length} Comentarios</span>
                             </div>
 
@@ -55,34 +58,20 @@ const PostDetails: React.FC = () => {
                                 </Button>
                             </div>
                         </div>
-
-
+                          
+                        
                         <div className="container-comments">
-                            <div className="comment">
-                                <div className="container-user-dice">
-                                    <div className="users-faces-comment"><img src={post?.comments[0].writter.profilePicUrl} alt="" /></div>
-                                    <span>Flavin</span>
-                                    <AutoTextArea />
-                                </div>
-                            </div>
+
+                            <CreateComment />
 
                             {
-                                
-                                    post?.comments.map((comment?) => (
-
-                                        <div className="comment" >
-                                            <div className="container-user-dice">
-                                                <div className="users-faces-comment"><img src={comment.writter.profilePicUrl} alt="" /></div>
-                                                <span>{comment.writter.name}</span>
-                                                <p className="text-comment">{comment.content}</p>
-                                            </div>
-    
-                                        </div>
-                                    ))
-                                
-
+                                post?.comments.map((comment?) => (
+                                    <Comment data={comment} />
+                                ))
 
                             }
+
+                            
 
                         </div>
 
@@ -93,9 +82,10 @@ const PostDetails: React.FC = () => {
                         <Icon name="close" onClick={() => navigate(-1)} />
                         <div className="carousel-image" >
 
-                            <Swiper modules={[Pagination, A11y]}
+                            <Swiper modules={[Navigation, Pagination, Scrollbar, A11y]}
                                 spaceBetween={50}
                                 slidesPerView={1}
+                                navigation
                                 pagination={{ clickable: true }}
                             >
 
