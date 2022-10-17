@@ -1,22 +1,29 @@
-import IPost from "interfaces/IPost";
 import React, { useState } from "react"
 import Button from "../shared/Button";
 import Icon from "../shared/Icon";
 import { Swiper, SwiperSlide } from "swiper/react"
 import { useNavigate } from "react-router-dom";
 import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
-import IPostListItem from "interfaces/IPost";
+import {IPostListItem, IPost} from "interfaces/IPost";
+import * as postService from "../../services/post.service"
 
- interface IPostProps {
+interface IPostProps {
     data: IPostListItem
-    
+
 }
 
-const Post: React.FC<IPostProps> = ({ data}) => {
-    const navigate = useNavigate(); 
+const Post: React.FC<IPostProps> = ({ data }) => {
 
+    const navigate = useNavigate();
+
+    const [liked, setLiked] = useState(data.alreadyHearted)
+
+    const giveLike = async () => {
+        const res = await postService.addHeart(data.id)
+
+        setLiked(!liked)
+    }
     
-
     return (
         <div className="postcard" key={data.id}>
             <div className="post-header">
@@ -37,37 +44,36 @@ const Post: React.FC<IPostProps> = ({ data}) => {
                         navigation
                         pagination={{ clickable: true }}
                     >
-                            {
-                                data.attachments.map((attachment) => (
-                                    <SwiperSlide><img onClick={() => navigate(`posts/${data.id}`)} src={attachment} alt="" /></SwiperSlide>
-                                )
-                                )
-                            }
-                        
+                        {
+                            data.attachments.map((attachment) => (
+                                <SwiperSlide><img onClick={() => navigate(`posts/${data.id}`)} src={attachment} alt="" /></SwiperSlide>
+                            )
+                            )
+                        }
+
                     </Swiper>
-                    
+
                 </div>
             </div>
             <div className="post-footer">
                 <div className="comments">
-
-                    <div>
-                        {data.comments.length >= 1 ? <img src={data.comments[0].writter.profilePicUrl} /> : <></>}
-                        {data.comments.length >= 2 ? <img src={data.comments[1].writter.profilePicUrl} /> : <></>}
-                    </div>
-
-                   
-                    <span  onClick={() => navigate(`posts/${data.id}`)}>{data.comments.length} Comentários</span>
+                    {data.comments}
+                    <span onClick={() => navigate(`posts/${data.id}`)}>comentários</span>
                 </div>
                 <div className="hearts">
-                    {data.hearts}
-                    <Button>
-                        <Icon name="favorite" />
+                    {
+                        (liked && !data.alreadyHearted) ? data.hearts + 1 : (!liked && data.alreadyHearted) ? data.hearts - 1 : data.hearts
+                    }
+                    <Button onClick={giveLike}>
+                        <Icon name="favorite" id={`${liked ? 'already-hearted' : ''}`} />
                     </Button>
                 </div>
             </div>
         </div>
     );
+
+
+
 }
 
 // passo 1 -> pegar o array

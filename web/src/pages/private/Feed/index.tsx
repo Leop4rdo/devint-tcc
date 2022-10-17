@@ -1,16 +1,28 @@
 import MenuWapper from "components/layout/MenuWrapper";
 import Post from "components/Post";
-import IPost from "interfaces/IPost";
 import React, { useEffect, useState } from "react";
 import * as postService from 'services/post.service'
-import IPostListItem from "interfaces/IPost";
+import {IPostListItem, IPost} from "interfaces/IPost";
 import POSTS_DATA from "../../../DATA/posts-get-response.json"
 import NewPost from "components/shared/NewPost";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
 import SideCard from "components/shared/SideCard";
+import IDevMinimal from "interfaces/IDev";
+import * as devService from "../../../services/dev.service" 
 
 const FeedPage: React.FC = () => {
+
+    const [devs, setDevs] = useState<IDevMinimal[]>([])
+
+    const getDevs= async () => {
+        
+        const res = await devService.list({limit : 20})
+
+        setDevs(res.data)
+    }
+
+    useEffect(() => { getDevs() }, [])
 
     const [ posts, setPosts] = useState<IPostListItem[]>([])
   
@@ -21,6 +33,8 @@ const FeedPage: React.FC = () => {
     }
 
     useEffect(() => { getPosts() }, []) 
+
+    
     
     return (
         <MenuWapper>
@@ -38,23 +52,11 @@ const FeedPage: React.FC = () => {
                                     navigation
                                     slidesPerGroup={10}>
 
-                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-
+                                        {
+                                            devs?.map((dev) =>
+                                            <SwiperSlide><img src={dev.profilePicUrl} /></SwiperSlide>
+                                        )}
+                                
                                 </Swiper>
 
                             </div>
@@ -62,7 +64,7 @@ const FeedPage: React.FC = () => {
 
                         <div className="post-container">
                             {
-                                posts.map((post: IPost) =>
+                                posts.map((post: IPostListItem) =>
                                     <Post data={post} />
 
                                 )
