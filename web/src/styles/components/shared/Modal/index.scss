@@ -1,0 +1,40 @@
+.modal{
+    width: calc(100% - 100px);
+    height: calc(100% - 80px);;
+    position: absolute;
+    z-index: 1;
+    overflow-y: hidden;
+    background-color: $color-dark-gray;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    
+    .container{
+        width:  clamp( 56rem, 78vw,77rem);
+        height: clamp( 40rem , 50vw , 49rem);
+        background-color: $color-black;
+        display: flex;
+        border-radius: 16px;
+        justify-content: space-between;
+
+        .icon {
+            order: 2;
+            color: $color-white;
+            font-size: 40px;
+            height: 40px;
+            order: 2;
+            margin-top: 40px;
+            margin-right: 20px;
+            cursor: pointer;
+            transition: 0.8s;
+
+            &:hover{
+                color: $color-primary;
+                transform: scale(1.1);
+            }
+
+        }
+    }
+}

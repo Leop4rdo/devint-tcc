@@ -9,10 +9,11 @@ import IPostListItem from "interfaces/IPost";
 
  interface IPostProps {
     data: IPostListItem
+    onClick? : any
     
 }
 
-const Post: React.FC<IPostProps> = ({ data}) => {
+const Post: React.FC<IPostProps> = ({ data , onClick}) => {
     const navigate = useNavigate(); 
 
     
@@ -39,7 +40,7 @@ const Post: React.FC<IPostProps> = ({ data}) => {
                     >
                             {
                                 data.attachments.map((attachment) => (
-                                    <SwiperSlide><img onClick={() => navigate(`posts/${data.id}`)} src={attachment} alt="" /></SwiperSlide>
+                                    <SwiperSlide><img onClick={onClick} src={attachment} alt="" /></SwiperSlide>
                                 )
                                 )
                             }

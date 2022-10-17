@@ -3,7 +3,6 @@ import { SwiperSlide, Swiper } from 'swiper/react'
 import Button from "../../../components/shared/Button";
 import Icon from "../../../components/shared/Icon";
 import MenuWapper from "components/layout/MenuWrapper";
-
 import { useNavigate, useParams } from "react-router-dom";
 import IPost from "interfaces/IPost";
 import POSTS_DATA from "../../../DATA/posts-get-response.json"
