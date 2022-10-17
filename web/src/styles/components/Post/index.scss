@@ -89,6 +89,7 @@
         p {
             font-size: 1em;
             color: $color-white;
+            overflow-wrap: break-word;
         }
     }
 
@@ -131,7 +132,14 @@
     .image-swiper {
         background-color: chocolate;
     }
+    
 }
+@media (max-width : $breakpoint-laptop)  {
+    .postcard {
+        width:100%;
+    }        
+}
+
 
 // <SwiperSlide className="image-swiper">
 // {
