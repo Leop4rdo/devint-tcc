@@ -79,13 +79,11 @@
         width: 13rem;
         transition: background  0.25s ease-out;
         border-radius: 12px;
+        cursor: pointer;
 
         &:hover {
           background-color: $color-primary;
-          background-color: $color-primary;
-          cursor: pointer;
           
-
           a {
             color: $color-white;
           }
