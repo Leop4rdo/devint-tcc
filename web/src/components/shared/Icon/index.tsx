@@ -2,7 +2,6 @@ import React from 'react';
 
 interface IIconProps extends React.HTMLProps<HTMLSpanElement> {
     name : string
-    onClick? : any
 }
 
 

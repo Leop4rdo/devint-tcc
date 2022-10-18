@@ -70,10 +70,10 @@ export default class PostService {
             return new BadRequestResponse({ message: errors.ENTITY_NOT_FOUND })
 
         if (post.hearts.includes(userId))
-            post.hearts.filter((id) => id !== userId)
+            post.hearts.filter((id) => id != userId)
         else 
             post.hearts.push(userId)
-
+        
         await this._.update(post)
 
         return new SuccessResponse({

@@ -4,16 +4,20 @@ import React, { useEffect, useState } from "react";
 import * as postService from 'services/post.service'
 import {IPostListItem, IPost} from "interfaces/IPost";
 import POSTS_DATA from "../../../DATA/posts-get-response.json"
-import NewPost from "components/shared/NewPost";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
 import SideCard from "components/shared/SideCard";
+
+import Button from "components/shared/Button";
+import CreatePostModal from "components/Modals/CreatePostModal";
+
 import IDevMinimal from "interfaces/IDev";
 import * as devService from "../../../services/dev.service" 
 
 const FeedPage: React.FC = () => {
-
     const [devs, setDevs] = useState<IDevMinimal[]>([])
+    const [ writtingPost, setWrittingPost ] = useState(false)
+    const [ posts, setPosts] = useState<IPostListItem[]>([])
 
     const getDevs= async () => {
         
@@ -22,17 +26,13 @@ const FeedPage: React.FC = () => {
         setDevs(res.data)
     }
 
-    useEffect(() => { getDevs() }, [])
-
-    const [ posts, setPosts] = useState<IPostListItem[]>([])
-  
     const getPosts = async () => {
-        const { data } =  await postService.list({ offset : posts.length, limit : 48 })
+        const { data } =  await postService.list({ offset : posts.length, limit : 999 })
         
         setPosts([...posts, ...data ])
     }
 
-    useEffect(() => { getPosts() }, []) 
+    useEffect(() => { getPosts(); getDevs() }, []) 
 
     
     
@@ -41,7 +41,11 @@ const FeedPage: React.FC = () => {
             <div className="feed" >
                 <div className="feed-components-container">
                     <div className="feed-center">
-                        <NewPost />
+                        <div className="new-post">
+                            <span>O que você tem para nos dizer hoje?</span>
+                            <button className="btn-primary" onClick={() => setWrittingPost(true)}>Novo Post</button>
+                        </div>
+
                         <div className="outstanding-container">
                             <h2>Devs em destaque</h2>
                             <div className="outstanding-users">
@@ -93,10 +97,10 @@ const FeedPage: React.FC = () => {
                     </div>
                 </div>
             </div>
-
-
-    
-               
+            {
+                writtingPost &&
+                <CreatePostModal onClose={() => setWrittingPost(false)}/>
+            }
         </MenuWapper>
     );
 }
