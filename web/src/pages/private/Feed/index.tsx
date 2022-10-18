@@ -64,7 +64,7 @@ const FeedPage: React.FC = () => {
                         <div className="post-container">
                             {
                                 posts.map((post: IPost) =>
-                                    <Post data={post} />
+                                    <Post key={`${post.id}-${Math.random()*999}`} data={post} />
                                     
                                 )
                             }
