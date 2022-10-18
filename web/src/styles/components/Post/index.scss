@@ -71,11 +71,12 @@
             background-color: transparent; 
 
             .icon{
-            color: $color-white;
+                color: $color-white;
 
-            &:hover {
-                color: $color-dark-red;
-            }
+                &:hover, &#already-hearted {
+                    color: $color-primary;
+                }
+
             }
         }
     }
@@ -89,6 +90,7 @@
         p {
             font-size: 1em;
             color: $color-white;
+            overflow-wrap: break-word;
         }
     }
 
@@ -131,7 +133,14 @@
     .image-swiper {
         background-color: chocolate;
     }
+    
 }
+@media (max-width : $breakpoint-laptop)  {
+    .postcard {
+        width:100%;
+    }        
+}
+
 
 // <SwiperSlide className="image-swiper">
 // {

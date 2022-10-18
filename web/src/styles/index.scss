@@ -73,5 +73,6 @@ a {
   @import "./components/layout/Modals/ModalWrapper/index.scss";
   @import "./components/layout/Modals/ModalPost/index.scss";
 
- 
+  // Modal Style Imports ->
+  @import "./components/Modals/CreatePostModal/index.scss";
 }

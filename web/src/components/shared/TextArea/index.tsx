@@ -5,11 +5,11 @@ import React, {
 	TextareaHTMLAttributes,
 } from "react";
 
-interface IAutoTextArea {
+interface IAutoTextArea extends TextareaHTMLAttributes<HTMLTextAreaElement> {
 	placeholder?: string
 } 
 
-const AutoTextArea : React.FC<IAutoTextArea> = (props: TextareaHTMLAttributes<HTMLTextAreaElement> ) => {
+const AutoTextArea : React.FC<IAutoTextArea> = (props: IAutoTextArea ) => {
 	
 	const textAreaRef = useRef<HTMLTextAreaElement>(null);
 	const [text, setText] = useState("");
@@ -41,7 +41,7 @@ const AutoTextArea : React.FC<IAutoTextArea> = (props: TextareaHTMLAttributes<HT
 		>
 			<textarea
 				{...props}
-				placeholder={'Escreva um comentario...'}
+				placeholder={props.placeholder}
 				ref={textAreaRef}
 				rows={1}
 				style={{

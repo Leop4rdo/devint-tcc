@@ -32,7 +32,7 @@ const PostRegisterPage : React.FC<{ navigation : any }> = ({navigation}) => {
         if (uploading) return
 
         const result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
             allowsEditing : true,
             quality : 1
         });
@@ -50,7 +50,7 @@ const PostRegisterPage : React.FC<{ navigation : any }> = ({navigation}) => {
             const blob = await res.blob()
             const fileName = uri.substring(uri.lastIndexOf('/')+1)
 
-            const uploaded = await firebase.storage().ref().child(fileName).put(blob)
+            const uploaded = await firebase.storage().ref().child('attachments/').child(fileName).put(blob)
 
             setAttachments([
                 ...attachments,    

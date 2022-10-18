@@ -1,39 +1,39 @@
 import MenuWapper from "components/layout/MenuWrapper";
 import Post from "components/Post";
-import IPost from "interfaces/IPost";
 import React, { useEffect, useState } from "react";
 import * as postService from 'services/post.service'
-import IPostListItem from "interfaces/IPost";
-import Button from "../../../components/shared/Button";
+import {IPostListItem, IPost} from "interfaces/IPost";
 import POSTS_DATA from "../../../DATA/posts-get-response.json"
-import NewPost from "components/shared/NewPost";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SideCard from "components/shared/SideCard";
 
-import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
-import ModalWrapper from "components/layout/Modals/ModalWrapper";
-import ModalPost from "components/layout/Modals/ModalPost";
+import Button from "components/shared/Button";
+import CreatePostModal from "components/Modals/CreatePostModal";
+
+import IDevMinimal from "interfaces/IDev";
+import * as devService from "../../../services/dev.service" 
 
 const FeedPage: React.FC = () => {
-
-
+    const [devs, setDevs] = useState<IDevMinimal[]>([])
     const [selectedPostId, setSelectedPostId] = useState('')
+    const [ writtingPost, setWrittingPost ] = useState(false)
+    const [ posts, setPosts] = useState<IPostListItem[]>([])
 
-    const [posts, setPosts] = useState<IPostListItem[]>([])
- 
-    const getPosts = async () => {
-        const { data } = await postService.list({ offset : posts.length, limit : 999 })
-        setPosts([...posts, ...data])
+    const getDevs= async () => {
+        
+        const res = await devService.list({limit : 20})
+
+        setDevs(res.data)
     }
- 
-    useEffect(() => { getPosts() }, [])
 
+    const getPosts = async () => {
+        const { data } =  await postService.list({ offset : posts.length, limit : 999 })
+        
+        setPosts([...posts, ...data ])
+    }
 
-    
+    useEffect(() => { getPosts(); getDevs() }, []) 
 
-
-
-    console.log(posts)
      
 
 
@@ -42,7 +42,11 @@ const FeedPage: React.FC = () => {
             <div className="feed" >
                 <div className="feed-components-container">
                     <div className="feed-center">
-                        <NewPost />
+                        <div className="new-post">
+                            <span>O que você tem para nos dizer hoje?</span>
+                            <button className="btn-primary" onClick={() => setWrittingPost(true)}>Novo Post</button>
+                        </div>
+
                         <div className="outstanding-container">
                             <h2>Devs em destaque</h2>
                             <div className="outstanding-users">
@@ -52,24 +56,13 @@ const FeedPage: React.FC = () => {
                                     slidesPerView={10}
                                     navigation
                                     slidesPerGroup={10}>
+                                
 
-                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide><img src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-
+                                        {
+                                            devs?.map((dev) =>
+                                            <SwiperSlide><img src={dev.profilePicUrl} /></SwiperSlide>
+                                        )}
+                                
                                 </Swiper>
 
                             </div>
@@ -77,10 +70,15 @@ const FeedPage: React.FC = () => {
 
                         <div className="post-container">
                             {
+<<<<<<< HEAD
                                 posts.map((post: IPost) => (
                                     <Post data={post} onClick={() => setSelectedPostId(post.id)} />
                                 )
                                    
+=======
+                                posts.map((post: IPostListItem) =>
+                                    <Post key={`${post.id}-${Math.random()*999}`} data={post} />
+>>>>>>> 656a4e791a525b283d56b44bd2a085568d353156
                                 )
                             }
                         </div>
@@ -88,11 +86,11 @@ const FeedPage: React.FC = () => {
 
                     <div className="side-card-container">
                         <SideCard title="Seguindo" >
-                            <a href=""><img src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
-                            <a href=""><img src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
-                            <a href=""><img src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
-                            <a href=""><img src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
-                            <a href=""><img src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
+                            <a href=""><img alt=""src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
+                            <a href=""><img alt=""src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
+                            <a href=""><img alt=""src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
+                            <a href=""><img alt=""src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
+                            <a href=""><img alt=""src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
                         </SideCard>
                         <SideCard title="Artigos em alta">
                             <a>Stop complaining about PHP</a>
@@ -107,6 +105,7 @@ const FeedPage: React.FC = () => {
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
 
 
             {
@@ -114,6 +113,12 @@ const FeedPage: React.FC = () => {
                 <ModalPost postId={selectedPostId} onClick={() => setSelectedPostId('')} />
             }
 
+=======
+            {
+                writtingPost &&
+                <CreatePostModal onClose={() => setWrittingPost(false)}/>
+            }
+>>>>>>> 656a4e791a525b283d56b44bd2a085568d353156
         </MenuWapper>
     );
 }
