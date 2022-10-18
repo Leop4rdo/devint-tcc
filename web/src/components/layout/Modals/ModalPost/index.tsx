@@ -1,8 +1,8 @@
-import { IPost, IPostListItem } from "interfaces/IPost"
+import { IPost } from "interfaces/IPost"
 import React, { useState, useEffect } from "react"
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper"
 import * as postService from 'services/post.service'
-import ModalWrapper from "../ModalWrapper"
+
 import { SwiperSlide, Swiper } from "swiper/react"
 import Button from "components/shared/Button"
 import CreateComment from "components/shared/CreateComment"
@@ -76,20 +76,19 @@ const ModalPost: React.FC<IModalPostProps> = ({ postId, onClick }) => {
                                 ))
 
                             }
-
-
-
                         </div>
 
                     </div>
-                    
+
                     <div className="container-carousel">
-                    <Icon name="close" onClick={onClick} />
+                        <Icon name="close" onClick={onClick} />
+
                         {
                             post?.attachments.length &&
-                            <>
 
-                               
+                            <div>
+
+
                                 <div className="carousel-image" >
 
                                     <Swiper modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -111,7 +110,7 @@ const ModalPost: React.FC<IModalPostProps> = ({ postId, onClick }) => {
                                     </Swiper>
                                 </div>
 
-                            </>
+                            </div>
 
 
                         }
@@ -130,11 +129,3 @@ const ModalPost: React.FC<IModalPostProps> = ({ postId, onClick }) => {
 
 export default ModalPost
 
-/*
-
-14
-0
-null
-undefined
-
-*/
