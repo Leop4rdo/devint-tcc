@@ -50,7 +50,7 @@ const PostRegisterPage : React.FC<{ navigation : any }> = ({navigation}) => {
             const blob = await res.blob()
             const fileName = uri.substring(uri.lastIndexOf('/')+1)
 
-            const uploaded = await firebase.storage().ref().child(fileName).put(blob)
+            const uploaded = await firebase.storage().ref().child('attachments/').child(fileName).put(blob)
 
             setAttachments([
                 ...attachments,    

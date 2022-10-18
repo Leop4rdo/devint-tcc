@@ -1,11 +1,15 @@
-import Icon from "components/shared/Icon";
-import AutoTextArea from "components/shared/TextArea";
 import React, { useContext, useState } from "react";
 import { AuthContext } from "store/context/Auth.context";
+
 import firebase from "config/firebase"
+import {v4 as randomUUIDV4} from "uuid"
+
+import Icon from "components/shared/Icon";
+import AutoTextArea from "components/shared/TextArea";
 interface ICreatePostModalProps {
     onClose : () => void
 }
+
 
 const CreatePostModal : React.FC<ICreatePostModalProps> = ({ onClose }) => {
     const authContext = useContext(AuthContext)
@@ -21,9 +25,10 @@ const CreatePostModal : React.FC<ICreatePostModalProps> = ({ onClose }) => {
         try {
             const res = await fetch(uri)
             const blob = await res.blob()
-            const fileName = uri.substring(uri.lastIndexOf('/')+1)
+            const fileName = randomUUIDV4()
 
-            const uploaded = await firebase.storage().ref().child(fileName).put(blob)
+
+            const uploaded = await firebase.storage().ref().child('attachments/').child(fileName).put(blob)
 
             setAttachments([
                 ...attachments,    
@@ -67,7 +72,7 @@ const CreatePostModal : React.FC<ICreatePostModalProps> = ({ onClose }) => {
                 <footer>
                     <div className="attachment-load-options">
                         <div>
-                            <input accept="image/*" type="file" name="attachment-input" id="attachment-input" />
+                            <input accept="image/*" onChange={upload} type="file" name="attachment-input" id="attachment-input" />
                             <label htmlFor="attachment-input"><Icon name="image" /></label>
                         </div>
 
