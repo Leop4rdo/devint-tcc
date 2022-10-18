@@ -1,27 +1,40 @@
 import MenuWapper from "components/layout/MenuWrapper";
 import Post from "components/Post";
-import IPost from "interfaces/IPost";
 import React, { useEffect, useState } from "react";
 import * as postService from 'services/post.service'
-import IPostListItem from "interfaces/IPost";
+import {IPostListItem, IPost} from "interfaces/IPost";
 import POSTS_DATA from "../../../DATA/posts-get-response.json"
 import { Swiper, SwiperSlide } from "swiper/react";
 import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
 import SideCard from "components/shared/SideCard";
+
 import Button from "components/shared/Button";
 import CreatePostModal from "components/Modals/CreatePostModal";
 
+import IDevMinimal from "interfaces/IDev";
+import * as devService from "../../../services/dev.service" 
+
 const FeedPage: React.FC = () => {
+    const [devs, setDevs] = useState<IDevMinimal[]>([])
     const [ writtingPost, setWrittingPost ] = useState(false)
     const [ posts, setPosts] = useState<IPostListItem[]>([])
-  
+
+    const getDevs= async () => {
+        
+        const res = await devService.list({limit : 20})
+
+        setDevs(res.data)
+    }
+
     const getPosts = async () => {
-        const { data } =  await postService.list({ offset : posts.length, limit : 48 })
+        const { data } =  await postService.list({ offset : posts.length, limit : 999 })
         
         setPosts([...posts, ...data ])
     }
 
-    useEffect(() => { getPosts() }, []) 
+    useEffect(() => { getPosts(); getDevs() }, []) 
+
+    
     
     return (
         <MenuWapper>
@@ -44,23 +57,11 @@ const FeedPage: React.FC = () => {
                                     slidesPerGroup={10}>
                                 
 
-                                    <SwiperSlide ><img alt="" src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide ><img alt="" src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide ><img alt="" src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide ><img alt="" src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide ><img alt="" src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide ><img alt="" src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide ><img alt="" src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide ><img alt="" src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide ><img alt="" src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide ><img alt="" src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide ><img alt="" src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide ><img alt="" src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide ><img alt="" src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide ><img alt="" src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide ><img alt="" src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-                                    <SwiperSlide ><img alt="" src="https://avatars.githubusercontent.com/u/5909549?v=4" /></SwiperSlide>
-
+                                        {
+                                            devs?.map((dev) =>
+                                            <SwiperSlide><img src={dev.profilePicUrl} /></SwiperSlide>
+                                        )}
+                                
                                 </Swiper>
 
                             </div>
@@ -68,9 +69,8 @@ const FeedPage: React.FC = () => {
 
                         <div className="post-container">
                             {
-                                posts.map((post: IPost) =>
+                                posts.map((post: IPostListItem) =>
                                     <Post key={`${post.id}-${Math.random()*999}`} data={post} />
-                                    
                                 )
                             }
                         </div>
