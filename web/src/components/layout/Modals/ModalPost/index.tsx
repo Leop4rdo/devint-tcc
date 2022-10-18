@@ -12,30 +12,30 @@ import * as postService from 'services/post.service'
 
 interface IModalPostProps {
     postId: string
-    onClick : any
+    onClick: any
 }
 
-const ModalPost: React.FC<IModalPostProps> = ({ postId , onClick }) => {
+const ModalPost: React.FC<IModalPostProps> = ({ postId, onClick }) => {
 
     const [post, setPost] = useState<IPostListItem | null>(null)
- 
+
     const getPost = async () => {
         const { data } = await postService.findById(postId)
-        setPost(data )
+        setPost(data)
     }
- 
+
     useEffect(() => { getPost() }, [postId])
 
-    
+
     console.log(post?.comments)
 
-    
+
 
     return (
-        <ModalWrapper onClick={onClick}>
+        <ModalWrapper >
 
-            
-             <div className="container-modal-post">
+
+            <div className="container-modal-post">
 
                 <div className="modal-post">
                     <div className="container-itens">
@@ -53,8 +53,9 @@ const ModalPost: React.FC<IModalPostProps> = ({ postId , onClick }) => {
 
                         <div className="post-footer">
                             <div className="comment-user">
-                                <img src="https://i.imgur.com/dv8Pbcg.png" />
-                                <img src="https://i.imgur.com/dv8Pbcg.png" />
+                                {
+                                    //Fazer validação das imagens aquiii
+                                }
                                 <span>{post?.comments.length} Comentarios</span>
                             </div>
 
@@ -86,6 +87,7 @@ const ModalPost: React.FC<IModalPostProps> = ({ postId , onClick }) => {
 
 
                     <div className="container-carousel">
+                        <Icon name="close" onClick={onClick} />
                         <div className="carousel-image" >
 
                             <Swiper modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -110,7 +112,7 @@ const ModalPost: React.FC<IModalPostProps> = ({ postId , onClick }) => {
 
                 </div>
             </div>
- 
+
 
 
         </ModalWrapper>
