@@ -46,7 +46,7 @@ const Post: React.FC<IPostProps> = ({ data }) => {
                     >
                         {
                             data.attachments.map((attachment) => (
-                                <SwiperSlide><img onClick={() => navigate(`posts/${data.id}`)} src={attachment} alt="" /></SwiperSlide>
+                                <SwiperSlide key={`${data.id}-${Math.random()*999}`}><img onClick={() => navigate(`posts/${data.id}`)} src={attachment} alt="" /></SwiperSlide>
                             )
                             )
                         }

@@ -49,17 +49,16 @@ const FeedPage: React.FC = () => {
                         <div className="outstanding-container">
                             <h2>Devs em destaque</h2>
                             <div className="outstanding-users">
-                                <Swiper
+                                <Swiper 
                                     modules={[Navigation, Pagination, Scrollbar, A11y]}
                                     spaceBetween={50}
                                     slidesPerView={10}
                                     navigation
                                     slidesPerGroup={10}>
                                 
-
                                         {
-                                            devs?.map((dev) =>
-                                            <SwiperSlide><img src={dev.profilePicUrl} /></SwiperSlide>
+                                            devs?.map((dev: IDevMinimal) => 
+                                            <SwiperSlide key={`${dev.id}-${Math.random()*999}`} ><img src={dev.profilePicUrl} /></SwiperSlide>
                                         )}
                                 
                                 </Swiper>
@@ -77,7 +76,7 @@ const FeedPage: React.FC = () => {
                     </div>
 
                     <div className="side-card-container">
-                        <SideCard title="Seguindo" >
+                        {/* <SideCard title="Seguindo" >
                             <a href=""><img alt=""src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
                             <a href=""><img alt=""src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
                             <a href=""><img alt=""src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
@@ -93,7 +92,7 @@ const FeedPage: React.FC = () => {
                         <SideCard title="Meus grupos">
                             <a>Juninhos</a>
                             <a>Um empreguinho por favor</a>
-                        </SideCard>
+                        </SideCard> */}
                     </div>
                 </div>
             </div>
