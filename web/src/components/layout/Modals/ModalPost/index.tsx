@@ -1,9 +1,9 @@
 import { IPost, IPostListItem } from "interfaces/IPost"
 import React, { useState, useEffect } from "react"
-import Swiper, { Navigation, Pagination, Scrollbar, A11y } from "swiper"
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper"
 import * as postService from 'services/post.service'
 import ModalWrapper from "../ModalWrapper"
-import { SwiperSlide } from "swiper/react"
+import { SwiperSlide, Swiper } from "swiper/react"
 import Button from "components/shared/Button"
 import CreateComment from "components/shared/CreateComment"
 import Icon from "components/shared/Icon"
@@ -18,7 +18,7 @@ interface IModalPostProps {
 
 const ModalPost: React.FC<IModalPostProps> = ({ postId, onClick }) => {
 
-    const [post, setPost] = useState<IPost| null>(null)
+    const [post, setPost] = useState<IPost | null>(null)
 
     const getPost = async () => {
         const { data } = await postService.findById(postId)
@@ -28,7 +28,7 @@ const ModalPost: React.FC<IModalPostProps> = ({ postId, onClick }) => {
     useEffect(() => { getPost() }, [postId])
 
 
-    
+
 
 
     return (
@@ -46,13 +46,14 @@ const ModalPost: React.FC<IModalPostProps> = ({ postId, onClick }) => {
                             </div>
 
                             <Button className="follow-button" children={[<Icon name="add" />, "Seguir"]} />
+
                         </div>
 
                         <p className="content">{post?.content}</p>
 
                         <div className="post-footer">
                             <div className="comment-user">
-                                
+
                                 <span>{post?.comments.length} Comentarios</span>
                             </div>
 
@@ -81,30 +82,40 @@ const ModalPost: React.FC<IModalPostProps> = ({ postId, onClick }) => {
                         </div>
 
                     </div>
-
-
+                    
                     <div className="container-carousel">
-                        <Icon name="close" onClick={onClick} />
-                        <div className="carousel-image" >
+                    <Icon name="close" onClick={onClick} />
+                        {
+                            post?.attachments.length &&
+                            <>
 
-                            <Swiper modules={[Navigation, Pagination, Scrollbar, A11y]}
-                                spaceBetween={50}
-                                slidesPerView={1}
-                                navigation
-                                pagination={{ clickable: true }}
-                            >
+                               
+                                <div className="carousel-image" >
 
-
-                                {
-                                    post?.attachments.map((attachment) => (
-                                        <SwiperSlide><img src={attachment} alt="" /></SwiperSlide>
-                                    )
-                                    )
-                                }
+                                    <Swiper modules={[Navigation, Pagination, Scrollbar, A11y]}
+                                        spaceBetween={50}
+                                        slidesPerView={1}
+                                        navigation
+                                        pagination={{ clickable: true }}
+                                    >
 
 
-                            </Swiper>
-                        </div>
+                                        {
+                                            post?.attachments.map((attachment) => (
+                                                <SwiperSlide><img src={attachment} alt="" /></SwiperSlide>
+                                            )
+                                            )
+                                        }
+
+
+                                    </Swiper>
+                                </div>
+
+                            </>
+
+
+                        }
+
                     </div>
 
                 </div>
@@ -118,3 +129,12 @@ const ModalPost: React.FC<IModalPostProps> = ({ postId, onClick }) => {
 }
 
 export default ModalPost
+
+/*
+
+14
+0
+null
+undefined
+
+*/

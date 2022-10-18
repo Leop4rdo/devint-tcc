@@ -19,7 +19,7 @@
 
 
     .modal-post {
-        width:  clamp( 56rem, 75vw,75rem);
+        width:  100%;
         height: clamp( 40rem , 48vw , 47rem);
         background-color: $color-black;
         display: flex;
@@ -29,9 +29,10 @@
 
         .container-itens {
             width: 500px;
-            height: 700px;
+            height: auto;
             margin-top: 30px;
             margin-left: 16px;
+            word-wrap:break-word;
 
             .user-info {
                 display: flex;

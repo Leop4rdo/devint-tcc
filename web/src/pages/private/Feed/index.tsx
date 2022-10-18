@@ -12,6 +12,8 @@ import CreatePostModal from "components/Modals/CreatePostModal";
 
 import IDevMinimal from "interfaces/IDev";
 import * as devService from "../../../services/dev.service" 
+import ModalPost from "components/layout/Modals/ModalPost";
+import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
 
 const FeedPage: React.FC = () => {
     const [devs, setDevs] = useState<IDevMinimal[]>([])
@@ -70,15 +72,10 @@ const FeedPage: React.FC = () => {
 
                         <div className="post-container">
                             {
-<<<<<<< HEAD
-                                posts.map((post: IPost) => (
-                                    <Post data={post} onClick={() => setSelectedPostId(post.id)} />
+                                posts.map((post: IPostListItem) => (
+                                    <Post key={`${post.id}-${Math.random()*999}`} data={post} openDetails={() => setSelectedPostId(post.id)} />
                                 )
                                    
-=======
-                                posts.map((post: IPostListItem) =>
-                                    <Post key={`${post.id}-${Math.random()*999}`} data={post} />
->>>>>>> 656a4e791a525b283d56b44bd2a085568d353156
                                 )
                             }
                         </div>
@@ -105,7 +102,6 @@ const FeedPage: React.FC = () => {
                     </div>
                 </div>
             </div>
-<<<<<<< HEAD
 
 
             {
@@ -113,12 +109,10 @@ const FeedPage: React.FC = () => {
                 <ModalPost postId={selectedPostId} onClick={() => setSelectedPostId('')} />
             }
 
-=======
             {
                 writtingPost &&
                 <CreatePostModal onClose={() => setWrittingPost(false)}/>
             }
->>>>>>> 656a4e791a525b283d56b44bd2a085568d353156
         </MenuWapper>
     );
 }
