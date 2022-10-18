@@ -13,7 +13,6 @@ const Sidebar: React.FC<ISidebarProps> = ({open}) => {
     const authContext = useContext(AuthContext)
 
     return (
-            // <div className="container-side-bar effect-side-bar ">
             <div className={`container-side-bar effect-side-bar ${open ? 'open' : ''}`}>
 
                 <div className="container-user">
@@ -25,26 +24,31 @@ const Sidebar: React.FC<ISidebarProps> = ({open}) => {
 
                 <div className="container-itens">
                     <nav className="container-nav">
-                        <ul>
-                            <Icon name="house" /><li><a>Home</a></li>
-                        </ul>
-                        <ul>
-                            <Icon name="article" /><li><a>Artigos</a></li>
-                        </ul>
-                        <ul>
-                            <Icon name="watch_later" /><li><a>Itens salvos</a></li>
-                        </ul>
-                        <ul>
-                            <Icon name="chat" /><li><a>Chats</a></li>
-                        </ul>
-                        <ul>
-                            <Icon name="settings" /><li><a>Configurações</a></li>
-                        </ul>
+                        <div className="sidebar-item active">
+                            <Icon name="house" />
+                            <a className="item-text">Home</a>
+                        </div>
+                        <div className="sidebar-item">
+                            <Icon name="article" />
+                            <a className="item-text">Artigos</a>
+                        </div>
+                        <div className="sidebar-item">
+                            <Icon name="watch_later" />
+                            <a className="item-text">Itens salvos</a>
+                        </div>
+                        <div className="sidebar-item">
+                            <Icon name="chat" />
+                            <a className="item-text">Chats</a>
+                        </div>
+                        <div className="sidebar-item">
+                            <Icon name="settings" />
+                            <a className="item-text">Configurações</a>
+                        </div>
                     </nav>
 
-                    <div className="logout-area" onClick={authContext?.signOut}>
-                        <span>:q</span>
-                        <span>sair</span>
+                    <div className="sidebar-item" onClick={authContext?.signOut}>
+                        <span className="icon">:q</span>
+                        <span className="item-text">sair</span>
                     </div>
 
                 </div>

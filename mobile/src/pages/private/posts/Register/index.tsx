@@ -77,7 +77,6 @@ const PostRegisterPage : React.FC<{ navigation : any }> = ({navigation}) => {
         }
 
         const res = await postService.create(body)
-        console.log(res)
 
         if (res.hasError) return Alert.alert('Houve um erro inesperado ao publicar, tente novamente mais tarde!')
 
