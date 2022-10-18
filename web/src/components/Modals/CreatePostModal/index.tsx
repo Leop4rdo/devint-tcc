@@ -6,6 +6,8 @@ import {v4 as randomUUIDV4} from "uuid"
 
 import Icon from "components/shared/Icon";
 import AutoTextArea from "components/shared/TextArea";
+
+import * as postService from "services/post.service"
 interface ICreatePostModalProps {
     onClose : () => void
 }
@@ -20,15 +22,15 @@ const CreatePostModal : React.FC<ICreatePostModalProps> = ({ onClose }) => {
     const upload = async (evt : any) => {
         setUploading(true)
 
-        const uri = evt.target.files[0]
+        const file = evt.target.files[0]
 
+        if (!file) return
+        
         try {
-            const res = await fetch(uri)
-            const blob = await res.blob()
-            const fileName = randomUUIDV4()
+            const extension = `.${file.name.split('.')[1]}`
+            const fileName = randomUUIDV4() + extension
 
-
-            const uploaded = await firebase.storage().ref().child('attachments/').child(fileName).put(blob)
+            const uploaded = await firebase.storage().ref().child('attachments/').child(fileName).put(file)
 
             setAttachments([
                 ...attachments,    
@@ -40,6 +42,19 @@ const CreatePostModal : React.FC<ICreatePostModalProps> = ({ onClose }) => {
         }
 
         setUploading(false)
+    }
+
+    const publishPost = async () => {
+        if (!content || uploading) return
+        
+        const body = { content, attachments}
+
+        const res = await postService.create(body)
+        
+        if (res.hasError) 
+            return alert('Houve um erro inesperado ao publicar, tente novamente mais tarde!')
+
+        onClose()
     }
 
     return (
@@ -81,7 +96,10 @@ const CreatePostModal : React.FC<ICreatePostModalProps> = ({ onClose }) => {
                         <select>
                             <option selected>Selecione um projeto</option>
                         </select>
-                        <button className={`btn-primary publish-btn ${content || uploading ? '' : 'disabled'}`}>
+                        <button 
+                            onClick={publishPost}
+                            className={`btn-primary publish-btn ${content && !uploading ? '' : 'disabled'}`}
+                        >
                             Publicar
                         </button>
                     </div>

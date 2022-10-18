@@ -102,6 +102,21 @@
 
                 }
             }
+
+            .attachment-list {
+                width: 100%;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                img {
+                    height: clamp(4rem, 10vw, 8rem);
+                    aspect-ratio: 1;
+
+                    object-fit: contain;
+                }
+            }
         }
 
         footer {
