@@ -9,7 +9,6 @@ function App() {
       <AuthProvider>
         <AppRouter />
       </AuthProvider> 
-      
     </div>    
   );
 }

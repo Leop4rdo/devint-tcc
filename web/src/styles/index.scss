@@ -72,5 +72,6 @@ a {
   @import "./components/shared/Comment/index.scss";
   @import "./components/shared/CreateComment/index.scss";
 
- 
+  // Modal Style Imports ->
+  @import "./components/Modals/CreatePostModal/index.scss";
 }
