@@ -5,7 +5,7 @@ import Icon from "../../../components/shared/Icon";
 import MenuWapper from "components/layout/MenuWrapper";
 
 import { useNavigate, useParams } from "react-router-dom";
-import IPost from "interfaces/IPost";
+import {IPost} from "interfaces/IPost";
 import POSTS_DATA from "../../../DATA/posts-get-response.json"
 import { useState } from "react";
 import Comment from "components/shared/Comment";
@@ -23,8 +23,6 @@ const PostDetails: React.FC = () => {
     useEffect(() => {
         setPost(POSTS_DATA.data.find((post) => post.id == id) as unknown as IPost)
     }, [id])
-
-    console.log(post)
 
     return (
         <MenuWapper>

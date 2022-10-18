@@ -71,11 +71,12 @@
             background-color: transparent; 
 
             .icon{
-            color: $color-white;
+                color: $color-white;
 
-            &:hover {
-                color: $color-dark-red;
-            }
+                &:hover, &#already-hearted {
+                    color: $color-primary;
+                }
+
             }
         }
     }

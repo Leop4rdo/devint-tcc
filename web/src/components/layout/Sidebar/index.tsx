@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 
 import Icon from "components/shared/Icon";
 import { AuthContext } from "store/context/Auth.context";
+import Button from "components/shared/Button";
 
 
 interface ISidebarProps {
@@ -17,9 +18,9 @@ const Sidebar: React.FC<ISidebarProps> = ({open}) => {
 
                 <div className="container-user">
                     <div className="container-image-face">
-                    <img src="../assets/images/Tony.jpg" alt="Tony Cauntry" />
+                    <img src={authContext?.userData?.profilePicUrl} alt="User profile picture" />
                     </div>
-                    <h2>{authContext?.signIn.name}</h2>
+                    <h2>{authContext?.userData?.name}</h2>
                 </div>
 
                 <div className="container-itens">
@@ -41,8 +42,9 @@ const Sidebar: React.FC<ISidebarProps> = ({open}) => {
                         </ul>
                     </nav>
 
-                    <div className="logout-icon">
-                        <Icon name="logout" />
+                    <div className="logout-area" onClick={authContext?.signOut}>
+                        <span>:q</span>
+                        <span>sair</span>
                     </div>
 
                 </div>
