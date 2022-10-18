@@ -81,7 +81,7 @@ const FeedPage: React.FC = () => {
                     </div>
 
                     <div className="side-card-container">
-                        {/* <SideCard title="Seguindo" >
+                        <SideCard title="Seguindo" >
                             <a href=""><img alt=""src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
                             <a href=""><img alt=""src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
                             <a href=""><img alt=""src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
@@ -97,7 +97,7 @@ const FeedPage: React.FC = () => {
                         <SideCard title="Meus grupos">
                             <a>Juninhos</a>
                             <a>Um empreguinho por favor</a>
-                        </SideCard> */}
+                        </SideCard>
                     </div>
                 </div>
             </div>
