@@ -6,7 +6,7 @@ import { Route, Routes } from "react-router-dom"
 import ForgotMyPasswordPage from "../pages/public/ForgotMyPassword/ForgotMyPasswordPage"
 import ChangeMyPasswordPage from "pages/public/ChangeMyPassword";
 import EmailConfirmPage from "pages/public/EmailConfirm/EmailConfirmPage";
-import PostDetailsPage from "pages/private/PostDetails/index"
+
 import LoginPage from "pages/public/Login";
 
 
@@ -14,7 +14,6 @@ const PublicRouter: React.FC = () => {
     return (
         <Routes>
             <Route index element={<LoginPage />} />
-            <Route path="posts/:id" element={<PostDetailsPage />} />
             <Route path="forgot-my-password" element={<ForgotMyPasswordPage />} />
             <Route path="change-my-password/:token" element={<ChangeMyPasswordPage />} />
             <Route path="register">
