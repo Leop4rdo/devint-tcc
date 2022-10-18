@@ -2,7 +2,6 @@ import { IPost, IPostListItem } from "interfaces/IPost"
 import React, { useState, useEffect } from "react"
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper"
 import * as postService from 'services/post.service'
-import ModalWrapper from "../ModalWrapper"
 import { SwiperSlide, Swiper } from "swiper/react"
 import Button from "components/shared/Button"
 import CreateComment from "components/shared/CreateComment"
@@ -11,12 +10,12 @@ import Comment from "components/shared/Comment"
 
 
 
-interface IModalPostProps {
+interface IPostDetailsModalProps {
     postId: string
     onClick: any
 }
 
-const ModalPost: React.FC<IModalPostProps> = ({ postId, onClick }) => {
+const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick }) => {
 
     const [post, setPost] = useState<IPost | null>(null)
 
@@ -27,18 +26,13 @@ const ModalPost: React.FC<IModalPostProps> = ({ postId, onClick }) => {
 
     useEffect(() => { getPost() }, [postId])
 
-
-
-
-
     return (
         <div className="modal-wrapper">
-
             <div className="container-modal-post">
-
                 <div className="modal-post">
-                    <div className="container-itens">
+                    <Icon name="close" onClick={onClick} />
 
+                    <div className="container-itens">
                         <div className="user-info">
                             <div className="dice-user">
                                 <img src={post?.writter.profilePicUrl} />
@@ -46,7 +40,6 @@ const ModalPost: React.FC<IModalPostProps> = ({ postId, onClick }) => {
                             </div>
 
                             <Button className="follow-button" children={[<Icon name="add" />, "Seguir"]} />
-
                         </div>
 
                         <p className="content">{post?.content}</p>
@@ -65,76 +58,41 @@ const ModalPost: React.FC<IModalPostProps> = ({ postId, onClick }) => {
                             </div>
                         </div>
 
-
                         <div className="container-comments">
-
                             <CreateComment />
-
                             {
                                 post?.comments.map((comment?) => (
                                     <Comment data={comment} />
                                 ))
 
                             }
-
-
-
                         </div>
-
                     </div>
                     
-                    <div className="container-carousel">
-                    <Icon name="close" onClick={onClick} />
-                        {
-                            post?.attachments.length &&
-                            <>
+                    {
+                        post?.attachments.length &&
+                        <div className="container-carousel">
+                            <div className="carousel-image" >
 
-                               
-                                <div className="carousel-image" >
-
-                                    <Swiper modules={[Navigation, Pagination, Scrollbar, A11y]}
-                                        spaceBetween={50}
-                                        slidesPerView={1}
-                                        navigation
-                                        pagination={{ clickable: true }}
-                                    >
-
-
-                                        {
-                                            post?.attachments.map((attachment) => (
-                                                <SwiperSlide><img src={attachment} alt="" /></SwiperSlide>
-                                            )
-                                            )
-                                        }
-
-
-                                    </Swiper>
-                                </div>
-
-                            </>
-
-
-                        }
-
-                    </div>
-
+                                <Swiper modules={[Navigation, Pagination, Scrollbar, A11y]}
+                                    spaceBetween={50}
+                                    slidesPerView={1}
+                                    navigation
+                                    pagination={{ clickable: true }}
+                                >
+                                    {
+                                        post?.attachments.map((attachment) => 
+                                            <SwiperSlide><img src={attachment} alt="" /></SwiperSlide>
+                                        )
+                                    }
+                                </Swiper>
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
-
-
-
         </div>
-
     )
 }
 
-export default ModalPost
-
-/*
-
-14
-0
-null
-undefined
-
-*/
+export default PostDetailsModal
