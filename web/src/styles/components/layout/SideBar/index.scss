@@ -96,10 +96,55 @@
 	.logout-area {
     width: fit-content;
     height: auto;
-		display: flex;
-		gap: 0.5em;
+	display: flex;
+	gap: 0.5em;
     align-items: center;
     justify-content: center;
+    justify-content: space-between;
+    height: 100%;
+
+    .container-nav {
+      ul li a {
+        font-size: clamp(1rem, 2vw, 1.2rem);
+        cursor: pointer;
+        color: $color-light-gray;
+        padding-bottom: 20px;
+
+        &:hover::before {
+          transform: scaleX(0);
+        }
+      }
+
+      ul li {
+        list-style: none;
+      }
+
+      ul .icon {
+        color: $color-white;
+        font-size: clamp(1.5rem, 3vw, 1.8rem);
+      }
+
+      ul {
+        display: flex;
+        gap: 8px;
+        margin-top: 30px;
+        align-items: center;
+        padding-left: 10px;
+        height: 40px;
+        width: 13rem;
+        transition: background  0.25s ease-out;
+        border-radius: 12px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: $color-primary;
+          
+          a {
+            color: $color-white;
+          }
+        }
+      }
+    }
     color: $color-white;
     margin-bottom: 2em;
 

@@ -55,6 +55,7 @@ const FeedPage: React.FC = () => {
                                     slidesPerView={10}
                                     navigation
                                     slidesPerGroup={10}>
+                                
 
                                         {
                                             devs?.map((dev) =>
@@ -69,8 +70,7 @@ const FeedPage: React.FC = () => {
                         <div className="post-container">
                             {
                                 posts.map((post: IPostListItem) =>
-                                    <Post data={post} />
-
+                                    <Post key={`${post.id}-${Math.random()*999}`} data={post} />
                                 )
                             }
                         </div>
@@ -78,11 +78,11 @@ const FeedPage: React.FC = () => {
 
                     <div className="side-card-container">
                         <SideCard title="Seguindo" >
-                            <a href=""><img src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
-                            <a href=""><img src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
-                            <a href=""><img src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
-                            <a href=""><img src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
-                            <a href=""><img src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
+                            <a href=""><img alt=""src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
+                            <a href=""><img alt=""src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
+                            <a href=""><img alt=""src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
+                            <a href=""><img alt=""src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
+                            <a href=""><img alt=""src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
                         </SideCard>
                         <SideCard title="Artigos em alta">
                             <a>Stop complaining about PHP</a>

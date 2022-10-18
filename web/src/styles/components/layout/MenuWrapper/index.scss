@@ -26,7 +26,17 @@
                 width: 1.5em;
                 height: 1.5em;
             }
+
+            
         }
+        
+        @media (max-width : $breakpoint-laptop)  {
+            .side-card-container {
+                display: none;
+            }        
+        }
+
+        
      }
 
      @media (max-width: $breakpoint-laptop) {
