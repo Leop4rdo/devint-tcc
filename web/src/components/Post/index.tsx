@@ -9,23 +9,24 @@ import * as postService from "../../services/post.service"
 
 interface IPostProps {
     data: IPostListItem
+    openDetails: () => void
 
 }
 
-const Post: React.FC<IPostProps> = ({ data }) => {
+const Post: React.FC<IPostProps> = ({ data , openDetails}) => {
 
-    const navigate = useNavigate();
+   
 
     const [liked, setLiked] = useState(data.alreadyHearted)
 
     const giveLike = async () => {
-        const res = await postService.addHeart(data.id)
+       await postService.addHeart(data.id)
 
         setLiked(!liked)
     }
     
     return (
-        <div className="postcard" key={data.id}>
+        <div className="postcard" key={data.id} onClick={openDetails}>
             <div className="post-header">
                 <div className="user-info">
                     <img src={data.writter.profilePicUrl} />
@@ -44,13 +45,13 @@ const Post: React.FC<IPostProps> = ({ data }) => {
                         navigation
                         pagination={{ clickable: true }}
                     >
-                        {
-                            data.attachments.map((attachment) => (
-                                <SwiperSlide><img onClick={() => navigate(`posts/${data.id}`)} src={attachment} alt="" /></SwiperSlide>
-                            )
-                            )
-                        }
-
+                            {
+                                data.attachments.map((attachment) => (
+                                    <SwiperSlide><img src={attachment} alt="" /></SwiperSlide>
+                                )
+                                )
+                            }
+                        
                     </Swiper>
 
                 </div>
@@ -58,7 +59,7 @@ const Post: React.FC<IPostProps> = ({ data }) => {
             <div className="post-footer">
                 <div className="comments">
                     {data.comments}
-                    <span onClick={() => navigate(`posts/${data.id}`)}>comentários</span>
+                    <span onClick={openDetails}>comentários</span>
                 </div>
                 <div className="hearts">
                     {

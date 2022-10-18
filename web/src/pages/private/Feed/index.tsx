@@ -5,7 +5,6 @@ import * as postService from 'services/post.service'
 import {IPostListItem, IPost} from "interfaces/IPost";
 import POSTS_DATA from "../../../DATA/posts-get-response.json"
 import { Swiper, SwiperSlide } from "swiper/react";
-import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
 import SideCard from "components/shared/SideCard";
 
 import Button from "components/shared/Button";
@@ -13,9 +12,12 @@ import CreatePostModal from "components/Modals/CreatePostModal";
 
 import IDevMinimal from "interfaces/IDev";
 import * as devService from "../../../services/dev.service" 
+import ModalPost from "components/layout/Modals/ModalPost";
+import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
 
 const FeedPage: React.FC = () => {
     const [devs, setDevs] = useState<IDevMinimal[]>([])
+    const [selectedPostId, setSelectedPostId] = useState('')
     const [ writtingPost, setWrittingPost ] = useState(false)
     const [ posts, setPosts] = useState<IPostListItem[]>([])
 
@@ -34,8 +36,9 @@ const FeedPage: React.FC = () => {
 
     useEffect(() => { getPosts(); getDevs() }, []) 
 
-    
-    
+     
+
+
     return (
         <MenuWapper>
             <div className="feed" >
@@ -69,8 +72,10 @@ const FeedPage: React.FC = () => {
 
                         <div className="post-container">
                             {
-                                posts.map((post: IPostListItem) =>
-                                    <Post key={`${post.id}-${Math.random()*999}`} data={post} />
+                                posts.map((post: IPostListItem) => (
+                                    <Post key={`${post.id}-${Math.random()*999}`} data={post} openDetails={() => setSelectedPostId(post.id)} />
+                                )
+                                   
                                 )
                             }
                         </div>
@@ -97,6 +102,13 @@ const FeedPage: React.FC = () => {
                     </div>
                 </div>
             </div>
+
+
+            {
+                selectedPostId &&
+                <ModalPost postId={selectedPostId} onClick={() => setSelectedPostId('')} />
+            }
+
             {
                 writtingPost &&
                 <CreatePostModal onClose={() => setWrittingPost(false)}/>
