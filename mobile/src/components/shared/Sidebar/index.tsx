@@ -45,7 +45,7 @@ const Sidebar : React.FC<ISidebarProps> = ({ visible, onClose }) => {
                 <View style={styles.topItemContainer}>
                     <View style={styles.profileContainer}>
                         <Image style={styles.profileImage} source={{ uri : 'https://avatars.githubusercontent.com/u/51890537?v=4'}} />
-                        <Text style={styles.username}>Usuário</Text>
+                        <Text style={styles.username}>{authContext?.userData?.name}</Text>
                     </View>
 
                     <View style={styles.divisor}></View>
