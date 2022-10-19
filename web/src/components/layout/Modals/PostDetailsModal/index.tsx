@@ -30,8 +30,6 @@ const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick })
         <div className="modal-wrapper">
             <div className="container-modal-post">
                 <div className="modal-post">
-                    
-
                     <div className="container-itens">
                         <div className="user-info">
                             <div className="dice-user">
@@ -39,7 +37,10 @@ const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick })
                                 <h2>{post?.writter.name}</h2>
                             </div>
 
-                            <Button className="follow-button" children={[<Icon name="add" />, "Seguir"]} />
+                            <div className="dice-user">
+                                <Button className="follow-button" children={[<Icon name="add" />, "Seguir"]} />
+                                <Icon name="close" onClick={onClick} />
+                            </div>
                         </div>
 
                         <p className="content">{post?.content}</p>
@@ -69,12 +70,9 @@ const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick })
                         </div>
                     </div>
                     
-                    <div className="container-carousel">
-                    <Icon name="close" onClick={onClick} />
-                    
                     {
-                        post?.attachments.length &&
-                        
+                        post?.attachments != undefined && post?.attachments.length > 0 &&
+                        <div className="container-carousel">
                             <div className="carousel-image" >
 
                                 <Swiper modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -90,10 +88,8 @@ const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick })
                                     }
                                 </Swiper>
                             </div>
-                        
+                        </div>
                     }
-
-                </div>
                 </div>
             </div>
         </div>
