@@ -10,7 +10,7 @@ interface ICreateCommentProps {
 
 }
 
-const CreateComment: React.FC<ICreateCommentProps> = ({ data , icon , onClick }) => {
+const CreateComment: React.FC<ICreateCommentProps> = ({ icon , onClick }) => {
 
 
     return (

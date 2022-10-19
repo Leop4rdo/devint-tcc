@@ -1,4 +1,4 @@
-import { IPost, IPostListItem } from "interfaces/IPost"
+import { IPost } from "interfaces/IPost"
 import React, { useState, useEffect } from "react"
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper"
 import * as postService from 'services/post.service'
@@ -30,7 +30,7 @@ const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick })
         <div className="modal-wrapper">
             <div className="container-modal-post">
                 <div className="modal-post">
-                    <Icon name="close" onClick={onClick} />
+                    
 
                     <div className="container-itens">
                         <div className="user-info">
@@ -69,9 +69,12 @@ const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick })
                         </div>
                     </div>
                     
+                    <div className="container-carousel">
+                    <Icon name="close" onClick={onClick} />
+                    
                     {
                         post?.attachments.length &&
-                        <div className="container-carousel">
+                        
                             <div className="carousel-image" >
 
                                 <Swiper modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -87,8 +90,10 @@ const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick })
                                     }
                                 </Swiper>
                             </div>
-                        </div>
+                        
                     }
+
+                </div>
                 </div>
             </div>
         </div>
