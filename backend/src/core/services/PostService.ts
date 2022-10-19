@@ -22,19 +22,17 @@ export default class PostService {
         this._ = repo
     }
 
-    async getById(id: string): Promise<IResponse> {
+    async getById(id: string, devId : string): Promise<IResponse> {
         const post = await this._.findById(id)
 
         if (!post)
             return new BadRequestResponse({ message: errors.ENTITY_NOT_FOUND })
 
-        try {
-            const res = new PostOutput(post)
+        const res = new PostOutput(post, devId)
 
-            return new SuccessResponse({
-                data: res
-            })
-        } catch(err) { console.log(err)}
+        return new SuccessResponse({
+            data: res
+        })
     }
 
     async getByWritter(id: string): Promise<IResponse> {
@@ -43,7 +41,7 @@ export default class PostService {
         if (!posts)
             return new BadRequestResponse({ message: errors.ENTITY_NOT_FOUND })
 
-        const res = posts.map(post => new PostListOutput(post));
+        const res = posts.map(post => new PostListOutput(post, id));
 
         return new SuccessResponse({
             data: res
@@ -55,7 +53,8 @@ export default class PostService {
 
         const post = await this._.create(new Post({
             ...postInput,
-            writter: { id: owner }
+            writter: { id: owner },
+            order : Math.floor(Math.random() * 999999)
         } as unknown as IPostProps))
 
         if (!post)
@@ -64,29 +63,29 @@ export default class PostService {
             return new SuccessResponse({ status: 201, message: 'Post created successfully', data: { id: post.id, writter: post.writter, content: post.content, attachments: post.attachments } })
     }
 
-    async addHeart(postId: string, userId: string) {
+    async toggleHeart(postId: string, userId: string) {
         const post = await this._.findById(postId)
 
         if (!post)
             return new BadRequestResponse({ message: errors.ENTITY_NOT_FOUND })
 
         if (post.hearts.includes(userId))
-            return new SuccessResponse({ status: 200, message: 'You already gave a heart in this post' })
-
-        post.hearts.push(userId)
-
+            post.hearts.filter((id) => id != userId)
+        else 
+            post.hearts.push(userId)
+        
         await this._.update(post)
 
         return new SuccessResponse({
             status: 200,
-            data: new PostListOutput(post)
+            data: new PostListOutput(post, userId)
         })
     }
 
-    async list(filter ?: PaginateListInput) {
+    async list(userId : string, filter ?: PaginateListInput) {
         const posts = await this._.listByFilters(filter)
 
-        const mapped = posts.map(( post : Post ) => new PostListOutput(post))
+        const mapped = posts.map(( post : Post ) => new PostListOutput(post, userId))
 
         return new SuccessResponse({ data: mapped })
     }

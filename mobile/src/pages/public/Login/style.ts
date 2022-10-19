@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
         color : colors.PRIMARY,
         fontFamily: fonts.POPPINS_MEDIUM,
         textAlign: "center",
-        marginBottom: 24
+        marginBottom: 16
     },
 
     linkPasswordRecover : {

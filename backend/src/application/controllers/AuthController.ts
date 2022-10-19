@@ -33,7 +33,7 @@ export default class AuthController {
     login = (req: Request, res: Response) => {
         this.authService.login(new LoginInput(req.body))
             .then((response) => res.status(response.status || 200).json(response))
-            .catch((err) => { res.status(err.status || 500).json(err); console.log(err) })
+            .catch((err) => { res.status(err.status || 500).json(err);})
     }
 
     create = (req: Request, res: Response) => {

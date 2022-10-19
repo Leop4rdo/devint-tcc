@@ -1,12 +1,13 @@
 import CompanyRegistrationPage from "pages/public/Register/Company";
 import DevRegistrationPage from "pages/public/Register/Dev";
-import LoginPage from "pages/public/Login";
 import Register from "pages/public/Register";
 import React from "react"
 import { Route, Routes } from "react-router-dom"
 import ForgotMyPasswordPage from "../pages/public/ForgotMyPassword/ForgotMyPasswordPage"
 import ChangeMyPasswordPage from "pages/public/ChangeMyPassword";
 import EmailConfirmPage from "pages/public/EmailConfirm/EmailConfirmPage";
+
+import LoginPage from "pages/public/Login";
 
 
 const PublicRouter: React.FC = () => {
@@ -28,4 +29,3 @@ const PublicRouter: React.FC = () => {
 export default PublicRouter;
 
 
-/* <Route path="change-password" element={<ChangePasswordPage />} */

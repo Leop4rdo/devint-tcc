@@ -1,0 +1,151 @@
+.postcard{
+    background-color: $color-black;
+    width: clamp(30rem, 30vw, 50rem);
+    //height: clamp(30rem, 20vw, 50rem);
+    height: auto;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+
+    img{
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+    }
+
+    .user-info {
+        display: flex;
+        gap: 16px;
+    }
+
+    .post-header {
+        width: 90%;
+        margin-top: 1em;
+        display: flex;
+        justify-content: space-between;
+
+        h2 {
+            color: $color-white;
+        }
+    
+        button {
+            width: clamp(6em, 5vw, 2em);
+            background-color: $color-primary;
+            color: $color-white;
+            border: none;
+        }
+    }
+    
+    .comments {
+        display: flex;
+        align-items: center;
+        color: $color-white;
+
+        span {
+            margin-left: 8px;
+            cursor: pointer;
+        }
+    }
+
+    .post-footer {
+        width: 90%;
+        display: flex;
+        align-items: center;
+        margin-bottom: 1em;
+        justify-content: space-between;
+    }
+
+    .hearts {
+        display: flex;
+        align-items: center;
+        gap: .5em;
+        color: $color-white;
+
+        button{
+            width: fit-content;
+            height: auto;
+            border: none;
+            background-color: transparent; 
+
+            .icon{
+                color: $color-white;
+
+                &:hover, &#already-hearted {
+                    color: $color-primary;
+                }
+
+            }
+        }
+    }
+
+    .post-content {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        
+        p {
+            font-size: 1em;
+            color: $color-white;
+            overflow-wrap: break-word;
+        }
+    }
+
+    .post-images {
+        width: 100%;
+        height: auto;
+        position: relative;
+
+        img {
+            width: 100%;
+            border-radius: 0;
+            height: auto;
+        }
+    }
+
+    .swiper-slide {
+        img{
+            cursor: pointer;
+        }
+    }   
+    
+    .swiper-pagination-bullet{
+        width: 0.5em;
+        height: 0.5em;
+        background-color: $color-primary;
+    }
+
+    .swiper-button-next{
+        width: 0.5em;
+        height: 0.5em;
+        color: $color-primary;
+    }
+
+    .swiper-button-prev{
+        width: 0.5em;
+        height: 0.5em;
+        color: $color-primary;
+    }
+
+    .image-swiper {
+        background-color: chocolate;
+    }
+    
+}
+@media (max-width : $breakpoint-laptop)  {
+    .postcard {
+        width:100%;
+    }        
+}
+
+
+// <SwiperSlide className="image-swiper">
+// {
+//     data.attachments.map((attachment) => 
+//         <img src={attachment}/>
+//     )
+// }
+// </SwiperSlide>

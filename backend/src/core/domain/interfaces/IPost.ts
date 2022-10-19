@@ -7,6 +7,7 @@ export default interface IPostProps {
 	reports: JSON;
 	comments: ICommentProps[];
 	hearts: JSON;
+	order : number
 	attachments: JSON
 	writter: IDevProps;
 }

@@ -12,10 +12,10 @@ export default class PostOutput {
     attachments: JSON
     writter: DevMinimalOutput
 
-    constructor(props: IPostProps) {
+    constructor(props: IPostProps, devId) {
         this.id = props.id
         this.content = props.content
-        this.comments = props.comments.map((comment : Comment) => new CommentOutput(comment))
+        this.comments = props.comments.map((comment : Comment) => new CommentOutput(comment, devId))
         this.hearts = JSON.parse(JSON.stringify(props.hearts)).length
         this.reports = props.reports
         this.attachments = props.attachments

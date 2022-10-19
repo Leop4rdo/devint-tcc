@@ -22,7 +22,7 @@ export default class PostRepository extends AbstractRepository<PostEntity> {
         return await this.db.createQueryBuilder('posts')
             .innerJoinAndSelect('posts.writter', 'devs')
             .leftJoinAndSelect('posts.comments', 'comments')
-            .orderBy("RANDOM()")
+            .orderBy("posts.order")
             .limit(filters.limit)
             .offset(filters.offset)
             .getMany()

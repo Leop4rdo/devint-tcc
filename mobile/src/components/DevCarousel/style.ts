@@ -14,6 +14,8 @@ const styles = StyleSheet.create({
     },
 
     item : {
+        borderWidth: 2,
+        borderColor: colors.PRIMARY,
         marginHorizontal : 12,
         width : 56,
         height : 56,

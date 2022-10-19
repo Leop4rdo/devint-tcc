@@ -32,22 +32,23 @@ export default class CommentService {
         })
     }
 
-    async addHeart(commentId: string, userId: string) {
+    async toggleHeart(commentId: string, userId: string) {
         const comment = await this._.findById(commentId)
 
         if (!comment)
             return new BadRequestResponse({ message: errors.ENTITY_NOT_FOUND })
 
         if (comment.hearts.includes(userId))
-            return new SuccessResponse({ status: 200, message: 'You already gave a heart in this comment' })
-
-        comment.hearts.push(userId)
+            comment.hearts = comment.hearts.filter((sourceId) => sourceId != userId)
+        else {
+            comment.hearts.push(userId)
+        }
 
         await this._.update(comment)
 
         return new SuccessResponse({
             status: 200,
-            data: new CommentOutput(comment)
+            data: new CommentOutput(comment, userId)
         })
     }
 

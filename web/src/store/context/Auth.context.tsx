@@ -1,4 +1,4 @@
-import React, { createContext, ReactNode, useContext, useState } from "react";
+import React, { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import api from "../../services";
 import { auth } from "../../services/auth.service";
 
@@ -6,8 +6,9 @@ import { auth } from "../../services/auth.service";
 interface IAuthContextProps {
     signed : boolean;
     token ?: string;
-    userData ?: object | null
+    userData ?: any
     signIn : (email: string, password: string) => Promise<any>
+    signOut : () => void
 }
 
 export const AuthContext = createContext<IAuthContextProps | null>(null)
@@ -23,7 +24,21 @@ export const AuthProvider : React.FC<{ children : ReactNode }> = ({ children }) 
             userData : res.data?.user || null
         })
 
+        localStorage.setItem('devint-auth', res.data?.token)
+        localStorage.setItem('devint-login', JSON.stringify({ email, password }))
+
         return res
+    }
+
+    const handleSignOut = () => {
+        setAuthData({
+            signed : false,
+            token : "",
+            userData : null
+        })
+
+        localStorage.removeItem('devint-auth')
+        localStorage.removeItem('devint-login')
     }
 
     const [ authData, setAuthData ] = useState({
@@ -32,8 +47,18 @@ export const AuthProvider : React.FC<{ children : ReactNode }> = ({ children }) 
         userData : null,
     });
 
+    useEffect(() => {
+        const storedAuth = localStorage.getItem('devint-login')
+
+        if (!storedAuth) return
+
+        const parsedAuth = JSON.parse(storedAuth)
+
+        handleAuth(parsedAuth.email, parsedAuth.password)
+    }, [])
+
     return (
-        <AuthContext.Provider value={{...authData, signIn : handleAuth}}>
+        <AuthContext.Provider value={{...authData, signIn : handleAuth, signOut : handleSignOut}}>
             {children}
         </AuthContext.Provider>
     );

@@ -1,13 +1,15 @@
 
 import React, { useContext, useState } from "react";
 import { AuthContext } from "store/context/Auth.context";
-import { Link } from "react-router-dom"
+import { Link, Navigate, useNavigate } from "react-router-dom"
 import Input from "components/shared/Input";
-import LoginWrapper from "../../../components/LoginWrapper/index";
+import LoginWrapper from "../../../components/layout/LoginWrapper/index";
 
 
 
 const LoginPage: React.FC = () => {
+    
+    const navigate = useNavigate()
 
     const authContext = useContext(AuthContext);
 
@@ -28,6 +30,7 @@ const LoginPage: React.FC = () => {
         const res = await authContext?.signIn(formValues.email, formValues.password)
 
         if (res.hasError) alert("Usuário ou senha invalidos!")
+
     }
 
     return (
