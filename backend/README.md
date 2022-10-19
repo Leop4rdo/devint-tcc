@@ -48,7 +48,4 @@ renaming it to _.env_ and then run:
 
 <code>
     npm i
-    npm run dev
 </code>
-
-
