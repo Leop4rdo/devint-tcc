@@ -5,11 +5,8 @@
     display: flex;
     flex-direction: column;
     border-radius: 8px;
-    padding-right: 8px;
+    padding: 0.5em 1em;
     
-
-   
-
     span{
         text-align: end;
         color: $color-light-gray;
@@ -21,7 +18,6 @@
             color: $color-primary;
         }
     }
-   
 
     .container-user-dice {
         display: flex;
@@ -29,12 +25,6 @@
         height: auto;
         word-wrap:break-word;
         width: 100%;
-        
-        .users-faces-comment {
-            margin-left: 16px;
-        }
-
-       
 
         p {
             font-size: 16px;
@@ -54,6 +44,34 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
+        }
+    }
+
+    .post-footer {
+        display: flex;
+        flex-direction: row;
+
+        button {
+            background-color: transparent;
+            border: none;
+            width: fit-content;
+            height: auto;
+
+            .icon{
+                color: $color-white;
+
+                &:hover, &#already-hearted {
+                    color: $color-primary;
+                }
+
+            }
+        }
+
+        .likes {
+            display: flex;
+            flex-direction: row;
+            gap: 0.5em;
+            color: $color-white;
         }
     }
 }

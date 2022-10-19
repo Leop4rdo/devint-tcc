@@ -1,4 +1,4 @@
-import { IPost, IPostListItem } from "interfaces/IPost"
+import { IPost } from "interfaces/IPost"
 import React, { useState, useEffect } from "react"
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper"
 import * as postService from 'services/post.service'
@@ -30,7 +30,6 @@ const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick })
         <div className="modal-wrapper">
             <div className="container-modal-post">
                 <div className="modal-post">
-
                     <div className="container-itens">
                         <div className="user-info">
                             <div className="dice-user">
