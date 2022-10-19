@@ -1,4 +1,11 @@
 .postcard{
+
+    .horizontal-line{
+		width: 90%;
+		height: 0.15vh;
+		background-color: $color-light-gray;
+	} 
+
     background-color: $color-black;
     width: clamp(30rem, 30vw, 50rem);
     //height: clamp(30rem, 20vw, 50rem);

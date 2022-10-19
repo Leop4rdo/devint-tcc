@@ -64,6 +64,7 @@ const FeedPage: React.FC = () => {
                                         )}
                                 </Swiper>
                             </div>
+                            <div className="horizontal-line"></div>
                         </div>
 
                         <div className="post-container">

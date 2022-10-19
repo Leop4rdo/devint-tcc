@@ -55,8 +55,13 @@
     .swiper-button-next, .swiper-button-prev {
       top: 45%
     }
-
-        
+    .horizontal-line{
+      width: 100%;
+      margin-top: 0.35rem;
+      height: 0.15vh;
+      background-color: $color-light-gray;
+  
+    }    
   }
 
   @media (max-width : $breakpoint-laptop)  {
@@ -72,6 +77,8 @@
   .outstanding-users {
     width: 100%;
     display: flex;
+    
+    
     
     .swiper {
       width: 100%;

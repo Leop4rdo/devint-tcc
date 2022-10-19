@@ -56,6 +56,9 @@ const Post: React.FC<IPostProps> = ({ data , openDetails}) => {
 
                 </div>
             </div>
+
+            <div className="horizontal-line"></div>
+            
             <div className="post-footer">
                 <div className="comments">
                     {data.comments}
