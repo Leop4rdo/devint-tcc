@@ -11,33 +11,48 @@ const styles = StyleSheet.create({
     },
     profileContainer:{
         height:200,
-        backgroundColor: colors.DARK_GRAY
+        backgroundColor: colors.DARK_GRAY,
  
     },
     backgroundImage:{
         backgroundColor:colors.LIGHT_GRAY,
         width: '100%',
-        height:'55%',
+        height:100,
         position: "absolute"
     },
     
     photoUser:{
-        height: 90,
-        width: 100,
+        width: 80,
+        aspectRatio : 1,
         borderRadius : 48,
-        marginTop: 70,
-        marginLeft:20
+       
     },
     devName:{
         color:colors.WHITE
     },
     diceProfile:{
-        marginLeft:20
+        marginHorizontal:20
     },
     profileEdit:{
         display:'flex',
-        flexDirection:'row'
+        flexDirection:'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginTop : 64,
+        marginHorizontal: 20
     },
+    buttonEdit:{
+        backgroundColor: colors.PRIMARY,
+        width:140,
+        height:21,
+        flexDirection : 'row',
+        paddingHorizontal: 20,
+        borderRadius: 16
+    },
+    textButton:{
+        color: colors.WHITE,
+        marginLeft: 10
+    }
  
 })
 
