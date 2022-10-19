@@ -1,258 +1,197 @@
-.container-global{
 
-    .container-nav-bar {
+.modal-post {
+    padding: 24px;
+    background-color: $color-black;
+    display: flex;
+    border-radius: 24px;
+    gap: 48px;
 
-        header{
-            
-            position: static;
-            z-index: 0;
-        }
-    }
+    max-height: 60vh;
+    min-height: 30vh;
 
-    .main{
-       overflow: hidden;
-    }  
-
-}   
-  
-
-
-
-    .modal-post {
-        width:  100%;
-        height: clamp( 40rem , 48vw , 47rem);
-        background-color: $color-black;
+    .container-itens {
+        width: 100%;
+        word-wrap:break-word;
         display: flex;
-        border-radius: 16px;
-        
+        flex-direction: column;
+        gap: 48px;
 
+        .user-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
 
-        .container-itens {
-            width: 500px;
-            height: auto;
-            margin-top: 30px;
-            margin-left: 16px;
-            word-wrap:break-word;
-
-            .user-info {
+            .dice-user {
                 display: flex;
                 align-items: center;
-                margin-bottom: 20px;
-                justify-content: space-between;
+                gap: 16px;
 
-                .dice-user {
-                    display: flex;
-                    align-items: center;
-
-                    img {
-                        width: 50px;
-                        height: 50px;
-                        border-radius: 50%;
-                        margin-right: 16px;
-                    }
-
-                    h2 {
-
-                        color: $color-white;
-                        font-weight: $font-regular;
-
-                    }
+                img {
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;
                 }
 
+                h2 {
+                    color: $color-white;
+                    font-weight: $font-regular;
+                }
 
+                .icon {
+                    color: white;
+                }
+            }
+
+            button {
+                width: 120px;
+                background-color: $color-primary;
+                color: $color-white;
+                border: none;
+            }
+        }
+
+        .content {
+            color: $color-white;
+            font-size: 20px;
+            font-weight: $font-regular;
+        }
+
+        .post-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .comment-user {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+
+
+
+                img {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                }
+
+                
+                span {
+                    font-weight: $font-regular;
+                    color: $color-white;
+                    font-size: 16px;
+                }
+            }
+
+            .hearts {
+                display: flex;
+
+
+                p {
+                    
+                    color: $color-white;
+                    font-size: 16px;
+                    margin-right: 8px;
+                }
 
                 button {
-                    width: 120px;
-                    background-color: $color-primary;
-                    color: $color-white;
+                    width: fit-content;
+                    height: auto;
                     border: none;
-                   
-                    .icon{
-                        margin-top: -1px;
-                        
-                        
-                    }
-                    
-                }
-            }
+                    background-color: transparent;
 
-
-            .content {
-                color: $color-white;
-                font-size: 20px;
-                font-weight: $font-regular;
-                margin-left: 10px;
-
-            }
-
-
-
-            .post-footer {
-                margin-top: 24px;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-
-                .comment-user {
-                    display: flex;
-                    align-items: center;
-                    gap: 8px;
-
-
-
-                    img {
-                        width: 40px;
-                        height: 40px;
-                        border-radius: 50%;
-                        margin-right: -10px;
-
-                    }
-
-                   
-                    span {
-                        margin-left: 25px;
-                        font-weight: $font-regular;
+                    .icon {
                         color: $color-white;
-                        font-size: 16px;
-                    }
-                }
 
-                .hearts {
-                    display: flex;
-
-
-                    p {
-                        
-                        color: $color-white;
-                        font-size: 16px;
-                        margin-right: 8px;
-                    }
-
-                    button {
-                        width: fit-content;
-                        height: auto;
-                        border: none;
-                        background-color: transparent;
-
-                        .icon {
-                            color: $color-white;
-
-                            &:hover {
-                                color: $color-dark-red;
-                            }
+                        &:hover {
+                            color: $color-dark-red;
                         }
                     }
-
                 }
-            }
-
-            .container-comments {
-                margin-top: 32px;
-                overflow: auto;
-                height: 500px;
-
-                &::-webkit-scrollbar {
-                    background-color: transparent;
-                    width: 8px;
-
-                }
-
-                &::-webkit-scrollbar-thumb {
-                    background-color: $color-light-gray;
-                    border-radius: 8px;
-
-
-                }
-                
 
             }
-
         }
 
-        
-
-        .container-carousel {
+        .container-comments {
+            overflow-y: auto;
             width: 100%;
             height: 100%;
-            display: flex;
-            justify-content: center;
-           
-            .icon {
-                order: 2;
-                color: $color-white;
-                font-size: 40px;
-                height: 40px;
-                order: 2;
-                margin: 20px;
-               
-                cursor: pointer;
-                transition: 0.8s;
-    
-                &:hover{
-                    color: $color-primary;
-                    transform: scale(1.1);
-                }
-    
+
+            &::-webkit-scrollbar {
+                background-color: transparent;
+                width: 8px;
+
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background-color: $color-light-gray;
+                border-radius: 8px;
+
+
             }
             
 
-            
-
-            .carousel-image {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                margin-left: 60px;
-                
-                
-
-                .swiper {
-                    width: clamp( 23rem ,34vw , 34rem);
-                    height: clamp( 28rem , 38vw, 37.2rem);
-                    
-                   
-                }
-    
-                .swiper-slide {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    width: 500px;
-                    height: 500px;
-                    border-radius: 8px;
-                    overflow: hidden;
-                    
-                    
-                    img {
-                        width: 100%;
-                        height: auto;
-                        object-fit: cover;
-                        border-radius: 8px;
-                    }
-    
-                }
-    
-                .swiper-pagination-bullet {
-                    width: 12px;
-                    height: 12px;
-                    background-color: $color-primary;
-                }
-    
-                .swiper-button-prev , .swiper-button-next{
-                    display: flex;
-                     color: $color-white;
-                    margin-top: -4rem;
-                     font-size: 24px;
-                     font-weight: $font-bold;
-                }
-    
-               
-
-
-            }
         }
 
-    
-
     }
+
+    .container-carousel {
+        height: 100%;
+        aspect-ratio: 1/1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        .icon {
+            order: 2;
+            color: $color-white;
+            font-size: 40px;
+            height: 40px;
+            order: 2;
+            
+            cursor: pointer;
+            transition: 0.8s;
+
+            &:hover{
+                color: $color-primary;
+                transform: scale(1.1);
+            }
+
+        }
+
+        .carousel-image {
+            .swiper {
+                width: 500px;
+                height: 500px;
+            }
+
+            .swiper-slide {
+                width: 500px;
+                height: 500px;
+                border-radius: 8px;
+                overflow: hidden;
+                
+                img {
+                    width: 100%;
+                    height: auto;
+                    object-fit: cover;
+                    border-radius: 8px;
+                }
+            }
+
+            .swiper-pagination-bullet {
+                width: 12px;
+                height: 12px;
+                background-color: $color-primary;
+            }
+
+            .swiper-button-prev , .swiper-button-next{
+                display: flex;
+                    color: $color-white;
+                margin-top: -4rem;
+                    font-size: 24px;
+                    font-weight: $font-bold;
+            }
+        }
+    }
+}
 
