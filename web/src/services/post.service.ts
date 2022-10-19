@@ -67,4 +67,18 @@ export const findById = async (id : string) => {
     }
 }
 
+export const addHeartToComment = async (commentId : string) => {
+    try {
+        const { data } = await api.patch(
+            `/comments/${commentId}/toggle-heart`,
+            {},
+            { headers: { Authorization: `Baerer ${ await getToken()}` } }
+        )
+
+        return data as IResponse
+    } catch (err : any) {
+        console.log(err)
+        return err.response?.data as IResponse 
+    }
+}
 
