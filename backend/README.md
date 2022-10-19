@@ -1,5 +1,19 @@
 # <DevInt_ API
 
+## Entities
+[x] Article
+[x] Company
+[x] Dev
+[x] Auth
+[x] SeniorityLevel
+[x] Skill
+[x] CareerFocus
+[x] Comment
+[x] Post
+[x] Project
+[x] PasswordResetToken
+[x] SocialLink
+
 ## Installation Guide
 
 ### 0 - pre-requisites
