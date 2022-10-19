@@ -8,12 +8,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SideCard from "components/shared/SideCard";
 
 import Button from "components/shared/Button";
-import CreatePostModal from "components/Modals/CreatePostModal";
+import CreatePostModal from "components/layout/Modals/CreatePostModal";
 
 import IDevMinimal from "interfaces/IDev";
 import * as devService from "../../../services/dev.service" 
-import ModalPost from "components/layout/Modals/ModalPost";
 import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
+import PostDetailsModal from "components/layout/Modals/PostDetailsModal";
 
 const FeedPage: React.FC = () => {
     const [devs, setDevs] = useState<IDevMinimal[]>([])
@@ -58,23 +58,18 @@ const FeedPage: React.FC = () => {
                                     slidesPerView={10}
                                     navigation
                                     slidesPerGroup={10}>
-                                
                                         {
                                             devs?.map((dev: IDevMinimal) => 
                                             <SwiperSlide key={`${dev.id}-${Math.random()*999}`} ><img src={dev.profilePicUrl} /></SwiperSlide>
                                         )}
-                                
                                 </Swiper>
-
                             </div>
                         </div>
 
                         <div className="post-container">
                             {
-                                posts.map((post: IPostListItem) => (
+                                posts.map((post: IPostListItem) => 
                                     <Post key={`${post.id}-${Math.random()*999}`} data={post} openDetails={() => setSelectedPostId(post.id)} />
-                                )
-                                   
                                 )
                             }
                         </div>
@@ -105,7 +100,7 @@ const FeedPage: React.FC = () => {
 
             {
                 selectedPostId &&
-                <ModalPost postId={selectedPostId} onClick={() => setSelectedPostId('')} />
+                <PostDetailsModal postId={selectedPostId} onClick={() => setSelectedPostId('')} />
             }
 
             {
