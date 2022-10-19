@@ -1,6 +1,9 @@
 import React from 'react'
 import CreateComment from "components/shared/CreateComment";
 import {useState} from 'react';
+import Icon from '../Icon';
+import Button from '../Button';
+import * as postService from "../../../services/post.service"
 
 
 interface ICommentProps {
@@ -27,6 +30,14 @@ const Comment: React.FC<ICommentProps> = ({ data }) => {
         
     ]
 
+    const [liked, setLiked] = useState(data.alreadyHearted)
+
+    const giveLike = async () => {
+       await postService.addHeartToComment(data.id)
+
+        setLiked(!liked)
+    }
+
 
     return (
         <div>
@@ -36,7 +47,17 @@ const Comment: React.FC<ICommentProps> = ({ data }) => {
                     <span>{data.writter.name}</span>
                     <p className="text-comment">{data.content}</p>
                 </div>
-                <span onClick={Replycomment}>Responder</span>
+                <div className='post-footer'>
+                    <span onClick={Replycomment}>Responder</span>
+                    <div className='likes'>
+                        {
+                            (liked && !data.alreadyHearted) ? data.hearts + 1 : (!liked && data.alreadyHearted) ? data.hearts - 1 : data.hearts
+                        }
+                        <Button onClick={giveLike}>
+                                <Icon name="favorite" id={`${liked ? 'already-hearted' : ''}`} />
+                        </Button>
+                    </div>
+                </div>
             </div>
 
             <div className='container-answer-comment'>
