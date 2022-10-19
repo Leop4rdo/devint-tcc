@@ -2,6 +2,11 @@
 
 ## Installation Guide
 
+### 0 - pre-requisites
+- install docker
+- install node
+- install npm
+
 ### 1 - Setup database
 from repository root folder go to _docker/database_ and run:
 
