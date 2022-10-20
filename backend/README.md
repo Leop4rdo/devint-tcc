@@ -25,13 +25,13 @@
 from repository root folder go to _docker/database_ and run:
 
 <code>
-    docker compose up
+    docker compose up -d
 </code>
 
 Or
 
 <code>
-    docker-compose up
+    docker-compose up -d
 </code>
 
 and then run the following commands
