@@ -25,21 +25,19 @@
 from repository root folder go to _docker/database_ and run:
 
 <code>
-    docker compose up
+    docker compose up -d
 </code>
 
 Or
 
 <code>
-    docker-compose up
+    docker-compose up -d
 </code>
 
 and then run the following commands
 
-<code>
-    docker exec -it pgdb psql 
-    CREATE DATABASE devint_db
-</code>
+<code>docker exec -it database-pgdb-1 psql</code></br>
+<code>CREATE DATABASE devint_db</code>
 
 ### 2 - Setup .env
 
