@@ -36,7 +36,7 @@ Or
 
 and then run the following commands
 
-<code>docker exec -it database-pgdb-1 psql</code>
+<code>docker exec -it database-pgdb-1 psql</code></br>
 <code>CREATE DATABASE devint_db</code>
 
 ### 2 - Setup .env
