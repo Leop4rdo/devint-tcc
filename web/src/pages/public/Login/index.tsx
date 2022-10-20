@@ -29,7 +29,7 @@ const LoginPage: React.FC = () => {
     const login = async () => {
         const res = await authContext?.signIn(formValues.email, formValues.password)
 
-        if (res.hasError) alert("Usuário ou senha invalidos!")
+        if (res.hasError === true) alert("Usuário ou senha invalidos!")
 
     }
 
