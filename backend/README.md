@@ -37,7 +37,7 @@ Or
 and then run the following commands
 
 <code>
-    docker exec -it pgdb psql 
+    docker exec -it database-pgdb-1 psql 
     CREATE DATABASE devint_db
 </code>
 
