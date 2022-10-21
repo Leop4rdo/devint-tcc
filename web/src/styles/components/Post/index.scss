@@ -93,8 +93,11 @@
         flex-direction: column;
         cursor: pointer;
         gap: 1em;
+        width: 90%;
+        
         
         p {
+            
             font-size: 1em;
             color: $color-white;
             overflow-wrap: break-word;
@@ -102,11 +105,12 @@
 
         .post-images {
             
-    
+           
             
             .swiper {
-                width: 500px;
-                height: 500px;
+               
+                width: 100%;
+                height: 100%;
                 height: auto;
                 display: flex;
                 align-items: center;
