@@ -35,8 +35,8 @@ const Post: React.FC<IPostProps> = ({ data , openDetails}) => {
                 <Button className="follow-button" children={[<Icon name="add" />, "Seguir"]} />
             </div>
 
-            <div className="post-content" onClick={openDetails}>
-                <p>{data.content}</p>
+            <div className="post-content" >
+                <p onClick={openDetails}>{data.content}</p>
                 <div className="post-images">
                     <Swiper
                         modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -44,6 +44,7 @@ const Post: React.FC<IPostProps> = ({ data , openDetails}) => {
                         slidesPerView={1}
                         navigation
                         pagination={{ clickable: true }}
+                        onClick={openDetails}
                     >
                             {
                                 data.attachments.map((attachment) => (
@@ -60,11 +61,11 @@ const Post: React.FC<IPostProps> = ({ data , openDetails}) => {
             <div className="horizontal-line"></div>
             
             <div className="post-footer">
-                <div className="comments">
+                <div className="comments" onClick={() => openDetails()}>
                     {data.comments}
                     <span >Comentários</span>
                 </div>
-                <div className="hearts" onClick={() => openDetails()}>
+                <div className="hearts" >
                     {
                         (liked && !data.alreadyHearted) ? data.hearts + 1 : (!liked && data.alreadyHearted) ? data.hearts - 1 : data.hearts
                     }
