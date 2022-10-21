@@ -65,7 +65,7 @@ const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick })
                         <div className="post-footer">
                             <div className="comment-user">
 
-                                <span>{post?.comments.length} Comentarios</span>
+                                <span>{post?.commentAmount} Comentarios</span>
                             </div>
 
                             <div className="hearts">
