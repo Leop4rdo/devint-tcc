@@ -20,7 +20,11 @@ const Sidebar: React.FC<ISidebarProps> = ({open}) => {
                     <img src={authContext?.userData?.profilePicUrl} alt="User profile picture" />
                     </div>
                     <h2>{authContext?.userData?.name}</h2>
+                    
                 </div>
+
+                <div className="horizontal-line">
+                    </div>
 
                 <div className="container-itens">
                     <nav className="container-nav">
