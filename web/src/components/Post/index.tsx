@@ -28,7 +28,7 @@ const Post: React.FC<IPostProps> = ({ data, openDetails }) => {
     return (
         <div className="postcard" key={data.id} >
             <div className="post-header">
-                <div className="user-info">
+                <div className="user-info" >
                     <img src={data.writter.profilePicUrl} />
                     <h2>{data.writter.name}</h2>
                 </div>
@@ -36,7 +36,7 @@ const Post: React.FC<IPostProps> = ({ data, openDetails }) => {
             </div>
 
             <div className="post-content" >
-                <p>{data.content}</p>
+                <p onClick={() => openDetails()}>{data.content}</p>
                 <div className="post-images">
                     <Swiper
                         modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -56,6 +56,9 @@ const Post: React.FC<IPostProps> = ({ data, openDetails }) => {
 
                 </div>
             </div>
+
+            <div className="horizontal-line"></div>
+            
             <div className="post-footer">
                 <div className="comments" onClick={() => openDetails()}>
                     <Icon name="forum" />

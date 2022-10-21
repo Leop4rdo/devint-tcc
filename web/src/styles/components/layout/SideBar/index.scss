@@ -10,7 +10,7 @@
 	flex-direction: column;
 	align-items: center;
 
-	gap: 48px;
+	gap: 24.5px;
 	background-color: $color-black;
 	z-index: 3;
 
@@ -42,6 +42,12 @@
 		}
 	}
 
+	
+	.horizontal-line{
+		width: 76%;
+		height: 0.20vh;
+		background-color: $color-gray;
+	}
 	.container-itens {
 		display: flex;
 		flex-direction: column;

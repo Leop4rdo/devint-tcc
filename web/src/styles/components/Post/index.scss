@@ -1,4 +1,11 @@
 .postcard{
+
+    .horizontal-line{
+		width: 90%;
+		height: 0.15vh;
+		background-color: $color-gray;
+	} 
+
     background-color: $color-black;
     width: clamp(30rem, 30vw, 50rem);
     //height: clamp(30rem, 20vw, 50rem);
@@ -99,20 +106,25 @@
         flex-direction: column;
        
         gap: 1em;
+        width: 90%;
+        
         
         p {
+            
             font-size: 1em;
             color: $color-white;
             overflow-wrap: break-word;
+            cursor: pointer;
         }
 
         .post-images {
             
-    
+           
             
             .swiper {
-                width: 500px;
-                height: 500px;
+               
+                width: 100%;
+                height: 100%;
                 height: auto;
                 display: flex;
                 align-items: center;

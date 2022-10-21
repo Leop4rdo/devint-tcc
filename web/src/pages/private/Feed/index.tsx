@@ -52,18 +52,19 @@ const FeedPage: React.FC = () => {
                         <div className="outstanding-container">
                             <h2>Devs em destaque</h2>
                             <div className="outstanding-users">
-                                <Swiper
+                                <Swiper 
                                     modules={[Navigation, Pagination, Scrollbar, A11y]}
                                     spaceBetween={50}
                                     slidesPerView={10}
                                     navigation
                                     slidesPerGroup={10}>
                                         {
-                                            devs?.map((dev) =>
-                                            <SwiperSlide><img src={dev.profilePicUrl} /></SwiperSlide>
+                                            devs?.map((dev: IDevMinimal) => 
+                                            <SwiperSlide key={`${dev.id}-${Math.random()*999}`} ><img src={dev.profilePicUrl} /></SwiperSlide>
                                         )}
                                 </Swiper>
                             </div>
+                            <div className="horizontal-line"></div>
                         </div>
 
                         <div className="post-container">
