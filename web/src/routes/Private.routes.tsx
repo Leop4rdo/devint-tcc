@@ -8,7 +8,6 @@ const PrivateRouter: React.FC = () => {
     return (
         <Routes>
             <Route index element={<FeedPage />}/>
-            
         </Routes>
     );
 }
