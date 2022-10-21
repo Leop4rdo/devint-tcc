@@ -119,17 +119,38 @@
             &::-webkit-scrollbar {
                 background-color: transparent;
                 width: 8px;
-
             }
 
             &::-webkit-scrollbar-thumb {
                 background-color: $color-light-gray;
                 border-radius: 8px;
-
-
             }
             
+            .new-comment-container {
+                display: flex;
+                gap: 16px;
 
+                img {
+                    width: clamp(32px, 10vw, 56px);
+                    aspect-ratio: 1;
+                    border-radius: 100%;
+                }
+
+                textarea {
+                    width: 100%;
+                    height: fit-content;
+                    padding: 16px;
+
+                    resize: none;
+                    padding-bottom: 0;
+                    background-color: $color-dark-gray;
+
+                    outline: none;
+                    
+                    border : 2px solid $color-gray;
+                    border-radius: 16px;
+                }
+            }
         }
 
     }

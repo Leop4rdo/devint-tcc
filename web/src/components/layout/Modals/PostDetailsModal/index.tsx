@@ -1,21 +1,21 @@
 import { IPost } from "interfaces/IPost"
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper"
 import * as postService from 'services/post.service'
 import { SwiperSlide, Swiper } from "swiper/react"
 import Button from "components/shared/Button"
-import CreateComment from "components/shared/CreateComment"
 import Icon from "components/shared/Icon"
 import Comment from "components/shared/Comment"
-
-
-
+import { AuthContext } from "store/context/Auth.context"
+import Input from "components/shared/Input"
+import AutoTextArea from "components/shared/TextArea"
 interface IPostDetailsModalProps {
     postId: string
     onClick: any
 }
 
 const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick }) => {
+    const authContext = useContext(AuthContext)
 
     const [post, setPost] = useState<IPost | null>(null)
 
@@ -60,7 +60,11 @@ const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick })
                         </div>
 
                         <div className="container-comments">
-                            <CreateComment />
+                            <div className="new-comment-container">
+                                <img src={authContext?.userData.profilePicUrl} />
+                                <textarea />
+                            </div>
+                            
                             {
                                 post?.comments.map((comment?) => (
                                     <Comment data={comment} />
