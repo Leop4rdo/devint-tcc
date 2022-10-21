@@ -1,13 +1,14 @@
+import IDevMinimal from "./IDev"
+
 export default interface IComment {
     id: string
     content: string
-    writter: IWritter
+    writter: IDevMinimal
+    hearts : number
+    answers : {
+        content : string
+        writter : IDevMinimal
+    }[]
+    alreadyHearted : boolean
 }
 
-
-interface IWritter {
-    id : string
-    name : string
-    profilePicUrl : string
-    githubUsername ?: string
-}
