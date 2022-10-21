@@ -6,6 +6,7 @@ import {IPostListItem, IPost} from "interfaces/IPost";
 import POSTS_DATA from "../../../DATA/posts-get-response.json"
 import { Swiper, SwiperSlide } from "swiper/react";
 import SideCard from "components/shared/SideCard";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 import Button from "components/shared/Button";
 import CreatePostModal from "components/layout/Modals/CreatePostModal";
@@ -36,9 +37,6 @@ const FeedPage: React.FC = () => {
 
     useEffect(() => { getPosts(); getDevs() }, []) 
 
-     
-
-
     return (
         <MenuWapper>
             <div className="feed" >
@@ -67,11 +65,23 @@ const FeedPage: React.FC = () => {
                         </div>
 
                         <div className="post-container">
-                            {
-                                posts.map((post: IPostListItem) => 
-                                    <Post key={`${post.id}-${Math.random()*999}`} data={post} openDetails={() => setSelectedPostId(post.id)} />
-                                )
-                            }
+                            <InfiniteScroll
+                                dataLength={posts.length}
+                                next={getPosts}
+                                hasMore={true}
+                                loader={<h4>Loading...</h4>}
+                                endMessage={
+                                    <p style={{ textAlign: 'center' }}>
+                                      <b>Yay! You have seen it all</b>
+                                    </p>
+                                  }
+                                >
+                                {
+                                    posts.map((post: IPostListItem) => 
+                                        <Post key={`${post.id}-${Math.random()*999}`} data={post} openDetails={() => setSelectedPostId(post.id)} />
+                                    )
+                                }
+                            </InfiniteScroll>
                         </div>
                     </div>
 
