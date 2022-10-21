@@ -12,9 +12,10 @@ import AutoTextArea from "components/shared/TextArea"
 interface IPostDetailsModalProps {
     postId: string
     onClick: any
+   
 }
 
-const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick }) => {
+const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick  }) => {
     const authContext = useContext(AuthContext)
 
     const [post, setPost] = useState<IPost | null>(null)
@@ -71,7 +72,7 @@ const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick })
                         <div className="post-footer">
                             <div className="comment-user">
 
-                                <span>{post?.comments.length} Comentarios</span>
+                                <span>{post?.commentAmount} Comentarios</span>
                             </div>
 
                             <div className="hearts">

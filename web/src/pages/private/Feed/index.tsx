@@ -103,7 +103,7 @@ const FeedPage: React.FC = () => {
 
             {
                 selectedPostId &&
-                <PostDetailsModal postId={selectedPostId} onClick={() => setSelectedPostId('')} />
+                <PostDetailsModal  postId={selectedPostId} onClick={() => setSelectedPostId('')} />
             }
 
             {
