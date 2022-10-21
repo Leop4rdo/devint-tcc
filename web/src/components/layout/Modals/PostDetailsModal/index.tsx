@@ -87,7 +87,7 @@ const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick })
                             
                             {
                                 post?.comments.sort((a, b) => a.hearts > b.hearts ? 1 : -1).map((comment?) => (
-                                    <Comment refresh={getPost} data={comment} />
+                                    <Comment refresh={getPost} data={comment} key={postId} />
                                 ))
 
                             }
@@ -106,8 +106,8 @@ const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick })
                                     pagination={{ clickable: true }}
                                 >
                                     {
-                                        post?.attachments.map((attachment) => 
-                                            <SwiperSlide><img src={attachment} alt="" /></SwiperSlide>
+                                        post?.attachments.map((attachment, index) => 
+                                            <SwiperSlide><img src={attachment} alt="" key={`${index}`} /></SwiperSlide>
                                         )
                                     }
                                 </Swiper>

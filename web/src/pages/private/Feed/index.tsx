@@ -60,7 +60,7 @@ const FeedPage: React.FC = () => {
                                     slidesPerGroup={10}>
                                         {
                                             devs?.map((dev: IDevMinimal) => 
-                                            <SwiperSlide key={`${dev.id}-${Math.random()*999}`} ><img src={dev.profilePicUrl} /></SwiperSlide>
+                                            <SwiperSlide key={`${dev.id}-${Math.random()*999}`} ><img src={dev.profilePicUrl} alt=""/></SwiperSlide>
                                         )}
                                 </Swiper>
                             </div>
