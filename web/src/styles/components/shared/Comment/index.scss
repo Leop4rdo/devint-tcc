@@ -1,112 +1,99 @@
-.comment {
-    margin-top: 16px;
-    background-color: $color-dark-gray;
-    height: auto;
+.comment-container {
     display: flex;
     flex-direction: column;
-    border-radius: 8px;
-    padding: 0.5em 1em;
-    
-    span{
-        text-align: end;
-        color: $color-light-gray;
-        cursor: pointer;
-        transition: 0.4s;
-        font-weight: $font-regular;
+    gap: 16px;
 
-        &:hover{
-            color: $color-primary;
-        }
-    }
-
-    .container-user-dice {
-        display: flex;
-        margin-top: 8px;
-        height: auto;
-        word-wrap:break-word;
+    .comment {
         width: 100%;
-
-        p {
-            font-size: 16px;
-            height: auto;
-        }
-
-        span {
-
-            font-size: 16px;
-            font-weight: $font-medium;
-            color: $color-primary;
-            margin-left: 10px;
-            margin-right: 10px;
-        }
-
-        img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-        }
-    }
-
-    
-
-    .comment-footer {
+        
         display: flex;
         flex-direction: row;
-
-        button {
-            background-color: transparent;
-            border: none;
-            width: fit-content;
-            height: auto;
-
-            .icon{
-                color: $color-white;
-
-                &:hover, &#already-hearted {
-                    color: $color-primary;
-                }
-
-            }
+        gap: 16px;
+    
+        .profile-pic img{
+            width: clamp(48px, 2vw, 64px);
+            aspect-ratio: 1;
+    
+            border-radius:  100%;
         }
-
-        .likes {
+    
+        .content-container {
+            width: 100%;
+            padding: 12px;
+    
             display: flex;
-            flex-direction: row;
-            gap: 0.5em;
-            color: $color-white;
+            flex-direction: column;
+            gap: 8px;
+    
+            background-color: $color-dark-gray;
+    
+            border-radius: 16px;
+    
+            .username {
+                color: $color-primary;
+                font-weight: $font-semibold;
+                font-size: clamp(.75rem, 4vw, 1rem);
+            }
+    
+            .text-content {
+                font-size: clamp(.75rem, 4vw, 1rem);
+                color: white;
+            }
+    
+            .comment-footer {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+    
+                #answer {
+                    font-size: clamp(.6rem, 4vw, .8rem);
+                    color: $color-light-gray;
+    
+                    cursor: pointer;
+    
+                    transition: color .25s ease-out;
+    
+                    &:hover {
+                        color: $color-primary;
+                    }
+                }
+    
+                .likes {
+                    display: flex;
+                    flex-direction: row;
+                    gap: 0.5em;
+                    color: $color-white;
+    
+                    button {
+                        background-color: transparent;
+                        border: none;
+                        width: fit-content;
+                        height: auto;
+            
+                        .icon{
+                            color: $color-white;
+                            transition: color .25s ease-out;
+            
+                            &:hover, &#already-hearted {
+                                color: $color-primary;
+                            }
+            
+                        }
+                    }
+                }
+            }
         }
     }
-}
 
+    .answer, .new-comment-container {
+        padding-left: 48px;
 
-.container-answer-comment{
-    .container-create-comment {
-       width: 380px;
-       
-        .create-comment{
-            img {
-                width: 30px;
-                height: 30px;
-                border-radius: 50%;
-            }
-
-            span {
-                font-size: 14px;
-            }
-
-            textarea {
-               font-size: 14px;
-               width: 230px;
+        img {
+            width: clamp(48px, 2vw, 64px);
+            aspect-ratio: 1;
     
-            }
+            border-radius:  100%;
         }
-
-
-       
-    
     }
-    
+
 }
-
-
-

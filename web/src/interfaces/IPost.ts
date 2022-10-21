@@ -1,13 +1,12 @@
+import IComment from "./IComment"
 import IDevMinimal from "./IDev"
 
 export interface IPost {
     id : string
     content : string
     reports : any[]
-    comments : {
-        content : string,
-        writter : IDevMinimal
-    }[]
+    comments : IComment[]
+    commentAmount : number
     hearts : number
     attachments : string[]
     writter : IDevMinimal
@@ -20,7 +19,6 @@ export interface IPost {
 //     profilePicUrl : string
 //     githubUsername ?: string
 // }
-
 export interface IPostListItem {
     id : string
     content : string
