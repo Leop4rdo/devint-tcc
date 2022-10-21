@@ -7,7 +7,7 @@ export default class CommentOutput {
     hearts : number
     answers : JSON
     writter : DevMinimalOutput
-    alreadyHearted
+    alreadyHearted : boolean
 
     constructor(props : ICommentProps, devId) {
         this.id = props.id
