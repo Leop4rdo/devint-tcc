@@ -6,15 +6,15 @@
     flex-direction: column;
     border-radius: 8px;
     padding: 0.5em 1em;
-    
-    span{
+
+    span {
         text-align: end;
         color: $color-light-gray;
         cursor: pointer;
         transition: 0.4s;
         font-weight: $font-regular;
 
-        &:hover{
+        &:hover {
             color: $color-primary;
         }
     }
@@ -23,7 +23,7 @@
         display: flex;
         margin-top: 8px;
         height: auto;
-        word-wrap:break-word;
+        word-wrap: break-word;
         width: 100%;
 
         p {
@@ -47,9 +47,10 @@
         }
     }
 
-    .post-footer {
+    .post-footer-comment {
         display: flex;
-        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
 
         button {
             background-color: transparent;
@@ -57,10 +58,11 @@
             width: fit-content;
             height: auto;
 
-            .icon{
+            .icon {
                 color: $color-white;
 
-                &:hover, &#already-hearted {
+                &:hover,
+                &#already-hearted {
                     color: $color-primary;
                 }
 
@@ -77,11 +79,11 @@
 }
 
 
-.container-answer-comment{
+.container-answer-comment {
     .container-create-comment {
-       width: 380px;
-       
-        .create-comment{
+        width: 380px;
+
+        .create-comment {
             img {
                 width: 30px;
                 height: 30px;
@@ -93,18 +95,15 @@
             }
 
             textarea {
-               font-size: 14px;
-               width: 230px;
-    
+                font-size: 14px;
+                width: 230px;
+
             }
         }
 
 
-       
-    
+
+
     }
-    
+
 }
-
-
-

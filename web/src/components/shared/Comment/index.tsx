@@ -47,7 +47,7 @@ const Comment: React.FC<ICommentProps> = ({ data }) => {
                     <span>{data.writter.name}</span>
                     <p className="text-comment">{data.content}</p>
                 </div>
-                <div className='post-footer'>
+                <div className='post-footer-comment'>
                     <span onClick={Replycomment}>Responder</span>
                     <div className='likes'>
                         {

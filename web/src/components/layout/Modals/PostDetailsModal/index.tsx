@@ -39,7 +39,10 @@ const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick })
 
                             <div className="dice-user">
                                 <Button className="follow-button" children={[<Icon name="add" />, "Seguir"]} />
-                                <Icon name="close" onClick={onClick} />
+                                {post?.attachments === undefined || post?.attachments.length === 0 &&
+                                    <Icon className="icon-close" name="close" onClick={onClick} />
+                                }
+                                
                             </div>
                         </div>
 
@@ -73,6 +76,7 @@ const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick })
                     {
                         post?.attachments != undefined && post?.attachments.length > 0 &&
                         <div className="container-carousel">
+                            <Icon className="icon-close" name="close" onClick={onClick} />
                             <div className="carousel-image" >
 
                                 <Swiper modules={[Navigation, Pagination, Scrollbar, A11y]}
