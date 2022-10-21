@@ -6,6 +6,7 @@ export interface IPost {
     content : string
     reports : any[]
     comments : IComment[]
+    commentAmount : number
     hearts : number
     attachments : string[]
     writter : IDevMinimal
