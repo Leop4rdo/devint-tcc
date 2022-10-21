@@ -59,9 +59,9 @@ const Post: React.FC<IPostProps> = ({ data , openDetails}) => {
             <div className="post-footer">
                 <div className="comments">
                     {data.comments}
-                    <span onClick={openDetails}>comentários</span>
+                    <span >Comentários</span>
                 </div>
-                <div className="hearts">
+                <div className="hearts" onClick={() => openDetails()}>
                     {
                         (liked && !data.alreadyHearted) ? data.hearts + 1 : (!liked && data.alreadyHearted) ? data.hearts - 1 : data.hearts
                     }

@@ -82,9 +82,9 @@
     }
 
     .post-content {
-        width: 80%;
         display: flex;
         flex-direction: column;
+        cursor: pointer;
         gap: 1em;
         
         p {
@@ -92,47 +92,61 @@
             color: $color-white;
             overflow-wrap: break-word;
         }
-    }
 
-    .post-images {
-        width: 100%;
-        height: auto;
-        position: relative;
-
-        img {
-            width: 100%;
-            border-radius: 0;
-            height: auto;
-        }
-    }
-
-    .swiper-slide {
-        img{
-            cursor: pointer;
-        }
-    }   
+        .post-images {
+            
     
-    .swiper-pagination-bullet{
-        width: 0.5em;
-        height: 0.5em;
-        background-color: $color-primary;
+            
+            .swiper {
+                width: 500px;
+                height: 500px;
+                height: auto;
+                display: flex;
+                align-items: center;
+                
+               
+            }
+            .swiper-slide {
+                width: 100%;
+                height: 500px;
+                
+                border-radius: 8px;
+                overflow: hidden;
+                
+                
+                
+                
+                
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                    border-radius: 8px;
+                }
+            }
+        
+            .swiper-pagination-bullet {
+                width: 12px;
+                height: 12px;
+                background-color: $color-primary;
+            }
+        
+            .swiper-button-prev , .swiper-button-next{
+                display: flex;
+                color: $color-white;
+                font-size: 24px;
+                font-weight: $font-bold;
+            }
+        
+    
+            
+        }
     }
 
-    .swiper-button-next{
-        width: 0.5em;
-        height: 0.5em;
-        color: $color-primary;
-    }
+    
 
-    .swiper-button-prev{
-        width: 0.5em;
-        height: 0.5em;
-        color: $color-primary;
-    }
-
-    .image-swiper {
-        background-color: chocolate;
-    }
+   
+    
     
 }
 @media (max-width : $breakpoint-laptop)  {
