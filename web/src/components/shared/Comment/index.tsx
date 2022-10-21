@@ -1,5 +1,4 @@
 import React from 'react'
-import CreateComment from "components/shared/CreateComment";
 import {useState} from 'react';
 import Icon from '../Icon';
 import Button from '../Button';
@@ -13,22 +12,7 @@ interface ICommentProps {
 
 const Comment: React.FC<ICommentProps> = ({ data }) => {
 
-    const [answerComment, setAnswer] = useState(0)
 
-    const Replycomment = () => {
-        if (answerComment < 1) {
-            setAnswer(answerComment + 1)
-        }
-        else if(answerComment >= 1){
-            setAnswer(answerComment - 1)
-        }
-    }
-
-    const step = [
-        { component: null },
-        { component: <CreateComment icon={'close'} onClick={Replycomment} data={data}/> },
-        
-    ]
 
     const [liked, setLiked] = useState(data.alreadyHearted)
 
@@ -47,8 +31,8 @@ const Comment: React.FC<ICommentProps> = ({ data }) => {
                     <span>{data.writter.name}</span>
                     <p className="text-comment">{data.content}</p>
                 </div>
-                <div className='post-footer'>
-                    <span onClick={Replycomment}>Responder</span>
+                <div className='comment-footer'>
+                    <span>Responder</span>
                     <div className='likes'>
                         {
                             (liked && !data.alreadyHearted) ? data.hearts + 1 : (!liked && data.alreadyHearted) ? data.hearts - 1 : data.hearts
@@ -61,8 +45,6 @@ const Comment: React.FC<ICommentProps> = ({ data }) => {
             </div>
 
             <div className='container-answer-comment'>
-              {step[answerComment].component}
-
             </div>
         </div>
         

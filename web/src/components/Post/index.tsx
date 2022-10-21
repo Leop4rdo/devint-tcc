@@ -26,7 +26,7 @@ const Post: React.FC<IPostProps> = ({ data , openDetails}) => {
     }
     
     return (
-        <div className="postcard" key={data.id} onClick={openDetails}>
+        <div className="postcard" key={data.id} >
             <div className="post-header">
                 <div className="user-info">
                     <img src={data.writter.profilePicUrl} />
@@ -35,7 +35,7 @@ const Post: React.FC<IPostProps> = ({ data , openDetails}) => {
                 <Button className="follow-button" children={[<Icon name="add" />, "Seguir"]} />
             </div>
 
-            <div className="post-content">
+            <div className="post-content" onClick={openDetails}>
                 <p>{data.content}</p>
                 <div className="post-images">
                     <Swiper
@@ -47,7 +47,7 @@ const Post: React.FC<IPostProps> = ({ data , openDetails}) => {
                     >
                             {
                                 data.attachments.map((attachment) => (
-                                    <SwiperSlide><img src={attachment} alt="" /></SwiperSlide>
+                                    <SwiperSlide key={`${data.id}-${Math.random()*999}`}><img src={attachment} alt="" /></SwiperSlide>
                                 )
                                 )
                             }
@@ -56,12 +56,15 @@ const Post: React.FC<IPostProps> = ({ data , openDetails}) => {
 
                 </div>
             </div>
+
+            <div className="horizontal-line"></div>
+            
             <div className="post-footer">
                 <div className="comments">
                     {data.comments}
-                    <span onClick={openDetails}>comentários</span>
+                    <span >Comentários</span>
                 </div>
-                <div className="hearts">
+                <div className="hearts" onClick={() => openDetails()}>
                     {
                         (liked && !data.alreadyHearted) ? data.hearts + 1 : (!liked && data.alreadyHearted) ? data.hearts - 1 : data.hearts
                     }

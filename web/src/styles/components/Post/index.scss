@@ -1,4 +1,11 @@
 .postcard{
+
+    .horizontal-line{
+		width: 90%;
+		height: 0.15vh;
+		background-color: $color-gray;
+	} 
+
     background-color: $color-black;
     width: clamp(30rem, 30vw, 50rem);
     //height: clamp(30rem, 20vw, 50rem);
@@ -82,57 +89,75 @@
     }
 
     .post-content {
-        width: 80%;
         display: flex;
         flex-direction: column;
+        cursor: pointer;
         gap: 1em;
+        width: 90%;
+        
         
         p {
+            
             font-size: 1em;
             color: $color-white;
             overflow-wrap: break-word;
         }
-    }
 
-    .post-images {
-        width: 100%;
-        height: auto;
-        position: relative;
-
-        img {
-            width: 100%;
-            border-radius: 0;
-            height: auto;
-        }
-    }
-
-    .swiper-slide {
-        img{
-            cursor: pointer;
-        }
-    }   
+        .post-images {
+            
+           
+            
+            .swiper {
+               
+                width: 100%;
+                height: 100%;
+                height: auto;
+                display: flex;
+                align-items: center;
+                
+               
+            }
+            .swiper-slide {
+                width: 100%;
+                height: 500px;
+                
+                border-radius: 8px;
+                overflow: hidden;
+                
+                
+                
+                
+                
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                    border-radius: 8px;
+                }
+            }
+        
+            .swiper-pagination-bullet {
+                width: 12px;
+                height: 12px;
+                background-color: $color-primary;
+            }
+        
+            .swiper-button-prev , .swiper-button-next{
+                display: flex;
+                color: $color-white;
+                font-size: 24px;
+                font-weight: $font-bold;
+            }
+        
     
-    .swiper-pagination-bullet{
-        width: 0.5em;
-        height: 0.5em;
-        background-color: $color-primary;
+            
+        }
     }
 
-    .swiper-button-next{
-        width: 0.5em;
-        height: 0.5em;
-        color: $color-primary;
-    }
+    
 
-    .swiper-button-prev{
-        width: 0.5em;
-        height: 0.5em;
-        color: $color-primary;
-    }
-
-    .image-swiper {
-        background-color: chocolate;
-    }
+   
+    
     
 }
 @media (max-width : $breakpoint-laptop)  {
