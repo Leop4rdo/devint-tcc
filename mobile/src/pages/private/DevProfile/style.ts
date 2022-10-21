@@ -1,7 +1,9 @@
 import { StyleSheet } from "react-native";
-import { color } from "react-native-reanimated";
+import { color, FlipInEasyX } from "react-native-reanimated";
 import colors from "../../../styles/colors";
 import globalStyles from "../../../styles/global";
+import fonts from "../../../styles/typography";
+
 
 const styles = StyleSheet.create({
     page : {
@@ -11,14 +13,13 @@ const styles = StyleSheet.create({
     },
     profileContainer:{
         height:200,
-        backgroundColor: colors.DARK_GRAY,
- 
+  
     },
     backgroundImage:{
         backgroundColor:colors.LIGHT_GRAY,
         width: '100%',
         height:100,
-        position: "absolute"
+        position: 'absolute'
     },
     
     photoUser:{
@@ -28,10 +29,35 @@ const styles = StyleSheet.create({
        
     },
     devName:{
-        color:colors.WHITE
+        color:colors.WHITE,
+        fontSize: 16,
+        fontFamily: fonts.POPPINS_REGULAR
     },
-    diceProfile:{
+    devBio:{
+        color:colors.WHITE,
+        fontSize: 12,
+        fontFamily: fonts.POPPINS_REGULAR
+    },
+    profileData:{
         marginHorizontal:20
+    },
+    profileDice:{
+        flexDirection:'row',
+        justifyContent:'space-around',
+    },
+    dice:{
+        flexDirection:'column',
+        alignItems:'center'
+    },
+    amount:{
+        color:colors.PRIMARY,
+        fontSize:16,
+        fontFamily: fonts.POPPINS_SEMIBOLD
+    },
+    text:{
+        color:colors.WHITE,
+        fontSize:12,
+        fontFamily: fonts.POPPINS_REGULAR
     },
     profileEdit:{
         display:'flex',
@@ -46,13 +72,32 @@ const styles = StyleSheet.create({
         width:140,
         height:21,
         flexDirection : 'row',
+        alignItems:'center',
         paddingHorizontal: 20,
         borderRadius: 16
     },
     textButton:{
         color: colors.WHITE,
-        marginLeft: 10
+        marginLeft: 10,
+        fontSize:12,
+        fontFamily: fonts.POPPINS_SEMIBOLD
+    },
+    publicationData:{
+        marginVertical: 16,
+        flexDirection:'row',
+        justifyContent:'space-evenly',
+    },
+    publications:{
+        borderBottomColor:colors.DARK_PURPLE,
+        borderBottomWidth:1
+    },
+    textPublications:{
+        fontSize:12,
+        color: colors.LIGHT_GRAY,
+        fontFamily: fonts.POPPINS_SEMIBOLD
+    
     }
+   
  
 })
 
