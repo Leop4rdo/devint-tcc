@@ -61,8 +61,11 @@ const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick })
 
                         <div className="container-comments">
                             <div className="new-comment-container">
-                                <img src={authContext?.userData.profilePicUrl} />
-                                <textarea />
+                                <div className="profile">
+                                    <img src={authContext?.userData.profilePicUrl} />
+                                </div>
+                                <AutoTextArea />
+                                <Icon name="send" />
                             </div>
                             
                             {

@@ -6,11 +6,12 @@
     border-radius: 24px;
     gap: 48px;
 
+    min-width: 300px;
     max-height: 60vh;
-    min-height: 30vh;
+    min-height: 50vh;
 
     .container-itens {
-        width: 100%;
+        width: 30vw;
         word-wrap:break-word;
         display: flex;
         flex-direction: column;
@@ -39,6 +40,7 @@
 
                 .icon {
                     color: white;
+                    cursor: pointer;
                 }
             }
 
@@ -101,9 +103,10 @@
 
                     .icon {
                         color: $color-white;
+                        transition: color 0.1s ease-out;
 
                         &:hover {
-                            color: $color-dark-red;
+                            color: $color-primary;
                         }
                     }
                 }
@@ -128,6 +131,8 @@
             
             .new-comment-container {
                 display: flex;
+                padding-bottom: 12px;
+                border-bottom: 2px solid $color-gray;
                 gap: 16px;
 
                 img {
@@ -136,19 +141,50 @@
                     border-radius: 100%;
                 }
 
-                textarea {
+                .auto-grow-text-area {
                     width: 100%;
-                    height: fit-content;
-                    padding: 16px;
+                    textarea {
+                        width: 100%;
+                        height: fit-content;
+                        padding: 12px;
+                        min-height: 48px;
+    
+                        color : white;
+    
+                        resize: none;
+                        padding-bottom: 0;
+                        background-color: $color-dark-gray;
+    
+                        outline: none;
+                        
+                        border : 2px solid $color-gray;
+                        border-radius: 16px;
+    
+                        transition: border 0.25s ease-out;
+    
+                        &:focus {
+                            border-color: $color-primary;
+                        }
+                    }
+                }
 
-                    resize: none;
-                    padding-bottom: 0;
-                    background-color: $color-dark-gray;
+                .icon {
+                    height: 48px;
+                    aspect-ratio: 1;
 
-                    outline: none;
-                    
-                    border : 2px solid $color-gray;
-                    border-radius: 16px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    color: white;
+
+                    transition: color .1s ease-out;
+
+                    cursor: pointer;
+
+                    &:hover {
+                        color: $color-primary;
+                    }
                 }
             }
         }
