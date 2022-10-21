@@ -74,6 +74,8 @@
                 color: white;
 
                 transition: color .25s ease-out;
+                cursor: pointer;
+               
                 
                 &:hover {
                     color : $color-primary;

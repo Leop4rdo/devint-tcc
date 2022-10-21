@@ -105,7 +105,7 @@ const FeedPage: React.FC = () => {
 
             {
                 writtingPost &&
-                <CreatePostModal onClose={() => setWrittingPost(false)}/>
+                <CreatePostModal onClose={() => { setWrittingPost(false); getPosts() }}/>
             }
         </MenuWapper>
     );

@@ -22,8 +22,6 @@ const AutoTextArea : React.FC<IAutoTextArea> = (props: IAutoTextArea ) => {
 	}, [text]);
 
 	const onChangeHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-		
-		
 		setParentHeight(`${textAreaRef.current!.scrollHeight}px`);
 		setText(event.target.value);
 
@@ -35,6 +33,7 @@ const AutoTextArea : React.FC<IAutoTextArea> = (props: IAutoTextArea ) => {
 
 	return (
 		<div
+			className="auto-grow-text-area"
 			style={{
 				minHeight: parentHeight,
 			}}
