@@ -19,6 +19,7 @@
 		justify-content: center;
 		align-items: center;
 		flex-direction: column;
+		
 
 		.container-image-face {
 			display: flex;
@@ -31,6 +32,7 @@
 				width: 80px;
 				height: 80px;
 				border-radius: 50%;
+				cursor: pointer;
 			}
 		}
 
@@ -39,6 +41,7 @@
 			margin-top: 16px;
 			color: $color-white;
 			font-weight: $font-regular;
+			cursor: pointer;
 		}
 	}
 

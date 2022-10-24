@@ -3,23 +3,26 @@ import React, { useContext } from "react";
 import Icon from "components/shared/Icon";
 import { AuthContext } from "store/context/Auth.context";
 import Button from "components/shared/Button";
+import { useNavigate } from "react-router-dom";
 
 
 interface ISidebarProps {
     open : boolean
 }
 
-const Sidebar: React.FC<ISidebarProps> = ({open}) => {
+const Sidebar: React.FC<ISidebarProps> = ({open }) => {
     const authContext = useContext(AuthContext)
+
+    const navigation = useNavigate()
 
     return (
             <div className={`container-side-bar effect-side-bar ${open ? 'open' : ''}`}>
 
                 <div className="container-user">
-                    <div className="container-image-face">
+                    <div className="container-image-face" onClick={() => navigation('user-profile')}>
                     <img src={authContext?.userData?.profilePicUrl} alt="User profile picture" />
                     </div>
-                    <h2>{authContext?.userData?.name}</h2>
+                    <h2 onClick={() => navigation('user-profile')}>{authContext?.userData?.name}</h2>
                     
                 </div>
 
