@@ -47,7 +47,7 @@ const Post: React.FC<IPostProps> = ({ data, openDetails }) => {
                     >
                         {
                             data.attachments.map((attachment) => (
-                                <SwiperSlide>< img onClick={() => openDetails()} src={attachment} alt="" /></SwiperSlide>
+                                <SwiperSlide key={`${attachment}-${Math.()*999}`}>< img onClick={() => openDetails()} src={attachment} alt="" /></SwiperSlide>
                             )
                             )
                         }
