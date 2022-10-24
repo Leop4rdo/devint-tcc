@@ -46,9 +46,8 @@ const Post: React.FC<IPostProps> = ({ data, openDetails }) => {
                         pagination={{ clickable: true }}
                     >
                         {
-                            data.attachments.map((attachment) => (
+                            data.attachments.map((attachment) => 
                                 <SwiperSlide key={`${attachment}-${Math.()*999}`}>< img onClick={() => openDetails()} src={attachment} alt="" /></SwiperSlide>
-                            )
                             )
                         }
 
@@ -76,13 +75,6 @@ const Post: React.FC<IPostProps> = ({ data, openDetails }) => {
             </div>
         </div>
     );
-
-
-
 }
-
-// passo 1 -> pegar o array
-// passo 2 -> quebrar o array nos 3 primeiros index
-// passo 3 -> mapear os 3 primeiros index para uma <img>2
 
 export default Post;
