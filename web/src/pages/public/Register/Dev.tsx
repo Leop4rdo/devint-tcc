@@ -102,6 +102,7 @@ const DevRegistrationPage: React.FC = () => {
 
         authContext?.signIn(body.email, body.password);    
         
+        navigate("/")
     }
 
     const onPreviousButtonPress = () => {

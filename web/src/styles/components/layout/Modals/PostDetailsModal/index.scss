@@ -5,12 +5,14 @@
     display: flex;
     border-radius: 24px;
     gap: 48px;
-
+    min-width: 300px;
     max-height: 60vh;
-    min-height: 30vh;
+    min-height: 50vh;
+
+    
 
     .container-itens {
-        width: 100%;
+        width: 30vw;
         word-wrap:break-word;
         display: flex;
         flex-direction: column;
@@ -26,6 +28,28 @@
                 align-items: center;
                 gap: 16px;
 
+                .container-icon-close{
+                    .icon {
+                        order: 2;
+                        color: $color-white;
+                        font-size: 40px;
+                        height: 40px;
+                        
+                        order: 2;
+                       
+                        
+                        cursor: pointer;
+                        transition: 0.8s;
+                
+                        &:hover{
+                            color: $color-primary;
+                            transform: scale(1.1);
+                        }
+                
+                    }
+                }
+
+
                 img {
                     width: 50px;
                     height: 50px;
@@ -39,6 +63,7 @@
 
                 .icon {
                     color: white;
+                    cursor: pointer;
                 }
             }
 
@@ -60,6 +85,8 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            border-top: 0.1px solid $color-light-gray;
+            padding-top: 10px;
 
             .comment-user {
                 display: flex;
@@ -101,9 +128,10 @@
 
                     .icon {
                         color: $color-white;
+                        transition: color 0.1s ease-out;
 
                         &:hover {
-                            color: $color-dark-red;
+                            color: $color-primary;
                         }
                     }
                 }
@@ -111,54 +139,115 @@
             }
         }
 
+        .new-comment-container {
+            display: flex;
+            padding-bottom: 12px;
+            gap: 16px;
+
+            img {
+                width: clamp(32px, 10vw, 56px);
+                aspect-ratio: 1;
+                border-radius: 100%;
+            }
+
+            .auto-grow-text-area {
+                width: 100%;
+                textarea {
+                    width: 100%;
+                    height: fit-content;
+                    padding: 12px;
+                    min-height: 48px;
+
+                    color : white;
+
+                    resize: none;
+                    padding-bottom: 0;
+                    background-color: $color-dark-gray;
+
+                    outline: none;
+                    
+                    border : 2px solid $color-gray;
+                    border-radius: 16px;
+
+                    transition: border 0.25s ease-out;
+
+                    &:focus {
+                        border-color: $color-primary;
+                    }
+                }
+            }
+
+            .icon {
+                height: 48px;
+                aspect-ratio: 1;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                color: white;
+
+                transition: color .1s ease-out;
+
+                cursor: pointer;
+
+                &:hover {
+                    color: $color-primary;
+                }
+            }
+        }
+
         .container-comments {
             overflow-y: auto;
             width: 100%;
             height: 100%;
+            padding-right: 16px;
+
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
 
             &::-webkit-scrollbar {
                 background-color: transparent;
                 width: 8px;
-
             }
 
             &::-webkit-scrollbar-thumb {
                 background-color: $color-light-gray;
                 border-radius: 8px;
-
-
             }
-            
-
         }
-
     }
 
     .container-carousel {
-        height: 100%;
-       
         display: flex;
         justify-content: center;
-        align-items: center;
+       
         
+       
         .icon {
             order: 2;
             color: $color-white;
             font-size: 40px;
             height: 40px;
             order: 2;
+           
             
             cursor: pointer;
             transition: 0.8s;
-
+    
             &:hover{
                 color: $color-primary;
                 transform: scale(1.1);
             }
-
+    
         }
 
         .carousel-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
             
             .swiper {
                 width: 500px;
