@@ -5,6 +5,7 @@ export interface IPost {
     id : string
     content : string
     reports : any[]
+    commentAmount : number
     comments : IComment[]
     commentAmount : number
     hearts : number

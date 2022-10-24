@@ -52,71 +52,88 @@
     width: clamp(15em, 45vw, 60em);
     background-color: $color-dark-gray;
 
-    .swiper-button-next, .swiper-button-prev {
+    .swiper-button-next,
+    .swiper-button-prev {
       top: 45%
     }
-    .horizontal-line{
+
+    .horizontal-line {
       width: 100%;
       margin-top: 0.35rem;
       height: 0.15vh;
       background-color: $color-gray;
-  
-    }    
-  }
 
-  @media (max-width : $breakpoint-laptop)  {
-    .outstanding-container {
-      width:80%;
+    }
 
-    }    
-    .post-container {
-      width: 80%;
-    }    
-  }
-
-  .outstanding-users {
-    width: 100%;
-    display: flex;
-    
-    
-    
-    .swiper {
+    .outstanding-users {
       width: 100%;
-      height: 100px;
-      padding-left: 3rem;
-      padding-right: 3rem;
-      
-    
-    }
-
-    .swiper-button-next {
-      color: $color-primary;
-      
-    }
-
-    .swiper-button-prev {
-      color: $color-primary;
-      
-    }
-
-    .swiper-slide {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100px;
-      height: 100px;
-    }
 
-    .swiper-pagination-bullet {
-      width: 12px;
-      height: 12px;
-      background-color: $color-primary;
-    }
 
-    img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
+
+      .swiper {
+        width: 100%;
+        height: 100px;
+        padding-left: 3rem;
+        padding-right: 3rem;
+
+
+      }
+
+      .swiper-button-next {
+        color: $color-primary;
+
+      }
+
+      .swiper-button-prev {
+        color: $color-primary;
+
+      }
+
+      .swiper-slide {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100px;
+        height: 100px;
+      }
+
+      .swiper-pagination-bullet {
+        width: 12px;
+        height: 12px;
+        background-color: $color-primary;
+      }
+
+      .container-img-devs-highlighted {
+        border-radius: 50%;
+        height: 56px;
+        width: 56px;
+        background-color: $color-primary;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        img {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          margin-left: 10px;
+          margin-right: 10px;
+        }
+
+      }
+
+
     }
+  }
+}
+
+@media (max-width : $breakpoint-laptop) {
+  .outstanding-container {
+    width: 80%;
+
+  }
+
+  .post-container {
+    width: 80%;
   }
 }

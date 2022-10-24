@@ -12,9 +12,10 @@ import AutoTextArea from "components/shared/TextArea"
 interface IPostDetailsModalProps {
     postId: string
     onClick: any
+   
 }
 
-const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick }) => {
+const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick  }) => {
     const authContext = useContext(AuthContext)
 
     const [post, setPost] = useState<IPost | null>(null)
@@ -56,7 +57,13 @@ const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick })
 
                             <div className="dice-user">
                                 <Button className="follow-button" children={[<Icon name="add" />, "Seguir"]} />
-                                <Icon name="close" onClick={onClick} />
+                                {post?.attachments === undefined || post?.attachments.length === 0 &&
+                                <div className="container-icon-close">
+                                     <Icon className="close" name="close" onClick={onClick} />
+                                </div>
+                                   
+                                }
+                                
                             </div>
                         </div>
 
@@ -97,6 +104,7 @@ const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick })
                     {
                         post?.attachments != undefined && post?.attachments.length > 0 &&
                         <div className="container-carousel">
+                            <Icon  name="close" onClick={onClick} />
                             <div className="carousel-image" >
 
                                 <Swiper modules={[Navigation, Pagination, Scrollbar, A11y]}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SideBar from "components/layout/Sidebar"
 import NavBar from "../NavBar/index"
-import SideCard from "components/shared/SideCard";
+
 
 
 const MenuWapper: React.FC<React.PropsWithChildren> = ({ children }) => {
