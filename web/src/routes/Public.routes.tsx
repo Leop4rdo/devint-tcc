@@ -9,7 +9,6 @@ import EmailConfirmPage from "pages/public/EmailConfirm/EmailConfirmPage";
 
 import LoginPage from "pages/public/Login";
 
-
 const PublicRouter: React.FC = () => {
     return (
         <Routes>

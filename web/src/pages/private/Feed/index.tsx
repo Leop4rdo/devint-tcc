@@ -2,7 +2,7 @@ import MenuWapper from "components/layout/MenuWrapper";
 import Post from "components/Post";
 import React, { useEffect, useState } from "react";
 import * as postService from 'services/post.service'
-import {IPostListItem, IPost} from "interfaces/IPost";
+import { IPostListItem, IPost } from "interfaces/IPost";
 import POSTS_DATA from "../../../DATA/posts-get-response.json"
 import { Swiper, SwiperSlide } from "swiper/react";
 import SideCard from "components/shared/SideCard";
@@ -11,26 +11,29 @@ import Button from "components/shared/Button";
 import CreatePostModal from "components/layout/Modals/CreatePostModal";
 
 import IDevMinimal from "interfaces/IDev";
-import * as devService from "../../../services/dev.service" 
+import * as devService from "../../../services/dev.service"
 import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
 import PostDetailsModal from "components/layout/Modals/PostDetailsModal";
 
 const FeedPage: React.FC = () => {
     const [devs, setDevs] = useState<IDevMinimal[]>([])
     const [selectedPostId, setSelectedPostId] = useState('')
-    const [ writtingPost, setWrittingPost ] = useState(false)
-    const [ posts, setPosts] = useState<IPostListItem[]>([])
+    const [writtingPost, setWrittingPost] = useState(false)
+    const [posts, setPosts] = useState<IPostListItem[]>([])
+
+    //const [posts, setPosts] = useState<IPost[]>(POSTS_DATA.data as unknown as IPost[]);
+
 
     const getDevs= async () => {
-        
+
         const res = await devService.list({limit : 20})
 
         setDevs(res.data)
     }
 
     const getPosts = async () => {
-        const { data } =  await postService.list({ offset : posts.length, limit : 999 })
-        
+        const { data } =  await postService.list({ offset : posts.length, limit : 6 })
+
         setPosts([...posts, ...data ])
     }
 
@@ -49,15 +52,15 @@ const FeedPage: React.FC = () => {
                         <div className="outstanding-container">
                             <h2>Devs em destaque</h2>
                             <div className="outstanding-users">
-                                <Swiper 
+                                <Swiper
                                     modules={[Navigation, Pagination, Scrollbar, A11y]}
                                     spaceBetween={50}
                                     slidesPerView={10}
                                     navigation
                                     slidesPerGroup={10}>
-                                        {
-                                            devs?.map((dev: IDevMinimal) => 
-                                            <SwiperSlide key={`${dev.id}-${Math.random()*999}`} ><img src={dev.profilePicUrl} /></SwiperSlide>
+                                    {
+                                        devs?.map((dev: IDevMinimal) =>
+                                            <SwiperSlide key={`${dev.id}-${Math.random() * 999}`} ><img src={dev.profilePicUrl} /></SwiperSlide>
                                         )}
                                 </Swiper>
                             </div>
@@ -65,7 +68,13 @@ const FeedPage: React.FC = () => {
                         </div>
 
                         <div className="post-container">
-                            {
+                            {/* {
+                                posts.map((post: IPost) =>
+                                    <Post data={post} />
+
+                                )
+                            } */}
+                             {
                                 posts.map((post: IPostListItem) => 
                                     <Post key={`${post.id}-${Math.random()*999}`} data={post} openDetails={() => setSelectedPostId(post.id)} />
                                 )
@@ -75,11 +84,11 @@ const FeedPage: React.FC = () => {
 
                     <div className="side-card-container">
                         <SideCard title="Seguindo" >
-                            <a href=""><img alt=""src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
-                            <a href=""><img alt=""src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
-                            <a href=""><img alt=""src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
-                            <a href=""><img alt=""src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
-                            <a href=""><img alt=""src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
+                            <a href=""><img alt="" src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
+                            <a href=""><img alt="" src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
+                            <a href=""><img alt="" src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
+                            <a href=""><img alt="" src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
+                            <a href=""><img alt="" src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
                         </SideCard>
                         <SideCard title="Artigos em alta">
                             <a>Stop complaining about PHP</a>
@@ -103,7 +112,7 @@ const FeedPage: React.FC = () => {
 
             {
                 writtingPost &&
-                <CreatePostModal onClose={() => setWrittingPost(false)}/>
+                <CreatePostModal onClose={() => setWrittingPost(false)} />
             }
         </MenuWapper>
     );
