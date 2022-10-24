@@ -11,7 +11,6 @@ import IArticleProps from "./IArticle"
 import IBadgeProps from "./IBadge"
 import ICareerProps from "./ICareerFocus"
 import IPostProps from "./IPost"
-import IPostAttachmentProps from "./IPostAttachment"
 import IProjectProps from "./IProject"
 import ISeniorityProps from "./ISeniority"
 import ISkillProps from "./ISkill"
@@ -20,6 +19,8 @@ import ISocialLinkProps from "./ISocialLink"
 export default interface IDevProps {
     id ?: string
     name : string
+    follows : IDevProps[]
+    followers : IDevProps[]
     bio : string
     gender : string
     status: string 
