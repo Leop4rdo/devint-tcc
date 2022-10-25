@@ -7,6 +7,5 @@ export default class DevFollowInput{
     constructor(source: string, target: string){
         this.source = source
         this.target = target
-
     }
 }
