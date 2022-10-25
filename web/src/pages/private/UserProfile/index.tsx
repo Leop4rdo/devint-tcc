@@ -41,8 +41,44 @@ const UserProfilePage: React.FC = () => {
 
                         <div className="container-contact-user">
 
-                            <div className="contact-header">
-                                <Icon name=""/>
+                            <div className="container-contact-header">
+
+                                <div className="contact">
+                                    <Icon name="group" />
+                                    <p>Contatos</p>
+                                </div>
+                                <Icon name="edit" />
+
+                            </div>
+
+                            <div className="container-contact-main">
+                                <div className="container-email">
+                                    <Icon name="email" />
+                                    <p>emailqualquer@gmail.com</p>
+                                </div>
+
+                                <div className="container-phone">
+                                    <Icon name="call" />
+                                    <p>emailqualquer@gmail.com</p>
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+
+
+                        <div className="container-career-focus">
+
+                            <div className="container-career-header">
+
+                                <div className="contact">
+                                    <Icon name="group" />
+                                    <p>Contatos</p>
+                                </div>
+                                <Icon name="edit" />
+
                             </div>
 
                         </div>
