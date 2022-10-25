@@ -29,13 +29,24 @@ const FeedPage: React.FC = () => {
     }
 
     const getPosts = async () => {
-        const { data } = await postService.list({ offset: posts.length, limit: 999 })
+        const { data } = await postService.list({ offset: posts.length, limit: 7 })
 
         setPosts([...posts, ...data])
     }
 
     useEffect(() => { getPosts(); getDevs() }, [])
 
+    const [currentPage, setCurrentPage] = useState(1);
+
+    useEffect(() => {
+        const intersectionObserver = new IntersectionObserver(entries => {
+          if (entries.some(entry => entry.isIntersecting)) {
+            setCurrentPage((currentValue) => currentValue + 1);
+          }
+        })
+        intersectionObserver.observe(document.querySelector('#alert'));
+        return () => intersectionObserver.disconnect();
+      }, []);
 
     return (
         <MenuWapper>
@@ -73,6 +84,7 @@ const FeedPage: React.FC = () => {
                                     <Post key={`${post.id}-${Math.random() * 999}`} data={post} openDetails={() => setSelectedPostId(post.id)} />
                                 )
                             }
+                            <div id="alert"></div>
                         </div>
                     </div>
 
