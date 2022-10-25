@@ -9,11 +9,14 @@ import IPostListItem from "../../../interfaces/IPost";
 import * as postService from "../../../services/post.service"
 import {screenHeight} from "../../../styles/utils";
 import CommentModal from "../../../components/CommentModal";
+import {useIsFocused} from "@react-navigation/native";
 
 const HomePage : React.FC<{ navigation : any }> = ({navigation}) => {
     const [posts, setPosts] = useState<IPostListItem[]>([])
     const [isRefreshing, setRefreshing] = useState(false)
     const [selectedPostId, setSelectedPostId] = useState("")
+
+    const isFocused = useIsFocused()
 
     const getPosts = async () => {
         const { data }= await postService.list({ offset : posts.length, limit : 24 })
@@ -33,7 +36,7 @@ const HomePage : React.FC<{ navigation : any }> = ({navigation}) => {
         setRefreshing(false)
     }
 
-    useEffect(() => { getPosts() }, [])
+    useEffect(() => { setPosts([]); getPosts() }, [isFocused])
 
     return (
         <LayoutWrapper navigation={navigation}>
