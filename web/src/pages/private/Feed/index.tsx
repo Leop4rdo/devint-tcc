@@ -1,6 +1,6 @@
 import MenuWapper from "components/layout/MenuWrapper";
 import Post from "components/Post";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import * as postService from 'services/post.service'
 import { IPostListItem, IPost } from "interfaces/IPost";
 import POSTS_DATA from "../../../DATA/posts-get-response.json"
@@ -20,45 +20,41 @@ const FeedPage: React.FC = () => {
     const [selectedPostId, setSelectedPostId] = useState('')
     const [writtingPost, setWrittingPost] = useState(false)
     const [posts, setPosts] = useState<IPostListItem[]>([])
+    const scrollObserverRef = useRef<HTMLDivElement>(null)
+    const pageRef = useRef<HTMLDivElement>(null)
 
     const getDevs = async () => {
-
         const res = await devService.list({ limit: 20 })
 
         setDevs(res.data)
     }
 
     const getPosts = async () => {
-        const { data } = await postService.list({ offset: posts.length, limit: 7 })
+        const { data } = await postService.list({ offset: posts.length, limit: 1 })
 
         setPosts([...posts, ...data])
     }
 
+    const configObserver = () => {
+
+        const intersectionObserver = new IntersectionObserver((entries : any) => { 
+            if (entries.includes((entry : any) => entry.isIntersecting))
+                getPosts()
+        }, {
+            root: null,
+            rootMargin: '0px',
+            threshold: 1.0
+        })
+        if (scrollObserverRef.current)
+            intersectionObserver.observe(scrollObserverRef.current)
+    }
+
     useEffect(() => { getPosts(); getDevs() }, [])
-
-    const [currentPage, setCurrentPage] = useState(1);
-
-    // useEffect(() => {
-    //     const intersectionObserver = new IntersectionObserver(entries => {
-    //       if (entries.some(entry => entry.isIntersecting)) {
-    //         setCurrentPage((currentValue) => currentValue + 1);
-    //       }
-    //     })
-    //     intersectionObserver.observe(document.querySelector('#alert'));
-    //     return () => intersectionObserver.disconnect();
-    //   }, []);
-
-      const { data } = useInfiniteQuery(
-        'key',
-        ({ pageParam }) => axios.get(myUrl + '?offset=' + pageParam?.offset ?? 0),
-        {
-            getNextPageParam: (lastPage) => lastPage?.meta
-        }
-    )
+    useLayoutEffect(configObserver)
 
     return (
         <MenuWapper>
-            <div className="feed" >
+            <div className="feed" ref={pageRef} >
                 <div className="feed-components-container">
                     <div className="feed-center">
                         <div className="new-post">
@@ -91,8 +87,9 @@ const FeedPage: React.FC = () => {
                                 posts.map((post: IPostListItem) =>
                                     <Post key={`${post.id}-${Math.random() * 999}`} data={post} openDetails={() => setSelectedPostId(post.id)} />
                                 )
+                                 
                             }
-                            <div id="alert"></div>
+                            <div id="scroll-observer" ref={scrollObserverRef}></div>
                         </div>
                     </div>
 
