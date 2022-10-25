@@ -5,10 +5,11 @@
     display: flex;
     border-radius: 24px;
     gap: 48px;
-
     min-width: 300px;
     max-height: 60vh;
     min-height: 50vh;
+
+    
 
     .container-itens {
         width: 30vw;
@@ -26,6 +27,28 @@
                 display: flex;
                 align-items: center;
                 gap: 16px;
+
+                .container-icon-close{
+                    .icon {
+                        order: 2;
+                        color: $color-white;
+                        font-size: 40px;
+                        height: 40px;
+                        
+                        order: 2;
+                       
+                        
+                        cursor: pointer;
+                        transition: 0.8s;
+                
+                        &:hover{
+                            color: $color-primary;
+                            transform: scale(1.1);
+                        }
+                
+                    }
+                }
+
 
                 img {
                     width: 50px;
@@ -62,6 +85,8 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            border-top: 0.1px solid $color-light-gray;
+            padding-top: 10px;
 
             .comment-user {
                 display: flex;
@@ -195,30 +220,34 @@
     }
 
     .container-carousel {
-        height: 100%;
-       
         display: flex;
         justify-content: center;
-        align-items: center;
+       
         
+       
         .icon {
             order: 2;
             color: $color-white;
             font-size: 40px;
             height: 40px;
             order: 2;
+           
             
             cursor: pointer;
             transition: 0.8s;
-
+    
             &:hover{
                 color: $color-primary;
                 transform: scale(1.1);
             }
-
+    
         }
 
         .carousel-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
             
             .swiper {
                 width: 500px;

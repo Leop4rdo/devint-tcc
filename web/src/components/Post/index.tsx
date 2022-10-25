@@ -14,7 +14,7 @@ interface IPostProps {
 
 }
 
-const Post: React.FC<IPostProps> = ({ data }) => {
+const Post: React.FC<IPostProps> = ({ data, openDetails }) => {
 
 
 
@@ -29,15 +29,15 @@ const Post: React.FC<IPostProps> = ({ data }) => {
     return (
         <div className="postcard" key={data.id} >
             <div className="post-header">
-                <div className="user-info">
+                <div className="user-info" >
                     <img src={data.writter.profilePicUrl} />
                     <h2>{data.writter.name}</h2>
                 </div>
                 <Button className="follow-button" children={[<Icon name="add" />, "Seguir"]} />
             </div>
 
-            <div className="post-content">
-                <p>{data.content}</p>
+            <div className="post-content" >
+                <p onClick={() => openDetails()}>{data.content}</p>
                 <div className="post-images">
                     <Swiper
                         modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -47,9 +47,8 @@ const Post: React.FC<IPostProps> = ({ data }) => {
                         pagination={{ clickable: true }}
                     >
                         {
-                            data.attachments.map((attachment) => (
-                                <SwiperSlide key={`${data.id}-${Math.random() * 999}`}><img src={attachment} alt="" /></SwiperSlide>
-                            )
+                            data.attachments.map((attachment) => 
+                                <SwiperSlide key={`${attachment}-${Math.random()*999}`}>< img onClick={() => openDetails()} src={attachment} alt="" /></SwiperSlide>
                             )
                         }
 
@@ -61,7 +60,11 @@ const Post: React.FC<IPostProps> = ({ data }) => {
             <div className="horizontal-line"></div>
 
             <div className="post-footer">
-
+                <div className="comments" onClick={() => openDetails()}>
+                    <Icon name="forum" />
+                    {data.comments}
+                    <span>Comentários</span>
+                </div>
                 <div className="hearts">
                     {
                         (liked && !data.alreadyHearted) ? data.hearts + 1 : (!liked && data.alreadyHearted) ? data.hearts - 1 : data.hearts
@@ -73,13 +76,6 @@ const Post: React.FC<IPostProps> = ({ data }) => {
             </div>
         </div>
     );
-
-
-
 }
-
-// passo 1 -> pegar o array
-// passo 2 -> quebrar o array nos 3 primeiros index
-// passo 3 -> mapear os 3 primeiros index para uma <img>2
 
 export default Post;

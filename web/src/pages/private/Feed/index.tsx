@@ -21,23 +21,21 @@ const FeedPage: React.FC = () => {
     const [writtingPost, setWrittingPost] = useState(false)
     const [posts, setPosts] = useState<IPostListItem[]>([])
 
-    //const [posts, setPosts] = useState<IPost[]>(POSTS_DATA.data as unknown as IPost[]);
+    const getDevs = async () => {
 
-
-    const getDevs= async () => {
-
-        const res = await devService.list({limit : 20})
+        const res = await devService.list({ limit: 20 })
 
         setDevs(res.data)
     }
 
     const getPosts = async () => {
-        const { data } =  await postService.list({ offset : posts.length, limit : 6 })
+        const { data } = await postService.list({ offset: posts.length, limit: 999 })
 
-        setPosts([...posts, ...data ])
+        setPosts([...posts, ...data])
     }
 
-    useEffect(() => { getPosts(); getDevs() }, []) 
+    useEffect(() => { getPosts(); getDevs() }, [])
+
 
     return (
         <MenuWapper>
@@ -60,7 +58,9 @@ const FeedPage: React.FC = () => {
                                     slidesPerGroup={10}>
                                     {
                                         devs?.map((dev: IDevMinimal) =>
-                                            <SwiperSlide key={`${dev.id}-${Math.random() * 999}`} ><img src={dev.profilePicUrl} /></SwiperSlide>
+                                            <SwiperSlide key={`${dev.id}-${Math.random() * 999}`}>
+                                                <div className="container-img-devs-highlighted"><img src={dev.profilePicUrl} /></div>
+                                            </SwiperSlide>
                                         )}
                                 </Swiper>
                             </div>
@@ -68,15 +68,9 @@ const FeedPage: React.FC = () => {
                         </div>
 
                         <div className="post-container">
-                            {/* {
-                                posts.map((post: IPost) =>
-                                    <Post data={post} />
-
-                                )
-                            } */}
-                             {
-                                posts.map((post: IPostListItem) => 
-                                    <Post key={`${post.id}-${Math.random()*999}`} data={post} openDetails={() => setSelectedPostId(post.id)} />
+                            {
+                                posts.map((post: IPostListItem) =>
+                                    <Post key={`${post.id}-${Math.random() * 999}`} data={post} openDetails={() => setSelectedPostId(post.id)} />
                                 )
                             }
                         </div>
@@ -107,12 +101,12 @@ const FeedPage: React.FC = () => {
 
             {
                 selectedPostId &&
-                <PostDetailsModal postId={selectedPostId} onClick={() => setSelectedPostId('')} />
+                <PostDetailsModal  postId={selectedPostId} onClick={() => setSelectedPostId('')} />
             }
 
             {
                 writtingPost &&
-                <CreatePostModal onClose={() => setWrittingPost(false)} />
+                <CreatePostModal onClose={() => { setWrittingPost(false); getPosts() }} />
             }
         </MenuWapper>
     );
