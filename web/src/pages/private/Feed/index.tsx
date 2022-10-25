@@ -38,15 +38,23 @@ const FeedPage: React.FC = () => {
 
     const [currentPage, setCurrentPage] = useState(1);
 
-    useEffect(() => {
-        const intersectionObserver = new IntersectionObserver(entries => {
-          if (entries.some(entry => entry.isIntersecting)) {
-            setCurrentPage((currentValue) => currentValue + 1);
-          }
-        })
-        intersectionObserver.observe(document.querySelector('#alert'));
-        return () => intersectionObserver.disconnect();
-      }, []);
+    // useEffect(() => {
+    //     const intersectionObserver = new IntersectionObserver(entries => {
+    //       if (entries.some(entry => entry.isIntersecting)) {
+    //         setCurrentPage((currentValue) => currentValue + 1);
+    //       }
+    //     })
+    //     intersectionObserver.observe(document.querySelector('#alert'));
+    //     return () => intersectionObserver.disconnect();
+    //   }, []);
+
+      const { data } = useInfiniteQuery(
+        'key',
+        ({ pageParam }) => axios.get(myUrl + '?offset=' + pageParam?.offset ?? 0),
+        {
+            getNextPageParam: (lastPage) => lastPage?.meta
+        }
+    )
 
     return (
         <MenuWapper>
