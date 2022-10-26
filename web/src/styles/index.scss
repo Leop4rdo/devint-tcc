@@ -13,7 +13,14 @@
   font-family: $base-font-family;
 }
 
+#scroll-observer {
+  width: 100px;
+  height: 100px;
+  margin: 50px;
 
+  background-color: $color-primary;
+
+}
 
 a {
   position: relative;

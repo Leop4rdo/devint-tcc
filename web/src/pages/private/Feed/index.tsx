@@ -20,8 +20,10 @@ const FeedPage: React.FC = () => {
     const [selectedPostId, setSelectedPostId] = useState('')
     const [writtingPost, setWrittingPost] = useState(false)
     const [posts, setPosts] = useState<IPostListItem[]>([])
-    const scrollObserverRef = useRef<HTMLDivElement>(null)
-    const pageRef = useRef<HTMLDivElement>(null)
+    const [loading, setLoading] = useState(true)
+    const triggerRef = useRef<HTMLDivElement>(null)
+    const limit = 10
+    let page = 1;
 
     const getDevs = async () => {
         const res = await devService.list({ limit: 20 })
@@ -30,30 +32,38 @@ const FeedPage: React.FC = () => {
     }
 
     const getPosts = async () => {
-        const { data } = await postService.list({ offset: posts.length, limit: 1 })
+        const { data } = await postService.list({ limit })
 
         setPosts([...posts, ...data])
+        setLoading(false)
     }
 
-    const configObserver = () => {
+    const getMorePosts = async () => {
+        console.log(loading)
+        if (loading) return
+        console.log('i_p ->', page)
 
-        const intersectionObserver = new IntersectionObserver((entries : any) => { 
-            if (entries.includes((entry : any) => entry.isIntersecting))
-                getPosts()
-        }, {
-            root: null,
-            rootMargin: '0px',
-            threshold: 1.0
-        })
-        if (scrollObserverRef.current)
-            intersectionObserver.observe(scrollObserverRef.current)
+        page += 1
+
+        console.log('f_p ->', page)
+
     }
 
-    useEffect(() => { getPosts(); getDevs() }, [])
+    const configTrigger = () => {
+        var observer = new IntersectionObserver((entries) => {
+            if(entries[0].isIntersecting)
+                getMorePosts()
+        }, { threshold: [1] });
+
+        if (triggerRef.current)
+            observer.observe(triggerRef.current)
+    }
+
+    useEffect(() => { getPosts(); getDevs(); configTrigger() }, [])
 
     return (
         <MenuWapper>
-            <div className="feed" ref={pageRef} >
+            <div className="feed">
                 <div className="feed-components-container">
                     <div className="feed-center">
                         <div className="new-post">
@@ -83,12 +93,14 @@ const FeedPage: React.FC = () => {
 
                         <div className="post-container">
                             {
-                                posts.map((post: IPostListItem) =>
-                                    <Post key={`${post.id}-${Math.random() * 999}`} data={post} openDetails={() => setSelectedPostId(post.id)} />
+                                posts.map((post: IPostListItem, index : number) =>
+                                    <>
+                                        <span>{index}</span>
+                                        <Post key={`${post.id}-${Math.random() * 999}`} data={post} openDetails={() => setSelectedPostId(post.id)} />
+                                    </>
                                 )
-                                 
                             }
-                            <div id="scroll-observer" ref={scrollObserverRef} ></div>
+                            <div id="scroll-observer" onClick={getPosts} ref={triggerRef}></div>
                         </div>
                     </div>
 
