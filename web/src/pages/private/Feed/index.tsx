@@ -50,7 +50,6 @@ const FeedPage: React.FC = () => {
     }
 
     useEffect(() => { getPosts(); getDevs() }, [])
-    useLayoutEffect(configObserver)
 
     return (
         <MenuWapper>
@@ -89,7 +88,7 @@ const FeedPage: React.FC = () => {
                                 )
                                  
                             }
-                            <div id="scroll-observer" ref={scrollObserverRef}></div>
+                            <div id="scroll-observer" ref={scrollObserverRef} ></div>
                         </div>
                     </div>
 
