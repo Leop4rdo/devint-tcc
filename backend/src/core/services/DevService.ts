@@ -12,6 +12,8 @@ import IDevProps from "../domain/interfaces/IDev";
 import DevFollowInput from "@src/ports/input/user/dev/DevFollowInput";
 import Dev from "../domain/Dev";
 import BadRequestResponse from "@src/application/Responses/BadRequestResponse";
+import DevUpdateInput from "@src/ports/input/user/dev/DevUpdateInput";
+import errors from "@src/helpers/errors";
 
 export default class DevService {
     private repo : DevRepository
@@ -65,6 +67,23 @@ export default class DevService {
         return new SuccessResponse({
             status : 200,
             data : new DevOutput(dev)
+        })
+    }
+
+    async update (input: DevUpdateInput, id: string ): Promise<IResponse>{
+        
+        const dev : DevEntity = await this.repo.findById(id)
+
+        if (!dev)
+            return new BadRequestResponse({ status : 404, message: errors.ENTITY_NOT_FOUND })
+
+
+        const updated = Object.assign(dev, input)
+        
+        const res = await this.repo.update(updated)
+
+        return new SuccessResponse({
+            data : res
         })
     }
     

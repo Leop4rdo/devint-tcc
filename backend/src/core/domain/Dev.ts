@@ -18,7 +18,6 @@ export default class Dev {
     followers : Dev[]
     bio : string
     gender : string
-    status: string 
     profilePicUrl : string
     comunityRating : number
     notifications : JSON

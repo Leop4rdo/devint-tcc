@@ -23,7 +23,6 @@ export default interface IDevProps {
     followers : IDevProps[]
     bio : string
     gender : string
-    status: string 
     profilePicUrl : string
     comunityRating : number
     notifications : JSON
