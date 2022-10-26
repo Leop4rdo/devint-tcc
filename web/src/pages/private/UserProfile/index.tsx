@@ -1,4 +1,5 @@
 import MenuWapper from "components/layout/MenuWrapper";
+import UserProfileEdit from "components/layout/UserProfileEdit";
 import Icon from "components/shared/Icon";
 import React from "react";
 
@@ -38,23 +39,11 @@ const UserProfilePage: React.FC = () => {
                             </div>
                         </div>
 
-
-                        <div className="container-contact-user">
-
-                            <div className="container-contact-header">
-
-                                <div className="contact">
-                                    <Icon name="group" />
-                                    <p>Contatos</p>
-                                </div>
-                                <Icon name="edit" />
-
-                            </div>
-
-                            <div className="container-contact-main">
+                        <UserProfileEdit iconName="group" subject="Contatos">
+                            <div className="container-contact-quite">
                                 <div className="container-email">
                                     <Icon name="email" />
-                                    <p>emailqualquer@gmail.com</p>
+                                    <p>emailqualddddddddddddddddddquer@gmail.com</p>
                                 </div>
 
                                 <div className="container-phone">
@@ -64,37 +53,29 @@ const UserProfilePage: React.FC = () => {
 
                             </div>
 
+                        </UserProfileEdit>
 
+                        <UserProfileEdit iconName="center_focus_weak" subject="Foco de carreira" >
 
-                        </div>
-
-
-                        <div className="container-career-focus">
-
-                            <div className="container-career-header">
-
-                                <div className="contact">
-                                    <Icon name="group" />
-                                    <p>Contatos</p>
-                                </div>
-                                <Icon name="edit" />
-
+                            <div className="container-career-focus">
+                                 <p>Front-end</p>
+                                 <p>Front-end</p>   
+                                 <p>Front-end</p>
+                                 <p>Front-end</p>
+                                 <p>Front-end</p>   
+                                 <p>Front-end</p>
+                                 <p>Front-end</p>
+                                 <p>Front-end</p>   
+                                 <p>Front-end</p>
+                                 <p>Front-end</p>
+                                 <p>Front-end</p>   
+                                 <p>Front-end</p>       
+                                   
                             </div>
 
-                        </div>
+                        </UserProfileEdit>
 
                     </div>
-
-
-
-
-
-
-
-
-
-
-
 
                 </div>
 

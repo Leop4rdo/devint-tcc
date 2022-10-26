@@ -16,13 +16,9 @@
 
         }
 
-
-
         .container-of-information {
             position: absolute;
             top: 170px;
-
-
 
             .container-profile-data {
                 width: 350px;
@@ -92,85 +88,35 @@
                 }
             }
 
-            .container-contact-user {
-                margin-left: 32px;
-                margin-top: 20px;
-                background-color: $color-black;
-                border-radius: 16px;
-                width: 350px;
-
-
-                .container-contact-header {
+            .container-contact-quite {
+                padding: 10px;
+                .icon {
+                    color: $color-white;
+                }
+                .container-email,
+                .container-phone {
+                    
                     display: flex;
-                    justify-content: space-between;
-
-                    .contact{
-                        display: flex;
-
-                        padding: 10px;
-                        gap: 8px;
-
-                        p {
-                            font-size: 22px;
-                            font-weight: $font-regular;
-                        }
-
-                        .icon {
-                            margin-top: 0;
-                            color: $color-white;
-                            font-size: 32px;
-                        }
-
-                    }
-
-                    .icon {
-                        margin-top: 16px;
-                        margin-right: 10px;
-                        color: $color-light-gray;
-                        font-size: 20px;
-                        cursor: pointer;
-                    }
-
+                    gap: 8px;
+                    margin-bottom: 20px;
                 }
-
-                .container-contact-main{
-                    
-                    padding: 10px;
-                    
-                    
-                    .icon{
-                        color: $color-white;
-                    }
-
-                    .container-email , .container-phone{
-                        display: flex;
-                        gap: 8px;
-                        margin-bottom: 20px;
-
-                    }
-
-                   
-                }
-
             }
+
 
             .container-career-focus{
-                margin-left: 32px;
-                margin-top: 20px;
-                background-color: $color-black;
-                border-radius: 16px;
+                word-wrap: break-word;
                 width: 350px;
-
-                .container-career-header{
-                    display: flex;
-                    justify-content: space-between;
-
-                    .contact{
-                        display: flex;
-                        gap: 8px;
-                    }
+                display: flex;
+                
+                
+                p{
+                    
+                    padding: 10px;
                 }
             }
+
+
+
 
         }
 
