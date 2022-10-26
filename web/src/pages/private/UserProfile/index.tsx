@@ -43,12 +43,12 @@ const UserProfilePage: React.FC = () => {
                             <div className="container-contact-quite">
                                 <div className="container-email">
                                     <Icon name="email" />
-                                    <p>emailqualddddddddddddddddddquer@gmail.com</p>
+                                    <span>emailqualddddddddddddddddddquer@gmail.com</span>
                                 </div>
 
                                 <div className="container-phone">
                                     <Icon name="call" />
-                                    <p>emailqualquer@gmail.com</p>
+                                    <span>(11) 4954-5965</span>
                                 </div>
 
                             </div>
@@ -58,20 +58,62 @@ const UserProfilePage: React.FC = () => {
                         <UserProfileEdit iconName="center_focus_weak" subject="Foco de carreira" >
 
                             <div className="container-career-focus">
-                                 <p>Front-end</p>
-                                 <p>Front-end</p>   
-                                 <p>Front-end</p>
-                                 <p>Front-end</p>
-                                 <p>Front-end</p>   
-                                 <p>Front-end</p>
-                                 <p>Front-end</p>
-                                 <p>Front-end</p>   
-                                 <p>Front-end</p>
-                                 <p>Front-end</p>
-                                 <p>Front-end</p>   
-                                 <p>Front-end</p>       
-                                   
+                                <span>Front-End</span>
                             </div>
+
+                        </UserProfileEdit>
+
+
+                        <UserProfileEdit iconName="school" subject="Senioridade">
+                            <div className="container-seniority-user">
+                                <span>Junior</span>
+                            </div>
+                        </UserProfileEdit>
+
+
+                        <UserProfileEdit iconName="star" subject="Habilidades">
+                            <div className="skill-user">
+                                <div className="container-skill-user">
+                                    <div className="container-skill">
+                                        <Icon name="star" />
+                                        <span>Html e css</span>
+                                    </div>
+                                </div>
+
+                                <div className="container-skill-user">
+                                    <div className="container-skill">
+                                        <Icon name="star" />
+                                        <span>Html e css</span>
+                                    </div>
+                                </div>
+                                <div className="container-skill-user">
+                                    <div className="container-skill">
+                                        <Icon name="star" />
+                                        <span>Html e css</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </UserProfileEdit>
+
+
+                        <UserProfileEdit iconName="push_pin" subject="Outros links">
+
+                            <div className="teste">
+                                <div className="container-links">
+                                    <span>Link qualquer</span>
+                                </div>
+
+                                <div className="container-links">
+                                    <span>Link qualquer</span>
+                                </div>
+
+                                <div className="container-links">
+                                    <span>Link qualquer</span>
+                                </div>
+                            </div>
+
+
 
                         </UserProfileEdit>
 

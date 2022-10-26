@@ -22,7 +22,12 @@ const UserProfileEdit: React.FC<IUserProfileEditProps> = ({ iconName, subject, c
 
             </div>
 
-            {children}
+          
+                {children}
+
+            
+
+
         </div>
 
 
