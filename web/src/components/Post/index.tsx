@@ -36,7 +36,7 @@ const Post: React.FC<IPostProps> = ({ data, openDetails }) => {
             </div>
 
             <div className="post-content" >
-                <p onClick={() => openDetails()}>{data.content}</p>
+                <p onClick={openDetails}>{data.content}</p>
                 <div className="post-images">
                     <Swiper
                         modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -44,6 +44,7 @@ const Post: React.FC<IPostProps> = ({ data, openDetails }) => {
                         slidesPerView={1}
                         navigation
                         pagination={{ clickable: true }}
+                        onClick={openDetails}
                     >
                         {
                             data.attachments.map((attachment) => 
@@ -64,7 +65,7 @@ const Post: React.FC<IPostProps> = ({ data, openDetails }) => {
                     {data.comments}
                     <span>Comentários</span>
                 </div>
-                <div className="hearts">
+                <div className="hearts" >
                     {
                         (liked && !data.alreadyHearted) ? data.hearts + 1 : (!liked && data.alreadyHearted) ? data.hearts - 1 : data.hearts
                     }

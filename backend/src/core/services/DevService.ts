@@ -9,6 +9,9 @@ import DevOutput from "@src/ports/output/user/DevOutput";
 import PaginateListInput from "@src/ports/input/PaginateListInput";
 import DevMinimalOutput from "@src/ports/output/user/DevMinimalOutput";
 import IDevProps from "../domain/interfaces/IDev";
+import DevFollowInput from "@src/ports/input/user/dev/DevFollowInput";
+import Dev from "../domain/Dev";
+import BadRequestResponse from "@src/application/Responses/BadRequestResponse";
 
 export default class DevService {
     private repo : DevRepository
@@ -43,6 +46,26 @@ export default class DevService {
         this.populateProfile(dev.githubUsername, dev.id)
 
         return res
+    }
+
+    async toggleFollow (input: DevFollowInput ): Promise<IResponse>{
+        const dev : Dev = await this.repo.findById(input.source, ['follows'])
+
+        console.log('dev ->', dev)
+
+        const targetIndex = dev.follows.findIndex((dev)=>  dev.id == input.target) 
+            
+        if (targetIndex < 0)
+            dev.follows.push({ id : input.target} as unknown as Dev)
+        else 
+            dev.follows.splice(targetIndex, 1)
+
+        await this.repo.update(dev)
+        
+        return new SuccessResponse({
+            status : 200,
+            data : new DevOutput(dev)
+        })
     }
     
     private async populateProfile(githubUsername : string, id : string) {

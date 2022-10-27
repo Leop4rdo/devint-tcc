@@ -16,11 +16,12 @@ export default abstract class AbstractRepository<T> {
 
     async remove(id:string) { return (await this.db.delete({id})) ? true : false}
     
-    async findById(id: string){
+    async findById(id: string, relations ?: string[]){
         return this.db.findOne({
             where: {
                 id
-            }
+            },
+            relations : relations
         })
     }
 
