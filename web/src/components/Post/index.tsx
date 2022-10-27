@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
 import { IPostListItem, IPost } from "interfaces/IPost";
 import * as postService from "../../services/post.service"
+import * as devService from "../../services/dev.service"
 
 interface IPostProps {
     data: IPostListItem
@@ -14,15 +15,19 @@ interface IPostProps {
 }
 
 const Post: React.FC<IPostProps> = ({ data, openDetails }) => {
-
-
-
     const [liked, setLiked] = useState(data.alreadyHearted)
+    const [followingWritter, setFollowingWritter] = useState(data.writter.following ?? false)
 
     const giveLike = async () => {
         await postService.addHeart(data.id)
 
         setLiked(!liked)
+    }
+
+    const toggleFollow = async () => {
+        await devService.toggleFollow(data.writter.id)
+
+        setFollowingWritter(!followingWritter)
     }
 
     return (
@@ -32,7 +37,7 @@ const Post: React.FC<IPostProps> = ({ data, openDetails }) => {
                     <img src={data.writter.profilePicUrl} />
                     <h2>{data.writter.name}</h2>
                 </div>
-                <Button className="follow-button" children={[<Icon name="add" />, "Seguir"]} />
+                <Button className="follow-button" onClick={toggleFollow} children={[<Icon name={ (followingWritter) ? "add" : "remove" } />, "Seguir"]} />
             </div>
 
             <div className="post-content" >
