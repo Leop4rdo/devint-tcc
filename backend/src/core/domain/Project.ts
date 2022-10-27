@@ -5,8 +5,8 @@ import Post from "./Post";
 export default class Project {
     id : string
     name: string
+    bannerURI : string
     githubRepo: JSON
-    followers: JSON
     license: String
     helpWanted: boolean
     desc: string

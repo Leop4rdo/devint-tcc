@@ -8,8 +8,11 @@ export default class ProjectEntity {
 
     @Column({ nullable : false})
     name: string
+
+    @Column({ nullable : true, name : 'banner_uri' })
+    bannerURI : string
     
-    @Column({ nullable : true, name : 'github_repo'})
+    @Column('jsonb', { nullable : true, name : 'github_repo'})
     githubRepo: JSON
 
     @Column({ default : 'All rights reserved'})
