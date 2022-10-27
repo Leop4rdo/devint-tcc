@@ -18,12 +18,24 @@ const UserProfilePage: React.FC = () => {
 
 
                     <div className="container-of-information">
+
                         <div className="container-profile-data">
-                            <div className="container-image-face-user">
+                            <div className="icon-edit">
+                                <Icon name="edit" />
                             </div>
-                            <h2>Name user</h2>
-                            <p>Bio muito bunita feita para exemplificar uns bagui ai
-                                tipo... alguma coisa</p>
+                            <div className="container-image-face-user">
+
+                            </div>
+
+                            <div className="data-user">
+                                <h2>Name user</h2>
+                                <span>
+                                    <img src="assets/icons/github.svg" alt="" />
+                                    Ezequiel-Mathias
+                                </span>
+                                <p>Bio muito bunita feita para exemplificar uns bagui ai
+                                    tipo... alguma coisa</p>
+                            </div>
 
                             <div className="container-follower-data">
                                 <div className="container-followers">
@@ -36,6 +48,10 @@ const UserProfilePage: React.FC = () => {
                                     <p>Seguindo</p>
                                 </div>
 
+                            </div>
+
+                            <div className="container-follow-unfollow">
+                                <span><Icon name="add"/>Seguir</span>
                             </div>
                         </div>
 
@@ -99,21 +115,24 @@ const UserProfilePage: React.FC = () => {
 
                         <UserProfileEdit iconName="push_pin" subject="Outros links">
 
-                            <div className="teste">
-                                <div className="container-links">
+                            <div className="container-links">
+                                <div className="links">
                                     <span>Link qualquer</span>
                                 </div>
 
-                                <div className="container-links">
+                                <div className="links">
                                     <span>Link qualquer</span>
                                 </div>
 
-                                <div className="container-links">
+                                <div className="links">
                                     <span>Link qualquer</span>
                                 </div>
+                                <div className="links">
+                                    <span>Link qualquer</span>
+                                </div>
+
+
                             </div>
-
-
 
                         </UserProfileEdit>
 

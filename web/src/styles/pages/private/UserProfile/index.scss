@@ -17,7 +17,8 @@
         }
 
         .container-of-information {
-            position: absolute;
+
+
             top: 170px;
 
             .container-profile-data {
@@ -28,33 +29,63 @@
                 display: flex;
                 align-items: center;
                 flex-direction: column;
-                word-wrap: break-word;
-                gap: 16px;
                 padding: 12px;
+
+                .icon-edit {
+                    width: 100%;
+                    display: flex;
+                    justify-content: right;
+
+                    .icon {
+                        color: $color-light-gray;
+                        font-size: 20px;
+                        cursor: pointer;
+                    }
+                }
 
                 .container-image-face-user {
                     width: 150px;
                     height: 150px;
                     background-color: $color-white;
                     border-radius: 50%;
-                    margin-top: 20px;
+
 
                 }
 
-                h2 {
-                    margin-top: 16px;
-                    color: $color-white;
-                    font-weight: $font-regular;
+                .data-user {
+                    display: flex;
+                    align-items: center;
+                    flex-direction: column;
+
+                    span {
+                        color: $color-light-gray;
+                        font-size: 15px;
+                        display: flex;
+                        padding: 10px;
+
+                        img{
+                            margin-right: 10px;    
+                            height: 20px;   
+                        }
+                    }
+
+                    h2 {
+                        margin-top: 16px;
+                        color: $color-white;
+                        font-weight: $font-regular;
+                    }
+
+                    p {
+                        font-size: 16px;
+                        color: $color-light-gray;
+                        font-weight: $font-regular;
+                        width: 75%;
+                        text-align: center;
+                        margin-top: 16px;
+                    }
                 }
 
-                p {
-                    font-size: 16px;
-                    color: $color-light-gray;
-                    font-weight: $font-regular;
-                    width: 75%;
-                    text-align: center;
-                    margin-top: 16px;
-                }
+
 
                 .container-follower-data {
                     display: flex;
@@ -83,8 +114,22 @@
 
                         }
                     }
+                }
 
-
+                .container-follow-unfollow{
+                    margin-top: 30px;
+                    margin-bottom: 30px;
+                    span{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        color: $color-white;
+                        background-color: $color-primary;
+                        border-radius: 16px;
+                        padding: 2px 8px 2px 0px;
+                        font-weight: $font-medium;
+                        cursor: pointer;
+                    }
                 }
             }
 
@@ -157,14 +202,20 @@
         }
 
 
-        .teste {
+        .container-links {
+            flex-direction: row;
             display: flex;
-            .container-links {
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-left: -20px;
+
+            .links {
                 height: 50px;
                 margin-top: 20px;
                 margin-left: 20px;
                 display: flex;
                 flex-direction: row;
+                align-items: center;
 
                 span {
                     padding: 10px;
