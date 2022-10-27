@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm"
+import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm"
+import PostEntity from "./PostEntity"
 
 @Entity('projects')
 export default class ProjectEntity {
@@ -8,29 +9,23 @@ export default class ProjectEntity {
     @Column({ nullable : false})
     name: string
     
-    @Column({ nullable : false, name : 'github_repo_url'})
-    githubRepoUrl: string
+    @Column({ nullable : true, name : 'github_repo'})
+    githubRepo: JSON
 
-    @Column('jsonb')
-    followers: JSON
-    
-    @Column()
+    @Column({ default : 'All rights reserved'})
     license: String
     
-    @Column({ name : 'accept_donations'})
-    acceptDonations: boolean
-   
     @Column({ name : 'help_wanted'})
     helpWanted: boolean
    
     @Column()
     desc: string
+
+    @OneToMany(() => PostEntity, (post) => post.project)
+    posts : PostEntity[]
    
-    @Column('jsonb', { name : 'up_votes' })
-    upVotes: JSON
-   
-    @Column('jsonb', { name : 'down_votes' })
-    downVotes: JSON
+    @Column('jsonb')
+    hearts : JSON
 
     @CreateDateColumn({ name : 'created_at', select: false })
     createdAt : Timestamp

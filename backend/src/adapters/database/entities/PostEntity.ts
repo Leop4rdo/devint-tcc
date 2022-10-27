@@ -1,6 +1,7 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm";
 import CommentEntity from "./CommentEntity";
 import DevEntity from "./DevEntity";
+import ProjectEntity from "./ProjectEntity";
 
 @Entity('posts')
 export default class PostEntity {
@@ -24,7 +25,10 @@ export default class PostEntity {
 
     @Column()
     order : number
-      
+    
+    @ManyToOne(() => ProjectEntity, (project) => project.posts, { nullable : true })
+    project : ProjectEntity
+
     @ManyToOne(() => DevEntity, (writter) => writter.posts, { eager : true})
     writter: DevEntity
     

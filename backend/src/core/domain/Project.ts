@@ -1,17 +1,17 @@
 import { Timestamp } from "typeorm";
 import IProjectProps from "@src/core/domain/interfaces/IProject";
+import Post from "./Post";
 
 export default class Project {
     id : string
     name: string
-    githubRepoUrl: string
+    githubRepo: JSON
     followers: JSON
     license: String
-    acceptDonations: boolean
     helpWanted: boolean
     desc: string
-    upVotes: JSON
-    downVotes: JSON
+    posts : Post[]
+    hearts: JSON
     createdAt : Timestamp
     updatedAt : Timestamp
     
