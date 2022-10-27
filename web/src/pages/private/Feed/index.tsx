@@ -93,7 +93,7 @@ const FeedPage: React.FC = () => {
                                     </>
                                 )
                             }
-                            <div id="scroll-observer" onClick={getPosts} ref={triggerRef}></div>
+                            <div id="scroll-observer" onClick={getPosts} ref={triggerRef}>Ver mais</div>
                         </div>
                     </div>
 
