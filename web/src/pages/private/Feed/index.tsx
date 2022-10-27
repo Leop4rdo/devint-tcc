@@ -26,7 +26,7 @@ const FeedPage: React.FC = () => {
     let page = 1;
 
     const getDevs = async () => {
-        const res = await devService.list({ limit: 20 })
+        const res = await devService.list({ limit: 48 })
 
         setDevs(res.data)
     }
@@ -39,14 +39,7 @@ const FeedPage: React.FC = () => {
     }
 
     const getMorePosts = async () => {
-        console.log(loading)
         if (loading) return
-        console.log('i_p ->', page)
-
-        page += 1
-
-        console.log('f_p ->', page)
-
     }
 
     const configTrigger = () => {
