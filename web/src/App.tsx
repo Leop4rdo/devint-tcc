@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 import AppRouter from 'routes';
@@ -9,7 +8,7 @@ function App() {
     <div className="app">
       <AuthProvider>
         <AppRouter />
-      </AuthProvider>
+      </AuthProvider> 
     </div>    
   );
 }

@@ -56,7 +56,6 @@ interface IChangePasswordRequestBody {
 export const changePassword = async (body : IChangePasswordRequestBody) => {
     try {
         const { data } = await api.patch("change-password", body)
-        console.log(data)
 
         return data as IResponse
     } catch (err : any) {

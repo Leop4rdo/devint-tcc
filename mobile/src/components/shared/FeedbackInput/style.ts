@@ -44,6 +44,11 @@ const styles = StyleSheet.create({
         ...globalStyles.text,
         textVerticalAlign: 'center',
         alignItems: 'center'
+    },
+    iconImage : {
+        height:24,
+        width:24,
+        marginRight:4
     }
 })
 

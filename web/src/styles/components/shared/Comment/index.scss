@@ -1,0 +1,99 @@
+.comment-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .comment {
+        width: 100%;
+        
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+    
+        .profile-pic img{
+            width: clamp(48px, 2vw, 64px);
+            aspect-ratio: 1;
+    
+            border-radius:  100%;
+        }
+    
+        .content-container {
+            width: 100%;
+            padding: 12px;
+    
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+    
+            background-color: $color-dark-gray;
+    
+            border-radius: 16px;
+    
+            .username {
+                color: $color-primary;
+                font-weight: $font-semibold;
+                font-size: clamp(.75rem, 4vw, 1rem);
+            }
+    
+            .text-content {
+                font-size: clamp(.75rem, 4vw, 1rem);
+                color: white;
+            }
+    
+            .comment-footer {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+    
+                #answer {
+                    font-size: clamp(.6rem, 4vw, .8rem);
+                    color: $color-light-gray;
+    
+                    cursor: pointer;
+    
+                    transition: color .25s ease-out;
+    
+                    &:hover {
+                        color: $color-primary;
+                    }
+                }
+    
+                .likes {
+                    display: flex;
+                    flex-direction: row;
+                    gap: 0.5em;
+                    color: $color-white;
+    
+                    button {
+                        background-color: transparent;
+                        border: none;
+                        width: fit-content;
+                        height: auto;
+            
+                        .icon{
+                            color: $color-white;
+                            transition: color .25s ease-out;
+            
+                            &:hover, &#already-hearted {
+                                color: $color-primary;
+                            }
+            
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .answer, .new-comment-container {
+        padding-left: 48px;
+
+        img {
+            width: clamp(48px, 2vw, 64px);
+            aspect-ratio: 1;
+    
+            border-radius:  100%;
+        }
+    }
+
+}

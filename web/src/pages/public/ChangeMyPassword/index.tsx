@@ -1,4 +1,4 @@
-import LoginWrapper from "components/LoginWrapper"
+import LoginWrapper from "components/layout/LoginWrapper"
 import ForgotMyPasswordStep1 from "components/RegisterForms/ForgetMyPasswordPage/Step1";
 import ForgotMyPasswordStep2 from "components/RegisterForms/ForgetMyPasswordPage/Step2";
 import Input from "components/shared/Input";

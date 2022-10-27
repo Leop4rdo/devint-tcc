@@ -8,22 +8,16 @@ const styles = StyleSheet.create({
     page : {
         height : '100%',
         width : '100%',
-       
-
         backgroundColor : colors.DARK_GRAY,
-
-        
-       
     },
 
     title : {
         ...globalStyles.text,
         fontSize: 32,
+        color : colors.PRIMARY,
         fontFamily: fonts.POPPINS_MEDIUM,
-
         textAlign: "center",
-
-        marginBottom: 24
+        marginBottom: 16
     },
 
     linkPasswordRecover : {
@@ -38,7 +32,6 @@ const styles = StyleSheet.create({
     },
 
     ContainerLogin:{
-        paddingVertical: 56,
         paddingHorizontal: 24,
     }
 })

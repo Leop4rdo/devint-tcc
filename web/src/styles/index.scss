@@ -7,9 +7,13 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
+  p {
+    color: $color-white;
+  }
   font-family: $base-font-family;
 }
+
+
 
 a {
   position: relative;
@@ -38,18 +42,39 @@ a {
 #root {
   z-index: 0;
 
+  //Styles Libraries Imports ->
+  @import 'swiper/scss';
+  @import 'swiper/scss/pagination';
+
   // Page Style Imports ->
   @import "./pages/public/Login/index.scss";
   @import "./pages/public/Register/index.scss";
   @import "./pages/public/Register/Dev.scss";
   @import "./pages/public/Register/Company.scss";
   @import "./pages/public/ForgotMyPasswordPage/index.scss";
+  @import "./pages/private/Feed";
+  @import "./pages/private/UserProfile/index.scss";
  
 
   // Component Style Imports ->
-  @import "./components/Input";
-  @import "./components/Button";
+  @import "swiper/css/bundle";
+  @import "./components/layout/NavBar/index.scss";
+  @import "./components/layout/SideBar/index.scss";
+  @import "./components/layout/MenuWrapper/index.scss";
   @import "./components/RegisterForms/Company/index.scss";
   @import "./components/RegisterForms/Dev/index.scss";
-  @import "./components/Select/index.scss";
+  @import "./components/Post/index.scss";
+  @import "./components/shared/Input/index.scss";
+  @import "./components/shared/Button/index.scss";
+  @import "./components/shared/Select/index.scss";
+  @import "./components/shared/SideCard/index.scss";
+  @import "./components/shared/NewPost/index.scss";
+  @import "./components/shared/Comment/index.scss";
+  @import "./components/shared/CreateComment/index.scss";
+  
+
+  
+  // Modal Style Imports ->
+  @import "./components/layout/Modals/CreatePostModal/index.scss";
+  @import "./components/layout/Modals/PostDetailsModal/index.scss";
 }

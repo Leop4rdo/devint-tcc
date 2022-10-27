@@ -13,7 +13,6 @@ export interface IRegisterFormProps {
 }
 
 const RegisterFormStep1: React.FC<IRegisterFormProps> = ({ styles, formData, onChange }) => {
-
     const opacityAnim = useAnimation(0, 1)
 
     useEffect(() => {
@@ -26,7 +25,7 @@ const RegisterFormStep1: React.FC<IRegisterFormProps> = ({ styles, formData, onC
 
             <FeedbackTextInput style={styles.input} placeholder="Digite um email" icon="mail" onChangeText={(text: string) => onChange(text, "email")} keyboardType="email-address"></FeedbackTextInput>
 
-            <FeedbackTextInput style={styles.input} placeholder="Usuário GitHub (opcional)" icon="add-box" onChangeText={(text: string) => onChange(text, "github")} keyboardType="user"></FeedbackTextInput>
+            <FeedbackTextInput style={styles.input} placeholder="Usuário (opcional)" onChangeText={(text: string) => onChange(text, "github")} keyboardType="user" image={require("../../../../assets/github-icon-light-purple.png")} focusImage={require("../../../../assets/github-icon-light-purple.png")}></FeedbackTextInput>
         </Animated.View>
     )
 }
