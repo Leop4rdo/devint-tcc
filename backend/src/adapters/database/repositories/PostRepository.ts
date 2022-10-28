@@ -1,5 +1,4 @@
-import PaginateListInput from "@src/ports/input/PaginateListInput";
-import { AppDataSource } from "../data-source";
+import PaginateListInput from "@src/ports/input/PaginateListInput"; import { AppDataSource } from "../data-source";
 import PostEntity from "../entities/PostEntity";
 import AbstractRepository from "./AbstractRepository"
 
