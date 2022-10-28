@@ -75,7 +75,7 @@ const Comment: React.FC<ICommentProps> = ({ data, refresh }) => {
 
             {
                 data.answers.map((answer : any) => 
-                    <div className="comment answer">
+                    <div className="comment answer" key={data.id}>
                         <div className="profile-pic">
                             <img src={answer.writter.profilePicUrl} alt="" />
                         </div>

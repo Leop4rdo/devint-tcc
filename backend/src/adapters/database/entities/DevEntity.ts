@@ -19,6 +19,13 @@ export default class DevEntity {
     @Index()
     name: string
 
+    @ManyToMany(() => DevEntity, (dev) => dev.followers, {cascade: true})
+    @JoinTable({ name : 'follow', joinColumn : { name : 'source_dev' }, inverseJoinColumn : { name : 'target_dev'} })
+    follows : DevEntity[]
+
+    @ManyToMany(() => DevEntity, (dev) => dev.follows)
+    followers : DevEntity[]
+
     @Column({ default: '', nullable: true })
     bio: string
 
@@ -30,6 +37,9 @@ export default class DevEntity {
 
     @Column({ name: 'profile_pic_url', default : 'https://st2.depositphotos.com/19428878/44645/v/450/depositphotos_446453832-stock-illustration-default-avatar-profile-icon-social.jpg' })
     profilePicUrl: string
+
+    @Column({ name: 'banner_uri', default : ''})
+    bannerURI : string
 
     @Column({ default: 0, name: 'comunity_ratings' })
     comunityRating: number
