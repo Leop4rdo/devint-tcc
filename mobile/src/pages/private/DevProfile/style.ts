@@ -43,7 +43,8 @@ const styles = StyleSheet.create({
     },
     profileDice:{
         flexDirection:'row',
-        justifyContent:'space-around',
+        marginHorizontal:20
+
     },
     dice:{
         flexDirection:'column',
@@ -69,18 +70,19 @@ const styles = StyleSheet.create({
     },
     buttonEdit:{
         backgroundColor: colors.PRIMARY,
-        width:140,
-        height:21,
+        width:88,
+        height:22,
         flexDirection : 'row',
         alignItems:'center',
-        paddingHorizontal: 20,
-        borderRadius: 16
+        paddingHorizontal:12 ,
+        borderRadius: 16,
     },
     textButton:{
         color: colors.WHITE,
         marginLeft: 10,
         fontSize:12,
-        fontFamily: fonts.POPPINS_SEMIBOLD
+        fontFamily: fonts.POPPINS_SEMIBOLD,
+    
     },
     publicationData:{
         marginVertical: 16,
@@ -95,8 +97,25 @@ const styles = StyleSheet.create({
         fontSize:12,
         color: colors.LIGHT_GRAY,
         fontFamily: fonts.POPPINS_SEMIBOLD
-    
+    },
+    containerChildren:{
+        marginHorizontal: 2,
+        flexDirection: 'row',
+        alignItems: 'center',
+        fontSize: 16,
+        marginBottom: 6
+    },
+    icon:{
+        fontSize:16,
+        marginRight:8,
+    },
+
+    textedit:{
+         color: colors.WHITE
     }
+
+   
+
    
  
 })

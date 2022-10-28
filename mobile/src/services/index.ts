@@ -14,9 +14,8 @@ export interface PaginationQuery {
     offset ?: number
 }
 
-export const baseUrl = "http://10.107.144.16:8080/api/v1"
+export const baseUrl = "http://10.107.144.6:8080/api/v1"
 // export const baseUrl = "http://192.168.0.113:8080/api/v1"
-
 
 export const getToken = async () => {
     return await getFromLocalStorage('devint-authorization')

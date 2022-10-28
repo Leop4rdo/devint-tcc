@@ -6,6 +6,7 @@
     justify-content: left;
     border-radius: 8px;
     padding-right: 8px;
+    width: 100%;
     
     
     .icon{
@@ -26,6 +27,7 @@
         height: auto;
         word-wrap:break-word;
         width: 100%;
+        
 
         img {
             width: 40px;
@@ -53,7 +55,7 @@
             color: $color-white;
             text-decoration: none;
             font-size: 16px;
-            width: 260px;
+            width: clamp(16rem , 20vw , 18rem);
             outline: none;
             resize: none;
             overflow-y: scroll;

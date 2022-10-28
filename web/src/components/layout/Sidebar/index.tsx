@@ -2,47 +2,60 @@ import React, { useContext } from "react";
 
 import Icon from "components/shared/Icon";
 import { AuthContext } from "store/context/Auth.context";
+import Button from "components/shared/Button";
+import { useNavigate } from "react-router-dom";
 
 
 interface ISidebarProps {
     open : boolean
 }
 
-const Sidebar: React.FC<ISidebarProps> = ({open}) => {
+const Sidebar: React.FC<ISidebarProps> = ({open }) => {
     const authContext = useContext(AuthContext)
 
+    const navigation = useNavigate()
+
     return (
-            // <div className="container-side-bar effect-side-bar ">
             <div className={`container-side-bar effect-side-bar ${open ? 'open' : ''}`}>
 
                 <div className="container-user">
-                    <div className="container-image-face">
-                    <img src="../assets/images/Tony.jpg" alt="Tony Cauntry" />
+                    <div className="container-image-face" onClick={() => navigation('user-profile')}>
+                    <img src={authContext?.userData?.profilePicUrl} alt="User profile picture" />
                     </div>
-                    <h2>{authContext?.signIn.name}</h2>
+                    <h2 onClick={() => navigation('user-profile')}>{authContext?.userData?.name}</h2>
+                    
                 </div>
+
+                <div className="horizontal-line">
+                    </div>
 
                 <div className="container-itens">
                     <nav className="container-nav">
-                        <ul>
-                            <Icon name="house" /><li><a>Home</a></li>
-                        </ul>
-                        <ul>
-                            <Icon name="article" /><li><a>Artigos</a></li>
-                        </ul>
-                        <ul>
-                            <Icon name="watch_later" /><li><a>Itens salvos</a></li>
-                        </ul>
-                        <ul>
-                            <Icon name="chat" /><li><a>Chats</a></li>
-                        </ul>
-                        <ul>
-                            <Icon name="settings" /><li><a>Configurações</a></li>
-                        </ul>
+                        <div className="sidebar-item active">
+                            <Icon name="house" />
+                            <a className="item-text">Home</a>
+                        </div>
+                        <div className="sidebar-item">
+                            <Icon name="article" />
+                            <a className="item-text">Artigos</a>
+                        </div>
+                        <div className="sidebar-item">
+                            <Icon name="watch_later" />
+                            <a className="item-text">Itens salvos</a>
+                        </div>
+                        <div className="sidebar-item">
+                            <Icon name="chat" />
+                            <a className="item-text">Chats</a>
+                        </div>
+                        <div className="sidebar-item">
+                            <Icon name="settings" />
+                            <a className="item-text">Configurações</a>
+                        </div>
                     </nav>
 
-                    <div className="logout-icon">
-                        <Icon name="logout" />
+                    <div className="sidebar-item" onClick={authContext?.signOut}>
+                        <span className="icon">:q</span>
+                        <span className="item-text">sair</span>
                     </div>
 
                 </div>

@@ -1,0 +1,165 @@
+.modal-wrapper {
+    width: 100vw;
+    height: 100vh;
+    
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    z-index: 9999;
+
+    background-color: $color-modal-wrapper-background;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .create-post-modal {
+        width: clamp(200px, 80vw, 1000px);
+
+        background-color: $color-dark-gray;
+        
+        padding: 16px;
+        
+        border-radius: 16px;
+
+        display: flex;
+        flex-direction: column;
+        gap: 48px;
+
+        header {
+            width: 100%;
+            
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .user-data-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 16px;
+
+                .profile-image {
+                    width: clamp(48px, 10vw, 80px);
+                    aspect-ratio: 1;
+
+                    border-radius: 100%;
+                    border-style: solid;
+                    border-width: 2px;
+                    border-color: $color-primary;
+                }
+
+                .user-names-container {
+                    display: flex;
+                    justify-content: center;
+                    flex-direction: column;
+
+                    #username {
+                        color: white;
+                        font-weight: $font-semibold;
+                        font-size: clamp(1rem, 4vw, 1.5rem);
+                    }
+
+                    #github-username {
+                        color: $color-light-gray;
+                        font-weight: $font-regular;
+                        font-size: clamp(.75rem, 4vw, 1.25rem);
+                    }
+                }
+            }
+
+            .icon {
+                font-size: clamp(1.5rem, 4vw, 2.5rem);
+                color: white;
+
+                transition: color .25s ease-out;
+                cursor: pointer;
+               
+                
+                &:hover {
+                    color : $color-primary;
+                }
+            }
+        }
+
+        .content {
+            .post-content-textarea {
+                min-height: 80px;
+                max-height: 40vh;
+                width: 100%;    
+
+                resize: none;
+
+                background-color: $color-dark-gray;
+                border: none;
+                outline: none;
+
+                color: white;
+                font-size: clamp(.75rem, 4vw, 1.25rem);
+
+                &::placeholder {
+                    color: $color-gray;
+                    font-size: clamp(.75rem, 4vw, 1.25rem);
+
+                }
+            }
+
+            .attachment-list {
+                width: 100%;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                img {
+                    height: clamp(4rem, 10vw, 8rem);
+                    aspect-ratio: 1;
+
+                    object-fit: contain;
+                }
+            }
+        }
+
+        footer {
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .attachment-load-options {
+                #attachment-input { display:  none; }
+                .icon {
+                    font-size: clamp(1.5rem, 4vw, 2.5rem);
+                    color: white;
+
+                    transition: color .25s ease-out;
+                    
+                    &:hover {
+                        color : $color-primary;
+                    }
+                }
+            }
+
+            .post-options {
+                height: 48px;
+                display: flex;
+                gap : 16px;
+
+                align-items: center;
+
+                select {
+                    width: clamp(80px, 25vw, 240px);
+                    height: 100%;
+                }
+
+                button {
+                    width: auto;
+                    padding: 16px;
+                    height: 100%;
+                }
+            }
+        }
+    }
+}

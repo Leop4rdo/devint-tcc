@@ -1,14 +1,16 @@
-import MenuWapper from "components/layout/MenuWrapper";
+
 import FeedPage from "pages/private/Feed";
+import UserProfilePage from "pages/private/UserProfile";
 import React from "react"
 import { Route, Routes } from "react-router-dom"
-import PostDetailsPage from "pages/private/PostDetails"
+
 
 const PrivateRouter: React.FC = () => {
     return (
         <Routes>
-            {/* <Route index element={<FeedPage />}/>
-            <Route path="posts/:id" element={<PostDetailsPage />} /> */}
+            <Route index element={<FeedPage />}/>
+            <Route path="user-profile" element={<UserProfilePage />} />
+            
         </Routes>
     );
 }

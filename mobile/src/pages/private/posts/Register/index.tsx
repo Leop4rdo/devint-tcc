@@ -32,7 +32,7 @@ const PostRegisterPage : React.FC<{ navigation : any }> = ({navigation}) => {
         if (uploading) return
 
         const result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
             allowsEditing : true,
             quality : 1
         });
@@ -50,7 +50,7 @@ const PostRegisterPage : React.FC<{ navigation : any }> = ({navigation}) => {
             const blob = await res.blob()
             const fileName = uri.substring(uri.lastIndexOf('/')+1)
 
-            const uploaded = await firebase.storage().ref().child(fileName).put(blob)
+            const uploaded = await firebase.storage().ref().child('attachments/').child(fileName).put(blob)
 
             setAttachments([
                 ...attachments,    
@@ -77,7 +77,6 @@ const PostRegisterPage : React.FC<{ navigation : any }> = ({navigation}) => {
         }
 
         const res = await postService.create(body)
-        console.log(res)
 
         if (res.hasError) return Alert.alert('Houve um erro inesperado ao publicar, tente novamente mais tarde!')
 

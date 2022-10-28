@@ -3,7 +3,8 @@ import {MaterialIcons} from "@expo/vector-icons";
 import LayoutWrapper from "../../../components/shared/LayoutWrapper";
 import styles from "./style";
 import Post from "../../../components/Post";
-
+import ProfileEdit from "../../../components/ProfileEdit";
+import ButtonComponent from "../../../components/shared/Button";
 
 
 const ProfilePage: React.FC<{ navigation : any }> = ({navigation}) => {
@@ -17,8 +18,8 @@ const ProfilePage: React.FC<{ navigation : any }> = ({navigation}) => {
                     <View style={styles.profileEdit}>
                         <Image source={{uri:'https://midias.correiobraziliense.com.br/_midias/jpg/2013/11/15/675x450/1_cbifot151120135622-18891928.jpg?20220922092144?20220922092144'}} style={styles.photoUser}></Image>
                         <Pressable onPress={() => navigation.navigate('profile-edit')} style={styles.buttonEdit}>
-                            <MaterialIcons name="edit" size={16} color='#FFF' />
-                            <Text style={styles.textButton}>Editar perfil</Text>
+                            <MaterialIcons name="add" size={16} color='#FFF' />
+                            <Text style={styles.textButton}>Seguir </Text>
                         </Pressable>
                     </View>
 
@@ -37,14 +38,6 @@ const ProfilePage: React.FC<{ navigation : any }> = ({navigation}) => {
                         <Text style={styles.amount}>40</Text>
                         <Text style={styles.text}> Seguindo</Text>
                     </View>
-                    <View style={styles.dice}>
-                        <Text style={styles.amount}>40</Text>
-                        <Text style={styles.text}>Posts</Text>
-                    </View>
-                    <View style={styles.dice}>
-                        <Text style={styles.amount}>40</Text>
-                        <Text style={styles.text}>Article</Text>
-                    </View>
                 </View>
                 
 
@@ -61,6 +54,62 @@ const ProfilePage: React.FC<{ navigation : any }> = ({navigation}) => {
                         <Text style={styles.textPublications}>Artigos</Text>
                     </Pressable>
                 </View>
+
+                <ProfileEdit icon="star" text="Contato">
+                 <View style={styles.containerChildren}>
+                    <MaterialIcons style={styles.icon} name="email" color={'#FFF'}></MaterialIcons>
+                    <Text style={styles.textedit}>john.doe@devint.com</Text>
+                 </View>
+                 <View style={styles.containerChildren}>
+                    <MaterialIcons style={styles.icon} name="call" color={'#FFF'}></MaterialIcons>
+                    <Text style={styles.textedit}>(XX) XXXXX-XXXX</Text>
+                 </View>
+                </ProfileEdit>
+
+                <ProfileEdit icon="star" text="Sobre">
+                 <View style={styles.containerChildren}>
+                    <MaterialIcons style={styles.icon} name="calendar_month" color={'#FFF'}></MaterialIcons>
+                    <Text style={styles.textedit}>29/08/2099</Text>
+                 </View>
+
+                 <View style={styles.containerChildren}>
+                    <MaterialIcons style={styles.icon} name="group" color={'#FFF'}></MaterialIcons>
+                    <Text style={styles.textedit}>Masculino</Text>
+                 </View>
+                </ProfileEdit>
+
+                <ProfileEdit icon="star" text="Foco de Carreira">
+                 <View style={styles.containerChildren}>
+                    <MaterialIcons style={styles.icon} name="email" color={'#FFF'}></MaterialIcons>
+                    <Text style={styles.textedit}>Front-End</Text>
+                 </View>
+                </ProfileEdit>
+
+                <ProfileEdit icon="star" text="Trabalho atual">
+                 <View style={styles.containerChildren}>
+                    <MaterialIcons style={styles.icon} name="email" color={'#FFF'}></MaterialIcons>
+                    <Text style={styles.textedit}>Front-End</Text>
+                 </View>
+                </ProfileEdit>
+
+                <ProfileEdit icon="star" text="Senioridade">
+                 <View style={styles.containerChildren}>
+                    <MaterialIcons style={styles.icon} name="email" color={'#FFF'}></MaterialIcons>
+                    <Text style={styles.textedit}>Junior</Text>
+                 </View>
+                </ProfileEdit>
+
+                <ProfileEdit icon="star" text="Habilidades">
+                 <View style={styles.containerChildren}>
+                    <MaterialIcons style={styles.icon} name="email" color={'#FFF'}></MaterialIcons>
+                    <Text style={styles.textedit}>Junior</Text>
+                 </View>
+                </ProfileEdit>
+
+                
+                    
+               
+
    
             </View>
         </LayoutWrapper>

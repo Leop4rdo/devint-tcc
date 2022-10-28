@@ -5,11 +5,11 @@ import React, {
 	TextareaHTMLAttributes,
 } from "react";
 
-interface IAutoTextArea {
+interface IAutoTextArea extends TextareaHTMLAttributes<HTMLTextAreaElement> {
 	placeholder?: string
 } 
 
-const AutoTextArea : React.FC<IAutoTextArea> = (props: TextareaHTMLAttributes<HTMLTextAreaElement> ) => {
+const AutoTextArea : React.FC<IAutoTextArea> = (props: IAutoTextArea ) => {
 	
 	const textAreaRef = useRef<HTMLTextAreaElement>(null);
 	const [text, setText] = useState("");
@@ -22,8 +22,6 @@ const AutoTextArea : React.FC<IAutoTextArea> = (props: TextareaHTMLAttributes<HT
 	}, [text]);
 
 	const onChangeHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-		
-		
 		setParentHeight(`${textAreaRef.current!.scrollHeight}px`);
 		setText(event.target.value);
 
@@ -35,13 +33,14 @@ const AutoTextArea : React.FC<IAutoTextArea> = (props: TextareaHTMLAttributes<HT
 
 	return (
 		<div
+			className="auto-grow-text-area"
 			style={{
 				minHeight: parentHeight,
 			}}
 		>
 			<textarea
 				{...props}
-				placeholder={'Escreva um comentario...'}
+				placeholder={props.placeholder}
 				ref={textAreaRef}
 				rows={1}
 				style={{

@@ -53,10 +53,10 @@ a {
   @import "./pages/public/Register/Company.scss";
   @import "./pages/public/ForgotMyPasswordPage/index.scss";
   @import "./pages/private/Feed";
-  @import "./pages/private/PostDetails/index.scss";
+  @import "./pages/private/UserProfile/index.scss";
+ 
 
   // Component Style Imports ->
-
   @import "swiper/css/bundle";
   @import "./components/layout/NavBar/index.scss";
   @import "./components/layout/SideBar/index.scss";
@@ -71,6 +71,10 @@ a {
   @import "./components/shared/NewPost/index.scss";
   @import "./components/shared/Comment/index.scss";
   @import "./components/shared/CreateComment/index.scss";
+  
 
- 
+  
+  // Modal Style Imports ->
+  @import "./components/layout/Modals/CreatePostModal/index.scss";
+  @import "./components/layout/Modals/PostDetailsModal/index.scss";
 }
