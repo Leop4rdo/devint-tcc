@@ -16,7 +16,6 @@ interface IPostProps {
 
 const Post: React.FC<IPostProps> = ({ data, openDetails }) => {
     const [liked, setLiked] = useState(data.alreadyHearted)
-    const [followingWritter, setFollowingWritter] = useState(data.writter.following ?? false)
 
     const giveLike = async () => {
         await postService.addHeart(data.id)
@@ -37,7 +36,6 @@ const Post: React.FC<IPostProps> = ({ data, openDetails }) => {
                     <img src={data.writter.profilePicUrl} />
                     <h2>{data.writter.name}</h2>
                 </div>
-                <Button className="follow-button" onClick={toggleFollow} children={[<Icon name={ (followingWritter) ? "add" : "remove" } />, "Seguir"]} />
             </div>
 
             <div className="post-content" >
