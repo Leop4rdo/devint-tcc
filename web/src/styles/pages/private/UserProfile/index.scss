@@ -1,29 +1,39 @@
 .container-user-profile {
     background-color: $color-dark-gray;
-    height: 100%;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
 
 
+    .background-image {
+        width: 100%;
+        margin-bottom: 20px;
 
-    .container-profile-style {
-
-
-        .background-image {
-            width: 100%;
-            height: 200px;
-            background-color: $color-white;
-
+        .icon {
+            margin-top: 16px;
+            margin-right: 10px;
+            color: $color-light-gray;
+            font-size: 20px;
+            cursor: pointer;
+            position: absolute;
 
         }
 
+        img {
+            margin-right: -30px;
+            width: 100%;
+            height: auto;
+        }
+
+    }
+
+    .container-profile-style {
+        width: 450px;
+
         .container-of-information {
 
-
-            top: 170px;
-
             .container-profile-data {
-                width: 350px;
                 background-color: $color-black;
+                width: 350px;
                 border-radius: 16px;
                 margin-left: 32px;
                 display: flex;
@@ -63,9 +73,9 @@
                         display: flex;
                         padding: 10px;
 
-                        img{
-                            margin-right: 10px;    
-                            height: 20px;   
+                        img {
+                            margin-right: 10px;
+                            height: 20px;
                         }
                     }
 
@@ -116,10 +126,11 @@
                     }
                 }
 
-                .container-follow-unfollow{
+                .container-follow-unfollow {
                     margin-top: 30px;
                     margin-bottom: 30px;
-                    span{
+
+                    span {
                         display: flex;
                         align-items: center;
                         justify-content: center;
@@ -142,14 +153,39 @@
 
                 .container-email,
                 .container-phone {
-
                     display: flex;
                     gap: 8px;
-                    margin-bottom: 20px;
+                    margin-bottom: 10px;
 
                     span {
                         word-break: break-all;
                         color: $color-white;
+                    }
+                }
+            }
+
+            .container-about {
+                margin-left: 10px;
+                height: auto;
+                padding-bottom: 20px;
+
+                .icon {
+                    color: $color-white;
+                }
+
+                .container-email,
+                .container-sex, .container-user-git-hub {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    margin-top: 16px;
+
+                    span {
+                        color: $color-white;
+                    }
+
+                    img{
+                        width: 24px;
                     }
                 }
             }
@@ -173,9 +209,6 @@
                 margin-left: 10px;
                 width: 100%;
                 display: flex;
-
-
-
 
                 .container-skill {
                     display: flex;
@@ -229,9 +262,3 @@
         }
     }
 }
-
-
-/* background-color: $color-primary;
-            
-            padding: 10px;
-            margin-left: 20px; */

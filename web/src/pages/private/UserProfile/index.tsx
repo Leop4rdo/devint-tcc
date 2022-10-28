@@ -4,6 +4,7 @@ import Icon from "components/shared/Icon";
 import React from "react";
 
 
+
 const UserProfilePage: React.FC = () => {
 
 
@@ -11,11 +12,12 @@ const UserProfilePage: React.FC = () => {
         <MenuWapper>
             <div className="container-user-profile">
 
+                <div className="background-image">
+                    <img src="./assets/images/papeldeparede.png" />
+                    <Icon name="edit" />
+                </div>
+
                 <div className="container-profile-style">
-
-                    <div className="background-image">
-                    </div>
-
 
                     <div className="container-of-information">
 
@@ -47,15 +49,15 @@ const UserProfilePage: React.FC = () => {
                                     <span>45</span>
                                     <p>Seguindo</p>
                                 </div>
-
                             </div>
 
                             <div className="container-follow-unfollow">
-                                <span><Icon name="add"/>Seguir</span>
+                                <span><Icon name="add" />Seguir</span>
                             </div>
                         </div>
 
-                        <UserProfileEdit iconName="group" subject="Contatos">
+                        <UserProfileEdit iconName="forum" subject="Contato">
+
                             <div className="container-contact-quite">
                                 <div className="container-email">
                                     <Icon name="email" />
@@ -71,14 +73,38 @@ const UserProfilePage: React.FC = () => {
 
                         </UserProfileEdit>
 
-                        <UserProfileEdit iconName="center_focus_weak" subject="Foco de carreira" >
+                        <UserProfileEdit iconName="group" subject="Sobre" >
 
+                        <div className="container-about">
+                            <div className="container-email">
+                                <Icon name="calendar_month" />
+                                <span>14/01/2001</span>
+                            </div>
+
+                            <div className="container-sex">
+                                <Icon name="group" />
+                                <span>Masculino</span>
+                            </div>
+
+                            <div className="container-user-git-hub">
+                                <img src="assets/icons/github.svg" alt="" />
+                                <span>Ezequiel-Mathias</span>
+                            </div>
+
+                        </div>
+                        </UserProfileEdit>
+
+                        <UserProfileEdit iconName="center_focus_weak" subject="Foco de carreira" >
                             <div className="container-career-focus">
                                 <span>Front-End</span>
                             </div>
-
                         </UserProfileEdit>
 
+                        <UserProfileEdit iconName="work" subject="Trabalho Atual" >
+                            <div className="container-career-focus">
+                                <span>Front-end</span>
+                            </div>
+                        </UserProfileEdit>
 
                         <UserProfileEdit iconName="school" subject="Senioridade">
                             <div className="container-seniority-user">
@@ -111,7 +137,6 @@ const UserProfilePage: React.FC = () => {
                             </div>
 
                         </UserProfileEdit>
-
 
                         <UserProfileEdit iconName="push_pin" subject="Outros links">
 
