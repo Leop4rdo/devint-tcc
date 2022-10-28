@@ -68,7 +68,7 @@ export default class DevEntity {
     @OneToMany(() => ArticleEntity, (articles) => articles.writter)
     articles: ArticleEntity[]
 
-    @OneToMany(() => SocialLinkEntity, (social) => social.owner)
+    @OneToMany(() => SocialLinkEntity, (social) => social.owner, {cascade: true})
     @JoinColumn({ name: 'social_links' })
     socialLinks: SocialLinkEntity[]
 
