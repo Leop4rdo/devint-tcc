@@ -1,5 +1,6 @@
 import MenuWapper from "components/layout/MenuWrapper";
 import UserProfileEdit from "components/layout/UserProfileEdit";
+import Button from "components/shared/Button";
 import Icon from "components/shared/Icon";
 import React from "react";
 
@@ -37,18 +38,21 @@ const UserProfilePage: React.FC = () => {
                             <div className="container-followers">
                                 <span>43</span>
                                 <p>Seguidores</p>
-
                             </div>
                             <div className="container-following">
                                 <span>45</span>
                                 <p>Seguindo</p>
                             </div>
-
                         </div>
 
-                        <div className="container-follow-unfollow">
+                        <Button className="follow-btn btn-primary">
+                            <Icon name="add" />
+                            <span>Seguir</span>
+                        </Button>
+
+                        {/* <div className="follow-btn">
                             <span><Icon name="add" />Seguir</span>
-                        </div>
+                        </div> */}
 
                     </div>
 
@@ -129,6 +133,15 @@ const UserProfilePage: React.FC = () => {
 
                     </UserProfileEdit>
 
+                </div>
+
+                <div className="post-tabs-container">
+                    <div className="posts-tabs">
+                        <h4>Posts</h4>
+                        <h4>Artigos</h4>
+                        <h4>Projetos</h4>
+                    </div>
+                    <hr></hr>
                 </div>
 
             </div>

@@ -77,10 +77,9 @@
             }
 
             .container-follower-data {
+                width: 15em;
                 display: flex;
-                gap: 59px;
-                margin-top: 16px;
-
+                justify-content: space-between;
 
                 .container-followers,
                 .container-following {
@@ -105,7 +104,7 @@
                 }
             }
 
-            .container-follow-unfollow{
+            .follow-btn{
                 margin-top: 30px;
                 margin-bottom: 30px;
                 span{
@@ -217,6 +216,52 @@
 
         }
     }
+
+    .post-tabs-container {
+        width: 80%;
+        height: auto;
+        margin-top: 2em;
+        margin-left: 26rem;
+
+        .posts-tabs {
+            width: fit-content;
+            display: flex;
+            margin-left: 1em;
+            gap: 2em;
+            font-size: 1.5em;
+            color: $color-white;
+
+            h4 {
+                position: relative;
+                &:hover {
+
+                    color: $color-primary;
+                    &:before {
+                        content: '';
+                        position: absolute;
+                        top: 1.5em;
+                        transition: transform .25s ease;
+                    
+                        width: 100%;
+                        height: 2px;
+                        border-radius: 10px;
+                        background: $color-primary;
+                        transform:  scaleX(0);
+                    }
+                    &:hover:before {
+                        transform:  scaleX(1);
+                    }
+                }
+            }
+
+        }
+
+        hr {
+            width: 100%;
+            border-color: $color-light-gray;
+            height: 2px;
+        }
+    }
 }
 
 
@@ -224,3 +269,6 @@
             
             padding: 10px;
             margin-left: 20px; */
+
+
+            //1329 382
