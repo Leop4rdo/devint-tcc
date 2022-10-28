@@ -1,169 +1,164 @@
-.container-user-profile {
+.profile-page {
     background-color: $color-dark-gray;
     height: 100%;
     width: 100%;
+    position: relative;
 
+    .background-image {
+        width: 100%;
+        height: 200px;
+        background-color: $color-light-gray;
+    }
 
+    .container-user-info {
 
-    .container-profile-style {
+        position: absolute;
+        width: fit-content;
+        height: auto;
+        margin-left: 1em;
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        top: 120px;
 
+        .main-profile-info {
+            width: 350px;
+            background-color: $color-black;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
 
-        .background-image {
-            width: 100%;
-            height: 200px;
-            background-color: $color-white;
-
-
-        }
-
-        .container-of-information {
-
-
-            top: 170px;
-
-            .container-profile-data {
-                width: 350px;
-                background-color: $color-black;
-                border-radius: 16px;
-                margin-left: 32px;
+            .icon {
+                width: 100%;
                 display: flex;
-                align-items: center;
-                flex-direction: column;
-                padding: 12px;
+                justify-content: right;
 
-                .icon-edit {
-                    width: 100%;
-                    display: flex;
-                    justify-content: right;
+                color: $color-light-gray;
+                font-size: 20px;
+                cursor: pointer;
+                
+            }
 
-                    .icon {
-                        color: $color-light-gray;
-                        font-size: 20px;
-                        cursor: pointer;
-                    }
+            .container-image-face-user {
+                width: 150px;
+                height: 150px;
+                background-color: $color-white;
+                border-radius: 50%;
+
+
+            }
+
+            span {
+                color: $color-light-gray;
+                font-size: 15px;
+                display: flex;
+                padding: 10px;
+
+                img{
+                    margin-right: 10px;    
+                    height: 20px;   
                 }
+            }
 
-                .container-image-face-user {
-                    width: 150px;
-                    height: 150px;
-                    background-color: $color-white;
-                    border-radius: 50%;
+            h2 {
+                margin-top: 16px;
+                color: $color-white;
+                font-weight: $font-regular;
+            }
+
+            p {
+                font-size: 16px;
+                color: $color-light-gray;
+                font-weight: $font-regular;
+                width: 75%;
+                text-align: center;
+                margin-top: 16px;
+            }
+
+            .container-follower-data {
+                display: flex;
+                gap: 59px;
+                margin-top: 16px;
 
 
-                }
-
-                .data-user {
+                .container-followers,
+                .container-following {
                     display: flex;
-                    align-items: center;
                     flex-direction: column;
+                    align-items: center;
 
                     span {
-                        color: $color-light-gray;
-                        font-size: 15px;
-                        display: flex;
-                        padding: 10px;
-
-                        img{
-                            margin-right: 10px;    
-                            height: 20px;   
-                        }
-                    }
-
-                    h2 {
-                        margin-top: 16px;
-                        color: $color-white;
-                        font-weight: $font-regular;
+                        color: $color-primary;
+                        font-size: 24px;
+                        font-weight: $font-semibold;
+                        margin-bottom: 0px;
                     }
 
                     p {
-                        font-size: 16px;
+                        width: 100px;
                         color: $color-light-gray;
-                        font-weight: $font-regular;
-                        width: 75%;
                         text-align: center;
-                        margin-top: 16px;
-                    }
-                }
+                        margin-top: 0;
 
-
-
-                .container-follower-data {
-                    display: flex;
-                    gap: 59px;
-                    margin-top: 16px;
-
-
-                    .container-followers,
-                    .container-following {
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-
-                        span {
-                            color: $color-primary;
-                            font-size: 24px;
-                            font-weight: $font-semibold;
-                            margin-bottom: 0px;
-                        }
-
-                        p {
-                            width: 100px;
-                            color: $color-light-gray;
-                            text-align: center;
-                            margin-top: 0;
-
-                        }
-                    }
-                }
-
-                .container-follow-unfollow{
-                    margin-top: 30px;
-                    margin-bottom: 30px;
-                    span{
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        color: $color-white;
-                        background-color: $color-primary;
-                        border-radius: 16px;
-                        padding: 2px 8px 2px 0px;
-                        font-weight: $font-medium;
-                        cursor: pointer;
                     }
                 }
             }
 
-            .container-contact-quite {
-                padding: 10px;
-
-                .icon {
+            .container-follow-unfollow{
+                margin-top: 30px;
+                margin-bottom: 30px;
+                span{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                     color: $color-white;
+                    background-color: $color-primary;
+                    border-radius: 16px;
+                    padding: 2px 8px 2px 0px;
+                    font-weight: $font-medium;
+                    cursor: pointer;
                 }
+            }
+        }
 
-                .container-email,
-                .container-phone {
+        .container-information-user {
 
-                    display: flex;
-                    gap: 8px;
-                    margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
 
-                    span {
-                        word-break: break-all;
-                        color: $color-white;
-                    }
+            .icon {
+                color: $color-white;
+
+                &:hover {
+                    color: $color-primary;
                 }
             }
 
-            .container-career-focus,
-            .container-seniority-user {
-                height: 40px;
+            .container-email,
+            .container-phone {
+
+                display: flex;
+                align-items: center;
+                gap: 0.5em;
+                margin: 10px;
 
                 span {
+                    word-break: break-all;
                     color: $color-white;
-                    margin: 15px;
                 }
             }
+        }
 
+        .container-career-focus,
+        .container-seniority-user {
+            height: 40px;
+
+            span {
+                color: $color-white;
+                margin: 15px;
+            }
         }
 
         .skill-user {
@@ -173,9 +168,6 @@
                 margin-left: 10px;
                 width: 100%;
                 display: flex;
-
-
-
 
                 .container-skill {
                     display: flex;
@@ -194,9 +186,6 @@
                         color: $color-light-gray;
                     }
                 }
-
-
-
 
             }
         }
