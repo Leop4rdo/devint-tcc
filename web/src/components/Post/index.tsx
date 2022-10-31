@@ -8,6 +8,7 @@ import { IPostListItem, IPost } from "interfaces/IPost";
 import * as postService from "../../services/post.service"
 
 interface IPostProps {
+    // data: IPost
     data: IPostListItem
     openDetails: () => void
 
@@ -58,7 +59,7 @@ const Post: React.FC<IPostProps> = ({ data, openDetails }) => {
             </div>
 
             <div className="horizontal-line"></div>
-            
+
             <div className="post-footer">
                 <div className="comments" onClick={() => openDetails()}>
                     <Icon name="forum" />
