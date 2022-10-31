@@ -22,7 +22,7 @@ export default class SkillController {
             .catch((err) => res.status(err.status || 500).json(err))
     }
 
-    list = (res: Response) => {
+    list = (req : Request, res: Response) => {
         this.service.list()
             .then((_res) => res.status(_res.status || 200).json(_res))
             .catch((err) => res.status(err.status || 500).json(err))
