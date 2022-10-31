@@ -6,7 +6,7 @@ button {
   width: clamp(11rem, 10vw, 15rem);
   height: 2rem;
   font-weight: $font-semibold;
-  font-size: 18px;
+  font-size: clamp(.8rem, 4vw, 1rem);
 
   display: flex;
   justify-content: center;
@@ -27,8 +27,8 @@ button {
   }
 
   &.btn-secondary {
-    background-color: $color-dark-gray;
-    border-color: $color-primary;
+    background-color: $color-dark-gray !important;
+    border-color: $color-dark-gray;
     color: $color-white;
 
     &:hover {
