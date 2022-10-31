@@ -89,7 +89,6 @@ export default class DevEntity {
     skills: SkillEntity[]
 
     @ManyToMany(() => ProjectEntity)
-    @JoinTable({ name: 'devs_projects' })
     projects: ProjectEntity[]
 
     @ManyToMany(() => BadgeEntity)

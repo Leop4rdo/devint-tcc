@@ -1,25 +1,23 @@
 import IProjectProps from "@src/core/domain/interfaces/IProject"
 import InputPort from "../InputPort"
 
-export default class ProjectInput extends InputPort {
-    id : string
+export default class ProjectCreateInput extends InputPort {
     name: string
     bannerURI : string
-    githubRepo: JSON
+    githubRepo: string
     license: String
     helpWanted: boolean
+    members : {id : string}[]
     desc: string
-    hearts: JSON
 
     constructor(props : IProjectProps) {
         super()
-        this.id = props.id
         this.name = props.name
         this.bannerURI = props.bannerURI
         this.githubRepo = props.githubRepo
         this.license = props.license
+        this.members = this.members || []
         this.helpWanted = props.helpWanted
         this.desc = props.desc
-        this.hearts = props.hearts
     }
 }
