@@ -8,6 +8,9 @@ export default class SkillEntity {
     
     @Column({ nullable : false})
     name: string
+
+    @Column({})
+    icon: string
     
     @CreateDateColumn({ name: 'created_at', select: false })
     createdAt : Timestamp

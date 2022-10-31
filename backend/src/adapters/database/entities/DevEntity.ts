@@ -32,9 +32,6 @@ export default class DevEntity {
     @Column()
     gender: string
 
-    @Column({ default: '' })
-    status: string
-
     @Column({ name: 'profile_pic_url', default : 'https://st2.depositphotos.com/19428878/44645/v/450/depositphotos_446453832-stock-illustration-default-avatar-profile-icon-social.jpg' })
     profilePicUrl: string
 
@@ -71,7 +68,7 @@ export default class DevEntity {
     @OneToMany(() => ArticleEntity, (articles) => articles.writter)
     articles: ArticleEntity[]
 
-    @OneToMany(() => SocialLinkEntity, (social) => social.owner)
+    @OneToMany(() => SocialLinkEntity, (social) => social.owner, {cascade: true})
     @JoinColumn({ name: 'social_links' })
     socialLinks: SocialLinkEntity[]
 

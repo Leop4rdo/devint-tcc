@@ -4,6 +4,7 @@ import commentRouter from "./routes/CommentRoutes";
 import devRouter from "./routes/DevRoutes";
 import postRouter from "./routes/PostRoutes";
 import projectRouter from "./routes/ProjectRoutes";
+import skillRoutes from "./routes/SkillRoute";
 import { publicUserRoutes, securedUserRoutes } from "./routes/UserRoutes";
 
 const routes = Router();
@@ -15,6 +16,9 @@ routes.use("/", publicUserRoutes)
 routes.use(authMiddleware)
 
 // secure routes ->
+routes.use("/skills", skillRoutes)
+// routes.use("/seniority", seniorityRoutes)
+// routes.use("/", careerFocusRoutes)
 routes.use("/users", securedUserRoutes)
 routes.use("/devs", devRouter)
 routes.use("/", postRouter)
