@@ -17,6 +17,7 @@ export const AuthProvider : React.FC<{ children : ReactNode }> = ({ children }) 
     const handleAuth = async (email : string, password : string) => {
         const res = await auth({email, password})
 
+
         setAuthData({
             signed: res.hasError === false,
             token: res.data?.token || "",
