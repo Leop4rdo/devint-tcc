@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm"
+import { Column, CreateDateColumn, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm"
+import DevEntity from "./DevEntity"
 import PostEntity from "./PostEntity"
 
 @Entity('projects')
@@ -26,6 +27,9 @@ export default class ProjectEntity {
 
     @OneToMany(() => PostEntity, (post) => post.project)
     posts : PostEntity[]
+
+    @ManyToMany(() => DevEntity, (dev) => dev.projects)
+    members : DevEntity[]
    
     @Column('jsonb')
     hearts : JSON
