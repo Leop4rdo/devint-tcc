@@ -5,6 +5,7 @@ export default class DevMinimalOutput {
     name : string
     profilePicUrl : string
     githubUsername : string
+    following ?: boolean
     
     constructor(props : IDevProps) {
         this.id = props.id

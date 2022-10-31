@@ -16,7 +16,6 @@ export const AuthContext = createContext<IAuthContextProps | null>(null)
 export const AuthProvider : React.FC<{ children : ReactNode }> = ({ children }) => {
     const handleAuth = async (email : string, password : string) => {
         const res = await auth({email, password})
-        console.log('auth res', res.hasError)
 
 
         setAuthData({
