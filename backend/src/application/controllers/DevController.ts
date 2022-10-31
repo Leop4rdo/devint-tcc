@@ -38,5 +38,5 @@ export default class DevController {
             .then((_res) => res.status(_res.status || 200).json(_res))
             .catch((err) => res.status(err.status || 500).json(err))
     }
-
+    
 }
