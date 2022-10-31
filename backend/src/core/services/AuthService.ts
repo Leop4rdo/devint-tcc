@@ -55,7 +55,7 @@ export default class AuthService {
     async setEnabled(id: string, value: number): Promise<IResponse> {
         const auth = await this.repo.findById(id)
         auth.enabled = value;
-        this.repo.update(auth);
+        this.repo.update(auth as AuthEntity);
 
         return new SuccessResponse({
             data: `user ${value == 0 ? 'disabled' : 'enabled'} sucessfully!`

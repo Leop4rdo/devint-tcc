@@ -18,10 +18,10 @@ def auth() :
 
     pass
 
-def createPost(token) :
+def createPost(token, index) :
 
     letters = string.ascii_lowercase
-    random_content = ''.join(random.choice(letters) for i in range(0, 50))
+    random_content = 'post nº' + str(index) + ' - ' + ''.join(random.choice(letters) for i in range(0, 50))
     
     res = requests.post(f'{API_URL}/posts', json = {
         'content' : random_content
@@ -36,7 +36,7 @@ def run() :
  
     for i in range(0, 101) :
         print(f'creating post {i}/100')
-        createPost(token)
+        createPost(token, i)
         pass   
     pass
 
