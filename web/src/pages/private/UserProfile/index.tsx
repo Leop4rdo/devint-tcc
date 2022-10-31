@@ -56,8 +56,9 @@ const UserProfilePage: React.FC = () => {
 
                     </div>
 
-                    <UserProfileEdit iconName="group" subject="Contatos">
-                        
+                    <UserProfileEdit iconName="forum" subject="Contato">
+
+                        <div className="container-contact-quite">
                             <div className="container-email">
                                 <Icon name="email" />
                                 <span>emailqualddddddddddddddddddquer@gmail.com</span>
@@ -68,6 +69,29 @@ const UserProfilePage: React.FC = () => {
                                 <span>(11) 4954-5965</span>
                             </div>
 
+                        </div>
+
+                    </UserProfileEdit>
+
+                    <UserProfileEdit iconName="group" subject="Sobre" >
+
+                        <div className="container-about">
+                            <div className="container-email">
+                                <Icon name="calendar_month" />
+                                <span>14/01/2001</span>
+                            </div>
+
+                            <div className="container-sex">
+                                <Icon name="group" />
+                                <span>Masculino</span>
+                            </div>
+
+                            <div className="container-user-git-hub">
+                                <img src="assets/icons/github.svg" alt="" />
+                                <span>Ezequiel-Mathias</span>
+                            </div>
+
+                        </div>
                     </UserProfileEdit>
 
                     <UserProfileEdit iconName="center_focus_weak" subject="Foco de carreira" >
@@ -78,6 +102,11 @@ const UserProfilePage: React.FC = () => {
 
                     </UserProfileEdit>
 
+                    <UserProfileEdit iconName="work" subject="Trabalho Atual" >
+                        <div className="container-career-focus">
+                            <span>Front-end</span>
+                        </div>
+                    </UserProfileEdit>
 
                     <UserProfileEdit iconName="school" subject="Senioridade">
                         <div className="container-seniority-user">
