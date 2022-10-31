@@ -20,6 +20,7 @@ export default class Dev {
     gender : string
     status: string 
     profilePicUrl : string
+    bannerURI : string
     comunityRating : number
     notifications : JSON
     currentJob : string

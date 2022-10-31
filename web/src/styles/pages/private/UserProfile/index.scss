@@ -1,46 +1,274 @@
-.container-user-profile {
+.profile-page {
     background-color: $color-dark-gray;
     height: 100%;
     width: 100%;
-    display: flex;
-    justify-content: center;
+    position: relative;
 
-    .container-profile-style {
-        .background-image {
-            width: 60rem;
-            height: 100px;
-            background-color: $color-primary;
-            margin-top: 52px;
-            border-radius: 16px;
-        }
+    .background-image {
+        width: 100%;
+        height: 200px;
+        background-color: $color-light-gray;
+    }
 
-        .container-profile-data {
-            width: 300px;
-            height: 400px;
+    .container-user-info {
+
+        position: absolute;
+        width: fit-content;
+        height: auto;
+        margin-left: 1em;
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        top: 120px;
+
+        .main-profile-info {
+            width: 350px;
             background-color: $color-black;
             border-radius: 16px;
-            position: absolute;
-            top: 170px;
-            margin-left: 28px;
             display: flex;
             align-items: center;
             flex-direction: column;
-            
-            .container-image-face-user{
-                width: 100px;
-                height: 100px;
+
+            .icon {
+                width: 100%;
+                display: flex;
+                justify-content: right;
+
+                color: $color-light-gray;
+                font-size: 20px;
+                cursor: pointer;
+                
+            }
+
+            .container-image-face-user {
+                width: 150px;
+                height: 150px;
                 background-color: $color-white;
                 border-radius: 50%;
-                margin: 20px;
+
 
             }
 
-            h2{
+            span {
+                color: $color-light-gray;
+                font-size: 15px;
+                display: flex;
+                padding: 10px;
+
+                img{
+                    margin-right: 10px;    
+                    height: 20px;   
+                }
+            }
+
+            h2 {
+                margin-top: 16px;
                 color: $color-white;
                 font-weight: $font-regular;
+            }
+
+            p {
+                font-size: 16px;
+                color: $color-light-gray;
+                font-weight: $font-regular;
+                width: 75%;
+                text-align: center;
+                margin-top: 16px;
+            }
+
+            .container-follower-data {
+                width: 15em;
+                display: flex;
+                justify-content: space-between;
+
+                .container-followers,
+                .container-following {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+
+                    span {
+                        color: $color-primary;
+                        font-size: 24px;
+                        font-weight: $font-semibold;
+                        margin-bottom: 0px;
+                    }
+
+                    p {
+                        width: 100px;
+                        color: $color-light-gray;
+                        text-align: center;
+                        margin-top: 0;
+
+                    }
+                }
+            }
+
+            .follow-btn{
+                margin-top: 30px;
+                margin-bottom: 30px;
+                span{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: $color-white;
+                    background-color: $color-primary;
+                    border-radius: 16px;
+                    padding: 2px 8px 2px 0px;
+                    font-weight: $font-medium;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .container-information-user {
+
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+
+            .icon {
+                color: $color-white;
+
+                &:hover {
+                    color: $color-primary;
+                }
+            }
+
+            .container-email,
+            .container-phone {
+
+                display: flex;
+                align-items: center;
+                gap: 0.5em;
+                margin: 10px;
+
+                span {
+                    word-break: break-all;
+                    color: $color-white;
+                }
+            }
+        }
+
+        .container-career-focus,
+        .container-seniority-user {
+            height: 40px;
+
+            span {
+                color: $color-white;
+                margin: 15px;
+            }
+        }
+
+        .skill-user {
+            display: flex;
+
+            .container-skill-user {
+                margin-left: 10px;
+                width: 100%;
+                display: flex;
+
+                .container-skill {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    margin-bottom: 20px;
+
+                    .icon {
+                        color: $color-white;
+                        font-size: 32px;
+                    }
+
+                    span {
+                        margin-top: 8px;
+                        font-size: 12px;
+                        color: $color-light-gray;
+                    }
+                }
+
             }
         }
 
 
+        .container-links {
+            flex-direction: row;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-left: -20px;
+
+            .links {
+                height: 50px;
+                margin-top: 20px;
+                margin-left: 20px;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+
+                span {
+                    padding: 10px;
+                    background-color: $color-primary;
+                    color: $color-white;
+                    border-radius: 24px;
+
+                }
+            }
+
+        }
+    }
+
+    .post-tabs-container {
+        width: 80%;
+        height: auto;
+        margin-top: 2em;
+        margin-left: 26rem;
+
+        .posts-tabs {
+            width: fit-content;
+            display: flex;
+            margin-left: 1em;
+            gap: 2em;
+            font-size: 1.5em;
+            color: $color-white;
+
+            h4 {
+                position: relative;
+                &:hover {
+
+                    color: $color-primary;
+                    &:before {
+                        content: '';
+                        position: absolute;
+                        top: 1.5em;
+                        transition: transform .25s ease;
+                    
+                        width: 100%;
+                        height: 2px;
+                        border-radius: 10px;
+                        background: $color-primary;
+                        transform:  scaleX(0);
+                    }
+                    &:hover:before {
+                        transform:  scaleX(1);
+                    }
+                }
+            }
+
+        }
+
+        hr {
+            width: 100%;
+            border-color: $color-light-gray;
+            height: 2px;
+        }
     }
 }
+
+
+/* background-color: $color-primary;
+            
+            padding: 10px;
+            margin-left: 20px; */
+
+
+            //1329 382

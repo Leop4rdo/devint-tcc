@@ -5,11 +5,13 @@ import styles from "./style";
 import Post from "../../../components/Post";
 import ProfileEdit from "../../../components/ProfileEdit";
 import ButtonComponent from "../../../components/shared/Button";
+import { ScrollView } from "react-native-gesture-handler";
 
 
 const ProfilePage: React.FC<{ navigation : any }> = ({navigation}) => {
     return(
         <LayoutWrapper navigation={navigation}>
+            <ScrollView>
             <View style={styles.page}>
 
                 <View style={styles.profileContainer}>
@@ -17,7 +19,7 @@ const ProfilePage: React.FC<{ navigation : any }> = ({navigation}) => {
 
                     <View style={styles.profileEdit}>
                         <Image source={{uri:'https://midias.correiobraziliense.com.br/_midias/jpg/2013/11/15/675x450/1_cbifot151120135622-18891928.jpg?20220922092144?20220922092144'}} style={styles.photoUser}></Image>
-                        <Pressable onPress={() => navigation.navigate('profile-edit')} style={styles.buttonEdit}>
+                        <Pressable  style={styles.buttonEdit}>
                             <MaterialIcons name="add" size={16} color='#FFF' />
                             <Text style={styles.textButton}>Seguir </Text>
                         </Pressable>
@@ -42,22 +44,25 @@ const ProfilePage: React.FC<{ navigation : any }> = ({navigation}) => {
                 
 
                 <View style={styles.publicationData}>
-                    <Pressable style={styles.publications}>
-                        <Text style={styles.textPublications}>Informações gerais</Text>
-                    </Pressable>
-
-                    <Pressable>
+                    <Pressable >
                         <Text style={styles.textPublications}>Posts</Text>
                     </Pressable>
 
-                    <Pressable>
+                    <Pressable >
                         <Text style={styles.textPublications}>Artigos</Text>
+                    </Pressable>
+
+                    <Pressable>
+                        <Text style={styles.textPublications}>Projetos</Text>
+                    </Pressable>
+                    <Pressable style={styles.publications}>
+                        <Text style={styles.textPublications}>Informações</Text>
                     </Pressable>
                 </View>
 
-                <ProfileEdit icon="star" text="Contato">
+                <ProfileEdit icon="forum" text="Contato">
                  <View style={styles.containerChildren}>
-                    <MaterialIcons style={styles.icon} name="email" color={'#FFF'}></MaterialIcons>
+                    <MaterialIcons style={styles.icon} name="mail" color={'#FFF'}></MaterialIcons>
                     <Text style={styles.textedit}>john.doe@devint.com</Text>
                  </View>
                  <View style={styles.containerChildren}>
@@ -66,9 +71,9 @@ const ProfilePage: React.FC<{ navigation : any }> = ({navigation}) => {
                  </View>
                 </ProfileEdit>
 
-                <ProfileEdit icon="star" text="Sobre">
+                <ProfileEdit icon="group" text="Sobre">
                  <View style={styles.containerChildren}>
-                    <MaterialIcons style={styles.icon} name="calendar_month" color={'#FFF'}></MaterialIcons>
+                    <MaterialIcons style={styles.icon} name="event" color={'#FFF'}></MaterialIcons>
                     <Text style={styles.textedit}>29/08/2099</Text>
                  </View>
 
@@ -80,28 +85,25 @@ const ProfilePage: React.FC<{ navigation : any }> = ({navigation}) => {
 
                 <ProfileEdit icon="star" text="Foco de Carreira">
                  <View style={styles.containerChildren}>
-                    <MaterialIcons style={styles.icon} name="email" color={'#FFF'}></MaterialIcons>
+                    <MaterialIcons style={styles.icon} name="center-focus-weak" color={'#FFF'}></MaterialIcons>
                     <Text style={styles.textedit}>Front-End</Text>
                  </View>
                 </ProfileEdit>
 
-                <ProfileEdit icon="star" text="Trabalho atual">
+                <ProfileEdit icon="work" text="Trabalho atual">
                  <View style={styles.containerChildren}>
-                    <MaterialIcons style={styles.icon} name="email" color={'#FFF'}></MaterialIcons>
                     <Text style={styles.textedit}>Front-End</Text>
                  </View>
                 </ProfileEdit>
 
-                <ProfileEdit icon="star" text="Senioridade">
+                <ProfileEdit icon="school" text="Senioridade">
                  <View style={styles.containerChildren}>
-                    <MaterialIcons style={styles.icon} name="email" color={'#FFF'}></MaterialIcons>
                     <Text style={styles.textedit}>Junior</Text>
                  </View>
                 </ProfileEdit>
 
                 <ProfileEdit icon="star" text="Habilidades">
                  <View style={styles.containerChildren}>
-                    <MaterialIcons style={styles.icon} name="email" color={'#FFF'}></MaterialIcons>
                     <Text style={styles.textedit}>Junior</Text>
                  </View>
                 </ProfileEdit>
@@ -112,6 +114,7 @@ const ProfilePage: React.FC<{ navigation : any }> = ({navigation}) => {
 
    
             </View>
+            </ScrollView>
         </LayoutWrapper>
     )
 

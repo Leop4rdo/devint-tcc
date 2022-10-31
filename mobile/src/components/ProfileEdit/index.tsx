@@ -21,7 +21,7 @@ const ProfileEdit: React.FC<IProfileEditProps> = ({ children , icon , text, text
         <View style={[containerStyles.base]}>
             <View style={[containerStyles.container]}>
                 <View style={containerStyles.title}>
-                    {icon && <Ionicons name={icon} size={iconSize || 20} color={getIconColor()} style={(text) ? { marginRight: 8 } : {}} />}
+                    {icon && <MaterialIcons name={icon} size={iconSize || 20} color={getIconColor()} style={(text) ? { marginRight: 8 } : {}} />}
                     <Text style={[containerStyles.text, textStyle]}>{text}</Text>
                 </View>
                 <Pressable>
@@ -30,7 +30,6 @@ const ProfileEdit: React.FC<IProfileEditProps> = ({ children , icon , text, text
             </View>
             {children}
         </View>
-        
     )
 }
 

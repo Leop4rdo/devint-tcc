@@ -78,7 +78,7 @@ const CreatePostModal : React.FC<ICreatePostModalProps> = ({ onClose }) => {
                     <div className="attachment-list">
                         {
                             attachments.map((uri, idx) => 
-                                <img src={uri} key={idx}/>
+                                <img src={uri} key={idx} alt=""/>
                             )
                         }
                     </div>

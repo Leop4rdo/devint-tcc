@@ -16,10 +16,10 @@ export const AuthContext = createContext<IAuthContextProps | null>(null)
 export const AuthProvider : React.FC<{ children : ReactNode }> = ({ children }) => {
     const handleAuth = async (email : string, password : string) => {
         const res = await auth({email, password})
-        console.log('auth res', res.hasError)
+
 
         setAuthData({
-            signed: !res.hasError,
+            signed: res.hasError === false,
             token: res.data?.token || "",
             userData : res.data?.user || null
         })

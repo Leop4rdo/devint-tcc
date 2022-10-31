@@ -6,23 +6,28 @@ import { useNavigate } from "react-router-dom";
 import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
 import { IPostListItem, IPost } from "interfaces/IPost";
 import * as postService from "../../services/post.service"
+import * as devService from "../../services/dev.service"
 
 interface IPostProps {
+    // data: IPost
     data: IPostListItem
     openDetails: () => void
 
 }
 
 const Post: React.FC<IPostProps> = ({ data, openDetails }) => {
-
-
-
     const [liked, setLiked] = useState(data.alreadyHearted)
 
     const giveLike = async () => {
         await postService.addHeart(data.id)
 
         setLiked(!liked)
+    }
+
+    const toggleFollow = async () => {
+        await devService.toggleFollow(data.writter.id)
+
+        setFollowingWritter(!followingWritter)
     }
 
     return (
@@ -32,11 +37,10 @@ const Post: React.FC<IPostProps> = ({ data, openDetails }) => {
                     <img src={data.writter.profilePicUrl} />
                     <h2>{data.writter.name}</h2>
                 </div>
-                <Button className="follow-button" children={[<Icon name="add" />, "Seguir"]} />
             </div>
 
             <div className="post-content" >
-                <p onClick={() => openDetails()}>{data.content}</p>
+                <p onClick={openDetails}>{data.content}</p>
                 <div className="post-images">
                     <Swiper
                         modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -44,6 +48,7 @@ const Post: React.FC<IPostProps> = ({ data, openDetails }) => {
                         slidesPerView={1}
                         navigation
                         pagination={{ clickable: true }}
+                        onClick={openDetails}
                     >
                         {
                             data.attachments.map((attachment) => 
@@ -57,14 +62,14 @@ const Post: React.FC<IPostProps> = ({ data, openDetails }) => {
             </div>
 
             <div className="horizontal-line"></div>
-            
+
             <div className="post-footer">
                 <div className="comments" onClick={() => openDetails()}>
                     <Icon name="forum" />
                     {data.comments}
                     <span>Comentários</span>
                 </div>
-                <div className="hearts">
+                <div className="hearts" >
                     {
                         (liked && !data.alreadyHearted) ? data.hearts + 1 : (!liked && data.alreadyHearted) ? data.hearts - 1 : data.hearts
                     }

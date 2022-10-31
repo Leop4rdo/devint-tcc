@@ -3,4 +3,5 @@ export default interface IDevMinimal {
     name : string
     profilePicUrl : string
     githubUsername : string
+    following ?: boolean
 }

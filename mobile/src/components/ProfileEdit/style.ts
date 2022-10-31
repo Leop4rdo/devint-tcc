@@ -26,7 +26,8 @@ const containerStyles = StyleSheet.create({
     },
     edit:{
         fontSize: 16,
-        color: colors.LIGHT_GRAY
+        color: colors.LIGHT_GRAY,
+    
     },
     title : {
         flexDirection : 'row',

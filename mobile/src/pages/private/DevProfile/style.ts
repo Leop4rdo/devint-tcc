@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     },
     profileDice:{
         flexDirection:'row',
-        marginHorizontal:20
+        marginHorizontal:20,
 
     },
     dice:{
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
         fontFamily: fonts.POPPINS_SEMIBOLD
     },
     text:{
-        color:colors.WHITE,
+        color:colors.LIGHT_GRAY,
         fontSize:12,
         fontFamily: fonts.POPPINS_REGULAR
     },
@@ -88,14 +88,16 @@ const styles = StyleSheet.create({
         marginVertical: 16,
         flexDirection:'row',
         justifyContent:'space-evenly',
+        borderBottomColor: colors.LIGHT_GRAY,
+        borderBottomWidth: 0.5
     },
     publications:{
         borderBottomColor:colors.DARK_PURPLE,
-        borderBottomWidth:1
+        borderBottomWidth:2.5
     },
     textPublications:{
         fontSize:12,
-        color: colors.LIGHT_GRAY,
+        color: colors.WHITE,
         fontFamily: fonts.POPPINS_SEMIBOLD
     },
     containerChildren:{

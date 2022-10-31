@@ -25,6 +25,7 @@ export default interface IDevProps {
     gender : string
     status: string 
     profilePicUrl : string
+    bannerURI : string
     comunityRating : number
     notifications : JSON
     currentJob : string
