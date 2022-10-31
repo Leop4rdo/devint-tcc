@@ -8,11 +8,12 @@ import ChangeMyPasswordPage from "pages/public/ChangeMyPassword";
 import EmailConfirmPage from "pages/public/EmailConfirm/EmailConfirmPage";
 import UserProfilePage from "pages/private/UserProfile";
 import LoginPage from "pages/public/Login";
-
+import FeedPage from "pages/private/Feed";
 
 const PublicRouter: React.FC = () => {
     return (
         <Routes>
+            <Route index element={<FeedPage />}/>
             <Route index element={<LoginPage />} />
             <Route path="forgot-my-password" element={<ForgotMyPasswordPage />} />
             <Route path="change-my-password/:token" element={<ChangeMyPasswordPage />} />
