@@ -13,8 +13,6 @@
   font-family: $base-font-family;
 }
 
-
-
 a {
   position: relative;
   color: $color-primary;
@@ -71,6 +69,7 @@ a {
   @import "./components/shared/NewPost/index.scss";
   @import "./components/shared/Comment/index.scss";
   @import "./components/shared/CreateComment/index.scss";
+  @import "./components/layout/UserProfileEdit/index.scss";
   
 
   

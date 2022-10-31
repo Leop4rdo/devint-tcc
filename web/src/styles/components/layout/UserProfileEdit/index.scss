@@ -1,0 +1,41 @@
+.container-information-user {
+    background-color: $color-black;
+    border-radius: 16px;
+    width: 350px;
+    padding: 16px;
+    
+
+    .container-information-top {
+        display: flex;
+        justify-content: space-between;
+
+
+        .contact {
+            display: flex;
+            padding: 10px;
+            gap: 8px;
+
+            p {
+                font-size: 22px;
+                font-weight: $font-regular;
+            }
+
+            .icon {
+                margin-top: 0;
+                color: $color-white;
+                font-size: 32px;
+            }
+
+        }
+
+        .icon {
+            margin-top: 16px;
+            margin-right: 10px;
+            color: $color-light-gray;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+    }
+
+}
