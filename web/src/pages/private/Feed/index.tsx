@@ -26,7 +26,7 @@ const FeedPage: React.FC = () => {
     let page = 1;
 
     const getDevs = async () => {
-        const res = await devService.list({ limit: 5 })
+        const res = await devService.list({ limit: 24 })
 
         setDevs(res.data)
     }
@@ -36,8 +36,6 @@ const FeedPage: React.FC = () => {
 
         setPosts([...posts, ...data])
         setLoading(false)
-
-        page++
     }
 
     const getMorePosts = async () => {

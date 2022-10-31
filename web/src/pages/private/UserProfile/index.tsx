@@ -2,11 +2,39 @@ import MenuWapper from "components/layout/MenuWrapper";
 import UserProfileEdit from "components/layout/UserProfileEdit";
 import Button from "components/shared/Button";
 import Icon from "components/shared/Icon";
-import React from "react";
-
+import IDevMinimal from "interfaces/IDev";
+import React, { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { AuthContext } from "store/context/Auth.context";
+import * as devService from "../../../services/dev.service"
 
 const UserProfilePage: React.FC = () => {
+    const [dev, setDev] = useState<IDevMinimal | null>(null)
+    const authContext = useContext(AuthContext)
+    const { devId } = useParams()
+    
+    const [following, setFollowing] = useState(false);
 
+    const toggleFollow = async () => {
+        if (!devId) return
+
+        const res = await devService.toggleFollow(devId)
+        
+        setFollowing(!following);
+    }
+    console.log(devId);
+
+    const findById = async () => {
+
+        if (!devId) return 
+        const res = await devService.findById(devId)
+
+        setDev(res.data)
+        
+    }
+    
+    useEffect(() => { findById() }, [devId])
+    
 
     return (
         <MenuWapper>
@@ -21,14 +49,14 @@ const UserProfilePage: React.FC = () => {
                         <Icon name="edit" />
 
                         <div className="container-image-face-user">
-                            <img />
+                            <img src={dev?.profilePicUrl}/>
                         </div>
 
-                        <h2>Name user</h2>
+                        <h2>{dev?.name}</h2>
 
                         <span>
                             <img src="assets/icons/github.svg" alt="" />
-                            Ezequiel-Mathias
+                            {dev?.githubUsername}
                         </span>
 
                         <p>Bio muito bunita feita para exemplificar uns bagui ai
@@ -45,14 +73,14 @@ const UserProfilePage: React.FC = () => {
                             </div>
                         </div>
 
-                        <Button className="follow-btn btn-primary">
-                            <Icon name="add" />
-                            <span>Seguir</span>
-                        </Button>
+                        {
+                            (authContext?.userData?.id !== devId) ? 
+                                <Button className="follow-btn btn-primary" onClick={toggleFollow}>
+                                    <span>{following ? "Seguindo" : "Seguir"}</span>
+                                    <Icon name={following ? "check": "add"} />
+                                </Button> : ''
+                        }
 
-                        {/* <div className="follow-btn">
-                            <span><Icon name="add" />Seguir</span>
-                        </div> */}
 
                     </div>
 

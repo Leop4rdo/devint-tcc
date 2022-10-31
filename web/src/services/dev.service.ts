@@ -29,3 +29,18 @@ export const toggleFollow = async (targetId : string) : Promise<IResponse> => {
     }
 }
 
+export const findById = async ( id : string ) : Promise<IResponse> => {
+    try {
+        const { data } = await api.get(
+            (id) ? `/devs/${id}` : '/devs',
+            { headers: { Authorization: `Baerer ${ await getToken() }` } }
+        )
+
+        return data as IResponse
+
+    } catch (err : any) {
+        console.log(err);
+        return err.response.data as IResponse
+    }
+}
+

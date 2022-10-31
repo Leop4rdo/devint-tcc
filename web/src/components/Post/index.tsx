@@ -16,6 +16,9 @@ interface IPostProps {
 }
 
 const Post: React.FC<IPostProps> = ({ data, openDetails }) => {
+
+    const navigation = useNavigate()
+
     const [liked, setLiked] = useState(data.alreadyHearted)
 
     const giveLike = async () => {
@@ -29,7 +32,7 @@ const Post: React.FC<IPostProps> = ({ data, openDetails }) => {
             <div className="post-header">
                 <div className="user-info" >
                     <img src={data.writter.profilePicUrl} />
-                    <h2>{data.writter.name}</h2>
+                    <h2 onClick={() => navigation(`/dev/${data.writter.id}`)}>{data.writter.name}</h2>
                 </div>
             </div>
 
