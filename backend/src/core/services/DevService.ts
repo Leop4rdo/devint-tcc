@@ -23,8 +23,18 @@ export default class DevService {
     }
 
 
-    findById(id: string): Promise<IResponse> {
-        throw new Error("Method not implemented.");
+    async findById(id: string): Promise<IResponse> {
+        const dev = await this.repo.findById(id);
+
+        if (!dev) 
+            return new BadRequestResponse({
+                message : 'Can not find dev',
+                status : 404
+            })
+
+        return new SuccessResponse({
+            data : new DevOutput(dev)
+        })
     }
 
     async list(filters : PaginateListInput) : Promise<IResponse> {
@@ -62,7 +72,7 @@ export default class DevService {
         else 
             dev.follows.splice(targetIndex, 1)
 
-        await this.repo.update(dev)
+        await this.repo.update(dev as DevEntity)
         
         return new SuccessResponse({
             status : 200,

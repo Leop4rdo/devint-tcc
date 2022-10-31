@@ -1,12 +1,16 @@
 import IProjectProps from "@src/core/domain/interfaces/IProject"
 import { Timestamp } from "typeorm"
+import DevMinimalOutput from "../user/DevMinimalOutput"
+import DevOutput from "../user/DevOutput"
 
 export default class ProjectOutput {
     id : string
     name: string
     bannerURI : string
-    githubRepo: JSON
+    githubRepo: string
     license: String
+    members : DevMinimalOutput[]
+    owner : string
     helpWanted: boolean
     desc: string
     hearts: JSON
@@ -19,6 +23,8 @@ export default class ProjectOutput {
         this.license = props.license
         this.helpWanted = props.helpWanted
         this.desc = props.desc
-        this.hearts = props.hearts
+        this.hearts = JSON.parse(JSON.stringify(props.hearts)).length
+        this.owner = props.owner
+        this.members = props.members.map((dev) => new DevMinimalOutput(dev))
     }
 }

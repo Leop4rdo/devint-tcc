@@ -23,6 +23,6 @@ routes.use("/users", securedUserRoutes)
 routes.use("/devs", devRouter)
 routes.use("/", postRouter)
 routes.use("/", commentRouter)
-routes.use(projectRouter)
+routes.use('/', projectRouter)
 
 export default routes

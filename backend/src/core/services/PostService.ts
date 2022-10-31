@@ -55,7 +55,7 @@ export default class PostService {
             ...postInput,
             writter: { id: owner },
             order : Math.floor(Math.random() * 999999)
-        } as unknown as IPostProps))
+        } as unknown as IPostProps) as PostEntity)
 
         if (!post)
             return new ServerErrorResponse({ message: errors.CAN_NOT_CREATE_ENTITY })
