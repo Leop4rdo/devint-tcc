@@ -24,12 +24,6 @@ const Post: React.FC<IPostProps> = ({ data, openDetails }) => {
         setLiked(!liked)
     }
 
-    const toggleFollow = async () => {
-        await devService.toggleFollow(data.writter.id)
-
-        setFollowingWritter(!followingWritter)
-    }
-
     return (
         <div className="postcard" key={data.id} >
             <div className="post-header">

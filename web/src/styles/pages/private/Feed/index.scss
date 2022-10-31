@@ -44,16 +44,17 @@
   .post-container {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 2em;
+    align-items: center;
 
     #scroll-observer {
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-bottom: 2em;
     
       width: 7em;
       height: 2em;
-      margin: 50px;
     
       border-radius: 1em;
       background-color: $color-primary;

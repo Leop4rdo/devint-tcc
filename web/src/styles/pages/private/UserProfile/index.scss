@@ -53,7 +53,6 @@
                 color: $color-light-gray;
                 font-size: 15px;
                 display: flex;
-                padding: 10px;
 
                 img{
                     margin-right: 10px;    
@@ -105,19 +104,8 @@
             }
 
             .follow-btn{
-                margin-top: 30px;
-                margin-bottom: 30px;
-                span{
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    color: $color-white;
-                    background-color: $color-primary;
-                    border-radius: 16px;
-                    padding: 2px 8px 2px 0px;
-                    font-weight: $font-medium;
-                    cursor: pointer;
-                }
+                
+                
             }
         }
 

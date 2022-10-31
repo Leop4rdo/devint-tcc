@@ -41,7 +41,7 @@ const Sidebar: React.FC<ISidebarProps> = ({open }) => {
                         </div>
                         <div className="sidebar-item">
                             <Icon name="watch_later" />
-                            <a className="item-text">Itens salvos</a>
+                            <a className="item-text">Ver mais tarde</a>
                         </div>
                         <div className="sidebar-item">
                             <Icon name="chat" />
