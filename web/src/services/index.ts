@@ -26,8 +26,6 @@ const api = axios.create({
     baseURL: baseUrl,
 })
 
-export const buildQuery = (queryObj : Object) => {
-    return Object.entries(queryObj).map(([key, val]) => `${key}=${val}`).join('&')
-}
+export const buildQuery = (queryObj : Object) => Object.entries(queryObj).map(([key, val]) => `${key}=${val}`).join('&')
 
 export default api
