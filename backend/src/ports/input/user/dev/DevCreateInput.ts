@@ -13,8 +13,10 @@ export default class DevCreateInput extends InputPort {
     @IsNotEmpty()
     auth : AuthEntity
 
+    @IsNotEmpty()
     gender : string 
 
+    @IsNotEmpty()
     githubUsername : string
 
     constructor(props : IDevProps) {

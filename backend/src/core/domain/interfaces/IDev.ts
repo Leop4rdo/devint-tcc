@@ -19,7 +19,7 @@ import ISocialLinkProps from "./ISocialLink"
 export default interface IDevProps {
     id ?: string
     name : string
-    follows : IDevProps[]
+    following : IDevProps[]
     followers : IDevProps[]
     bio : string
     gender : string

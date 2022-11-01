@@ -8,6 +8,7 @@ import SocialLink from "@domains/SocialLink";
 import Seniority from "@domains/Seniority";
 import Auth from "@domains/Auth";
 import IDevProps from "@domains/interfaces/IDev";
+import DevMinimalOutput from "./DevMinimalOutput";
 
 export default class DevOutput {
     id: string
@@ -32,11 +33,18 @@ export default class DevOutput {
     skills: Skill[]
     projects: Project[]
     badges: Badge[]   
+    following ?: DevMinimalOutput[]
+    followers ?: DevMinimalOutput[]
 
 
-    constructor(props : IDevProps) {
+    constructor(props : IDevProps, devId ?: string) {
         Object.assign(this, props);
         this.auth = undefined
-        this.email = props.auth.email
+        this.email = props.auth.email 
+        
+        if (devId) {
+            this.following = props.following.map((dev) => new DevMinimalOutput(dev))
+            this.followers = props.followers.map((dev) => new DevMinimalOutput(dev))
+        }
     }
 }
