@@ -28,6 +28,7 @@ const UserProfilePage: React.FC = () => {
         
         setDev(res.data)
         setFollowing(res.data?.followers.find((d : IDevMinimal) => d.id === authContext?.userData.id) != undefined)
+        
     }
 
     const toggleFollow = async () => {
@@ -81,7 +82,7 @@ const UserProfilePage: React.FC = () => {
                         <p>Bio muito bunita feita para exemplificar uns bagui ai
                             tipo... alguma coisa</p>
 
-                        <div className="container-follower-data">
+                        <div className="follow-container">
                             <div className="container-followers">
                                 <span>{dev?.followers.length}</span>
                                 <p>Seguidores</p>
