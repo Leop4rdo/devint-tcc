@@ -2,7 +2,7 @@ import MenuWapper from "components/layout/MenuWrapper";
 import UserProfileEdit from "components/layout/UserProfileEdit";
 import Button from "components/shared/Button";
 import Icon from "components/shared/Icon";
-import IDevMinimal from "interfaces/IDev";
+import IDevMinimal, { IDev } from "interfaces/IDev";
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "store/context/Auth.context";
@@ -12,11 +12,23 @@ import Select from "components/shared/Select";
 
 
 const UserProfilePage: React.FC = () => {
-    const [dev, setDev] = useState<IDevMinimal | null>(null)
     const authContext = useContext(AuthContext)
-    const { devId } = useParams()
     
+    const { devId } = useParams()
+
+
+    
+    const [dev, setDev] = useState<IDev | null>(null)
     const [following, setFollowing] = useState(false);
+    
+    const findById = async () => {
+        
+        if (!devId) return 
+        const res = await devService.findById(devId)
+        
+        setDev(res.data)
+        setFollowing(res.data?.followers.find((d : IDevMinimal) => d.id === authContext?.userData.id) != undefined)
+    }
 
     const toggleFollow = async () => {
         if (!devId) return
@@ -24,16 +36,7 @@ const UserProfilePage: React.FC = () => {
         const res = await devService.toggleFollow(devId)
         
         setFollowing(!following);
-    }
-    console.log(devId);
-
-    const findById = async () => {
-
-        if (!devId) return 
-        const res = await devService.findById(devId)
-
-        setDev(res.data)
-        console.log(res.data);
+        
     }
     
     useEffect(() => { findById() }, [devId])
@@ -80,11 +83,11 @@ const UserProfilePage: React.FC = () => {
 
                         <div className="container-follower-data">
                             <div className="container-followers">
-                                <span>43</span>
+                                <span>{dev?.followers.length}</span>
                                 <p>Seguidores</p>
                             </div>
                             <div className="container-following">
-                                <span>45</span>
+                                <span>{dev?.following.length}</span>
                                 <p>Seguindo</p>
                             </div>
                         </div>
