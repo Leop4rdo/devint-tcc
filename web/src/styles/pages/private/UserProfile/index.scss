@@ -116,8 +116,8 @@
             }
 
             .follow-btn{
-                width: 100px;
-                height: auto;
+                width: 10em;
+                height: 2em;
                 margin-bottom: 1.5em;
 
                 span{
@@ -148,7 +148,11 @@
 
             span {
                 word-break: break-all;
-                color: $color-white;
+                color: $color-light-gray;
+            }
+
+            .icon {
+                color: $color-light-gray;
             }
         }
 

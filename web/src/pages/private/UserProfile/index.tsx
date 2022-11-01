@@ -80,8 +80,8 @@ const UserProfilePage: React.FC = () => {
                         {
                             (authContext?.userData?.id !== devId) ? 
                                 <Button className="follow-btn btn-primary" onClick={toggleFollow}>
-                                    <span>{following ? "Seguindo" : "Seguir"}</span>
                                     <Icon name={following ? "check": "add"} />
+                                    <span>{following ? "Seguindo" : "Seguir"}</span>
                                 </Button> : ''
                         }
 
@@ -112,11 +112,6 @@ const UserProfilePage: React.FC = () => {
                             <div className="user-info">
                                 <Icon name="group" />
                                 <span>Masculino</span>
-                            </div>
-
-                            <div className="user-info">
-                                <img src="assets/icons/github.svg" alt="" />
-                                <span>Ezequiel-Mathias</span>
                             </div>
 
                     </UserProfileEdit>
