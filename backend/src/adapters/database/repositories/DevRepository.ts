@@ -14,6 +14,7 @@ export default class DevRepository extends AbstractRepository<DevEntity> {
         this.db = AppDataSource.getRepository<DevEntity>(DevEntity)
     }
 
+
     async listByFilters(filters : PaginateListInput) : Promise<DevEntity[]> {
         return await this.db.createQueryBuilder('devs')
             .orderBy('RANDOM()')

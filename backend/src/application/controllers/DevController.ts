@@ -40,7 +40,7 @@ export default class DevController {
     }
     
     findById = (req : Request, res: Response) => {
-        this.service.findById(req.params.id)
+        this.service.findById(req.params.id, req.body.userData.id)
             .then((_res) => res.status(_res.status || 200).json(_res))
             .catch((err) => res.status(err.status || 500).json(err))
     }
