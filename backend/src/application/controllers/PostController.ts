@@ -21,7 +21,7 @@ export default class PostController {
     }
 
     getByWritter = (req: Request, res: Response) => {
-        this.service.getByWritter(req.params.userId)
+        this.service.getByWritter(req.params.userId, new PaginateListInput(req.query))
             .then((_res) => res.status(_res.status || 200).json(_res))
             .catch((err) => res.status(err.status || 500).json(err))
     }

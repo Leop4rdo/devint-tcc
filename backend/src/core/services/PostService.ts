@@ -35,8 +35,8 @@ export default class PostService {
         })
     }
 
-    async getByWritter(id: string): Promise<IResponse> {
-        const posts = await this._.findByWritter(id)
+    async getByWritter(id: string, query ?: PaginateListInput): Promise<IResponse> {
+        const posts = await this._.listByFilters({ ...query, writter : id })
 
         if (!posts)
             return new BadRequestResponse({ message: errors.ENTITY_NOT_FOUND })
