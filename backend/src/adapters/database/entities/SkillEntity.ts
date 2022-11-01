@@ -9,7 +9,7 @@ export default class SkillEntity {
     @Column({ nullable : false})
     name: string
 
-    @Column({})
+    @Column()
     icon: string
     
     @CreateDateColumn({ name: 'created_at', select: false })
