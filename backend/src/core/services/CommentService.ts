@@ -28,7 +28,7 @@ export default class CommentService {
         
         return new SuccessResponse({
             status : 201,
-            data : await this._.create(comment)
+            data : await this._.create(comment as CommentEntity)
         })
     }
 
@@ -44,7 +44,7 @@ export default class CommentService {
             comment.hearts.push(userId)
         }
 
-        await this._.update(comment)
+        await this._.update(comment as CommentEntity)
 
         return new SuccessResponse({
             status: 200,
@@ -65,7 +65,7 @@ export default class CommentService {
 
         comment.answers.push(answer)
 
-        this._.update(comment)
+        this._.update(comment as CommentEntity)
 
         return new SuccessResponse({
             status : 201,
