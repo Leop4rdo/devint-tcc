@@ -35,9 +35,11 @@ export abstract class  AbstractService<T> {
 
     async create(entity: T) : Promise<IResponse> {
         try {
+            
+
             return new SuccessResponse({
                 status: 201,
-                data: await this.repo.create(entity)
+                data: {...await this.repo.create(entity), userData : undefined}
             })
         } catch (e) {
             return new ServerErrorResponse({ message : e.message })

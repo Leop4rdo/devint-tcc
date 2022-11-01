@@ -22,10 +22,7 @@ export default class AuthEntity {
     @Column({ default: true })
     enabled : boolean
 
-    @CreateDateColumn({ 
-        name: 'created_at', 
-        select : false 
-    })
+    @CreateDateColumn({ name: 'created_at'})
     createdAt : Timestamp
 
     @UpdateDateColumn({ name: 'updated_at' })

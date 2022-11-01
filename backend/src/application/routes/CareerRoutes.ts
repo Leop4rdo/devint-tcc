@@ -1,5 +1,5 @@
 import {Router} from "express"
-import CareerController  from "../controllers/SkillController"
+import CareerController  from "../controllers/CareerController"
 
 const careerFocusRoutes = Router()
 const ctrl = new CareerController
