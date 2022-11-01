@@ -3,7 +3,7 @@ import requests
 
 
 API_URL = 'http://localhost:8080/api/v1'
-DEVICON_URL = 'https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/' # /name/name-svgname.svg
+DEVICON_URL = 'https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons' # /name/name-svgname.svg
 
 
 def auth() :
@@ -24,21 +24,41 @@ def getNewSkills() :
 
     return res.json()
 
+def skillAlreadyExists(target_skill, existing_skills) :
+    for s in existing_skills:
+        if target_skill['name'] == s['name'] : 
+            return True
+
+def createSkill(skill, token):
+    body = {
+        "name" : skill['name'],
+        "icon" : f'{DEVICON_URL}/{skill["name"]}/{skill["name"]}-original.svg'
+    }
+    
+    requests.post(
+            f'{API_URL}/skills', 
+            json = body,
+            headers = { 'Authorization' : f'Bearer {token}' }
+    )
+
+
 def run() : 
     token = auth()
 
     existing_skills = getExistingSkills(token)
     new_skills = getNewSkills()
 
-    print(new_skills[0]['name'])
+    print('-------------------------')
+    print('')
+    print(f'new_skills -> {len(new_skills)}')
+    print(f'existing_skills -> {len(existing_skills)}')
+    print('')
+    print('-------------------------')
 
     for skill in new_skills:
-        print(skill[0]['name'])
-        pass
-        # print(f'skill : {skill['name']}')
-        # if skillAlreadyExists(skill, existing_skills):
-        #     print('already exists! :)')
-        
+        if (skillAlreadyExists(skill, existing_skills)) : 
+            continue
 
-
+        createSkill(skill, token)
+        print(f'skill created -> {skill["name"]}')
 run()
