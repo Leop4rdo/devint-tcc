@@ -10,7 +10,7 @@ const PrivateNavigator : React.FC = () => {
 
     return (
         <Stack.Navigator initialRouteName="home" screenOptions={{ headerShown : false, animation : 'fade_from_bottom'}}>
-            {/* <Stack.Screen name="home" component={HomePage} /> */}
+            {<Stack.Screen name="home" component={HomePage} /> }
             <Stack.Screen name="profile" component={ProfilePage}/>
             <Stack.Screen name="post-register" component={PostRegisterPage} />
             

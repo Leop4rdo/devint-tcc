@@ -5,10 +5,15 @@ import styles from "./style";
 import Post from "../../../components/Post";
 import ProfileEdit from "../../../components/ProfileEdit";
 import ButtonComponent from "../../../components/shared/Button";
-import { ScrollView } from "react-native-gesture-handler";
+import { GestureDetector, ScrollView, Swipeable } from "react-native-gesture-handler";
+import { useState } from "react";
+import DetailsSection from "../../../components/ProfileSections/DetailsSection";
 
 
 const ProfilePage: React.FC<{ navigation : any }> = ({navigation}) => {
+    const [currentSection, setCurrentSection] = useState(0)
+
+
     return(
         <LayoutWrapper navigation={navigation}>
             <ScrollView>
@@ -32,7 +37,7 @@ const ProfilePage: React.FC<{ navigation : any }> = ({navigation}) => {
                 </View>
                 
                 <View style={styles.profileDice}>
-                    <View style={styles.dice}>
+                    <View style={styles.diceFollowers}>
                         <Text style={styles.amount}>40</Text>
                         <Text style={styles.text}>Seguidores</Text>
                     </View>
@@ -44,70 +49,36 @@ const ProfilePage: React.FC<{ navigation : any }> = ({navigation}) => {
                 
 
                 <View style={styles.publicationData}>
-                    <Pressable >
+                    <Pressable style={currentSection === 0 ? styles.publications : {}} onPress={() => setCurrentSection(0)}>
                         <Text style={styles.textPublications}>Posts</Text>
                     </Pressable>
 
-                    <Pressable >
+                    <Pressable style={currentSection === 1 ? styles.publications : {}} onPress={() => setCurrentSection(1)}>
                         <Text style={styles.textPublications}>Artigos</Text>
                     </Pressable>
 
-                    <Pressable>
+                    <Pressable style={currentSection === 2 ? styles.publications : {}} onPress={() => setCurrentSection(2)}>
                         <Text style={styles.textPublications}>Projetos</Text>
                     </Pressable>
-                    <Pressable style={styles.publications}>
+                    <Pressable style={currentSection === 3 ? styles.publications : {}} onPress={() => setCurrentSection(3)}>
                         <Text style={styles.textPublications}>Informações</Text>
                     </Pressable>
                 </View>
 
-                <ProfileEdit icon="forum" text="Contato">
-                 <View style={styles.containerChildren}>
-                    <MaterialIcons style={styles.icon} name="mail" color={'#FFF'}></MaterialIcons>
-                    <Text style={styles.textedit}>john.doe@devint.com</Text>
-                 </View>
-                 <View style={styles.containerChildren}>
-                    <MaterialIcons style={styles.icon} name="call" color={'#FFF'}></MaterialIcons>
-                    <Text style={styles.textedit}>(XX) XXXXX-XXXX</Text>
-                 </View>
-                </ProfileEdit>
-
-                <ProfileEdit icon="group" text="Sobre">
-                 <View style={styles.containerChildren}>
-                    <MaterialIcons style={styles.icon} name="event" color={'#FFF'}></MaterialIcons>
-                    <Text style={styles.textedit}>29/08/2099</Text>
-                 </View>
-
-                 <View style={styles.containerChildren}>
-                    <MaterialIcons style={styles.icon} name="group" color={'#FFF'}></MaterialIcons>
-                    <Text style={styles.textedit}>Masculino</Text>
-                 </View>
-                </ProfileEdit>
-
-                <ProfileEdit icon="star" text="Foco de Carreira">
-                 <View style={styles.containerChildren}>
-                    <MaterialIcons style={styles.icon} name="center-focus-weak" color={'#FFF'}></MaterialIcons>
-                    <Text style={styles.textedit}>Front-End</Text>
-                 </View>
-                </ProfileEdit>
-
-                <ProfileEdit icon="work" text="Trabalho atual">
-                 <View style={styles.containerChildren}>
-                    <Text style={styles.textedit}>Front-End</Text>
-                 </View>
-                </ProfileEdit>
-
-                <ProfileEdit icon="school" text="Senioridade">
-                 <View style={styles.containerChildren}>
-                    <Text style={styles.textedit}>Junior</Text>
-                 </View>
-                </ProfileEdit>
-
-                <ProfileEdit icon="star" text="Habilidades">
-                 <View style={styles.containerChildren}>
-                    <Text style={styles.textedit}>Junior</Text>
-                 </View>
-                </ProfileEdit>
-
+                <GestureDetector>
+                    {
+                        (currentSection === 3) ? 
+                        <DetailsSection />
+                        : (currentSection === 2) ?
+                        <Text>2</Text>
+                        : (currentSection === 1) ?
+                        <Text>1</Text>
+                        : (currentSection === 0 ) ? 
+                        <Text>0</Text>
+                        :   <Text>Pagina inválida</Text>
+                    }
+                </GestureDetector>
+                
                 
                     
                

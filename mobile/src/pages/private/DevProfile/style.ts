@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
         width: 80,
         aspectRatio : 1,
         borderRadius : 48,
+   
        
     },
     devName:{
@@ -45,6 +46,11 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         marginHorizontal:20,
 
+    },
+    diceFollowers:{
+        flexDirection:'column',
+        alignItems:'center',
+        marginRight: 54 
     },
     dice:{
         flexDirection:'column',
@@ -100,22 +106,7 @@ const styles = StyleSheet.create({
         color: colors.WHITE,
         fontFamily: fonts.POPPINS_SEMIBOLD
     },
-    containerChildren:{
-        marginHorizontal: 2,
-        flexDirection: 'row',
-        alignItems: 'center',
-        fontSize: 16,
-        marginBottom: 6
-    },
-    icon:{
-        fontSize:16,
-        marginRight:8,
-    },
-
-    textedit:{
-         color: colors.WHITE
-    }
-
+   
    
 
    
