@@ -228,7 +228,11 @@
             color: $color-white;
 
             h4 {
+
+                font-weight: $font-regular;
                 position: relative;
+                color: $color-light-gray;
+
                 &:hover {
 
                     color: $color-primary;

@@ -33,7 +33,7 @@ const UserProfilePage: React.FC = () => {
         const res = await devService.findById(devId)
 
         setDev(res.data)
-        
+        console.log(res.data);
     }
     
     useEffect(() => { findById() }, [devId])
@@ -116,31 +116,6 @@ const UserProfilePage: React.FC = () => {
                         </div>
 
                     </UserProfileEdit>
-                    {/* <UserProfileEdit editIcon={edit.contacts} OnClick={() => setEdit({ ...edit, contacts: !edit.contacts })} iconName="forum" subject="Contato">
-
-                        <div className="container-contact-quite">
-                            <div className="container-email">
-                                <Icon name="email" />
-                                <span>emailqualddddddddddddddddddquer@gmail.com</span>
-                            </div>
-
-                            <div className="container-phone">
-                                <Icon name="call" />
-                                {edit.contacts ?
-                                    <Input value={"(11) 4954-5965"} />
-                                    :
-                                    <span>(11) 4954-5965</span>
-                                }
-
-
-                            </div>
-
-                        <div className="user-info">
-                            <Icon name="call" />
-                            <span>(11) 4954-5965</span>
-                        </div>
-
-                    </UserProfileEdit> */}
 
                     <UserProfileEdit editIcon={edit.about} OnClick={() => setEdit({ ...edit, about: !edit.about })} iconName="group" subject="Sobre" >
 
