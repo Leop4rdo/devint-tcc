@@ -44,7 +44,8 @@ const UserProfilePage: React.FC = () => {
         careerFocus: false,
         currentJob: false,
         seniority: false,
-        skills: false
+        skills: false,
+        links: false
     })
 
     return (
@@ -178,14 +179,46 @@ const UserProfilePage: React.FC = () => {
                         {edit.skills ?
 
                             <div>
-                                <Select onChange={'Selecione um item'}>
-                                    
+                                <Select onChange={() => { }}>
+                                    <option> Html </option>
+                                    <option> CSS </option>
+                                    <option> React Native </option>
                                 </Select>
+
+                                <div className="skill-user">
+                                    <div className="container-skill-user">
+                                        <Icon name="close" />
+                                        <div className="container-skill">
+                                            <Icon name="star" />
+                                            <span>Html e css</span>
+                                        </div>
+                                    </div>
+
+                                    <div className="container-skill-user">
+                                        <Icon name="close" />
+                                        <div className="container-skill">
+                                            <Icon name="star" />
+                                            <span>Html e css</span>
+                                        </div>
+                                    </div>
+                                    <div className="container-skill-user">
+                                        <Icon name="close" />
+                                        <div className="container-skill">
+                                            <Icon name="star" />
+                                            <span>Html e css</span>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
 
+
                             :
+
                             <div className="skill-user">
+
                                 <div className="container-skill-user">
+                                    <Icon name="close" />
                                     <div className="container-skill">
                                         <Icon name="star" />
                                         <span>Html e css</span>
@@ -193,12 +226,14 @@ const UserProfilePage: React.FC = () => {
                                 </div>
 
                                 <div className="container-skill-user">
+                                    <Icon name="close" />
                                     <div className="container-skill">
                                         <Icon name="star" />
                                         <span>Html e css</span>
                                     </div>
                                 </div>
                                 <div className="container-skill-user">
+                                    <Icon name="close" />
                                     <div className="container-skill">
                                         <Icon name="star" />
                                         <span>Html e css</span>
@@ -211,24 +246,35 @@ const UserProfilePage: React.FC = () => {
                     </UserProfileEdit>
 
 
-                    <UserProfileEdit editIcon={edit.contacts} OnClick={() => setEdit({ ...edit, contacts: !edit.contacts })} iconName="push_pin" subject="Outros links">
+                    <UserProfileEdit editIcon={edit.links} OnClick={() => setEdit({ ...edit, links: !edit.links })} iconName="push_pin" subject="Outros links">
 
-                        <div className="container-links">
-                            <div className="links">
-                                <span>Link qualquer</span>
+                        {edit.links ?
+                            <div>
+                                <Input placeholder="Insira o nome do link"/>
+                                <Input placeholder="Insira o Link"/>
+                            </div>
+                            :
+
+                            <div className="container-links">
+                                <Icon name="close"/>
+                                <div className="links">
+                                    <span>Link qualquer</span>
+                                </div>
+
+                                <div className="links">
+                                    <span>Link qualquer</span>
+                                </div>
+
+                                <div className="links">
+                                    <span>Link qualquer</span>
+                                </div>
+                                <div className="links">
+                                    <span>Link qualquer</span>
+                                </div>
                             </div>
 
-                            <div className="links">
-                                <span>Link qualquer</span>
-                            </div>
+                        }
 
-                            <div className="links">
-                                <span>Link qualquer</span>
-                            </div>
-                            <div className="links">
-                                <span>Link qualquer</span>
-                            </div>
-                        </div>
 
                     </UserProfileEdit>
 
