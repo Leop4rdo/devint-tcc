@@ -12,13 +12,12 @@ interface IUserProfileEditProps {
 const UserProfileEdit: React.FC<IUserProfileEditProps> = ({ iconName, subject, children , OnClick , editIcon}) => {
     return (
 
-        <div className="container-information-user">
+        <div className="card-user-informations">
 
-            <div className="container-information-top">
-
-                <div className="contact">
+            <div className="card-top">
+                <div className="card-tittle">
                     <Icon name={iconName} />
-                    <p>{subject}</p>
+                    <span>{subject}</span>
                 </div>
                 {editIcon ? 
                     <Icon name="done" onClick={OnClick}/>
@@ -29,16 +28,11 @@ const UserProfileEdit: React.FC<IUserProfileEditProps> = ({ iconName, subject, c
 
             </div>
 
-          
+            <div className="user-informations">
                 {children}
-
-            
-
+            </div>
 
         </div>
-
-
-
 
     )
 }

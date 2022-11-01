@@ -2,13 +2,42 @@ import MenuWapper from "components/layout/MenuWrapper";
 import UserProfileEdit from "components/layout/UserProfileEdit";
 import Button from "components/shared/Button";
 import Icon from "components/shared/Icon";
-import React, { useState } from "react";
+import IDevMinimal from "interfaces/IDev";
+import React, { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { AuthContext } from "store/context/Auth.context";
+import * as devService from "../../../services/dev.service"
 import Input from "components/shared/Input";
 import Select from "components/shared/Select";
 
 
 const UserProfilePage: React.FC = () => {
+    const [dev, setDev] = useState<IDevMinimal | null>(null)
+    const authContext = useContext(AuthContext)
+    const { devId } = useParams()
+    
+    const [following, setFollowing] = useState(false);
 
+    const toggleFollow = async () => {
+        if (!devId) return
+
+        const res = await devService.toggleFollow(devId)
+        
+        setFollowing(!following);
+    }
+    console.log(devId);
+
+    const findById = async () => {
+
+        if (!devId) return 
+        const res = await devService.findById(devId)
+
+        setDev(res.data)
+        console.log(res.data);
+    }
+    
+    useEffect(() => { findById() }, [devId])
+    
     const [edit, setEdit] = useState({
         contacts: false,
         about: false,
@@ -25,22 +54,26 @@ const UserProfilePage: React.FC = () => {
 
                 <div className="background-image"></div>
 
-                <div className="container-user-info">
+                <div className="container-user-informations">
 
                     <div className="main-profile-info">
 
-                        <Icon name="edit" />
-
-                        <div className="container-image-face-user">
-                            <img />
+                        <div className="edit-main-info">
+                            <Icon name="edit"/>
                         </div>
 
-                        <h2>Name user</h2>
+                        <img src={dev?.profilePicUrl} className="profile-pic"/>
 
-                        <span>
-                            <img src="assets/icons/github.svg" alt="" />
-                            Ezequiel-Mathias
-                        </span>
+                        <h2>{dev?.name}</h2>
+
+                        {
+                            (dev?.githubUsername) ? 
+                                <span>
+                                    <img src="assets/icons/github.svg" alt="" />
+                                    {dev?.githubUsername}
+                                </span>
+                            : ''
+                        }
 
                         <p>Bio muito bunita feita para exemplificar uns bagui ai
                             tipo... alguma coisa</p>
@@ -56,42 +89,38 @@ const UserProfilePage: React.FC = () => {
                             </div>
                         </div>
 
-                        <Button className="follow-btn btn-primary">
-                            <Icon name="add" />
-                            <span>Seguir</span>
-                        </Button>
-
+                        {
+                            (authContext?.userData?.id !== devId) ? 
+                                <Button className="follow-btn btn-primary" onClick={toggleFollow}>
+                                    <Icon name={following ? "check": "add"} />
+                                    <span>{following ? "Seguindo" : "Seguir"}</span>
+                                </Button> : ''
+                        }
 
 
                     </div>
 
                     <UserProfileEdit editIcon={edit.contacts} OnClick={() => setEdit({ ...edit, contacts: !edit.contacts })} iconName="forum" subject="Contato">
 
-                        <div className="container-contact-quite">
-                            <div className="container-email">
-                                <Icon name="email" />
-                                <span>emailqualddddddddddddddddddquer@gmail.com</span>
-                            </div>
+                        <div className="user-info">
+                            <Icon name="email" />
+                            <span>emailqualddddddddddddddddddquer@gmail.com</span>
+                        </div>
 
-                            <div className="container-phone">
+                        <div className="user-info">
                                 <Icon name="call" />
                                 {edit.contacts ?
-                                    <Input value={"(11) 4954-5965"} />
+                                    <Input value={"(00) 00000-0000"} />
                                     :
-                                    <span>(11) 4954-5965</span>
+                                    <span>(00) 0000-0000</span>
                                 }
-
-
-                            </div>
-
                         </div>
 
                     </UserProfileEdit>
 
                     <UserProfileEdit editIcon={edit.about} OnClick={() => setEdit({ ...edit, about: !edit.about })} iconName="group" subject="Sobre" >
 
-                        <div className="container-about">
-                            <div className="container-email">
+                            <div className="user-info">
                                 <Icon name="calendar_month" />
                                 {edit.about ?
                                     <Input value={"14/01/2001"} />
@@ -101,7 +130,7 @@ const UserProfilePage: React.FC = () => {
 
                             </div>
 
-                            <div className="container-sex">
+                            <div className="user-info">
                                 <Icon name="group" />
                                 {edit.about ?
                                     <Input value={"Masculino"} />
@@ -111,33 +140,22 @@ const UserProfilePage: React.FC = () => {
 
                             </div>
 
-                            <div className="container-user-git-hub">
-                                <img src="assets/icons/github.svg" alt="" />
-                                {edit.about ?
-                                    <Input value={"Ezequiel-Mathias"} />
-                                    :
-                                    <span>Ezequiel Mathias</span>
-                                }
-                            </div>
-
-                        </div>
                     </UserProfileEdit>
 
                     <UserProfileEdit editIcon={edit.careerFocus} OnClick={() => setEdit({ ...edit, careerFocus: !edit.careerFocus })} iconName="center_focus_weak" subject="Foco de carreira" >
 
-                        <div className="container-career-focus">
+                        <div className="user-info">
                             {edit.careerFocus ?
                                 <Input value={"Front-End"} />
                                 :
                                 <span>Front-End</span>
                             }
-
                         </div>
 
                     </UserProfileEdit>
 
                     <UserProfileEdit editIcon={edit.currentJob} OnClick={() => setEdit({ ...edit, currentJob: !edit.currentJob })} iconName="work" subject="Trabalho Atual" >
-                        <div className="container-career-focus">
+                        <div className="user-info">
                             {edit.currentJob ?
                                 <Input value={"Front-End"} />
                                 :
@@ -147,14 +165,12 @@ const UserProfilePage: React.FC = () => {
                     </UserProfileEdit>
 
                     <UserProfileEdit editIcon={edit.seniority} OnClick={() => setEdit({ ...edit, seniority: !edit.seniority })} iconName="school" subject="Senioridade">
-                        <div className="container-seniority-user">
-
+                        <div className="user-info">
                             {edit.seniority ?
                                 <Input value={"Junior"} />
                                 :
                                 <span>Junior</span>
                             }
-
                         </div>
                     </UserProfileEdit>
 

@@ -1,41 +1,60 @@
-.container-information-user {
+.card-user-informations {
     background-color: $color-black;
     border-radius: 16px;
     width: 350px;
-    padding: 16px;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
     
+    .icon {
+        font-size: 1em;
+        color: $color-light-gray;
+        cursor: pointer;
 
-    .container-information-top {
+        &:hover {
+            color: $color-primary;
+        }
+    }
+    .card-top {
         display: flex;
+        width: 100%;
+        height: auto;
+        align-items: center;
         justify-content: space-between;
 
-
-        .contact {
+        
+        .card-tittle {
             display: flex;
-            padding: 10px;
-            gap: 8px;
-
-            p {
-                font-size: 22px;
-                font-weight: $font-regular;
-            }
+            align-items: center;
+            gap: 0.5em;
 
             .icon {
-                margin-top: 0;
                 color: $color-white;
-                font-size: 32px;
+                font-size: 1.5em;
+                cursor: default;
             }
 
+            span {
+                font-size: 1em;
+                color: $color-white;
+            }
+    
         }
+
+    }
+
+    .user-informations {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
 
         .icon {
-            margin-top: 16px;
-            margin-right: 10px;
+            font-size: 1.5em;
             color: $color-light-gray;
-            font-size: 20px;
-            cursor: pointer;
         }
-
     }
 
 }

@@ -26,13 +26,13 @@ const FeedPage: React.FC = () => {
     let page = 1;
 
     const getDevs = async () => {
-        const res = await devService.list({ limit: 48 })
+        const res = await devService.list({ limit: 24 })
 
         setDevs(res.data)
     }
 
     const getPosts = async () => {
-        const { data } = await postService.list({ limit })
+        const { data } = await postService.list({ limit: 45, offset: posts.length })
 
         setPosts([...posts, ...data])
         setLoading(false)
@@ -88,7 +88,6 @@ const FeedPage: React.FC = () => {
                             {
                                 posts.map((post: IPostListItem, index : number) =>
                                     <>
-                                        <span>{index}</span>
                                         <Post key={`${post.id}-${Math.random() * 999}`} data={post} openDetails={() => setSelectedPostId(post.id)} />
                                     </>
                                 )

@@ -53,7 +53,7 @@ const Sidebar : React.FC<ISidebarProps> = ({ visible, onClose }) => {
                     <SidebarItem active icon="home" name="Home" />
                     <SidebarItem icon="trending-up" name="Em alta" />
                     <SidebarItem icon="article" name="Artigos" />
-                    <SidebarItem icon="watch-later" name="Itens salvos" />
+                    <SidebarItem icon="watch-later" name="Ver mais tarde" />
                     <SidebarItem icon="chat" name="Chat" />
                     <SidebarItem icon="settings" name="Configurações" />
                 </View>

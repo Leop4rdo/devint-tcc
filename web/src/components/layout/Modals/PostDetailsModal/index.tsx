@@ -49,7 +49,7 @@ const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick  }
             <div className="container-modal-post">
                 <div className="modal-post">
                     <div className="container-itens">
-                        <div className="user-info">
+                        <div className="user-informations">
                             <div className="dice-user">
                                 <img src={post?.writter.profilePicUrl} />
                                 <h2>{post?.writter.name}</h2>
