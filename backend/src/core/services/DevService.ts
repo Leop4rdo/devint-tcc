@@ -23,8 +23,8 @@ export default class DevService {
     }
 
 
-    async findById(id: string): Promise<IResponse> {
-        const dev = await this.repo.findById(id);
+    async findById(id: string, loggedDev : string): Promise<IResponse> {
+        const dev = await this.repo.findById(id, ['following', 'followers']);
 
         if (!dev) 
             return new BadRequestResponse({
@@ -33,7 +33,7 @@ export default class DevService {
             })
 
         return new SuccessResponse({
-            data : new DevOutput(dev)
+            data : new DevOutput(dev, loggedDev)
         })
     }
 
@@ -61,16 +61,16 @@ export default class DevService {
     }
 
     async toggleFollow (input: DevFollowInput ): Promise<IResponse>{
-        const dev : Dev = await this.repo.findById(input.source, ['follows'])
+        const dev : Dev = await this.repo.findById(input.source, ['following'])
 
         console.log('dev ->', dev)
 
-        const targetIndex = dev.follows.findIndex((dev)=>  dev.id == input.target) 
+        const targetIndex = dev.following.findIndex((dev)=>  dev.id == input.target) 
             
         if (targetIndex < 0)
-            dev.follows.push({ id : input.target} as unknown as Dev)
+            dev.following.push({ id : input.target} as unknown as Dev)
         else 
-            dev.follows.splice(targetIndex, 1)
+            dev.following.splice(targetIndex, 1)
 
         await this.repo.update(dev as DevEntity)
         
