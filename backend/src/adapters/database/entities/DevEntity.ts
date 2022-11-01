@@ -21,9 +21,9 @@ export default class DevEntity {
 
     @ManyToMany(() => DevEntity, (dev) => dev.followers, {cascade: true})
     @JoinTable({ name : 'follow', joinColumn : { name : 'source_dev' }, inverseJoinColumn : { name : 'target_dev'} })
-    follows : DevEntity[]
+    following : DevEntity[]
 
-    @ManyToMany(() => DevEntity, (dev) => dev.follows)
+    @ManyToMany(() => DevEntity, (dev) => dev.following)
     followers : DevEntity[]
 
     @Column({ default: '', nullable: true })

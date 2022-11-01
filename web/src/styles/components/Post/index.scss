@@ -23,7 +23,7 @@
         border-radius: 50%;
     }
 
-    .user-info {
+    .user-informations {
         display: flex;
         gap: 16px;
     }
@@ -36,6 +36,7 @@
 
         h2 {
             color: $color-white;
+            cursor: pointer;
         }
     
         button {

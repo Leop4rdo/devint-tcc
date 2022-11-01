@@ -19,10 +19,10 @@ const Sidebar: React.FC<ISidebarProps> = ({open }) => {
             <div className={`container-side-bar effect-side-bar ${open ? 'open' : ''}`}>
 
                 <div className="container-user">
-                    <div className="container-image-face" onClick={() => navigation('user-profile')}>
+                    <div className="container-image-face" onClick={() => navigation(`/dev/${authContext?.userData?.id}`)}>
                     <img src={authContext?.userData?.profilePicUrl} alt="User profile picture" />
                     </div>
-                    <h2 onClick={() => navigation('user-profile')}>{authContext?.userData?.name}</h2>
+                    <h2 onClick={() => navigation(`/dev/${authContext?.userData?.id}`)}>{authContext?.userData?.name}</h2>
                     
                 </div>
 
@@ -41,7 +41,7 @@ const Sidebar: React.FC<ISidebarProps> = ({open }) => {
                         </div>
                         <div className="sidebar-item">
                             <Icon name="watch_later" />
-                            <a className="item-text">Itens salvos</a>
+                            <a className="item-text">Ver mais tarde</a>
                         </div>
                         <div className="sidebar-item">
                             <Icon name="chat" />

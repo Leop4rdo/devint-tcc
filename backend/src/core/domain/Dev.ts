@@ -14,7 +14,7 @@ import SocialLink from "./SocialLink"
 export default class Dev {
     id: string
     name : string
-    follows : Dev[]
+    following : Dev[]
     followers : Dev[]
     bio : string
     gender : string
