@@ -4,11 +4,17 @@
     width: 100%;
     position: relative;
 
-
     .background-image {
         width: 100%;
         height: 200px;
         background-color: $color-light-gray;
+    }
+
+    .container-done-icon{
+        
+        .icon{
+            font-size: 24px;
+        }
     }
 
     .container-user-informations {
@@ -22,7 +28,7 @@
         gap: 1em;
         top: 120px;
 
-        .main-profile-info {
+        .profile-info {
             width: 350px;
             background-color: $color-black;
             border-radius: 16px;
@@ -45,7 +51,26 @@
                 
             }
 
-            .edit-main-info{
+            .auto-grow-text-area {
+                width: 300px;
+                textarea {
+                    width: 100%;
+                    height: fit-content;
+                    padding: 12px;
+                    min-height: 48px;
+                    color : white;
+                    resize: none;
+                    background-color: $color-dark-gray;
+                    outline: none;
+                    border : 2px solid $color-gray;
+                    border-radius: 16px;
+                    transition: border 0.25s ease-out;
+                    &:focus {
+                        border-color: $color-primary;
+                    }
+                }
+            }
+            .edit-info{
                 align-self: flex-end;
                 margin-top: 1em;
                 margin-right: 1em;
@@ -167,8 +192,9 @@
 
                 .icon{
                    font-size: 20px;
-                   width: 10px;
-                   height: 10px;
+                   width: 20px;
+                   height: 30px;
+                   color: $color-white;
                    
                 }
 
@@ -183,6 +209,7 @@
                         font-size: 32px;
                         width: 30px;
                         height: 30px;
+                        cursor: pointer;     
                     }
 
                     span {
@@ -202,22 +229,35 @@
             flex-wrap: wrap;
             justify-content: center;
             margin-left: -20px;
+            
 
-            .links {
-                height: 50px;
-                margin-top: 20px;
-                margin-left: 20px;
-                display: flex;
-                flex-direction: row;
-                align-items: center;
 
-                span {
-                    background-color: $color-primary;
+            .container-content-links{
+                .icon{
                     color: $color-white;
-                    border-radius: 24px;
-
+                    height: 30px;
+                    cursor: pointer;
                 }
+                .links {
+                    height: 50px;
+                    margin-top: -10px;
+                    margin-left: 20px;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+    
+                    span {
+                        padding: 10px;
+                        background-color: $color-primary;
+                        color: $color-white;
+                        border-radius: 24px;
+    
+                    }
+                }
+
             }
+
+            
 
         }
     }

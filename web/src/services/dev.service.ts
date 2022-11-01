@@ -44,3 +44,18 @@ export const findById = async ( id : string ) : Promise<IResponse> => {
     }
 }
 
+
+export const Skills = async () : Promise<IResponse> => {
+    try {
+        const { data } = await api.get( ``,
+            { headers: { Authorization: `Baerer ${ await getToken() }` } }
+        )
+
+        return data as IResponse
+
+    } catch (err : any) {
+        console.log(err);
+        return err.response.data as IResponse
+    }
+}
+

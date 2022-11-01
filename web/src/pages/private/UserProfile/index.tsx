@@ -9,36 +9,45 @@ import { AuthContext } from "store/context/Auth.context";
 import * as devService from "../../../services/dev.service"
 import Input from "components/shared/Input";
 import Select from "components/shared/Select";
+import AutoTextArea from "components/shared/TextArea";
 
 
 const UserProfilePage: React.FC = () => {
     const [dev, setDev] = useState<IDevMinimal | null>(null)
     const authContext = useContext(AuthContext)
     const { devId } = useParams()
-    
+    const [select, setSelectSkill] = useState()
+
     const [following, setFollowing] = useState(false);
 
     const toggleFollow = async () => {
         if (!devId) return
 
         const res = await devService.toggleFollow(devId)
-        
+
         setFollowing(!following);
     }
     console.log(devId);
 
     const findById = async () => {
 
-        if (!devId) return 
+        if (!devId) return
         const res = await devService.findById(devId)
 
         setDev(res.data)
         console.log(res.data);
     }
-    
+
     useEffect(() => { findById() }, [devId])
-    
+
+    const getDevs = async () => {
+        const res = await devService.list({ limit: 24 })
+
+        setSelectSkill(res.data)
+    }
+
     const [edit, setEdit] = useState({
+        bio: false,
         contacts: false,
         about: false,
         careerFocus: false,
@@ -56,27 +65,36 @@ const UserProfilePage: React.FC = () => {
 
                 <div className="container-user-informations">
 
-                    <div className="main-profile-info">
+                    <div className="profile-info">
 
-                        <div className="edit-main-info">
-                            <Icon name="edit"/>
+                        <div className="edit-info">
+                            <Icon name="edit" onClick={() => setEdit({ ...edit, bio: !edit.bio })} />
                         </div>
 
-                        <img src={dev?.profilePicUrl} className="profile-pic"/>
+                        <img src={dev?.profilePicUrl} className="profile-pic" />
 
                         <h2>{dev?.name}</h2>
 
                         {
-                            (dev?.githubUsername) ? 
+                            (dev?.githubUsername) ?
                                 <span>
                                     <img src="assets/icons/github.svg" alt="" />
                                     {dev?.githubUsername}
                                 </span>
-                            : ''
+                                : ''
                         }
 
-                        <p>Bio muito bunita feita para exemplificar uns bagui ai
+
+                        {edit.bio ?
+                            <AutoTextArea >
+                                Bio muito bunita feita para exemplificar uns bagui ai
+                                tipo... alguma coisa
+                            </AutoTextArea>
+                            :
+                            <p>Bio muito bunita feita para exemplificar uns bagui ai
                             tipo... alguma coisa</p>
+                        }
+
 
                         <div className="container-follower-data">
                             <div className="container-followers">
@@ -90,9 +108,9 @@ const UserProfilePage: React.FC = () => {
                         </div>
 
                         {
-                            (authContext?.userData?.id !== devId) ? 
+                            (authContext?.userData?.id !== devId) ?
                                 <Button className="follow-btn btn-primary" onClick={toggleFollow}>
-                                    <Icon name={following ? "check": "add"} />
+                                    <Icon name={following ? "check" : "add"} />
                                     <span>{following ? "Seguindo" : "Seguir"}</span>
                                 </Button> : ''
                         }
@@ -108,37 +126,37 @@ const UserProfilePage: React.FC = () => {
                         </div>
 
                         <div className="user-info">
-                                <Icon name="call" />
-                                {edit.contacts ?
-                                    <Input value={"(00) 00000-0000"} />
-                                    :
-                                    <span>(00) 0000-0000</span>
-                                }
+                            <Icon name="call" />
+                            {edit.contacts ?
+                                <Input value={"(00) 00000-0000"} />
+                                :
+                                <span>(00) 0000-0000</span>
+                            }
                         </div>
 
                     </UserProfileEdit>
 
                     <UserProfileEdit editIcon={edit.about} OnClick={() => setEdit({ ...edit, about: !edit.about })} iconName="group" subject="Sobre" >
 
-                            <div className="user-info">
-                                <Icon name="calendar_month" />
-                                {edit.about ?
-                                    <Input value={"14/01/2001"} />
-                                    :
-                                    <span>14/01/2001</span>
-                                }
+                        <div className="user-info">
+                            <Icon name="calendar_month" />
+                            {edit.about ?
+                                <Input value={"14/01/2001"} />
+                                :
+                                <span>14/01/2001</span>
+                            }
 
-                            </div>
+                        </div>
 
-                            <div className="user-info">
-                                <Icon name="group" />
-                                {edit.about ?
-                                    <Input value={"Masculino"} />
-                                    :
-                                    <span>Masculino</span>
-                                }
+                        <div className="user-info">
+                            <Icon name="group" />
+                            {edit.about ?
+                                <Input value={"Masculino"} />
+                                :
+                                <span>Masculino</span>
+                            }
 
-                            </div>
+                        </div>
 
                     </UserProfileEdit>
 
@@ -250,26 +268,40 @@ const UserProfilePage: React.FC = () => {
 
                         {edit.links ?
                             <div>
-                                <Input placeholder="Insira o nome do link"/>
-                                <Input placeholder="Insira o Link"/>
+                                <Input placeholder="Insira o nome do link" />
+                                <Input placeholder="Insira o Link" />
                             </div>
                             :
 
                             <div className="container-links">
-                                <Icon name="close"/>
-                                <div className="links">
-                                    <span>Link qualquer</span>
+
+                                <div className="container-content-links">
+                                    <Icon name="close" />
+                                    <div className="links">
+                                        <span>Link qualquer</span>
+                                    </div>
                                 </div>
 
-                                <div className="links">
-                                    <span>Link qualquer</span>
+
+                                <div className="container-content-links">
+                                    <Icon name="close" />
+                                    <div className="links">
+                                        <span>Link qualquer</span>
+                                    </div>
                                 </div>
 
-                                <div className="links">
-                                    <span>Link qualquer</span>
+                                <div className="container-content-links">
+                                    <Icon name="close" />
+                                    <div className="links">
+                                        <span>Link qualquer</span>
+                                    </div>
                                 </div>
-                                <div className="links">
-                                    <span>Link qualquer</span>
+
+                                <div className="container-content-links">
+                                    <Icon name="close" />
+                                    <div className="links">
+                                        <span>Link qualquer</span>
+                                    </div>
                                 </div>
                             </div>
 
