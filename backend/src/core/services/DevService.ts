@@ -12,6 +12,8 @@ import IDevProps from "../domain/interfaces/IDev";
 import DevFollowInput from "@src/ports/input/user/dev/DevFollowInput";
 import Dev from "../domain/Dev";
 import BadRequestResponse from "@src/application/Responses/BadRequestResponse";
+import DevUpdateInput from "@src/ports/input/user/dev/DevUpdateInput";
+import errors from "@src/helpers/errors";
 
 export default class DevService {
     private repo : DevRepository
@@ -21,8 +23,18 @@ export default class DevService {
     }
 
 
-    findById(id: string): Promise<IResponse> {
-        throw new Error("Method not implemented.");
+    async findById(id: string): Promise<IResponse> {
+        const dev = await this.repo.findById(id);
+
+        if (!dev) 
+            return new BadRequestResponse({
+                message : 'Can not find dev',
+                status : 404
+            })
+
+        return new SuccessResponse({
+            data : new DevOutput(dev)
+        })
     }
 
     async list(filters : PaginateListInput) : Promise<IResponse> {
@@ -60,11 +72,28 @@ export default class DevService {
         else 
             dev.follows.splice(targetIndex, 1)
 
-        await this.repo.update(dev)
+        await this.repo.update(dev as DevEntity)
         
         return new SuccessResponse({
             status : 200,
             data : new DevOutput(dev)
+        })
+    }
+
+    async update (input: DevUpdateInput, id: string ): Promise<IResponse>{
+        
+        const dev : DevEntity = await this.repo.findById(id)
+
+        if (!dev)
+            return new BadRequestResponse({ status : 404, message: errors.ENTITY_NOT_FOUND })
+
+
+        const updated = Object.assign(dev, input)
+        
+        const res = await this.repo.update(updated)
+
+        return new SuccessResponse({
+            data : res
         })
     }
     

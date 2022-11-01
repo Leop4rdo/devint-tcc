@@ -7,6 +7,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "store/context/Auth.context";
 import * as devService from "../../../services/dev.service"
+import Input from "components/shared/Input";
+import Select from "components/shared/Select";
+
 
 const UserProfilePage: React.FC = () => {
     const [dev, setDev] = useState<IDevMinimal | null>(null)
@@ -35,6 +38,14 @@ const UserProfilePage: React.FC = () => {
     
     useEffect(() => { findById() }, [devId])
     
+    const [edit, setEdit] = useState({
+        contacts: false,
+        about: false,
+        careerFocus: false,
+        currentJob: false,
+        seniority: false,
+        skills: false
+    })
 
     return (
         <MenuWapper>
@@ -88,7 +99,7 @@ const UserProfilePage: React.FC = () => {
 
                     </div>
 
-                    <UserProfileEdit iconName="forum" subject="Contatos">
+                    <UserProfileEdit editIcon={edit.contacts} OnClick={() => setEdit({ ...edit, contacts: !edit.contacts })} iconName="forum" subject="Contato">
 
                         <div className="user-info">
                             <Icon name="email" />
@@ -96,74 +107,136 @@ const UserProfilePage: React.FC = () => {
                         </div>
 
                         <div className="user-info">
+                                <Icon name="call" />
+                                {edit.contacts ?
+                                    <Input value={"(00) 00000-0000"} />
+                                    :
+                                    <span>(00) 0000-0000</span>
+                                }
+                        </div>
+
+                    </UserProfileEdit>
+                    {/* <UserProfileEdit editIcon={edit.contacts} OnClick={() => setEdit({ ...edit, contacts: !edit.contacts })} iconName="forum" subject="Contato">
+
+                        <div className="container-contact-quite">
+                            <div className="container-email">
+                                <Icon name="email" />
+                                <span>emailqualddddddddddddddddddquer@gmail.com</span>
+                            </div>
+
+                            <div className="container-phone">
+                                <Icon name="call" />
+                                {edit.contacts ?
+                                    <Input value={"(11) 4954-5965"} />
+                                    :
+                                    <span>(11) 4954-5965</span>
+                                }
+
+
+                            </div>
+
+                        <div className="user-info">
                             <Icon name="call" />
                             <span>(11) 4954-5965</span>
                         </div>
 
-                    </UserProfileEdit>
+                    </UserProfileEdit> */}
 
-                    <UserProfileEdit iconName="group" subject="Sobre" >
+                    <UserProfileEdit editIcon={edit.about} OnClick={() => setEdit({ ...edit, about: !edit.about })} iconName="group" subject="Sobre" >
 
                             <div className="user-info">
                                 <Icon name="calendar_month" />
-                                <span>14/01/2001</span>
+                                {edit.about ?
+                                    <Input value={"14/01/2001"} />
+                                    :
+                                    <span>14/01/2001</span>
+                                }
+
                             </div>
 
                             <div className="user-info">
                                 <Icon name="group" />
-                                <span>Masculino</span>
+                                {edit.about ?
+                                    <Input value={"Masculino"} />
+                                    :
+                                    <span>Masculino</span>
+                                }
+
                             </div>
 
                     </UserProfileEdit>
 
-                    <UserProfileEdit iconName="center_focus_weak" subject="Foco de carreira" >
+                    <UserProfileEdit editIcon={edit.careerFocus} OnClick={() => setEdit({ ...edit, careerFocus: !edit.careerFocus })} iconName="center_focus_weak" subject="Foco de carreira" >
 
                         <div className="user-info">
-                            <span>Front-End</span>
+                            {edit.careerFocus ?
+                                <Input value={"Front-End"} />
+                                :
+                                <span>Front-End</span>
+                            }
                         </div>
 
                     </UserProfileEdit>
 
-                    <UserProfileEdit iconName="work" subject="Trabalho Atual" >
+                    <UserProfileEdit editIcon={edit.currentJob} OnClick={() => setEdit({ ...edit, currentJob: !edit.currentJob })} iconName="work" subject="Trabalho Atual" >
                         <div className="user-info">
-                            <span>Front-end</span>
+                            {edit.currentJob ?
+                                <Input value={"Front-End"} />
+                                :
+                                <span>Front-End</span>
+                            }
                         </div>
                     </UserProfileEdit>
 
-                    <UserProfileEdit iconName="school" subject="Senioridade">
+                    <UserProfileEdit editIcon={edit.seniority} OnClick={() => setEdit({ ...edit, seniority: !edit.seniority })} iconName="school" subject="Senioridade">
                         <div className="user-info">
-                            <span>Junior</span>
+                            {edit.seniority ?
+                                <Input value={"Junior"} />
+                                :
+                                <span>Junior</span>
+                            }
                         </div>
                     </UserProfileEdit>
 
 
-                    <UserProfileEdit iconName="star" subject="Habilidades">
-                        <div className="skill-user">
-                            <div className="container-skill-user">
-                                <div className="container-skill">
-                                    <Icon name="star" />
-                                    <span>Html e css</span>
+                    <UserProfileEdit editIcon={edit.skills} OnClick={() => setEdit({ ...edit, skills: !edit.skills })} iconName="star" subject="Habilidades">
+                        {edit.skills ?
+
+                            <div>
+                                <Select onChange={'Selecione um item'}>
+                                    
+                                </Select>
+                            </div>
+
+                            :
+                            <div className="skill-user">
+                                <div className="container-skill-user">
+                                    <div className="container-skill">
+                                        <Icon name="star" />
+                                        <span>Html e css</span>
+                                    </div>
+                                </div>
+
+                                <div className="container-skill-user">
+                                    <div className="container-skill">
+                                        <Icon name="star" />
+                                        <span>Html e css</span>
+                                    </div>
+                                </div>
+                                <div className="container-skill-user">
+                                    <div className="container-skill">
+                                        <Icon name="star" />
+                                        <span>Html e css</span>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div className="container-skill-user">
-                                <div className="container-skill">
-                                    <Icon name="star" />
-                                    <span>Html e css</span>
-                                </div>
-                            </div>
-                            <div className="container-skill-user">
-                                <div className="container-skill">
-                                    <Icon name="star" />
-                                    <span>Html e css</span>
-                                </div>
-                            </div>
-                        </div>
+                        }
 
                     </UserProfileEdit>
 
 
-                    <UserProfileEdit iconName="push_pin" subject="Outros links">
+                    <UserProfileEdit editIcon={edit.contacts} OnClick={() => setEdit({ ...edit, contacts: !edit.contacts })} iconName="push_pin" subject="Outros links">
 
                         <div className="container-links">
                             <div className="links">

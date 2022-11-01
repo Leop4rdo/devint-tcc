@@ -1,20 +1,21 @@
 import { Timestamp } from "typeorm";
 import IProjectProps from "@src/core/domain/interfaces/IProject";
 import Post from "./Post";
+import Dev from "./Dev";
 
 export default class Project {
     id : string
-    name: string
+    name : string
     bannerURI : string
-    githubRepo: JSON
-    license: String
-    helpWanted: boolean
-    desc: string
+    githubRepo: string
+    license : String
+    helpWanted : boolean
+    desc : string
     posts : Post[]
-    hearts: JSON
-    createdAt : Timestamp
-    updatedAt : Timestamp
-    
+    members : Dev[]
+    owner : string
+    hearts : JSON
+
     constructor(props : IProjectProps) {
         Object.assign(this, props)
     }

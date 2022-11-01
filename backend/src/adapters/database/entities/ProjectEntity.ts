@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm"
+import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm"
 import DevEntity from "./DevEntity"
 import PostEntity from "./PostEntity"
 
@@ -13,13 +13,13 @@ export default class ProjectEntity {
     @Column({ nullable : true, name : 'banner_uri' })
     bannerURI : string
     
-    @Column('jsonb', { nullable : true, name : 'github_repo'})
-    githubRepo: JSON
+    @Column({ nullable : false, name : 'github_repo'})
+    githubRepo: string
 
     @Column({ default : 'All rights reserved'})
     license: String
     
-    @Column({ name : 'help_wanted'})
+    @Column({ name : 'help_wanted', default : false})
     helpWanted: boolean
    
     @Column()
@@ -29,9 +29,13 @@ export default class ProjectEntity {
     posts : PostEntity[]
 
     @ManyToMany(() => DevEntity, (dev) => dev.projects)
+    @JoinTable()
     members : DevEntity[]
-   
-    @Column('jsonb')
+
+    @Column()
+    owner : string
+
+    @Column('jsonb', { default : [] })
     hearts : JSON
 
     @CreateDateColumn({ name : 'created_at', select: false })
