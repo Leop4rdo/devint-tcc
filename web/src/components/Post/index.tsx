@@ -30,7 +30,7 @@ const Post: React.FC<IPostProps> = ({ data, openDetails }) => {
     return (
         <div className="postcard" key={data.id} >
             <div className="post-header">
-                <div className="user-info" >
+                <div className="user-informations" >
                     <img src={data.writter.profilePicUrl} />
                     <h2 onClick={() => navigation(`/dev/${data.writter.id}`)}>{data.writter.name}</h2>
                 </div>

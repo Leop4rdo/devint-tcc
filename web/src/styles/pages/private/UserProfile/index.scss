@@ -10,7 +10,7 @@
         background-color: $color-light-gray;
     }
 
-    .container-user-info {
+    .container-user-informations {
 
         position: absolute;
         width: fit-content;
@@ -28,19 +28,29 @@
             display: flex;
             align-items: center;
             flex-direction: column;
+            gap: 1.5em;
 
             .icon {
-                width: 100%;
-                display: flex;
-                justify-content: right;
+                width: 1em;
+                height: 1em;
 
                 color: $color-light-gray;
                 font-size: 20px;
                 cursor: pointer;
+
+                &:hover {
+                    color: $color-primary;
+                }
                 
             }
 
-            .container-image-face-user {
+            .edit-main-info{
+                align-self: flex-end;
+                margin-top: 1em;
+                margin-right: 1em;
+            }
+
+            .profile-pic {
                 width: 150px;
                 height: 150px;
                 background-color: $color-white;
@@ -50,13 +60,16 @@
             }
 
             span {
+
+                width: fit-content;
+                height: auto;
                 color: $color-light-gray;
                 font-size: 15px;
                 display: flex;
 
                 img{
-                    margin-right: 10px;    
-                    height: 20px;   
+                    width: 100%;
+                    height: auto;
                 }
             }
 
@@ -72,7 +85,6 @@
                 font-weight: $font-regular;
                 width: 75%;
                 text-align: center;
-                margin-top: 16px;
             }
 
             .container-follower-data {
@@ -104,102 +116,39 @@
             }
 
             .follow-btn{
-                margin-top: 30px;
-                margin-bottom: 30px;
                 width: 100px;
+                height: auto;
+                margin-bottom: 1.5em;
+
                 span{
                     display: flex;
                     align-items: center;
                     justify-content: center;
                     color: $color-white;
                     border-radius: 16px;
-                    padding: 5px;
                     font-weight: $font-medium;
                     cursor: pointer;
                 }
 
                 .icon{
                     width: 10px;
+
+                    &:hover {
+                        color: $color-white;
+                    }
                 }
             }
         }
 
-        
-
-        .container-about {
-            margin-left: 10px;
-            height: auto;
-            padding-bottom: 20px;
-
-            .icon {
-                color: $color-white;
-            }
-
-            
-            .container-sex, .container-user-git-hub {
-                display: flex;
-                align-items: center;
-                gap: 8px;
-                margin-top: 16px;
-
-                span {
-                    color: $color-white;
-                }
-
-                img{
-                    width: 24px;
-                }
-            }
-
-            .container-email {
-               width: 100%;
-              
-               
-
-               .icon{
-                    
-                    margin-left: -11px;
-               }
-            }
-        }
-
-
-        .container-information-user {
-
+        .user-info {
             display: flex;
-            flex-direction: column;
-            gap: 1em;
-
-            .icon {
-                color: $color-white;
-
-                &:hover {
-                    color: $color-primary;
-                }
-            }
-
-            .container-email,
-            .container-phone {
-
-                display: flex;
-                align-items: center;
-                gap: 0.5em;
-                margin: 10px;
-
-                span {
-                    word-break: break-all;
-                    color: $color-white;
-                }
-            }
-        }
-
-        .container-career-focus,
-        .container-seniority-user {
-            height: 40px;
+            width: 100%;
+            align-items: center;
+            gap: .5em;
 
             span {
+                word-break: break-all;
                 color: $color-white;
-                margin: 15px;
             }
         }
 
@@ -249,7 +198,6 @@
                 align-items: center;
 
                 span {
-                    padding: 10px;
                     background-color: $color-primary;
                     color: $color-white;
                     border-radius: 24px;
