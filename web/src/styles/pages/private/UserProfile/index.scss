@@ -212,6 +212,13 @@
                 width: 100%;
                 display: flex;
 
+                .icon{
+                   font-size: 20px;
+                   width: 10px;
+                   height: 10px;
+                   
+                }
+
                 .container-skill {
                     display: flex;
                     flex-direction: column;
@@ -221,6 +228,8 @@
                     .icon {
                         color: $color-white;
                         font-size: 32px;
+                        width: 30px;
+                        height: 30px;
                     }
 
                     span {
