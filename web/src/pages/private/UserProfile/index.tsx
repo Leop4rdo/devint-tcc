@@ -10,18 +10,56 @@ import * as devService from "../../../services/dev.service";
 import * as postService from "../../../services/post.service";
 import Input from "components/shared/Input";
 import Select from "components/shared/Select";
-import { useNavigate } from "react-router-dom";
 import PostsTab from "components/ProfileTabs/Posts";
+import firebase from "firebase/compat";
+import {v4 as randomUUIDV4} from "uuid"
 
 const UserProfilePage: React.FC = () => {
 
-    const navigate = useNavigate()
+    const [attachments, setAttachments] = useState<string[]>([])
+    
+    const [uploading, setUploading] = useState(false);
 
-    const [currentTab, setCurrentTab] = useState(0);
+    const upload = async (evt : any) => {
+        setUploading(true)
 
-    const tabs = [
-        { desc: "", component: <PostsTab props={undefined} />}
-    ]
+        const file = evt.target.files[0]
+
+        if (!file) return
+        
+        try {
+            const extension = `.${file.name.split('.')[1]}`
+            const fileName = randomUUIDV4() + extension
+
+            const uploaded = await firebase.storage().ref().child('attachments/').child(fileName).put(file)
+
+            setAttachments([
+                ...attachments,    
+                await uploaded.ref.getDownloadURL()
+            ])
+        } catch (err) {
+            console.log(err)
+            alert('Houve um erro inesperado ao fazer upload!')
+        }
+
+        setUploading(false)
+    }
+
+    const [currentTab, setCurrentTab] = useState("postsTab");
+
+    const handleTabs = (tabName: string) => {
+        if (tabName === "posts") {
+            setCurrentTab("postsTab")
+        }
+
+        if (tabName === "articles") {
+            setCurrentTab("articlesTab")
+        }
+
+        if (tabName === "projects") {
+            setCurrentTab("projectsTab")
+        }
+    }
 
     const authContext = useContext(AuthContext)
     
@@ -67,7 +105,10 @@ const UserProfilePage: React.FC = () => {
         <MenuWapper>
             <div className="profile-page">
 
-                <div className="background-image"></div>
+                <div className="background-image">
+                    <input accept="image/*" onChange={upload} type="file" name="attachment-input" id="attachment-input" />
+                    <label htmlFor="attachment-input"><Icon name="image" /></label>
+                </div>
 
                 <div className="container-user-informations">
 
@@ -295,13 +336,16 @@ const UserProfilePage: React.FC = () => {
 
                 </div>
 
-                <div className="post-tabs-container">
+                <div className="profile-tabs-container">
                     <div className="posts-tabs">
-                        <h4>Posts</h4>
-                        <h4>Artigos</h4>
-                        <h4>Projetos</h4>
+                        <h4 className={currentTab === "postsTab" ? "active" : ""} onClick={() => handleTabs("posts")}>Posts</h4>
+                        <h4 className={currentTab === "articlesTab" ? "active" : ""} onClick={() => handleTabs("articles")}>Artigos</h4>
+                        <h4 className={currentTab === "projectsTab" ? "active" : ""} onClick={() => handleTabs("projects")}>Projetos</h4>
                     </div>
                     <hr></hr>
+                    <div className="selectedTab">
+                        { currentTab === "postsTab" ? <PostsTab /> : "" }
+                    </div>
                 </div>
 
             </div>

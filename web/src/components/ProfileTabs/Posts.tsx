@@ -5,10 +5,10 @@ import { getPosts } from "services/post.service"
 import * as postService from "../../services/post.service"
 
 interface IPostsTab {
-    props : any
+    
 }
 
-const PostsTab: React.FC<IPostsTab> = () => {
+const PostsTab: React.FC<IPostsTab> = ( ) => {
 
     const [posts, setPosts] = useState<IPostListItem[]>([])
 
@@ -21,17 +21,28 @@ const PostsTab: React.FC<IPostsTab> = () => {
     useEffect(() => { getPosts(); }, [])
 
     return (
+        <div>
+            <div className="post-container">
+                {/* {
+                    posts.map((post: IPostListItem) =>
+                        <>
+                            <Post key={`${post.id}-${Math.random() * 999}`} data={post} openDetails={() => {}} />
+                        </>
+                    )
+                }
+                */}
 
-        <div className="post-container">
-                            {
-                                posts.map((post: IPostListItem) =>
-                                    <>
-                                        <Post key={`${post.id}-${Math.random() * 999}`} data={post} openDetails={() => {}} />
-                                    </>
-                                )
-                            }
-                           
-                        </div>
+                <div className="teste-post">post</div>
+                <div className="teste-post">post</div>
+                <div className="teste-post">post</div>
+                <div className="teste-post">post</div>
+                <div className="teste-post">post</div>
+                <div className="teste-post">post</div>
+                <div className="teste-post">post</div>
+                <div className="teste-post">post</div>
+                <div className="teste-post">post</div>
+            </div>
+        </div>
     )
     
 }
