@@ -13,8 +13,6 @@ import FeedPage from "pages/private/Feed";
 const PublicRouter: React.FC = () => {
     return (
         <Routes>
-            <Route index element={<FeedPage />}/>
-            <Route path="dev/:devId" element={<UserProfilePage />} />
             <Route index element={<LoginPage />} />
             <Route path="forgot-my-password" element={<ForgotMyPasswordPage />} />
             <Route path="change-my-password/:token" element={<ChangeMyPasswordPage />} />

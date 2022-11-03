@@ -11,7 +11,7 @@ import * as postService from "../../../services/post.service";
 import Input from "components/shared/Input";
 import Select from "components/shared/Select";
 import PostsTab from "components/ProfileTabs/Posts";
-import firebase from "firebase/compat";
+// import firebase from "firebase/compat";
 import {v4 as randomUUIDV4} from "uuid"
 
 const UserProfilePage: React.FC = () => {
@@ -31,11 +31,11 @@ const UserProfilePage: React.FC = () => {
             const extension = `.${file.name.split('.')[1]}`
             const fileName = randomUUIDV4() + extension
 
-            const uploaded = await firebase.storage().ref().child('attachments/').child(fileName).put(file)
+            // const uploaded = await firebase.storage().ref().child('attachments/').child(fileName).put(file)
 
             setAttachments([
                 ...attachments,    
-                await uploaded.ref.getDownloadURL()
+                // await uploaded.ref.getDownloadURL()
             ])
         } catch (err) {
             console.log(err)

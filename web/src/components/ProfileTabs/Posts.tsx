@@ -23,15 +23,16 @@ const PostsTab: React.FC<IPostsTab> = ( ) => {
     return (
         <div>
             <div className="post-container">
-                {/* {
+                {
                     posts.map((post: IPostListItem) =>
                         <>
                             <Post key={`${post.id}-${Math.random() * 999}`} data={post} openDetails={() => {}} />
                         </>
                     )
                 }
-                */}
+               
 
+                {/* <div className="teste-post">post</div>
                 <div className="teste-post">post</div>
                 <div className="teste-post">post</div>
                 <div className="teste-post">post</div>
@@ -39,8 +40,7 @@ const PostsTab: React.FC<IPostsTab> = ( ) => {
                 <div className="teste-post">post</div>
                 <div className="teste-post">post</div>
                 <div className="teste-post">post</div>
-                <div className="teste-post">post</div>
-                <div className="teste-post">post</div>
+                <div className="teste-post">post</div> */}
             </div>
         </div>
     )

@@ -115,11 +115,10 @@ export const addAnswer = async (body : addCommentRequestBody, commentId : string
     }
 }
 
-export const getPosts = async ( userId : string, query ?: PaginationQuery ) => {
+export const getPostsByUser = async ( userId : string, query ?: PaginationQuery ) => {
     try {
         const { data } = await api.get(
-            //(query) ? `/posts?${buildQuery(query)}` : '/posts',
-            (userId) ? `/devs/${userId}/posts` : `/devs`,
+            `/devs/${userId}/posts${? buildQuery(query)}`,
             { headers: { Authorization: `Baerer ${getToken()}` } }
         )
 
