@@ -118,9 +118,9 @@ export const addAnswer = async (body : addCommentRequestBody, commentId : string
 export const getPosts = async ( userId : string, query ?: PaginationQuery ) => {
     try {
         const { data } = await api.get(
-            (query) ? `/posts?${buildQuery(query)}` : '/posts',
+            //(query) ? `/posts?${buildQuery(query)}` : '/posts',
             (userId) ? `/devs/${userId}/posts` : `/devs`,
-            { headers: { Authorization: `Baerer ${ await getToken() }` } }
+            { headers: { Authorization: `Baerer ${getToken()}` } }
         )
 
         return data as IResponse

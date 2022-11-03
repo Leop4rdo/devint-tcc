@@ -6,12 +6,23 @@ import IDevMinimal, { IDev } from "interfaces/IDev";
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "store/context/Auth.context";
-import * as devService from "../../../services/dev.service"
+import * as devService from "../../../services/dev.service";
+import * as postService from "../../../services/post.service";
 import Input from "components/shared/Input";
 import Select from "components/shared/Select";
-
+import { useNavigate } from "react-router-dom";
+import PostsTab from "components/ProfileTabs/Posts";
 
 const UserProfilePage: React.FC = () => {
+
+    const navigate = useNavigate()
+
+    const [currentTab, setCurrentTab] = useState(0);
+
+    const tabs = [
+        { desc: "", component: <PostsTab props={undefined} />}
+    ]
+
     const authContext = useContext(AuthContext)
     
     const { devId } = useParams()
