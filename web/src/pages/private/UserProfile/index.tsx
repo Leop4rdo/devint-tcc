@@ -68,7 +68,12 @@ const UserProfilePage: React.FC = () => {
                     <div className="profile-info">
 
                         <div className="edit-info">
-                            <Icon name="edit" onClick={() => setEdit({ ...edit, bio: !edit.bio })} />
+                            {edit.bio ?
+                                <Icon name="done" onClick={() => setEdit({ ...edit, bio: !edit.bio })} />
+                                :
+                                <Icon name="edit" onClick={() => setEdit({ ...edit, bio: !edit.bio })} />
+                            }
+
                         </div>
 
                         <img src={dev?.profilePicUrl} className="profile-pic" />
@@ -92,7 +97,7 @@ const UserProfilePage: React.FC = () => {
                             </AutoTextArea>
                             :
                             <p>Bio muito bunita feita para exemplificar uns bagui ai
-                            tipo... alguma coisa</p>
+                                tipo... alguma coisa</p>
                         }
 
 
@@ -119,20 +124,22 @@ const UserProfilePage: React.FC = () => {
                     </div>
 
                     <UserProfileEdit editIcon={edit.contacts} OnClick={() => setEdit({ ...edit, contacts: !edit.contacts })} iconName="forum" subject="Contato">
+                        
+                            <div className="user-info">
+                                <Icon name="email" />
+                                <span>emailqualddddddddddddddddddquer@gmail.com</span>
+                            </div>
 
-                        <div className="user-info">
-                            <Icon name="email" />
-                            <span>emailqualddddddddddddddddddquer@gmail.com</span>
+                            <div className="user-info">
+                                <Icon name="call" />
+                                {edit.contacts ?
+                                    <Input value={"(00) 00000-0000"} />
+                                    :
+                                    <span>(00) 0000-0000</span>
+                                }
+                           
                         </div>
 
-                        <div className="user-info">
-                            <Icon name="call" />
-                            {edit.contacts ?
-                                <Input value={"(00) 00000-0000"} />
-                                :
-                                <span>(00) 0000-0000</span>
-                            }
-                        </div>
 
                     </UserProfileEdit>
 

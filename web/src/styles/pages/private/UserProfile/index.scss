@@ -54,6 +54,7 @@
             .auto-grow-text-area {
                 width: 300px;
                 textarea {
+                    overflow: hidden;
                     width: 100%;
                     height: fit-content;
                     padding: 12px;
@@ -74,6 +75,9 @@
                 align-self: flex-end;
                 margin-top: 1em;
                 margin-right: 1em;
+                .icon{
+                    font-size: 24px;
+                }
             }
 
             .profile-pic {
@@ -166,21 +170,25 @@
             }
         }
 
-        .user-info {
-            display: flex;
-            width: 100%;
-            align-items: center;
-            gap: .5em;
-
-            span {
-                word-break: break-all;
-                color: $color-light-gray;
+        
+            
+            .user-info {
+                display: flex;
+                width: 100%;
+                align-items: center;
+                gap: .5em;
+    
+                span {
+                    word-break: break-all;
+                    color: $color-light-gray;
+                }
+    
+                .icon {
+                    color: $color-light-gray; 
+                }
             }
-
-            .icon {
-                color: $color-light-gray;
-            }
-        }
+       
+        
 
         .skill-user {
             display: flex;
