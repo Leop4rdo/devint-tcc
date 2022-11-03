@@ -46,6 +46,34 @@ const UserProfilePage: React.FC = () => {
         setSelectSkill(res.data)
     }
 
+    const editContact = () => {
+
+    }
+
+
+    const handleInputChange = (text: string, key: keyof typeof formValues) => {
+        console.log(text)
+        setFormValues({
+            ...formValues,
+            [key]: text
+        })
+    }
+
+
+    const [formValues, setFormValues] = useState({
+        bio: "",
+        contacts: "",
+        about: "",
+        careerFocus: "",
+        currentJob: "",
+        seniority: "",
+        skills: "",
+        links: "",
+    })
+
+    
+
+    
     const [edit, setEdit] = useState({
         bio: false,
         contacts: false,
@@ -133,7 +161,11 @@ const UserProfilePage: React.FC = () => {
                             <div className="user-info">
                                 <Icon name="call" />
                                 {edit.contacts ?
-                                    <Input value={"(00) 00000-0000"} />
+                                    <Input 
+                                        value={formValues.contacts}
+                                        onChangeText={(text : string) =>
+                                        handleInputChange( text , 'contacts') } 
+                                    />
                                     :
                                     <span>(00) 0000-0000</span>
                                 }
