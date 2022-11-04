@@ -10,6 +10,9 @@ import * as devService from "../../../services/dev.service"
 import Input from "components/shared/Input";
 import Select from "components/shared/Select";
 import AutoTextArea from "components/shared/TextArea";
+import { isValidDate, isValidEmail } from "utils/validations";
+import { validate } from "uuid";
+import { dateMask } from "utils/masks";
 
 
 const UserProfilePage: React.FC = () => {
@@ -17,7 +20,6 @@ const UserProfilePage: React.FC = () => {
     const authContext = useContext(AuthContext)
     const { devId } = useParams()
     const [select, setSelectSkill] = useState()
-
     const [following, setFollowing] = useState(false);
 
     const toggleFollow = async () => {
@@ -27,7 +29,7 @@ const UserProfilePage: React.FC = () => {
 
         setFollowing(!following);
     }
-    console.log(devId);
+    // console.log(devId);
 
     const findById = async () => {
 
@@ -35,7 +37,7 @@ const UserProfilePage: React.FC = () => {
         const res = await devService.findById(devId)
 
         setDev(res.data)
-        console.log(res.data);
+        //   console.log(res.data);
     }
 
     useEffect(() => { findById() }, [devId])
@@ -46,16 +48,32 @@ const UserProfilePage: React.FC = () => {
         setSelectSkill(res.data)
     }
 
-    const editContact = () => {
+    /* const editContact = async () => {
+        const res = await devService.update({
+            name: "",
+            bio: "",
+            gender: "",
+            profilePicUrl: "",
+            currentJob: "",
+            githubUsername: "",
+            openToWork: true,
+            birthday: Date,
+            socialLinks: {
+                name: "",
+                url: "",
+                owner: ""
+            },
+            careerFocus: { id: "" },
+            autoDeclaredSeniority: { id: "" },
+            skills: { id: " " },[]
+        }, 5)
+    } */
 
-    }
 
-
-    const handleInputChange = (text: string, key: keyof typeof formValues) => {
-        console.log(text)
+    const handleInputChange = (text: any, key: any) => {
         setFormValues({
             ...formValues,
-            [key]: text
+            [key]: text.target.value
         })
     }
 
@@ -63,17 +81,18 @@ const UserProfilePage: React.FC = () => {
     const [formValues, setFormValues] = useState({
         bio: "",
         contacts: "",
-        about: "",
+        aboutCalendarMonth: "",
+        aboutSex: "",
         careerFocus: "",
         currentJob: "",
         seniority: "",
         skills: "",
-        links: "",
+        linkName: "",
+        link: ""
     })
 
-    
+    /* console.log(formValues.contacts) */
 
-    
     const [edit, setEdit] = useState({
         bio: false,
         contacts: false,
@@ -151,27 +170,11 @@ const UserProfilePage: React.FC = () => {
 
                     </div>
 
-                    <UserProfileEdit editIcon={edit.contacts} OnClick={() => setEdit({ ...edit, contacts: !edit.contacts })} iconName="forum" subject="Contato">
-                        
-                            <div className="user-info">
-                                <Icon name="email" />
-                                <span>emailqualddddddddddddddddddquer@gmail.com</span>
-                            </div>
-
-                            <div className="user-info">
-                                <Icon name="call" />
-                                {edit.contacts ?
-                                    <Input 
-                                        value={formValues.contacts}
-                                        onChangeText={(text : string) =>
-                                        handleInputChange( text , 'contacts') } 
-                                    />
-                                    :
-                                    <span>(00) 0000-0000</span>
-                                }
-                           
+                    <UserProfileEdit iconName="forum" subject="Contato">
+                        <div className="user-info">
+                            <Icon name="email" />
+                            <span>emailqualddddddddddddddddddquer@gmail.com</span>
                         </div>
-
 
                     </UserProfileEdit>
 
@@ -180,7 +183,12 @@ const UserProfilePage: React.FC = () => {
                         <div className="user-info">
                             <Icon name="calendar_month" />
                             {edit.about ?
-                                <Input value={"14/01/2001"} />
+                                <Input
+                                    value={dateMask(formValues.aboutCalendarMonth)}
+                                    onChange={(text: any) =>
+                                        handleInputChange(text, 'aboutCalendarMonth')}
+                                    validate={() => isValidDate(formValues.aboutCalendarMonth)}
+                                />
                                 :
                                 <span>14/01/2001</span>
                             }
@@ -190,7 +198,12 @@ const UserProfilePage: React.FC = () => {
                         <div className="user-info">
                             <Icon name="group" />
                             {edit.about ?
-                                <Input value={"Masculino"} />
+                                <Select onChange={() => { }}>
+                                    <option > Sexo </option>
+                                    <option> Masculino </option>
+                                    <option> Feminino </option>
+                                    <option> Outro </option>
+                                </Select>
                                 :
                                 <span>Masculino</span>
                             }
@@ -203,7 +216,12 @@ const UserProfilePage: React.FC = () => {
 
                         <div className="user-info">
                             {edit.careerFocus ?
-                                <Input value={"Front-End"} />
+                                <Select onChange={() => { }}>
+                                    <option>Selecione um foco de carreira</option>
+                                    <option>Front-end</option>
+                                    <option>Backend</option>
+                                    <option>Full stack</option>
+                                </Select>
                                 :
                                 <span>Front-End</span>
                             }
@@ -214,7 +232,11 @@ const UserProfilePage: React.FC = () => {
                     <UserProfileEdit editIcon={edit.currentJob} OnClick={() => setEdit({ ...edit, currentJob: !edit.currentJob })} iconName="work" subject="Trabalho Atual" >
                         <div className="user-info">
                             {edit.currentJob ?
-                                <Input value={"Front-End"} />
+                                <Input value={formValues.currentJob}
+                                    onChange={(text: any) =>
+                                        handleInputChange(text, 'currentJob')}
+
+                                />
                                 :
                                 <span>Front-End</span>
                             }
@@ -224,7 +246,12 @@ const UserProfilePage: React.FC = () => {
                     <UserProfileEdit editIcon={edit.seniority} OnClick={() => setEdit({ ...edit, seniority: !edit.seniority })} iconName="school" subject="Senioridade">
                         <div className="user-info">
                             {edit.seniority ?
-                                <Input value={"Junior"} />
+                                <Select onChange={() => { }}>
+                                    <option>Selecione uma Senioridade</option>
+                                    <option>Junior</option>
+                                    <option>Pleno</option>
+                                    <option>Senior</option>
+                                </Select>
                                 :
                                 <span>Junior</span>
                             }
@@ -237,6 +264,7 @@ const UserProfilePage: React.FC = () => {
 
                             <div>
                                 <Select onChange={() => { }}>
+                                    <option>Selecione uma Tecnologia</option>
                                     <option> Html </option>
                                     <option> CSS </option>
                                     <option> React Native </option>
@@ -301,13 +329,21 @@ const UserProfilePage: React.FC = () => {
                         }
 
                     </UserProfileEdit>
-                    
+
                     <UserProfileEdit editIcon={edit.links} OnClick={() => setEdit({ ...edit, links: !edit.links })} iconName="push_pin" subject="Outros links">
 
                         {edit.links ?
                             <div>
-                                <Input placeholder="Insira o nome do link" />
-                                <Input placeholder="Insira o Link" />
+                                <Input placeholder="Insira o nome do link"
+                                    onChange={(text: any) =>
+                                        handleInputChange(text, 'linkName')}
+
+                                />
+                                <Input placeholder="Insira o Link"
+                                    onChange={(text: any) =>
+                                        handleInputChange(text, 'link')}
+
+                                />
                             </div>
                             :
 

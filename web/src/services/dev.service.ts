@@ -44,10 +44,29 @@ export const findById = async ( id : string ) : Promise<IResponse> => {
     }
 }
 
+type updateDevRequestBody = {
+    name : string
+    bio : string
+    gender : string
+    profilePicUrl : string
+    currentJob : string
+    githubUsername : string
+    openToWork : boolean
+    birthday : Date
+    socialLinks : {
+        name : string
+        url : string
+        owner : string
+    }
+    careerFocus : { id : string }
+    autoDeclaredSeniority : { id : string }
+    skills: { id : string}[]
+}
 
-export const Skills = async () : Promise<IResponse> => {
+export const update = async (body : updateDevRequestBody, id: string) : Promise<IResponse> => {
     try {
-        const { data } = await api.get( ``,
+        const { data } = await api.patch(`devs/${id}`,
+            body,
             { headers: { Authorization: `Baerer ${ await getToken() }` } }
         )
 
