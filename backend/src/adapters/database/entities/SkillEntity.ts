@@ -12,7 +12,7 @@ export default class SkillEntity {
     @Column()
     icon: string
     
-    @CreateDateColumn({ name: 'created_at', select: false })
+    @CreateDateColumn({ name: 'created_at' })
     createdAt : Timestamp
 
     @UpdateDateColumn({ name : 'updated_at' })

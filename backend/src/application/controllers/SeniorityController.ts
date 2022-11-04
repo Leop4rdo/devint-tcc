@@ -17,7 +17,7 @@ export default class SeniorityController {
         this.repo = new SeniorityRepository()
         this.service = new SeniorityService(this.repo)
     }
-    
+
     create = (req: Request, res: Response) => {
         this.service.create(req.body)
             .then((_res) => res.status(_res.status || 200).json(_res))

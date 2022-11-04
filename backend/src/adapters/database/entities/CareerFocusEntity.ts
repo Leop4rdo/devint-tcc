@@ -9,7 +9,7 @@ export default class CareerFocusEntity {
     @Column({ nullable : false})
     name: string
 
-    @CreateDateColumn({ name: 'created_at', select: false })
+    @CreateDateColumn({ name: 'created_at' })
     createdAt : Timestamp
 
     @UpdateDateColumn({ name : 'updated_at' })

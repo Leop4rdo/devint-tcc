@@ -13,7 +13,7 @@ export default class SeniorityEntity {
   @OneToMany(()=> DevEntity, (dev) => dev.autoDeclaredSeniority)
   devs: DevEntity[]
   
-  @CreateDateColumn({ name : 'created_at', select: false })
+  @CreateDateColumn({ name : 'created_at' })
   createdAt : Timestamp
 
   @UpdateDateColumn({ name : 'updated_at' })
