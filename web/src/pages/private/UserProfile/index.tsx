@@ -301,8 +301,7 @@ const UserProfilePage: React.FC = () => {
                         }
 
                     </UserProfileEdit>
-
-
+                    
                     <UserProfileEdit editIcon={edit.links} OnClick={() => setEdit({ ...edit, links: !edit.links })} iconName="push_pin" subject="Outros links">
 
                         {edit.links ?
