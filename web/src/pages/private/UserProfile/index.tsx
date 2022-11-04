@@ -11,14 +11,28 @@ import * as postService from "../../../services/post.service";
 import Input from "components/shared/Input";
 import Select from "components/shared/Select";
 import PostsTab from "components/ProfileTabs/Posts";
-// import firebase from "firebase/compat";
 import {v4 as randomUUIDV4} from "uuid"
+import firebase from "config/firebase";
 
 const UserProfilePage: React.FC = () => {
 
-    const [attachments, setAttachments] = useState<string[]>([])
-    
     const [uploading, setUploading] = useState(false);
+    const [currentTab, setCurrentTab] = useState("postsTab");
+    const authContext = useContext(AuthContext)
+    const [edit, setEdit] = useState({
+        contacts: false,
+        about: false,
+        careerFocus: false,
+        currentJob: false,
+        seniority: false,
+        skills: false,
+        links: false
+    })
+    
+    const { devId } = useParams()
+
+    const [dev, setDev] = useState<IDev | null>(null)
+    const [following, setFollowing] = useState(false);
 
     const upload = async (evt : any) => {
         setUploading(true)
@@ -31,12 +45,12 @@ const UserProfilePage: React.FC = () => {
             const extension = `.${file.name.split('.')[1]}`
             const fileName = randomUUIDV4() + extension
 
-            // const uploaded = await firebase.storage().ref().child('attachments/').child(fileName).put(file)
+            const uploaded = await firebase.storage().ref().child('attachments/').child(fileName).put(file)
 
-            setAttachments([
-                ...attachments,    
-                // await uploaded.ref.getDownloadURL()
-            ])
+            setDev({...dev, [evt.target.name] : await uploaded.ref.getDownloadURL()} as IDev)
+            // update na service
+
+            // updateLanguageServiceSourceFile()
         } catch (err) {
             console.log(err)
             alert('Houve um erro inesperado ao fazer upload!')
@@ -45,7 +59,6 @@ const UserProfilePage: React.FC = () => {
         setUploading(false)
     }
 
-    const [currentTab, setCurrentTab] = useState("postsTab");
 
     const handleTabs = (tabName: string) => {
         if (tabName === "posts") {
@@ -61,23 +74,14 @@ const UserProfilePage: React.FC = () => {
         }
     }
 
-    const authContext = useContext(AuthContext)
-    
-    const { devId } = useParams()
 
-
-    
-    const [dev, setDev] = useState<IDev | null>(null)
-    const [following, setFollowing] = useState(false);
     
     const findById = async () => {
-        
         if (!devId) return 
         const res = await devService.findById(devId)
         
         setDev(res.data)
         setFollowing(res.data?.followers.find((d : IDevMinimal) => d.id === authContext?.userData.id) != undefined)
-        
     }
 
     const toggleFollow = async () => {
@@ -91,15 +95,7 @@ const UserProfilePage: React.FC = () => {
     
     useEffect(() => { findById() }, [devId])
     
-    const [edit, setEdit] = useState({
-        contacts: false,
-        about: false,
-        careerFocus: false,
-        currentJob: false,
-        seniority: false,
-        skills: false,
-        links: false
-    })
+
 
     return (
         <MenuWapper>
@@ -343,8 +339,8 @@ const UserProfilePage: React.FC = () => {
                         <h4 className={currentTab === "projectsTab" ? "active" : ""} onClick={() => handleTabs("projects")}>Projetos</h4>
                     </div>
                     <hr></hr>
-                    <div className="selectedTab">
-                        { currentTab === "postsTab" ? <PostsTab /> : "" }
+                    <div className="selected-tab">
+                        { currentTab === "postsTab" ? <PostsTab devId={devId || ''} /> : "" }
                     </div>
                 </div>
 

@@ -11,7 +11,7 @@ const PrivateRouter: React.FC = () => {
         <Routes>
             <Route index element={<FeedPage />}/>
             <Route path="dev/:devId" element={<UserProfilePage />} />
-            <Route path="/devs/:userId/posts" element={<PostsTab />} />
+            <Route path="/devs/:userId/posts" element={<PostsTab devId="" />} />
         </Routes>
     );
 }

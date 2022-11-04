@@ -271,6 +271,14 @@
             border-color: $color-light-gray;
             height: 2px;
         }
+
+        .selected-tab {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
     }
 }
 

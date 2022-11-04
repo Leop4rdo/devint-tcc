@@ -55,6 +55,8 @@ const DevRegistrationPage: React.FC = () => {
 
         if (currentStep == 1) {
 
+            if (formValues.githubUser.length <= 0 ) return false
+
             if (formValues.password.length <= 0 ) return false
 
             if (formValues.confirmPassword.length <= 0 ) return false
@@ -92,7 +94,7 @@ const DevRegistrationPage: React.FC = () => {
             birthday: birthday,
             gender: formValues.gender,
             password: formValues.password,
-            githubUser: formValues.githubUser,
+            githubUsername: formValues.githubUser,
         }
 
         const res = await AuthService.register(body)

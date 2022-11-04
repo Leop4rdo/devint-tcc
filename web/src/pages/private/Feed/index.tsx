@@ -22,8 +22,6 @@ const FeedPage: React.FC = () => {
     const [posts, setPosts] = useState<IPostListItem[]>([])
     const [loading, setLoading] = useState(true)
     const triggerRef = useRef<HTMLDivElement>(null)
-    const limit = 10
-    let page = 1;
 
     const getDevs = async () => {
         const res = await devService.list({ limit: 24 })
