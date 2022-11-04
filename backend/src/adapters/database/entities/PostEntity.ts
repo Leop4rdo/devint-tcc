@@ -32,9 +32,9 @@ export default class PostEntity {
     @ManyToOne(() => DevEntity, (writter) => writter.posts, { eager : true})
     writter: DevEntity
     
-    @CreateDateColumn({select:false, name : 'created_at'})
+    @CreateDateColumn({ name : 'created_at'})
     createdAt : Timestamp
       
-    @UpdateDateColumn({name : 'updated_at'})
+    @UpdateDateColumn({ name : 'updated_at'})
     updateAt : Timestamp
 }

@@ -20,7 +20,7 @@ routes.use(authMiddleware)
 // secure routes ->
 routes.use("/skills", skillRoutes)
 routes.use("/seniority", seniorityRoutes)
-routes.use("/", careerFocusRoutes)
+routes.use("/career-focus", careerFocusRoutes)
 routes.use("/users", securedUserRoutes)
 routes.use("/devs", devRouter)
 routes.use("/", postRouter)
