@@ -51,7 +51,7 @@ const Sidebar : React.FC<ISidebarProps> = ({ visible, onClose, navigation }) => 
 
                     <View style={styles.divisor}></View>
 
-                    <SidebarItem active icon="home" name="Home" />
+                    <SidebarItem active icon="home" name="Home" onPress={() => navigation.navigate('home')}/>
                     <SidebarItem icon="trending-up" name="Em alta" />
                     <SidebarItem icon="article" name="Artigos" />
                     <SidebarItem icon="watch-later" name="Ver mais tarde" />
@@ -59,7 +59,7 @@ const Sidebar : React.FC<ISidebarProps> = ({ visible, onClose, navigation }) => 
                     <SidebarItem icon="settings" name="Configurações" />
                 </View>
 
-                <Pressable style={styles.exitContainer} onPress={() => { authContext?.signOut(); navigation.navigate('login') } }>
+                <Pressable style={styles.exitContainer} onPress={() => { authContext?.signOut(); } }>
                     <Text style={styles.exitIcon}>:q</Text>
                     <Text style={styles.exitText}>sair</Text>
                 </Pressable>

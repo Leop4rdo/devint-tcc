@@ -1,13 +1,9 @@
 import { StyleSheet } from "react-native"
 import colors from "../../styles/colors"
-import globalStyles from "../../styles/global"
 import fonts from "../../styles/typography"
-
-
 
 const base = {
     borderRadius: 12,
-    
 }
 
 const containerStyles = StyleSheet.create({
@@ -22,7 +18,7 @@ const containerStyles = StyleSheet.create({
     container:{
         flexDirection: 'row',
         justifyContent: 'space-between',
-      
+        marginBottom : 8
     },
     edit:{
         fontSize: 16,

@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     },
 
     textedit:{
-         color: colors.WHITE
+         color: colors.LIGHT_GRAY
     }
 
 })

@@ -1,57 +1,53 @@
 import { MaterialIcons } from "@expo/vector-icons"
 import { Text, View } from "react-native"
-import ProfileEdit from "../../ProfileEdit"
+import colors from "../../../styles/colors"
+import ProfileDetailItem from "../../ProfileDetailItem"
 import styles from "./style"
 
 const DetailsSection : React.FC = () => {
     return <>
-        <ProfileEdit icon="forum" text="Contato">
-        <View style={styles.containerChildren}>
-        <MaterialIcons style={styles.icon} name="mail" color={'#FFF'}></MaterialIcons>
-        <Text style={styles.textedit}>john.doe@devint.com</Text>
-        </View>
-        <View style={styles.containerChildren}>
-        <MaterialIcons style={styles.icon} name="call" color={'#FFF'}></MaterialIcons>
-        <Text style={styles.textedit}>(XX) XXXXX-XXXX</Text>
-        </View>
-        </ProfileEdit>
+        <ProfileDetailItem icon="forum" text="Contato">
+            <View style={styles.containerChildren}>
+                <MaterialIcons style={styles.icon} name="mail" color={colors.LIGHT_GRAY}></MaterialIcons>
+                <Text style={styles.textedit}>john.doe@devint.com</Text>
+            </View>
+        </ProfileDetailItem>
 
-    <ProfileEdit icon="group" text="Sobre">
-        <View style={styles.containerChildren}>
-        <MaterialIcons style={styles.icon} name="event" color={'#FFF'}></MaterialIcons>
-        <Text style={styles.textedit}>29/08/2099</Text>
-        </View>
+        <ProfileDetailItem icon="group" text="Sobre">
+            <View style={styles.containerChildren}>
+                <MaterialIcons style={styles.icon} name="event" color={colors.LIGHT_GRAY}></MaterialIcons>
+                <Text style={styles.textedit}>29/08/2099</Text>
+            </View>
 
-        <View style={styles.containerChildren}>
-        <MaterialIcons style={styles.icon} name="group" color={'#FFF'}></MaterialIcons>
-        <Text style={styles.textedit}>Masculino</Text>
-        </View>
-    </ProfileEdit>
+            <View style={styles.containerChildren}>
+                <MaterialIcons style={styles.icon} name="group" color={colors.LIGHT_GRAY}></MaterialIcons>
+                <Text style={styles.textedit}>Masculino</Text>
+            </View>
+        </ProfileDetailItem>
 
-    <ProfileEdit icon="star" text="Foco de Carreira">
-        <View style={styles.containerChildren}>
-        <MaterialIcons style={styles.icon} name="center-focus-weak" color={'#FFF'}></MaterialIcons>
-        <Text style={styles.textedit}>Front-End</Text>
-        </View>
-    </ProfileEdit>
+        <ProfileDetailItem icon="center-focus-strong" text="Foco de Carreira">
+            <View style={styles.containerChildren}>
+                <Text style={styles.textedit}>Front-End</Text>
+            </View>
+        </ProfileDetailItem>
 
-    <ProfileEdit icon="work" text="Trabalho atual">
-        <View style={styles.containerChildren}>
-        <Text style={styles.textedit}>Front-End</Text>
-        </View>
-    </ProfileEdit>
+        <ProfileDetailItem icon="work" text="Trabalho atual">
+            <View style={styles.containerChildren}>
+                <Text style={styles.textedit}>Front-End</Text>
+            </View>
+        </ProfileDetailItem>
 
-    <ProfileEdit icon="school" text="Senioridade">
-        <View style={styles.containerChildren}>
-        <Text style={styles.textedit}>Junior</Text>
-        </View>
-    </ProfileEdit>
+        <ProfileDetailItem icon="school" text="Senioridade">
+            <View style={styles.containerChildren}>
+                <Text style={styles.textedit}>Junior</Text>
+            </View>
+        </ProfileDetailItem>
 
-    <ProfileEdit icon="star" text="Habilidades">
-        <View style={styles.containerChildren}>
-        <Text style={styles.textedit}>Junior</Text>
-        </View>
-    </ProfileEdit>
+        <ProfileDetailItem icon="star" text="Habilidades">
+            <View style={styles.containerChildren}>
+                <Text style={styles.textedit}>Junior</Text>
+            </View>
+        </ProfileDetailItem>
    </>
 }
 
