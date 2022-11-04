@@ -15,7 +15,7 @@ publicUserRoutes.patch("/email-confirm", authCtrl.emailConfirm)
 
 export const securedUserRoutes = Router();
 
-securedUserRoutes.patch("/disable/:userId", authCtrl.disable)
-securedUserRoutes.patch("/enable/:userId", authCtrl.enable)
-securedUserRoutes.get("/", userCtrl.list)
-securedUserRoutes.get("/:userId", userCtrl.getById);
+securedUserRoutes.patch("/users/disable/:userId", authCtrl.disable)
+securedUserRoutes.patch("/users/enable/:userId", authCtrl.enable)
+securedUserRoutes.get("/users", userCtrl.list)
+securedUserRoutes.get("/users/:userId", userCtrl.getById);

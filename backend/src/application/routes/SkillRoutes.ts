@@ -4,7 +4,7 @@ import SkillController  from "../controllers/SkillController"
 const skillRoutes = Router()
 const ctrl = new SkillController
 
-skillRoutes.post('/', ctrl.create)
-skillRoutes.get('/', ctrl.list)
+skillRoutes.post('/skills', ctrl.create)
+skillRoutes.get('/skills', ctrl.list)
 
 export default skillRoutes

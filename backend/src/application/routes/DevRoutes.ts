@@ -4,9 +4,9 @@ import DevController from "../controllers/DevController";
 const devRouter = Router()
 const ctrl = new DevController();
 
-devRouter.get('/', ctrl.listByFilters)
-devRouter.patch('/:devId/toggle-follow', ctrl.toggleFollow)
-devRouter.put('/:devId', ctrl.update)
-devRouter.get('/:id', ctrl.findById)
+devRouter.get('/devs', ctrl.listByFilters)
+devRouter.patch('/devs/:devId/toggle-follow', ctrl.toggleFollow)
+devRouter.put('/devs/:devId', ctrl.update)
+devRouter.get('/devs/:id', ctrl.findById)
 
 export default devRouter;

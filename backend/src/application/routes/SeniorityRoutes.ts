@@ -4,7 +4,7 @@ import SeniorityController  from "../controllers/SeniorityController"
 const seniorityRoutes = Router()
 const ctrl = new SeniorityController
 
-seniorityRoutes.post('/', ctrl.create)
-seniorityRoutes.get('/', ctrl.list)
+seniorityRoutes.post('/seniority', ctrl.create)
+seniorityRoutes.get('/seniority', ctrl.list)
 
 export default seniorityRoutes  

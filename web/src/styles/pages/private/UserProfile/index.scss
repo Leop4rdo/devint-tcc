@@ -88,10 +88,11 @@
                 text-align: center;
             }
 
-            .container-follower-data {
+            .follow-container {
                 width: 15em;
                 display: flex;
                 justify-content: space-between;
+                margin-bottom: 2em;
 
                 .container-followers,
                 .container-following {
