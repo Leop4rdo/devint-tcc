@@ -24,7 +24,14 @@ export default class DevService {
 
 
     async findById(id: string, loggedDev : string): Promise<IResponse> {
-        const dev = await this.repo.findById(id, ['following', 'followers']);
+        const dev = await this.repo.findById(id, [
+            'following', 
+            'followers', 
+            'socialLinks', 
+            'careerFocus', 
+            'autoDeclaredSeniority',
+            'skills',
+        ]);
 
         if (!dev) 
             return new BadRequestResponse({

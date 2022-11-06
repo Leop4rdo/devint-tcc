@@ -12,7 +12,23 @@ import DevOutput from "@src/ports/output/user/DevOutput";
 const authMiddleware = (req : Request, res : Response, next : NextFunction) => {
     if (process.env.PROFILE === 'dev' && process.env.IGNORE_AUTH) {
         AppDataSource.getRepository<DevEntity>(DevEntity).find().then(devs => {
-            req.body.userData =new DevOutput(devs[0])
+            req.body.userData = {
+                id: 'b4c02b51-2601-4257-b9a4-de61ef83ad34',
+                name: 'ezequiel',
+                bio: '',
+                gender: 'm',
+                profilePicUrl: 'https://avatars.githubusercontent.com/u/5909549?v=4',
+                bannerURI: '',
+                comunityRating: 0,
+                notifications: null,
+                currentJob: '',
+                githubUsername: null,
+                openToWork: false,
+                birthday: '2005-02-28',
+                auth: undefined,
+                email: 'ezequielmathias2b@gmail.com'
+            }
+
             return next()
         });
 
