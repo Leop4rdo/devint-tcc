@@ -3,17 +3,18 @@ import styles from "./styles"
 import ButtonComponent from "../shared/Button"
 import {MaterialIcons} from "@expo/vector-icons"
 import colors from "../../styles/colors"
-import IPostListItem from "../../interfaces/IPost"
 import { useState } from "react"
 import AttachmentCarousel from "./AttachmentCarousel"
 import * as postService from "../../services/post.service"
+import { IPostListItem } from "../../interfaces/IPost"
 
 interface IPostProps {
     data : IPostListItem,
     openComments : () => void
+    openProfile : () => void
 }
 
-const Post : React.FC<IPostProps> = ({ data, openComments }) =>{
+const Post : React.FC<IPostProps> = ({ data, openComments, openProfile }) =>{
     const [liked, setLiked] = useState(data.alreadyHearted)
 
     const giveLike = async () => {
@@ -24,13 +25,13 @@ const Post : React.FC<IPostProps> = ({ data, openComments }) =>{
 
     return(
         <View style={styles.cardPost}>
-            <View style={styles.header}>
+            <Pressable style={styles.header} onPress={openProfile}>
                 <Image style={styles.profilePic} source={{ uri : data.writter.profilePicUrl }}></Image>
                 <View>
                     <Text style={styles.devName}>{data.writter.name}</Text>
                     <Text style={styles.devGithub}>{data.writter.githubUsername}</Text>
                 </View>
-            </View>
+            </Pressable>
 
             <View>
                 <Text style={styles.content}>

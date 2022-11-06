@@ -3,88 +3,86 @@ import {MaterialIcons} from "@expo/vector-icons";
 import LayoutWrapper from "../../../components/shared/LayoutWrapper";
 import styles from "./style";
 import Post from "../../../components/Post";
-import ProfileEdit from "../../../components/ProfileEdit";
+import ProfileEdit from "../../../components/ProfileDetailItem";
 import ButtonComponent from "../../../components/shared/Button";
 import { GestureDetector, ScrollView, Swipeable } from "react-native-gesture-handler";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DetailsSection from "../../../components/ProfileSections/DetailsSection";
+import colors from "../../../styles/colors";
+import { IDev } from "../../../interfaces/IDev";
 
+import * as devService from "../../../services/dev.service"
 
-const ProfilePage: React.FC<{ navigation : any }> = ({navigation}) => {
+const ProfilePage: React.FC<{ route : any, navigation : any }> = ({route, navigation}) => {
     const [currentSection, setCurrentSection] = useState(0)
+    const [data, setData] = useState<IDev>()
 
+    const getDev = async () => {
+        const res = await devService.findById(route.params.devId)
+
+        setData(res.data)
+    }
+
+    useEffect(() => { getDev() }, [])
 
     return(
         <LayoutWrapper navigation={navigation}>
             <ScrollView>
-            <View style={styles.page}>
+                <View style={styles.page}>
 
-                <View style={styles.profileContainer}>
-                    <Image source={{uri:'https://arquivei.com.br/blog/wp-content/uploads/2017/09/tipos-empresas-1200_og.jpg'}}style={styles.backgroundImage}></Image>
+                    <Image source={{uri:data?.bannerURI}}style={styles.backgroundImage}></Image>
+                    <View style={styles.header}>
+                        <Image source={{uri: data?.profilePicUrl}} style={styles.photoUser}></Image>
 
-                    <View style={styles.profileEdit}>
-                        <Image source={{uri:'https://midias.correiobraziliense.com.br/_midias/jpg/2013/11/15/675x450/1_cbifot151120135622-18891928.jpg?20220922092144?20220922092144'}} style={styles.photoUser}></Image>
-                        <Pressable  style={styles.buttonEdit}>
-                            <MaterialIcons name="add" size={16} color='#FFF' />
-                            <Text style={styles.textButton}>Seguir </Text>
+                        <View>
+                            <Text style={styles.devName}>{data?.name}</Text>
+                            <Text style={styles.devBio}>{data?.bio}</Text>
+                        </View>
+                    </View>
+                    
+                    <View style={styles.followDataContainer}>
+                        <View style={styles.diceFollowers}>
+                            <Text style={styles.amount}>40</Text>
+                            <Text style={styles.text}>Seguidores</Text>
+                        </View>
+                        <View style={styles.dice}>
+                            <Text style={styles.amount}>40</Text>
+                            <Text style={styles.text}> Seguindo</Text>
+                        </View>
+                    </View>
+                    
+
+                    <View style={styles.publicationData}>
+                        <Pressable style={currentSection === 0 ? styles.publications : {}} onPress={() => setCurrentSection(0)}>
+                            <Text style={[styles.textPublications, { color : currentSection === 0 ? colors.PRIMARY : colors.LIGHT_GRAY}]}>Posts</Text>
+                        </Pressable>
+
+                        <Pressable style={currentSection === 1 ? styles.publications : {}} onPress={() => setCurrentSection(1)}>
+                            <Text style={[styles.textPublications, { color : currentSection === 1 ? colors.PRIMARY : colors.LIGHT_GRAY}]}>Artigos</Text>
+                        </Pressable>
+
+                        <Pressable style={currentSection === 2 ? styles.publications : {}} onPress={() => setCurrentSection(2)}>
+                            <Text style={[styles.textPublications, { color : currentSection === 2 ? colors.PRIMARY : colors.LIGHT_GRAY}]}>Projetos</Text>
+                        </Pressable>
+                        <Pressable style={currentSection === 3 ? styles.publications : {}} onPress={() => setCurrentSection(3)}>
+                            <Text style={[styles.textPublications, { color : currentSection === 3 ? colors.PRIMARY : colors.LIGHT_GRAY}]}>Informações</Text>
                         </Pressable>
                     </View>
 
-                    <View style={styles.profileData}>
-                        <Text style={styles.devName}>Daiane Silva</Text>
-                        <Text style={styles.devBio}>bio skdjkajdlkjsakdj</Text>
+                    <View>
+                        {
+                            (currentSection === 3) ? 
+                            <DetailsSection />
+                            : (currentSection === 2) ?
+                            <Text>2</Text>
+                            : (currentSection === 1) ?
+                            <Text>1</Text>
+                            : (currentSection === 0 ) ? 
+                            <Text>0</Text>
+                            :   <Text>Pagina inválida</Text>
+                        }
                     </View>
                 </View>
-                
-                <View style={styles.profileDice}>
-                    <View style={styles.diceFollowers}>
-                        <Text style={styles.amount}>40</Text>
-                        <Text style={styles.text}>Seguidores</Text>
-                    </View>
-                    <View style={styles.dice}>
-                        <Text style={styles.amount}>40</Text>
-                        <Text style={styles.text}> Seguindo</Text>
-                    </View>
-                </View>
-                
-
-                <View style={styles.publicationData}>
-                    <Pressable style={currentSection === 0 ? styles.publications : {}} onPress={() => setCurrentSection(0)}>
-                        <Text style={styles.textPublications}>Posts</Text>
-                    </Pressable>
-
-                    <Pressable style={currentSection === 1 ? styles.publications : {}} onPress={() => setCurrentSection(1)}>
-                        <Text style={styles.textPublications}>Artigos</Text>
-                    </Pressable>
-
-                    <Pressable style={currentSection === 2 ? styles.publications : {}} onPress={() => setCurrentSection(2)}>
-                        <Text style={styles.textPublications}>Projetos</Text>
-                    </Pressable>
-                    <Pressable style={currentSection === 3 ? styles.publications : {}} onPress={() => setCurrentSection(3)}>
-                        <Text style={styles.textPublications}>Informações</Text>
-                    </Pressable>
-                </View>
-
-                <GestureDetector>
-                    {
-                        (currentSection === 3) ? 
-                        <DetailsSection />
-                        : (currentSection === 2) ?
-                        <Text>2</Text>
-                        : (currentSection === 1) ?
-                        <Text>1</Text>
-                        : (currentSection === 0 ) ? 
-                        <Text>0</Text>
-                        :   <Text>Pagina inválida</Text>
-                    }
-                </GestureDetector>
-                
-                
-                    
-               
-
-   
-            </View>
             </ScrollView>
         </LayoutWrapper>
     )

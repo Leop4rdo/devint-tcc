@@ -9,63 +9,69 @@ const styles = StyleSheet.create({
     page : {
         backgroundColor : colors.DARK_GRAY,
         flex : 1,
-    
+        
     },
-    profileContainer:{
-        height:200,
-  
+
+    header:{
+        marginTop : 60,
+        paddingHorizontal : 16
     },
+
     backgroundImage:{
         backgroundColor:colors.LIGHT_GRAY,
         width: '100%',
         height:100,
         position: 'absolute'
     },
-    
+
     photoUser:{
         width: 80,
         aspectRatio : 1,
         borderRadius : 48,
-   
-       
+        marginBottom : 12
     },
+
     devName:{
         color:colors.WHITE,
         fontSize: 16,
         fontFamily: fonts.POPPINS_REGULAR
     },
+
     devBio:{
         color:colors.WHITE,
         fontSize: 12,
         fontFamily: fonts.POPPINS_REGULAR
     },
-    profileData:{
-        marginHorizontal:20
-    },
-    profileDice:{
+
+    followDataContainer:{
         flexDirection:'row',
         marginHorizontal:20,
 
     },
+
     diceFollowers:{
         flexDirection:'column',
         alignItems:'center',
         marginRight: 54 
     },
+
     dice:{
         flexDirection:'column',
         alignItems:'center'
     },
+
     amount:{
         color:colors.PRIMARY,
         fontSize:16,
         fontFamily: fonts.POPPINS_SEMIBOLD
     },
+
     text:{
         color:colors.LIGHT_GRAY,
         fontSize:12,
         fontFamily: fonts.POPPINS_REGULAR
     },
+
     profileEdit:{
         display:'flex',
         flexDirection:'row',
@@ -98,7 +104,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 0.5
     },
     publications:{
-        borderBottomColor:colors.DARK_PURPLE,
+        borderBottomColor:colors.PRIMARY,
         borderBottomWidth:2.5
     },
     textPublications:{

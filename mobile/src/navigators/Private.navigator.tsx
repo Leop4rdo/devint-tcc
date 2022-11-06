@@ -13,8 +13,6 @@ const PrivateNavigator : React.FC = () => {
             {<Stack.Screen name="home" component={HomePage} /> }
             <Stack.Screen name="profile" component={ProfilePage}/>
             <Stack.Screen name="post-register" component={PostRegisterPage} />
-            
-   
         </Stack.Navigator>
     )
 }

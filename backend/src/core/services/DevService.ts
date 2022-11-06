@@ -62,7 +62,7 @@ export default class DevService {
             data: new DevOutput(dev)
         })
 
-        this.populateProfile(dev.githubUsername, dev.id)
+        this.populateProfile(body.githubUsername, dev.id)
 
         return res
     }

@@ -96,6 +96,7 @@ export default class AuthService {
             })
         } catch (e) {
             await this.repo.remove(auth.id)
+            console.log(e)
             return new ServerErrorResponse({ message: "Cannot create user" })
         }
     }
