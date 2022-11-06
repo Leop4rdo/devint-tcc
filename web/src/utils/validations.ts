@@ -11,4 +11,5 @@ export const isValidDate = (date: any) => {
 
 export const isEmpty = (data: any) => {
     return !data
+    
 }

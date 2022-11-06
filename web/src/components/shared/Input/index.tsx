@@ -5,10 +5,11 @@ interface IInputProps extends React.HTMLProps<HTMLInputElement> {
     icon?: string,
     isPassword?: boolean
     validate?: (name?: string) => boolean
-    image?: string
+    image?: string,
+    
 }
 
-const Input: React.FC<IInputProps> = (props) => {
+const Input: React.FC<IInputProps> = ( props) => {
     const [isValid, setValid] = useState(true);
     const [textVisible, setTextVisible] = useState(false);
 
@@ -24,7 +25,7 @@ const Input: React.FC<IInputProps> = (props) => {
         <div className={`input-container ${!isValid ? 'error' : ''}`} onBlur={validate}>
             {props.image && <img src={props.image} />}
             {props.icon && <Icon name={props.icon} />}
-            <input {...props} className={(props.icon) ? 'icon-input' : ''} type={(props.type == "password") ? ((textVisible) ? "text" : "password") : (props.type)} />
+            <input value={props.value}  {...props} className={(props.icon) ? 'icon-input' : ''} type={(props.type == "password") ? ((textVisible) ? "text" : "password") : (props.type)} />
             {
                 props.type == "password" &&
                 <Icon name={textVisible ? "visibility" : "visibility_off"} onClick={toggleVisibility} />

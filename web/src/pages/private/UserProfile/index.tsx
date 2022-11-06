@@ -13,6 +13,11 @@ import Select from "components/shared/Select";
 import PostsTab from "components/ProfileTabs/Posts";
 import {v4 as randomUUIDV4} from "uuid"
 import firebase from "config/firebase";
+import AutoTextArea from "components/shared/TextArea";
+import { isValidDate, isValidEmail } from "utils/validations";
+import { validate } from "uuid";
+import { dateMask } from "utils/masks";
+
 
 const UserProfilePage: React.FC = () => {
 
@@ -28,10 +33,10 @@ const UserProfilePage: React.FC = () => {
         skills: false,
         links: false
     })
-    
-    const { devId } = useParams()
 
     const [dev, setDev] = useState<IDev | null>(null)
+    const { devId } = useParams()
+    const [select, setSelectSkill] = useState()
     const [following, setFollowing] = useState(false);
 
     const upload = async (evt : any) => {
@@ -92,10 +97,57 @@ const UserProfilePage: React.FC = () => {
         setFollowing(!following);
         
     }
-    
-    useEffect(() => { findById() }, [devId])
-    
 
+    useEffect(() => { findById() }, [devId])
+
+    const getDevs = async () => {
+        const res = await devService.list({ limit: 24 })
+
+        setSelectSkill(res.data)
+    }
+
+    /* const editContact = async () => {
+        const res = await devService.update({
+            name: "",
+            bio: "",
+            gender: "",
+            profilePicUrl: "",
+            currentJob: "",
+            githubUsername: "",
+            openToWork: true,
+            birthday: Date,
+            socialLinks: {
+                name: "",
+                url: "",
+                owner: ""
+            },
+            careerFocus: { id: "" },
+            autoDeclaredSeniority: { id: "" },
+            skills: { id: " " },[]
+        }, 5)
+    } */
+
+
+    const handleInputChange = (text: any, key: any) => {
+        setFormValues({
+            ...formValues,
+            [key]: text.target.value
+        })
+    }
+
+
+    const [formValues, setFormValues] = useState({
+        bio: "",
+        contacts: "",
+        aboutCalendarMonth: "",
+        aboutSex: "",
+        careerFocus: "",
+        currentJob: "",
+        seniority: "",
+        skills: "",
+        linkName: "",
+        link: ""
+    })
 
     return (
         <MenuWapper>
@@ -108,27 +160,41 @@ const UserProfilePage: React.FC = () => {
 
                 <div className="container-user-informations">
 
-                    <div className="main-profile-info">
+                    <div className="profile-info">
 
-                        <div className="edit-main-info">
-                            <Icon name="edit"/>
+                        <div className="edit-info">
+                            {edit.bio ?
+                                <Icon name="done" onClick={() => setEdit({ ...edit, bio: !edit.bio })} />
+                                :
+                                <Icon name="edit" onClick={() => setEdit({ ...edit, bio: !edit.bio })} />
+                            }
+
                         </div>
 
-                        <img src={dev?.profilePicUrl} className="profile-pic"/>
+                        <img src={dev?.profilePicUrl} className="profile-pic" />
 
                         <h2>{dev?.name}</h2>
 
                         {
-                            (dev?.githubUsername) ? 
+                            (dev?.githubUsername) ?
                                 <span>
                                     <img src="assets/icons/github.svg" alt="" />
                                     {dev?.githubUsername}
                                 </span>
-                            : ''
+                                : ''
                         }
 
-                        <p>Bio muito bunita feita para exemplificar uns bagui ai
-                            tipo... alguma coisa</p>
+
+                        {edit.bio ?
+                            <AutoTextArea >
+                                Bio muito bunita feita para exemplificar uns bagui ai
+                                tipo... alguma coisa
+                            </AutoTextArea>
+                            :
+                            <p>Bio muito bunita feita para exemplificar uns bagui ai
+                                tipo... alguma coisa</p>
+                        }
+
 
                         <div className="follow-container">
                             <div className="container-followers">
@@ -142,9 +208,9 @@ const UserProfilePage: React.FC = () => {
                         </div>
 
                         {
-                            (authContext?.userData?.id !== devId) ? 
+                            (authContext?.userData?.id !== devId) ?
                                 <Button className="follow-btn btn-primary" onClick={toggleFollow}>
-                                    <Icon name={following ? "check": "add"} />
+                                    <Icon name={following ? "check" : "add"} />
                                     <span>{following ? "Seguindo" : "Seguir"}</span>
                                 </Button> : ''
                         }
@@ -152,45 +218,45 @@ const UserProfilePage: React.FC = () => {
 
                     </div>
 
-                    <UserProfileEdit editIcon={edit.contacts} OnClick={() => setEdit({ ...edit, contacts: !edit.contacts })} iconName="forum" subject="Contato">
-
+                    <UserProfileEdit iconName="forum" subject="Contato">
                         <div className="user-info">
                             <Icon name="email" />
                             <span>emailqualddddddddddddddddddquer@gmail.com</span>
-                        </div>
-
-                        <div className="user-info">
-                                <Icon name="call" />
-                                {edit.contacts ?
-                                    <Input value={"(00) 00000-0000"} />
-                                    :
-                                    <span>(00) 0000-0000</span>
-                                }
                         </div>
 
                     </UserProfileEdit>
 
                     <UserProfileEdit editIcon={edit.about} OnClick={() => setEdit({ ...edit, about: !edit.about })} iconName="group" subject="Sobre" >
 
-                            <div className="user-info">
-                                <Icon name="calendar_month" />
-                                {edit.about ?
-                                    <Input value={"14/01/2001"} />
-                                    :
-                                    <span>14/01/2001</span>
-                                }
+                        <div className="user-info">
+                            <Icon name="calendar_month" />
+                            {edit.about ?
+                                <Input
+                                    value={dateMask(formValues.aboutCalendarMonth)}
+                                    onChange={(text: any) =>
+                                        handleInputChange(text, 'aboutCalendarMonth')}
+                                    validate={() => isValidDate(formValues.aboutCalendarMonth)}
+                                />
+                                :
+                                <span>14/01/2001</span>
+                            }
 
-                            </div>
+                        </div>
 
-                            <div className="user-info">
-                                <Icon name="group" />
-                                {edit.about ?
-                                    <Input value={"Masculino"} />
-                                    :
-                                    <span>Masculino</span>
-                                }
+                        <div className="user-info">
+                            <Icon name="group" />
+                            {edit.about ?
+                                <Select onChange={() => { }}>
+                                    <option > Sexo </option>
+                                    <option> Masculino </option>
+                                    <option> Feminino </option>
+                                    <option> Outro </option>
+                                </Select>
+                                :
+                                <span>Masculino</span>
+                            }
 
-                            </div>
+                        </div>
 
                     </UserProfileEdit>
 
@@ -198,7 +264,12 @@ const UserProfilePage: React.FC = () => {
 
                         <div className="user-info">
                             {edit.careerFocus ?
-                                <Input value={"Front-End"} />
+                                <Select onChange={() => { }}>
+                                    <option>Selecione um foco de carreira</option>
+                                    <option>Front-end</option>
+                                    <option>Backend</option>
+                                    <option>Full stack</option>
+                                </Select>
                                 :
                                 <span>Front-End</span>
                             }
@@ -209,7 +280,11 @@ const UserProfilePage: React.FC = () => {
                     <UserProfileEdit editIcon={edit.currentJob} OnClick={() => setEdit({ ...edit, currentJob: !edit.currentJob })} iconName="work" subject="Trabalho Atual" >
                         <div className="user-info">
                             {edit.currentJob ?
-                                <Input value={"Front-End"} />
+                                <Input value={formValues.currentJob}
+                                    onChange={(text: any) =>
+                                        handleInputChange(text, 'currentJob')}
+
+                                />
                                 :
                                 <span>Front-End</span>
                             }
@@ -219,7 +294,12 @@ const UserProfilePage: React.FC = () => {
                     <UserProfileEdit editIcon={edit.seniority} OnClick={() => setEdit({ ...edit, seniority: !edit.seniority })} iconName="school" subject="Senioridade">
                         <div className="user-info">
                             {edit.seniority ?
-                                <Input value={"Junior"} />
+                                <Select onChange={() => { }}>
+                                    <option>Selecione uma Senioridade</option>
+                                    <option>Junior</option>
+                                    <option>Pleno</option>
+                                    <option>Senior</option>
+                                </Select>
                                 :
                                 <span>Junior</span>
                             }
@@ -232,6 +312,7 @@ const UserProfilePage: React.FC = () => {
 
                             <div>
                                 <Select onChange={() => { }}>
+                                    <option>Selecione uma Tecnologia</option>
                                     <option> Html </option>
                                     <option> CSS </option>
                                     <option> React Native </option>
@@ -297,31 +378,52 @@ const UserProfilePage: React.FC = () => {
 
                     </UserProfileEdit>
 
-
                     <UserProfileEdit editIcon={edit.links} OnClick={() => setEdit({ ...edit, links: !edit.links })} iconName="push_pin" subject="Outros links">
 
                         {edit.links ?
                             <div>
-                                <Input placeholder="Insira o nome do link"/>
-                                <Input placeholder="Insira o Link"/>
+                                <Input placeholder="Insira o nome do link"
+                                    onChange={(text: any) =>
+                                        handleInputChange(text, 'linkName')}
+
+                                />
+                                <Input placeholder="Insira o Link"
+                                    onChange={(text: any) =>
+                                        handleInputChange(text, 'link')}
+
+                                />
                             </div>
                             :
 
                             <div className="container-links">
-                                <Icon name="close"/>
-                                <div className="links">
-                                    <span>Link qualquer</span>
+
+                                <div className="container-content-links">
+                                    <Icon name="close" />
+                                    <div className="links">
+                                        <span>Link qualquer</span>
+                                    </div>
                                 </div>
 
-                                <div className="links">
-                                    <span>Link qualquer</span>
+
+                                <div className="container-content-links">
+                                    <Icon name="close" />
+                                    <div className="links">
+                                        <span>Link qualquer</span>
+                                    </div>
                                 </div>
 
-                                <div className="links">
-                                    <span>Link qualquer</span>
+                                <div className="container-content-links">
+                                    <Icon name="close" />
+                                    <div className="links">
+                                        <span>Link qualquer</span>
+                                    </div>
                                 </div>
-                                <div className="links">
-                                    <span>Link qualquer</span>
+
+                                <div className="container-content-links">
+                                    <Icon name="close" />
+                                    <div className="links">
+                                        <span>Link qualquer</span>
+                                    </div>
                                 </div>
                             </div>
 

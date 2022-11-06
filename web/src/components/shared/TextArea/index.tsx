@@ -7,6 +7,7 @@ import React, {
 
 interface IAutoTextArea extends TextareaHTMLAttributes<HTMLTextAreaElement> {
 	placeholder?: string
+	value?: string
 } 
 
 const AutoTextArea : React.FC<IAutoTextArea> = (props: IAutoTextArea ) => {
@@ -47,6 +48,7 @@ const AutoTextArea : React.FC<IAutoTextArea> = (props: IAutoTextArea ) => {
 					height: textAreaHeight,
 				}}
 				onChange={onChangeHandler}
+				value={props.value}
 			/>
 		</div>
 	);
