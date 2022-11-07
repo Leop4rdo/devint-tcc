@@ -1,6 +1,7 @@
 import CareerRepository from "@src/adapters/database/repositories/CareerRepository";
 import DevRepository from "@src/adapters/database/repositories/DevRepository";
 import SkillRepository from "@src/adapters/database/repositories/SkillRepository";
+import CareerService from "@src/core/services/CareerService";
 import DevService from "@src/core/services/DevService";
 import SkillService from "@src/core/services/SkillService";
 import PaginateListInput from "@src/ports/input/PaginateListInput";

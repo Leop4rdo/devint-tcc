@@ -12,9 +12,9 @@ export default class BadgeEntity {
     @Column({ nullable : false})
     desc: string
     
-    @CreateDateColumn({ name: 'created_at', select: false })
+    @CreateDateColumn({ name: 'created_at' })
     createdAt : Timestamp
 
-    @UpdateDateColumn({ name : 'updated_at' })
+    @UpdateDateColumn({ name : 'updated_at'})
     updatedAt : Timestamp
 }

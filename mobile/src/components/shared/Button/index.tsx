@@ -19,13 +19,13 @@ const ButtonComponent : React.FC<IButtonProps> = ({onPress, style, text, textSty
     const [isPressed, setPressed] = useState(false)
 
 
-    const getIconColor = () => (iconColor) ? iconColor : colors.PRIMARY
+    const getIconColor = () => (iconColor) ? iconColor : '#FFF'
 
     return (
         <TouchableOpacity
             activeOpacity={.75}
             onPress={onPress}
-            style={style || buttonStyles.base}>
+            style={[buttonStyles.base, style]}>
             <View >
                 {icon && <Ionicons name={icon} size={iconSize || 24} color={getIconColor()} style={(text) ? { marginRight: 8 } : {}} />}
                 <Text style={[buttonStyles.text, textStyle]}>{text}</Text>

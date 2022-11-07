@@ -17,7 +17,7 @@ export default class PasswordResetTokenEntity {
     @ManyToOne(() => AuthEntity, { onDelete : 'CASCADE', eager : true })
     owner : AuthEntity
 
-    @CreateDateColumn({ name : 'created_at', select : false })
+    @CreateDateColumn({ name : 'created_at' })
     createdAt : Timestamp
 
     @UpdateDateColumn({ name : 'updated_at',})

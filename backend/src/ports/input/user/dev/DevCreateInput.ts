@@ -16,7 +16,7 @@ export default class DevCreateInput extends InputPort {
     @IsNotEmpty()
     gender : string 
 
-    @IsNotEmpty()
+    @IsString()
     githubUsername : string
 
     constructor(props : IDevProps) {

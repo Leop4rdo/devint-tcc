@@ -5,11 +5,11 @@ import LayoutWrapper from "../../../components/shared/LayoutWrapper";
 import Post from "../../../components/Post";
 import styles from "./style";
 import {useEffect, useState} from "react";
-import IPostListItem from "../../../interfaces/IPost";
 import * as postService from "../../../services/post.service"
 import {screenHeight} from "../../../styles/utils";
 import CommentModal from "../../../components/CommentModal";
 import {useIsFocused} from "@react-navigation/native";
+import { IPostListItem } from "../../../interfaces/IPost";
 
 const HomePage : React.FC<{ navigation : any }> = ({navigation}) => {
     const [posts, setPosts] = useState<IPostListItem[]>([])
@@ -58,6 +58,7 @@ const HomePage : React.FC<{ navigation : any }> = ({navigation}) => {
                     ListFooterComponent={<ActivityIndicator />}
                     renderItem={({ item }) => (
                         <Post 
+                            openProfile={() => navigation.navigate('profile', { devId : item.writter.id})}
                             openComments={() => setSelectedPostId(item.id)} 
                             data={item} 
                             key={`${item.id}-${Math.random()**999}`}

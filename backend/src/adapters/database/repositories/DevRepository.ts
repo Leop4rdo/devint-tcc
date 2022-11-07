@@ -23,6 +23,7 @@ export default class DevRepository extends AbstractRepository<DevEntity> {
             .getMany()
     }
 
+
     async findByAuthId(_id : string) : Promise<DevEntity> {
         return await this.db.findOne({
             where : {

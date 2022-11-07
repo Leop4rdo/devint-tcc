@@ -25,7 +25,7 @@ export default class ArticleEntity {
     @JoinColumn()
     writter : DevEntity
 
-    @CreateDateColumn({ name: 'created_at', select: false })
+    @CreateDateColumn({ name: 'created_at' })
     createdAt : Timestamp
 
     @UpdateDateColumn({ name : 'updated_at' })

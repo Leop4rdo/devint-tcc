@@ -1,15 +1,14 @@
-import { IDevMinimal } from "./IDev"
-import IPostProps from "./IPost"
+import IDevMinimal from "./IDev"
 
 export default interface IComment {
-    alreadyHearted: boolean
-    id : string
-    writter : IDevMinimal
-    post : IPostProps
+    id: string
+    content: string
+    writter: IDevMinimal
     hearts : number
     answers : {
-        content : string,
+        content : string
         writter : IDevMinimal
     }[]
-    content : string
+    alreadyHearted : boolean
 }
+
