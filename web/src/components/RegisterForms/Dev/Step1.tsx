@@ -17,7 +17,7 @@ const DevForm1: React.FC<IForm1Props> = ({ onSubmit, formData, onChange }) => {
 
         <form className="form" onSubmit={onSubmit}>
 
-            <Input icon="account_circle" type="text" placeholder="Nome" name="name" onChange={onChange} validate={() => !isEmpty(formData.name)} />
+            <Input icon="account_circle" type="text" placeholder="Nome" name="name" onChange={onChange} value={formData.name} validate={() => !isEmpty(formData.name)} />
 
             <Input icon="mail" type="text" placeholder="E-mail" onChange={onChange} name="email" value={formData.email} validate={() => isValidEmail(formData.email)} />
 

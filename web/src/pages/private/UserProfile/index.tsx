@@ -7,16 +7,15 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "store/context/Auth.context";
 import * as devService from "../../../services/dev.service";
-import * as postService from "../../../services/post.service";
 import Input from "components/shared/Input";
 import Select from "components/shared/Select";
 import PostsTab from "components/ProfileTabs/Posts";
-import {v4 as randomUUIDV4} from "uuid"
+import { v4 as randomUUIDV4 } from "uuid"
 import firebase from "config/firebase";
 import AutoTextArea from "components/shared/TextArea";
 import { isValidDate, isValidEmail } from "utils/validations";
-import { validate } from "uuid";
 import { dateMask } from "utils/masks";
+
 
 
 const UserProfilePage: React.FC = () => {
@@ -25,6 +24,7 @@ const UserProfilePage: React.FC = () => {
     const [currentTab, setCurrentTab] = useState("postsTab");
     const authContext = useContext(AuthContext)
     const [edit, setEdit] = useState({
+        bio: false,
         contacts: false,
         about: false,
         careerFocus: false,
@@ -39,20 +39,20 @@ const UserProfilePage: React.FC = () => {
     const [select, setSelectSkill] = useState()
     const [following, setFollowing] = useState(false);
 
-    const upload = async (evt : any) => {
+    const upload = async (evt: any) => {
         setUploading(true)
 
         const file = evt.target.files[0]
 
         if (!file) return
-        
+
         try {
             const extension = `.${file.name.split('.')[1]}`
             const fileName = randomUUIDV4() + extension
 
             const uploaded = await firebase.storage().ref().child('attachments/').child(fileName).put(file)
 
-            setDev({...dev, [evt.target.name] : await uploaded.ref.getDownloadURL()} as IDev)
+            setDev({ ...dev, [evt.target.name]: await uploaded.ref.getDownloadURL() } as IDev)
             // update na service
 
             // updateLanguageServiceSourceFile()
@@ -80,22 +80,21 @@ const UserProfilePage: React.FC = () => {
     }
 
 
-    
+
     const findById = async () => {
-        if (!devId) return 
+        if (!devId) return
         const res = await devService.findById(devId)
-        
+
         setDev(res.data)
-        setFollowing(res.data?.followers.find((d : IDevMinimal) => d.id === authContext?.userData.id) != undefined)
+        setFollowing(res.data?.followers.find((d: IDevMinimal) => d.id === authContext?.userData.id) != undefined)
     }
 
     const toggleFollow = async () => {
         if (!devId) return
-
         const res = await devService.toggleFollow(devId)
-        
         setFollowing(!following);
-        
+        const updateFollowing = await devService.findById(devId)
+        setDev(updateFollowing.data)
     }
 
     useEffect(() => { findById() }, [devId])
@@ -172,13 +171,11 @@ const UserProfilePage: React.FC = () => {
                         </div>
 
                         <img src={dev?.profilePicUrl} className="profile-pic" />
-
+                        
                         <h2>{dev?.name}</h2>
 
-                        {
-                            (dev?.githubUsername) ?
-                                <span>
-                                    <img src="assets/icons/github.svg" alt="" />
+                        {dev?.githubUsername ?
+                                <span>     
                                     {dev?.githubUsername}
                                 </span>
                                 : ''
@@ -442,7 +439,7 @@ const UserProfilePage: React.FC = () => {
                     </div>
                     <hr></hr>
                     <div className="selected-tab">
-                        { currentTab === "postsTab" ? <PostsTab devId={devId || ''} /> : "" }
+                        {currentTab === "postsTab" ? <PostsTab devId={devId || ''} /> : ""}
                     </div>
                 </div>
 
