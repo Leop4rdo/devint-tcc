@@ -32,44 +32,50 @@ const ProfilePage: React.FC<{ route : any, navigation : any }> = ({route, naviga
 
                     <Image source={{uri:data?.bannerURI}}style={styles.backgroundImage}></Image>
                     <View style={styles.header}>
-                        <Image source={{uri: data?.profilePicUrl}} style={styles.photoUser}></Image>
+                        <View style={{flexDirection : 'row', justifyContent : 'space-between', alignItems : 'flex-end'}}>
+                            <Image source={{uri: data?.profilePicUrl}} style={styles.photoUser}></Image>
+                            
+                            <Pressable style={styles.followButton}>
+                                <Text style={styles.followButtonText}>+ Seguir</Text>
+                            </Pressable>
+                        </View>
 
                         <View>
                             <Text style={styles.devName}>{data?.name}</Text>
-                            <Text style={styles.devBio}>{data?.bio}</Text>
+                            <Text style={styles.devBio}>aosdalsldkajsdlakjjsldkaljsd alskdjalksj alskdjalskjda alkajsdl </Text>
                         </View>
                     </View>
                     
                     <View style={styles.followDataContainer}>
-                        <View style={styles.diceFollowers}>
+                        <View style={styles.followData}>
                             <Text style={styles.amount}>40</Text>
                             <Text style={styles.text}>Seguidores</Text>
                         </View>
-                        <View style={styles.dice}>
+                        <View style={styles.followData}>
                             <Text style={styles.amount}>40</Text>
                             <Text style={styles.text}> Seguindo</Text>
                         </View>
                     </View>
                     
 
-                    <View style={styles.publicationData}>
-                        <Pressable style={currentSection === 0 ? styles.publications : {}} onPress={() => setCurrentSection(0)}>
-                            <Text style={[styles.textPublications, { color : currentSection === 0 ? colors.PRIMARY : colors.LIGHT_GRAY}]}>Posts</Text>
+                    <View style={styles.nav}>
+                        <Pressable style={currentSection === 0 ? styles.navItem : {}} onPress={() => setCurrentSection(0)}>
+                            <Text style={[styles.selectedNavItem, { color : currentSection === 0 ? colors.PRIMARY : colors.LIGHT_GRAY}]}>Posts</Text>
                         </Pressable>
 
-                        <Pressable style={currentSection === 1 ? styles.publications : {}} onPress={() => setCurrentSection(1)}>
-                            <Text style={[styles.textPublications, { color : currentSection === 1 ? colors.PRIMARY : colors.LIGHT_GRAY}]}>Artigos</Text>
+                        <Pressable style={currentSection === 1 ? styles.navItem : {}} onPress={() => setCurrentSection(1)}>
+                            <Text style={[styles.selectedNavItem, { color : currentSection === 1 ? colors.PRIMARY : colors.LIGHT_GRAY}]}>Artigos</Text>
                         </Pressable>
 
-                        <Pressable style={currentSection === 2 ? styles.publications : {}} onPress={() => setCurrentSection(2)}>
-                            <Text style={[styles.textPublications, { color : currentSection === 2 ? colors.PRIMARY : colors.LIGHT_GRAY}]}>Projetos</Text>
+                        <Pressable style={currentSection === 2 ? styles.navItem : {}} onPress={() => setCurrentSection(2)}>
+                            <Text style={[styles.selectedNavItem, { color : currentSection === 2 ? colors.PRIMARY : colors.LIGHT_GRAY}]}>Projetos</Text>
                         </Pressable>
-                        <Pressable style={currentSection === 3 ? styles.publications : {}} onPress={() => setCurrentSection(3)}>
-                            <Text style={[styles.textPublications, { color : currentSection === 3 ? colors.PRIMARY : colors.LIGHT_GRAY}]}>Informações</Text>
+                        <Pressable style={currentSection === 3 ? styles.navItem : {}} onPress={() => setCurrentSection(3)}>
+                            <Text style={[styles.selectedNavItem, { color : currentSection === 3 ? colors.PRIMARY : colors.LIGHT_GRAY}]}>Informações</Text>
                         </Pressable>
                     </View>
 
-                    <View>
+                    <View style={styles.section}>
                         {
                             (currentSection === 3) ? 
                             <DetailsSection />
