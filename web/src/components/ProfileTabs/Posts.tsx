@@ -18,8 +18,6 @@ const PostsTab: React.FC<IPostsTab> = ({ devId }) => {
         const { data } = await postService.getPostsByUser(devId)
 
         setPosts([...posts, ...data])
-
-        console.log(posts);
         
     }
 

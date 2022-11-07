@@ -117,7 +117,6 @@ export const addAnswer = async (body : addCommentRequestBody, commentId : string
 
 export const getPostsByUser = async ( userId : string, query ?: PaginationQuery ) => {
     try {
-        console.log('endpoint ->', `/devs/${userId}/posts${(query)? `?${buildQuery(query)}`: '' }`)
 
         const { data } = await api.get(
             `/devs/${userId}/posts${(query)? `?${buildQuery(query)}`: '' }`,
