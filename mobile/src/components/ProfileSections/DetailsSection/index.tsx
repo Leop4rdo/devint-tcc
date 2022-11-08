@@ -7,11 +7,29 @@ import styles from "./style"
 const DetailsSection : React.FC = () => {
     return (
         <>
+            {/* CONTATO */}
             <View style={styles.dataContainer}>
                 <View style={styles.header}>
                     <View style={{flexDirection : 'row'}}>
                         <MaterialIcons name="forum" size={24} color='#FFF' />
                         <Text style={styles.title}>Contato</Text>
+                    </View>
+                </View>
+
+                <View>
+                    <View style={{flexDirection : 'row'}}>
+                        <MaterialIcons name='email' size={16} color={colors.LIGHT_GRAY} />
+                        <Text style={styles.infoIntem}>john.doe@mail.com</Text>
+                    </View>
+                </View>
+            </View>
+            
+            {/* SOBRE */}
+            <View style={styles.dataContainer}>
+                <View style={styles.header}>
+                    <View style={{flexDirection : 'row'}}>
+                        <MaterialIcons name="round-info" size={24} color='#FFF' />
+                        <Text style={styles.title}>Sobre</Text>
                     </View>
 
                     <Pressable>
@@ -19,7 +37,22 @@ const DetailsSection : React.FC = () => {
                     </Pressable>
                 </View>
 
-                
+                <View>
+                    <View style={{flexDirection : 'row'}}>
+                        <MaterialIcons name='calendar' size={16} color={colors.LIGHT_GRAY} />
+                        <Text style={styles.infoIntem}>john.doe@mail.com</Text>
+                    </View>
+
+                    <View style={{flexDirection : 'row'}}>
+                        <MaterialIcons name='person' size={16} color={colors.LIGHT_GRAY} />
+                        <Text style={styles.infoIntem}>john.doe@mail.com</Text>
+                    </View>
+
+                    <View style={{flexDirection : 'row'}}>
+                        <MaterialIcons name='calendar' size={16} color={colors.LIGHT_GRAY} />
+                        <Text style={styles.infoIntem}>john.doe@mail.com</Text>
+                    </View>
+                </View>
             </View>
         </>
     )
