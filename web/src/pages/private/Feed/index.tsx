@@ -31,29 +31,21 @@ const FeedPage: React.FC = () => {
     }
 
     const getPosts = async () => {
-        const { data } = await postService.list({ limit: 45, offset: posts.length })  
+        const { data } = await postService.list({ limit: 48, offset: posts.length })
+
         setPosts([...posts, ...data])
         setLoading(false)
-        console.log([...posts])
-        
-        
     }
 
-    const getMorePosts = async () => {
-        if (loading) return
+    const refresh = async () => {
+        setPosts([])
+
+        const { data } = await postService.list({ limit: 48, offset: 0 })
+
+        setPosts(data)
     }
 
-    const configTrigger = () => {
-        var observer = new IntersectionObserver((entries) => {
-            if(entries[0].isIntersecting)
-                getMorePosts()
-        }, { threshold: [1] });
-
-        if (triggerRef.current)
-            observer.observe(triggerRef.current)
-    }
-
-    useEffect(() => { getPosts(); getDevs(); configTrigger() }, [])
+    useEffect(() => { getPosts(); getDevs(); }, [])
 
     return (
         <MenuWapper>
@@ -130,12 +122,12 @@ const FeedPage: React.FC = () => {
 
             {
                 selectedPostId &&
-                <PostDetailsModal  postId={selectedPostId} onClick={() => setSelectedPostId('')} />
+                <PostDetailsModal  postId={selectedPostId} onClick={() => setSelectedPostId('')} refreshComment={refresh} />
             }
 
             {
                 writtingPost &&
-                <CreatePostModal onClose={() =>  setWrittingPost(false)} refresh={ () => getPosts()} />
+                <CreatePostModal onClose={() =>  { setWrittingPost(false); refresh()}}  />
             }
         </MenuWapper>
     );

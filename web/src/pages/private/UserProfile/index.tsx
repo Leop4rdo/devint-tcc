@@ -105,27 +105,6 @@ const UserProfilePage: React.FC = () => {
         setSelectSkill(res.data)
     }
 
-    /* const editContact = async () => {
-        const res = await devService.update({
-            name: "",
-            bio: "",
-            gender: "",
-            profilePicUrl: "",
-            currentJob: "",
-            githubUsername: "",
-            openToWork: true,
-            birthday: Date,
-            socialLinks: {
-                name: "",
-                url: "",
-                owner: ""
-            },
-            careerFocus: { id: "" },
-            autoDeclaredSeniority: { id: "" },
-            skills: { id: " " },[]
-        }, 5)
-    } */
-
 
     const handleInputChange = (text: any, key: any) => {
         setFormValues({
@@ -151,7 +130,6 @@ const UserProfilePage: React.FC = () => {
     return (
         <MenuWapper>
             <div className="profile-page">
-
                 <div className="background-image">
                     <input accept="image/*" onChange={upload} type="file" name="attachment-input" id="attachment-input" />
                     <label htmlFor="attachment-input"><Icon name="image" /></label>
@@ -220,7 +198,6 @@ const UserProfilePage: React.FC = () => {
                             <Icon name="email" />
                             <span>emailqualddddddddddddddddddquer@gmail.com</span>
                         </div>
-
                     </UserProfileEdit>
 
                     <UserProfileEdit editIcon={edit.about} OnClick={() => setEdit({ ...edit, about: !edit.about })} iconName="group" subject="Sobre" >
@@ -231,7 +208,7 @@ const UserProfilePage: React.FC = () => {
                                 <Input
                                     value={dateMask(formValues.aboutCalendarMonth)}
                                     onChange={(text: any) =>
-                                        handleInputChange(text, 'aboutCalendarMonth')}
+                                    handleInputChange(text, 'aboutCalendarMonth')}
                                     validate={() => isValidDate(formValues.aboutCalendarMonth)}
                                 />
                                 :
