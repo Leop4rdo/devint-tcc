@@ -1,4 +1,3 @@
-import ObjectMapper from "@src/utils/ObjectMapper"
 import Dev from "./Dev"
 import ICommentProps from "./interfaces/IComment"
 import Post from "./Post"

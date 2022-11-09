@@ -3,6 +3,7 @@ import { color, FlipInEasyX } from "react-native-reanimated";
 import colors from "../../../styles/colors";
 import globalStyles from "../../../styles/global";
 import fonts from "../../../styles/typography";
+import { screenWidth } from "../../../styles/utils";
 
 
 const styles = StyleSheet.create({
@@ -18,15 +19,14 @@ const styles = StyleSheet.create({
     },
 
     header:{
-        marginTop : 80,
-        paddingHorizontal : 16
+        paddingHorizontal : 0
     },
 
-    backgroundImage:{
+    banner:{
         backgroundColor:colors.LIGHT_GRAY,
-        width: '100%',
-        height:120,
-        position: 'absolute'
+        width: screenWidth,
+        aspectRatio : 4,
+        resizeMode : 'contain',
     },
 
     photoUser:{

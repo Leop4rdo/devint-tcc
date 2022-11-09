@@ -41,10 +41,7 @@ export default class DevOutput {
         Object.assign(this, props);
         this.auth = undefined
         this.email = props.auth.email 
-        
-        if (devId) {
-            this.following = props.following.map((dev) => new DevMinimalOutput(dev))
-            this.followers = props.followers.map((dev) => new DevMinimalOutput(dev))
-        }
+        this.following = props.following.map((dev) => new DevMinimalOutput(dev)) ?? undefined
+        this.followers = props.followers.map((dev) => new DevMinimalOutput(dev)) ?? undefined
     }
 }

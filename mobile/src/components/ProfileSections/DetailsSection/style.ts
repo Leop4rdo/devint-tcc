@@ -31,11 +31,11 @@ const styles = StyleSheet.create({
     infoItem : {
         flexDirection : 'row',
         alignItems : 'center',
+        marginBottom : 4
     },
 
     infoItemText : {
         color : colors.LIGHT_GRAY,
-        marginLeft : 8
     }
 })
 

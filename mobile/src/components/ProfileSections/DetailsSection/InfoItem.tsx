@@ -14,8 +14,8 @@ interface IInfoItemProps {
 const InfoItem : React.FC<IInfoItemProps> = (props) => {
     return (
         <View style={styles.infoItem}>
-            { props.icon && <MaterialIcons name={props.icon} size={16} color={colors.LIGHT_GRAY} /> }
-            { props.imageUri && <Image source={props.imageUri} style={{width : 16, height : 16}}/> }
+            { props.icon && <MaterialIcons name={props.icon} size={16} color={colors.LIGHT_GRAY} style={{marginRight : 8}} /> }
+            { props.imageUri && <Image source={props.imageUri} style={{width : 16, height : 16, marginRight : 8}}/> }
 
             {
                 props.editing ?
