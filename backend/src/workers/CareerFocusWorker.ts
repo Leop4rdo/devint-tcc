@@ -14,6 +14,8 @@ const CAREER_FOCUS_LIST = [
     'Dev'
 ]
 
+export let defaultCareerFocus = null
+
 export const setup = async() => {
     console.log('[INFO] Career Focus worker is running')
 
@@ -26,6 +28,9 @@ export const setup = async() => {
         console.log(`[INFO] creating ${c}`)
         repo.create(new CareerFocus({ name : c }))
     }
+
+    const existing = await repo.list()
+    defaultCareerFocus = existing[0]
 
     console.log('[INFO] finished running Career Focus worker')
 }

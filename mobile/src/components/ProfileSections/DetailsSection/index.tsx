@@ -46,17 +46,17 @@ const DetailsSection : React.FC<IDetailSectionProps> = (props) => {
 
             {/* FOCO DE CARREIRA */}
             <DetailCard title="Foco de carreira" headerIcon="center-focus-strong">
-                <InfoItem value={props.data.careerFocus.name || 'Dev'} />
+                <InfoItem value={props.data.careerFocus?.name || 'Não informado'} />
             </DetailCard>
 
             {/* TRABALHO ATUAL */}
             <DetailCard title="Trabalho Atual" headerIcon="work">
-                <InfoItem value="john.doe@mail.com" />
+                <InfoItem value={props.data.currentJob || 'Não informado'} />
             </DetailCard>
 
             {/* SENIORIDADE */}
             <DetailCard title="Senioridade" headerIcon="school">
-                <InfoItem value="john.doe@mail.com" />
+                <InfoItem value={props.data.autoDeclaredSeniority.name || 'Não informado'} />
             </DetailCard>
 
             {/* HABILIDADES */}
