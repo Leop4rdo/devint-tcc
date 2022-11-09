@@ -59,7 +59,7 @@ const UserProfilePage: React.FC = () => {
             const extension = `.${file.name.split('.')[1]}`
             const fileName = randomUUIDV4() + extension
 
-            const uploaded = await firebase.storage().ref().child('bannerImage/').child(fileName).put(file)
+            const uploaded = await firebase.storage().ref().child('banner/').child(fileName).put(file)
 
             setDev({ ...dev, [evt.target.name]: await uploaded.ref.getDownloadURL() } as IDev)
             // update na service
@@ -127,27 +127,33 @@ const UserProfilePage: React.FC = () => {
     
     
     const editContact = async () => {
-        let devLegacy = dev;
-        let devChange = formValues;
+        // let devLegacy = dev;
+        // let devChange = formValues;
         
-        let isDevEqual = (JSON.stringify(devLegacy) === JSON.stringify(devChange));
+        // let isDevEqual = (JSON.stringify(devLegacy) === JSON.stringify(devChange));
         
-        console.log(isDevEqual);
+        // console.log(isDevEqual);
         
-        if (!isDevEqual) {
-            let newDevChange = diffObject(devLegacy, devChange);
-            console.log(diffObject(devLegacy, devChange));
-        }
+        // if (!isDevEqual) {
+        //     let newDevChange = diffObject(devLegacy, devChange);
+        //     console.log(diffObject(devLegacy, devChange));
+        // }
         
-        function diffObject(a, b) {
-          return Object.keys(a).reduce(function(map, k) {
-            if (a[k] !== b[k]) map[k] = b[k];
-            return map;
-          }, {});
-        }
+        // function diffObject(a, b) {
+        //   return Object.keys(a).reduce(function(map, k) {
+        //     if (a[k] !== b[k]) map[k] = b[k];
+        //     return map;
+        //   }, {});
+        // }
+
+        if (!devId) return
 
         const res = await devService.update({ 
-           
+            
+                bio: formValues.bio,
+                gender: formValues.gender,
+                currentJob: formValues.currentJob
+            
          }, devId)
 
     }
@@ -164,12 +170,10 @@ const UserProfilePage: React.FC = () => {
 
     const [formValues, setFormValues] = useState({
         bio: "",
-        contacts: "",
-        aboutCalendarMonth: "",
-        aboutSex: "",
+        gender: "",
         careerFocus: "",
         currentJob: "",
-        seniority: "",
+        autoDeclaredSeniority: "",
         skills: "",
         linkName: "",
         link: ""
@@ -193,7 +197,7 @@ const UserProfilePage: React.FC = () => {
 
                     <div className="profile-info">
 
-                        <div className="edit-info">
+                        <div className="edit-info" >
                             {edit.bio ?
                                 <Icon name="done" onClick={() => setEdit({ ...edit, bio: !edit.bio })} />
                                 :
@@ -218,7 +222,7 @@ const UserProfilePage: React.FC = () => {
 
 
                         {edit.bio ?
-                            <AutoTextArea>
+                            <AutoTextArea onChange={() => handleInputChange} value={formValues.bio}>
                                 Conte um pouco sobre você...
                             </AutoTextArea>
                             :
@@ -266,7 +270,7 @@ const UserProfilePage: React.FC = () => {
                         <div className="user-info">
                             <Icon name="group" />
                             {edit.about ?
-                                <Select onChange={() => {dev?.gender}} value={dev?.gender} >
+                                <Select onChange={() => handleInputChange} value={formValues.gender} >
                                     <option > Gênero </option>
                                     <option> Masculino </option>
                                     <option> Feminino </option>

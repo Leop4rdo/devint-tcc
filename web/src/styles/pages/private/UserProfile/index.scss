@@ -7,7 +7,23 @@
     .background-image {
         width: 100%;
         height: 200px;
-        background-color: $color-light-gray;
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+
+        #attachment-input { display:  none; }
+        .icon {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: white;
+
+            transition: color .25s ease-out;
+            
+            &:hover {
+                color : $color-primary;
+            }
+        }
     }
 
     .container-done-icon{

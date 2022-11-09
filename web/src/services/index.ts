@@ -13,7 +13,7 @@ export interface PaginationQuery {
     offset ?: number
 }
 
- export const baseUrl = "http://192.168.30.192:8080/api/v1"  
+ export const baseUrl = "http://192.168.1.13:8080/api/v1"  
 // export const baseUrl = "http://192.168.1.7:8080/api/v1"
 // export const baseUrl = "http://10.107.144.30:8080/api/v1"
 //export const baseUrl = "http://7a72-187-84-34-232.sa.ngrok.io/api/v1"
