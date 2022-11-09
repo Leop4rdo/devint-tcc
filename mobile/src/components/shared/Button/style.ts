@@ -4,6 +4,7 @@ import colors from "../../../styles/colors";
 const base = {
     width : 200,
     height : 48,
+
     margin : 16,
 
     borderWidth: 2,

@@ -14,6 +14,7 @@ import IDevMinimal from "interfaces/IDev";
 import * as devService from "../../../services/dev.service"
 import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
 import PostDetailsModal from "components/layout/Modals/PostDetailsModal";
+import { resolveModuleName } from "typescript";
 
 const FeedPage: React.FC = () => {
     const [devs, setDevs] = useState<IDevMinimal[]>([])
@@ -30,10 +31,12 @@ const FeedPage: React.FC = () => {
     }
 
     const getPosts = async () => {
-        const { data } = await postService.list({ limit: 45, offset: posts.length })
-
+        const { data } = await postService.list({ limit: 45, offset: posts.length })  
         setPosts([...posts, ...data])
         setLoading(false)
+        console.log([...posts])
+        
+        
     }
 
     const getMorePosts = async () => {
@@ -59,7 +62,10 @@ const FeedPage: React.FC = () => {
                     <div className="feed-center">
                         <div className="new-post">
                             <span>O que você tem para nos dizer hoje?</span>
-                            <button className="btn-primary" onClick={() => setWrittingPost(true)}>Novo Post</button>
+                            <button className="btn-primary" onClick={() => {
+                                setWrittingPost(true)
+                                
+                            }}>Novo Post</button>
                         </div>
 
                         <div className="outstanding-container">
@@ -84,9 +90,14 @@ const FeedPage: React.FC = () => {
 
                         <div className="post-container">
                             {
-                                posts.map((post: IPostListItem, index : number) =>
+                                
+                                posts.map((post: IPostListItem) =>
+
                                     <>
-                                        <Post key={`${post.id}-${Math.random() * 999}`} data={post} openDetails={() => setSelectedPostId(post.id)} />
+                                        <Post key={`${post.id}-${Math.random() * 999}`} data={post} openDetails={() => {
+                                            setSelectedPostId(post.id)
+                                            getPosts()
+                                        }} />
                                     </>
                                 )
                             }
@@ -128,7 +139,7 @@ const FeedPage: React.FC = () => {
 
             {
                 writtingPost &&
-                <CreatePostModal onClose={() => { setWrittingPost(false); getPosts() }} />
+                <CreatePostModal onClose={() =>  setWrittingPost(false)} refresh={ () => getPosts()} />
             }
         </MenuWapper>
     );

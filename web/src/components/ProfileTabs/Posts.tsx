@@ -33,7 +33,10 @@ const PostsTab: React.FC<IPostsTab> = ({ devId }) => {
                     </>
                 )
             }
+            
         </div>
+
+
         
     )
 

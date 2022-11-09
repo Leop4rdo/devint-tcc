@@ -12,10 +12,31 @@ import { AuthContext } from "store/context/Auth.context";
 import { Link, useNavigate } from "react-router-dom";
 
 
+
 const DevRegistrationPage: React.FC = () => {
     const navigate = useNavigate()
     const authContext = useContext(AuthContext)
+    const [ ValidadeUserGithub , setValidadeUserGithub] = useState(false)
 
+    const apiGithub = async (nameUserGitHub : string) => {
+        if( nameUserGitHub.length > 3) {
+            fetch(`https://api.github.com/users/${nameUserGitHub}`, {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then((resposta) => resposta.json())
+            .then(() => {
+                setValidadeUserGithub(true)
+                
+            })
+            .catch(() => {
+                setValidadeUserGithub(false)
+                
+            })
+        }
+        
+    }
 
     const [formValues, setFormValues] = useState({
         name: "",
@@ -76,10 +97,13 @@ const DevRegistrationPage: React.FC = () => {
         
         if (!isFormValid()) 
             return alert("Por favor, verifique se os dados estão corretos!")
-        
-        if (currentStep < steps.length -1)
+        else if(currentStep < steps.length -1)
             setCurrentStep(currentStep + 1)
-        else
+        else if(!ValidadeUserGithub){
+            apiGithub(formValues.githubUser)
+            return alert("Verifique o nome de usuario do seu github, algo está errado !")
+        }
+        else   
             register()
     }
     
@@ -111,7 +135,7 @@ const DevRegistrationPage: React.FC = () => {
         if (currentStep > 0 && currentStep < steps.length) {
             setCurrentStep(currentStep - 1)
         } else {
-            navigate("/register")
+            navigate("/")
         }
     }
 

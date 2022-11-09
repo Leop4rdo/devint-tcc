@@ -7,7 +7,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "store/context/Auth.context";
 import * as devService from "../../../services/dev.service";
-import * as postService from "../../../services/post.service";
 import Input from "components/shared/Input";
 import Select from "components/shared/Select";
 import PostsTab from "components/ProfileTabs/Posts";
@@ -15,8 +14,8 @@ import { v4 as randomUUIDV4 } from "uuid"
 import firebase from "config/firebase";
 import AutoTextArea from "components/shared/TextArea";
 import { isValidDate, isValidEmail } from "utils/validations";
-import { validate } from "uuid";
 import { dateMask } from "utils/masks";
+
 
 
 const UserProfilePage: React.FC = () => {
@@ -104,11 +103,10 @@ const UserProfilePage: React.FC = () => {
 
     const toggleFollow = async () => {
         if (!devId) return
-
         const res = await devService.toggleFollow(devId)
-
         setFollowing(!following);
-
+        const updateFollowing = await devService.findById(devId)
+        setDev(updateFollowing.data)
     }
 
     useEffect(() => { findById() }, [devId])
@@ -207,14 +205,11 @@ const UserProfilePage: React.FC = () => {
                         </div>
 
                         <img src={dev?.profilePicUrl} className="profile-pic" />
-
+                        
                         <h2>{dev?.name}</h2>
 
-                        {
-                            (dev?.githubUsername) ?
-                                <span>
-
-                                    <img src="assets/icons/github.svg" alt="" />
+                        {dev?.githubUsername ?
+                                <span>     
                                     {dev?.githubUsername}
                                 </span>
                                 : ''

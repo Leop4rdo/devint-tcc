@@ -9,10 +9,11 @@ import styles from "./styles"
 
 interface ISidebarProps {
     visible: boolean,
-    onClose : () => void
+    onClose : () => void,
+    navigation : any
 }
 
-const Sidebar : React.FC<ISidebarProps> = ({ visible, onClose }) => {
+const Sidebar : React.FC<ISidebarProps> = ({ visible, onClose, navigation }) => {
     const animOffset = useSharedValue(-screenWidth)
     const bgFade = useSharedValue(0)
 
@@ -50,7 +51,7 @@ const Sidebar : React.FC<ISidebarProps> = ({ visible, onClose }) => {
 
                     <View style={styles.divisor}></View>
 
-                    <SidebarItem active icon="home" name="Home" />
+                    <SidebarItem active icon="home" name="Home" onPress={() => navigation.navigate('home')}/>
                     <SidebarItem icon="trending-up" name="Em alta" />
                     <SidebarItem icon="article" name="Artigos" />
                     <SidebarItem icon="watch-later" name="Ver mais tarde" />
@@ -58,7 +59,7 @@ const Sidebar : React.FC<ISidebarProps> = ({ visible, onClose }) => {
                     <SidebarItem icon="settings" name="Configurações" />
                 </View>
 
-                <Pressable style={styles.exitContainer} onPress={authContext?.signOut}>
+                <Pressable style={styles.exitContainer} onPress={() => { authContext?.signOut(); } }>
                     <Text style={styles.exitIcon}>:q</Text>
                     <Text style={styles.exitText}>sair</Text>
                 </Pressable>
