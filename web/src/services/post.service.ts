@@ -115,4 +115,21 @@ export const addAnswer = async (body : addCommentRequestBody, commentId : string
     }
 }
 
+export const getPostsByUser = async ( userId : string, query ?: PaginationQuery ) => {
+    try {
+        console.log('endpoint ->', `/devs/${userId}/posts${(query)? `?${buildQuery(query)}`: '' }`)
+
+        const { data } = await api.get(
+            `/devs/${userId}/posts${(query)? `?${buildQuery(query)}`: '' }`,
+            { headers: { Authorization: `Baerer ${getToken()}` } }
+        )
+
+        return data as IResponse
+
+    } catch (err : any) {
+        console.log(err);
+        return err.response?.data as IResponse
+        
+    }
+}
 
