@@ -1,54 +1,61 @@
 import { MaterialIcons } from "@expo/vector-icons"
-import { Text, View } from "react-native"
+import { Image, Pressable, Text, View } from "react-native"
 import colors from "../../../styles/colors"
 import ProfileDetailItem from "../../ProfileDetailItem"
+import DetailCard from "./card"
+import InfoItem from "./InfoItem"
 import styles from "./style"
 
+// import GITHUB_ICON from '../../../../assets/github-icon-gray.png';
+
 const DetailsSection : React.FC = () => {
-    return <>
-        <ProfileDetailItem icon="forum" text="Contato">
-            <View style={styles.containerChildren}>
-                <MaterialIcons style={styles.icon} name="mail" color={colors.LIGHT_GRAY}></MaterialIcons>
-                <Text style={styles.textedit}>john.doe@devint.com</Text>
-            </View>
-        </ProfileDetailItem>
+    return (
+        <>
+            {/* CONTATO */}
+            <DetailCard title="Contato" headerIcon="forum">
+                <InfoItem icon='mail' value="john.doe@mail.com" />
+            </DetailCard>
 
-        <ProfileDetailItem icon="group" text="Sobre">
-            <View style={styles.containerChildren}>
-                <MaterialIcons style={styles.icon} name="event" color={colors.LIGHT_GRAY}></MaterialIcons>
-                <Text style={styles.textedit}>29/08/2099</Text>
-            </View>
+            <DetailCard title="Sobre" headerIcon="info">
+                <InfoItem icon='calendar-today' value="john.doe@mail.com" />
+                <InfoItem icon='person' value="john.doe@mail.com" />
+                <InfoItem icon='calendar-today' value="john.doe@mail.com" />
+            </DetailCard>
 
-            <View style={styles.containerChildren}>
-                <MaterialIcons style={styles.icon} name="group" color={colors.LIGHT_GRAY}></MaterialIcons>
-                <Text style={styles.textedit}>Masculino</Text>
-            </View>
-        </ProfileDetailItem>
+            
+            
+            {/* SOBRE */}
+            <View style={styles.dataContainer}>
+                <View style={styles.header}>
+                    <View style={styles.infoItem}>
+                        <MaterialIcons name="info" size={24} color='#FFF' />
+                        <Text style={styles.title}>Sobre</Text>
+                    </View>
 
-        <ProfileDetailItem icon="center-focus-strong" text="Foco de Carreira">
-            <View style={styles.containerChildren}>
-                <Text style={styles.textedit}>Front-End</Text>
-            </View>
-        </ProfileDetailItem>
+                    <Pressable>
+                        <MaterialIcons name="edit" size={16} color={colors.LIGHT_GRAY} />
+                    </Pressable>
+                </View>
 
-        <ProfileDetailItem icon="work" text="Trabalho atual">
-            <View style={styles.containerChildren}>
-                <Text style={styles.textedit}>Front-End</Text>
-            </View>
-        </ProfileDetailItem>
+                <View>
+                    <View style={styles.infoItem}>
+                        <MaterialIcons name='calendar-today' size={16} color={colors.LIGHT_GRAY} />
+                        <Text style={styles.infoItemText}>john.doe@mail.com</Text>
+                    </View>
 
-        <ProfileDetailItem icon="school" text="Senioridade">
-            <View style={styles.containerChildren}>
-                <Text style={styles.textedit}>Junior</Text>
-            </View>
-        </ProfileDetailItem>
+                    <View style={styles.infoItem}>
+                        <MaterialIcons name='person' size={16} color={colors.LIGHT_GRAY} />
+                        <Text style={styles.infoItemText}>john.doe@mail.com</Text>
+                    </View>
 
-        <ProfileDetailItem icon="star" text="Habilidades">
-            <View style={styles.containerChildren}>
-                <Text style={styles.textedit}>Junior</Text>
+                    <View style={styles.infoItem}>
+                        <Image source={require('../../../../assets/github-icon-gray.png')} style={{width : 16, height : 16}}/>
+                        <Text style={styles.infoItemText}>john.doe@mail.com</Text>
+                    </View>
+                </View>
             </View>
-        </ProfileDetailItem>
-   </>
+        </>
+    )
 }
 
 export default DetailsSection;

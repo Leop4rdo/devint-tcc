@@ -6,58 +6,77 @@ import fonts from "../../../styles/typography";
 
 
 const styles = StyleSheet.create({
+    section : {
+        paddingHorizontal : 16,
+        paddingVertical : 16,
+        minWidth : '100%'
+    },
+
     page : {
         backgroundColor : colors.DARK_GRAY,
         flex : 1,
-        
     },
 
     header:{
-        marginTop : 60,
+        marginTop : 80,
         paddingHorizontal : 16
     },
 
     backgroundImage:{
         backgroundColor:colors.LIGHT_GRAY,
         width: '100%',
-        height:100,
+        height:120,
         position: 'absolute'
     },
 
     photoUser:{
-        width: 80,
+        width: 100,
         aspectRatio : 1,
         borderRadius : 48,
+        borderColor : colors.PRIMARY,
+        borderWidth : 1,
         marginBottom : 12
+    },
+
+    followButton : {
+        paddingVertical : 8,
+        paddingHorizontal : 16,
+        marginBottom : 12,
+
+        borderRadius : 16,
+
+        backgroundColor : colors.PRIMARY
+    },
+
+    followButtonText : {
+        color : '#FFF',
+        fontFamily : fonts.POPPINS_REGULAR
     },
 
     devName:{
         color:colors.WHITE,
         fontSize: 16,
-        fontFamily: fonts.POPPINS_REGULAR
+        fontFamily: fonts.POPPINS_REGULAR,
+        marginBottom : 8
     },
 
     devBio:{
-        color:colors.WHITE,
+        color:colors.LIGHT_GRAY,
         fontSize: 12,
-        fontFamily: fonts.POPPINS_REGULAR
+        fontFamily: fonts.POPPINS_REGULAR,
+        marginBottom : 12
     },
 
     followDataContainer:{
         flexDirection:'row',
-        marginHorizontal:20,
-
+        paddingHorizontal:24,
     },
 
-    diceFollowers:{
+    followData:{
         flexDirection:'column',
         alignItems:'center',
-        marginRight: 54 
-    },
-
-    dice:{
-        flexDirection:'column',
-        alignItems:'center'
+        justifyContent : 'center',
+        marginRight : 48
     },
 
     amount:{
@@ -72,51 +91,23 @@ const styles = StyleSheet.create({
         fontFamily: fonts.POPPINS_REGULAR
     },
 
-    profileEdit:{
-        display:'flex',
-        flexDirection:'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        marginTop : 64,
-        marginHorizontal: 20
-    },
-    buttonEdit:{
-        backgroundColor: colors.PRIMARY,
-        width:88,
-        height:22,
-        flexDirection : 'row',
-        alignItems:'center',
-        paddingHorizontal:12 ,
-        borderRadius: 16,
-    },
-    textButton:{
-        color: colors.WHITE,
-        marginLeft: 10,
-        fontSize:12,
-        fontFamily: fonts.POPPINS_SEMIBOLD,
-    
-    },
-    publicationData:{
+
+    nav:{
         marginVertical: 16,
         flexDirection:'row',
         justifyContent:'space-evenly',
         borderBottomColor: colors.LIGHT_GRAY,
-        borderBottomWidth: 0.5
+        borderBottomWidth: 1
     },
-    publications:{
+    navItem:{
         borderBottomColor:colors.PRIMARY,
         borderBottomWidth:2.5
     },
-    textPublications:{
+    selectedNavItem:{
         fontSize:12,
         color: colors.WHITE,
         fontFamily: fonts.POPPINS_SEMIBOLD
     },
-   
-   
-
-   
- 
 })
 
 export default styles
