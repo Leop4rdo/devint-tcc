@@ -25,7 +25,17 @@ const styles = StyleSheet.create({
         color : '#FFF',
         fontFamily : fonts.POPPINS_SEMIBOLD,
         fontSize : 16,
-        marginLeft : 16
+        marginLeft : 8
+    },
+
+    infoItem : {
+        flexDirection : 'row',
+        alignItems : 'center',
+    },
+
+    infoItemText : {
+        color : colors.LIGHT_GRAY,
+        marginLeft : 8
     }
 })
 
