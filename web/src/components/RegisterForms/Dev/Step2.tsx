@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Input from "components/shared/Input";
 import { isEmpty } from "utils/validations";
 
+
 interface IFormProps {
     onChange?: any;
     onSubmit: () => void,
@@ -18,11 +19,15 @@ const DevForm2: React.FC<IFormProps> = ({ onSubmit, formData, onChange }) => {
         if (checked == 'on') setChecked('off')
     }
 
+    
+
+    
+
     return (
 
         <form className="form" onSubmit={onSubmit}>
 
-            <Input type="text" placeholder="Usuário do GitHub (opcional)" onChange={onChange} name="githubUser" image="/assets/icons/github.svg" />
+            <Input type="text" placeholder="Usuário do GitHub (opcional)" onChange={onChange} value={formData.githubUser} name="githubUser" image="/assets/icons/github.svg" />
 
             <Input icon="lock" placeholder="Senha" onChange={onChange} name="password" type="password" validate={() => !isEmpty(formData.password)}/>
 

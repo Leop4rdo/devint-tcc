@@ -18,16 +18,6 @@ const LoginWrapper: React.FC<ILoginWapper> = (props) => {
                     <img src="../assets/images/svg/login.svg" className="login-image" />
                 </div>
                 <div className="login-wrapper">
-
-                    <div className="menu-container">
-                        <nav>
-                            <ul>
-                                <li><a href="#">Sobre Nós</a></li>
-                                <li><a href="#">Desenvolvedores</a></li>
-                                <li><a href="#">Empresas</a></li>
-                            </ul>
-                        </nav>
-                    </div>
                     
                     {
                         props.children

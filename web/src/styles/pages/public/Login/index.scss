@@ -35,26 +35,7 @@
 
   }
 
-  .menu-container {
-    top: 10rem; 
-    display: flex;
-    position: absolute;
-    align-items: flex-end;
-    justify-content: end;
-    
-    nav ul li a {
-
-      font-size: clamp(0.9rem, 2vw, 1.3rem);
-      cursor: pointer;
-      color: $color-primary;
-      padding: clamp(0.4rem, 1.5vw, 1.4rem);
-    }
-
-    nav ul li {
-      list-style: none;
-      display: inline;
-    }
-  }
+  
 
   @media (max-width: $breakpoint-medium) {
     .menu-container {

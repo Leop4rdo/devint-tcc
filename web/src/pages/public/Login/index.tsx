@@ -54,7 +54,7 @@ const LoginPage: React.FC = () => {
                         </button>
                     </div>
 
-                    <Link className="container-new-user" to='/register'>Sou novo aqui</Link>
+                    <Link className="container-new-user" to='/register/dev'>Sou novo aqui</Link>
 
                 </div>
             </LoginWrapper>
