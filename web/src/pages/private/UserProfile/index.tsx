@@ -13,14 +13,10 @@ import PostsTab from "components/ProfileTabs/Posts";
 import { v4 as randomUUIDV4 } from "uuid"
 import firebase from "config/firebase";
 import AutoTextArea from "components/shared/TextArea";
-import { isValidDate, isValidEmail } from "utils/validations";
-import { dateMask } from "utils/masks";
-
-
 
 const UserProfilePage: React.FC = () => {
 
-    const [bannerImage, setBannerImage] = useState<string[]>([])
+    const [newImage, setNewImage] = useState<string[]>([])
     const [uploading, setUploading] = useState(false);
     const [currentTab, setCurrentTab] = useState("postsTab");
     const authContext = useContext(AuthContext)
@@ -35,47 +31,44 @@ const UserProfilePage: React.FC = () => {
         links: false
     })
 
-    console.log(edit);
-
-
     const [dev, setDev] = useState<IDev | null>(null)
     const { devId } = useParams()
     const [select, setSelectSkill] = useState()
     const [following, setFollowing] = useState(false);
 
     const upload = async (evt: any) => {
-        setUploading(true)
 
-        dev?.bannerURI
+        useEffect(() => {
+            const handleImageUpload = async() => {
 
-        const file = evt.target.files[0]
+                setUploading(true);
+                const file = evt.target.files[0];
 
-        if (!devId) return
+                if (!devId) return
+                if (!file) return
 
-        if (!file) return
+                try {
+                    const extension = `.${file.name.split('.')[1]}`
+                    const fileName = randomUUIDV4() + extension
 
-        try {
-            const extension = `.${file.name.split('.')[1]}`
-            const fileName = randomUUIDV4() + extension
+                    const uploaded = await firebase.storage().ref().child('banner/').child(fileName).put(file)
 
-            const uploaded = await firebase.storage().ref().child('banner/').child(fileName).put(file)
+                    setDev({ ...dev, [evt.target.name]: await uploaded.ref.getDownloadURL() } as IDev)
 
-            setDev({ ...dev, [evt.target.name]: await uploaded.ref.getDownloadURL() } as IDev)
-            // update na service
-            const res = await devService.update({ bannerURI: uploaded.ref.fullPath }, devId)
+                    const res = await devService.update({[evt.target.name] : uploaded.ref.getDownloadURL() }, devId)
 
-            setBannerImage([
-                ...bannerImage,
-                await uploaded.ref.getDownloadURL()
-            ])
+                    setNewImage([
+                        ...newImage,
+                        await uploaded.ref.getDownloadURL()
+                    ])    
+                } catch (err) {
+                    console.log(err);
+                    alert('Um erro inesperado ocorreu')
+                }
 
-            // updateLanguageServiceSourceFile()
-        } catch (err) {
-            console.log(err)
-            alert('Houve um erro inesperado ao fazer upload!')
-        }
-
-        setUploading(false)
+                setUploading(false)
+            }
+        })
     }
 
 
@@ -116,13 +109,6 @@ const UserProfilePage: React.FC = () => {
 
         setSelectSkill(res.data)
     }
-
-    const devLegacy = dev
-
-    
-    console.log("DEVLEGACY", devLegacy);
-    console.log("DEV", dev);
-    
     
     const editContact = async () => {
         // let devLegacy = dev;
@@ -182,13 +168,16 @@ const UserProfilePage: React.FC = () => {
             <div className="profile-page">
 
                 <div className="background-image">
-                    <input accept="image/*" onChange={upload} type="file" name="attachment-input" id="attachment-input" />
-                    <label htmlFor="attachment-input"><Icon name="image" /></label>
                     {
-                        bannerImage.map((uri, idx) =>
-                            <img src={uri} key={idx} alt="" />
-                        )
+                        (authContext?.userData?.id == devId) ? 
+                            <div className="upload-new-image">
+                                <input accept="image/*" onChange={upload} type="file" name="attachment-input" id="attachment-input" />
+                                <label htmlFor="attachment-input"><Icon name="image" /></label>
+                            </div>
+
+                        : ''    
                     }
+                    <img src={dev?.bannerURI} />
                 </div>
 
                 <div className="container-user-informations">
@@ -289,8 +278,8 @@ const UserProfilePage: React.FC = () => {
                                     <option>Backend</option>
                                     <option>Full stack</option>
                                 </Select>
-                                :
-                                <span>{dev?.careerFocus ? dev.careerFocus : ''}</span>
+                                : 'Null'
+                                // <span>{dev?.careerFocus}</span>
                             }
                         </div>
 
@@ -320,7 +309,7 @@ const UserProfilePage: React.FC = () => {
                                     <option>Senior</option>
                                 </Select>
                                 :
-                                <span>{dev?.autoDeclaredSeniority ? dev.autoDeclaredSeniority : ''}</span>
+                                'Null'
                             }
                         </div>
                     </UserProfileEdit>

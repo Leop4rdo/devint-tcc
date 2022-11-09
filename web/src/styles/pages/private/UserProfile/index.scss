@@ -5,23 +5,29 @@
     position: relative;
 
     .background-image {
+        position: relative;
+        display: flex;
+        justify-content: flex-end;
         width: 100%;
-        height: 200px;
 
         img {
             width: 100%;
-            height: auto;
+            aspect-ratio: 4;
+            object-fit: fill;
         }
 
-        #attachment-input { display:  none; }
-        .icon {
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
-            color: white;
+        .upload-new-image{
+            position: absolute;
+            #attachment-input { display:  none; }
+            .icon {
+                font-size: clamp(1.5rem, 4vw, 2.5rem);
+                color: white;
 
-            transition: color .25s ease-out;
-            
-            &:hover {
-                color : $color-primary;
+                transition: color .25s ease-out;
+                
+                &:hover {
+                    color : $color-primary;
+                }
             }
         }
     }
@@ -288,7 +294,6 @@
     }
 
     .profile-tabs-container {
-        width: 80%;
         height: auto;
         margin-top: 2em;
         margin-left: 26rem;
@@ -331,7 +336,7 @@
         }
 
         hr {
-            width: 100%;
+            width: 95%;
             border-color: $color-light-gray;
             height: 2px;
         }
