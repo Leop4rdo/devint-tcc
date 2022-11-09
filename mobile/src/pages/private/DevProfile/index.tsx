@@ -6,16 +6,21 @@ import Post from "../../../components/Post";
 import ProfileEdit from "../../../components/ProfileDetailItem";
 import ButtonComponent from "../../../components/shared/Button";
 import { GestureDetector, ScrollView, Swipeable } from "react-native-gesture-handler";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import DetailsSection from "../../../components/ProfileSections/DetailsSection";
 import colors from "../../../styles/colors";
-import { IDev } from "../../../interfaces/IDev";
+import { useParams } from "react-router-native";
+import IDevMinimal, { IDev } from "../../../interfaces/IDev";
 
 import * as devService from "../../../services/dev.service"
+import { AuthContext } from "../../../store/context/Auth.context";
+
 
 const ProfilePage: React.FC<{ route : any, navigation : any }> = ({route, navigation}) => {
     const [currentSection, setCurrentSection] = useState(0)
     const [data, setData] = useState<IDev>()
+    const authContext = useContext(AuthContext)
+
 
     const getDev = async () => {
         const res = await devService.findById(route.params.devId)
@@ -24,6 +29,37 @@ const ProfilePage: React.FC<{ route : any, navigation : any }> = ({route, naviga
     }
 
     useEffect(() => { getDev() }, [])
+
+    const [dev, setDev] = useState<IDev | null>(null)
+    const { devId } = useParams()
+    const [select, setSelectSkill] = useState()
+    const [following, setFollowing] = useState(false);
+
+
+    const findById = async () => {
+        if (!devId) return
+        const res = await devService.findById(devId)
+
+        setDev(res.data)
+        setFollowing(res.data?.followers.find((d: IDevMinimal) => d.id === authContext?.userData.id) != undefined)
+    }
+
+    const toggleFollow = async () => {
+        if (!devId) return
+        const res = await devService.toggleFollow(devId)
+        setFollowing(!following);
+        const updateFollowing = await devService.findById(devId)
+        setDev(updateFollowing.data)
+    }
+
+    
+    useEffect(() => { findById() }, [devId])
+
+    const getDevs = async () => {
+        const res = await devService.list({ limit: 24 })
+
+        setSelectSkill(res.data)
+    }
 
     return(
         <LayoutWrapper navigation={navigation}>
@@ -35,9 +71,14 @@ const ProfilePage: React.FC<{ route : any, navigation : any }> = ({route, naviga
                         <View style={{flexDirection : 'row', justifyContent : 'space-between', alignItems : 'flex-end'}}>
                             <Image source={{uri: data?.profilePicUrl}} style={styles.photoUser}></Image>
                             
-                            <Pressable style={styles.followButton}>
-                                <Text style={styles.followButtonText}>+ Seguir</Text>
-                            </Pressable>
+
+                        {
+                            (authContext?.userData?.id !== devId) ?
+                                <Pressable style={styles.followButton} onPress={toggleFollow}>
+                                    <Text style={styles.followButtonText}>{ following ? '+ Seguir' : '- Seguindo '}</Text>
+                                </Pressable> : ""
+                        
+                        }
                         </View>
 
                         <View>
