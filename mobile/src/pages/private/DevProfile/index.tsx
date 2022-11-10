@@ -30,9 +30,9 @@ const ProfilePage: React.FC<{ route : any, navigation : any }> = ({route, naviga
             <ScrollView>
                 <View style={styles.page}>
 
-                    <Image source={{uri:data?.bannerURI}}style={styles.backgroundImage}></Image>
                     <View style={styles.header}>
-                        <View style={{flexDirection : 'row', justifyContent : 'space-between', alignItems : 'flex-end'}}>
+                        <Image source={{uri:data?.bannerURI}}style={styles.banner}></Image>
+                        <View style={{flexDirection : 'row', justifyContent : 'space-between', alignItems : 'flex-end', paddingHorizontal : 16, marginTop : -48}}>
                             <Image source={{uri: data?.profilePicUrl}} style={styles.photoUser}></Image>
                             
                             <Pressable style={styles.followButton}>
@@ -40,9 +40,9 @@ const ProfilePage: React.FC<{ route : any, navigation : any }> = ({route, naviga
                             </Pressable>
                         </View>
 
-                        <View>
+                        <View style={{paddingHorizontal : 16}}>
                             <Text style={styles.devName}>{data?.name}</Text>
-                            <Text style={styles.devBio}>aosdalsldkajsdlakjjsldkaljsd alskdjalksj alskdjalskjda alkajsdl </Text>
+                            { data?.bio && <Text style={styles.devBio}>{data.bio}</Text> }
                         </View>
                     </View>
                     
@@ -78,7 +78,7 @@ const ProfilePage: React.FC<{ route : any, navigation : any }> = ({route, naviga
                     <View style={styles.section}>
                         {
                             (currentSection === 3) ? 
-                            <DetailsSection />
+                            <DetailsSection data={data as IDev}/>
                             : (currentSection === 2) ?
                             <Text>2</Text>
                             : (currentSection === 1) ?

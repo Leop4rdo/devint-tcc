@@ -10,7 +10,7 @@ import SeniorityEntity from "./SeniorityEntity";
 import SkillEntity from "./SkillEntity";
 import SocialLinkEntity from "./SocialLinkEntity";
 
-const DEFAULT_BANNER = 'https://firebasestorage.googleapis.com/v0/b/devint-tcc-33eb6.appspot.com/o/banner%2Fdefault_banner.png?alt=media&token=e49423e0-f090-400f-b055-c2f36ab4c7fd'
+const DEFAULT_BANNER = 'https://firebasestorage.googleapis.com/v0/b/devint-tcc-33eb6.appspot.com/o/banner%2Fdefault_banner.png?alt=media&token=338d3340-ca96-4245-95b2-2bde00c6c5f5'
 const DEFAULT_PROFILE_PIC = 'https://firebasestorage.googleapis.com/v0/b/devint-tcc-33eb6.appspot.com/o/profile%2Fdefault_profile_pic(1).png?alt=media&token=c56f4d96-a281-481a-a398-3bf4306ede97'
 
 @Entity('devs')

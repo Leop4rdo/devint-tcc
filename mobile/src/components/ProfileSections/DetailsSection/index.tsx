@@ -1,5 +1,6 @@
 import { MaterialIcons } from "@expo/vector-icons"
 import { Image, Pressable, Text, View } from "react-native"
+import { IDev } from "../../../interfaces/IDev"
 import colors from "../../../styles/colors"
 import ProfileDetailItem from "../../ProfileDetailItem"
 import DetailCard from "./card"
@@ -8,52 +9,61 @@ import styles from "./style"
 
 // import GITHUB_ICON from '../../../../assets/github-icon-gray.png';
 
-const DetailsSection : React.FC = () => {
+interface IDetailSectionProps {
+    data : IDev
+    onFinishEditing ?: () => void
+}
+
+const DetailsSection : React.FC<IDetailSectionProps> = (props) => {
+    const getFormatedDate = (dateString : string) => {   
+        const splited = dateString.split('-')
+
+        return `${splited[2]}/${splited[1]}/${splited[0]}`
+    }
+
+    const getGenderName = (gender : string) => {
+        if (gender.toLowerCase() == 'f')
+            return 'Feminino'
+        else if (gender.toLowerCase() == 'm')
+            return 'Masculino'
+        else
+            return 'Outro'
+    }
+
     return (
         <>
             {/* CONTATO */}
             <DetailCard title="Contato" headerIcon="forum">
-                <InfoItem icon='mail' value="john.doe@mail.com" />
+                <InfoItem icon='mail' value={props.data.email} />
             </DetailCard>
 
-            <DetailCard title="Sobre" headerIcon="info">
-                <InfoItem icon='calendar-today' value="john.doe@mail.com" />
-                <InfoItem icon='person' value="john.doe@mail.com" />
-                <InfoItem icon='calendar-today' value="john.doe@mail.com" />
-            </DetailCard>
-
-            
-            
             {/* SOBRE */}
-            <View style={styles.dataContainer}>
-                <View style={styles.header}>
-                    <View style={styles.infoItem}>
-                        <MaterialIcons name="info" size={24} color='#FFF' />
-                        <Text style={styles.title}>Sobre</Text>
-                    </View>
+            <DetailCard title="Sobre" headerIcon="info">
+                <InfoItem icon='calendar-today' value={getFormatedDate(props.data.birthday)} />
+                <InfoItem icon='person' value={getGenderName(props.data.gender)} />
+                <InfoItem imageUri={require('../../../../assets/github-icon-gray.png')} value={props.data.githubUsername} />
+            </DetailCard>
 
-                    <Pressable>
-                        <MaterialIcons name="edit" size={16} color={colors.LIGHT_GRAY} />
-                    </Pressable>
-                </View>
+            {/* FOCO DE CARREIRA */}
+            <DetailCard title="Foco de carreira" headerIcon="center-focus-strong">
+                <InfoItem value={props.data.careerFocus?.name || 'Não informado'} />
+            </DetailCard>
 
-                <View>
-                    <View style={styles.infoItem}>
-                        <MaterialIcons name='calendar-today' size={16} color={colors.LIGHT_GRAY} />
-                        <Text style={styles.infoItemText}>john.doe@mail.com</Text>
-                    </View>
+            {/* TRABALHO ATUAL */}
+            <DetailCard title="Trabalho Atual" headerIcon="work">
+                <InfoItem value={props.data.currentJob || 'Não informado'} />
+            </DetailCard>
 
-                    <View style={styles.infoItem}>
-                        <MaterialIcons name='person' size={16} color={colors.LIGHT_GRAY} />
-                        <Text style={styles.infoItemText}>john.doe@mail.com</Text>
-                    </View>
+            {/* SENIORIDADE */}
+            <DetailCard title="Senioridade" headerIcon="school">
+                <InfoItem value={props.data.autoDeclaredSeniority.name || 'Não informado'} />
+            </DetailCard>
 
-                    <View style={styles.infoItem}>
-                        <Image source={require('../../../../assets/github-icon-gray.png')} style={{width : 16, height : 16}}/>
-                        <Text style={styles.infoItemText}>john.doe@mail.com</Text>
-                    </View>
-                </View>
-            </View>
+            {/* HABILIDADES */}
+            <DetailCard title="Habilidades" headerIcon="star">
+                <InfoItem value="john.doe@mail.com" />
+            </DetailCard>
+
         </>
     )
 }

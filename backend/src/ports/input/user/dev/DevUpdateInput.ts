@@ -9,6 +9,7 @@ export default class DevUpdateInput{
     bio : string
     gender : string
     profilePicUrl : string
+    bannerURI : string
     currentJob : string
     githubUsername : string
     openToWork : boolean
@@ -23,6 +24,7 @@ export default class DevUpdateInput{
         this.bio = props.bio
         this.gender = props.gender
         this.profilePicUrl = props.profilePicUrl
+        this.bannerURI = props.bannerURI
         this.currentJob = props.currentJob
         this.githubUsername = props.githubUsername
         this.openToWork = props.openToWork
