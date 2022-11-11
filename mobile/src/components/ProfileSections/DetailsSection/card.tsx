@@ -7,6 +7,7 @@ interface IDetailCardProps extends React.PropsWithChildren {
     headerIcon : keyof typeof MaterialIcons.glyphMap
     title : string
     onEditPress ?: () => void
+    editing ?: boolean
 }
 
 const DetailCard : React.FC<IDetailCardProps> = (props) => {
@@ -23,7 +24,7 @@ const DetailCard : React.FC<IDetailCardProps> = (props) => {
                 {
                     props.onEditPress &&
                     <Pressable onPress={props.onEditPress}>
-                        <MaterialIcons name="edit" size={16} color={colors.LIGHT_GRAY} />
+                        <MaterialIcons name={(!props.editing) ? "edit" : "check"} size={16} color={colors.LIGHT_GRAY} />
                     </Pressable>
                 }
             </View>

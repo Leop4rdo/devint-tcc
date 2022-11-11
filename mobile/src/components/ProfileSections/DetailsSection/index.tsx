@@ -1,4 +1,5 @@
 import { MaterialIcons } from "@expo/vector-icons"
+import { useState } from "react"
 import { Image, Pressable, Text, View } from "react-native"
 import { IDev } from "../../../interfaces/IDev"
 import colors from "../../../styles/colors"
@@ -14,7 +15,23 @@ interface IDetailSectionProps {
     onFinishEditing ?: () => void
 }
 
+const genderOptions = [
+    { label : 'Masculino', value : 'm'},
+    { label : 'Feminino', value : 'f'},
+    { label : 'Outro', value : 'o'},
+]
+
 const DetailsSection : React.FC<IDetailSectionProps> = (props) => {
+    const [data, setData] = useState({
+       ...props.data
+    })
+
+    const [editing, setEditing] = useState({
+        about : false,
+        careerFocus : false,
+        currentJob : false
+    })
+
     const getFormatedDate = (dateString : string) => {   
         const splited = dateString.split('-')
 
@@ -30,38 +47,76 @@ const DetailsSection : React.FC<IDetailSectionProps> = (props) => {
             return 'Outro'
     }
 
+    const toggleEditing = (key : keyof typeof editing) => {
+        // if (editing[key])
+            // update()
+
+        setEditing({
+            ...editing,
+            [key] : !editing[key]
+        })
+    }
+
+    const handleChange = (value : string, key : keyof typeof data) => {
+        setData({
+            ...data,
+            [key] : value
+        })
+    }
+
     return (
         <>
             {/* CONTATO */}
             <DetailCard title="Contato" headerIcon="forum">
-                <InfoItem icon='mail' value={props.data.email} />
+                <InfoItem icon='mail' value={data.email} />
             </DetailCard>
 
             {/* SOBRE */}
-            <DetailCard title="Sobre" headerIcon="info">
-                <InfoItem icon='calendar-today' value={getFormatedDate(props.data.birthday)} />
-                <InfoItem icon='person' value={getGenderName(props.data.gender)} />
-                <InfoItem imageUri={require('../../../../assets/github-icon-gray.png')} value={props.data.githubUsername} />
+            <DetailCard title="Sobre" headerIcon="info" onEditPress={() => toggleEditing('about')} editing={editing.about}>
+                <InfoItem 
+                    icon='calendar-today' 
+                    value={getFormatedDate(data.birthday)} 
+                    onChangeText={(text) => handleChange(text, 'birthday')} 
+                    editing={editing.about}
+                    />
+                <InfoItem 
+                    icon='person' 
+                    value={(editing.about) ? data.gender : getGenderName(data.gender)}
+                    options={genderOptions}
+                    onChangeText={(text) => handleChange(text, 'gender')} 
+                    editing={editing.about}
+                    />
+                <InfoItem 
+                    imageUri={require('../../../../assets/github-icon-gray.png')} 
+                    value={data.githubUsername} 
+                    editing={editing.about}
+                    />
             </DetailCard>
 
             {/* FOCO DE CARREIRA */}
-            <DetailCard title="Foco de carreira" headerIcon="center-focus-strong">
-                <InfoItem value={props.data.careerFocus?.name || 'Não informado'} />
+            <DetailCard title="Foco de carreira" headerIcon="center-focus-strong" onEditPress={() => toggleEditing('careerFocus')} editing={editing.careerFocus}>
+                <InfoItem 
+                    value={data.careerFocus?.name || 'Não informado'} 
+                    editing={editing.careerFocus}
+                />
             </DetailCard>
 
             {/* TRABALHO ATUAL */}
-            <DetailCard title="Trabalho Atual" headerIcon="work">
-                <InfoItem value={props.data.currentJob || 'Não informado'} />
+            <DetailCard title="Emprego Atual" headerIcon="work" onEditPress={() => toggleEditing('currentJob')} editing={editing.currentJob}>
+                <InfoItem 
+                    value={data.currentJob || 'Não informado'} 
+                    onChangeText={(value) => handleChange(value, 'currentJob')} 
+                    editing={editing.currentJob} 
+                />
             </DetailCard>
 
             {/* SENIORIDADE */}
             <DetailCard title="Senioridade" headerIcon="school">
-                <InfoItem value={props.data.autoDeclaredSeniority.name || 'Não informado'} />
+                <InfoItem value={data.autoDeclaredSeniority?.name || 'Não informado'} />
             </DetailCard>
 
             {/* HABILIDADES */}
             <DetailCard title="Habilidades" headerIcon="star">
-                <InfoItem value="john.doe@mail.com" />
             </DetailCard>
 
         </>
