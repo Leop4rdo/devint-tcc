@@ -44,3 +44,48 @@ export const findById = async ( id : string ) : Promise<IResponse> => {
     }
 }
 
+export const listCareerFocus = async () : Promise<IResponse> => {
+    try {
+        const { data } = await api.get(
+            '/career-focus',
+            { headers: { Authorization: `Baerer ${ await getToken() }` } }
+        )
+
+        return data as IResponse
+
+    } catch (err : any) {
+        console.log(err);
+        return err.response.data as IResponse
+    }
+}
+
+type devUpdateInput = {
+    name : string
+    bio : string
+    gender : string
+    profilePicUrl : string
+    bannerURI : string
+    currentJob : string
+    githubUsername : string
+    openToWork : boolean
+    birthday : Date
+    socialLinks : { id : string }
+    careerFocus : { id : string }
+    autoDeclaredSeniority : { id : string }
+    skills: {id : string }[]
+}
+
+export const update = async (body : devUpdateInput, id : string) : Promise<IResponse> => {
+    try {
+        const { data } = await api.put(
+            `/devs/${id}`,
+            body,
+            { headers: { Authorization: `Baerer ${ await getToken() }` } }
+        )
+
+        return data as IResponse
+    } catch (err : any) {
+        console.log(err);
+        return err.response.data as IResponse
+    }
+}

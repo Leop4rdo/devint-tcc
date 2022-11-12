@@ -26,7 +26,7 @@ const InfoItem : React.FC<IInfoItemProps> = (props) => {
             return (
                 <PickerComponent value={props.value}onChange={props.onChangeText} style={{...styles.input, marginHorizontal : 0}}>
                     {props.options.map((opt) => 
-                        <Picker.Item {...opt}/>
+                        <Picker.Item {...opt} key={opt.value}/>
                     )}
                 </PickerComponent>
             )

@@ -1,18 +1,20 @@
 import { MaterialIcons } from "@expo/vector-icons"
-import { useState } from "react"
-import { Image, Pressable, Text, View } from "react-native"
+import { useEffect, useState } from "react"
+import { Image, Pressable, RefreshControl, Text, View } from "react-native"
+import ICareerProps from "../../../interfaces/ICareerFocus"
 import { IDev } from "../../../interfaces/IDev"
 import colors from "../../../styles/colors"
 import ProfileDetailItem from "../../ProfileDetailItem"
 import DetailCard from "./card"
 import InfoItem from "./InfoItem"
+import * as devService from '../../../services/dev.service'
+
 import styles from "./style"
 
-// import GITHUB_ICON from '../../../../assets/github-icon-gray.png';
 
 interface IDetailSectionProps {
     data : IDev
-    onFinishEditing ?: () => void
+    onFinishEditing : (data : IDev) => void
 }
 
 const genderOptions = [
@@ -22,6 +24,7 @@ const genderOptions = [
 ]
 
 const DetailsSection : React.FC<IDetailSectionProps> = (props) => {
+    const [careerFocusOptions, setCareerFocusOptions] = useState<{ label : string, value : string}[]>([])
     const [data, setData] = useState({
        ...props.data
     })
@@ -48,8 +51,8 @@ const DetailsSection : React.FC<IDetailSectionProps> = (props) => {
     }
 
     const toggleEditing = (key : keyof typeof editing) => {
-        // if (editing[key])
-            // update()
+        if (editing[key])
+            props.onFinishEditing(data)
 
         setEditing({
             ...editing,
@@ -64,6 +67,28 @@ const DetailsSection : React.FC<IDetailSectionProps> = (props) => {
         })
     }
 
+    const handleSelectChange = (value : string, key : keyof typeof data) => {
+        setData({
+            ...data,
+            [key] : { id : value }
+        })
+    }
+
+    const getCareerFocusOptions = async () => {
+        const res = await devService.listCareerFocus()
+
+        setCareerFocusOptions(
+            res.data.map((c : ICareerProps) => {
+                return {
+                    value : c.id,
+                    label : c.name
+                }
+            })
+        )
+    }
+
+    useEffect(() => { getCareerFocusOptions() }, [])
+
     return (
         <>
             {/* CONTATO */}
@@ -75,7 +100,7 @@ const DetailsSection : React.FC<IDetailSectionProps> = (props) => {
             <DetailCard title="Sobre" headerIcon="info" onEditPress={() => toggleEditing('about')} editing={editing.about}>
                 <InfoItem 
                     icon='calendar-today' 
-                    value={getFormatedDate(data.birthday)} 
+                    value={(editing.about) ? data.birthday : getFormatedDate(data.birthday)} 
                     onChangeText={(text) => handleChange(text, 'birthday')} 
                     editing={editing.about}
                     />
@@ -96,8 +121,10 @@ const DetailsSection : React.FC<IDetailSectionProps> = (props) => {
             {/* FOCO DE CARREIRA */}
             <DetailCard title="Foco de carreira" headerIcon="center-focus-strong" onEditPress={() => toggleEditing('careerFocus')} editing={editing.careerFocus}>
                 <InfoItem 
-                    value={data.careerFocus?.name || 'Não informado'} 
+                    value={(editing.careerFocus) ? data.careerFocus.id || '' : data.careerFocus?.name || 'Não informado'} 
                     editing={editing.careerFocus}
+                    options={careerFocusOptions}
+                    onChangeText={(text) => handleSelectChange(text, 'careerFocus')}
                 />
             </DetailCard>
 

@@ -23,6 +23,12 @@ const ProfilePage: React.FC<{ route : any, navigation : any }> = ({route, naviga
         setData(res.data)
     }
 
+    const updateDev = async (body : any) => {
+        const res = await devService.update(body, body.id)
+
+        setData(res.data)
+    }
+
     useEffect(() => { getDev() }, [])
 
     return(
@@ -78,7 +84,7 @@ const ProfilePage: React.FC<{ route : any, navigation : any }> = ({route, naviga
                     <View style={styles.section}>
                         {
                             (currentSection === 3) ? 
-                            <DetailsSection data={data as IDev}/>
+                            <DetailsSection data={data as IDev} onFinishEditing={updateDev}/>
                             : (currentSection === 2) ?
                             <Text>2</Text>
                             : (currentSection === 1) ?
