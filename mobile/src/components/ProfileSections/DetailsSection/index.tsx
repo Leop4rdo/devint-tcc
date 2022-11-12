@@ -10,6 +10,7 @@ import InfoItem from "./InfoItem"
 import * as devService from '../../../services/dev.service'
 
 import styles from "./style"
+import ISeniorityProps from "../../../interfaces/ISeniority"
 
 
 interface IDetailSectionProps {
@@ -25,6 +26,7 @@ const genderOptions = [
 
 const DetailsSection : React.FC<IDetailSectionProps> = (props) => {
     const [careerFocusOptions, setCareerFocusOptions] = useState<{ label : string, value : string}[]>([])
+    const [seniorityOptions, setSeniorityOptions] = useState<{ label : string, value : string}[]>([])
     const [data, setData] = useState({
        ...props.data
     })
@@ -32,7 +34,8 @@ const DetailsSection : React.FC<IDetailSectionProps> = (props) => {
     const [editing, setEditing] = useState({
         about : false,
         careerFocus : false,
-        currentJob : false
+        seniority : false,
+        currentJob : false,
     })
 
     const getFormatedDate = (dateString : string) => {   
@@ -67,10 +70,15 @@ const DetailsSection : React.FC<IDetailSectionProps> = (props) => {
         })
     }
 
-    const handleSelectChange = (value : string, key : keyof typeof data) => {
+    const handleSelectChange = (value : string, key : keyof typeof data, options : any[]) => {
+        const selected = options.find((o) => o.value == value)
+
         setData({
             ...data,
-            [key] : { id : value }
+            [key] : {
+                id : selected.value,
+                name : selected.label
+            }
         })
     }
 
@@ -87,7 +95,20 @@ const DetailsSection : React.FC<IDetailSectionProps> = (props) => {
         )
     }
 
-    useEffect(() => { getCareerFocusOptions() }, [])
+    const getSeniorityOptions = async () => {
+        const res = await devService.listSeniorities()
+
+        setSeniorityOptions(
+            res.data.map((c : ISeniorityProps) => {
+                return {
+                    value : c.id,
+                    label : c.name
+                }
+            })
+        )
+    }
+
+    useEffect(() => { getCareerFocusOptions(); getSeniorityOptions() }, [])
 
     return (
         <>
@@ -115,31 +136,38 @@ const DetailsSection : React.FC<IDetailSectionProps> = (props) => {
                     imageUri={require('../../../../assets/github-icon-gray.png')} 
                     value={data.githubUsername} 
                     editing={editing.about}
+                    onChangeText={(text) => handleChange(text, 'githubUsername')} 
                     />
             </DetailCard>
 
             {/* FOCO DE CARREIRA */}
             <DetailCard title="Foco de carreira" headerIcon="center-focus-strong" onEditPress={() => toggleEditing('careerFocus')} editing={editing.careerFocus}>
                 <InfoItem 
-                    value={(editing.careerFocus) ? data.careerFocus.id || '' : data.careerFocus?.name || 'Não informado'} 
+                    value={(editing.careerFocus) ? data.careerFocus?.id || '' : data.careerFocus?.name || 'Não informado'} 
                     editing={editing.careerFocus}
                     options={careerFocusOptions}
-                    onChangeText={(text) => handleSelectChange(text, 'careerFocus')}
+                    onChangeText={(value) => handleSelectChange(value, 'careerFocus', careerFocusOptions)}
                 />
             </DetailCard>
 
             {/* TRABALHO ATUAL */}
             <DetailCard title="Emprego Atual" headerIcon="work" onEditPress={() => toggleEditing('currentJob')} editing={editing.currentJob}>
                 <InfoItem 
-                    value={data.currentJob || 'Não informado'} 
+                    value={(editing.currentJob) ? data.currentJob : data.currentJob || 'Não informado'} 
                     onChangeText={(value) => handleChange(value, 'currentJob')} 
                     editing={editing.currentJob} 
                 />
             </DetailCard>
 
             {/* SENIORIDADE */}
-            <DetailCard title="Senioridade" headerIcon="school">
-                <InfoItem value={data.autoDeclaredSeniority?.name || 'Não informado'} />
+            <DetailCard title="Senioridade" headerIcon="school" onEditPress={() => toggleEditing('seniority')} editing={editing.seniority}>
+                <InfoItem 
+                    value={(editing.seniority) ? data.autoDeclaredSeniority?.id || '' : data.autoDeclaredSeniority?.name || 'Não informado'}
+                    editing={editing.seniority}
+                    options={seniorityOptions}
+                    onChangeText={(value) => handleSelectChange(value, 'autoDeclaredSeniority', seniorityOptions)}
+
+                />
             </DetailCard>
 
             {/* HABILIDADES */}

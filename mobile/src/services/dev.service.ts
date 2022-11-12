@@ -58,6 +58,20 @@ export const listCareerFocus = async () : Promise<IResponse> => {
         return err.response.data as IResponse
     }
 }
+export const listSeniorities = async () : Promise<IResponse> => {
+    try {
+        const { data } = await api.get(
+            '/seniorities',
+            { headers: { Authorization: `Baerer ${ await getToken() }` } }
+        )
+
+        return data as IResponse
+
+    } catch (err : any) {
+        console.log(err);
+        return err.response.data as IResponse
+    }
+}
 
 type devUpdateInput = {
     name : string
