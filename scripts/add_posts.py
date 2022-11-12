@@ -8,17 +8,18 @@ import string
 API_URL = 'http://localhost:8080/api/v1'
 
 def auth() :
-
     res = requests.post(f'{API_URL}/auth', json = {
-        'email' : 'leonardoantunes1401@gmail.com',
-        'password' : 'tccdst'
+        'email' : sys.argv[1],
+        'password' : sys.argv[0]
     })
+
+    if res.status_code != 200:
+        print('Forbidden access to API')
+        sys.exit()
 
     return res.json()['data']['token']
 
-    pass
-
-def createPost(token, index) :
+def create_post(token, index) :
 
     letters = string.ascii_lowercase
     random_content = 'post nº' + str(index) + ' - ' + ''.join(random.choice(letters) for i in range(0, 50))
@@ -31,12 +32,15 @@ def createPost(token, index) :
     pass
 
 def run() :
+    if (len(sys.argv) < 3) :
+        print('user and password must be provided in order!')
+        sys.exit()
+
     token = auth()
 
- 
     for i in range(0, 101) :
         print(f'creating post {i}/100')
-        createPost(token, i)
+        create_post(token, i)
         pass   
     pass
 

@@ -8,28 +8,32 @@ DEVICON_URL = 'https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290
 
 def auth() :
     res = requests.post(f'{API_URL}/auth', json = {
-        'email' : 'leonardoantunes1401@gmail.com',
-        'password' : 'tccdst'
+        'email' : sys.argv[1],
+        'password' : sys.argv[0]
     })
+
+    if res.status_code != 200:
+        print('Forbidden access to API')
+        sys.exit()
 
     return res.json()['data']['token']
 
-def getExistingSkills(token) :
+def get_existing_skills(token) :
     res = requests.get(f'{API_URL}/skills', headers = { 'Authorization' : f'Bearer {token}' } )
 
     return res.json()['data']
 
-def getNewSkills() :
+def get_sew_skills() :
     res = requests.get(f'https://cdn.jsdelivr.net/gh/devicons/devicon@master/devicon.json')
 
     return res.json()
 
-def skillAlreadyExists(target_skill, existing_skills) :
+def skill_already_exists(target_skill, existing_skills) :
     for s in existing_skills:
         if target_skill['name'] == s['name'] : 
             return True
 
-def createSkill(skill, token):
+def create_skill(skill, token):
     body = {
         "name" : skill['name'],
         "icon" : f'{DEVICON_URL}/{skill["name"]}/{skill["name"]}-original.svg'
@@ -43,10 +47,14 @@ def createSkill(skill, token):
 
 
 def run() : 
+    if (len(sys.argv) < 3) :
+        print('user and password must be provided in order!')
+        sys.exit()
+
     token = auth()
 
-    existing_skills = getExistingSkills(token)
-    new_skills = getNewSkills()
+    existing_skills = get_existing_skills(token)
+    new_skills = get_sew_skills()
 
     print('-------------------------')
     print('')
@@ -54,11 +62,16 @@ def run() :
     print(f'existing_skills -> {len(existing_skills)}')
     print('')
     print('-------------------------')
+    print('')
+
 
     for skill in new_skills:
-        if (skillAlreadyExists(skill, existing_skills)) : 
+        if (skill_already_exists(skill, existing_skills)) : 
             continue
 
-        createSkill(skill, token)
+        create_skill(skill, token)
         print(f'skill created -> {skill["name"]}')
+    print('')
+    print('-------------------------')
+
 run()
