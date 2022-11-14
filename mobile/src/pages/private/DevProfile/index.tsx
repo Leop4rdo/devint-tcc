@@ -9,7 +9,8 @@ import { GestureDetector, ScrollView, Swipeable } from "react-native-gesture-han
 import { useContext, useEffect, useState } from "react";
 import DetailsSection from "../../../components/ProfileSections/DetailsSection";
 import colors from "../../../styles/colors";
-import { IDev } from "../../../interfaces/IDev";
+import { useParams } from "react-router-native";
+import IDevMinimal, { IDev } from "../../../interfaces/IDev";
 
 import firebase from "../../../config/firebase";
 import * as ImagePicker from 'expo-image-picker'
@@ -96,6 +97,28 @@ const ProfilePage: React.FC<{ route : any, navigation : any }> = ({route, naviga
 
     useEffect(() => { getDev() }, [])
 
+    const [dev, setDev] = useState<IDev | null>(null)
+    const { devId } = useParams()
+    const [select, setSelectSkill] = useState()
+    const [following, setFollowing] = useState(false);
+
+    const toggleFollow = async () => {
+        if (!devId) return
+        const res = await devService.toggleFollow(devId)
+        setFollowing(!following);
+        const updateFollowing = await devService.findById(devId)
+        setDev(updateFollowing.data)
+    }
+
+    
+    useEffect(() => { findById() }, [devId])
+
+    const getDevs = async () => {
+        const res = await devService.list({ limit: 24 })
+
+        setSelectSkill(res.data)
+    }
+
     return(
         <LayoutWrapper navigation={navigation}>
             <ScrollView>
@@ -104,7 +127,6 @@ const ProfilePage: React.FC<{ route : any, navigation : any }> = ({route, naviga
                     <View style={styles.header}>
                         <View style={{ position : 'relative' }}>
                             <Image source={{uri:data?.bannerURI}}style={styles.banner}></Image>
-                            
                             {
                                 authContext?.userData.id == data?.id &&
                                 <Pressable style={[styles.editFloatBtn, {right : 8, top : 8}  ]} onPress={() => pickImage("banner")}>
@@ -127,8 +149,8 @@ const ProfilePage: React.FC<{ route : any, navigation : any }> = ({route, naviga
                             </View>
                             {
                                 authContext?.userData.id != data?.id &&
-                                <Pressable style={styles.followButton}>
-                                    <Text style={styles.followButtonText}>+ Seguir</Text>
+                                <Pressable style={styles.followButton} onPress={toggleFollow}>
+                                    <Text style={styles.followButtonText}>{ following ? '+ Seguir' : 'Seguindo'}</Text>
                                 </Pressable>
                             }
                         </View>
