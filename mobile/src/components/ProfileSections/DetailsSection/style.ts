@@ -31,11 +31,36 @@ const styles = StyleSheet.create({
     infoItem : {
         flexDirection : 'row',
         alignItems : 'center',
-        marginBottom : 4
+        marginBottom : 8
     },
 
     infoItemText : {
         color : colors.LIGHT_GRAY,
+    },
+
+    input : {
+        width : '92%',
+        borderBottomColor : colors.LIGHT_GRAY,
+        borderBottomWidth : 2,
+        padding : 0,
+        color : '#FFF'        
+    },
+
+    skillToken : {
+        justifyContent : 'center',
+        alignItems : 'center',
+        marginRight : 24,
+        marginTop : 16,
+        position : 'relative'
+    },
+
+    removeSkillBtn : {
+        marginRight : 8
+    },
+
+    skillName : {
+        marginVertical : 8,
+        color : colors.LIGHT_GRAY
     }
 })
 

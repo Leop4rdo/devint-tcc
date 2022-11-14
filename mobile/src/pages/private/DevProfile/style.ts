@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     banner:{
         backgroundColor:colors.LIGHT_GRAY,
         width: screenWidth,
-        aspectRatio : 4,
+        aspectRatio : 360/90,
         resizeMode : 'contain',
     },
 
@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
         paddingVertical : 8,
         paddingHorizontal : 16,
         marginBottom : 12,
+        marginLeft : 12,
 
         borderRadius : 16,
 
@@ -108,6 +109,22 @@ const styles = StyleSheet.create({
         color: colors.WHITE,
         fontFamily: fonts.POPPINS_SEMIBOLD
     },
+
+    editFloatBtn : {
+        position : 'absolute',
+        width : 32,
+        height : 32,
+
+        justifyContent : 'center',
+        alignItems : 'center',
+
+        backgroundColor : colors.PRIMARY,
+
+        borderWidth : 1,
+        borderColor : colors.BLACK,
+        borderRadius : 100
+
+    }
 })
 
 export default styles
