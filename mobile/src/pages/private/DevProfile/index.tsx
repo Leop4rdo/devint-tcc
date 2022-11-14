@@ -1,4 +1,4 @@
-import {Text, View,Image, Pressable} from "react-native"
+import {Text, View,Image, Pressable, Alert} from "react-native"
 import {MaterialIcons} from "@expo/vector-icons";
 import LayoutWrapper from "../../../components/shared/LayoutWrapper";
 import styles from "./style";
@@ -11,12 +11,16 @@ import DetailsSection from "../../../components/ProfileSections/DetailsSection";
 import colors from "../../../styles/colors";
 import { IDev } from "../../../interfaces/IDev";
 
-import * as devService from "../../../services/dev.service"
+import firebase from "../../../config/firebase";
+import * as ImagePicker from 'expo-image-picker'
+
+import * as devService from "../../../services/dev.service";
 import { AuthContext } from "../../../store/context/Auth.context";
 
 const ProfilePage: React.FC<{ route : any, navigation : any }> = ({route, navigation}) => {
     const [currentSection, setCurrentSection] = useState(0)
     const [data, setData] = useState<IDev>()
+    const [uploading, setUploading] = useState(false)
 
     const authContext = useContext(AuthContext)
 
@@ -43,6 +47,53 @@ const ProfilePage: React.FC<{ route : any, navigation : any }> = ({route, naviga
         })
     }
 
+    const pickImage = async (type : 'profile' | 'banner') => {
+        if (uploading)
+            return;
+        
+        const result = await ImagePicker.launchImageLibraryAsync({
+            allowsEditing : true,
+            mediaTypes : ImagePicker.MediaTypeOptions.Images,
+            quality : 1,
+            aspect : (type === 'banner') ? [ 360, 90 ] : [ 1, 1 ]
+        })
+
+        if (result.cancelled)
+            return
+        
+        uploadImage(result.uri, type)
+    }
+
+    const uploadImage = async (uri : string, folder : 'banner' | 'profile') => {
+        setUploading(true)
+
+        try {
+            const res = await fetch(uri)
+            const blob = await res.blob()
+            const fileName = `${folder}-${data!.id!}`
+
+            const uploaded = await firebase.storage().ref().child(`${folder}/`).child(fileName).put(blob)
+
+            const donwloadURL = await uploaded.ref.getDownloadURL()
+
+            const updatedData = {
+                ...data!,
+                profilePicUrl : (folder == 'profile') ? donwloadURL : data?.profilePicUrl!,
+                bannerURI : (folder == 'banner') ? donwloadURL : data?.bannerURI!
+            }
+
+            setData(updatedData)
+
+            updateDev(updatedData)
+
+        } catch (err) {
+            console.log(err)
+            Alert.alert('Houve um erro inesperado ao fazer upload!')
+        } finally {
+            setUploading(false)
+        }
+    }
+
     useEffect(() => { getDev() }, [])
 
     return(
@@ -51,22 +102,35 @@ const ProfilePage: React.FC<{ route : any, navigation : any }> = ({route, naviga
                 <View style={styles.page}>
 
                     <View style={styles.header}>
-                        <Image source={{uri:data?.bannerURI}}style={styles.banner}></Image>
-                        <View style={{flexDirection : 'row', justifyContent : 'space-between', alignItems : 'flex-end', paddingHorizontal : 16, marginTop : -48}}>
-                            <Image source={{uri: data?.profilePicUrl}} style={styles.photoUser}></Image>
+                        <View style={{ position : 'relative' }}>
+                            <Image source={{uri:data?.bannerURI}}style={styles.banner}></Image>
                             
-                            <View style={{flexDirection : 'row'}}>
-                                <Pressable style={styles.followButton}>
-                                    <Text style={styles.followButtonText}>+ Seguir</Text>
+                            {
+                                authContext?.userData.id == data?.id &&
+                                <Pressable style={[styles.editFloatBtn, {right : 8, top : 8}  ]} onPress={() => pickImage("banner")}>
+                                    <MaterialIcons name="wallpaper" size={16} color='#FFF' />
                                 </Pressable>
+                            }
+                        </View>
+
+                        <View style={{flexDirection : 'row', justifyContent : 'space-between', alignItems : 'flex-end', paddingHorizontal : 16, marginTop : -48}}>
+                            
+                            <View style={{position : 'relative'}}>
+                                <Image source={{uri: data?.profilePicUrl}} style={styles.photoUser}></Image>
 
                                 {
                                     authContext?.userData.id == data?.id &&
-                                    <Pressable style={styles.followButton}>
-                                        <MaterialIcons size={16} color="#FFF" name="edit" />
+                                    <Pressable style={[styles.editFloatBtn, {right : -4, bottom : 8} ]} onPress={() => pickImage("profile")}>
+                                        <MaterialIcons name="add-a-photo" size={16} color='#FFF' />
                                     </Pressable>
                                 }
                             </View>
+                            {
+                                authContext?.userData.id != data?.id &&
+                                <Pressable style={styles.followButton}>
+                                    <Text style={styles.followButtonText}>+ Seguir</Text>
+                                </Pressable>
+                            }
                         </View>
 
                         <View style={{paddingHorizontal : 16}}>
