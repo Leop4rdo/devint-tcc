@@ -82,8 +82,7 @@ type devUpdateInput = {
     currentJob : string
     githubUsername : string
     openToWork : boolean
-    birthday : Date
-    socialLinks : { id : string }
+    birthday : string
     careerFocus : { id : string }
     autoDeclaredSeniority : { id : string }
     skills: {id : string }[]
@@ -96,6 +95,17 @@ export const update = async (body : devUpdateInput, id : string) : Promise<IResp
             body,
             { headers: { Authorization: `Baerer ${ await getToken() }` } }
         )
+
+        return data as IResponse
+    } catch (err : any) {
+        console.log(err);
+        return err.response.data as IResponse
+    }
+}
+
+export const listSkills = async () : Promise<IResponse> => {
+    try {
+        const { data } = await api.get('/skills', { headers: { Authorization: `Baerer ${ await getToken() }` } })
 
         return data as IResponse
     } catch (err : any) {

@@ -11,6 +11,10 @@ type inputOptions = {
     label : string,
 }
 
+type keyboardTypes = "default" | 'numeric' | 'email-address' | "ascii-capable" | 'numbers-and-punctuation' | 
+                    'url' | 'number-pad' | 'phone-pad' | 'name-phone-pad' | 'decimal-pad' | 'twitter' | 'web-search' | 
+                    'visible-password'
+
 interface IInfoItemProps {
     value : string
     editing ?: boolean
@@ -18,6 +22,7 @@ interface IInfoItemProps {
     imageUri ?: any
     onChangeText ?: (text : string) => void
     options ?: inputOptions[]
+    keyboardType ?: keyboardTypes
 }
 
 const InfoItem : React.FC<IInfoItemProps> = (props) => {
@@ -32,7 +37,7 @@ const InfoItem : React.FC<IInfoItemProps> = (props) => {
             )
                 
 
-        return <TextInput value={props.value} style={styles.input} onChangeText={props.onChangeText}/>
+        return <TextInput keyboardType={props.keyboardType || "default"} value={props.value} style={styles.input} onChangeText={props.onChangeText}/>
     }
 
     return (

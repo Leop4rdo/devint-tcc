@@ -88,7 +88,7 @@ const RegisterPage: React.FC<IPageProps> = ({navigation}) => {
 
     const register = async () => {
         const birthdayAsArray = formValues.birthday.split('/')
-        const birthday = [birthdayAsArray[2], birthdayAsArray[1], birthdayAsArray[0]].join('/')
+        const birthday = birthdayAsArray.reverse().join('/')
 
         const body = {
             name: formValues.name,

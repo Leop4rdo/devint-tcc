@@ -6,27 +6,41 @@ import Post from "../../../components/Post";
 import ProfileEdit from "../../../components/ProfileDetailItem";
 import ButtonComponent from "../../../components/shared/Button";
 import { GestureDetector, ScrollView, Swipeable } from "react-native-gesture-handler";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import DetailsSection from "../../../components/ProfileSections/DetailsSection";
 import colors from "../../../styles/colors";
 import { IDev } from "../../../interfaces/IDev";
 
 import * as devService from "../../../services/dev.service"
+import { AuthContext } from "../../../store/context/Auth.context";
 
 const ProfilePage: React.FC<{ route : any, navigation : any }> = ({route, navigation}) => {
     const [currentSection, setCurrentSection] = useState(0)
     const [data, setData] = useState<IDev>()
 
+    const authContext = useContext(AuthContext)
+
     const getDev = async () => {
         const res = await devService.findById(route.params.devId)
 
-        setData(res.data)
+        setData({
+            ...res.data,
+            birthday : res.data.birthday.split('-').reverse().join('/')
+        })
     }
 
-    const updateDev = async (body : any) => {
-        const res = await devService.update(body, body.id)
+    const updateDev = async (body : IDev) => {
+        const _body : IDev =  {
+            ...body,
+            birthday : body.birthday.split('/').reverse().join('-')
+        }
 
-        setData(res.data)
+        const res = await devService.update(_body as any, body.id!)
+
+        setData({
+            ...res.data,
+            birthday : res.data.birthday.split('-').reverse().join('/')
+        })
     }
 
     useEffect(() => { getDev() }, [])
@@ -41,9 +55,18 @@ const ProfilePage: React.FC<{ route : any, navigation : any }> = ({route, naviga
                         <View style={{flexDirection : 'row', justifyContent : 'space-between', alignItems : 'flex-end', paddingHorizontal : 16, marginTop : -48}}>
                             <Image source={{uri: data?.profilePicUrl}} style={styles.photoUser}></Image>
                             
-                            <Pressable style={styles.followButton}>
-                                <Text style={styles.followButtonText}>+ Seguir</Text>
-                            </Pressable>
+                            <View style={{flexDirection : 'row'}}>
+                                <Pressable style={styles.followButton}>
+                                    <Text style={styles.followButtonText}>+ Seguir</Text>
+                                </Pressable>
+
+                                {
+                                    authContext?.userData.id == data?.id &&
+                                    <Pressable style={styles.followButton}>
+                                        <MaterialIcons size={16} color="#FFF" name="edit" />
+                                    </Pressable>
+                                }
+                            </View>
                         </View>
 
                         <View style={{paddingHorizontal : 16}}>
@@ -84,7 +107,7 @@ const ProfilePage: React.FC<{ route : any, navigation : any }> = ({route, naviga
                     <View style={styles.section}>
                         {
                             (currentSection === 3) ? 
-                            <DetailsSection data={data as IDev} onFinishEditing={updateDev}/>
+                            <DetailsSection canEdit={authContext?.userData.id == data?.id} data={data as IDev} onFinishEditing={updateDev}/>
                             : (currentSection === 2) ?
                             <Text>2</Text>
                             : (currentSection === 1) ?

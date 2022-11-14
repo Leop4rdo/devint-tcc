@@ -26,7 +26,9 @@ const styles = StyleSheet.create({
         height : 48,
         marginRight : 16,
 
-        borderRadius : 48
+        borderRadius : 48,
+        borderWidth : 1,
+        borderColor : colors.PRIMARY
     },
 
     devName : {

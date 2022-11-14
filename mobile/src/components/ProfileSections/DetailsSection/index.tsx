@@ -1,6 +1,6 @@
 import { MaterialIcons } from "@expo/vector-icons"
 import { useEffect, useState } from "react"
-import { Image, Pressable, RefreshControl, Text, View } from "react-native"
+import { Alert, Image, Pressable, RefreshControl, Text, View } from "react-native"
 import ICareerProps from "../../../interfaces/ICareerFocus"
 import { IDev } from "../../../interfaces/IDev"
 import colors from "../../../styles/colors"
@@ -11,10 +11,17 @@ import * as devService from '../../../services/dev.service'
 
 import styles from "./style"
 import ISeniorityProps from "../../../interfaces/ISeniority"
+import { applyDateMask } from "../../../utils/masks"
+import { Picker } from "@react-native-picker/picker"
+import PickerComponent from "../../shared/Picker"
+import ISkillProps from "../../../interfaces/ISkill"
+import SkillToken from "./SkillToken"
+import { FlatList } from "react-native-gesture-handler"
 
 
 interface IDetailSectionProps {
     data : IDev
+    canEdit : boolean
     onFinishEditing : (data : IDev) => void
 }
 
@@ -27,6 +34,7 @@ const genderOptions = [
 const DetailsSection : React.FC<IDetailSectionProps> = (props) => {
     const [careerFocusOptions, setCareerFocusOptions] = useState<{ label : string, value : string}[]>([])
     const [seniorityOptions, setSeniorityOptions] = useState<{ label : string, value : string}[]>([])
+    const [allSkills, setAllSkills] = useState<ISkillProps[]>([])
     const [data, setData] = useState({
        ...props.data
     })
@@ -36,13 +44,8 @@ const DetailsSection : React.FC<IDetailSectionProps> = (props) => {
         careerFocus : false,
         seniority : false,
         currentJob : false,
+        skills : false
     })
-
-    const getFormatedDate = (dateString : string) => {   
-        const splited = dateString.split('-')
-
-        return `${splited[2]}/${splited[1]}/${splited[0]}`
-    }
 
     const getGenderName = (gender : string) => {
         if (gender.toLowerCase() == 'f')
@@ -75,10 +78,7 @@ const DetailsSection : React.FC<IDetailSectionProps> = (props) => {
 
         setData({
             ...data,
-            [key] : {
-                id : selected.value,
-                name : selected.label
-            }
+            [key] : selected
         })
     }
 
@@ -108,22 +108,51 @@ const DetailsSection : React.FC<IDetailSectionProps> = (props) => {
         )
     }
 
-    useEffect(() => { getCareerFocusOptions(); getSeniorityOptions() }, [])
+    const getAllSkills = async () => {
+        const res = await devService.listSkills()
+
+        setAllSkills(res.data)
+    }
+
+    const addSkill = (id : string) => {
+        const newSkill = allSkills.find((s) => s.id == id)
+
+        if (!newSkill)
+            Alert.alert("Erro ao adicionar skill!")
+
+        setData({
+            ...data,
+            skills : [
+                ...data.skills,
+                newSkill!
+            ]
+        })
+    }
+
+    const removeSkill = (id : string) => {
+        setData({
+            ...data,
+            skills : data.skills.filter((s) => s.id != id)
+        })
+    }
+
+    useEffect(() => { getCareerFocusOptions(); getSeniorityOptions(); getAllSkills() }, [])
 
     return (
         <>
             {/* CONTATO */}
-            <DetailCard title="Contato" headerIcon="forum">
+            <DetailCard title="Contato" headerIcon="forum" canEdit={props.canEdit}>
                 <InfoItem icon='mail' value={data.email} />
             </DetailCard>
 
             {/* SOBRE */}
-            <DetailCard title="Sobre" headerIcon="info" onEditPress={() => toggleEditing('about')} editing={editing.about}>
+            <DetailCard title="Sobre" headerIcon="info" onEditPress={() => toggleEditing('about')} canEdit={props.canEdit} editing={editing.about}>
                 <InfoItem 
                     icon='calendar-today' 
-                    value={(editing.about) ? data.birthday : getFormatedDate(data.birthday)} 
-                    onChangeText={(text) => handleChange(text, 'birthday')} 
+                    value={data.birthday} 
+                    onChangeText={(text) => handleChange(applyDateMask(text), 'birthday')} 
                     editing={editing.about}
+                    keyboardType="numeric"
                     />
                 <InfoItem 
                     icon='person' 
@@ -141,7 +170,7 @@ const DetailsSection : React.FC<IDetailSectionProps> = (props) => {
             </DetailCard>
 
             {/* FOCO DE CARREIRA */}
-            <DetailCard title="Foco de carreira" headerIcon="center-focus-strong" onEditPress={() => toggleEditing('careerFocus')} editing={editing.careerFocus}>
+            <DetailCard title="Foco de carreira" headerIcon="center-focus-strong" onEditPress={() => toggleEditing('careerFocus')} editing={editing.careerFocus} canEdit={props.canEdit}>
                 <InfoItem 
                     value={(editing.careerFocus) ? data.careerFocus?.id || '' : data.careerFocus?.name || 'Não informado'} 
                     editing={editing.careerFocus}
@@ -151,7 +180,7 @@ const DetailsSection : React.FC<IDetailSectionProps> = (props) => {
             </DetailCard>
 
             {/* TRABALHO ATUAL */}
-            <DetailCard title="Emprego Atual" headerIcon="work" onEditPress={() => toggleEditing('currentJob')} editing={editing.currentJob}>
+            <DetailCard title="Emprego Atual" headerIcon="work" onEditPress={() => toggleEditing('currentJob')} editing={editing.currentJob} canEdit={props.canEdit}>
                 <InfoItem 
                     value={(editing.currentJob) ? data.currentJob : data.currentJob || 'Não informado'} 
                     onChangeText={(value) => handleChange(value, 'currentJob')} 
@@ -160,18 +189,48 @@ const DetailsSection : React.FC<IDetailSectionProps> = (props) => {
             </DetailCard>
 
             {/* SENIORIDADE */}
-            <DetailCard title="Senioridade" headerIcon="school" onEditPress={() => toggleEditing('seniority')} editing={editing.seniority}>
+            <DetailCard title="Senioridade" headerIcon="school" onEditPress={() => toggleEditing('seniority')} editing={editing.seniority} canEdit={props.canEdit}>
                 <InfoItem 
                     value={(editing.seniority) ? data.autoDeclaredSeniority?.id || '' : data.autoDeclaredSeniority?.name || 'Não informado'}
                     editing={editing.seniority}
                     options={seniorityOptions}
                     onChangeText={(value) => handleSelectChange(value, 'autoDeclaredSeniority', seniorityOptions)}
-
                 />
             </DetailCard>
 
             {/* HABILIDADES */}
-            <DetailCard title="Habilidades" headerIcon="star">
+            <DetailCard title="Habilidades" headerIcon="star" onEditPress={() => toggleEditing('skills')} editing={editing.skills} canEdit={props.canEdit}>
+                {
+                    editing.skills &&
+                    <PickerComponent onChange={(id) => addSkill(id)}>
+                        <Picker.Item label="Selecionar uma skill" enabled={false} />
+                        {
+                            allSkills
+                                .filter((skill) => !data.skills.find((s) => s.id == skill.id))
+                                .map((skill) => 
+                                    <Picker.Item label={skill.name} value={skill.id} key={skill.id} />
+                            )
+                        }
+                    </PickerComponent>
+                }
+
+                <FlatList
+                    renderItem={({item}) => 
+                        <SkillToken 
+                            data={item} 
+                            editing={editing.skills} 
+                            onRemove={removeSkill} 
+                        />
+                    }
+                    data={data.skills}
+                    keyExtractor={(item) => item.id!}
+                    horizontal
+                    snapToAlignment="start"
+                    scrollEventThrottle={16}
+                    decelerationRate="fast"
+                    pagingEnabled
+
+                />
             </DetailCard>
 
         </>

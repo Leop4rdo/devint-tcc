@@ -44,6 +44,23 @@ const styles = StyleSheet.create({
         borderBottomWidth : 2,
         padding : 0,
         color : '#FFF'        
+    },
+
+    skillToken : {
+        justifyContent : 'center',
+        alignItems : 'center',
+        marginRight : 24,
+        marginTop : 16,
+        position : 'relative'
+    },
+
+    removeSkillBtn : {
+        marginRight : 8
+    },
+
+    skillName : {
+        marginVertical : 8,
+        color : colors.LIGHT_GRAY
     }
 })
 
