@@ -180,7 +180,6 @@ const UserProfilePage: React.FC = () => {
     return (
         <MenuWapper>
             <div className="profile-page">
-
                 <div className="background-image">
                     <input accept="image/*" onChange={upload} type="file" name="attachment-input" id="attachment-input" />
                     <label htmlFor="attachment-input"><Icon name="image" /></label>
@@ -251,14 +250,23 @@ const UserProfilePage: React.FC = () => {
                             <Icon name="email" />
                             <span>{dev?.email}</span>
                         </div>
-
                     </UserProfileEdit>
 
                     <UserProfileEdit editIcon={edit.about} OnClick={() => setEdit({ ...edit, about: !edit.about })} iconName="group" subject="Sobre" >
 
                         <div className="user-info">
                             <Icon name="calendar_month" />
-                            <span>{dev?.birthday}</span>
+                            {edit.about ?
+                                <Input
+                                    value={dateMask(formValues.aboutCalendarMonth)}
+                                    onChange={(text: any) =>
+                                    handleInputChange(text, 'aboutCalendarMonth')}
+                                    validate={() => isValidDate(formValues.aboutCalendarMonth)}
+                                />
+                                :
+                                <span>{dev?.birthday}</span>
+                            }
+                            
 
                         </div>
 

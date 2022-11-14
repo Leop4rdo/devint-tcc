@@ -10,11 +10,10 @@ import AutoTextArea from "components/shared/TextArea";
 import * as postService from "services/post.service"
 interface ICreatePostModalProps {
     onClose : () => void
-    refresh : any
 }
 
 
-const CreatePostModal : React.FC<ICreatePostModalProps> = ({ onClose , refresh}) => {
+const CreatePostModal : React.FC<ICreatePostModalProps> = ({ onClose }) => {
     const authContext = useContext(AuthContext)
     const [content, setContent] = useState('');
     const [attachments, setAttachments] = useState<string[]>([])
@@ -44,7 +43,8 @@ const CreatePostModal : React.FC<ICreatePostModalProps> = ({ onClose , refresh})
 
         
         setUploading(false)
-        refresh()
+        
+        
     }
 
     const publishPost = async () => {
@@ -57,10 +57,8 @@ const CreatePostModal : React.FC<ICreatePostModalProps> = ({ onClose , refresh})
         if (res.hasError) 
             return alert('Houve um erro inesperado ao publicar, tente novamente mais tarde!')
 
-        refresh()
+       
         onClose()
-        
-        
     }
 
     return (

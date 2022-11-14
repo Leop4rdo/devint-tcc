@@ -12,10 +12,11 @@ import AutoTextArea from "components/shared/TextArea"
 interface IPostDetailsModalProps {
     postId: string
     onClick: any
+    refreshComment: any
    
 }
 
-const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick  }) => {
+const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick , refreshComment  }) => {
     const authContext = useContext(AuthContext)
 
     const [post, setPost] = useState<IPost | null>(null)
@@ -40,6 +41,7 @@ const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick  }
         setNewComment({ content : '' })
 
         getPost()
+        refreshComment()
     }
 
     useEffect(() => { getPost() }, [postId])
