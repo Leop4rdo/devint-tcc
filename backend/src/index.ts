@@ -8,9 +8,13 @@ import helmet from "helmet"
 import routes from "@src/application/routes";
 import logMiddleware from "@src/application/middlewares/log.middleware"
 
+import * as CareerFocusWorker from "./workers/CareerFocusWorker"
+
 const PORT = process.env.SE_PORT || 8080;
 
 AppDataSource.initialize().then(async () => {
+    await CareerFocusWorker.setup()
+
     const app = express(); // creating express app
     
     // loading global middlewares

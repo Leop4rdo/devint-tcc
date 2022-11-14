@@ -89,7 +89,14 @@ export default class DevService {
 
     async update (input: DevUpdateInput, id: string ): Promise<IResponse>{
         
-        const dev : DevEntity = await this.repo.findById(id)
+        const dev : DevEntity = await this.repo.findById(id, [
+            'following', 
+            'followers', 
+            'socialLinks', 
+            'careerFocus', 
+            'autoDeclaredSeniority',
+            'skills',
+        ])
 
         if (!dev)
             return new BadRequestResponse({ status : 404, message: errors.ENTITY_NOT_FOUND })
@@ -100,7 +107,7 @@ export default class DevService {
         const res = await this.repo.update(updated)
 
         return new SuccessResponse({
-            data : res
+            data : new DevOutput(res)
         })
     }
     

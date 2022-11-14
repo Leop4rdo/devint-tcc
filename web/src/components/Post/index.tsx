@@ -9,7 +9,6 @@ import * as postService from "../../services/post.service"
 import * as devService from "../../services/dev.service"
 
 interface IPostProps {
-    // data: IPost
     data: IPostListItem
     openDetails: () => void
 

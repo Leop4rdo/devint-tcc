@@ -45,22 +45,23 @@ export const findById = async ( id : string ) : Promise<IResponse> => {
 }
 
 type updateDevRequestBody = {
-    name : string
-    bio : string
-    gender : string
-    profilePicUrl : string
-    currentJob : string
-    githubUsername : string
-    openToWork : boolean
-    birthday : Date
-    socialLinks : {
+    bannerURI ?: string,
+    name ?: string
+    bio ?: string
+    gender ?: string
+    profilePicUrl ?: string
+    currentJob ?: string
+    githubUsername ?: string
+    openToWork ?: boolean
+    birthday ?: Date
+    socialLinks ?: {
         name : string
         url : string
         owner : string
     }
-    careerFocus : { id : string }
-    autoDeclaredSeniority : { id : string }
-    skills: { id : string}[]
+    careerFocus ?: { id : string }
+    autoDeclaredSeniority ?: { id : string }
+    skills ?: { id : string}[]
 }
 
 export const update = async (body : updateDevRequestBody, id: string) : Promise<IResponse> => {

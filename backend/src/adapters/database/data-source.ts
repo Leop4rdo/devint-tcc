@@ -13,8 +13,7 @@ import SeniorityEntity from "@entities/SeniorityEntity";
 import SkillEntity from "@entities/SkillEntity";
 import SocialLinkEntity from "@entities/SocialLinkEntity";
 import CommentEntity from "./entities/CommentEntity";
-
-
+import { readFileSync } from "fs";
 
 export const AppDataSource = new DataSource({
     synchronize : true,
