@@ -13,6 +13,8 @@ import PostsTab from "components/ProfileTabs/Posts";
 import { v4 as randomUUIDV4 } from "uuid"
 import firebase from "config/firebase";
 import AutoTextArea from "components/shared/TextArea";
+import { isValidDate } from "utils/validations";
+import { dateMask } from "utils/masks";
 
 const UserProfilePage: React.FC = () => {
 
@@ -36,41 +38,49 @@ const UserProfilePage: React.FC = () => {
     const [select, setSelectSkill] = useState()
     const [following, setFollowing] = useState(false);
 
-    const upload = async (evt: any) => {
+    const upload = async (uri: string, folder: 'banner' | 'profile') => {
+        setUploading(true)
 
-        useEffect(() => {
-            const handleImageUpload = async() => {
+        try {
+            const res = await fetch(uri)
+            const blob = await res.blob()
+            const fileName = `${folder}-${dev!.id}`
 
-                setUploading(true);
-                const file = evt.target.files[0];
+            const uploaded = await firebase.storage().ref().child(`${folder}/`).child(fileName).put(blob)
 
-                if (!devId) return
-                if (!file) return
+            const downloadURL = await uploaded.ref.getDownloadURL()
 
-                try {
-                    const extension = `.${file.name.split('.')[1]}`
-                    const fileName = randomUUIDV4() + extension
-
-                    const uploaded = await firebase.storage().ref().child('banner/').child(fileName).put(file)
-
-                    setDev({ ...dev, [evt.target.name]: await uploaded.ref.getDownloadURL() } as IDev)
-
-                    const res = await devService.update({[evt.target.name] : uploaded.ref.getDownloadURL() }, devId)
-
-                    setNewImage([
-                        ...newImage,
-                        await uploaded.ref.getDownloadURL()
-                    ])    
-                } catch (err) {
-                    console.log(err);
-                    alert('Um erro inesperado ocorreu')
-                }
-
-                setUploading(false)
+            const updateData = {
+                ...dev!,
+                profilePicUrl : (folder == 'profile') ? downloadURL : dev?.profilePicUrl!,
+                bannerURI : (folder == 'banner') ? downloadURL : dev?.bannerURI!
             }
-        })
+
+            setDev(updateData)
+            updateDev(updateData)
+
+        } catch (err) {
+            console.log(err);
+            alert('Houve um erro inesperado ao fazer upload!')
+            
+        } finally {
+            setUploading(false)
+        }
     }
 
+    const updateDev = async (body: IDev) => {
+        const updateBody = {
+            ...body,
+            birthday: body.birthday.split('/').reverse().join('-')
+        }
+
+        const res = await devService.update(updateBody as any, body.id!)
+
+        setDev({
+            ...res.data,
+            birthday: res.data.birthday.split('-').reverse().join('/')
+        })
+    }
 
     const handleTabs = (tabName: string) => {
         if (tabName === "posts") {
@@ -90,7 +100,10 @@ const UserProfilePage: React.FC = () => {
         if (!devId) return
         const res = await devService.findById(devId)
 
-        setDev(res.data)
+        setDev({
+            ...res.data,
+            birthday: res.data.birthday.split('-').reverse().join('/')
+        })
         setFollowing(res.data?.followers.find((d: IDevMinimal) => d.id === authContext?.userData.id) != undefined)
     }
 
@@ -109,52 +122,20 @@ const UserProfilePage: React.FC = () => {
 
         setSelectSkill(res.data)
     }
-    
-    const editContact = async () => {
-        // let devLegacy = dev;
-        // let devChange = formValues;
-        
-        // let isDevEqual = (JSON.stringify(devLegacy) === JSON.stringify(devChange));
-        
-        // console.log(isDevEqual);
-        
-        // if (!isDevEqual) {
-        //     let newDevChange = diffObject(devLegacy, devChange);
-        //     console.log(diffObject(devLegacy, devChange));
-        // }
-        
-        // function diffObject(a, b) {
-        //   return Object.keys(a).reduce(function(map, k) {
-        //     if (a[k] !== b[k]) map[k] = b[k];
-        //     return map;
-        //   }, {});
-        // }
-
-        if (!devId) return
-
-        const res = await devService.update({ 
-            
-                bio: formValues.bio,
-                gender: formValues.gender,
-                currentJob: formValues.currentJob
-            
-         }, devId)
-
-    }
-
 
     const handleInputChange = (text: any, key: any) => {
         setFormValues({
             ...formValues,
             [key]: text.target.value
-            
+
         })
-        
+
     }
 
     const [formValues, setFormValues] = useState({
         bio: "",
         gender: "",
+        birthday: "",
         careerFocus: "",
         currentJob: "",
         autoDeclaredSeniority: "",
@@ -168,13 +149,13 @@ const UserProfilePage: React.FC = () => {
             <div className="profile-page">
                 <div className="background-image">
                     {
-                        (authContext?.userData?.id == devId) ? 
+                        (authContext?.userData?.id == devId) ?
                             <div className="upload-new-image">
-                                <input accept="image/*" onChange={upload} type="file" name="attachment-input" id="attachment-input" />
+                                <input accept="image/*" type="file" name="attachment-input" id="attachment-input" />
                                 <label htmlFor="attachment-input"><Icon name="image" /></label>
                             </div>
 
-                        : ''    
+                            : ''
                     }
                     <img src={dev?.bannerURI} />
                 </div>
@@ -193,14 +174,14 @@ const UserProfilePage: React.FC = () => {
                         </div>
 
                         <img src={dev?.profilePicUrl} className="profile-pic" />
-                        
+
                         <h2>{dev?.name}</h2>
 
                         {dev?.githubUsername ?
-                                <span>     
-                                    {dev?.githubUsername}
-                                </span>
-                                : ''
+                            <span>
+                                {dev?.githubUsername}
+                            </span>
+                            : ''
                         }
 
 
@@ -247,15 +228,15 @@ const UserProfilePage: React.FC = () => {
                             <Icon name="calendar_month" />
                             {edit.about ?
                                 <Input
-                                    value={dateMask(formValues.aboutCalendarMonth)}
+                                    value={dateMask(formValues.birthday)}
                                     onChange={(text: any) =>
-                                    handleInputChange(text, 'aboutCalendarMonth')}
-                                    validate={() => isValidDate(formValues.aboutCalendarMonth)}
+                                        handleInputChange(text, 'aboutCalendarMonth')}
+                                    validate={() => isValidDate(formValues.birthday)}
                                 />
                                 :
                                 <span>{dev?.birthday}</span>
                             }
-                            
+
 
                         </div>
 
