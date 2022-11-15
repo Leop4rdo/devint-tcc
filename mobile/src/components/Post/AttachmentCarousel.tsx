@@ -3,23 +3,14 @@ import { View, FlatList, Image, LayoutChangeEvent, Text, NativeSyntheticEvent, N
 import styles from "./styles"
 
 const AttachmentCarousel : React.FC<{data: string[]}> = ({data}) => {
-    const [carouselDimensions, setCarouselDimensions] = useState({ width : 0, height : 0})
-
-    const getCarouselDimensions = ({nativeEvent} : LayoutChangeEvent) => {
-        setCarouselDimensions({
-            width : nativeEvent.layout.width,
-            height : nativeEvent.layout.height
-        })
-    }
 
     return (
-        <View style={styles.carousel} onLayout={getCarouselDimensions}>
+        <View style={styles.carousel}>
             <FlatList 
                 horizontal
                 data={data}
-                snapToAlignment='center'
+                pagingEnabled
                 decelerationRate="fast"
-                snapToInterval={carouselDimensions.width}
                 keyExtractor={(item) => `att-${item}#${Math.random()**10}`}
                 renderItem={({ item }) => 
                     <View style={styles.carouselSlide}>

@@ -1,3 +1,4 @@
+import CareerFocus from "@src/core/domain/CareerFocus";
 import { IsString, IsNotEmpty } from "class-validator";
 import AuthEntity from "../../../../adapters/database/entities/AuthEntity";
 import IDevProps from "../../../../core/domain/interfaces/IDev";

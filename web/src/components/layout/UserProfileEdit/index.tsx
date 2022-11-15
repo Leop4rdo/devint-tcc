@@ -24,9 +24,7 @@ const UserProfileEdit: React.FC<IUserProfileEditProps> = ({ iconName, subject, c
                     <div className="container-done-icon">
                         <Icon name="done" onClick={OnClick} />
                     </div>
-
                     :
-
                     <Icon name="edit" onClick={OnClick} />
                 }
 

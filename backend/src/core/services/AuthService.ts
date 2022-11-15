@@ -102,6 +102,8 @@ export default class AuthService {
     }
 
     async login(body: LoginInput): Promise<IResponse> {
+        try {
+
         await body.validate()
 
         const auth = await this.repo.findBy("email", body.email);
@@ -134,6 +136,11 @@ export default class AuthService {
                 user: userRes,
             },
         });
+        } catch(err) {
+            console.log(err)
+            throw err
+        }
+
     }
 
     private createToken(user: CompanyOutput | DevOutput) {

@@ -10,6 +10,9 @@ import SeniorityEntity from "./SeniorityEntity";
 import SkillEntity from "./SkillEntity";
 import SocialLinkEntity from "./SocialLinkEntity";
 
+const DEFAULT_BANNER = 'https://firebasestorage.googleapis.com/v0/b/devint-tcc-33eb6.appspot.com/o/banner%2Fdefault_banner.png?alt=media&token=338d3340-ca96-4245-95b2-2bde00c6c5f5'
+const DEFAULT_PROFILE_PIC = 'https://firebasestorage.googleapis.com/v0/b/devint-tcc-33eb6.appspot.com/o/profile%2Fdefault_profile_pic(1).png?alt=media&token=c56f4d96-a281-481a-a398-3bf4306ede97'
+
 @Entity('devs')
 export default class DevEntity {
     @PrimaryGeneratedColumn('uuid')
@@ -32,10 +35,10 @@ export default class DevEntity {
     @Column()
     gender: string
 
-    @Column({ name: 'profile_pic_url', default : 'https://st2.depositphotos.com/19428878/44645/v/450/depositphotos_446453832-stock-illustration-default-avatar-profile-icon-social.jpg' })
+    @Column({ name: 'profile_pic_url', default : DEFAULT_PROFILE_PIC })
     profilePicUrl: string
 
-    @Column({ name: 'banner_uri', default : ''})
+    @Column({ name: 'banner_uri', default : DEFAULT_BANNER})
     bannerURI : string
 
     @Column({ default: 0, name: 'comunity_ratings' })
