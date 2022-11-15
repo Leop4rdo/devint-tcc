@@ -54,7 +54,7 @@ const HomePage : React.FC<{ navigation : any }> = ({navigation}) => {
                     contentContainerStyle={{paddingBottom: screenHeight * .1}}
                     onEndReached={getPosts}
                     onEndReachedThreshold={.1}
-                    ListHeaderComponent={<DevCarousel />}
+                    ListHeaderComponent={<DevCarousel navigation={navigation}/>}
                     ListFooterComponent={<ActivityIndicator />}
                     renderItem={({ item }) => (
                         <Post 

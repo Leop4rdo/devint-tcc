@@ -65,7 +65,9 @@ const styles = StyleSheet.create({
         color:colors.LIGHT_GRAY,
         fontSize: 12,
         fontFamily: fonts.POPPINS_REGULAR,
-        marginBottom : 12
+        marginBottom : 12,
+        maxHeight : 120
+
     },
 
     followDataContainer:{
@@ -107,7 +109,7 @@ const styles = StyleSheet.create({
     selectedNavItem:{
         fontSize:12,
         color: colors.WHITE,
-        fontFamily: fonts.POPPINS_SEMIBOLD
+        fontFamily: fonts.POPPINS_SEMIBOLD,
     },
 
     editFloatBtn : {
@@ -124,6 +126,22 @@ const styles = StyleSheet.create({
         borderColor : colors.BLACK,
         borderRadius : 100
 
+    },
+
+    bioInput : {
+        borderColor : colors.GRAY,
+        borderWidth : 2,
+        borderRadius : 8,
+
+        padding : 8,
+
+        marginBottom : 16,
+
+        color : '#FFF',
+        fontSize : 12,
+        fontFamily : fonts.POPPINS_REGULAR,
+
+        maxHeight : 100
     }
 })
 

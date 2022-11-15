@@ -5,11 +5,10 @@ import styles from "./style";
 import Post from "../../../components/Post";
 import ProfileEdit from "../../../components/ProfileDetailItem";
 import ButtonComponent from "../../../components/shared/Button";
-import { GestureDetector, ScrollView, Swipeable } from "react-native-gesture-handler";
+import { GestureDetector, ScrollView, Swipeable, TextInput } from "react-native-gesture-handler";
 import { useContext, useEffect, useState } from "react";
 import DetailsSection from "../../../components/ProfileSections/DetailsSection";
 import colors from "../../../styles/colors";
-import { useParams } from "react-router-native";
 import IDevMinimal, { IDev } from "../../../interfaces/IDev";
 
 import firebase from "../../../config/firebase";
@@ -19,11 +18,13 @@ import * as devService from "../../../services/dev.service";
 import { AuthContext } from "../../../store/context/Auth.context";
 
 const ProfilePage: React.FC<{ route : any, navigation : any }> = ({route, navigation}) => {
-    const [currentSection, setCurrentSection] = useState(0)
-    const [data, setData] = useState<IDev>()
-    const [uploading, setUploading] = useState(false)
-
-    const authContext = useContext(AuthContext)
+    const [currentSection, setCurrentSection] = useState(0);
+    const [data, setData] = useState<IDev>();
+    const [uploading, setUploading] = useState(false);
+    const [following, setFollowing] = useState(false);
+    const [editing, setEditing] = useState(false);
+    
+    const authContext = useContext(AuthContext);
 
     const getDev = async () => {
         const res = await devService.findById(route.params.devId)
@@ -95,29 +96,25 @@ const ProfilePage: React.FC<{ route : any, navigation : any }> = ({route, naviga
         }
     }
 
-    useEffect(() => { getDev() }, [])
-
-    const [dev, setDev] = useState<IDev | null>(null)
-    const { devId } = useParams()
-    const [select, setSelectSkill] = useState()
-    const [following, setFollowing] = useState(false);
-
     const toggleFollow = async () => {
-        if (!devId) return
-        const res = await devService.toggleFollow(devId)
+        if (!data) 
+            return
+
+        const res = await devService.toggleFollow(data.id!)
+
         setFollowing(!following);
-        const updateFollowing = await devService.findById(devId)
-        setDev(updateFollowing.data)
     }
 
-    
-    useEffect(() => { findById() }, [devId])
+    const toggleEditing = () => {
+        Alert.alert((editing) ? 'true' : 'false')
 
-    const getDevs = async () => {
-        const res = await devService.list({ limit: 24 })
+        if (editing)
+            updateDev(data!)
 
-        setSelectSkill(res.data)
+        setEditing(!editing)
     }
+
+    useEffect(() => { getDev() }, [])
 
     return(
         <LayoutWrapper navigation={navigation}>
@@ -155,19 +152,46 @@ const ProfilePage: React.FC<{ route : any, navigation : any }> = ({route, naviga
                             }
                         </View>
 
-                        <View style={{paddingHorizontal : 16}}>
-                            <Text style={styles.devName}>{data?.name}</Text>
-                            { data?.bio && <Text style={styles.devBio}>{data.bio}</Text> }
+                        <View style={{paddingHorizontal : 16, position : 'relative'}}>
+                            
+
+                            <View style={{justifyContent : 'space-between', alignItems : 'center', flexDirection : 'row'}}>
+                                <Text style={styles.devName}>{data?.name}</Text>
+                            
+                                {
+                                    authContext?.userData.id == data?.id &&    
+                                    <Pressable style={{padding : 8}} onPress={toggleEditing}>
+                                        <MaterialIcons name={(editing) ? 'check': "edit"} size={16} color={colors.LIGHT_GRAY} />
+                                    </Pressable>
+                                } 
+                            </View>
+                            {
+                                (editing) ?
+                                    <TextInput 
+                                        style={styles.bioInput} 
+                                        multiline
+                                        maxLength={255} 
+                                        value={data?.bio}  
+                                        onChangeText={(text) => 
+                                            setData({
+                                                ...data!, 
+                                                bio : text
+                                            })
+                                        } 
+                                    />
+                                :
+                                    <>{data?.bio && <Text style={styles.devBio}>{data.bio}</Text> }</>
+                            }
                         </View>
                     </View>
                     
                     <View style={styles.followDataContainer}>
                         <View style={styles.followData}>
-                            <Text style={styles.amount}>40</Text>
+                            <Text style={styles.amount}>{(data) ? (following) ? data.following.length + 1 : data.followers.length : '--'}</Text>
                             <Text style={styles.text}>Seguidores</Text>
                         </View>
                         <View style={styles.followData}>
-                            <Text style={styles.amount}>40</Text>
+                            <Text style={styles.amount}>{(data) ? data.following.length : '--'}</Text>
                             <Text style={styles.text}> Seguindo</Text>
                         </View>
                     </View>
