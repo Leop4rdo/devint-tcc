@@ -16,6 +16,8 @@ import * as ImagePicker from 'expo-image-picker'
 
 import * as devService from "../../../services/dev.service";
 import { AuthContext } from "../../../store/context/Auth.context";
+import ProfilePostSection from "../../../components/ProfileSections/Posts";
+import { useIsFocused } from "@react-navigation/native";
 
 const ProfilePage: React.FC<{ route : any, navigation : any }> = ({route, navigation}) => {
     const [currentSection, setCurrentSection] = useState(0);
@@ -25,6 +27,7 @@ const ProfilePage: React.FC<{ route : any, navigation : any }> = ({route, naviga
     const [editing, setEditing] = useState(false);
     
     const authContext = useContext(AuthContext);
+    const isFocused = useIsFocused();
 
     const getDev = async () => {
         const res = await devService.findById(route.params.devId)
@@ -117,7 +120,7 @@ const ProfilePage: React.FC<{ route : any, navigation : any }> = ({route, naviga
     useEffect(() => { getDev() }, [])
 
     return(
-        <LayoutWrapper navigation={navigation}>
+        <LayoutWrapper navigation={navigation} focused={isFocused}>
             <ScrollView>
                 <View style={styles.page}>
 
@@ -217,13 +220,13 @@ const ProfilePage: React.FC<{ route : any, navigation : any }> = ({route, naviga
                     <View style={styles.section}>
                         {
                             (currentSection === 3) ? 
-                            <DetailsSection canEdit={authContext?.userData.id == data?.id} data={data as IDev} onFinishEditing={updateDev}/>
+                                <DetailsSection canEdit={authContext?.userData.id == data?.id} data={data as IDev} onFinishEditing={updateDev}/>
                             : (currentSection === 2) ?
                             <Text>2</Text>
                             : (currentSection === 1) ?
                             <Text>1</Text>
                             : (currentSection === 0 ) ? 
-                            <Text>0</Text>
+                                <ProfilePostSection navigation={navigation} devId={data?.id!} />
                             :   <Text>Pagina inválida</Text>
                         }
                     </View>

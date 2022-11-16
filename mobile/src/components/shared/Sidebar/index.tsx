@@ -44,10 +44,10 @@ const Sidebar : React.FC<ISidebarProps> = ({ visible, onClose, navigation }) => 
         <Animated.View style={[styles.sidebarBg, animatedStyle]}>
             <View style={styles.sidebar}>
                 <View style={styles.topItemContainer}>
-                    <View style={styles.profileContainer}>
+                    <Pressable onPress={() => navigation.navigate('profile', { devId : authContext?.userData.id })} style={styles.profileContainer}>
                         <Image style={styles.profileImage} source={{ uri : authContext?.userData.profilePicUrl}} />
                         <Text style={styles.username}>{authContext?.userData?.name}</Text>
-                    </View>
+                    </Pressable>
 
                     <View style={styles.divisor}></View>
 
