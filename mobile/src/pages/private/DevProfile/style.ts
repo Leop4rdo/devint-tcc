@@ -3,19 +3,19 @@ import { color, FlipInEasyX } from "react-native-reanimated";
 import colors from "../../../styles/colors";
 import globalStyles from "../../../styles/global";
 import fonts from "../../../styles/typography";
-import { screenWidth } from "../../../styles/utils";
+import { screenHeight, screenWidth } from "../../../styles/utils";
 
 
 const styles = StyleSheet.create({
     section : {
         paddingHorizontal : 16,
         paddingVertical : 16,
-        minWidth : '100%'
+        minHeight : '50%'
     },
 
     page : {
         backgroundColor : colors.DARK_GRAY,
-        flex : 1,
+        minHeight : screenHeight
     },
 
     header:{
