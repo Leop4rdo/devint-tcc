@@ -2,7 +2,7 @@ import { resolve } from "path";
 import { config } from "dotenv"
 
 const getEnvPath = () => {
-    if (process.env.NODE_ENV.toLowerCase() == 'prod') 
+    if ((process.env.NODE_ENV || '').toLowerCase() == 'prod') 
         return '../../.env.prod'
     else
         return '../../.env'

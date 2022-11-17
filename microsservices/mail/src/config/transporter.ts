@@ -1,8 +1,4 @@
-import "./env";
-
 import { createTransport } from "nodemailer";
-
-
 
 const transporter = createTransport({
     auth: {
