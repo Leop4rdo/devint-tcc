@@ -5,23 +5,21 @@ import DevOutput from "../user/DevOutput"
 
 export default class ProjectOutput {
     id : string
-    name: string
     bannerURI : string
-    githubRepo: string
-    license: String
+    name: string
+    desc: string
+    githubRepository: JSON
     members : DevMinimalOutput[]
     owner : string
-    helpWanted: boolean
-    desc: string
+    openSource: boolean
     hearts: JSON
 
     constructor(props : IProjectProps) {
         this.id = props.id
         this.name = props.name
         this.bannerURI = props.bannerURI
-        this.githubRepo = props.githubRepo
-        this.license = props.license
-        this.helpWanted = props.helpWanted
+        this.githubRepository = props.githubRepository
+        this.openSource = props.openSource
         this.desc = props.desc
         this.hearts = JSON.parse(JSON.stringify(props.hearts)).length
         this.owner = props.owner

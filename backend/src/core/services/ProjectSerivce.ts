@@ -19,7 +19,7 @@ export default class ProjectService {
             const projects = await this.repo.list(options)
             console.log('projects: ', projects)
 
-            const mapped = projects.map((project) => new ProjectOutput(project))
+            const mapped = projects.map((project) => new ProjectOutput(project as unknown as IProjectProps))
 
             return new SuccessResponse({
                 data : mapped
@@ -40,10 +40,10 @@ export default class ProjectService {
 
     async create(input : ProjectCreateInput, ownerId : string) : Promise<IResponse> {
         const project = await this.repo.create(new Project({
-            ...input, 
-            members : [...input.members, {id : ownerId}], 
-            owner : ownerId
-        } as IProjectProps) as ProjectEntity)
+                ...input,
+                members: [...input.members, { id: ownerId }],
+                owner: ownerId
+            } as unknown as IProjectProps) as unknown as ProjectEntity)
 
         return new SuccessResponse({
             data : new ProjectOutput(project)

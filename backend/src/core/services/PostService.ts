@@ -41,7 +41,7 @@ export default class PostService {
         if (!posts)
             return new BadRequestResponse({ message: errors.ENTITY_NOT_FOUND })
 
-        const res = posts.map(post => new PostListOutput(post, id));
+        const res = posts.map(post => new PostListOutput(post as unknown as IPostProps, id));
 
         return new SuccessResponse({
             data: res
@@ -55,7 +55,7 @@ export default class PostService {
             ...postInput,
             writter: { id: owner },
             order : Math.floor(Math.random() * 999999)
-        } as unknown as IPostProps) as PostEntity)
+        } as unknown as IPostProps) as unknown as PostEntity)
 
         if (!post)
             return new ServerErrorResponse({ message: errors.CAN_NOT_CREATE_ENTITY })
@@ -85,7 +85,7 @@ export default class PostService {
     async list(userId : string, filter ?: PaginateListInput) {
         const posts = await this._.listByFilters(filter)
 
-        const mapped = posts.map(( post : Post ) => new PostListOutput(post, userId))
+        const mapped = posts.map(( post : PostEntity ) => new PostListOutput(post as unknown as IPostProps, userId))
 
         return new SuccessResponse({ data: mapped })
     }
