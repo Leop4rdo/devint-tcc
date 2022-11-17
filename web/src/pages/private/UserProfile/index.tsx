@@ -13,14 +13,12 @@ import PostsTab from "components/ProfileTabs/Posts";
 import { v4 as randomUUIDV4 } from "uuid"
 import firebase from "config/firebase";
 import AutoTextArea from "components/shared/TextArea";
-import { isValidDate, isValidEmail } from "utils/validations";
+import { isValidDate } from "utils/validations";
 import { dateMask } from "utils/masks";
-
-
 
 const UserProfilePage: React.FC = () => {
 
-    const [bannerImage, setBannerImage] = useState<string[]>([])
+    const [newImage, setNewImage] = useState<string[]>([])
     const [uploading, setUploading] = useState(false);
     const [currentTab, setCurrentTab] = useState("postsTab");
     const authContext = useContext(AuthContext)
@@ -35,49 +33,54 @@ const UserProfilePage: React.FC = () => {
         links: false
     })
 
-    console.log(edit);
-
-
     const [dev, setDev] = useState<IDev | null>(null)
     const { devId } = useParams()
     const [select, setSelectSkill] = useState()
     const [following, setFollowing] = useState(false);
 
-    const upload = async (evt: any) => {
+    const upload = async (uri: string, folder: 'banner' | 'profile') => {
         setUploading(true)
 
-        dev?.bannerURI
-
-        const file = evt.target.files[0]
-
-        if (!devId) return
-
-        if (!file) return
-
         try {
-            const extension = `.${file.name.split('.')[1]}`
-            const fileName = randomUUIDV4() + extension
+            const res = await fetch(uri)
+            const blob = await res.blob()
+            const fileName = `${folder}-${dev!.id}`
 
-            const uploaded = await firebase.storage().ref().child('banner/').child(fileName).put(file)
+            const uploaded = await firebase.storage().ref().child(`${folder}/`).child(fileName).put(blob)
 
-            setDev({ ...dev, [evt.target.name]: await uploaded.ref.getDownloadURL() } as IDev)
-            // update na service
-            const res = await devService.update({ bannerURI: uploaded.ref.fullPath }, devId)
+            const downloadURL = await uploaded.ref.getDownloadURL()
 
-            setBannerImage([
-                ...bannerImage,
-                await uploaded.ref.getDownloadURL()
-            ])
+            const updateData = {
+                ...dev!,
+                profilePicUrl : (folder == 'profile') ? downloadURL : dev?.profilePicUrl!,
+                bannerURI : (folder == 'banner') ? downloadURL : dev?.bannerURI!
+            }
 
-            // updateLanguageServiceSourceFile()
+            setDev(updateData)
+            updateDev(updateData)
+
         } catch (err) {
-            console.log(err)
+            console.log(err);
             alert('Houve um erro inesperado ao fazer upload!')
+            
+        } finally {
+            setUploading(false)
         }
-
-        setUploading(false)
     }
 
+    const updateDev = async (body: IDev) => {
+        const updateBody = {
+            ...body,
+            birthday: body.birthday.split('/').reverse().join('-')
+        }
+
+        const res = await devService.update(updateBody as any, body.id!)
+
+        setDev({
+            ...res.data,
+            birthday: res.data.birthday.split('-').reverse().join('/')
+        })
+    }
 
     const handleTabs = (tabName: string) => {
         if (tabName === "posts") {
@@ -97,7 +100,10 @@ const UserProfilePage: React.FC = () => {
         if (!devId) return
         const res = await devService.findById(devId)
 
-        setDev(res.data)
+        setDev({
+            ...res.data,
+            birthday: res.data.birthday.split('-').reverse().join('/')
+        })
         setFollowing(res.data?.followers.find((d: IDevMinimal) => d.id === authContext?.userData.id) != undefined)
     }
 
@@ -117,58 +123,19 @@ const UserProfilePage: React.FC = () => {
         setSelectSkill(res.data)
     }
 
-    const devLegacy = dev
-
-    
-    console.log("DEVLEGACY", devLegacy);
-    console.log("DEV", dev);
-    
-    
-    const editContact = async () => {
-        // let devLegacy = dev;
-        // let devChange = formValues;
-        
-        // let isDevEqual = (JSON.stringify(devLegacy) === JSON.stringify(devChange));
-        
-        // console.log(isDevEqual);
-        
-        // if (!isDevEqual) {
-        //     let newDevChange = diffObject(devLegacy, devChange);
-        //     console.log(diffObject(devLegacy, devChange));
-        // }
-        
-        // function diffObject(a, b) {
-        //   return Object.keys(a).reduce(function(map, k) {
-        //     if (a[k] !== b[k]) map[k] = b[k];
-        //     return map;
-        //   }, {});
-        // }
-
-        if (!devId) return
-
-        const res = await devService.update({ 
-            
-                bio: formValues.bio,
-                gender: formValues.gender,
-                currentJob: formValues.currentJob
-            
-         }, devId)
-
-    }
-
-
     const handleInputChange = (text: any, key: any) => {
         setFormValues({
             ...formValues,
             [key]: text.target.value
-            
+
         })
-        
+
     }
 
     const [formValues, setFormValues] = useState({
         bio: "",
         gender: "",
+        birthday: "",
         careerFocus: "",
         currentJob: "",
         autoDeclaredSeniority: "",
@@ -181,13 +148,16 @@ const UserProfilePage: React.FC = () => {
         <MenuWapper>
             <div className="profile-page">
                 <div className="background-image">
-                    <input accept="image/*" onChange={upload} type="file" name="attachment-input" id="attachment-input" />
-                    <label htmlFor="attachment-input"><Icon name="image" /></label>
                     {
-                        bannerImage.map((uri, idx) =>
-                            <img src={uri} key={idx} alt="" />
-                        )
+                        (authContext?.userData?.id == devId) ?
+                            <div className="upload-new-image">
+                                <input accept="image/*" type="file" name="attachment-input" id="attachment-input" />
+                                <label htmlFor="attachment-input"><Icon name="image" /></label>
+                            </div>
+
+                            : ''
                     }
+                    <img src={dev?.bannerURI} />
                 </div>
 
                 <div className="container-user-informations">
@@ -204,14 +174,14 @@ const UserProfilePage: React.FC = () => {
                         </div>
 
                         <img src={dev?.profilePicUrl} className="profile-pic" />
-                        
+
                         <h2>{dev?.name}</h2>
 
                         {dev?.githubUsername ?
-                                <span>     
-                                    {dev?.githubUsername}
-                                </span>
-                                : ''
+                            <span>
+                                {dev?.githubUsername}
+                            </span>
+                            : ''
                         }
 
 
@@ -258,15 +228,15 @@ const UserProfilePage: React.FC = () => {
                             <Icon name="calendar_month" />
                             {edit.about ?
                                 <Input
-                                    value={dateMask(formValues.aboutCalendarMonth)}
+                                    value={dateMask(formValues.birthday)}
                                     onChange={(text: any) =>
-                                    handleInputChange(text, 'aboutCalendarMonth')}
-                                    validate={() => isValidDate(formValues.aboutCalendarMonth)}
+                                        handleInputChange(text, 'aboutCalendarMonth')}
+                                    validate={() => isValidDate(formValues.birthday)}
                                 />
                                 :
                                 <span>{dev?.birthday}</span>
                             }
-                            
+
 
                         </div>
 
@@ -297,8 +267,8 @@ const UserProfilePage: React.FC = () => {
                                     <option>Backend</option>
                                     <option>Full stack</option>
                                 </Select>
-                                :
-                                <span>{dev?.careerFocus ? dev.careerFocus : ''}</span>
+                                : 'Null'
+                                // <span>{dev?.careerFocus}</span>
                             }
                         </div>
 
@@ -328,7 +298,7 @@ const UserProfilePage: React.FC = () => {
                                     <option>Senior</option>
                                 </Select>
                                 :
-                                <span>{dev?.autoDeclaredSeniority ? dev.autoDeclaredSeniority : ''}</span>
+                                'Null'
                             }
                         </div>
                     </UserProfileEdit>
