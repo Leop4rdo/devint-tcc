@@ -13,6 +13,9 @@ import PostsTab from "components/ProfileTabs/Posts";
 import { v4 as randomUUIDV4 } from "uuid"
 import firebase from "config/firebase";
 import AutoTextArea from "components/shared/TextArea";
+import { dateMask } from "utils/masks";
+import { isValidDate } from "utils/validations";
+import { setEnvironmentData } from "worker_threads";
 
 const UserProfilePage: React.FC = () => {
 
@@ -20,57 +23,90 @@ const UserProfilePage: React.FC = () => {
     const [uploading, setUploading] = useState(false);
     const [currentTab, setCurrentTab] = useState("postsTab");
     const authContext = useContext(AuthContext)
-    const [edit, setEdit] = useState({
-        bio: false,
-        contacts: false,
-        about: false,
-        careerFocus: false,
-        currentJob: false,
-        seniority: false,
-        skills: false,
-        links: false
-    })
+    const [editing, setEditing] = useState(false)
 
     const [dev, setDev] = useState<IDev | null>(null)
     const { devId } = useParams()
     const [select, setSelectSkill] = useState()
     const [following, setFollowing] = useState(false);
 
-    const upload = async (evt: any) => {
+    const updateUser = async (body : IDev) => {
+        const _body : IDev = {
+            ...body,
+            birthday : body.birthday.split('/').reverse().join('-')
+        }
 
-        useEffect(() => {
-            const handleImageUpload = async() => {
+        const res = await devService.update(_body as any, body.id!)
 
-                setUploading(true);
-                const file = evt.target.files[0];
-
-                if (!devId) return
-                if (!file) return
-
-                try {
-                    const extension = `.${file.name.split('.')[1]}`
-                    const fileName = randomUUIDV4() + extension
-
-                    const uploaded = await firebase.storage().ref().child('banner/').child(fileName).put(file)
-
-                    setDev({ ...dev, [evt.target.name]: await uploaded.ref.getDownloadURL() } as IDev)
-
-                    const res = await devService.update({[evt.target.name] : uploaded.ref.getDownloadURL() }, devId)
-
-                    setNewImage([
-                        ...newImage,
-                        await uploaded.ref.getDownloadURL()
-                    ])    
-                } catch (err) {
-                    console.log(err);
-                    alert('Um erro inesperado ocorreu')
-                }
-
-                setUploading(false)
-            }
+        setDev({
+            ...res.data,
+            birthday : res.data.birthday.split('-').reverse().join('/')
         })
     }
 
+    // const uploadImage = async (uri : string, folder : 'banner' | 'profile') => {
+    //     setUploading(true)
+
+    //     try {
+    //         const res = await fetch(uri)
+    //         const blob = await res.blob()
+    //         const fileName = `${folder}-${dev!.id!}`
+
+    //         const uploaded = await firebase.storage().ref().child(`${folder}/`).child(fileName).put(blob)
+
+    //         const downloadURL = await uploaded.ref.getDownloadURL()
+
+    //         const updateData = {
+    //             ...dev!, 
+    //             profilePicUrl : (folder == 'profile') ? downloadURL : dev?.profilePicUrl!,
+    //             bannerURI : (folder == 'banner') ? downloadURL : dev?.bannerURI!
+    //         }
+
+    //         setDev(updateData)
+    //         updateUser(updateData)
+
+    //     } catch (err) {
+    //         console.log(err);
+    //         alert('Houve um erro inesperado ao fazer upload!')
+            
+    //     } finally {
+    //         setUploading(false)
+    //     }
+    // }
+
+    const uploadImage = async (evt : any) => {
+        setUploading(true)
+
+        const file = evt.target.files[0]
+
+        if (!file)
+            return
+
+        try {
+            const extension = `.${file.name.split('.')[1]}`
+            const fileName = `${evt.target.name}-${dev!.id!}`
+            const uploaded = await firebase.storage().ref().child(`${evt.target.name}/`).child(fileName).put(file)
+
+            const downloadURL = await uploaded.ref.getDownloadURL()
+
+            const updateData = {
+                ...dev!, 
+                profilePicUrl : (evt.target.name == 'profile') ? downloadURL : dev?.profilePicUrl!,
+                bannerURI : (evt.target.name == 'banner') ? downloadURL : dev?.bannerURI!
+            }
+
+            setDev(updateData)
+            updateUser(updateData)
+
+        } catch (err) {
+            console.log(err);
+            alert('Houve um erro inesperado ao fazer upload!')
+            
+        } finally {
+            setUploading(false)
+        }
+        
+    }
 
     const handleTabs = (tabName: string) => {
         if (tabName === "posts") {
@@ -109,59 +145,20 @@ const UserProfilePage: React.FC = () => {
 
         setSelectSkill(res.data)
     }
-    
-    const editContact = async () => {
-        // let devLegacy = dev;
-        // let devChange = formValues;
-        
-        // let isDevEqual = (JSON.stringify(devLegacy) === JSON.stringify(devChange));
-        
-        // console.log(isDevEqual);
-        
-        // if (!isDevEqual) {
-        //     let newDevChange = diffObject(devLegacy, devChange);
-        //     console.log(diffObject(devLegacy, devChange));
-        // }
-        
-        // function diffObject(a, b) {
-        //   return Object.keys(a).reduce(function(map, k) {
-        //     if (a[k] !== b[k]) map[k] = b[k];
-        //     return map;
-        //   }, {});
-        // }
 
-        if (!devId) return
-
-        const res = await devService.update({ 
-            
-                bio: formValues.bio,
-                gender: formValues.gender,
-                currentJob: formValues.currentJob
-            
-         }, devId)
-
-    }
-
-
-    const handleInputChange = (text: any, key: any) => {
-        setFormValues({
-            ...formValues,
-            [key]: text.target.value
-            
+    const handleInputChange = (e : any) => {
+        setDev({
+            ...dev!,
+            [e.target.name]: e.target.value
         })
-        
     }
 
-    const [formValues, setFormValues] = useState({
-        bio: "",
-        gender: "",
-        careerFocus: "",
-        currentJob: "",
-        autoDeclaredSeniority: "",
-        skills: "",
-        linkName: "",
-        link: ""
-    })
+    const toggleEditing = () => {
+        if (editing)
+            updateUser(dev!)
+
+        setEditing(!editing)    
+    }
 
     return (
         <MenuWapper>
@@ -170,8 +167,8 @@ const UserProfilePage: React.FC = () => {
                     {
                         (authContext?.userData?.id == devId) ? 
                             <div className="upload-new-image">
-                                <input accept="image/*" onChange={upload} type="file" name="attachment-input" id="attachment-input" />
-                                <label htmlFor="attachment-input"><Icon name="image" /></label>
+                                <input accept="image/*" type="file" name="attachment-input" id="attachment-input" />
+                                <label htmlFor="attachment-input"><Icon name="image" onClick={uploadImage} /></label>
                             </div>
 
                         : ''    
@@ -183,16 +180,7 @@ const UserProfilePage: React.FC = () => {
 
                     <div className="profile-info">
 
-                        <div className="edit-info" >
-                            {edit.bio ?
-                                <Icon name="done" onClick={() => setEdit({ ...edit, bio: !edit.bio })} />
-                                :
-                                <Icon name="edit" onClick={() => setEdit({ ...edit, bio: !edit.bio })} />
-                            }
-
-                        </div>
-
-                        <img src={dev?.profilePicUrl} className="profile-pic" />
+                        <img src={dev?.profilePicUrl} className="profile-pic" onClick={() => {uploadImage("profile")}}/>
                         
                         <h2>{dev?.name}</h2>
 
@@ -204,10 +192,8 @@ const UserProfilePage: React.FC = () => {
                         }
 
 
-                        {edit.bio ?
-                            <AutoTextArea onChange={() => handleInputChange} value={formValues.bio}>
-                                Conte um pouco sobre você...
-                            </AutoTextArea>
+                        { (editing) ?
+                            <AutoTextArea name="bio" onChange={(e) => handleInputChange} placeholder="Conte um pouco sobre você" />
                             :
                             dev?.bio ? dev.bio : <p>Olá, meu nome é {dev?.name}</p>
                         }
