@@ -78,7 +78,10 @@ const DetailsSection : React.FC<IDetailSectionProps> = (props) => {
 
         setData({
             ...data,
-            [key] : selected
+            [key] : {
+                id : selected.value,
+                name : selected.label
+            }
         })
     }
 
