@@ -9,9 +9,8 @@ import { AuthContext } from "store/context/Auth.context";
 import * as devService from "../../../services/dev.service";
 import Input from "components/shared/Input";
 import Select from "components/shared/Select";
-import PostsTab from "components/ProfileTabs/Posts";
-import ProfileTabs from "components/ProfileTabs/ProjectsTab"; 
-import { v4 as randomUUIDV4 } from "uuid"
+import PostsTab from "components/ProfileTabs/Posts/Posts";
+import ProjectsTabs from "components/ProfileTabs/Projects/Projects"; 
 import firebase from "config/firebase";
 import AutoTextArea from "components/shared/TextArea";
 import { isValidDate } from "utils/validations";
@@ -444,7 +443,7 @@ const UserProfilePage: React.FC = () => {
                     <div className="selected-tab">
                         {currentTab === "postsTab" ? <PostsTab devId={devId || ''} /> : ""}
 
-                        {currentTab === "projectsTab" ? <ProfileTabs devId={devId || ''}/>
+                        {currentTab === "projectsTab" ? <ProjectsTabs devId={devId || ''}/>
                          : ""}
                     </div>
                 </div>
