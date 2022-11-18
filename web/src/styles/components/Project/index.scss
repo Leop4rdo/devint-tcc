@@ -56,10 +56,36 @@
     .container-participants{
         display: flex;
         gap: 8px;
+
         img{
             width: 4rem;
             height: 4rem;
             border-radius: 50%;
+        }
+
+        .container-project-owner{
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
+            background-color: $color-light-gray;
+        }
+
+    }
+
+    .container-interactions{
+        margin-top: 16px;
+
+        .container-github{
+
+            span{
+                color: $color-light-gray;
+                cursor: pointer;
+            }
+            img{
+                width: 50px;
+                height: 50px;
+                
+            }
         }
     }
 }

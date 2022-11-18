@@ -2,17 +2,17 @@ import React from "react";
 
 interface INewContents{    
     catchphrase : string
-    writtingPost?: any
+    writting?: any
     newContentName : string
 }
 
-const NewContents: React.FC<INewContents> = ({catchphrase , writtingPost , newContentName}) => {
+const NewContents: React.FC<INewContents> = ({catchphrase , writting , newContentName}) => {
 
     return (
         <div className="new-post">
             <span>{catchphrase}</span>
             <button className="btn-primary" onClick={() => 
-            writtingPost()    
+            writting()    
             }>{newContentName}</button>
         </div>
     )

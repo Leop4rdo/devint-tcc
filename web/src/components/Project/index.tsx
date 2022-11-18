@@ -25,10 +25,36 @@ const Project: React.FC = () => {
             </div>
 
             <div className="container-participants">
-                <img src="assets/images/teste.png" alt="" />
-                <img src="assets/images/teste.png" alt="" />
-                <img src="assets/images/teste.png" alt="" />
-                <img src="assets/images/teste.png" alt="" />
+                <div className="container-project-owner">
+
+                </div>
+
+                <div className="container-project-owner">
+
+                </div>
+
+                <div className="container-project-owner">
+
+                </div>
+
+                <div className="container-project-owner">
+
+                </div>
+
+                <div className="container-project-owner">
+
+                </div>
+
+            </div>
+
+            <div className="container-interactions">
+                <div className="container-github">
+                    <img src="./assets/icons/github.svg" alt="" />
+                    <span>github</span>
+                </div>
+                <div>
+
+                </div>
             </div>
         </div>
     )
