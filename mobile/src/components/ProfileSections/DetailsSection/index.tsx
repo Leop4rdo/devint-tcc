@@ -1,6 +1,6 @@
 import { MaterialIcons } from "@expo/vector-icons"
 import { useEffect, useState } from "react"
-import { Alert, Image, Pressable, RefreshControl, Text, View } from "react-native"
+import { Alert, FlatList, Image, Pressable, RefreshControl, Text, View } from "react-native"
 import ICareerProps from "../../../interfaces/ICareerFocus"
 import { IDev } from "../../../interfaces/IDev"
 import colors from "../../../styles/colors"
@@ -16,7 +16,6 @@ import { Picker } from "@react-native-picker/picker"
 import PickerComponent from "../../shared/Picker"
 import ISkillProps from "../../../interfaces/ISkill"
 import SkillToken from "./SkillToken"
-import { FlatList } from "react-native-gesture-handler"
 
 
 interface IDetailSectionProps {
@@ -32,6 +31,8 @@ const genderOptions = [
 ]
 
 const DetailsSection : React.FC<IDetailSectionProps> = (props) => {
+    if (!props.data) return(<span>loading...</span>)
+
     const [careerFocusOptions, setCareerFocusOptions] = useState<{ label : string, value : string}[]>([])
     const [seniorityOptions, setSeniorityOptions] = useState<{ label : string, value : string}[]>([])
     const [allSkills, setAllSkills] = useState<ISkillProps[]>([])
@@ -48,9 +49,9 @@ const DetailsSection : React.FC<IDetailSectionProps> = (props) => {
     })
 
     const getGenderName = (gender : string) => {
-        if (gender.toLowerCase() == 'f')
+        if (gender == 'f')
             return 'Feminino'
-        else if (gender.toLowerCase() == 'm')
+        else if (gender == 'm')
             return 'Masculino'
         else
             return 'Outro'

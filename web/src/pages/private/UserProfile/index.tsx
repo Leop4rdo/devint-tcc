@@ -16,6 +16,7 @@ import AutoTextArea from "components/shared/TextArea";
 import { dateMask } from "utils/masks";
 import { isValidDate } from "utils/validations";
 import { setEnvironmentData } from "worker_threads";
+import DetailSection from "components/ProfileSections/DetailSection";
 
 const UserProfilePage: React.FC = () => {
 
@@ -43,36 +44,6 @@ const UserProfilePage: React.FC = () => {
             birthday : res.data.birthday.split('-').reverse().join('/')
         })
     }
-
-    // const uploadImage = async (uri : string, folder : 'banner' | 'profile') => {
-    //     setUploading(true)
-
-    //     try {
-    //         const res = await fetch(uri)
-    //         const blob = await res.blob()
-    //         const fileName = `${folder}-${dev!.id!}`
-
-    //         const uploaded = await firebase.storage().ref().child(`${folder}/`).child(fileName).put(blob)
-
-    //         const downloadURL = await uploaded.ref.getDownloadURL()
-
-    //         const updateData = {
-    //             ...dev!, 
-    //             profilePicUrl : (folder == 'profile') ? downloadURL : dev?.profilePicUrl!,
-    //             bannerURI : (folder == 'banner') ? downloadURL : dev?.bannerURI!
-    //         }
-
-    //         setDev(updateData)
-    //         updateUser(updateData)
-
-    //     } catch (err) {
-    //         console.log(err);
-    //         alert('Houve um erro inesperado ao fazer upload!')
-            
-    //     } finally {
-    //         setUploading(false)
-    //     }
-    // }
 
     const uploadImage = async (evt : any) => {
         setUploading(true)
@@ -140,12 +111,6 @@ const UserProfilePage: React.FC = () => {
 
     useEffect(() => { findById() }, [devId])
 
-    const getDevs = async () => {
-        const res = await devService.list({ limit: 24 })
-
-        setSelectSkill(res.data)
-    }
-
     const handleInputChange = (e : any) => {
         setDev({
             ...dev!,
@@ -167,7 +132,7 @@ const UserProfilePage: React.FC = () => {
                     {
                         (authContext?.userData?.id == devId) ? 
                             <div className="upload-new-image">
-                                <input accept="image/*" type="file" name="banner" id="attachment-input" onClick={(evt) => {handleInputChange}}/>
+                                <input accept="image/*" type="file" name="banner" id="attachment-input" onClick={handleInputChange}/>
                                 <label htmlFor="attachment-input"><Icon name="image" onClick={uploadImage} /></label>
                             </div>
 
@@ -219,6 +184,8 @@ const UserProfilePage: React.FC = () => {
 
 
                     </div>
+                    
+                    {dev && <DetailSection canEdit={authContext?.userData.id == dev?.id} data={dev as IDev} onFinishEditing={updateUser} />}
 
                 </div>
 
