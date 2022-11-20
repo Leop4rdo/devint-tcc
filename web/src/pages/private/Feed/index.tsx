@@ -56,7 +56,7 @@ const FeedPage: React.FC = () => {
                         <NewContents 
                         catchphrase="O que você tem para nos dizer hoje?" 
                         newContentName="Novo Post"
-                        writting={() => setWrittingPost(true)}
+                        openCloseModal={() => setWrittingPost(true)}
                         />
 
                         <div className="outstanding-container">

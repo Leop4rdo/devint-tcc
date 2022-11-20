@@ -27,8 +27,7 @@ const AutoTextArea : React.FC<IAutoTextArea> = (props: IAutoTextArea ) => {
 		setText(event.target.value);
 
 		if (props.onChange) {
-			props.onChange(event);
-			setTextAreaHeight("auto");
+			props.onChange(event);	
 		}
 	};
 

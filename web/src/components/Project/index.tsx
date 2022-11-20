@@ -1,5 +1,6 @@
 import Icon from "components/shared/Icon";
 import React from "react";
+import Button from "components/shared/Button";
 
 
 
@@ -8,7 +9,7 @@ const Project: React.FC = () => {
     return (
         <div className="container-project">
             <div className="container-image">
-                <img src="assets/images/teste.png" alt="" />
+                <img src="https://www.vounajanela.com/wp-content/uploads/2015/03/fotos.jpg" alt="" />
             </div>
 
             <div className="container-name-project">
@@ -25,35 +26,46 @@ const Project: React.FC = () => {
             </div>
 
             <div className="container-participants">
-                <div className="container-project-owner">
 
+                <div className="container-project-owner">
+                    <div className="container-crown-project-owner">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Coroa_Real_Fechada_-_barrete_purp%C3%BAreo.svg/1200px-Coroa_Real_Fechada_-_barrete_purp%C3%BAreo.svg.png" alt="" />
+                    </div>
+
+                    <div className="project-owner">
+                        <img src="https://img.ibxk.com.br/2012/4/materias/3802463332510208.jpg?ims=704x" alt="" />
+                    </div>
                 </div>
 
-                <div className="container-project-owner">
-
+                <div className="container-project-participants">
+                    <img src="https://img.ibxk.com.br/2012/4/materias/3802463332510208.jpg?ims=704x" alt="" />
                 </div>
 
-                <div className="container-project-owner">
-
+                <div className="container-project-participants">
+                    <img src="https://img.ibxk.com.br/2012/4/materias/3802463332510208.jpg?ims=704x" alt="" />
                 </div>
 
-                <div className="container-project-owner">
-
+                <div className="container-project-participants">
+                    <img src="https://img.ibxk.com.br/2012/4/materias/3802463332510208.jpg?ims=704x" alt="" />
                 </div>
 
-                <div className="container-project-owner">
-
+                <div className="container-project-participants">
+                    <img src="https://img.ibxk.com.br/2012/4/materias/3802463332510208.jpg?ims=704x" alt="" />
                 </div>
 
             </div>
 
+
             <div className="container-interactions">
                 <div className="container-github">
-                    <img src="./assets/icons/github.svg" alt="" />
+                    <img src="../../public/assets/icons/google.svg" alt="" />
                     <span>github</span>
                 </div>
-                <div>
-
+                <div className="container-interaction-project">
+                    <Button onClick={() => {}}>
+                        <Icon name="favorite"/>
+                    </Button>
+                    <span>100</span>
                 </div>
             </div>
         </div>

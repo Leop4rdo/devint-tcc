@@ -12,15 +12,24 @@ const ProjectsTabs: React.FC<IProjectTab> = ({ devId }) => {
 
     const [writtingProject, setWrittingProject] = useState(false)
 
+    const ModalProject = () => {
+        if (writtingProject)
+            setWrittingProject(false)
+        else
+            setWrittingProject(true)
+    }
+
     return (
         <>
-            <NewContents catchphrase="Compartilhe seus projetos com a comunidade !" newContentName="Novo projeto" />
+            <NewContents catchphrase="Compartilhe seus projetos com a comunidade !" newContentName="Novo projeto" openCloseModal={ModalProject} />
 
-            
-                <CreateProjects/>
-            
+            {writtingProject &&
+                <CreateProjects openCloseModal={ModalProject} />
+            }
 
-            <Project/>
+
+
+            <Project />
         </>
 
 
