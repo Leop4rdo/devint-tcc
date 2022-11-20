@@ -4,11 +4,10 @@ import IPostProps from "./IPost";
 export default interface IProjectProps {
     id ?: string
     name : string
-    bannerURI : string
-    githubRepo: string
-    license : String
-    helpWanted : boolean
     desc : string
+    bannerURI : string
+    githubRepository: JSON
+    openSource : boolean
     posts : IPostProps[]
     members : IDevProps[]
     owner : string

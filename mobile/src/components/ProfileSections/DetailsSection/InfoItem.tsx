@@ -1,7 +1,6 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import { Picker } from "@react-native-picker/picker";
-import { Image, Text, View } from "react-native";
-import { TextInput } from "react-native-gesture-handler";
+import { Image, Text, View, TextInput } from "react-native";
 import colors from "../../../styles/colors";
 import PickerComponent from "../../shared/Picker";
 import styles from "./style";

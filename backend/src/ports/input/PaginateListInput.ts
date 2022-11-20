@@ -1,6 +1,6 @@
 export default class PaginateListInput {
-    offset : number
-    limit : number
+    offset ?: number
+    limit ?: number
 
     constructor(query : any) {
         this.offset = +query.offset || null

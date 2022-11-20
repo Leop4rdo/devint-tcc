@@ -25,13 +25,13 @@ export default class ProjectController {
     }
 
     list = (req : Request, res : Response) => {
-        this.service.list()
+        this.service.list(req.query)
             .then((_res) => res.status(_res.status || 200).json(_res))
             .catch((err) => res.status(err.status || 500).json(err))
     }
 
     listByDev = (req : Request, res : Response) => {
-        this.service.list({ owner : req.params.ownerId })
+        this.service.list({ owner : req.params.ownerId, ...req.query })
             .then((_res) => res.status(_res.status || 200).json(_res))
             .catch((err) => res.status(err.status || 500).json(err))
     }
@@ -40,5 +40,11 @@ export default class ProjectController {
         this.service.getById(req.params.id)
             .then((_res) => res.status(_res.status || 200).json(_res))
             .catch((err) => res.status(err.status || 500).json(err))
+    }
+
+    toggleHeart = (req : Request, res : Response) => {
+        this.service.toggleHeart(req.params.id, req.body.userData.id)
+            .then((_res) => res.status(_res.status || 200).json(_res))
+            .catch((err) => { console.log(err); res.status(err.status || 500).json(err)})
     }
 }
