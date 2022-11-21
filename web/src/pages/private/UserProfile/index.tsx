@@ -443,7 +443,9 @@ const UserProfilePage: React.FC = () => {
                     <div className="selected-tab">
                         {currentTab === "postsTab" ? <PostsTab devId={devId || ''} /> : ""}
 
-                        {currentTab === "projectsTab" ? <ProjectsTabs devId={devId || ''}/>
+                        {currentTab === "projectsTab" ?
+                
+                        <ProjectsTabs devId={devId || ''}/>
                          : ""}
                     </div>
                 </div>
