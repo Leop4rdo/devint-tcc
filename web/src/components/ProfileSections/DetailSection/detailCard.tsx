@@ -16,11 +16,11 @@ const DetailCard : React.FC<IDetailCardProps> = (props) => {
     return (
         <div className="detail-card">
             <div className="card-header">
-                <div>
+                <div className="card-title">
                     <Icon name={props.headerIcon}/>
                     <span>{props.title}</span>
                 </div>
-
+                
                 {
                     props.onEditPress && props.canEdit &&
                     <Icon name={(!props.editing) ? "edit" : "check"} onClick={props.onEditPress} />

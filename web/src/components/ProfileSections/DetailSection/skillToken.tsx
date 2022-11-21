@@ -9,7 +9,7 @@ interface ISkillTokenProps {
 }
 
 const SkillToken : React.FC<ISkillTokenProps> = (props) => {
-    const onPress = () => {
+    const onClick = () => {
         if (!props.editing)
             return
 
@@ -19,12 +19,12 @@ const SkillToken : React.FC<ISkillTokenProps> = (props) => {
     return (
         <div>
             <img src={props.data.icon}/>
-            <div>
+            <div className="delete-skill">
                 {
                     props.editing &&
-                    <Icon name="delete"/>
+                    <Icon name="delete" onClick={onClick}/>
                 }
-                <span>{props.data.name}</span>
+                {/* <span>{props.data.name}</span> */}
             </div>
         </div>
     )

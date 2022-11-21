@@ -71,6 +71,11 @@ const DetailSection: React.FC<IDetailSectionProps> = (props) => {
 	) => {
 		const selected = options.find((o) => o.value == value);
 
+		console.table({
+			value,
+			key,
+		})
+
 		setData({
 			...data,
 			[key]: {
@@ -195,9 +200,9 @@ const DetailSection: React.FC<IDetailSectionProps> = (props) => {
 					}
 					editing={editing.careerFocus}
 					options={careerFocusOptions}
-					onChangeText={(value) =>
+					onChangeText={(event) =>
 						handleSelectChange(
-							value,
+							event.target.value,
 							"careerFocus",
 							careerFocusOptions
 						)
@@ -221,9 +226,9 @@ const DetailSection: React.FC<IDetailSectionProps> = (props) => {
 					}
 					editing={editing.seniority}
 					options={seniorityOptions}
-					onChangeText={(value) =>
+					onChangeText={(event) =>
 						handleSelectChange(
-							value,
+							event?.target.value,
 							"autoDeclaredSeniority",
 							seniorityOptions
 						)
@@ -239,25 +244,21 @@ const DetailSection: React.FC<IDetailSectionProps> = (props) => {
 				canEdit={props.canEdit}
 			>
 				{editing.skills && (
-					<Select onChange={(id: string) => addSkill(id)}>
-						<option label="Selecionar uma skill" />
+					<Select onChange={(e : any) => addSkill(e.target.value)}>
+						<option value='' disabled label="Selecionar uma skill" />
 						{allSkills
 							.filter(
 								(skill) =>
 									!data.skills.find((s) => s.id == skill.id)
 							)
 							.map((skill) => (
-								<option
-									label={skill.name}
-									value={skill.id}
-									key={skill.id}
-								/>
+								<option	value={skill.id} key={skill.id}>{skill.name}</option>
 							))}
 					</Select>
 				)}
 
 				<div className="token-container">
-					{allSkills.map((skill: ISkillProps) => (
+					{data.skills.map((skill) => (
 						<>
 							<SkillToken
 								data={skill}

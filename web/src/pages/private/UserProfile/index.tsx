@@ -59,13 +59,14 @@ const UserProfilePage: React.FC = () => {
             const uploaded = await firebase.storage().ref().child(`${evt.target.name}/`).child(fileName).put(file)
 
             const downloadURL = await uploaded.ref.getDownloadURL()
-
+            
             const updateData = {
                 ...dev!, 
                 profilePicUrl : (evt.target.name == 'profile') ? downloadURL : dev?.profilePicUrl!,
                 bannerURI : (evt.target.name == 'banner') ? downloadURL : dev?.bannerURI!
             }
 
+            
             setDev(updateData)
             updateUser(updateData)
 
@@ -165,12 +166,15 @@ const UserProfilePage: React.FC = () => {
                             : ''
                         }
 
-
-                        { (editing) ?
-                            <AutoTextArea name="bio" onChange={(evt) => handleInputChange} placeholder="Conte um pouco sobre você" />
-                            :
-                            dev?.bio ? dev.bio : <p>Olá, meu nome é {dev?.name}</p>
-                        }
+                        <div className="bio-edit">
+                            <Icon name={editing? "check" : "edit"} onClick={() => setEditing(!editing)} />
+                            { (editing) ?
+                                    <AutoTextArea name="bio" onChange={(evt) => handleInputChange} placeholder="Conte um pouco sobre você" />
+                                :
+                                dev?.bio ? dev.bio : 
+                                <p>Olá, meu nome é {dev?.name}</p>
+                            }
+                        </div>    
 
                         <div className="follow-container">
                             <div className="container-followers">
