@@ -3,6 +3,7 @@ import ProjectRepository, { ProjectListOptions } from "@src/adapters/database/re
 import BadRequestResponse from "@src/application/Responses/BadRequestResponse";
 import IResponse from "@src/application/Responses/IResponse";
 import SuccessResponse from "@src/application/Responses/SuccessResponse";
+import errors from "@src/helpers/errors";
 import ProjectCreateInput from "@src/ports/input/projects/ProjectCreateInput";
 import ProjectOutput from "@src/ports/output/projects/ProjectOutput";
 import IDevProps from "../domain/interfaces/IDev";
@@ -15,17 +16,14 @@ export default class ProjectService {
     constructor(repo : ProjectRepository) { this.repo = repo }
 
     async list(options ?: ProjectListOptions) : Promise<IResponse> {
-        try {
-            const projects = await this.repo.list(options)
-            console.log('projects: ', projects)
+        console.log(options)
+        const projects = await this.repo.list(options)
 
-            const mapped = projects.map((project) => new ProjectOutput(project))
+        const mapped = projects.map((project) => new ProjectOutput(project as unknown as IProjectProps))
 
-            return new SuccessResponse({
-                data : mapped
-            })
-        } catch(err) { console.log(err)}
-
+        return new SuccessResponse({
+            data : mapped
+        })
     }
 
     async getById(id : string) : Promise<IResponse> {
@@ -40,10 +38,10 @@ export default class ProjectService {
 
     async create(input : ProjectCreateInput, ownerId : string) : Promise<IResponse> {
         const project = await this.repo.create(new Project({
-            ...input, 
-            members : [...input.members, {id : ownerId}], 
-            owner : ownerId
-        } as IProjectProps) as ProjectEntity)
+                ...input,
+                members: [...input.members, { id: ownerId }],
+                owner: ownerId
+            } as unknown as IProjectProps) as unknown as ProjectEntity)
 
         return new SuccessResponse({
             data : new ProjectOutput(project)
@@ -51,7 +49,7 @@ export default class ProjectService {
     }
 
     async update(input : ProjectCreateInput, id : string) : Promise<IResponse> {
-        const project = await this.repo.findById(id)
+        const project : Project = await this.repo.findById(id)
 
         if (!project)
             return new BadRequestResponse({
@@ -61,10 +59,34 @@ export default class ProjectService {
         
         Object.assign(project, input)
 
-        await this.repo.update(project)
+        await this.repo.update(project as ProjectEntity)
 
         return new SuccessResponse({
             data : project
+        })
+    }
+
+    async toggleHeart(projectId: string, userId: string) {
+        const project  = await this.repo.findById(projectId, ['members'])
+
+        if (!project)
+            return new BadRequestResponse({ message: errors.ENTITY_NOT_FOUND })
+
+        console.table({
+            includes : project.hearts.includes(userId),
+            userId : userId,
+        })
+        
+        if (project.hearts.includes(userId))
+            project.hearts.filter((id : string) => id != userId)
+        else 
+            project.hearts.push(userId)
+        
+        await this.repo.update(project)
+
+        return new SuccessResponse({
+            status: 200,
+            data: new ProjectOutput(project, userId)
         })
     }
 }

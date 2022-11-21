@@ -1,4 +1,11 @@
 import { resolve } from "path";
 import { config } from "dotenv"
 
-config({ path: resolve(__dirname, '../../.env') })
+const getEnvPath = () => {
+    if ((process.env.NODE_ENV || '').toLowerCase() == 'prod') 
+        return '../../.env.prod'
+    else
+        return '../../.env'
+}
+
+config({ path: resolve(__dirname, getEnvPath())})

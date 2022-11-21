@@ -1,8 +1,5 @@
-import { MetadataAlreadyExistsError } from "typeorm";
-import axios from "axios";
 import fs from "fs";
-import { error } from "console";
-import IResponse from "../../application/Responses/IResponse";
+import transporter from "./Transporter";
 
 export type EmailData = {
     to : string,
@@ -13,21 +10,37 @@ export type EmailData = {
 export default class EmailService {
     async send(data: EmailData, template: string) {
         console.log('[INFO] sending email with template', template);
-   
-        const reqBody = {
-            ...data,
-            body : await this.getTemplate(template)
-        }  
-
+        
         try {
-             const mailRes = await axios.post(`${process.env.MAIL_SERVICE_URL}/send`, reqBody)
+            data.body = this.processTemplate(data.values, await this.getTemplate(template) as string)
 
-            return mailRes.data as IResponse
+            this.sendEmail(data.to, data.subject, data.body)
         } catch (e) {
             console.error(e)
-            return e.response.data
         }
     };
+
+    private processTemplate = (values : Object, template : string) => {
+        const valueEntries = Object.entries(values)
+        let proccessedTemplate = template;
+    
+        valueEntries.forEach(([key, value]) => {
+            proccessedTemplate = proccessedTemplate.replace('${'+key+'}', value)
+        })
+    
+        return proccessedTemplate;
+    }
+
+    private sendEmail = async (_to : string, _subject : string , _body : string) => {
+        const email = await transporter.sendMail({
+            from: `${process.env.MAIL_SENDER_NAME} <${process.env.MAIL_USER}>`,
+            to: _to,
+            subject: _subject,
+            html: _body
+        })
+    
+        console.log(`email sent to ${_to}, id : ${email.messageId}, subject : ${_subject}`)
+    }
 
     private async getTemplate(src : string) {
         return new Promise((resolve,reject)=>{

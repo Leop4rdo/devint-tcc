@@ -39,7 +39,7 @@ const HomePage : React.FC<{ navigation : any }> = ({navigation}) => {
     useEffect(() => { setPosts([]); getPosts() }, [isFocused])
 
     return (
-        <LayoutWrapper navigation={navigation}>
+        <LayoutWrapper navigation={navigation} focused={isFocused}>
 
             <View style={styles.page}>
                 <Pressable onPress={() => navigation.navigate('post-register')}style={styles.floatingButton}>
@@ -54,7 +54,7 @@ const HomePage : React.FC<{ navigation : any }> = ({navigation}) => {
                     contentContainerStyle={{paddingBottom: screenHeight * .1}}
                     onEndReached={getPosts}
                     onEndReachedThreshold={.1}
-                    ListHeaderComponent={<DevCarousel />}
+                    ListHeaderComponent={<DevCarousel navigation={navigation}/>}
                     ListFooterComponent={<ActivityIndicator />}
                     renderItem={({ item }) => (
                         <Post 

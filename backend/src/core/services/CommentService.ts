@@ -28,7 +28,7 @@ export default class CommentService {
         
         return new SuccessResponse({
             status : 201,
-            data : await this._.create(comment as CommentEntity)
+            data : await this._.create(comment as unknown as CommentEntity)
         })
     }
 

@@ -47,7 +47,7 @@ export default class DevService {
     async list(filters : PaginateListInput) : Promise<IResponse> {
         const devs = await this.repo.listByFilters(filters);
     
-        const mapped = devs.map((dev) => new DevMinimalOutput(dev as IDevProps))
+        const mapped = devs.map((dev) => new DevMinimalOutput(dev as unknown as IDevProps))
 
         return new SuccessResponse({ data : mapped })
     }
@@ -79,7 +79,7 @@ export default class DevService {
         else 
             dev.following.splice(targetIndex, 1)
 
-        await this.repo.update(dev as DevEntity)
+        await this.repo.update(dev as unknown as DevEntity)
         
         return new SuccessResponse({
             status : 200,

@@ -1,16 +1,16 @@
+import IDevMinimal from "./IDev";
 import IDevProps from "./IDev";
 import { IPost } from "./IPost";
 
-export default interface IProjectProps {
-    id ?: string
-    name : string
+export default interface IProject {
+    id : string
     bannerURI : string
-    githubRepo: string
-    license : String
-    helpWanted : boolean
-    desc : string
-    posts : IPost[]
-    members : IDevProps[]
+    name: string
+    desc: string
+    githubRepository: JSON
+    members : IDevMinimal[]
     owner : string
-    hearts : JSON
+    openSource: boolean
+    hearts: JSON
+    alreadyHearted : boolean
 }

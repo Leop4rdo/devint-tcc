@@ -9,8 +9,8 @@ import { AuthContext } from "store/context/Auth.context";
 import * as devService from "../../../services/dev.service";
 import Input from "components/shared/Input";
 import Select from "components/shared/Select";
-import PostsTab from "components/ProfileTabs/Posts";
-import { v4 as randomUUIDV4 } from "uuid"
+import PostsTab from "components/ProfileTabs/Posts/Posts";
+import ProjectsTabs from "components/ProfileTabs/Projects/Projects"; 
 import firebase from "config/firebase";
 import AutoTextArea from "components/shared/TextArea";
 import { dateMask } from "utils/masks";
@@ -97,7 +97,10 @@ const UserProfilePage: React.FC = () => {
         if (!devId) return
         const res = await devService.findById(devId)
 
-        setDev(res.data)
+        setDev({
+            ...res.data,
+            birthday: res.data.birthday.split('-').reverse().join('/')
+        })
         setFollowing(res.data?.followers.find((d: IDevMinimal) => d.id === authContext?.userData.id) != undefined)
     }
 
@@ -125,18 +128,24 @@ const UserProfilePage: React.FC = () => {
         setEditing(!editing)    
     }
 
+    const getDevs = async () => {
+        const res = await devService.list({ limit: 24 })
+
+        setSelectSkill(res.data)
+    }
+
     return (
         <MenuWapper>
             <div className="profile-page">
                 <div className="background-image">
                     {
-                        (authContext?.userData?.id == devId) ? 
+                        (authContext?.userData?.id == devId) ?
                             <div className="upload-new-image">
                                 <input accept="image/*" type="file" name="banner" id="attachment-input" onClick={handleInputChange}/>
                                 <label htmlFor="attachment-input"><Icon name="image" onClick={uploadImage} /></label>
                             </div>
 
-                        : ''    
+                            : ''
                     }
                     <img src={dev?.bannerURI} />
                 </div>
@@ -150,10 +159,10 @@ const UserProfilePage: React.FC = () => {
                         <h2>{dev?.name}</h2>
 
                         {dev?.githubUsername ?
-                                <span>     
-                                    {dev?.githubUsername}
-                                </span>
-                                : ''
+                            <span>
+                                {dev?.githubUsername}
+                            </span>
+                            : ''
                         }
 
 
@@ -198,6 +207,9 @@ const UserProfilePage: React.FC = () => {
                     <hr></hr>
                     <div className="selected-tab">
                         {currentTab === "postsTab" ? <PostsTab devId={devId || ''} /> : ""}
+
+                        {currentTab === "projectsTab" ? <ProjectsTabs devId={devId || ''}/>
+                         : ""}
                     </div>
                 </div>
 

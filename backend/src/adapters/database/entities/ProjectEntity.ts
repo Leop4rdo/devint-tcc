@@ -9,21 +9,18 @@ export default class ProjectEntity {
 
     @Column({ nullable : false})
     name: string
+    
+    @Column()
+    desc: string
 
     @Column({ nullable : true, name : 'banner_uri' })
     bannerURI : string
     
-    @Column({ nullable : false, name : 'github_repo'})
-    githubRepo: string
+    @Column('jsonb', { nullable : false, name : 'github_repository'})
+    githubRepository: JSON
 
-    @Column({ default : 'All rights reserved'})
-    license: String
-    
-    @Column({ name : 'help_wanted', default : false})
-    helpWanted: boolean
-   
-    @Column()
-    desc: string
+    @Column({ name : 'open_source', default : false})
+    openSource: boolean
 
     @OneToMany(() => PostEntity, (post) => post.project)
     posts : PostEntity[]

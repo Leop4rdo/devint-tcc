@@ -1,0 +1,204 @@
+.modal-container-global {
+    background-color: $color-modal-wrapper-background;
+    top: 0;
+    left: 0;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+
+    .container-elements {
+        width: 40vw;
+        height: 90vh;
+        background-color: $color-dark-gray;
+        border-radius: 16px;
+        word-wrap: break-word;
+
+        .elements {
+            padding: 20px;
+
+            .title-project {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                h1 {
+                    color: $color-primary;
+                    margin-bottom: 24px;
+                }
+
+                .icon {
+                    font-size: 32px;
+                    color: $color-white;
+                    margin-bottom: 15px;
+                    cursor: pointer;
+                }
+            }
+
+            .container-image {  
+                margin-bottom: 16px;
+                img{
+                    width: 100%;
+                    height: 300px;
+                    object-fit: contain;
+                }
+
+                
+            }
+
+
+        }
+
+        .container-data-filling {
+            display: flex;
+            flex-direction: column;
+            word-wrap: break-word;
+
+            .input-container {
+                width: 100%;
+            }
+
+            .data-github {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                align-items: center;
+
+                .input-container {
+                    width: 70%;
+                }
+
+                span {
+                    color: $color-light-gray;
+                    margin-top: -10px;
+                }
+
+                .toggle-button {
+                    margin-top: -10px;
+
+                    #chk {
+                        display: none;
+                    }
+
+                    .switch {
+                        position: relative;
+                        background-color: $color-black;
+                        width: 60px;
+                        height: 30px;
+                        border-radius: 40px;
+                        display: flex;
+                        align-items: center;
+                        padding: 5px;
+                        transition: all .5s ease-in-out;
+                        cursor: pointer;
+                        border: 2px solid;
+
+                        border-color: $color-gray;
+                    }
+
+                    .slider {
+                        margin-top: 0px;
+                        position: absolute;
+                        background-color: $color-light-gray;
+                        border-radius: 50%;
+                        width: 20px;
+                        height: 20px;
+                        transition: all .3s ease-in-out;
+                    }
+
+                    #chk:checked~.switch .slider {
+                        transform: translateX(26px);
+                    }
+                }
+            }
+
+            .container-participants-github {
+                display: flex;
+
+                margin-top: 24px;
+                justify-content: space-around;
+
+                .input-container {
+                    width: 90%;
+                }
+
+                .btn-primary {
+                    width: 50px;
+                    height: 43px;
+                }
+
+            }
+
+            .container-scroll-participants-project {
+                overflow-y: auto;
+                width: 100%;
+                height: 200px;
+                padding-right: 16px;
+
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+
+                &::-webkit-scrollbar {
+                    background-color: transparent;
+                    width: 8px;
+                }
+
+                &::-webkit-scrollbar-thumb {
+                    background-color: $color-light-gray;
+                    border-radius: 8px;
+                }
+
+
+                .conatiner-participants-project {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    .participants-project {
+                        margin-top: 24px;
+
+                        .participants {
+                            display: flex;
+                            gap: 16px;
+
+                            .image {
+                                width: 48px;
+                                height: 48px;
+                                background-color: $color-white;
+                                border-radius: 50%;
+                            }
+
+                            .container-information-participants {
+                                .developer-name {
+                                    span {
+                                        font-size: 20px;
+                                        color: $color-white;
+                                    }
+                                }
+
+                                .developer-github {
+                                    span {
+                                        color: $color-light-gray;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .icon {
+                        color: $color-red;
+                        cursor: pointer;
+                        margin-top: 30px;
+                    }
+                }
+            }
+
+
+
+        }
+    }
+}

@@ -15,9 +15,11 @@ import SocialLinkEntity from "@entities/SocialLinkEntity";
 import CommentEntity from "./entities/CommentEntity";
 import { readFileSync } from "fs";
 
+
 export const AppDataSource = new DataSource({
     synchronize : true,
     type: "postgres",
+    ssl : false,
     host: process.env.DB_HOST || 'localhost',
     port: +process.env.DB_PORT || 5432, 
     username: process.env.DB_USER || 'root',
