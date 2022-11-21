@@ -13,7 +13,7 @@ export interface PaginationQuery {
     offset ?: number
 }
 
-export const baseUrl = process.env.REACT_ENV_API_URL || "http://10.107.144.6:8080/api/v1" 
+export const baseUrl = process.env.REACT_ENV_API_URL || "http://localhost:8080/api/v1" 
 
 export const getToken = () => {
     return localStorage.getItem("devint-auth")

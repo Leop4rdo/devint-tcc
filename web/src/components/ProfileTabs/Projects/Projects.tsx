@@ -29,7 +29,7 @@ const ProjectsTabs: React.FC<IProjectTab> = ({ devId }) => {
 
 
 
-            <Project />
+            <Project openCloseModal={ModalProject}/>
         </>
 
 

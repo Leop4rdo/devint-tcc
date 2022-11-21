@@ -2,9 +2,11 @@ import Icon from "components/shared/Icon";
 import React from "react";
 import Button from "components/shared/Button";
 
+interface IProject {
+    openCloseModal : any
+}
 
-
-const Project: React.FC = () => {
+const Project: React.FC<IProject> = ({openCloseModal}) => {
 
     return (
         <div className="container-project">
@@ -17,7 +19,7 @@ const Project: React.FC = () => {
                     <h2>Devint NetWork</h2>
                     <span>(open source)</span>
                 </div>
-                <Icon name="edit" />
+                <Icon name="edit" onClick={openCloseModal}/>
 
             </div>
 
