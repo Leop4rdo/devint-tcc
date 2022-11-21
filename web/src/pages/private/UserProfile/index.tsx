@@ -142,8 +142,8 @@ const UserProfilePage: React.FC = () => {
                     {
                         (authContext?.userData?.id == devId) ?
                             <div className="upload-new-image">
-                                <input accept="image/*" type="file" name="banner" id="attachment-input" onClick={handleInputChange}/>
-                                <label htmlFor="attachment-input"><Icon name="image" onClick={uploadImage} /></label>
+                                <input accept="image/*" type="file" name="banner" id="attachment-input" onClick={uploadImage}/>
+                                <label htmlFor="attachment-input"><Icon name="image"  /></label>
                             </div>
 
                             : ''
