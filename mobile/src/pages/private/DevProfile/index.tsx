@@ -223,7 +223,8 @@ const ProfilePage: React.FC<{ route : any, navigation : any }> = ({route, naviga
                             (currentSection === 3) ? 
                                 <DetailsSection canEdit={authContext?.userData.id == data?.id} data={data as IDev} onFinishEditing={updateDev}/>
                             : (currentSection === 2) ?
-                                <ProfileProjectsSection navigation={navigation}/>
+
+                                <ProfileProjectSection navigation={navigation}/>
                             : (currentSection === 1) ?
                             <Text>1</Text>
                             : (currentSection === 0 ) ? 
