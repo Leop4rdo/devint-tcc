@@ -2,9 +2,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomePage from "../pages/private/Home"
 import PostRegisterPage from "../pages/private/posts/Register";
 import ProfilePage from "../pages/private/DevProfile";
-import Card from "../components/Card";
-
-
+import ProjectRegisterPage from "../pages/private/ProjectRegister";
 
 const PrivateNavigator : React.FC = () => {
     const Stack = createNativeStackNavigator()
@@ -15,7 +13,7 @@ const PrivateNavigator : React.FC = () => {
             {<Stack.Screen name="home" component={HomePage} /> }
             <Stack.Screen name="profile" component={ProfilePage}/>
             <Stack.Screen name="post-register" component={PostRegisterPage} />
-           
+            <Stack.Screen name="project-register" component={ProjectRegisterPage} />
         </Stack.Navigator>
     )
 }

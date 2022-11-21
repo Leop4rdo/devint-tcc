@@ -69,8 +69,13 @@ a {
   @import "./components/shared/NewPost/index.scss";
   @import "./components/shared/Comment/index.scss";
   @import "./components/shared/CreateComment/index.scss";
+  @import "./components/shared/TextArea/index.scss";
   @import "./components/layout/UserProfileEdit/index.scss";
-  @import "./components/PostTab/index.scss";
+  @import "./components/ProfileTabs/Posts/index.scss";
+  @import "./components/layout/NewContents/index.scss";
+  @import "./components/ProfileTabs/Projects/index.scss";
+  @import "./components/Project/index.scss";
+  @import "./components/layout/Modals/CreateProjects/index.scss";
   
 
   

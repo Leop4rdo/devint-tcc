@@ -6,11 +6,10 @@ import Dev from "./Dev";
 export default class Project {
     id : string
     name : string
-    bannerURI : string
-    githubRepo: string
-    license : String
-    helpWanted : boolean
     desc : string
+    bannerURI : string
+    githubRepository: JSON
+    openSource : boolean
     posts : Post[]
     members : Dev[]
     owner : string

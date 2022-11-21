@@ -18,6 +18,7 @@ import * as devService from "../../../services/dev.service";
 import { AuthContext } from "../../../store/context/Auth.context";
 import ProfilePostSection from "../../../components/ProfileSections/Posts";
 import { useIsFocused } from "@react-navigation/native";
+import ProfileProjectsSection from "../../../components/ProfileSections/Projects";
 
 const ProfilePage: React.FC<{ route : any, navigation : any }> = ({route, navigation}) => {
     const [currentSection, setCurrentSection] = useState(0);
@@ -150,7 +151,7 @@ const ProfilePage: React.FC<{ route : any, navigation : any }> = ({route, naviga
                             {
                                 authContext?.userData.id != data?.id &&
                                 <Pressable style={styles.followButton} onPress={toggleFollow}>
-                                    <Text style={styles.followButtonText}>{ following ? '+ Seguir' : 'Seguindo'}</Text>
+                                    <Text style={styles.followButtonText}>{ following ? 'Seguindo' : '+ Seguir'}</Text>
                                 </Pressable>
                             }
                         </View>
@@ -222,6 +223,7 @@ const ProfilePage: React.FC<{ route : any, navigation : any }> = ({route, naviga
                             (currentSection === 3) ? 
                                 <DetailsSection canEdit={authContext?.userData.id == data?.id} data={data as IDev} onFinishEditing={updateDev}/>
                             : (currentSection === 2) ?
+
                                 <ProfileProjectSection navigation={navigation}/>
                             : (currentSection === 1) ?
                             <Text>1</Text>

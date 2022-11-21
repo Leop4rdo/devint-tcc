@@ -15,6 +15,7 @@ import * as devService from "../../../services/dev.service"
 import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
 import PostDetailsModal from "components/layout/Modals/PostDetailsModal";
 import { resolveModuleName } from "typescript";
+import NewContents from "components/layout/NewContents/NewContents";
 
 const FeedPage: React.FC = () => {
     const [devs, setDevs] = useState<IDevMinimal[]>([])
@@ -52,13 +53,11 @@ const FeedPage: React.FC = () => {
             <div className="feed">
                 <div className="feed-components-container">
                     <div className="feed-center">
-                        <div className="new-post">
-                            <span>O que você tem para nos dizer hoje?</span>
-                            <button className="btn-primary" onClick={() => {
-                                setWrittingPost(true)
-                                
-                            }}>Novo Post</button>
-                        </div>
+                        <NewContents 
+                        catchphrase="O que você tem para nos dizer hoje?" 
+                        newContentName="Novo Post"
+                        openCloseModal={() => setWrittingPost(true)}
+                        />
 
                         <div className="outstanding-container">
                             <h2>Devs em destaque</h2>
