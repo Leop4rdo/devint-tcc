@@ -8,6 +8,7 @@ import ChangeMyPasswordPage from "pages/public/ChangeMyPassword";
 import EmailConfirmPage from "pages/public/EmailConfirm/EmailConfirmPage";
 import LoginPage from "pages/public/Login";
 import UserProfilePage from "pages/private/UserProfile";
+import FeedPage from "pages/private/Feed";
 
 
 const PublicRouter: React.FC = () => {
