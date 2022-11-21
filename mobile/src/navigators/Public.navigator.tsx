@@ -4,7 +4,7 @@ import LoginWrapper from "../pages/public/ForgotMyPassword";
 import LandingPage from "../pages/public/Landing";
 import LoginPage from "../pages/public/Login";
 import RegisterPage from "../pages/public/Register";
-import Card from "../components/Card";
+import Card from "../components/ProfileSections/Projects/ProjectCard";
 
 import { NativeRouter, Route}  from "react-router-native"
 
