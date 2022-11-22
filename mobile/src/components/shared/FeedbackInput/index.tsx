@@ -9,6 +9,7 @@ interface IFeedbackTextInput {
     placeholder? : string
     isPassword? : boolean
     style? : any
+    inputStyle? : any
     icon? : keyof typeof MaterialIcons.glyphMap
     iconSize? : number
     keyboardType ?: "default" | "numeric" | "email-address" | "user"
@@ -19,6 +20,8 @@ interface IFeedbackTextInput {
     image? : any,
     autoFocus ?: boolean
     focusImage ?: string
+    multiline ?: boolean
+    maxLines ?: number
 }
 
 export const inputStatus = {
@@ -27,7 +30,7 @@ export const inputStatus = {
     INVALID: 2
 }
 
-const FeedbackTextInput : React.FC<IFeedbackTextInput> = ({style, autoFocus, isPassword, placeholder, icon, iconSize, onChangeText, value, validate, keyboardType, maxLength, image, focusImage}) => {
+const FeedbackTextInput : React.FC<IFeedbackTextInput> = ({style, inputStyle, maxLines, autoFocus, isPassword, placeholder, icon, iconSize, onChangeText, value, validate, keyboardType, maxLength, image, focusImage, multiline}) => {
     const [status, setStatus] = useState(inputStatus.NEUTRAL);
     const [textVisible, setTextVisible] = useState(false);
 
@@ -67,11 +70,13 @@ const FeedbackTextInput : React.FC<IFeedbackTextInput> = ({style, autoFocus, isP
             { icon && <MaterialIcons name={icon} size={ iconSize || 24} color={getIconColor()} style={{marginRight : 4}}/>}
             <TextInput
                 secureTextEntry={isPassword && !textVisible || false}
-                style={styles.input}
+                style={[styles.input, inputStyle]}
                 placeholder={placeholder}
                 onChangeText={onChangeText}
                 value={value}
                 autoFocus={autoFocus}
+                multiline={multiline}
+                numberOfLines={maxLines || 1}
                 keyboardType={keyboardType || "default"}
                 placeholderTextColor={colors.GRAY}
                 onFocus={() => status != inputStatus.INVALID && setStatus(inputStatus.FOCUSED)}

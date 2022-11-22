@@ -1,5 +1,5 @@
 
-import PostsTab from "components/ProfileTabs/Posts";
+import PostsTab from "components/ProfileTabs/Posts/Posts";
 import FeedPage from "pages/private/Feed";
 import UserProfilePage from "pages/private/UserProfile";
 import React from "react"

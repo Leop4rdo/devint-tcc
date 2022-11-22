@@ -13,16 +13,20 @@ export default class ProjectOutput {
     owner : string
     openSource: boolean
     hearts: JSON
+    alreadyHearted : boolean
 
-    constructor(props : IProjectProps) {
+    constructor(props : IProjectProps, userId ?: string) {
+        const heartsArray = JSON.parse(JSON.stringify(props.hearts))
+
         this.id = props.id
         this.name = props.name
         this.bannerURI = props.bannerURI
         this.githubRepository = props.githubRepository
         this.openSource = props.openSource
         this.desc = props.desc
-        this.hearts = JSON.parse(JSON.stringify(props.hearts)).length
+        this.hearts = heartsArray.length
         this.owner = props.owner
         this.members = props.members.map((dev) => new DevMinimalOutput(dev))
+        this.alreadyHearted = heartsArray.includes(userId) || false
     }
 }

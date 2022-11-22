@@ -1,0 +1,14 @@
+.new-post{
+    width: 80%;
+    background-color: #1F252F;
+    display: flex;
+    padding: 1em;
+    border-radius: 1em;
+    justify-content: space-between;
+    margin-top: 2em;
+    align-items: center;
+
+    span {
+        color: #F5F9FF; 
+    }
+}
