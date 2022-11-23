@@ -54,8 +54,10 @@ const LoginPage : React.FC<any> = ({navigation}) => {
                         placeholder="E-mail" 
                         />
 
-                    <View style={{width: '100%', alignItems : 'flex-end'}}>
+                    <View style={{ alignItems : 'flex-end'}}>
                         <FeedbackTextInput  
+                            style={{ width : '95%'}}
+                            inputStyle={{ width : '85%' }}
                             isPassword
                             icon="lock-open" 
                             onChangeText={(text) => handleInputChange(text, 'password')}  

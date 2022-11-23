@@ -110,8 +110,6 @@ const ProfilePage: React.FC<{ route : any, navigation : any }> = ({route, naviga
     }
 
     const toggleEditing = () => {
-        Alert.alert((editing) ? 'true' : 'false')
-
         if (editing)
             updateDev(data!)
 

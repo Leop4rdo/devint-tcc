@@ -14,6 +14,7 @@ import Dev from "../domain/Dev";
 import BadRequestResponse from "@src/application/Responses/BadRequestResponse";
 import DevUpdateInput from "@src/ports/input/user/dev/DevUpdateInput";
 import errors from "@src/helpers/errors";
+import UserQueryFilter from "@src/ports/input/user/UserQueryFilter";
 
 export default class DevService {
     private repo : DevRepository
@@ -44,7 +45,7 @@ export default class DevService {
         })
     }
 
-    async list(filters : PaginateListInput) : Promise<IResponse> {
+    async list(filters : UserQueryFilter) : Promise<IResponse> {
         const devs = await this.repo.listByFilters(filters);
     
         const mapped = devs.map((dev) => new DevMinimalOutput(dev as unknown as IDevProps))

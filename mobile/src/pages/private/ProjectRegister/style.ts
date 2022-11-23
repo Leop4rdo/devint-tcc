@@ -37,9 +37,8 @@ export default StyleSheet.create({
     },
 
     formWrapper : {
-        width : "100%",
-        minHeight : screenHeight,
         padding : 16,
+        paddingBottom : 160
     },
 
     bannerContainer : {
@@ -91,13 +90,36 @@ export default StyleSheet.create({
         marginRight : 16
     },
 
-    addBtn : {
-        height : 48,
-        marginLeft : 8,
-        aspectRatio : 1,
-        borderRadius : 16,
-        backgroundColor : colors.PRIMARY,
+    teamMemberCard : {
+        flexDirection : 'row',
         alignItems : 'center',
-        justifyContent : 'center'
+        justifyContent : 'space-between',
+
+        width : "100%",
+        marginBottom : 16
+    },
+
+    devPic : {
+        marginRight : 16,
+
+        width : 48,
+        height : 48,
+
+        borderRadius : 48,
+        borderWidth : 1,
+        borderColor : colors.PRIMARY
+    },
+
+    devName : {
+        fontFamily : fonts.POPPINS_REGULAR,
+        fontSize : 16,
+        color : '#FFF'
+    },
+
+    devGithub : {
+        fontFamily : fonts.POPPINS_REGULAR,
+        fontSize : 12,
+        color : colors.LIGHT_GRAY
     }
+
 })
