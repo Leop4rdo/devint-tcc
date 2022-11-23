@@ -83,7 +83,7 @@ export default class DevService {
         
         return new SuccessResponse({
             status : 200,
-            data : new DevOutput(dev)
+            data : new DevOutput(dev as unknown as IDevProps)
         })
     }
 

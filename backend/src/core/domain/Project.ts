@@ -14,6 +14,8 @@ export default class Project {
     members : Dev[]
     owner : string
     hearts : JSON
+    createdAt : Timestamp
+    updatedAt : Timestamp
 
     constructor(props : IProjectProps) {
         Object.assign(this, props)

@@ -5,7 +5,7 @@ import AbstractRepository from "./AbstractRepository"
 
 interface PostFilters extends PaginateListInput {
     writter ?: string
-    order : 'RANDOM' | 'RECENT' | 'TRENDING'
+    order ?: 'RANDOM' | 'RECENT' | 'TRENDING'
 }
 
 export default class PostRepository extends AbstractRepository<PostEntity> {
@@ -24,12 +24,9 @@ export default class PostRepository extends AbstractRepository<PostEntity> {
             .getMany()
     }
 
-    private getOrderQuery (order: string){
+    private getOrderQuery (order?: string){
 
-        switch (order) {
-            case 'RANDOM':
-                order = 'posts.order'
-                break;
+        switch ((order||'').toUpperCase()) {
             case 'RECENT':
                 order = 'posts.createdAt'
                 break;
@@ -37,6 +34,7 @@ export default class PostRepository extends AbstractRepository<PostEntity> {
                 order = 'posts.hearts'
                 break;
             default:
+                order = 'posts.order'
                 break;
         }
 
