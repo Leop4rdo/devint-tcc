@@ -12,7 +12,7 @@
 
         img {
             width: 100%;
-            aspect-ratio: 4;
+            aspect-ratio: 36 / 9;
             object-fit: fill;
         }
 
@@ -58,6 +58,7 @@
             align-items: center;
             flex-direction: column;
             gap: 1.5em;
+            padding-top: 1.5em;
 
             .icon {
                 width: 1em;

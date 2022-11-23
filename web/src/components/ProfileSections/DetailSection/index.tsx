@@ -40,11 +40,9 @@ const DetailSection: React.FC<IDetailSectionProps> = (props) => {
 		skills: false,
 	});
 
-	const getGender = (gender: string) => {
-		if (!gender) return "o";
-
-		if (gender.toLocaleLowerCase() == "f") return "Feminino";
-		else if (gender.toLocaleLowerCase() == "m") return "Masculino";
+	const getGenderName = (gender: string) => {
+		if (gender == "f") return "Feminino";
+		else if (gender == "m") return "Masculino";
 		else return "Outro";
 	};
 
@@ -71,17 +69,12 @@ const DetailSection: React.FC<IDetailSectionProps> = (props) => {
 	) => {
 		const selected = options.find((o) => o.value == value);
 
-		console.table({
-			value,
-			key,
-		})
-
 		setData({
 			...data,
 			[key]: {
-                id : selected.value,
-                name : selected.label
-            },
+				id: selected.value,
+				name: selected.label,
+			},
 		});
 	};
 
@@ -149,7 +142,6 @@ const DetailSection: React.FC<IDetailSectionProps> = (props) => {
 				title="Contato"
 				headerIcon="forum"
 				canEdit={props.canEdit}
-                
 			>
 				<InfoItem icon="mail" value={data.email} />
 			</DetailCard>
@@ -164,29 +156,31 @@ const DetailSection: React.FC<IDetailSectionProps> = (props) => {
 				<InfoItem
 					icon="today"
 					value={data.birthday}
-					onChangeText={(text) =>
-						handleChange(dateMask(text), "birthday")
+					onChangeText={(event) =>
+						handleChange(event?.target.value, "birthday")
 					}
 					editing={editing.about}
 				/>
 				<InfoItem
 					icon="person"
-					value={editing.about ? data.gender : getGender(data.gender)}
+					value={
+						editing.about ? data.gender : getGenderName(data.gender)
+					}
 					options={genderOptions}
 					onChangeText={(event) =>
-						handleSelectChange(
+						handleChange(
 							event?.target.value,
 							"gender",
-							genderOptions
-						)}
-					editing-={editing.about}
+						)
+					}
+					editing={editing.about}
 				/>
 				<InfoItem
 					imageUri={"./public/assets/icons/github.svg"}
 					value={data.githubUsername}
 					editing={editing.about}
-					onChangeText={(text) =>
-						handleChange(text, "githubUsername")
+					onChangeText={(event) =>
+						handleChange(event?.target.value, "githubUsername")
 					}
 				/>
 			</DetailCard>
@@ -196,6 +190,7 @@ const DetailSection: React.FC<IDetailSectionProps> = (props) => {
 				headerIcon="center_focus_strong"
 				onEditPress={() => toggleEditing("careerFocus")}
 				editing={editing.careerFocus}
+				canEdit={props.canEdit}
 			>
 				<InfoItem
 					value={
@@ -249,15 +244,21 @@ const DetailSection: React.FC<IDetailSectionProps> = (props) => {
 				canEdit={props.canEdit}
 			>
 				{editing.skills && (
-					<Select onChange={(e : any) => addSkill(e.target.value)}>
-						<option value='' disabled label="Selecionar uma skill" />
+					<Select onChange={(e: any) => addSkill(e.target.value)}>
+						<option
+							value=""
+							disabled
+							label="Selecionar uma skill"
+						/>
 						{allSkills
 							.filter(
 								(skill) =>
 									!data.skills.find((s) => s.id == skill.id)
 							)
 							.map((skill) => (
-								<option	value={skill.id} key={skill.id}>{skill.name}</option>
+								<option value={skill.id} key={skill.id}>
+									{skill.name}
+								</option>
 							))}
 					</Select>
 				)}

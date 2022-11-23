@@ -66,7 +66,9 @@ const UserProfilePage: React.FC = () => {
                 bannerURI : (evt.target.name == 'banner') ? downloadURL : dev?.bannerURI!
             }
 
+            console.log(downloadURL);
             
+
             setDev(updateData)
             updateUser(updateData)
 
@@ -159,20 +161,12 @@ const UserProfilePage: React.FC = () => {
                         
                         <h2>{dev?.name}</h2>
 
-                        {dev?.githubUsername ?
-                            <span>
-                                {dev?.githubUsername}
-                            </span>
-                            : ''
-                        }
-
                         <div className="bio-edit">
                             <Icon name={editing? "check" : "edit"} onClick={() => setEditing(!editing)} />
                             { (editing) ?
-                                    <AutoTextArea name="bio" onChange={(evt) => handleInputChange} placeholder="Conte um pouco sobre você" />
+                                    <AutoTextArea name="bio" onChange={handleInputChange} placeholder="Conte um pouco sobre você" />
                                 :
-                                dev?.bio ? dev.bio : 
-                                <p>Olá, meu nome é {dev?.name}</p>
+                                dev?.bio && <span>{dev.bio}</span>
                             }
                         </div>    
 
