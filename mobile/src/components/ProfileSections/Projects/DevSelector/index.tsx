@@ -7,7 +7,11 @@ import FeedbackTextInput from "../../../shared/FeedbackInput"
 import styles from "./style"
 import * as devService from "../../../../services/dev.service"
 
-const DevSelector : React.FC = () => {
+interface DevSelectorProps {
+    onSelect : (dev : IDevMinimal) => void
+}
+
+const DevSelector : React.FC<DevSelectorProps> = ({ onSelect }) => {
     const [devs, setDevs] = useState<IDevMinimal[]>([])
     const [search, setSearch] = useState('')
 
@@ -17,7 +21,7 @@ const DevSelector : React.FC = () => {
 
         const res = await devService.list({
             search,
-            limit : 4,
+            limit : 2,
         })
 
         setDevs(res.data)
@@ -37,11 +41,19 @@ const DevSelector : React.FC = () => {
             />
 
             {
-                search.length > 0 &&
+                search.length > 0 && devs.length > 0 &&
                 <View style={styles.optionsWrapper}>
                     {
                         devs.map((dev) => 
-                            <DevOption data={dev} onPress={() => {Alert.alert('foda')}} />
+                            <DevOption 
+                                data={dev} 
+                                onPress={() => {
+                                    onSelect(dev);
+
+                                    setDevs([])
+                                    setSearch('')
+                                }} 
+                            />
                         )
                     }
                 </View>
