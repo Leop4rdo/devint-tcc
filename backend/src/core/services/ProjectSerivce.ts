@@ -39,7 +39,9 @@ export default class ProjectService {
     async create(input : ProjectCreateInput, ownerId : string) : Promise<IResponse> {
         const project = await this.repo.create(new Project({
                 ...input,
-                members: [...input.members, { id: ownerId }],
+                members: (input.members.find((m) => m.id == ownerId)) ? 
+                    input.members 
+                    : [...input.members, { id: ownerId }],
                 owner: ownerId
             } as unknown as IProjectProps) as unknown as ProjectEntity)
 
@@ -71,11 +73,6 @@ export default class ProjectService {
 
         if (!project)
             return new BadRequestResponse({ message: errors.ENTITY_NOT_FOUND })
-
-        console.table({
-            includes : project.hearts.includes(userId),
-            userId : userId,
-        })
         
         if (project.hearts.includes(userId))
             project.hearts.filter((id : string) => id != userId)
