@@ -6,9 +6,6 @@ import LoginPage from "../pages/public/Login";
 import RegisterPage from "../pages/public/Register";
 import Card from "../components/ProfileSections/Projects/ProjectCard";
 
-import { NativeRouter, Route}  from "react-router-native"
-
-
 
 const PublicNavigator : React.FC = () => {
     const PublicStack = createNativeStackNavigator()
@@ -16,7 +13,7 @@ const PublicNavigator : React.FC = () => {
     return (
         <PublicStack.Navigator screenOptions={{ headerShown : false, animation : 'fade_from_bottom' }} initialRouteName="landing">
           
-          
+            <PublicStack.Screen name="landing" component={LandingPage} />
             <PublicStack.Screen name='login' component={LoginPage}/>
             <PublicStack.Screen name='register' component={RegisterPage} />
             <PublicStack.Screen name='loginwrapper' component={LoginWrapper} />

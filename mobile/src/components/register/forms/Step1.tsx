@@ -21,11 +21,11 @@ const RegisterFormStep1: React.FC<IRegisterFormProps> = ({ styles, formData, onC
 
     return (
         <Animated.View style={{ ...styles.form, opacity: opacityAnim.prop }}>
-            <FeedbackTextInput style={styles.input} placeholder="Digite seu nome" icon="person" onChangeText={(text: string) => onChange(text, "name")} ></FeedbackTextInput>
+            <FeedbackTextInput value={formData.name} style={styles.input} placeholder="Digite seu nome" icon="person" onChangeText={(text: string) => onChange(text, "name")} ></FeedbackTextInput>
 
-            <FeedbackTextInput style={styles.input} placeholder="Digite um email" icon="mail" onChangeText={(text: string) => onChange(text, "email")} keyboardType="email-address"></FeedbackTextInput>
+            <FeedbackTextInput value={formData.email} style={styles.input} placeholder="Digite um email" icon="mail" onChangeText={(text: string) => onChange(text, "email")} keyboardType="email-address"></FeedbackTextInput>
 
-            <FeedbackTextInput style={styles.input} placeholder="Usuário (opcional)" onChangeText={(text: string) => onChange(text, "github")} keyboardType="user" image={require("../../../../assets/github-icon-light-purple.png")} focusImage={require("../../../../assets/github-icon-light-purple.png")}></FeedbackTextInput>
+            <FeedbackTextInput value={formData.github} style={styles.input} placeholder="Usuário" onChangeText={(text: string) => onChange(text, "github")} keyboardType="user" image={require("../../../../assets/github-icon-gray.png")} focusImage={require("../../../../assets/github-icon-light-purple.png")}></FeedbackTextInput>
         </Animated.View>
     )
 }
