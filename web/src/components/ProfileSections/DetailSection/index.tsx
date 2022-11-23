@@ -173,7 +173,12 @@ const DetailSection: React.FC<IDetailSectionProps> = (props) => {
 					icon="person"
 					value={editing.about ? data.gender : getGender(data.gender)}
 					options={genderOptions}
-					onChangeText={(text) => handleChange(text, "gender")}
+					onChangeText={(event) =>
+						handleSelectChange(
+							event?.target.value,
+							"gender",
+							genderOptions
+						)}
 					editing-={editing.about}
 				/>
 				<InfoItem
