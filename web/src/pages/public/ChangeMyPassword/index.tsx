@@ -31,8 +31,6 @@ const ChangeMyPasswordPage: React.FC = () => {
             token : token || ""
         })
 
-        console.log(res)
-
         if (res.hasError) 
             return alert("Um erro inesperado aconteceu, tente novamente mais tarde")
         

@@ -120,6 +120,24 @@ export default StyleSheet.create({
         fontFamily : fonts.POPPINS_REGULAR,
         fontSize : 12,
         color : colors.LIGHT_GRAY
-    }
+    },
 
-})
+    saveBtn : {
+        width : "100%",
+        height : 48,
+        marginTop : 32,
+
+        borderRadius : 16,
+
+        backgroundColor : colors.PRIMARY,
+
+        justifyContent  : 'center',
+        alignItems : 'center'
+    },
+
+    saveBtnText : {
+        fontFamily : fonts.POPPINS_MEDIUM,
+        color : '#FFF',
+        fontSize : 16,
+    }
+})  

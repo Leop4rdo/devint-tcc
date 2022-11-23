@@ -1,6 +1,6 @@
 import { MaterialIcons } from "@expo/vector-icons"
-import { useContext, useState } from "react"
-import { Image, KeyboardAvoidingView, Platform, Pressable, ScrollView, Switch, Text, View } from "react-native"
+import { useContext, useEffect, useState } from "react"
+import { Alert, Image, KeyboardAvoidingView, Platform, Pressable, ScrollView, Switch, Text, View } from "react-native"
 import { color } from "react-native-reanimated"
 import DevSelector from "../../../components/ProfileSections/Projects/DevSelector"
 import ButtonComponent from "../../../components/shared/Button"
@@ -10,22 +10,64 @@ import { AuthContext } from "../../../store/context/Auth.context"
 import colors from "../../../styles/colors"
 
 import styles from './style'
+import * as ImagePicker from 'expo-image-picker'
+import firebase from '../../../config/firebase'
 
-
+import * as githubService from '../../../services/github.service'
+import * as projectService from '../../../services/project.service'
+import { useFocusEffect } from "@react-navigation/native"
+import { GithubRepository } from "../../../interfaces/IGithubRepository"
+import { Picker } from "@react-native-picker/picker"
+import IProject from "../../../interfaces/IProject"
+import PickerComponent from "../../../components/shared/Picker"
 
 const ProjectRegisterPage : React.FC<{ route : any, navigation : any }> = ({route, navigation}) => {
     const authContext = useContext(AuthContext)
-
-    const [formValues, setFormValues] = useState({
+    
+    const [uploading, setUploading] = useState(false)
+    const [repos, setRepos] = useState<GithubRepository[]>([])
+    const [formValues, setFormValues] = useState<IProject>({
         name : '',
         bannerURI : '',
-        githubRepository : '',
+        githubRepository : undefined,
         desc : '',
         openSource : false,
         members : [
             authContext?.userData
         ]
     })
+
+    const getRepos = async () => {
+        const res = await githubService.listRepositoriesFromUser(authContext?.userData.githubUsername);
+        
+        setRepos(res.map((repo : any) => {
+            return {
+                id : repo.id,
+                name : repo.name,
+                fullName : repo.full_name,
+                description : repo.description,
+                url : repo.url
+            } as GithubRepository
+        }))
+    }
+
+    const getRepoOptions = () : { label : string, value : string }[] => {
+        return repos.map((repo) => { 
+            return { 
+                label : repo.fullName,
+                value : repo.id
+            }
+        })
+    }
+
+    const selectRepository = (id : string) => {
+        const selected = repos.find((repo) => repo.id === id )
+
+        setFormValues({
+            ...formValues,
+            githubRepository : selected
+        })
+    }
 
     const handleTextChange = (value : string, key : keyof typeof formValues) => {
         setFormValues({
@@ -57,6 +99,60 @@ const ProjectRegisterPage : React.FC<{ route : any, navigation : any }> = ({rout
         })
     }
 
+    const pickImage = async () => {
+        if (uploading) return
+
+        const result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            allowsEditing : true,
+            aspect : [ 3, 1 ],
+            quality : 1
+        });
+
+        if (!result.cancelled)
+
+        upload(result.uri)
+    }
+
+    const upload = async (uri : string) => {
+        setUploading(true)
+
+        try {
+            const res = await fetch(uri)
+            const blob = await res.blob()
+            const fileName = uri.substring(uri.lastIndexOf('/')+1)
+
+            const uploaded = await firebase.storage().ref().child('projects/').child(fileName).put(blob)
+
+            setFormValues({
+                ...formValues,    
+                bannerURI : await uploaded.ref.getDownloadURL()
+            })
+        } catch (err) {
+            console.log(err)
+            Alert.alert('Houve um erro inesperado ao fazer upload!')
+        }
+
+        setUploading(false)
+    }
+
+    const saveProject = async () => {
+        const body = {
+            ...formValues
+        }
+
+        const res = await projectService.create(body)
+
+        if (!res.hasError) {
+            navigation.goBack()
+        } else {
+            Alert.alert('Houve um erro inesperado ao salvar projeto!')
+        }
+    }
+
+    useEffect(() => { getRepos() },[])
+
+
     return (
         <KeyboardAvoidingView 
             behavior={Platform.OS === "ios" ? "padding" : undefined}
@@ -78,7 +174,7 @@ const ProjectRegisterPage : React.FC<{ route : any, navigation : any }> = ({rout
                         formValues.bannerURI && 
                         <Image style={{ flex : 1 }} source={{ uri : formValues.bannerURI }} />
                     }
-                    <Pressable style={styles.addBannerBtn}>
+                    <Pressable style={styles.addBannerBtn} onPress={pickImage}>
                         <MaterialIcons name="add-a-photo" size={16} color="#FFF" />
                     </Pressable>
                 </View>
@@ -86,7 +182,15 @@ const ProjectRegisterPage : React.FC<{ route : any, navigation : any }> = ({rout
                 <View style={styles.divisor}/>
 
                 <FeedbackTextInput style={styles.input} placeholder="Nome" onChangeText={(value) => handleTextChange(value, 'name')} />
-                <FeedbackTextInput style={styles.input} placeholder="Repositório do github" onChangeText={(value) => handleTextChange(value, 'githubRepository')} />
+
+                <PickerComponent style={styles.input} value={formValues.githubRepository?.id} onChange={selectRepository} >
+                    {
+                        getRepoOptions().map((optionProps) =>
+                            <Picker.Item {...optionProps} key={optionProps.value}/>
+                        )
+                    }
+                </PickerComponent>
+
                 <FeedbackTextInput 
                     style={{...styles.descInput, ...styles.input}}
                     inputStyle={{ justifyContent : "flex-start", alignItems : "flex-start"}}  
@@ -114,13 +218,18 @@ const ProjectRegisterPage : React.FC<{ route : any, navigation : any }> = ({rout
 
                 {
                     formValues.members.map((dev : IDevMinimal) => 
-                        <TeamMemberCard 
+                        <TeamMemberCard
+                            key={dev.id} 
                             data={dev} 
                             onRemove={() => removeTeamMember(dev)}
                             canRemove={dev.id != authContext?.userData.id}
                         />
                     )
                 }
+
+                <Pressable style={styles.saveBtn} onPress={saveProject}>
+                    <Text style={styles.saveBtnText}>Salvar</Text>
+                </Pressable>
             </ScrollView>
         </KeyboardAvoidingView>
     )

@@ -61,7 +61,7 @@ const ProfilePage: React.FC<{ route : any, navigation : any }> = ({route, naviga
             allowsEditing : true,
             mediaTypes : ImagePicker.MediaTypeOptions.Images,
             quality : 1,
-            aspect : (type === 'banner') ? [ 360, 90 ] : [ 1, 1 ]
+            aspect : (type === 'banner') ? [ 36, 9 ] : [ 1, 1 ]
         })
 
         if (result.cancelled)

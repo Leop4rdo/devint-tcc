@@ -1,5 +1,6 @@
 import api, { buildQuery, getToken, IResponse, PaginationQuery } from "."
 import IDevMinimal from "../interfaces/IDev"
+import IProject from "../interfaces/IProject"
 
 export const listByDev = async (devId : string, query ?: PaginationQuery) : Promise<IResponse> => {
     try {
@@ -16,14 +17,17 @@ export const listByDev = async (devId : string, query ?: PaginationQuery) : Prom
     }
 }
 
-interface IProjectCreateBody {
-    name: string
-    bannerURI : string
-    githubRepository: {
-        name : string,
-        url : string
+export const create = async (body : IProject) : Promise<IResponse> => {
+    try {
+        const { data } = await api.post(
+            `/projects`,
+            body,
+            { headers: { Authorization: `Baerer ${ await getToken() }` } }
+        )
+
+        return data as IResponse
+    } catch (err : any) {
+        console.log(err);
+        return err.response.data as IResponse
     }
-    openSource: boolean
-    members : IDevMinimal[]
-    desc: string
 }
