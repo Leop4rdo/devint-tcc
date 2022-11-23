@@ -54,14 +54,17 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, postId }) =
     })
 
     const handleChange = (e: any) => {
-        console.log(e.target.value)
+        
         setFormValues({
             ...formValues,
             [e.target.name]: e.target.value
         })
+
+
+        console.log(formValues.nameGithubUsers)
     }
 
-
+    
 
     return (
         <div className="modal-container-global">
@@ -95,85 +98,99 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, postId }) =
                         <AutoTextArea placeholder="Descrição" />
                         <div className="container-participants-github">
                             <Input placeholder="Participantes do projeto"
+                                name="nameGithubUsers"
                                 onChange={handleChange}
                             />
                             <Button className="btn-primary" children={<Icon name="add" />} />
                         </div>
 
-                        <div className="container-search-users-github">
-                            <div className="container-scroll-participants-project">
 
-                                <div className="conatiner-users-github">
-                                    <div className="users-github">
-                                        <div className="users">
-                                            <div className="image">
-                                                <img />
-                                            </div>
-                                            <div className="container-information-users-github">
-                                                <div className="user-name">
-                                                    <span>Developer_Name</span>
+                        {
+                            formValues.nameGithubUsers != "" ?
+
+                            <div className="container-search-users-github">
+                            <div className="search-users-github">
+                                <div className="container-scroll-participants-project">
+                                    <div className="conatiner-users-github">
+                                        <div className="users-github">
+                                            <div className="users">
+                                                <div className="image">
+                                                    <img />
                                                 </div>
-                                                <div className="user-github">
-                                                    <span >Developer_Github</span>
+                                                <div className="container-information-users-github">
+                                                    <div className="user-name">
+                                                        <span>Developer_Name</span>
+                                                    </div>
+                                                    <div className="user-github">
+                                                        <span >Developer_Github</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    
+    
                                 </div>
+                            </div>
+                            </div>
+                            :
+                            ""
+                        }
 
+                       
+
+                        
+
+
+                       
+
+
+                        <div className="container-scroll-participants-project">
+
+                            <div className="conatiner-participants-project">
+                                <div className="participants-project">
+                                    <div className="participants">
+                                        <div className="image">
+                                            <img />
+                                        </div>
+                                        <div className="container-information-participants">
+                                            <div className="developer-name">
+                                                <span>Developer_Name</span>
+                                            </div>
+                                            <div className="developer-github">
+                                                <span >Developer_Github</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                                <Icon name="delete_forever" />
                             </div>
 
 
-                            {/* aaaa */}
-
-
-                            <div className="container-scroll-participants-project">
-
-                                <div className="conatiner-participants-project">
-                                    <div className="participants-project">
-                                        <div className="participants">
-                                            <div className="image">
-                                                <img />
+                            <div className="conatiner-participants-project">
+                                <div className="participants-project">
+                                    <div className="participants">
+                                        <div className="image">
+                                            <img />
+                                        </div>
+                                        <div className="container-information-participants">
+                                            <div className="developer-name">
+                                                <span>Developer_Name</span>
                                             </div>
-                                            <div className="container-information-participants">
-                                                <div className="developer-name">
-                                                    <span>Developer_Name</span>
-                                                </div>
-                                                <div className="developer-github">
-                                                    <span >Developer_Github</span>
-                                                </div>
+                                            <div className="developer-github">
+                                                <span >Developer_Github</span>
                                             </div>
                                         </div>
                                     </div>
-                                    <Icon name="delete_forever" />
                                 </div>
-
-
-                                <div className="conatiner-participants-project">
-                                    <div className="participants-project">
-                                        <div className="participants">
-                                            <div className="image">
-                                                <img />
-                                            </div>
-                                            <div className="container-information-participants">
-                                                <div className="developer-name">
-                                                    <span>Developer_Name</span>
-                                                </div>
-                                                <div className="developer-github">
-                                                    <span >Developer_Github</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <Icon name="delete_forever" />
-                                </div>
+                                <Icon name="delete_forever" />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            )
+        </div>
+    )
 }
 
-            export default CreateProjects
+export default CreateProjects
