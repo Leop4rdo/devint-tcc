@@ -20,7 +20,7 @@ const Project: React.FC<IProject> = ({ data, openCloseModal }) => {
                 <div className="name-project">
                     <h2>{data.name}</h2>
 
-                    {data.license ? <span>(Open source)</span> : <span>(Closed source)</span>}
+                    {data.openSource ? <span>(Open source)</span> : <span>(Closed source)</span>}
 
                 </div>
                 <Icon name="edit" onClick={openCloseModal} />

@@ -19,7 +19,7 @@ export const getProjectByUser = async (userId : string ,query ?: PaginationQuery
 export const findById = async (id : string) => {
     try {
         const { data } = await api.get(
-            `/projects/${id}`,
+            `/devs/${id}`,
             { headers: { Authorization: `Baerer ${ getToken()}` } }
         )
 
