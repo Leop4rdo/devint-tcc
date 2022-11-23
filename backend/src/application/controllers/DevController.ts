@@ -3,6 +3,7 @@ import DevService from "@src/core/services/DevService";
 import PaginateListInput from "@src/ports/input/PaginateListInput";
 import DevFollowInput from "@src/ports/input/user/dev/DevFollowInput";
 import DevUpdateInput from "@src/ports/input/user/dev/DevUpdateInput";
+import UserQueryFilter from "@src/ports/input/user/UserQueryFilter";
 import {Request, Response} from "express";
 
 export default class DevController {
@@ -16,7 +17,7 @@ export default class DevController {
     }
     
     listByFilters = (req : Request, res: Response) => {
-        this.service.list(new PaginateListInput(req.query))
+        this.service.list(new UserQueryFilter(req.query))
             .then((_res) => res.status(_res.status || 200).json(_res))
             .catch((err) => res.status(err.status || 500).json(err))
             
