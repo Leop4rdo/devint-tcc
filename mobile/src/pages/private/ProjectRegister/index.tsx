@@ -3,6 +3,7 @@ import { useState } from "react"
 import { Image, KeyboardAvoidingView, Pressable, Switch, Text, View } from "react-native"
 import { ScrollView, TextInput } from "react-native-gesture-handler"
 import { color } from "react-native-reanimated"
+import DevSelector from "../../../components/ProfileSections/Projects/DevSelector"
 import ButtonComponent from "../../../components/shared/Button"
 import FeedbackTextInput from "../../../components/shared/FeedbackInput"
 import colors from "../../../styles/colors"
@@ -68,12 +69,7 @@ const ProjectRegisterPage : React.FC<{ route : any, navigation : any }> = ({rout
                     />
                 </View>
 
-                <View style={{ alignItems : "center", flexDirection : 'row', marginBottom : 16}}>
-                    <FeedbackTextInput style={{ marginHorizontal : 0, flex : 1 }} onChangeText={() => {}}/>
-                    <Pressable style={styles.addBtn}>
-                        <MaterialIcons name="add" size={32} color="#FFF" />
-                    </Pressable>
-                </View>
+                <DevSelector />
             </ScrollView>
         </KeyboardAvoidingView>
     )

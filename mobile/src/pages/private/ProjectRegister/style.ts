@@ -40,6 +40,7 @@ export default StyleSheet.create({
         width : "100%",
         minHeight : screenHeight,
         padding : 16,
+        paddingBottom : 64
     },
 
     bannerContainer : {
