@@ -4,6 +4,7 @@ import CareerFocus from "@src/core/domain/CareerFocus"
 const CAREER_FOCUS_LIST = [
     'Back-end',
     'Front-End',
+    'Full-stack',
     'Mobile',
     'Dev Ops',
     'DBA',
@@ -11,7 +12,9 @@ const CAREER_FOCUS_LIST = [
     'Tech Lead',
     'Software Engineer',
     'Software Architect',
-    'Dev'
+    'Dev',
+    'UI/UX',
+    'Designer'
 ]
 
 export let defaultCareerFocus = null
