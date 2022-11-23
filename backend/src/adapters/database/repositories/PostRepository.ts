@@ -5,6 +5,7 @@ import AbstractRepository from "./AbstractRepository"
 
 interface PostFilters extends PaginateListInput {
     writter ?: string
+    order : 'RANDOM' | 'RECENT' | 'TRENDING'
 }
 
 export default class PostRepository extends AbstractRepository<PostEntity> {
@@ -17,9 +18,28 @@ export default class PostRepository extends AbstractRepository<PostEntity> {
             .innerJoinAndSelect('posts.writter', 'devs')
             .leftJoinAndSelect('posts.comments', 'comments')
             .where((filters.writter) ? 'devs.id = :writterId' : '', { writterId : filters.writter })
-            .orderBy("posts.order")
+            .orderBy(this.getOrderQuery(filters.order))
             .limit(filters.limit)
             .offset(filters.offset)
             .getMany()
+    }
+
+    private getOrderQuery (order: string){
+
+        switch (order) {
+            case 'RANDOM':
+                order = 'posts.order'
+                break;
+            case 'RECENT':
+                order = 'posts.createdAt'
+                break;
+            case 'TRENDING':
+                order = 'posts.hearts'
+                break;
+            default:
+                break;
+        }
+
+        return order
     }
 }
