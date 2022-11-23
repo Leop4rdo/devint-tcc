@@ -1,6 +1,10 @@
 import api, { buildQuery, getToken, IResponse, PaginationQuery } from '.'
 
-export const list = async (query ?: PaginationQuery) : Promise<IResponse> => {
+interface UserQueryFilter extends PaginationQuery {
+    search ?: string
+}
+
+export const list = async (query ?: UserQueryFilter) : Promise<IResponse> => {
     try {
         const { data } = await api.get(
             (query) ? `/devs?${buildQuery(query)}` : '/devs',

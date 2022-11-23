@@ -1,5 +1,6 @@
 import Dev from "@src/core/domain/Dev";
 import PaginateListInput from "@src/ports/input/PaginateListInput";
+import UserQueryFilter from "@src/ports/input/user/UserQueryFilter";
 import { Repository } from "typeorm";
 import { AppDataSource } from "../data-source";
 import DevEntity from "../entities/DevEntity";
@@ -15,9 +16,16 @@ export default class DevRepository extends AbstractRepository<DevEntity> {
     }
 
 
-    async listByFilters(filters : PaginateListInput) : Promise<DevEntity[]> {
-        return await this.db.createQueryBuilder('devs')
-            .orderBy('RANDOM()')
+    async listByFilters(filters : UserQueryFilter) : Promise<DevEntity[]> {
+        const query = this.db.createQueryBuilder('d')
+
+        if (filters.sort && filters.sort.toUpperCase() === 'RANDOM')
+            query.orderBy('RANDOM()')
+            
+        if (filters.search)
+            query.where('d.name ILIKE :search or d.github_username ILIKE :search', { search : `${filters.search}%`})
+        
+        return query
             .limit(filters.limit)
             .offset(filters.offset)
             .getMany()
