@@ -1,8 +1,8 @@
 import CreateProjects from "components/layout/Modals/CreateProjects";
 import NewContents from "components/layout/NewContents/NewContents";
 import Project from "components/Project";
-import React, { useState , useEffect } from "react";
-import IProjectProps  from "interfaces/IProject"
+import React, { useState, useEffect } from "react";
+import IProjectProps from "interfaces/IProject"
 import * as projectService from 'services/project.service';
 
 
@@ -14,6 +14,9 @@ const ProjectsTabs: React.FC<IProjectTab> = ({ devId }) => {
 
     const [writtingProject, setWrittingProject] = useState(false)
     const [projects, setProjects] = useState<IProjectProps[]>([])
+
+    const [selectedProjectstId, setSelectedProjectsId] = useState("")
+
     const ModalProject = () => {
         if (writtingProject)
             setWrittingProject(false)
@@ -23,29 +26,37 @@ const ProjectsTabs: React.FC<IProjectTab> = ({ devId }) => {
 
     const getProjects = async () => {
         const { data } = await projectService.getProjectByUser(devId)
-        setProjects([...projects , ...data])
+        setProjects([...projects, ...data])
+
     }
 
     useEffect(() => { getProjects(); }, [])
 
     return (
         <>
+
+
             <NewContents catchphrase="Compartilhe seus projetos com a comunidade !" newContentName="Novo projeto" openCloseModal={ModalProject} />
 
             {writtingProject &&
-                <CreateProjects openCloseModal={ModalProject} />
+                <CreateProjects openCloseModal={ModalProject} postId={selectedProjectstId} />
             }
 
 
             {
-                projects?.map((project : IProjectProps) => 
+                projects?.map((project: IProjectProps) =>
                     <>
-                     <Project key={`${project.id}-${Math.random() * 999}`} data={project} openCloseModal={ModalProject}/>
+                        <Project key={`${project.id}-${Math.random() * 999}`} data={project} openCloseModal={() => {
+                            ModalProject()
+                            setSelectedProjectsId(`${project.id}`)
+                        }
+                        } />
+
                     </>
                 )
             }
 
-           
+
         </>
 
 

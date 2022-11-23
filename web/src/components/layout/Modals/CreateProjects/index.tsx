@@ -2,13 +2,26 @@ import Button from "components/shared/Button";
 import Icon from "components/shared/Icon";
 import Input from "components/shared/Input";
 import AutoTextArea from "components/shared/TextArea";
-import React from "react";
+import * as projectService from 'services/project.service';
+import React , {useState} from "react";
+
 
 interface ICreateProjects{
     openCloseModal: any
+    postId : string
 }
 
-const CreateProjects: React.FC<ICreateProjects> = ({openCloseModal}) => {
+const CreateProjects: React.FC<ICreateProjects> = ({openCloseModal , postId}) => {
+    
+    const [project , setProjects] = useState()
+
+    const getProject = async () => {
+        const { data } = await projectService.findById(postId)
+        setProjects(data)
+        console.log(project)
+    }
+
+    getProject()
 
     return (
         <div className="modal-container-global">
@@ -25,9 +38,9 @@ const CreateProjects: React.FC<ICreateProjects> = ({openCloseModal}) => {
 
                     <div className="container-data-filling">
 
-                        <Input placeholder="Nome" />
+                        <Input placeholder="" />
                         <div className="data-github">
-                            <Input placeholder="Github" />
+                            <Input placeholder="Github"  />
                             <span>Open Source</span>
 
                             <div className="toggle-button">
