@@ -1,5 +1,8 @@
 import api, { buildQuery, getToken, IResponse, PaginationQuery } from "."
 
+interface UserQueryFilter extends PaginationQuery {
+    search ?: string
+}
 
 export const getProjectByUser = async (userId : string ,query ?: PaginationQuery) : Promise<IResponse> => {
     try {
@@ -19,13 +22,28 @@ export const getProjectByUser = async (userId : string ,query ?: PaginationQuery
 export const findById = async (id : string) => {
     try {
         const { data } = await api.get(
-            `/devs/${id}`,
+            `/projects/${id}`,
             { headers: { Authorization: `Baerer ${ getToken()}` } }
         )
 
         return data as IResponse
     } catch (err : any) {
         console.log('error at get post by id')
+        console.log(err)
+        return err.response.data as IResponse
+    }
+}
+
+
+export const list = async (query ?: UserQueryFilter) : Promise<IResponse> => {
+    try {
+        const { data } = await api.get(
+            (query) ? `/devs?${buildQuery(query)}` : '/devs',
+            { headers: { Authorization: `Baerer ${ await getToken()}` } }
+        )
+
+        return data as IResponse
+    } catch (err : any) {
         console.log(err)
         return err.response.data as IResponse
     }

@@ -3,7 +3,9 @@ import Icon from "components/shared/Icon";
 import Input from "components/shared/Input";
 import AutoTextArea from "components/shared/TextArea";
 import * as projectService from 'services/project.service';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
+import IDevMinimal from "interfaces/IDev";
 
 
 interface ICreateProjects {
@@ -13,40 +15,17 @@ interface ICreateProjects {
 
 const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, postId }) => {
 
-    const [project, setProjects] = useState()
+    const [projectbyid, setProjectsbyid] = useState()
+    const [searchUsers, setsearchUsers] = useState<IDevMinimal[]>([])
     const [dataGithub, setDataResponseGithub] = useState()
 
     const getProject = async () => {
         const { data } = await projectService.findById(postId)
-        setProjects(data)
-        console.log(project)
+        setProjectsbyid(data)
+        
     }
 
     /* getProject() */
-
-
-    const apiGithub = async (nameUserGitHub: string) => {
-        if (nameUserGitHub.length > 3) {
-            fetch(`https://api.github.com/users/${nameUserGitHub}`, {
-                method: "GET",
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then((resposta) => resposta.json())
-                .then((data) => {
-                    setDataResponseGithub(data)
-
-                })
-                .catch(() => {
-
-
-                })
-        }
-
-    }
-
-    apiGithub('Ezequiel-Mathias')
-
 
     const [formValues, setFormValues] = useState({
         nameGithubUsers: "",
@@ -54,17 +33,32 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, postId }) =
     })
 
     const handleChange = (e: any) => {
-        
+
         setFormValues({
             ...formValues,
             [e.target.name]: e.target.value
         })
 
+        getSearchUsers(formValues.nameGithubUsers)
 
-        console.log(formValues.nameGithubUsers)
     }
 
-    
+
+    const getSearchUsers = async (nameUser: string) => {
+
+        if (formValues.nameGithubUsers.length === 0)
+            return
+
+        const { data } = await projectService.list({ search: `${nameUser}`, limit: 8 })
+        setsearchUsers(data)
+
+        
+
+    }
+
+
+
+
 
     return (
         <div className="modal-container-global">
@@ -106,43 +100,47 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, postId }) =
 
 
                         {
-                            formValues.nameGithubUsers != "" ?
+                            searchUsers.length > 0 && formValues.nameGithubUsers != "" ?
+                                <div className="container-search-users-github">
+                                    <div className="search-users-github">
+                                        <div className="container-scroll-participants-project">
 
-                            <div className="container-search-users-github">
-                            <div className="search-users-github">
-                                <div className="container-scroll-participants-project">
-                                    <div className="conatiner-users-github">
-                                        <div className="users-github">
-                                            <div className="users">
-                                                <div className="image">
-                                                    <img />
-                                                </div>
-                                                <div className="container-information-users-github">
-                                                    <div className="user-name">
-                                                        <span>Developer_Name</span>
+
+                                            {
+
+                                                searchUsers.map((users) => (
+
+                                                    <div className="conatiner-users-github">
+                                                        <div className="users-github">
+                                                            <div className="users">
+                                                                <div className="image">
+                                                                    <img src={users.profilePicUrl} />
+                                                                </div>
+                                                                <div className="container-information-users-github">
+                                                                    <div className="user-name">
+                                                                        <span>{users.name}</span>
+                                                                    </div>
+                                                                    <div className="user-github">
+                                                                        <span >{users.githubUsername}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
                                                     </div>
-                                                    <div className="user-github">
-                                                        <span >Developer_Github</span>
-                                                    </div>
-                                                </div>
-                                            </div>
+
+                                                ))
+
+                                            }
+
                                         </div>
                                     </div>
-                                    
-    
                                 </div>
-                            </div>
-                            </div>
-                            :
-                            ""
+
+                                :
+
+                               ""
                         }
-
-                       
-
-                        
-
-
-                       
 
 
                         <div className="container-scroll-participants-project">

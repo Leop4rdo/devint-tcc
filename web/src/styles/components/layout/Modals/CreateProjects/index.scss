@@ -137,20 +137,23 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                
 
                 .search-users-github {
                     width: 700px;
                     background-color: $color-gray;
                     border-radius: 8px;
+                    height: auto;
 
                     .container-scroll-participants-project {
                         overflow-y: auto;
                         width: 100%;
-                        height: 200px;
+                        height: 90px;
                         padding-right: 16px;
                         display: flex;
                         flex-direction: column;
                         gap: 16px;
+                        padding-bottom: 16px;
 
                         &::-webkit-scrollbar {
                             background-color: transparent;
@@ -170,12 +173,14 @@
 
                             .users-github {
                                 margin-top: 24px;
+                                width: 100%;
+                                cursor: pointer;
 
                                 .users {
                                     display: flex;
                                     gap: 16px;
 
-                                    .image {
+                                    img {
                                         width: 40px;
                                         height: 40px;
                                         background-color: $color-white;
@@ -207,6 +212,8 @@
                 }
 
             }
+
+            
 
             .container-scroll-participants-project {
                 overflow-y: auto;
