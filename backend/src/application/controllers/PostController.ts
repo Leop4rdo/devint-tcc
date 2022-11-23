@@ -3,6 +3,7 @@ import PostService from "@src/core/services/PostService";
 import PaginateListInput from "@src/ports/input/PaginateListInput";
 import AddCommentInput from "@src/ports/input/posts/AddCommentInput";
 import PostCreateInput from "@src/ports/input/posts/PostCreateInput";
+import PostQueryFilter from "@src/ports/input/posts/PostQueryFilter";
 import { Request, Response } from "express";
 
 export default class PostController {
@@ -33,7 +34,7 @@ export default class PostController {
     }
 
     list = (req: Request, res: Response) => {
-        this.service.list(req.body.userData.id, new PaginateListInput(req.query))
+        this.service.list(req.body.userData.id, new PostQueryFilter(req.query))
             .then((_res) => res.status(_res.status || 200).json(_res))
             .catch((err) => res.status(err.status || 500).json(err))
     }
