@@ -212,7 +212,7 @@ const ProjectRegisterPage : React.FC<{ route : any, navigation : any }> = ({rout
                     />
                 </View>
 
-                <DevSelector onSelect={addTeamMember}/>
+                <DevSelector onSelect={addTeamMember} ignoreIds={formValues.members.map((m) => m.id)}/>
 
                 <View style={styles.divisor}/>
 
