@@ -19,7 +19,7 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId }) =
     const [dataGithubRepo, setdataGithubRepo] = useState([])
     const [selectdNameRepository, setSelectdNameRepository] = useState()
     const [checkBoxValue, setCheckBoxValue] = useState()
-    const [ selectdUrlRepository ,  setSelectdUrlRepository] = useState()
+    const [selectdUrlRepository, setSelectdUrlRepository] = useState()
 
 
     const [formValues, setFormValues] = useState({
@@ -59,6 +59,7 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId }) =
         const { data } = await devService.findById(userId)
 
         RepositoriesGithubUser(data.githubUsername)
+
     }
 
 
@@ -83,14 +84,16 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId }) =
 
     const publishProject = async () => {
 
-        if (!formValues.name || !formValues.desc)
+        if (!formValues.name || !formValues.desc || !selectdNameRepository)
             return
 
+        const UrlRepositoryGit = `https://github.com/${selectdNameRepository}`
+        
         const body = {
             name: formValues.name,
             bannerURI: "https://destatic.blob.core.windows.net/images/dev-logo.png",
             githubRepository: {
-                url: "https://github.com/Leop4rdo/devint-tcc",
+                url: UrlRepositoryGit,
                 name: selectdNameRepository
             },
             openSource: checkBoxValue,
@@ -108,8 +111,8 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId }) =
     useEffect(() => { getUserData() }, [])
 
 
-    
-    
+
+
 
     return (
         <div className="modal-container-global">
@@ -132,15 +135,15 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId }) =
                         />
                         <div className="data-github">
                             <Select onChange={(selectd: any) => {
-                                setSelectdNameRepository(selectd.target.value) 
-                                                                
-                                }}>
+                                setSelectdNameRepository(selectd.target.value)
+
+                            }}>
                                 <option>Selecione um Repositório</option>
 
                                 {dataGithubRepo &&
                                     dataGithubRepo.map((data: any) => (
                                         <option key={data.id} value={data.full_name}>{data.full_name}</option>
-                                        
+
                                     ))
                                 }
 

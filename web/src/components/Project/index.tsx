@@ -6,12 +6,14 @@ import IProjectProps from "interfaces/IProject";
 interface IProject {
     openCloseModal: any
     data: IProjectProps
+    
+
 }
 
 const Project: React.FC<IProject> = ({ data, openCloseModal }) => {
-
+    
     return (
-        <div className="container-project">
+        <div className="container-project" >
             <div className="container-image">
                 <img src={data.bannerURI} alt="" />
             </div>
