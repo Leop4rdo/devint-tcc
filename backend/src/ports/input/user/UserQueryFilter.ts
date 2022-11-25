@@ -9,6 +9,7 @@ export default class UserQueryFilter extends PaginateListInput {
         super(props)
         this.search = props.search
         this.sort = props.sort 
-        this.ignore = (props.ignore||'').split(',')
+        if (props.ignore)
+            this.ignore = props.ignore.split(',')
     }
 }

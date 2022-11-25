@@ -24,21 +24,14 @@ export default class DevRepository extends AbstractRepository<DevEntity> {
             
         if (filters.search)
             query.where('d.name ILIKE :search or d.github_username ILIKE :search', { search : `${filters.search}%`})
-        
-        console.log('ignore ->', filters.ignore)
 
-        try {
-
-        
         if (filters.ignore)
-            query.andWhere('d.id NOT IN (:...ignore)', { ignore : [...filters.ignore] })
+            query.andWhere('d.id NOT IN (:...ignore)', { ignore : filters.ignore })
 
         return query
             .limit(filters.limit)
             .offset(filters.offset)
             .getMany()
-
-        } catch (err) { console.log(err)}
     }
 
 

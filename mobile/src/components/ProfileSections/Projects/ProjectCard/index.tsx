@@ -61,7 +61,6 @@ const ProjectCard: React.FC<IProjectCardProps> = ({ data, onMemberPress, onEditP
             </View>
 
             <View>
-                <>{console.log(data.members)}
                 <FlatList
                     data={data.members}
                     renderItem={({item}) => 
@@ -72,7 +71,6 @@ const ProjectCard: React.FC<IProjectCardProps> = ({ data, onMemberPress, onEditP
                     pagingEnabled
                     horizontal
                 />
-                </>
             </View>
 
             <View style={style.data}>
