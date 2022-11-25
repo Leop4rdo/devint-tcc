@@ -1,4 +1,5 @@
 import ICommentProps from "@src/core/domain/interfaces/IComment"
+import { Timestamp } from "typeorm"
 import DevMinimalOutput from "../user/DevMinimalOutput"
 
 export default class CommentOutput {
@@ -8,6 +9,8 @@ export default class CommentOutput {
     answers : JSON
     writter : DevMinimalOutput
     alreadyHearted : boolean
+    createdAt: Timestamp
+    updatedAt: Timestamp
 
     constructor(props : ICommentProps, devId) {
         this.id = props.id
@@ -15,6 +18,8 @@ export default class CommentOutput {
         this.hearts = JSON.parse(JSON.stringify(props.hearts)).length
         this.writter = new DevMinimalOutput(props.writter)
         this.answers = props.answers
+        this.createdAt = props.createdAt
+        this.updatedAt = props.updatedAt
         this.alreadyHearted = JSON.parse(JSON.stringify(props.hearts)).includes(devId)
     }
 }

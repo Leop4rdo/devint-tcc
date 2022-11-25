@@ -8,9 +8,10 @@ interface ILayoutWrapperProps {
     navigation : any,
     focused ?: any
     children : ReactElement[] | ReactElement
+    activeSidebarItem : number
 }
 
-const LayoutWrapper : React.FC<ILayoutWrapperProps> = ({ navigation, children, focused}) => {
+const LayoutWrapper : React.FC<ILayoutWrapperProps> = ({ navigation, children, focused, activeSidebarItem}) => {
     const [ isSidebarVisible, setSidebarVisible ] = useState(false)
 
     useEffect(() => setSidebarVisible(false), [focused])
@@ -19,7 +20,7 @@ const LayoutWrapper : React.FC<ILayoutWrapperProps> = ({ navigation, children, f
         <View style={{width : '100%', height : '100%'}}>
             <NavBar toggleSidebar={() => setSidebarVisible(!isSidebarVisible)} />
             { children }
-            <Sidebar navigation={navigation} visible={isSidebarVisible} onClose={() => setSidebarVisible(!isSidebarVisible)}/>
+            <Sidebar activeItem={activeSidebarItem} navigation={navigation} visible={isSidebarVisible} onClose={() => setSidebarVisible(!isSidebarVisible)}/>
         </View>
     )
 }

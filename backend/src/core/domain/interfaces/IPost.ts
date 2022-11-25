@@ -1,3 +1,4 @@
+import { Timestamp } from "typeorm";
 import ICommentProps from "./IComment";
 import IDevProps from "./IDev";
 import IProjectProps from "./IProject";
@@ -12,4 +13,6 @@ export default interface IPostProps {
     project : IProjectProps
 	attachments: JSON
 	writter: IDevProps;
+	createdAt: Timestamp;
+	updatedAt: Timestamp;
 }

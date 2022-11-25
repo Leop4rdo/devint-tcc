@@ -2,6 +2,7 @@ import api, { buildQuery, getToken, IResponse, PaginationQuery } from '.'
 
 interface UserQueryFilter extends PaginationQuery {
     search ?: string
+    ignore ?: string[]
 }
 
 export const list = async (query ?: UserQueryFilter) : Promise<IResponse> => {

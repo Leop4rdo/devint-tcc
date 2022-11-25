@@ -14,6 +14,7 @@ import IResponse from "@src/application/Responses/IResponse"
 import PostEntity from "@src/adapters/database/entities/PostEntity"
 import PaginateListInput from "@ports/input/PaginateListInput"
 import PostOutput from "@ports/output/posts/PostOutput"
+import ProjectOutput from "@src/ports/output/projects/ProjectOutput"
 
 export default class PostService {
     _: PostRepository
@@ -23,7 +24,7 @@ export default class PostService {
     }
 
     async getById(id: string, devId : string): Promise<IResponse> {
-        const post = await this._.findById(id)
+        const post = await this._.findById(id, ['members'])
 
         if (!post)
             return new BadRequestResponse({ message: errors.ENTITY_NOT_FOUND })
@@ -70,7 +71,7 @@ export default class PostService {
             return new BadRequestResponse({ message: errors.ENTITY_NOT_FOUND })
 
         if (post.hearts.includes(userId))
-            post.hearts.filter((id) => id != userId)
+            post.hearts = post.hearts.filter((id) => id != userId)
         else 
             post.hearts.push(userId)
         

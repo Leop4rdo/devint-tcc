@@ -1,3 +1,4 @@
+import { Timestamp } from "typeorm";
 import ICompanyProps from "../../../core/domain/interfaces/ICompany";
 
 export default class CompanyOutput {
@@ -7,7 +8,8 @@ export default class CompanyOutput {
     bio : string
     following : JSON
     followers : JSON
-
+    createdAt : Timestamp
+    updatedAt : Timestamp
     constructor(props : ICompanyProps) {
         Object.assign(this, props);
     }

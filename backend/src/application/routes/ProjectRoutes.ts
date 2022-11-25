@@ -10,5 +10,6 @@ projectRouter.get('/projects/:id', ctrl.getById)
 projectRouter.post('/projects', ctrl.create)
 projectRouter.patch('/projects/:id/toggle-heart', ctrl.toggleHeart)
 projectRouter.put('/projects/:id', ctrl.update)
+projectRouter.delete('/projects/:id', ctrl.delete)
 
 export default projectRouter

@@ -46,11 +46,13 @@ export default class DevService {
     }
 
     async list(filters : UserQueryFilter) : Promise<IResponse> {
+        try {
         const devs = await this.repo.listByFilters(filters);
     
         const mapped = devs.map((dev) => new DevMinimalOutput(dev as unknown as IDevProps))
 
         return new SuccessResponse({ data : mapped })
+        } catch (err) { console.log(err)}
     }
 
     async create(body: DevCreateInput): Promise<IResponse> {
@@ -84,7 +86,7 @@ export default class DevService {
         
         return new SuccessResponse({
             status : 200,
-            data : new DevOutput(dev)
+            data : new DevOutput(dev as unknown as IDevProps)
         })
     }
 
