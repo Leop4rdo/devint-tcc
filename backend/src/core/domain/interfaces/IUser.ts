@@ -4,6 +4,7 @@ import ProjectEntity from "@entities/ProjectEntity"
 import SkillEntity from "@entities/SkillEntity"
 import SocialLinkEntity from "@entities/SocialLinkEntity"
 import SeniorityEntity from "@entities/SeniorityEntity"
+import { Timestamp } from "typeorm"
 export interface IUserProps {
     id? : string
     name : string
@@ -29,6 +30,8 @@ export interface IUserProps {
     autoDeclaredSeniority : SeniorityEntity
     following? : JSON
     followers? : JSON
+    createdAt : Timestamp
+    updatedAt : Timestamp
 }
 
 export const userRoles = {
