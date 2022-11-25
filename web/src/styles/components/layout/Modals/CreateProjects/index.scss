@@ -41,11 +41,41 @@
             .container-image {
                 margin-bottom: 16px;
 
-                img {
-                    width: 100%;
-                    height: 300px;
-                    object-fit: contain;
+                height: 300px;
+
+                #attachment-input {
+                    
+                   
                 }
+                .icon {
+                    font-size: clamp(1.5rem, 4vw, 2.5rem);
+                    color: white;
+                    cursor: pointer;
+                    transition: color .25s ease-out;
+
+                    &:hover {
+                        color: $color-primary;
+                    }
+                
+                }
+
+                .attachment-list{
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    img {
+                        width: 100%;
+                        
+                        height: clamp(4rem, 10vw, 8rem);
+                        aspect-ratio: 1;
+
+                        object-fit: contain;
+                    }
+
+                }
+
 
 
             }
@@ -282,7 +312,7 @@
                     }
                 }
 
-                
+
 
             }
 

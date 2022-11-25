@@ -12,10 +12,11 @@ interface IProject {
 
 const Project: React.FC<IProject> = ({ data, openCloseModal }) => {
     
+    
     return (
         <div className="container-project" >
             <div className="container-image">
-                <img src={data.bannerURI} alt="" />
+                <img src={`${data.bannerURI}`} alt="" />
             </div>
 
             <div className="container-name-project">

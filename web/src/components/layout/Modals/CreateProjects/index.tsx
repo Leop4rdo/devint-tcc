@@ -7,19 +7,22 @@ import React, { useState, useEffect } from "react";
 import * as devService from "services/dev.service"
 import IDevMinimal from "interfaces/IDev";
 import Select from "components/shared/Select";
-
+import { v4 as randomUUIDV4 } from "uuid"
+import firebase from "config/firebase"
 
 interface ICreateProjects {
     openCloseModal: any
     userId: string
+    refreshPage : any
 }
 
-const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId }) => {
+const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId , refreshPage }) => {
     const [searchUsers, setsearchUsers] = useState<IDevMinimal[]>([])
     const [dataGithubRepo, setdataGithubRepo] = useState([])
     const [selectdNameRepository, setSelectdNameRepository] = useState()
     const [checkBoxValue, setCheckBoxValue] = useState()
-    const [selectdUrlRepository, setSelectdUrlRepository] = useState()
+    const [attachments, setAttachments] = useState<string[]>([])
+    const [uploading, setUploading] = useState(false);
 
 
     const [formValues, setFormValues] = useState({
@@ -88,10 +91,10 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId }) =
             return
 
         const UrlRepositoryGit = `https://github.com/${selectdNameRepository}`
-        
+
         const body = {
             name: formValues.name,
-            bannerURI: "https://destatic.blob.core.windows.net/images/dev-logo.png",
+            bannerURI: attachments[0],
             githubRepository: {
                 url: UrlRepositoryGit,
                 name: selectdNameRepository
@@ -104,13 +107,39 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId }) =
 
         if (res.hasError)
             return alert('Houve um erro inesperado ao publicar, tente novamente mais tarde!')
-
+        refreshPage()
         openCloseModal(false)
+        
     }
 
+
+    const upload = async (evt: any) => {
+        setUploading(true)
+
+        const file = evt.target.files[0]
+
+        if (!file) return
+
+        try {
+            const extension = `.${file.name.split('.')[1]}`
+            const fileName = randomUUIDV4() + extension
+            const uploaded = await firebase.storage().ref().child('attachments/').child(fileName).put(file)
+            setAttachments([
+                await uploaded.ref.getDownloadURL()
+            ])
+        } catch (err) {
+            console.log(err)
+            alert('Houve um erro inesperado ao fazer upload!')
+        }
+
+
+        setUploading(false)
+
+    }
+
+
+
     useEffect(() => { getUserData() }, [])
-
-
 
 
 
@@ -124,7 +153,19 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId }) =
                     </div>
 
                     <div className="container-image">
-                        <img src="https://www.vounajanela.com/wp-content/uploads/2015/03/fotos.jpg" alt="" />
+                        <input accept="image/*" onChange={upload} type="file" name="attachment-input" id="attachment-input" />
+                        <label htmlFor="attachment-input">
+                            <Icon name="image"/>
+                        </label>
+
+                        <div className="attachment-list">
+                            {attachments[0] ?  
+                            <img src={attachments[0]} alt="" /> : ""}
+                            
+
+                        </div>
+
+
                     </div>
 
                     <div className="container-data-filling">

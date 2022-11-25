@@ -26,7 +26,6 @@ const ProjectsTabs: React.FC<IProjectTab> = ({ devId }) => {
     const getProjects = async () => {
         const { data } = await projectService.getProjectByUser(devId)
         setProjects([...projects, ...data])
-
     }
 
     useEffect(() => { getProjects(); }, [])
@@ -38,7 +37,7 @@ const ProjectsTabs: React.FC<IProjectTab> = ({ devId }) => {
             <NewContents catchphrase="Compartilhe seus projetos com a comunidade !" newContentName="Novo projeto" openCloseModal={ModalProject} />
 
             {writtingProject &&
-                <CreateProjects openCloseModal={ModalProject} userId={devId} />
+                <CreateProjects openCloseModal={ModalProject} userId={devId} refreshPage={getProjects}/>
             }
 
 
