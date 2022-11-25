@@ -116,7 +116,7 @@ const ProfilePage: React.FC<{ route : any, navigation : any }> = ({route, naviga
         setEditing(!editing)
     }
 
-    useEffect(() => { getDev() }, [])
+    useEffect(() => { getDev() }, [isFocused])
 
     return(
         <LayoutWrapper navigation={navigation} focused={isFocused}>
@@ -222,7 +222,7 @@ const ProfilePage: React.FC<{ route : any, navigation : any }> = ({route, naviga
                                 <DetailsSection canEdit={authContext?.userData.id == data?.id} data={data as IDev} onFinishEditing={updateDev}/>
                             : (currentSection === 2) ?
 
-                                <ProfileProjectsSection devId={data?.id!} navigation={navigation}/>
+                                <ProfileProjectsSection isFocused={isFocused} devId={data?.id!} navigation={navigation}/>
                             : (currentSection === 1) ?
                             <Text>1</Text>
                             : (currentSection === 0 ) ? 

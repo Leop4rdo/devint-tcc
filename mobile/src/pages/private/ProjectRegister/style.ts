@@ -123,9 +123,11 @@ export default StyleSheet.create({
     },
 
     saveBtn : {
-        width : "100%",
+        flex: 1,
         height : 48,
         marginTop : 32,
+
+        flexDirection : 'row',
 
         borderRadius : 16,
 
@@ -139,5 +141,34 @@ export default StyleSheet.create({
         fontFamily : fonts.POPPINS_MEDIUM,
         color : '#FFF',
         fontSize : 16,
+    },
+
+    deleteBtn: {
+        width : "30%",
+        height : 48,
+        marginTop : 32,
+        marginLeft : 16,
+        
+        flexDirection : 'row',
+
+        borderRadius : 16,
+        borderWidth : 3,
+        borderColor : colors.LIGHT_RED,
+
+
+        justifyContent  : 'center',
+        alignItems : 'center'
+    },
+
+    deleteBtnText : {
+        fontFamily : fonts.POPPINS_MEDIUM,
+        color : colors.LIGHT_RED,
+        fontSize : 16,
+    },
+    
+    btnContainer : {
+        flexDirection : 'row',
+        alignItems : 'center',
+        justifyContent : 'space-around'
     }
 })  

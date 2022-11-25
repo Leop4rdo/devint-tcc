@@ -37,6 +37,24 @@ const ProjectRegisterPage : React.FC<{ route : any, navigation : any }> = ({rout
         ]
     })
 
+    const getProjectData = async () => {
+        const projectId = route.params?.projectId;
+
+
+        if (!projectId) 
+            return;
+
+        const res= await projectService.getById(projectId)
+        setFormValues({
+            name : res.data.name,
+            bannerURI : res.data.bannerURI,
+            desc : res.data.desc,
+            githubRepository : res.data.githubRepository,
+            openSource : res.data.openSource,
+            members : res.data.members
+        })
+    }
+
     const getRepos = async () => {
         const res = await githubService.listRepositoriesFromUser(authContext?.userData.githubUsername);
         
@@ -46,7 +64,7 @@ const ProjectRegisterPage : React.FC<{ route : any, navigation : any }> = ({rout
                 name : repo.name,
                 fullName : repo.full_name,
                 description : repo.description,
-                url : repo.url
+                url : repo.html_url
             } as GithubRepository
         }))
     }
@@ -137,11 +155,16 @@ const ProjectRegisterPage : React.FC<{ route : any, navigation : any }> = ({rout
     }
 
     const saveProject = async () => {
+        const { projectId } = route.params
+
         const body = {
+            id : projectId,
             ...formValues
         }
 
-        const res = await projectService.create(body)
+        const res = (projectId)?
+            await projectService.update(body, projectId) 
+            : await projectService.create(body)
 
         if (!res.hasError) {
             navigation.goBack()
@@ -150,8 +173,31 @@ const ProjectRegisterPage : React.FC<{ route : any, navigation : any }> = ({rout
         }
     }
 
-    useEffect(() => { getRepos() },[])
+    const confirmProjectDelete = () => {
+        Alert.alert(
+            'Deletar projeto',
+            "Deletar esse projeto cortará qualquer relação com os posts existentes, tem certeza que deseja deletar esse projeto?",
+            [
+                {
+                    text : 'Cancelar',
+                    style : 'cancel'
+                },
+                {
+                    text : 'Deletar',
+                    style : 'destructive',
+                    onPress : deleteProject
+                }
+            ]
+        )
+    }
 
+    const deleteProject = async () => {
+        await projectService.deleteProject(route.params.projectId)
+
+        navigation.goBack()
+    }
+
+    useEffect(() => { getRepos(), getProjectData() },[])
 
     return (
         <KeyboardAvoidingView 
@@ -181,7 +227,7 @@ const ProjectRegisterPage : React.FC<{ route : any, navigation : any }> = ({rout
 
                 <View style={styles.divisor}/>
 
-                <FeedbackTextInput style={styles.input} placeholder="Nome" onChangeText={(value) => handleTextChange(value, 'name')} />
+                <FeedbackTextInput value={formValues.name} style={styles.input} placeholder="Nome" onChangeText={(value) => handleTextChange(value, 'name')} />
 
                 <PickerComponent style={styles.input} value={formValues.githubRepository?.id} onChange={selectRepository} >
                     {
@@ -192,6 +238,7 @@ const ProjectRegisterPage : React.FC<{ route : any, navigation : any }> = ({rout
                 </PickerComponent>
 
                 <FeedbackTextInput 
+                    value={formValues.desc}
                     style={{...styles.descInput, ...styles.input}}
                     inputStyle={{ justifyContent : "flex-start", alignItems : "flex-start"}}  
                     placeholder="Descrição" 
@@ -227,9 +274,20 @@ const ProjectRegisterPage : React.FC<{ route : any, navigation : any }> = ({rout
                     )
                 }
 
-                <Pressable style={styles.saveBtn} onPress={saveProject}>
-                    <Text style={styles.saveBtnText}>Salvar</Text>
-                </Pressable>
+                <View style={styles.btnContainer}>
+                     <Pressable style={styles.saveBtn} onPress={saveProject}>
+                         <MaterialIcons size={24} color="#FFF" name="save" style={{ marginRight : 8}}/>
+                         <Text style={styles.saveBtnText}>Salvar</Text>
+                     </Pressable>
+                     {
+                        route.params?.projectId &&
+                        <Pressable style={styles.deleteBtn} onPress={confirmProjectDelete}>
+                            <MaterialIcons size={24} color={colors.LIGHT_RED} name="delete-forever" style={{ marginRight : 8}}/>
+                            <Text style={styles.deleteBtnText}>deletar</Text>
+                        </Pressable>
+                     }
+
+                </View>
             </ScrollView>
         </KeyboardAvoidingView>
     )

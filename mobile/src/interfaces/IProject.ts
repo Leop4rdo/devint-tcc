@@ -12,6 +12,6 @@ export default interface IProject {
     members : IDevMinimal[]
     owner ?: string
     openSource: boolean
-    hearts?: JSON
+    hearts?: string[]
     alreadyHearted ?: boolean
 }
