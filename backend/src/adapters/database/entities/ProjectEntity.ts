@@ -22,7 +22,7 @@ export default class ProjectEntity {
     @Column({ name : 'open_source', default : false})
     openSource: boolean
 
-    @OneToMany(() => PostEntity, (post) => post.project)
+    @OneToMany(() => PostEntity, (post) => post.project, { onDelete : "SET NULL" })
     posts : PostEntity[]
 
     @ManyToMany(() => DevEntity, (dev) => dev.projects)

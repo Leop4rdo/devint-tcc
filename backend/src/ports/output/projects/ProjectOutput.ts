@@ -24,9 +24,8 @@ export default class ProjectOutput {
         this.githubRepository = props.githubRepository
         this.openSource = props.openSource
         this.desc = props.desc
-        this.hearts = heartsArray.length
+        this.hearts = heartsArray
         this.owner = props.owner
         this.members = props.members.map((dev) => new DevMinimalOutput(dev))
-        this.alreadyHearted = heartsArray.includes(userId) || false
     }
 }
