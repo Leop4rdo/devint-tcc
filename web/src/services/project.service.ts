@@ -4,6 +4,8 @@ interface UserQueryFilter extends PaginationQuery {
     search ?: string
 }
 
+
+
 export const getProjectByUser = async (userId : string ,query ?: PaginationQuery) : Promise<IResponse> => {
     try {
         const { data } = await api.get(
@@ -46,5 +48,21 @@ export const list = async (query ?: UserQueryFilter) : Promise<IResponse> => {
     } catch (err : any) {
         console.log(err)
         return err.response.data as IResponse
+    }
+}
+
+
+export const create = async (body : object) => {
+    try {
+        const { data } = await api.post(
+            '/projects',
+            body,
+            { headers: { Authorization: `Baerer ${getToken()}` } }
+        )
+
+        return data as IResponse
+    } catch (err : any) {
+        console.log(err)
+        return err.response?.data as IResponse 
     }
 }

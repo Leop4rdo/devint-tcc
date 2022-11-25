@@ -15,7 +15,6 @@ const ProjectsTabs: React.FC<IProjectTab> = ({ devId }) => {
     const [writtingProject, setWrittingProject] = useState(false)
     const [projects, setProjects] = useState<IProjectProps[]>([])
 
-    const [selectedProjectstId, setSelectedProjectsId] = useState("")
 
     const ModalProject = () => {
         if (writtingProject)
@@ -39,7 +38,7 @@ const ProjectsTabs: React.FC<IProjectTab> = ({ devId }) => {
             <NewContents catchphrase="Compartilhe seus projetos com a comunidade !" newContentName="Novo projeto" openCloseModal={ModalProject} />
 
             {writtingProject &&
-                <CreateProjects openCloseModal={ModalProject} postId={selectedProjectstId} />
+                <CreateProjects openCloseModal={ModalProject} userId={devId} />
             }
 
 
@@ -48,7 +47,6 @@ const ProjectsTabs: React.FC<IProjectTab> = ({ devId }) => {
                     <>
                         <Project key={`${project.id}-${Math.random() * 999}`} data={project} openCloseModal={() => {
                             ModalProject()
-                            setSelectedProjectsId(`${project.id}`)
                         }
                         } />
 

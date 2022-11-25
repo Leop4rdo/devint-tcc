@@ -12,7 +12,7 @@ import Select from "components/shared/Select";
 import PostsTab from "components/ProfileTabs/Posts/Posts";
 import ProjectsTabs from "components/ProfileTabs/Projects/Projects"; 
 import firebase from "config/firebase";
-import AutoTextArea from "components/shared/TextArea";
+import AutoTextArea from "components/shared/AutogrowTextArea";
 import { isValidDate } from "utils/validations";
 import { dateMask } from "utils/masks";
 

@@ -1,34 +1,33 @@
 import Button from "components/shared/Button";
 import Icon from "components/shared/Icon";
 import Input from "components/shared/Input";
-import AutoTextArea from "components/shared/TextArea";
+import TextArea from "components/shared/TextArea";
 import * as projectService from 'services/project.service';
 import React, { useState, useEffect } from "react";
-
+import * as devService from "services/dev.service"
 import IDevMinimal from "interfaces/IDev";
+import Select from "components/shared/Select";
 
 
 interface ICreateProjects {
     openCloseModal: any
-    postId: string
+    userId: string
 }
 
-const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, postId }) => {
-
-    const [projectbyid, setProjectsbyid] = useState()
+const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId }) => {
     const [searchUsers, setsearchUsers] = useState<IDevMinimal[]>([])
-    const [dataGithub, setDataResponseGithub] = useState()
+    const [dataGithubRepo, setdataGithubRepo] = useState([])
+    const [selectdNameRepository, setSelectdNameRepository] = useState()
+    const [checkBoxValue, setCheckBoxValue] = useState()
+    const [ selectdUrlRepository ,  setSelectdUrlRepository] = useState()
 
-    const getProject = async () => {
-        const { data } = await projectService.findById(postId)
-        setProjectsbyid(data)
-        
-    }
-
-    /* getProject() */
 
     const [formValues, setFormValues] = useState({
+        name: "",
+        githubRepo: "",
         nameGithubUsers: "",
+        openSource: "",
+        desc: "",
 
     })
 
@@ -52,13 +51,65 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, postId }) =
         const { data } = await projectService.list({ search: `${nameUser}`, limit: 8 })
         setsearchUsers(data)
 
-        
 
     }
 
+    const getUserData = async () => {
+
+        const { data } = await devService.findById(userId)
+
+        RepositoriesGithubUser(data.githubUsername)
+    }
 
 
+    const RepositoriesGithubUser = async (nameUserGitHub: string) => {
+        if (nameUserGitHub.length > 3) {
+            fetch(`https://api.github.com/users/${nameUserGitHub}/repos`, {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then((resposta) => resposta.json())
+                .then((data) => {
+                    setdataGithubRepo(data)
+                })
+                .catch((error) => {
+                    console.log(error)
 
+                })
+        }
+
+    }
+
+    const publishProject = async () => {
+
+        if (!formValues.name || !formValues.desc)
+            return
+
+        const body = {
+            name: formValues.name,
+            bannerURI: "https://destatic.blob.core.windows.net/images/dev-logo.png",
+            githubRepository: {
+                url: "https://github.com/Leop4rdo/devint-tcc",
+                name: selectdNameRepository
+            },
+            openSource: checkBoxValue,
+            desc: formValues.desc
+        }
+
+        const res = await projectService.create(body)
+
+        if (res.hasError)
+            return alert('Houve um erro inesperado ao publicar, tente novamente mais tarde!')
+
+        openCloseModal(false)
+    }
+
+    useEffect(() => { getUserData() }, [])
+
+
+    
+    
 
     return (
         <div className="modal-container-global">
@@ -75,13 +126,29 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, postId }) =
 
                     <div className="container-data-filling">
 
-                        <Input placeholder="" />
+                        <Input placeholder="Nome"
+                            name="name"
+                            onChange={handleChange}
+                        />
                         <div className="data-github">
-                            <Input placeholder="Github" />
+                            <Select onChange={(selectd: any) => {
+                                setSelectdNameRepository(selectd.target.value) 
+                                                                
+                                }}>
+                                <option>Selecione um Repositório</option>
+
+                                {dataGithubRepo &&
+                                    dataGithubRepo.map((data: any) => (
+                                        <option key={data.id} value={data.full_name}>{data.full_name}</option>
+                                        
+                                    ))
+                                }
+
+                            </Select>
                             <span>Open Source</span>
 
                             <div className="toggle-button">
-                                <input type="checkbox" id="chk" />
+                                <input type="checkbox" id="chk" onChange={(value: any) => setCheckBoxValue(value.target.checked)} />
                                 <label htmlFor="chk" className="switch">
                                     <span className="slider"></span>
                                 </label>
@@ -89,7 +156,7 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, postId }) =
 
                         </div>
 
-                        <AutoTextArea placeholder="Descrição" />
+                        <TextArea placeholder="Descrição" onChange={handleChange} name={"desc"} />
                         <div className="container-participants-github">
                             <Input placeholder="Participantes do projeto"
                                 name="nameGithubUsers"
@@ -97,8 +164,6 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, postId }) =
                             />
                             <Button className="btn-primary" children={<Icon name="add" />} />
                         </div>
-
-
                         {
                             searchUsers.length > 0 && formValues.nameGithubUsers != "" ?
                                 <div className="container-search-users-github">
@@ -139,7 +204,7 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, postId }) =
 
                                 :
 
-                               ""
+                                ""
                         }
 
 
@@ -164,7 +229,6 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, postId }) =
                                 <Icon name="delete_forever" />
                             </div>
 
-
                             <div className="conatiner-participants-project">
                                 <div className="participants-project">
                                     <div className="participants">
@@ -185,6 +249,11 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, postId }) =
                             </div>
                         </div>
                     </div>
+
+                    <div className="container-button-create-project">
+                        <Button onClick={publishProject} className="btn-primary" children={"Criar Projeto"} />
+                    </div>
+
                 </div>
             </div>
         </div>

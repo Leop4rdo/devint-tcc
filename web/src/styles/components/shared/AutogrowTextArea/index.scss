@@ -1,17 +1,16 @@
-.container-text-area {
+.auto-grow-text-area {
     width: 100%;
-
     textarea {
         width: 100%;
-
+        height: auto;
         padding: 12px;
-        min-height: 90px;
-        color: white;
+        min-height: 48px;
+        color : white;
         resize: none;
         padding-bottom: 0;
         background-color: $color-dark-gray;
         outline: none;
-        border: 2px solid $color-gray;
+        border : 2px solid $color-gray;
         border-radius: 16px;
         transition: border 0.25s ease-out;
 
@@ -22,11 +21,19 @@
         &::-webkit-scrollbar {
             background-color: transparent;
             width: 8px;
-        }
-
-        &::-webkit-scrollbar-thumb {
+            
+          }
+          
+         
+          
+          &::-webkit-scrollbar-thumb {
             background-color: $color-light-gray;
             border-radius: 8px;
-        }
+            
+          }
+
+         
     }
+
+    
 }

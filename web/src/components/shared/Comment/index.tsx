@@ -5,7 +5,7 @@ import Button from '../Button';
 import * as postService from "../../../services/post.service"
 import IComment from 'interfaces/IComment';
 import { AuthContext } from 'store/context/Auth.context';
-import AutoTextArea from '../TextArea';
+import AutoTextArea from '../AutogrowTextArea';
 
 
 interface ICommentProps {

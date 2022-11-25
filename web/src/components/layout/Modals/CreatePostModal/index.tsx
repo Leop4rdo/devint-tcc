@@ -5,7 +5,7 @@ import firebase from "config/firebase"
 import {v4 as randomUUIDV4} from "uuid"
 
 import Icon from "components/shared/Icon";
-import AutoTextArea from "components/shared/TextArea";
+import AutoTextArea from "components/shared/AutogrowTextArea";
 
 import * as postService from "services/post.service"
 interface ICreatePostModalProps {
