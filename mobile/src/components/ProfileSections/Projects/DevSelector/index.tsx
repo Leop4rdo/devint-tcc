@@ -9,9 +9,10 @@ import * as devService from "../../../../services/dev.service"
 
 interface DevSelectorProps {
     onSelect : (dev : IDevMinimal) => void
+    ignoreIds ?: string[]
 }
 
-const DevSelector : React.FC<DevSelectorProps> = ({ onSelect }) => {
+const DevSelector : React.FC<DevSelectorProps> = ({ onSelect, ignoreIds }) => {
     const [devs, setDevs] = useState<IDevMinimal[]>([])
     const [search, setSearch] = useState('')
 
@@ -22,9 +23,10 @@ const DevSelector : React.FC<DevSelectorProps> = ({ onSelect }) => {
         const res = await devService.list({
             search,
             limit : 2,
+            ignore : ignoreIds
         })
 
-        setDevs(res.data)
+        setDevs(res.data || [])
     }
 
     useEffect(() => { searchDevs() }, [search])
@@ -41,11 +43,12 @@ const DevSelector : React.FC<DevSelectorProps> = ({ onSelect }) => {
             />
 
             {
-                search.length > 0 && devs.length > 0 &&
+                search.length > 0 && devs?.length > 0 &&
                 <View style={styles.optionsWrapper}>
                     {
                         devs.map((dev) => 
                             <DevOption 
+                                key={dev.id}
                                 data={dev} 
                                 onPress={() => {
                                     onSelect(dev);

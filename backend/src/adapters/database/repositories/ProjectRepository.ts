@@ -22,6 +22,7 @@ export default class ProjectRepository extends AbstractRepository<ProjectEntity>
             .where((options?.owner) ? "p.owner = :owner" : '', { owner: options?.owner })
             .limit(options?.limit)
             .offset(options?.offset)
+            .orderBy('p.updatedAt')
             .getMany()
     }
 }

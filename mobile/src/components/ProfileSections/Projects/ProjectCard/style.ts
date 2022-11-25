@@ -25,23 +25,25 @@ export default StyleSheet.create({
         display:"flex",
         flexDirection:"row",
         alignItems:"center",
-        justifyContent: "space-between"
-        
+        justifyContent: "space-between",
+        maxWidth : '100%',
+        marginBottom : 8
     },
     containerTitle:{
         display: "flex",
-        flexDirection:"row",
-        alignItems:"center",
-        flexWrap : 'wrap'
+        flexDirection:"column",
+        flexWrap : 'wrap',
+        flexGrow : 1
     },
     title:{
         color: colors.PRIMARY,
         marginRight: 8,
+        maxWidth : '100%',
         fontSize:24,
         fontFamily: fonts.POPPINS_SEMIBOLD
     },
     typeProject:{
-        color: colors.WHITE,
+        color: colors.GRAY,
         fontSize:16,
         fontFamily: fonts.POPPINS_REGULAR
     },
