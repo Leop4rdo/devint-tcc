@@ -26,6 +26,7 @@ const HomePage : React.FC<{ route : any, navigation : any }> = ({route, navigati
             limit : 24, 
             order : route?.params?.feedType || "random"
         })
+
         
         const newPosts = data.filter((post : IPostListItem) => !posts.find((_) => post.id === _.id))
 
@@ -46,7 +47,7 @@ const HomePage : React.FC<{ route : any, navigation : any }> = ({route, navigati
     }
 
     const getActiveSidebarItem = () => {
-        const feedType = route?.param?.feedType || ""
+        const feedType = route?.params?.feedType || ''
         console.log(route?.param?.feedType)
         if (feedType.toUpperCase() == 'NEWEST')
             setActiveSidebarItem(2)
@@ -56,7 +57,7 @@ const HomePage : React.FC<{ route : any, navigation : any }> = ({route, navigati
             setActiveSidebarItem(0)
 
     }
-
+ 
     useEffect(() => { setPosts([]); getPosts(), getActiveSidebarItem() }, [isFocused])
 
     return (
