@@ -1,3 +1,4 @@
+import { Timestamp } from "typeorm";
 import IDevProps from "./IDev";
 import IPostProps from "./IPost";
 
@@ -12,4 +13,6 @@ export default interface IProjectProps {
     members : IDevProps[]
     owner : string
     hearts : JSON
+    createdAt: Timestamp;
+    updatedAt: Timestamp;
 }

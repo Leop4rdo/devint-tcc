@@ -15,21 +15,20 @@ export default class ProjectService {
 
     constructor(repo : ProjectRepository) { this.repo = repo }
 
-    async list(options ?: ProjectListOptions) : Promise<IResponse> {
-        console.log(options)
+    async list(options ?: ProjectListOptions, userId ?: string) : Promise<IResponse> {
         const projects = await this.repo.list(options)
 
-        const mapped = projects.map((project) => new ProjectOutput(project as unknown as IProjectProps))
+        const mapped = projects.map((project) => new ProjectOutput(project as unknown as IProjectProps, userId))
 
         return new SuccessResponse({
             data : mapped
         })
     }
 
-    async getById(id : string) : Promise<IResponse> {
-        const project = await this.repo.findById(id)
+    async getById(id : string, userId : string) : Promise<IResponse> {
+        const project = await this.repo.findById(id, ['members'])
 
-        const mapped = new ProjectOutput(project)
+        const mapped = new ProjectOutput(project, userId)
 
         return new SuccessResponse({
             data : mapped
@@ -68,6 +67,14 @@ export default class ProjectService {
         })
     }
 
+    async delete(id : string) : Promise<IResponse> {
+        await this.repo.remove(id)
+
+        return new SuccessResponse({
+            status: 204
+        })
+    }
+
     async toggleHeart(projectId: string, userId: string) {
         const project  = await this.repo.findById(projectId, ['members'])
 
@@ -75,7 +82,7 @@ export default class ProjectService {
             return new BadRequestResponse({ message: errors.ENTITY_NOT_FOUND })
         
         if (project.hearts.includes(userId))
-            project.hearts.filter((id : string) => id != userId)
+            project.hearts = project.hearts.filter((id : string) => id != userId)
         else 
             project.hearts.push(userId)
         

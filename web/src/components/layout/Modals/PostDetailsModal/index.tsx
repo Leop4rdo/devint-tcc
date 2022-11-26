@@ -33,7 +33,6 @@ const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick , 
         if (!post) return
 
         const res = await postService.addComment(newComment, postId)
-        console.log(res)
 
         if (res.hasError !== false) 
             return alert('Erro ao postar commentario!')

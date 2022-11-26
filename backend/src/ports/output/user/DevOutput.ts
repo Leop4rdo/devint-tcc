@@ -9,6 +9,7 @@ import Seniority from "@domains/Seniority";
 import Auth from "@domains/Auth";
 import IDevProps from "@domains/interfaces/IDev";
 import DevMinimalOutput from "./DevMinimalOutput";
+import { Timestamp } from "typeorm";
 
 export default class DevOutput {
     id: string
@@ -35,12 +36,16 @@ export default class DevOutput {
     badges: Badge[]   
     following ?: DevMinimalOutput[]
     followers ?: DevMinimalOutput[]
+    createdAt : Timestamp
+    updatedAt : Timestamp
 
 
     constructor(props : IDevProps, devId ?: string) {
         Object.assign(this, props);
         this.auth = undefined
         this.email = props.auth.email 
+        this.createdAt = props.createdAt
+        this.updatedAt = props.updatedAt
         
         this.following = (props.following) ? props.following.map((dev) => new DevMinimalOutput(dev)) : undefined
         this.followers = (props.followers) ? props.followers.map((dev) => new DevMinimalOutput(dev)) : undefined

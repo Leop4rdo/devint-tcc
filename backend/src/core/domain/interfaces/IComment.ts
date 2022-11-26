@@ -1,3 +1,4 @@
+import { Timestamp } from "typeorm"
 import IDevProps from "./IDev"
 import IPostProps from "./IPost"
 
@@ -8,4 +9,6 @@ export default interface ICommentProps {
     hearts : JSON
     answers : JSON
     content : string
+    createdAt : Timestamp
+    updatedAt : Timestamp
 }

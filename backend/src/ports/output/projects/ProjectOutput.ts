@@ -14,6 +14,8 @@ export default class ProjectOutput {
     openSource: boolean
     hearts: JSON
     alreadyHearted : boolean
+    createdAt: Timestamp
+    updatedAt: Timestamp
 
     constructor(props : IProjectProps, userId ?: string) {
         const heartsArray = JSON.parse(JSON.stringify(props.hearts))
@@ -24,9 +26,11 @@ export default class ProjectOutput {
         this.githubRepository = props.githubRepository
         this.openSource = props.openSource
         this.desc = props.desc
-        this.hearts = heartsArray.length
+        this.hearts = heartsArray
         this.owner = props.owner
         this.members = props.members.map((dev) => new DevMinimalOutput(dev))
+        this.createdAt = props.createdAt
+        this.updatedAt = props.updatedAt
         this.alreadyHearted = heartsArray.includes(userId) || false
     }
 }

@@ -10,10 +10,11 @@ import styles from "./styles"
 interface ISidebarProps {
     visible: boolean,
     onClose : () => void,
-    navigation : any
+    navigation : any,
+    activeItem : number
 }
 
-const Sidebar : React.FC<ISidebarProps> = ({ visible, onClose, navigation }) => {
+const Sidebar : React.FC<ISidebarProps> = ({ visible, onClose, navigation, activeItem }) => {
     const animOffset = useSharedValue(-screenWidth)
     const bgFade = useSharedValue(0)
 
@@ -51,12 +52,12 @@ const Sidebar : React.FC<ISidebarProps> = ({ visible, onClose, navigation }) => 
 
                     <View style={styles.divisor}></View>
 
-                    <SidebarItem active icon="home" name="Home" onPress={() => navigation.navigate('home')}/>
-                    <SidebarItem icon="trending-up" name="Em alta" />
-                    <SidebarItem icon="article" name="Artigos" />
-                    <SidebarItem icon="watch-later" name="Ver mais tarde" />
-                    <SidebarItem icon="chat" name="Chat" />
-                    <SidebarItem icon="settings" name="Configurações" />
+                    <SidebarItem active={activeItem == 0} icon="home" name="Home" onPress={() => navigation.push('home')}/>
+                    <SidebarItem active={activeItem == 1} icon="trending-up" name="Em alta" onPress={() => navigation.push('home', {feedType : 'trending'})}/>
+                    <SidebarItem active={activeItem == 2} icon="watch-later" name="Recentes" onPress={() => navigation.push('home', {feedType : 'newest'})}/>
+                    <SidebarItem active={activeItem == 3} icon="article" name="Artigos" />
+                    <SidebarItem active={activeItem == 4} icon="chat" name="Chat" />
+                    <SidebarItem active={activeItem == 5} icon="settings" name="Configurações" />
                 </View>
 
                 <Pressable style={styles.exitContainer} onPress={() => { authContext?.signOut(); } }>

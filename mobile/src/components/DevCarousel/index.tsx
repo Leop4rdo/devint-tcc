@@ -10,7 +10,7 @@ const DevCarousel : React.FC<{ navigation : any }> = ({ navigation }) => {
 
     const getDevs = async () => {
         const res = await devService.list({ limit : 32 })
-
+        console.log(res.data)
         setDevs(res.data)
     }
 
