@@ -13,10 +13,10 @@ import firebase from "config/firebase"
 interface ICreateProjects {
     openCloseModal: any
     userId: string
-    refreshPage : any
+    refreshPage: any
 }
 
-const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId , refreshPage }) => {
+const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, refreshPage }) => {
     const [searchUsers, setsearchUsers] = useState<IDevMinimal[]>([])
     const [dataGithubRepo, setdataGithubRepo] = useState([])
     const [selectdNameRepository, setSelectdNameRepository] = useState()
@@ -107,8 +107,9 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId , re
 
         if (res.hasError)
             return alert('Houve um erro inesperado ao publicar, tente novamente mais tarde!')
-        refreshPage()
+        
         openCloseModal(false)
+        refreshPage()
         
     }
 
@@ -134,6 +135,7 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId , re
 
 
         setUploading(false)
+        
 
     }
 
@@ -153,16 +155,20 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId , re
                     </div>
 
                     <div className="container-image">
-                        <input accept="image/*" onChange={upload} type="file" name="attachment-input" id="attachment-input" />
-                        <label htmlFor="attachment-input">
-                            <Icon name="image"/>
-                        </label>
+
 
                         <div className="attachment-list">
-                            {attachments[0] ?  
-                            <img src={attachments[0]} alt="" /> : ""}
-                            
+                            {attachments[0] ?
+                                <img src={attachments[0]} alt="" /> :
+                                <div className="container-image-not-selected">
+                                </div>}
+                        </div>
 
+                        <div className="container-input-file">
+                            <label htmlFor="input-file">
+                                <Icon name="add_a_photo" />
+                            </label>
+                            <input accept="image/*" onChange={upload} type="file" name="input-file" id="input-file" />
                         </div>
 
 

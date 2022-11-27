@@ -24,6 +24,7 @@ const ProjectsTabs: React.FC<IProjectTab> = ({ devId }) => {
     }
 
     const getProjects = async () => {
+        setProjects([])
         const { data } = await projectService.getProjectByUser(devId)
         setProjects([...projects, ...data])
     }
