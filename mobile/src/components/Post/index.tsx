@@ -39,6 +39,13 @@ const Post : React.FC<IPostProps> = ({ data, openComments, openProfile }) =>{
                         data.content
                     }
                 </Text>
+
+                {
+                    data.project &&
+                    <Pressable>
+                        <Text style={styles.projectLink}>&#60; {data.project.name} &#47;&#62;</Text>
+                    </Pressable>
+                }
             </View>
 
             { 

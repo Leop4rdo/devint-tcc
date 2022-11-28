@@ -15,3 +15,12 @@ export default interface IProject {
     hearts?: string[]
     alreadyHearted ?: boolean
 }
+
+export interface IProjectMinimal {
+    id ?: string
+    bannerURI : string
+    name: string
+    desc: string
+    githubRepository?: GithubRepository
+    openSource: boolean
+}

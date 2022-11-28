@@ -9,6 +9,10 @@ export default class PostCreateInput extends InputPort {
     
     attachments: JSON
 
+    project : {
+        id : string
+    }
+
     constructor(props : IPostProps) {
         super()
         Object.assign(this, props)

@@ -44,7 +44,7 @@ export default StyleSheet.create({
     },
     typeProject:{
         color: colors.GRAY,
-        fontSize:16,
+        fontSize:12,
         fontFamily: fonts.POPPINS_REGULAR
     },
     description:{

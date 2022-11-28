@@ -155,7 +155,7 @@ const ProjectRegisterPage : React.FC<{ route : any, navigation : any }> = ({rout
     }
 
     const saveProject = async () => {
-        const { projectId } = route.params
+        const projectId = route?.params?.projectId
 
         const body = {
             id : projectId,

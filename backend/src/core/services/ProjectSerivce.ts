@@ -25,6 +25,12 @@ export default class ProjectService {
         })
     }
 
+    async listMinimal(devId) : Promise<IResponse> {
+        return new SuccessResponse({
+            data : await this.repo.listMinimal(devId)
+        })
+    }
+
     async getById(id : string, userId : string) : Promise<IResponse> {
         const project = await this.repo.findById(id, ['members'])
 

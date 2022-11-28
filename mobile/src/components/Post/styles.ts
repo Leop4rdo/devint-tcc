@@ -32,9 +32,10 @@ const styles = StyleSheet.create({
     },
 
     devName : {
-        color: '#FFF',
+        color: colors.PRIMARY,
         fontFamily : fonts.POPPINS_MEDIUM,
-        marginBottom : -4
+        marginBottom : -4,
+        fontSize : 16
     },
 
     devGithub : {
@@ -108,6 +109,12 @@ const styles = StyleSheet.create({
     carouselFooterLenght : {
         color : colors.LIGHT_GRAY,
         fontFamily : fonts.POPPINS_MEDIUM,
+    },
+
+    projectLink : {
+        fontFamily : fonts.POPPINS_MEDIUM,
+        fontSize : 12,
+        color : colors.PRIMARY
     }
 })
 

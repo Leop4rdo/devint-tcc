@@ -55,9 +55,12 @@ const ProjectCard: React.FC<IProjectCardProps> = ({ data, onMemberPress, onEditP
                     </View>
                 </View>
 
-                <View>
-                    <Text style={style.description}>{data.desc}</Text>
-                </View>
+                {
+                    data.desc &&
+                    <View>
+                        <Text style={style.description}>{data.desc}</Text>
+                    </View>
+                }
             </View>
 
             <View>
