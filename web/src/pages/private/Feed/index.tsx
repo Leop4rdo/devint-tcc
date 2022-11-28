@@ -2,19 +2,14 @@ import MenuWapper from "components/layout/MenuWrapper";
 import Post from "components/Post";
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import * as postService from 'services/post.service'
-import { IPostListItem, IPost } from "interfaces/IPost";
-import POSTS_DATA from "../../../DATA/posts-get-response.json"
+import { IPostListItem } from "interfaces/IPost"
 import { Swiper, SwiperSlide } from "swiper/react";
 import SideCard from "components/shared/SideCard";
-
-import Button from "components/shared/Button";
 import CreatePostModal from "components/layout/Modals/CreatePostModal";
-
 import IDevMinimal from "interfaces/IDev";
 import * as devService from "../../../services/dev.service"
 import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
 import PostDetailsModal from "components/layout/Modals/PostDetailsModal";
-import { resolveModuleName } from "typescript";
 import NewContents from "components/layout/NewContents/NewContents";
 
 const FeedPage: React.FC = () => {

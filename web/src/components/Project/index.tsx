@@ -1,28 +1,37 @@
 import Icon from "components/shared/Icon";
 import React from "react";
 import Button from "components/shared/Button";
+import IProjectProps from "interfaces/IProject";
 
+interface IProject {
+    openCloseModal: any
+    data: IProjectProps
+    
 
+}
 
-const Project: React.FC = () => {
-
+const Project: React.FC<IProject> = ({ data, openCloseModal }) => {
+    
+    
     return (
-        <div className="container-project">
+        <div className="container-project" >
             <div className="container-image">
-                <img src="https://www.vounajanela.com/wp-content/uploads/2015/03/fotos.jpg" alt="" />
+                <img src={`${data.bannerURI}`} alt="" />
             </div>
 
             <div className="container-name-project">
                 <div className="name-project">
-                    <h2>Devint NetWork</h2>
-                    <span>(open source)</span>
+                    <h2>{data.name}</h2>
+
+                    {data.openSource ? <span>(Open source)</span> : <span>(Closed source)</span>}
+
                 </div>
-                <Icon name="edit" />
+                <Icon name="edit" onClick={openCloseModal} />
 
             </div>
 
             <div className="container-description-project">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum volutpat lectus in nibh placerat condimentum. Morbi ipsum libero, faucibus ac facilisis vel, aliquet non nisi. Nunc ullamcorper et risus dignissim fringilla. Duis semper molestie arcu, quis ultricies mi interdum eget. Vivamus sed vehicula ante, sed semper justo. Nam vitae lorem sagittis, pulvinar felis maximus, molestie orci. Fusce fermentum sapien non ullamcorper luctus. Donec nec auctor metus.</p>
+                <p>{data.desc}</p>
             </div>
 
             <div className="container-participants">
@@ -33,25 +42,18 @@ const Project: React.FC = () => {
                     </div>
 
                     <div className="project-owner">
-                        <img src="https://img.ibxk.com.br/2012/4/materias/3802463332510208.jpg?ims=704x" alt="" />
+                        <img src={data.members[0].profilePicUrl} alt="" />
                     </div>
                 </div>
 
-                <div className="container-project-participants">
-                    <img src="https://img.ibxk.com.br/2012/4/materias/3802463332510208.jpg?ims=704x" alt="" />
-                </div>
+                {
+                    data.members.map((members) => (
+                        <div className="container-project-participants">
+                            <img src={members.profilePicUrl} alt="" />
+                        </div>
+                    ))
+                }
 
-                <div className="container-project-participants">
-                    <img src="https://img.ibxk.com.br/2012/4/materias/3802463332510208.jpg?ims=704x" alt="" />
-                </div>
-
-                <div className="container-project-participants">
-                    <img src="https://img.ibxk.com.br/2012/4/materias/3802463332510208.jpg?ims=704x" alt="" />
-                </div>
-
-                <div className="container-project-participants">
-                    <img src="https://img.ibxk.com.br/2012/4/materias/3802463332510208.jpg?ims=704x" alt="" />
-                </div>
 
             </div>
 
@@ -62,10 +64,10 @@ const Project: React.FC = () => {
                     <span>github</span>
                 </div>
                 <div className="container-interaction-project">
-                    <Button onClick={() => {}}>
-                        <Icon name="favorite"/>
+                    <Button onClick={() => { }}>
+                        <Icon name="favorite" />
                     </Button>
-                    <span>100</span>
+                    <span>{data.hearts}</span>
                 </div>
             </div>
         </div>

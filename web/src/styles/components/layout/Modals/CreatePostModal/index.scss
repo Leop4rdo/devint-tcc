@@ -131,7 +131,7 @@
                 #attachment-input { display:  none; }
                 .icon {
                     font-size: clamp(1.5rem, 4vw, 2.5rem);
-                    color: white;
+                    color: $color-white;
 
                     transition: color .25s ease-out;
                     

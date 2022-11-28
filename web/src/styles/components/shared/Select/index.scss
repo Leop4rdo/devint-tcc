@@ -1,43 +1,55 @@
 .select-container {
-    margin-bottom: 16px;
-    height: 40px;
-    width: 300px;
-    padding: 0px 8px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    
-    background-color: $color-black;
-  
-    border: 2px solid;
-    border-color: $color-gray;
-    border-radius: 8px;
-    border-style: solid;
-  
-    transition: border .25s ease-out;
-  
+  margin-bottom: 16px;
+  height: 40px;
+  width: 300px;
+  padding: 0px 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  background-color: $color-black;
+
+  border: 2px solid;
+  border-color: $color-gray;
+  border-radius: 8px;
+  border-style: solid;
+
+  transition: border .25s ease-out;
+
+
+
+  .icon {
+    color: $color-white;
+    font-size: 125%;
+
+    transition: color .5s ease-out;
+  }
+
+  &:focus-within,
+  &:hover {
     .icon {
-      color: $color-white;
-      font-size: 125%;
-  
-      transition: color .5s ease-out;
-    }
-  
-    &:focus-within,
-    &:hover {
-      .icon {
-        color: $color-primary;
-      }
-  
-      border-color: $color-primary;
+      color: $color-primary;
     }
 
-    select {
-        width: 100%;
-        height: auto;
-        border: none;
-        color: $color-white;
+    border-color: $color-primary;
+  }
+
+  select {
+    width: 100%;
+    height: auto;
+    border: none;
+    color: $color-white;
+
+
+    &::-webkit-scrollbar {
+      background-color: transparent;
+      width: 8px;
     }
-  
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $color-light-gray;
+      border-radius: 8px;
+    }
+  }
+
 }
-  

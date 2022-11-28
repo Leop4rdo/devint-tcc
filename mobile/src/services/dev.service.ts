@@ -19,6 +19,8 @@ export const list = async (query ?: UserQueryFilter) : Promise<IResponse> => {
     }
 }
 
+
+
 export const toggleFollow = async (targetId : string) : Promise<IResponse> => {
     try {
         const { data } = await api.patch(
