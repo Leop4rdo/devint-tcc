@@ -31,6 +31,8 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            word-wrap: break-word;
+            
 
             h2 {
                 color: $color-primary;
@@ -111,17 +113,23 @@
         justify-content: space-between;
 
         .container-github {
-            align-items: center;
-            display: flex;
-            span {
+            a{
+                align-items: center;
+                display: flex;
                 color: $color-light-gray;
-                cursor: pointer;
-            }
+                text-decoration: solid;
+                gap: 8px;
 
-            img {
-                width: 30px;
-                height: 30px;
-            }
+                  &:hover:before {
+                    transform:  scaleX(0);
+                  }
+
+                  img{
+                    cursor: pointer;
+                    width: 24px;
+                    height: 24px;    
+                }
+            }        
         }
 
         .container-interaction-project{
