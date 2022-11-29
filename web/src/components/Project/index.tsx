@@ -1,22 +1,31 @@
 import Icon from "components/shared/Icon";
-import React from "react";
+import React , {useState , useEffect} from "react";
 import Button from "components/shared/Button";
 import IProjectProps from "interfaces/IProject";
-
+import * as projectService from 'services/project.service';
 interface IProject {
     openCloseModal: any
     data: IProjectProps
-    
-
+    EditProject : any
+    idProject : any
 }
 
-const Project: React.FC<IProject> = ({ data, openCloseModal }) => {
+const Project: React.FC<IProject> = ({ data, openCloseModal , EditProject , idProject}) => 
+{
+    const [UrlRepoGithubProject , setUrlRepoGithubProject] = useState()
     
+    const getUrlGithubRepo = async () => {
+        const {data} = await projectService.findById(idProject)
+
+        setUrlRepoGithubProject(data.githubRepository.url)
+    }
+
+    useEffect(() => {getUrlGithubRepo(); }, [])
     
     return (
         <div className="container-project" >
             <div className="container-image">
-                <img src={`${data.bannerURI}`} alt="" />
+                <img src={data.bannerURI} alt="" />
             </div>
 
             <div className="container-name-project">
@@ -26,7 +35,7 @@ const Project: React.FC<IProject> = ({ data, openCloseModal }) => {
                     {data.openSource ? <span>(Open source)</span> : <span>(Closed source)</span>}
 
                 </div>
-                <Icon name="edit" onClick={openCloseModal} />
+                <Icon name="edit" onClick={() => {openCloseModal() ; EditProject()}} />
 
             </div>
 
@@ -35,16 +44,6 @@ const Project: React.FC<IProject> = ({ data, openCloseModal }) => {
             </div>
 
             <div className="container-participants">
-
-                <div className="container-project-owner">
-                    <div className="container-crown-project-owner">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Coroa_Real_Fechada_-_barrete_purp%C3%BAreo.svg/1200px-Coroa_Real_Fechada_-_barrete_purp%C3%BAreo.svg.png" alt="" />
-                    </div>
-
-                    <div className="project-owner">
-                        <img src={data.members[0].profilePicUrl} alt="" />
-                    </div>
-                </div>
 
                 {
                     data.members.map((members) => (
@@ -60,8 +59,11 @@ const Project: React.FC<IProject> = ({ data, openCloseModal }) => {
 
             <div className="container-interactions">
                 <div className="container-github">
-                    <img src="../../public/assets/icons/google.svg" alt="" />
-                    <span>github</span>
+                    <a href={UrlRepoGithubProject}>
+                    <img src="../assets/icons/github.svg" alt=""  />
+                        github 
+                        
+                        </a>
                 </div>
                 <div className="container-interaction-project">
                     <Button onClick={() => { }}>

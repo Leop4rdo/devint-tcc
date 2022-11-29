@@ -1,5 +1,5 @@
 import api, { buildQuery, getToken, IResponse, PaginationQuery } from "."
-
+import IProjectProps from "../interfaces/IProject"
 interface UserQueryFilter extends PaginationQuery {
     search ?: string
 }
@@ -64,5 +64,53 @@ export const create = async (body : object) => {
     } catch (err : any) {
         console.log(err)
         return err.response?.data as IResponse 
+    }
+}
+
+
+export const DeleteById = async (id : string) => {
+    try {
+        const { data } = await api.delete(
+            `/projects/${id}`,
+            { headers: { Authorization: `Baerer ${ getToken()}` } }
+        )
+
+        return data as IResponse
+    } catch (err : any) {
+        console.log('error at get post by id')
+        console.log(err)
+        return err.response.data as IResponse
+    }
+}
+
+
+export const GetByIdProject = async (id : string) => {
+    try {
+        const { data } = await api.get(
+            `/projects/${id}`,
+            { headers: { Authorization: `Baerer ${ getToken()}` } }
+        )
+
+        return data as IResponse
+    } catch (err : any) {
+        console.log('error at get post by id')
+        console.log(err)
+        return err.response.data as IResponse
+    }
+}
+
+
+export const update = async (body : IProjectProps, id : string) : Promise<IResponse> => {
+    try {
+        const { data } = await api.put(
+            `/projects/${id}`,
+            body,
+            { headers: { Authorization: `Baerer ${ await getToken() }` } }
+        )
+
+        return data as IResponse
+    } catch (err : any) {
+        console.log(err);
+        return err.response.data as IResponse
     }
 }
