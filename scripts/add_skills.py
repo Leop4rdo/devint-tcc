@@ -2,7 +2,7 @@ import sys
 import requests
 
 
-API_URL = 'http://localhost:8080/api/v1'
+API_URL = 'https://devint-api.azurewebsites.net'
 DEVICON_URL = 'https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons' # /name/name-svgname.svg
 
 

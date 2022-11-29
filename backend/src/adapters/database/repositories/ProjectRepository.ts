@@ -25,4 +25,17 @@ export default class ProjectRepository extends AbstractRepository<ProjectEntity>
             .orderBy('p.updatedAt')
             .getMany()
     }
+
+    async listMinimal(owner : string) {
+        return this.db.createQueryBuilder('p')
+            .select([
+                'p.id',
+                'p.name', 
+                'p.githubRepository', 
+                'p.desc',
+                'p.bannerURI'
+            ])
+            .where('p.owner = :owner', { owner })
+            .getMany()
+    }
 }

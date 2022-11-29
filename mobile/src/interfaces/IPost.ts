@@ -1,5 +1,6 @@
 import IComment from "./IComment"
 import IDevMinimal from "./IDev"
+import { IProjectMinimal } from "./IProject"
 
 export interface IPost {
     id : string
@@ -27,4 +28,5 @@ export interface IPostListItem {
     attachments : string[]
     writter : IDevMinimal
     alreadyHearted : boolean
+    project ?: IProjectMinimal
 }

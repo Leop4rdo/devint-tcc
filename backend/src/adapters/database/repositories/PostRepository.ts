@@ -17,6 +17,7 @@ export default class PostRepository extends AbstractRepository<PostEntity> {
     
         return await this.db.createQueryBuilder('posts')
             .innerJoinAndSelect('posts.writter', 'devs')
+            .leftJoinAndSelect('posts.project', 'projects')
             .leftJoinAndSelect('posts.comments', 'comments')
             .where((filters.writter) ? 'devs.id = :writterId' : '', { writterId : filters.writter })
             .orderBy(this.getOrderQuery(filters.order), "DESC")

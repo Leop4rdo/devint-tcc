@@ -17,6 +17,21 @@ export const listByDev = async (devId : string, query ?: PaginationQuery) : Prom
     }
 }
 
+export const listMinimal = async (devId : string) : Promise<IResponse> => {
+    try {
+        const { data } = await api.get(
+            `/devs/${devId}/projects/list-minimal`,
+            { headers: { Authorization: `Baerer ${ await getToken()}` } }
+        )
+
+        return data as IResponse
+    } catch (err : any) {
+        console.log('error at project list by dev')
+        console.log(err)
+        return err.response.data as IResponse
+    }
+}
+
 export const getById = async (id : string) : Promise<IResponse> => {
     try {
         const { data } = await api.get(

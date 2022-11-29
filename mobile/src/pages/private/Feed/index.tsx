@@ -11,7 +11,7 @@ import CommentModal from "../../../components/CommentModal";
 import {useIsFocused} from "@react-navigation/native";
 import { IPostListItem } from "../../../interfaces/IPost";
 
-const HomePage : React.FC<{ route : any, navigation : any }> = ({route, navigation}) => {
+const FeedPage : React.FC<{ route : any, navigation : any }> = ({route, navigation}) => {
     const [posts, setPosts] = useState<IPostListItem[]>([])
     const [isRefreshing, setRefreshing] = useState(false)
     const [selectedPostId, setSelectedPostId] = useState("")
@@ -94,4 +94,4 @@ const HomePage : React.FC<{ route : any, navigation : any }> = ({route, navigati
     )
 }
 
-export default HomePage;
+export default FeedPage;

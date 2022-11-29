@@ -30,6 +30,12 @@ export default class ProjectController {
             .catch((err) => res.status(err.status || 500).json(err))
     }
 
+    listMinimal = (req : Request, res : Response) => {
+        this.service.listMinimal(req.params.devId)
+            .then((_res) => res.status(_res.status || 200).json(_res))
+            .catch((err) => res.status(err.status || 500).json(err))
+    }
+
     listByDev = (req : Request, res : Response) => {
         this.service.list({ owner : req.params.ownerId, ...req.query },  req.body.userData.userId)
             .then((_res) => res.status(_res.status || 200).json(_res))

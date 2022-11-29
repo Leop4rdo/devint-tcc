@@ -5,6 +5,7 @@ const projectRouter = Router()
 const ctrl = new ProjectController()
 
 projectRouter.get('/projects', ctrl.list)
+projectRouter.get('/devs/:devId/projects/list-minimal', ctrl.listMinimal)
 projectRouter.get('/devs/:ownerId/projects', ctrl.listByDev)
 projectRouter.get('/projects/:id', ctrl.getById)
 projectRouter.post('/projects', ctrl.create)
