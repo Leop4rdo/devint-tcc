@@ -114,3 +114,19 @@ export const update = async (body : IProjectProps, id : string) : Promise<IRespo
         return err.response.data as IResponse
     }
 }
+
+
+export const toggleHeart = async (id : string) => {
+    try {
+        const { data } = await api.patch(
+            `/projects/${id}/toggle-heart`,
+            {},
+            { headers: { Authorization: `Baerer ${ await getToken()}` } }
+        )
+
+        return data as IResponse
+    } catch (err : any) {
+        console.log(err)
+        return err.response.data as IResponse
+    }
+}

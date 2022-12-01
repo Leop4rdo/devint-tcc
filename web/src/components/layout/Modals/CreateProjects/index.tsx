@@ -32,7 +32,8 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, ref
         desc: "",
         members : [
             authContext?.userData
-        ]
+        ],
+        openSource : false
 
     })
 
@@ -154,7 +155,8 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, ref
                 name: data.name,
                 nameGithubUsers: "",
                 desc: data.desc,
-                members: data.members
+                members: data.members,
+                openSource : data.openSource
             })
             
             setCheckBoxValue(data.openSource)
@@ -196,7 +198,7 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, ref
 
     useEffect(() => { getUserData(); getByidProjects() }, [])
 
-    console.log(attachments)
+   
     
 
     return (
@@ -254,8 +256,8 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, ref
                             </Select>
                             <span>Open Source</span>
                             <div className="toggle-button">
-                                <input type="checkbox" id="chk" onChange={(value: any) => setCheckBoxValue(value.target.checked)} />
-                                <label htmlFor="chk" className="switch">
+                                <input type="checkbox" id="chk" onChange={() => setFormValues({ ...formValues, openSource: !formValues.openSource})} />
+                                <label  htmlFor="chk" className="switch">
                                     <span className="slider"></span>
                                 </label>
                             </div>
@@ -347,26 +349,7 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, ref
                         
                             
                         } 
-                            
-
-                            {/* <div className="conatiner-participants-project">
-                                <div className="participants-project">
-                                    <div className="participants">
-                                        <div className="image">
-                                            <img />
-                                        </div>
-                                        <div className="container-information-participants">
-                                            <div className="developer-name">
-                                                <span>Developer_Name</span>
-                                            </div>
-                                            <div className="developer-github">
-                                                <span >Developer_Github</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <Icon name="delete_forever" />
-                            </div> */}
+                        
                         </div>
                     </div>
 
