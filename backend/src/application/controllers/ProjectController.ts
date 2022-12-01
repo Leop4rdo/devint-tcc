@@ -19,7 +19,7 @@ export default class ProjectController {
     }
 
     update = (req : Request, res : Response) => {
-        this.service.update(new ProjectCreateInput(req.body), req.params.id)
+        this.service.update(new ProjectCreateInput(req.body), req.params.id, req.body.userData.id)
             .then((_res) => res.status(_res.status || 200).json(_res))
             .catch((err) => res.status(err.status || 500).json(err))
     }
