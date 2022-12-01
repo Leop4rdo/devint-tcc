@@ -3,6 +3,7 @@ import api, { buildQuery, getToken, IResponse, PaginationQuery } from "."
 interface createPostRequestBody {
     content : string,
     attachments : string[]
+    project ?: { id : string }
 }
 
 export const create = async (body : createPostRequestBody) => {

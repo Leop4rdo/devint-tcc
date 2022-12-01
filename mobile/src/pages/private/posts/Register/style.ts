@@ -124,6 +124,11 @@ const styles = StyleSheet.create({
         aspectRatio : 1,
         marginVertical : 4,
         marginHorizontal : 12
+    },
+
+    projectPicker : {
+        width : '75%'
+
     }
 })
 

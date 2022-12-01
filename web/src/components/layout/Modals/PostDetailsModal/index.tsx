@@ -7,8 +7,8 @@ import Button from "components/shared/Button"
 import Icon from "components/shared/Icon"
 import Comment from "components/shared/Comment"
 import { AuthContext } from "store/context/Auth.context"
-import Input from "components/shared/Input"
-import AutoTextArea from "components/shared/TextArea"
+import Input from "components/shared/Input";
+import AutoTextArea from "components/shared/AutogrowTextArea";
 interface IPostDetailsModalProps {
     postId: string
     onClick: any

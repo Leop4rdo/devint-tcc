@@ -84,10 +84,12 @@ export default class PostService {
     }
 
     async list(userId : string, filter ?: PaginateListInput) {
-        const posts = await this._.listByFilters(filter)
-
-        const mapped = posts.map(( post : PostEntity ) => new PostListOutput(post as unknown as IPostProps, userId))
-
-        return new SuccessResponse({ data: mapped })
+        try {
+            const posts = await this._.listByFilters(filter)
+            
+            const mapped = posts.map(( post : PostEntity ) => new PostListOutput(post as unknown as IPostProps, userId))
+            
+            return new SuccessResponse({ data: mapped })
+        } catch (err) { console.log(err) }
     }
 }

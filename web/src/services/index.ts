@@ -13,12 +13,7 @@ export interface PaginationQuery {
     offset ?: number
 }
 
-
-// export const baseUrl = "http://192.168.1.14:8080/api/v1"
 export const baseUrl = "http://10.107.144.15:8080/api/v1" 
-//export const baseUrl = "http://7a72-187-84-34-232.sa.ngrok.io/api/v1"
-//export const baseUrl = "https://8c23-187-84-34-237.sa.ngrok.io/api/v1"
-//export const baseUrl = process.env.REACT_ENV_API_URL || "http://10.107.144.15:8080/api/v1" 
 
 export const getToken = () => {
     return localStorage.getItem("devint-auth")

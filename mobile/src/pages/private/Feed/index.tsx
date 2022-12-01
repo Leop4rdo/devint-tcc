@@ -11,7 +11,7 @@ import CommentModal from "../../../components/CommentModal";
 import {useIsFocused} from "@react-navigation/native";
 import { IPostListItem } from "../../../interfaces/IPost";
 
-const HomePage : React.FC<{ route : any, navigation : any }> = ({route, navigation}) => {
+const FeedPage : React.FC<{ route : any, navigation : any }> = ({route, navigation}) => {
     const [posts, setPosts] = useState<IPostListItem[]>([])
     const [isRefreshing, setRefreshing] = useState(false)
     const [selectedPostId, setSelectedPostId] = useState("")
@@ -26,6 +26,7 @@ const HomePage : React.FC<{ route : any, navigation : any }> = ({route, navigati
             limit : 24, 
             order : route?.params?.feedType || "random"
         })
+
         
         const newPosts = data.filter((post : IPostListItem) => !posts.find((_) => post.id === _.id))
 
@@ -46,7 +47,7 @@ const HomePage : React.FC<{ route : any, navigation : any }> = ({route, navigati
     }
 
     const getActiveSidebarItem = () => {
-        const feedType = route?.param?.feedType || ""
+        const feedType = route?.params?.feedType || ''
         console.log(route?.param?.feedType)
         if (feedType.toUpperCase() == 'NEWEST')
             setActiveSidebarItem(2)
@@ -56,7 +57,7 @@ const HomePage : React.FC<{ route : any, navigation : any }> = ({route, navigati
             setActiveSidebarItem(0)
 
     }
-
+ 
     useEffect(() => { setPosts([]); getPosts(), getActiveSidebarItem() }, [isFocused])
 
     return (
@@ -93,4 +94,4 @@ const HomePage : React.FC<{ route : any, navigation : any }> = ({route, navigati
     )
 }
 
-export default HomePage;
+export default FeedPage;

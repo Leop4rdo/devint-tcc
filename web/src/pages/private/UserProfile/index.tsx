@@ -13,8 +13,9 @@ import PostsTab from "components/ProfileTabs/Posts/Posts";
 import ProjectsTabs from "components/ProfileTabs/Projects/Projects"; 
 import firebase from "config/firebase";
 import AutoTextArea from "components/shared/TextArea";
-import { dateMask } from "utils/masks";
+//import AutoTextArea from "components/shared/AutogrowTextArea";
 import { isValidDate } from "utils/validations";
+import { dateMask } from "utils/masks";
 import { setEnvironmentData } from "worker_threads";
 import DetailSection from "components/ProfileSections/DetailSection";
 
@@ -206,7 +207,9 @@ const UserProfilePage: React.FC = () => {
                     <div className="selected-tab">
                         {currentTab === "postsTab" ? <PostsTab devId={devId || ''} /> : ""}
 
-                        {currentTab === "projectsTab" ? <ProjectsTabs devId={devId || ''}/>
+                        {currentTab === "projectsTab" ?
+                
+                        <ProjectsTabs devId={devId || ''}/>
                          : ""}
                     </div>
                 </div>

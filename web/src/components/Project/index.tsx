@@ -1,71 +1,75 @@
 import Icon from "components/shared/Icon";
-import React from "react";
+import React , {useState , useEffect} from "react";
 import Button from "components/shared/Button";
+import IProjectProps from "interfaces/IProject";
+import * as projectService from 'services/project.service';
+interface IProject {
+    openCloseModal: any
+    data: IProjectProps
+    EditProject : any
+    idProject : any
+}
 
+const Project: React.FC<IProject> = ({ data, openCloseModal , EditProject , idProject}) => 
+{
+    const [UrlRepoGithubProject , setUrlRepoGithubProject] = useState()
+    
+    const getUrlGithubRepo = async () => {
+        const {data} = await projectService.findById(idProject)
 
+        setUrlRepoGithubProject(data.githubRepository.url)
+    }
 
-const Project: React.FC = () => {
-
+    useEffect(() => {getUrlGithubRepo(); }, [])
+    
     return (
-        <div className="container-project">
+        <div className="container-project" >
             <div className="container-image">
-                <img src="https://www.vounajanela.com/wp-content/uploads/2015/03/fotos.jpg" alt="" />
+                <img src={data.bannerURI} alt="" />
             </div>
 
             <div className="container-name-project">
                 <div className="name-project">
-                    <h2>Devint NetWork</h2>
-                    <span>(open source)</span>
+                    <h2>{data.name}</h2>
+
+                    {data.openSource ? <span>(Open source)</span> : <span>(Closed source)</span>}
+
                 </div>
-                <Icon name="edit" />
+                <Icon name="edit" onClick={() => {openCloseModal() ; EditProject()}} />
 
             </div>
 
             <div className="container-description-project">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum volutpat lectus in nibh placerat condimentum. Morbi ipsum libero, faucibus ac facilisis vel, aliquet non nisi. Nunc ullamcorper et risus dignissim fringilla. Duis semper molestie arcu, quis ultricies mi interdum eget. Vivamus sed vehicula ante, sed semper justo. Nam vitae lorem sagittis, pulvinar felis maximus, molestie orci. Fusce fermentum sapien non ullamcorper luctus. Donec nec auctor metus.</p>
+                <p>{data.desc}</p>
             </div>
 
             <div className="container-participants">
 
-                <div className="container-project-owner">
-                    <div className="container-crown-project-owner">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Coroa_Real_Fechada_-_barrete_purp%C3%BAreo.svg/1200px-Coroa_Real_Fechada_-_barrete_purp%C3%BAreo.svg.png" alt="" />
-                    </div>
+                {
+                    data.members.map((members) => (
+                        <div className="container-project-participants">
+                            <img src={members.profilePicUrl} alt="" />
+                        </div>
+                    ))
+                }
 
-                    <div className="project-owner">
-                        <img src="https://img.ibxk.com.br/2012/4/materias/3802463332510208.jpg?ims=704x" alt="" />
-                    </div>
-                </div>
-
-                <div className="container-project-participants">
-                    <img src="https://img.ibxk.com.br/2012/4/materias/3802463332510208.jpg?ims=704x" alt="" />
-                </div>
-
-                <div className="container-project-participants">
-                    <img src="https://img.ibxk.com.br/2012/4/materias/3802463332510208.jpg?ims=704x" alt="" />
-                </div>
-
-                <div className="container-project-participants">
-                    <img src="https://img.ibxk.com.br/2012/4/materias/3802463332510208.jpg?ims=704x" alt="" />
-                </div>
-
-                <div className="container-project-participants">
-                    <img src="https://img.ibxk.com.br/2012/4/materias/3802463332510208.jpg?ims=704x" alt="" />
-                </div>
 
             </div>
 
 
             <div className="container-interactions">
                 <div className="container-github">
-                    <img src="../../public/assets/icons/google.svg" alt="" />
-                    <span>github</span>
+                    <a href={UrlRepoGithubProject}>
+                    <img src="../assets/icons/github.svg" alt=""  />
+                        github 
+                        
+                        </a>
                 </div>
                 <div className="container-interaction-project">
-                    <Button onClick={() => {}}>
-                        <Icon name="favorite"/>
+                    <Button onClick={() => { }}>
+                        <Icon name="favorite" />
                     </Button>
-                    <span>100</span>
+                    <span>{data.hearts}</span>
                 </div>
             </div>
         </div>

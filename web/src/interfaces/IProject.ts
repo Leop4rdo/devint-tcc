@@ -6,11 +6,11 @@ export default interface IProjectProps {
     name : string
     bannerURI : string
     githubRepo: string
-    license : String
+    openSource : boolean
     helpWanted : boolean
     desc : string
     posts : IPost[]
     members : IDevProps[]
     owner : string
-    hearts : JSON
+    hearts : number
 }

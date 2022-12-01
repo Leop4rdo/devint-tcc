@@ -1,19 +1,27 @@
 import {MaterialIcons} from "@expo/vector-icons"
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import {Alert, Image, KeyboardAvoidingView, Pressable, Text, View} from "react-native"
 import { ScrollView, TextInput } from "react-native-gesture-handler"
 import ButtonComponent from "../../../../components/shared/Button"
 import { AuthContext } from "../../../../store/context/Auth.context"
-import colors from "../../../../styles/colors"
-import styles from "./style"
+import PickerComponent from "../../../../components/shared/Picker"
 import * as ImagePicker from 'expo-image-picker'
+
+
+import styles from "./style"
+import colors from "../../../../styles/colors"
 import firebase from '../../../../config/firebase'
 import * as postService from "../../../../services/post.service"
+import * as projectService from "../../../../services/project.service";
+import IProject from "../../../../interfaces/IProject"
+import { Picker } from "@react-native-picker/picker"
 
 const PostRegisterPage : React.FC<{ navigation : any }> = ({navigation}) => {
     const [attachments, setAttachments] = useState<string[]>([])
     const [content, setContent] = useState('')
     const [uploading, setUploading] = useState(false)
+    const [projects, setProjects] = useState<IProject[]>([])
+    const [selectedProject, setSelectedProject] = useState('')
 
     const authContext = useContext(AuthContext)
     
@@ -67,13 +75,15 @@ const PostRegisterPage : React.FC<{ navigation : any }> = ({navigation}) => {
     const removeImage = (uri : string) => {
         setAttachments(attachments.filter((_uri) => uri != uri))
     }
+    console.log(selectedProject)
 
     const publish = async () => {
         if (!content || uploading) return
 
         const body = {
             content : content,
-            attachments : attachments
+            attachments : attachments,
+            project : (selectedProject.length >= 1) ? { id : selectedProject } : undefined
         }
 
         const res = await postService.create(body)
@@ -82,6 +92,14 @@ const PostRegisterPage : React.FC<{ navigation : any }> = ({navigation}) => {
 
         navigation.goBack()
     }
+
+    const getProjects = async () => {
+        const res = await projectService.listMinimal(authContext?.userData.id)
+
+        setProjects(res.data as IProject[])
+    }
+
+    useEffect(() => {getProjects()}, [])
 
     return (
         <KeyboardAvoidingView style={styles.page}>
@@ -132,6 +150,15 @@ const PostRegisterPage : React.FC<{ navigation : any }> = ({navigation}) => {
                 <Pressable onPress={pickImage}>
                     <MaterialIcons name="image" size={32} color={(uploading) ? colors.GRAY : colors.PRIMARY}/>
                 </Pressable>
+
+                <PickerComponent style={styles.projectPicker} value={selectedProject} onChange={(id) => setSelectedProject(id)}>
+                    <Picker.Item label="Selecionar um projeto" enabled={false} />
+                    {
+                        projects.map((p) => 
+                            <Picker.Item key={p.id} value={p.id} label={p.name}/>
+                        )
+                    }
+                </PickerComponent>
             </View>
         </KeyboardAvoidingView>
     )
