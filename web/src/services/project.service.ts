@@ -100,7 +100,7 @@ export const GetByIdProject = async (id : string) => {
 }
 
 
-export const update = async (body : IProjectProps, id : string) : Promise<IResponse> => {
+export const update = async (body : any, id : string) : Promise<IResponse> => {
     try {
         const { data } = await api.put(
             `/projects/${id}`,
@@ -130,3 +130,8 @@ export const toggleHeart = async (id : string) => {
         return err.response.data as IResponse
     }
 }
+
+
+
+
+

@@ -18,7 +18,7 @@ export default class ProjectRepository extends AbstractRepository<ProjectEntity>
 
     async list(options ?: ProjectListOptions) { 
         return this.db.createQueryBuilder('p')
-            .innerJoinAndSelect('p.members', 'devs')
+            .leftJoinAndSelect('p.members', 'devs')
             .where((options?.owner) ? "p.owner = :owner" : '', { owner: options?.owner })
             .limit(options?.limit)
             .offset(options?.offset)

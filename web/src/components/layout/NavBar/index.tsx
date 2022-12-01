@@ -3,6 +3,7 @@ import LogoComponent from "components/shared/Logo";
 import Input from "components/shared/Input";
 import Icon from "components/shared/Icon";
 import Sidebar from "../Sidebar/index";
+import { Link, useNavigate } from "react-router-dom";
 
 interface INavBarProps {
     toggleSidebar : () => void
@@ -10,17 +11,25 @@ interface INavBarProps {
 
 
 const NavBar: React.FC<INavBarProps> = ({ toggleSidebar }) => {
+    const navigate = useNavigate()
 
     return (
         <div className="container-nav-bar" >
 
             <header>
-                <div className="menu-toggle" onClick={toggleSidebar}>
-                    <div className="one"></div>
-                    <div className="two"></div>
-                    <div className="three"></div>
+                <div>
+                    <div className="menu-toggle" onClick={toggleSidebar}>
+                        <div className="one"></div>
+                        <div className="two"></div>
+                        <div className="three"></div>
+                    </div>
+                    <Link to={'/feed'}>
+                        <h1>
+                            <LogoComponent primary="#1F252F" />
+                        </h1>
+                    </Link>
                 </div>
-                <h1><LogoComponent primary="#1F252F" /></h1>
+
                 <div className="container-search">
                     
                         <Input icon="search" type="search" placeholder="Pesquisar..." />

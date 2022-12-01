@@ -79,7 +79,7 @@
 			cursor: pointer;
 
 			&:hover,
-			&.active {
+			&[data-status="active"] {
 				background-color: $color-primary;
 
 				.item-text {

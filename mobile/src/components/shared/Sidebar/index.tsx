@@ -54,7 +54,7 @@ const Sidebar : React.FC<ISidebarProps> = ({ visible, onClose, navigation, activ
 
                     <SidebarItem active={activeItem == 0} icon="home" name="Home" onPress={() => navigation.push('feed')}/>
                     <SidebarItem active={activeItem == 1} icon="trending-up" name="Em alta" onPress={() => navigation.push('feed', {feedType : 'trending'})}/>
-                    <SidebarItem active={activeItem == 2} icon="watch-later" name="Recentes" onPress={() => navigation.push('feed', {feedType : 'newest'})}/>
+                    <SidebarItem active={activeItem == 2} icon="watch-later" name="Recentes" onPress={() => navigation.push('feed', {feedType : 'latest'})}/>
                     <SidebarItem active={activeItem == 3} icon="article" name="Artigos" />
                     <SidebarItem active={activeItem == 4} icon="chat" name="Chat" />
                     <SidebarItem active={activeItem == 5} icon="settings" name="Configurações" />

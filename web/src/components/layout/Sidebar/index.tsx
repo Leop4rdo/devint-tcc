@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import Icon from "components/shared/Icon";
 import { AuthContext } from "store/context/Auth.context";
 import Button from "components/shared/Button";
-import { useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 
 interface ISidebarProps {
@@ -13,44 +13,46 @@ interface ISidebarProps {
 const Sidebar: React.FC<ISidebarProps> = ({open }) => {
     const authContext = useContext(AuthContext)
 
-    const navigation = useNavigate()
+    const location = useLocation()
 
     return (
             <div className={`container-side-bar effect-side-bar ${open ? 'open' : ''}`}>
 
-                <div className="container-user">
-                    <div className="container-image-face" onClick={() => navigation(`/dev/${authContext?.userData?.id}`)}>
+                <Link className="container-user" to={`/dev/${authContext?.userData?.id}`}>
+                    <div className="container-image-face">
                     <img src={authContext?.userData?.profilePicUrl} alt="User profile picture" />
                     </div>
-                    <h2 onClick={() => navigation(`/dev/${authContext?.userData?.id}`)}>{authContext?.userData?.name}</h2>
-                    
-                </div>
+                    <h2>{authContext?.userData?.name}</h2>
+                </Link>
 
-                <div className="horizontal-line">
-                    </div>
+                <div className="horizontal-line" />
 
                 <div className="container-itens">
                     <nav className="container-nav">
-                        <div className="sidebar-item active">
+                        <Link className="sidebar-item" to='/feed' data-status={(location.pathname == '/feed') ? 'active' : 'idle'}>
                             <Icon name="house" />
                             <a className="item-text">Home</a>
-                        </div>
-                        <div className="sidebar-item">
+                        </Link>
+                        <Link className="sidebar-item" to="/feed/latest" data-status={(location.pathname == '/feed/latest') ? 'active' : 'idle'}>
+                            <Icon name="watch_later" />
+                            <a className="item-text">Recentes</a>
+                        </Link>
+                        <Link className="sidebar-item" to='/feed/trending' data-status={(location.pathname == '/feed/trending') ? 'active' : 'idle'}>
+                            <Icon name="trending_up" />
+                            <a className="item-text">Em alta</a>
+                        </Link>
+                        <Link className="sidebar-item" to='/feed'>
                             <Icon name="article" />
                             <a className="item-text">Artigos</a>
-                        </div>
-                        <div className="sidebar-item">
-                            <Icon name="watch_later" />
-                            <a className="item-text">Ver mais tarde</a>
-                        </div>
-                        <div className="sidebar-item">
+                        </Link>
+                        <Link className="sidebar-item" to='/feed'>
                             <Icon name="chat" />
                             <a className="item-text">Chats</a>
-                        </div>
-                        <div className="sidebar-item">
+                        </Link>
+                        <Link className="sidebar-item" to='/feed'>
                             <Icon name="settings" />
                             <a className="item-text">Configurações</a>
-                        </div>
+                        </Link>
                     </nav>
 
                     <div className="sidebar-item" onClick={authContext?.signOut}>

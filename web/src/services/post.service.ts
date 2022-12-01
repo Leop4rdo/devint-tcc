@@ -20,7 +20,11 @@ export const create = async (body : createPostRequestBody) => {
     }
 }
 
-export const list = async (query ?: PaginationQuery) : Promise<IResponse> => {
+interface PostListQuery extends PaginationQuery {
+    order ?: 'random' | 'trending' | 'latest'
+}
+
+export const list = async (query ?: PostListQuery) : Promise<IResponse> => {
     try {
         const { data } = await api.get(
             (query) ? `/posts?${buildQuery(query)}` : '/posts',

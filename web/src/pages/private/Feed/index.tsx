@@ -12,7 +12,11 @@ import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
 import PostDetailsModal from "components/layout/Modals/PostDetailsModal";
 import NewContents from "components/layout/NewContents/NewContents";
 
-const FeedPage: React.FC = () => {
+interface FeedPageProps {
+    feedType : 'random' | 'latest' | 'trending'
+}
+
+const FeedPage : React.FC<FeedPageProps> = ({ feedType }) => {
     const [devs, setDevs] = useState<IDevMinimal[]>([])
     const [selectedPostId, setSelectedPostId] = useState('')
     const [writtingPost, setWrittingPost] = useState(false)
@@ -27,7 +31,7 @@ const FeedPage: React.FC = () => {
     }
 
     const getPosts = async () => {
-        const { data } = await postService.list({ limit: 48, offset: posts.length })
+        const { data } = await postService.list({ limit: 48, offset: posts.length, order : feedType || 'random' })
 
         setPosts([...posts, ...data])
         setLoading(false)
@@ -36,12 +40,13 @@ const FeedPage: React.FC = () => {
     const refresh = async () => {
         setPosts([])
 
-        const { data } = await postService.list({ limit: 48, offset: 0 })
+        const { data } = await postService.list({ limit: 48, offset: 0, order : feedType || 'random'  })
 
         setPosts(data)
     }
 
-    useEffect(() => { getPosts(); getDevs(); }, [])
+    useEffect(() => { getDevs(); }, [])
+    useEffect(() => { refresh() }, [feedType])
 
     return (
         <MenuWapper>

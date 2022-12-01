@@ -31,7 +31,7 @@ export interface IDev {
     currentJob : string
     githubUsername : string
     openToWork : boolean
-    birthday : String
+    birthday : string
     posts: IPost[]
     articles: IArticleProps[]
     socialLinks : ISocialLinkProps[]

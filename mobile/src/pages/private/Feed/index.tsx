@@ -49,7 +49,7 @@ const FeedPage : React.FC<{ route : any, navigation : any }> = ({route, navigati
     const getActiveSidebarItem = () => {
         const feedType = route?.params?.feedType || ''
         console.log(route?.param?.feedType)
-        if (feedType.toUpperCase() == 'NEWEST')
+        if (feedType.toUpperCase() == 'LATEST')
             setActiveSidebarItem(2)
         else if (feedType.toUpperCase() == 'TRENDING')
             setActiveSidebarItem(1)

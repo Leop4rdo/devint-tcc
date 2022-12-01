@@ -55,8 +55,8 @@ export default class ProjectService {
         })
     }
 
-    async update(input : ProjectCreateInput, id : string) : Promise<IResponse> {
-        const project : Project = await this.repo.findById(id)
+    async update(input : ProjectCreateInput, id : string, ownerId : string) : Promise<IResponse> {
+        const project = await this.repo.findById(id, ["members"])
 
         if (!project)
             return new BadRequestResponse({
@@ -64,7 +64,13 @@ export default class ProjectService {
                 message : 'Project not found'
             })
         
-        Object.assign(project, input)
+        Object.assign(project, {
+            ...input,
+            members: (input.members.find((m) => m.id == ownerId)) ? 
+                    input.members 
+                    : [...input.members, { id: ownerId }],
+                owner: ownerId    
+        })
 
         await this.repo.update(project as ProjectEntity)
 

@@ -1,0 +1,35 @@
+.detail-card {
+    background-color: $color-black;
+    border-radius: .5em;
+    color: $color-light-gray;
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+    padding: .5em;
+
+    .card-header {
+        color: $color-white;
+        font-size: 1.2em;
+        display: flex;
+        justify-content: space-between;
+
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: .5em;
+        }
+    }
+
+    .info-item, .delete-skill, .token-container {
+        display: flex;
+        gap: .5em;
+        align-items: center;
+        border-radius: 1em;
+    }
+
+    img {
+        width: 3em;
+        height: 3em;
+    }
+
+}

@@ -30,7 +30,7 @@ export default class PostRepository extends AbstractRepository<PostEntity> {
 
         switch ((order||'').toUpperCase()) {
             
-            case 'NEWEST':
+            case 'LATEST':
                 order = 'posts.createdAt'
                 break;
             case 'TRENDING':
