@@ -176,7 +176,7 @@ const DetailSection: React.FC<IDetailSectionProps> = (props) => {
 					editing={editing.about}
 				/>
 				<InfoItem
-					imageUri={"./public/assets/icons/github.svg"}
+					imageUri="assets/icons/github.svg"
 					value={data.githubUsername}
 					editing={editing.about}
 					onChangeText={(event) =>

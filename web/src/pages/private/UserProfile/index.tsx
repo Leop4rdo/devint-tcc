@@ -18,6 +18,7 @@ import { isValidDate } from "utils/validations";
 import { dateMask } from "utils/masks";
 import { setEnvironmentData } from "worker_threads";
 import DetailSection from "components/ProfileSections/DetailSection";
+import { trace } from "console";
 
 const UserProfilePage: React.FC = () => {
 
@@ -33,30 +34,35 @@ const UserProfilePage: React.FC = () => {
     const [following, setFollowing] = useState(false);
 
     const updateUser = async (body : IDev) => {
+        console.log('what if i wanted to break')
+
         const _body : IDev = {
             ...body,
             birthday : body.birthday.split('/').reverse().join('-')
         }
 
         const res = await devService.update(_body as any, body.id!)
-
         setDev({
             ...res.data,
             birthday : res.data.birthday.split('-').reverse().join('/')
         })
     }
 
+    
     const uploadImage = async (evt : any) => {
+        console.log('THIS IS WHO I REALLY AM!!!')
         setUploading(true)
 
         const file = evt.target.files[0]
+        console.log(evt.target.files)
 
         if (!file)
             return
 
         try {
+            console.log('i am finished with you')
             const extension = `.${file.name.split('.')[1]}`
-            const fileName = `${evt.target.name}-${dev!.id!}`
+            const fileName = `${evt.target.name}-${dev!.id!}${extension}`
             const uploaded = await firebase.storage().ref().child(`${evt.target.name}/`).child(fileName).put(file)
 
             const downloadURL = await uploaded.ref.getDownloadURL()
@@ -66,9 +72,7 @@ const UserProfilePage: React.FC = () => {
                 profilePicUrl : (evt.target.name == 'profile') ? downloadURL : dev?.profilePicUrl!,
                 bannerURI : (evt.target.name == 'banner') ? downloadURL : dev?.bannerURI!
             }
-
-            console.log(downloadURL);
-            
+            console.log('come break me down bury me bury me', updateData)
 
             setDev(updateData)
             updateUser(updateData)
@@ -145,8 +149,8 @@ const UserProfilePage: React.FC = () => {
                     {
                         (authContext?.userData?.id == devId) ?
                             <div className="upload-new-image">
-                                <input accept="image/*" type="file" name="banner" id="attachment-input" onClick={uploadImage}/>
-                                <label htmlFor="attachment-input"><Icon name="image"  /></label>
+                                <input accept="image/*" type="file" name="banner" id="banner-input" onChange={uploadImage}/>
+                                <label htmlFor="banner-input"><Icon name="image"  /></label>
                             </div>
 
                             : ''
@@ -157,18 +161,34 @@ const UserProfilePage: React.FC = () => {
                 <div className="container-user-informations">
 
                     <div className="profile-info">
-
-                        <img src={dev?.profilePicUrl} className="profile-pic" onClick={() => {uploadImage("profile")}}/>
+                        <div className="upload-new-profile-pic">
+                        {
+                            (authContext?.userData?.id == devId) ?
+                                <div className="upload-profile-image">
+                                    <input accept="image/*" type="file" name="profile"  onChange={uploadImage} id="profile-pic-input" />
+                                    <label htmlFor="profile-pic-input"><Icon name="edit"  /></label>
+                                </div> : ''
+                        }
+                            
+                            <img src={dev?.profilePicUrl} className="profile-pic" />
+                        </div>
+                        
                         
                         <h2>{dev?.name}</h2>
 
                         <div className="bio-edit">
-                            <Icon name={editing? "check" : "edit"} onClick={() => setEditing(!editing)} />
-                            { (editing) ?
-                                    <AutoTextArea name="bio" onChange={handleInputChange} placeholder="Conte um pouco sobre você" />
-                                :
-                                dev?.bio && <span>{dev.bio}</span>
+                            { (authContext?.userData?.id == devId) ?
+                                <Icon name={editing? "check" : "edit"} onClick={() => setEditing(!editing)} /> : ''
                             }
+                            { 
+                                (editing) ?
+                            
+                                    <AutoTextArea name="bio" onChange={handleInputChange} placeholder="Conte um pouco sobre você" />
+                                    :
+                                    dev?.bio && <span>{dev.bio}</span> 
+                            }
+                                
+
                         </div>    
 
                         <div className="follow-container">
