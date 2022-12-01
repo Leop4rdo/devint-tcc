@@ -9,7 +9,7 @@ import { Route, Routes } from "react-router-dom"
 const PrivateRouter: React.FC = () => {
     return (
         <Routes>
-            <Route index element={<FeedPage />}/>
+            <Route path="/feed"  element={<FeedPage />}/>
             <Route path="dev/:devId" element={<UserProfilePage />} />
             <Route path="/devs/:userId/posts" element={<PostsTab devId="" />} />
         </Routes>
