@@ -1,4 +1,4 @@
-import MenuWapper from "components/layout/MenuWrapper";
+  import MenuWapper from "components/layout/MenuWrapper";
 import Post from "components/Post";
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import * as postService from 'services/post.service'

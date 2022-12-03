@@ -113,7 +113,7 @@ const RegisterPage: React.FC<IPageProps> = ({navigation}) => {
 
             <ScrollView>
                 <View style={styles.containerRegisterForm}>
-                    <View>
+                    <View style={{justifyContent : `center`, alignItems : 'center'}}>
                         <Text style={styles.signUp}>Cadastre-se</Text>
                         <Text style={styles.stepDescription}>{steps[currentStep].desc}</Text>
                     </View>
