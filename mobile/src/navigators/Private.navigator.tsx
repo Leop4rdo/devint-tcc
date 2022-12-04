@@ -3,7 +3,8 @@ import PostRegisterPage from "../pages/private/posts/Register";
 import ProfilePage from "../pages/private/DevProfile";
 import ProjectRegisterPage from "../pages/private/ProjectRegister";
 import FeedPage from "../pages/private/Feed";
-
+import ProjectDetails from "../pages/private/ProjectDetails";
+import ProjectDetailsPage from "../pages/private/ProjectDetails";
 const PrivateNavigator : React.FC = () => {
     const Stack = createNativeStackNavigator()
 
@@ -14,6 +15,7 @@ const PrivateNavigator : React.FC = () => {
             <Stack.Screen name="profile" component={ProfilePage}/>
             <Stack.Screen name="post-register" component={PostRegisterPage} />
             <Stack.Screen name="project-register" component={ProjectRegisterPage} />
+            <Stack.Screen name="project-details" component={ProjectDetailsPage} />
         </Stack.Navigator>
     )
 }

@@ -27,6 +27,12 @@ export default class PostController {
             .catch((err) => res.status(err.status || 500).json(err))
     }
 
+    getByProject = (req: Request, res: Response) => {
+        this.service.getByProject(req.params.projectId, new PostQueryFilter(req.query))
+            .then((_res) => res.status(_res.status || 200).json(_res))
+            .catch((err) => res.status(err.status || 500).json(err))
+    }
+
     create = (req: Request, res: Response) => {
         this.service.create(new PostCreateInput(req.body), req.body.userData.id)
             .then((_res) => res.status(_res.status || 200).json(_res))

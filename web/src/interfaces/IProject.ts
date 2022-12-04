@@ -12,5 +12,5 @@ export default interface IProjectProps {
     posts : IPost[]
     members : IDevProps[]
     owner : string
-    hearts : number
+    hearts : []
 }

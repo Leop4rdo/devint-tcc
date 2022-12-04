@@ -32,6 +32,7 @@ const ProjectsTabs: React.FC<IProjectTab> = ({ devId }) => {
         setProjects(data)
         
         
+        
     }
 
     const EditProject = () => {

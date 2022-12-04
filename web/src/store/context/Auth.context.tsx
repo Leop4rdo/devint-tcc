@@ -3,6 +3,7 @@ import api from "../../services";
 import { auth } from "../../services/auth.service";
 
 
+
 interface IAuthContextProps {
     signed : boolean;
     token ?: string;
