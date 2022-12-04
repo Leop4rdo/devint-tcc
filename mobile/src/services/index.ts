@@ -16,7 +16,7 @@ export interface PaginationQuery {
 
 // export const baseUrl = "http://10.107.144.15:8080/api/v1"
 // export const baseUrl = "http://10.107.130.62:8080/api/v1"
-export const baseUrl = "https://devint-api.azurewebsites.net/api/v1/"; // PRODUCTION API (azure)
+export const baseUrl = "http://:8080/api/v1"; // PRODUCTION API (azure)
 // export const baseUrl = "http://192.168.0.113:8080/api/v1"
 // export const baseUrl = "https://8c23-187-84-34-237.sa.ngrok.io/api/v1"
 
