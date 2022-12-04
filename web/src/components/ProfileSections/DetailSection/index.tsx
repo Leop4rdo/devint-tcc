@@ -155,7 +155,7 @@ const DetailSection: React.FC<IDetailSectionProps> = (props) => {
 			>
 				<InfoItem
 					icon="today"
-					value={data.birthday}
+					value={dateMask(data.birthday)}
 					onChangeText={(event) =>
 						handleChange(event?.target.value, "birthday")
 					}
