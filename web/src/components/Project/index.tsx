@@ -18,7 +18,8 @@ const Project: React.FC<IProject> = ({ data, openCloseModal , EditProject , idPr
     const [UrlRepoGithubProject , setUrlRepoGithubProject] = useState()
     const [hearted, setHearted] = useState(false);
     const authContext = useContext(AuthContext)
-     
+    const [liked, setLiked] = useState(data.alreadyHearted) 
+    
 
     const getUrlGithubRepo = async () => {
         const {data} = await projectService.findById(idProject)
@@ -85,6 +86,7 @@ const Project: React.FC<IProject> = ({ data, openCloseModal , EditProject , idPr
                         </a>
                 </div>
                 <div className="container-interaction-project">
+                    
                     <Button onClick={() => { }}>
                         <Icon name="favorite" />
                     </Button>

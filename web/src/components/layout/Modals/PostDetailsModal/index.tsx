@@ -27,6 +27,7 @@ const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick , 
     const getPost = async () => {
         const { data } = await postService.findById(postId)
         setPost(data)
+        console.log(data)
     }
 
     const addComment = async () => {

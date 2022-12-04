@@ -229,7 +229,7 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, ref
 
     useEffect(() => { getUserData(); getByidProjects() }, [])
 
-
+    
 
     return (
         <div className="modal-container-global">
@@ -371,12 +371,10 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, ref
                                                 </div>
                                             </div>
                                         </div>
-                                        <Icon name="delete_forever" onClick={() => removeTeamMember(member)} />
+                                        {member.id === userId ? "" : <Icon name="delete_forever" onClick={() => removeTeamMember(member)} /> }
+                                        
                                     </div>
                                 ))
-
-
-
 
 
                             }
@@ -386,7 +384,7 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, ref
 
                     <div className="container-button-create-project">
                         <Button onClick={() => editProject ? update() : publishProject()} className="btn-primary" children={"Criar Projeto"} />
-
+ 
                         {
                             editProject &&
                             <Button className="btn-delete" onClick={DeleteProject} >
