@@ -8,6 +8,7 @@ export default interface IProjectProps {
     githubRepo: string
     openSource : boolean
     helpWanted : boolean
+    alreadyHearted : boolean
     desc : string
     posts : IPost[]
     members : IDevProps[]

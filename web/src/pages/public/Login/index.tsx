@@ -45,15 +45,6 @@ const LoginPage: React.FC = () => {
 
                     <button className="register-button btn-primary" onClick={login}>LOGIN</button>
 
-                    <p>ou</p>
-
-                    <div className="button-container">
-                        <button className="register-button btn-secondary"> <img src="assets/icons/github.svg" alt="" /></button>
-                        <button className="register-button btn-secondary" >
-                            <img src="assets/icons/google.svg" alt="" />
-                        </button>
-                    </div>
-
                     <Link className="container-new-user" to='/register/dev'>Sou novo aqui</Link>
 
                 </div>

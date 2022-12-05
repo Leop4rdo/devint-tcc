@@ -27,6 +27,7 @@ const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick , 
     const getPost = async () => {
         const { data } = await postService.findById(postId)
         setPost(data)
+        console.log(data)
     }
 
     const addComment = async () => {
@@ -111,7 +112,7 @@ const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick , 
                                 <Swiper modules={[Navigation, Pagination, Scrollbar, A11y]}
                                     spaceBetween={50}
                                     slidesPerView={1}
-                                    navigation
+                                    navigation={post.attachments.length > 0 ? true : false}
                                     pagination={{ clickable: true }}
                                 >
                                     {

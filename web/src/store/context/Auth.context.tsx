@@ -1,7 +1,7 @@
 import React, { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import api from "../../services";
 import { auth } from "../../services/auth.service";
-
+import IDevMinimal from "../../interfaces/IDev"
 
 
 interface IAuthContextProps {

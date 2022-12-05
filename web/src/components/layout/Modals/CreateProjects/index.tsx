@@ -27,6 +27,7 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, ref
     const [checkBoxValue, setCheckBoxValue] = useState(Boolean)
     const [banner, setBanner] = useState<string>('')
     const authContext = useContext(AuthContext)
+    const [visible, setVisible] = useState(true)
     const UrlRepositoryGit = `https://github.com/${selectdNameRepository}`
 
     const [formValues, setFormValues] = useState({
@@ -36,7 +37,7 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, ref
         members: [
             authContext?.userData
         ],
-        
+
 
     })
 
@@ -90,28 +91,30 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, ref
 
     const publishProject = async () => {
 
-        if (!formValues.name || !formValues.desc || !selectdNameRepository)
-            return
-
-        const body = {
-            name: formValues.name,
-            bannerURI: banner,
-            githubRepository: {
-                url: UrlRepositoryGit,
-                name: selectdNameRepository
-            },
-            members: formValues.members,
-            openSource: checkBoxValue,
-            desc: formValues.desc
+        if (!formValues.name || !selectdNameRepository)
+            alert("O campo com o nome do projeto e a seleção de um repositorio são obrigatorios")
+        else{
+            const body = {
+                name: formValues.name,
+                bannerURI: banner,
+                githubRepository: {
+                    url: UrlRepositoryGit,
+                    name: selectdNameRepository
+                },
+                members: formValues.members,
+                openSource: checkBoxValue,
+                desc: formValues.desc
+            }
+    
+            const res = await projectService.create(body)
+    
+            if (res.hasError)
+                return alert('Houve um erro inesperado ao publicar, tente novamente mais tarde!')
+    
+            openCloseModal(false)
+            refreshPage()
         }
-
-        const res = await projectService.create(body)
-
-        if (res.hasError)
-            return alert('Houve um erro inesperado ao publicar, tente novamente mais tarde!')
-
-        openCloseModal(false)
-        refreshPage()
+       
 
     }
 
@@ -154,10 +157,10 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, ref
                 name: data.name,
                 nameGithubUsers: "",
                 desc: data.desc,
-                members: data.members,          
-            })          
-            
-            setCheckBoxValue(data.openSource) 
+                members: data.members,
+            })
+
+            setCheckBoxValue(data.openSource)
             setBanner(data.bannerURI)
             setSelectdNameRepository(data.githubRepository.name)
         }
@@ -173,12 +176,15 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, ref
 
         setFormValues({
             ...formValues,
-            members: [...formValues.members, member]
+            members: [...formValues.members, member],
+            nameGithubUsers: ""
         })
 
 
 
     }
+
+
 
     const removeTeamMember = (member: IDevMinimal) => {
         if (member.id === authContext?.userData.id)
@@ -211,15 +217,15 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, ref
                 desc: formValues.desc
             }
             try {
-                await projectService.update(body , IdProject)
+                await projectService.update(body, IdProject)
                 openCloseModal()
                 refreshPage()
             } catch (err) {
                 console.log(err)
                 alert('Houve um erro inesperado ao fazer a edição')
             }
-            
-            
+
+
         }
 
     }
@@ -242,21 +248,22 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, ref
 
                     <div className="container-image">
 
-
                         <div className="attachment-list">
+
                             {banner ?
                                 <img src={banner} alt="" /> :
                                 <div className="container-image-not-selected">
+                                    <div className="container-input-file">
+                                        <label htmlFor="input-file">
+                                            <Icon name="add_a_photo" />
+                                        </label>
+                                        <input accept="image/*" onChange={upload} type="file" name="input-file" id="input-file" />
+                                    </div>
                                 </div>
-                                }
+                            }
                         </div>
 
-                        <div className="container-input-file">
-                            <label htmlFor="input-file">
-                                <Icon name="add_a_photo" />
-                            </label>
-                            <input accept="image/*" onChange={upload} type="file" name="input-file" id="input-file" />
-                        </div>
+
 
 
                     </div>
@@ -287,7 +294,7 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, ref
                             </Select>
                             <span>Open Source</span>
                             <div className="toggle-button">
-                                <input type="checkbox" id="chk" checked={checkBoxValue} onChange={ value => setCheckBoxValue(value.target.checked)} />
+                                <input type="checkbox" id="chk" checked={checkBoxValue} onChange={value => setCheckBoxValue(value.target.checked)} />
                                 <label htmlFor="chk" className="switch">
                                     <span className="slider"></span>
                                 </label>
@@ -311,7 +318,7 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, ref
                             searchUsers.length > 0 && formValues.nameGithubUsers != "" ?
                                 <div className="container-search-users-github">
                                     <div className="search-users-github">
-                                        <div className="container-scroll-participants-project">
+                                        <div className="container-scroll-member-project">
 
 
                                             {
@@ -352,7 +359,6 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, ref
 
 
                         <div className="container-scroll-participants-project">
-
                             {formValues.members &&
                                 formValues.members.map((member: IDevMinimal) => (
                                     <div className="conatiner-participants-project">
@@ -371,21 +377,22 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, ref
                                                 </div>
                                             </div>
                                         </div>
-                                        <Icon name="delete_forever" onClick={() => removeTeamMember(member)} />
+                                        {member.id === userId ? "" : <Icon name="delete_forever" onClick={() => removeTeamMember(member)} />}
+
                                     </div>
                                 ))
-
-
-
 
 
                             }
 
                         </div>
+
                     </div>
 
                     <div className="container-button-create-project">
-                        <Button onClick={() => editProject ? update() : publishProject()} className="btn-primary" children={"Criar Projeto"} />
+                        <Button onClick={() => editProject ? update() : publishProject()} className="btn-primary" >
+                            Salvar <Icon name="save"/>
+                        </Button>
 
                         {
                             editProject &&
