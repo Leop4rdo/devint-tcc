@@ -34,7 +34,6 @@ const UserProfilePage: React.FC = () => {
     const [following, setFollowing] = useState(false);
 
     const updateUser = async (body : IDev) => {
-        console.log('what if i wanted to break')
 
         const _body : IDev = {
             ...body,
@@ -50,12 +49,38 @@ const UserProfilePage: React.FC = () => {
 
     
     const uploadImage = async (evt : any) => {
-        console.log('THIS IS WHO I REALLY AM!!!')
         setUploading(true)
 
-        const file = evt.target.files[0]
-        console.log(evt.target.files)
+        let file = evt.target.files[0]
 
+        var url = window.URL || window.webkitURL
+
+        const img = new Image()
+
+        var objectURL = url.createObjectURL(file)
+
+        img.onload = function() {
+
+            console.log(img.width);
+            console.log(img.height);
+            
+            
+            if (img.width / img.height !== 4) {
+                
+                console.log('CHegou');
+                
+                alert('Imagem com proporções incompativeis')
+
+                return false
+            }
+            
+            url.revokeObjectURL(objectURL)
+        
+        }
+        
+        img.src =  objectURL
+        console.log(img, 'IMG');
+        
         if (!file)
             return
 
@@ -64,7 +89,6 @@ const UserProfilePage: React.FC = () => {
             const extension = `.${file.name.split('.')[1]}`
             const fileName = `${evt.target.name}-${dev!.id!}${extension}`
             const uploaded = await firebase.storage().ref().child(`${evt.target.name}/`).child(fileName).put(file)
-
             const downloadURL = await uploaded.ref.getDownloadURL()
             
             const updateData = {
