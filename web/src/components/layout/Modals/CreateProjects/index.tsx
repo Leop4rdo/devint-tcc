@@ -93,26 +93,28 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, ref
 
         if (!formValues.name || !selectdNameRepository)
             alert("O campo com o nome do projeto e a seleção de um repositorio são obrigatorios")
-
-        const body = {
-            name: formValues.name,
-            bannerURI: banner,
-            githubRepository: {
-                url: UrlRepositoryGit,
-                name: selectdNameRepository
-            },
-            members: formValues.members,
-            openSource: checkBoxValue,
-            desc: formValues.desc
+        else{
+            const body = {
+                name: formValues.name,
+                bannerURI: banner,
+                githubRepository: {
+                    url: UrlRepositoryGit,
+                    name: selectdNameRepository
+                },
+                members: formValues.members,
+                openSource: checkBoxValue,
+                desc: formValues.desc
+            }
+    
+            const res = await projectService.create(body)
+    
+            if (res.hasError)
+                return alert('Houve um erro inesperado ao publicar, tente novamente mais tarde!')
+    
+            openCloseModal(false)
+            refreshPage()
         }
-
-        const res = await projectService.create(body)
-
-        if (res.hasError)
-            return alert('Houve um erro inesperado ao publicar, tente novamente mais tarde!')
-
-        openCloseModal(false)
-        refreshPage()
+       
 
     }
 
