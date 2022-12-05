@@ -34,7 +34,6 @@ const UserProfilePage: React.FC = () => {
     const [following, setFollowing] = useState(false);
 
     const updateUser = async (body : IDev) => {
-        console.log('what if i wanted to break')
 
         const _body : IDev = {
             ...body,
@@ -50,7 +49,6 @@ const UserProfilePage: React.FC = () => {
 
     
     const uploadImage = async (evt : any) => {
-        console.log('THIS IS WHO I REALLY AM!!!')
         setUploading(true)
 
         const file = evt.target.files[0]
@@ -72,7 +70,6 @@ const UserProfilePage: React.FC = () => {
                 profilePicUrl : (evt.target.name == 'profile') ? downloadURL : dev?.profilePicUrl!,
                 bannerURI : (evt.target.name == 'banner') ? downloadURL : dev?.bannerURI!
             }
-            console.log('come break me down bury me bury me', updateData)
 
             setDev(updateData)
             updateUser(updateData)
