@@ -91,8 +91,8 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, ref
 
     const publishProject = async () => {
 
-        if (!formValues.name || !formValues.desc || !selectdNameRepository)
-            return
+        if (!formValues.name || !selectdNameRepository)
+            alert("O campo com o nome do projeto e a seleção de um repositorio são obrigatorios")
 
         const body = {
             name: formValues.name,

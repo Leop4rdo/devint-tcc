@@ -140,13 +140,20 @@
             span{
                 color: $color-white;
             }
-            .icon{
-                color: $color-white;
-            }
+            
             button{
                 width: 20px;
                 background-color: transparent;
                 border: hidden;
+                
+                .icon{
+                    color: $color-light-gray;
+    
+                    &:hover, &#already-hearted {
+                        color: $color-primary;
+                    }
+    
+                }
             }
         }
     }

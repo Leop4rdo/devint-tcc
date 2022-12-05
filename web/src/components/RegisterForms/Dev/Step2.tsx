@@ -8,43 +8,21 @@ interface IFormProps {
     onChange?: any;
     onSubmit: () => void,
     formData: any;
-    teste?: any
+    apiGit : any
+    ValidadeUserGithub : boolean
 }
 
-const DevForm2: React.FC<IFormProps> = ({ onSubmit, formData, onChange , teste}) => {
+const DevForm2: React.FC<IFormProps> = ({ onSubmit, formData, onChange , ValidadeUserGithub , apiGit}) => {
 
     const [checked, setChecked] = useState('off');
-    const [ ValidadeUserGithub , setValidadeUserGithub] = useState(true)
+    
     const handleChecked = () => {
         if (checked == 'off') setChecked('on')
         if (checked == 'on') setChecked('off')
     }
 
     
-    const apiGithub = async () => {
-        if( formData.githubUser.length > 3) {
-            fetch(`https://api.github.com/users/${formData.githubUser}`, {
-            method: "GET",
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then((resposta) => resposta.json())
-            .then((data) => {
-
-                if(data.id)
-                    setValidadeUserGithub(true)
-                else if(data.message === 'Not Found' || data.message)
-                    setValidadeUserGithub(false)
-                
-
-                console.log(data)
-            })
-            .catch((data) => {
-                
-            })
-        }
-        
-    }
+    
 
     
     
@@ -53,7 +31,7 @@ const DevForm2: React.FC<IFormProps> = ({ onSubmit, formData, onChange , teste})
 
         <form className="form" onSubmit={onSubmit}>
 
-            <Input type="text" onBlur={apiGithub} placeholder="Usuário do GitHub (opcional)" onChange={onChange} value={formData.githubUser} name="githubUser" image="/assets/icons/github.svg" validate={() => ValidadeUserGithub} />
+            <Input type="text" onBlur={apiGit} placeholder="Usuário do GitHub (opcional)" onChange={onChange} value={formData.githubUser} name="githubUser" image="/assets/icons/github.svg" validate={() => ValidadeUserGithub} />
 
             <Input icon="lock" placeholder="Senha" onChange={onChange} name="password" type="password" validate={() => !isEmpty(formData.password)}/>
 

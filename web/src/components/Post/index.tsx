@@ -28,6 +28,8 @@ const Post: React.FC<IPostProps> = ({ data, openDetails }) => {
 
     
 
+    
+
     return (
         <div className="postcard" key={data.id} >
             <div className="post-header">

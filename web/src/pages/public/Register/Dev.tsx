@@ -18,25 +18,7 @@ const DevRegistrationPage: React.FC = () => {
     const authContext = useContext(AuthContext)
     const [ ValidadeUserGithub , setValidadeUserGithub] = useState(false)
 
-    const apiGithub = async (nameUserGitHub : string) => {
-        if( nameUserGitHub.length > 3) {
-            fetch(`https://api.github.com/users/${nameUserGitHub}`, {
-            method: "GET",
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then((resposta) => resposta.json())
-            .then((data) => {
-                setValidadeUserGithub(true)
-                console.log(data)
-            })
-            .catch(() => {
-                setValidadeUserGithub(false)
-                
-            })
-        }
-        
-    }
+    
 
     const [formValues, setFormValues] = useState({
         name: "",
@@ -58,9 +40,34 @@ const DevRegistrationPage: React.FC = () => {
         })
     }
 
+    const apiGithub = async () => {
+        if( formValues.githubUser.length > 3) {
+            fetch(`https://api.github.com/users/${formValues.githubUser}`, {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then((resposta) => resposta.json())
+            .then((data) => {
+
+                if(data.id)
+                    setValidadeUserGithub(true)
+                else if(data.message === 'Not Found' || data.message)
+                    setValidadeUserGithub(false)
+                
+
+                console.log(data)
+            })
+            .catch((data) => {
+                setValidadeUserGithub(true)
+                console.log(data)
+            })
+        }
+        
+    }
     const steps = [
         { desc: "", component: <DevForm1  onSubmit={() => { }} formData={formValues} onChange={handleChange} /> },
-        { desc: "", component: <DevForm2 teste={ValidadeUserGithub} onSubmit={() => { }} formData={formValues} onChange={handleChange} /> },
+        { desc: "", component: <DevForm2 apiGit={apiGithub} ValidadeUserGithub={ValidadeUserGithub} onSubmit={() => { }} formData={formValues} onChange={handleChange} /> },
     ]
 
     const isFormValid = () => {
@@ -85,6 +92,8 @@ const DevRegistrationPage: React.FC = () => {
             if (formValues.password !== formValues.confirmPassword) return false;
 
             if (formValues.termsOfAcceptance == 'off') return false;
+
+            if (!ValidadeUserGithub) return false;
 
         }
 
