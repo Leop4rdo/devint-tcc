@@ -26,6 +26,8 @@ const Post: React.FC<IPostProps> = ({ data, openDetails }) => {
         setLiked(!liked)
     }
 
+    
+
     return (
         <div className="postcard" key={data.id} >
             <div className="post-header">
@@ -42,7 +44,7 @@ const Post: React.FC<IPostProps> = ({ data, openDetails }) => {
                         modules={[Navigation, Pagination, Scrollbar, A11y]}
                         spaceBetween={50}
                         slidesPerView={1}
-                        navigation
+                        navigation={data.attachments.length > 0 ? true : false}
                         pagination={{ clickable: true }}
                         onClick={openDetails}
                     >

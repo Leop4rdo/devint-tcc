@@ -81,6 +81,7 @@ const FeedPage : React.FC<{ route : any, navigation : any }> = ({route, navigati
                     renderItem={({ item }) => (
                         <Post 
                             openProfile={() => navigation.navigate('profile', { devId : item.writter.id})}
+                            openProject={() => navigation.navigate('project-details', { projectId : item.project?.id})}
                             openComments={() => setSelectedPostId(item.id)} 
                             data={item} 
                             key={`${item.id}-${Math.random()**999}`}

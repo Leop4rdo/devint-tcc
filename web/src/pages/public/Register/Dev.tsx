@@ -26,9 +26,9 @@ const DevRegistrationPage: React.FC = () => {
                 'Content-Type': 'application/json'
             }
         }).then((resposta) => resposta.json())
-            .then(() => {
+            .then((data) => {
                 setValidadeUserGithub(true)
-                
+                console.log(data)
             })
             .catch(() => {
                 setValidadeUserGithub(false)
@@ -59,8 +59,8 @@ const DevRegistrationPage: React.FC = () => {
     }
 
     const steps = [
-        { desc: "", component: <DevForm1 onSubmit={() => { }} formData={formValues} onChange={handleChange} /> },
-        { desc: "", component: <DevForm2 onSubmit={() => { }} formData={formValues} onChange={handleChange} /> },
+        { desc: "", component: <DevForm1  onSubmit={() => { }} formData={formValues} onChange={handleChange} /> },
+        { desc: "", component: <DevForm2 teste={ValidadeUserGithub} onSubmit={() => { }} formData={formValues} onChange={handleChange} /> },
     ]
 
     const isFormValid = () => {
@@ -99,10 +99,10 @@ const DevRegistrationPage: React.FC = () => {
             return alert("Por favor, verifique se os dados estão corretos!")
         else if(currentStep < steps.length -1)
             setCurrentStep(currentStep + 1)
-        else if(!ValidadeUserGithub){
+        /* else if(!ValidadeUserGithub){
             apiGithub(formValues.githubUser)
             return alert("Verifique o nome de usuario do seu github, algo está errado !")
-        }
+        } */
         else   
             register()
     }

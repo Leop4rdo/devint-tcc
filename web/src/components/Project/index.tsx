@@ -32,8 +32,8 @@ const Project: React.FC<IProject> = ({ data, openCloseModal , EditProject , idPr
         setHearted(!hearted)
     }
 
-    /* const getHeartAmount = () => {
-        if (data.hearts!.includes(UserData) && !hearted)
+   /*  const getHeartAmount = () => {
+        if (data.hearts!.includes(authContext?.userData.id) && !hearted)
             return data.hearts?.length! -1;
         if (!data.hearts!.includes(authContext?.userData.id) && hearted)
             return data.hearts?.length! +1;
@@ -53,7 +53,7 @@ const Project: React.FC<IProject> = ({ data, openCloseModal , EditProject , idPr
                 <div className="name-project">
                     <h2>{data.name}</h2>
 
-                    {data.openSource ? <span>(Open source)</span> : <span>(Closed source)</span>}
+                    {data.openSource ? <span>(Open source)</span> : ""}
 
                 </div>
                 <Icon name="edit" onClick={() => {openCloseModal() ; EditProject()}} />

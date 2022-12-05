@@ -229,7 +229,7 @@ const ProjectRegisterPage : React.FC<{ route : any, navigation : any }> = ({rout
 
                 <FeedbackTextInput value={formValues.name} style={styles.input} placeholder="Nome" onChangeText={(value) => handleTextChange(value, 'name')} />
 
-                <PickerComponent style={styles.input} value={formValues.githubRepository?.id} onChange={selectRepository} >
+                <PickerComponent style={styles.input} value={formValues.githubRepository?.id} onChange={selectRepository}  >
                     {
                         getRepoOptions().map((optionProps) =>
                             <Picker.Item {...optionProps} key={optionProps.value}/>

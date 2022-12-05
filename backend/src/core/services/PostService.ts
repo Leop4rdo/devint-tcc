@@ -24,20 +24,41 @@ export default class PostService {
     }
 
     async getById(id: string, devId : string): Promise<IResponse> {
-        const post = await this._.findById(id, ['members'])
+        try {
 
-        if (!post)
+            const post = await this._.findById(id, ['comments', 'project'])
+            
+            if (!post)
+                return new BadRequestResponse({ message: errors.ENTITY_NOT_FOUND })
+            
+            const res = new PostOutput(post, devId)
+            
+            return new SuccessResponse({
+                data: res
+            })
+        } catch(err) {
+            console.log(err)
+            return new ServerErrorResponse({
+                data : err
+            })
+        }
+    }
+
+    async getByWritter(id: string, query ?: PaginateListInput): Promise<IResponse> {
+        const posts = await this._.listByFilters({ ...query, writter : id })
+
+        if (!posts)
             return new BadRequestResponse({ message: errors.ENTITY_NOT_FOUND })
 
-        const res = new PostOutput(post, devId)
+        const res = posts.map(post => new PostListOutput(post as unknown as IPostProps, id));
 
         return new SuccessResponse({
             data: res
         })
     }
 
-    async getByWritter(id: string, query ?: PaginateListInput): Promise<IResponse> {
-        const posts = await this._.listByFilters({ ...query, writter : id })
+    async getByProject(id: string, query ?: PaginateListInput): Promise<IResponse> {
+        const posts = await this._.listByFilters({ ...query, project : id })
 
         if (!posts)
             return new BadRequestResponse({ message: errors.ENTITY_NOT_FOUND })
