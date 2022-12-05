@@ -4,16 +4,17 @@ import Button from "components/shared/Button";
 import IProjectProps from "interfaces/IProject";
 import * as projectService from 'services/project.service';
 import { AuthContext } from "store/context/Auth.context";
+import Project from "interfaces/IProject";
 
 interface IProject {
     openCloseModal: any
-    data: IProjectProps
+    data: Project
     EditProject: any
     idProject: any
 
 }
 
-const Project: React.FC<IProject> = ({ data, openCloseModal, EditProject, idProject }) => {
+const ProjectCard: React.FC<IProject> = ({ data, openCloseModal, EditProject, idProject }) => {
     const [UrlRepoGithubProject, setUrlRepoGithubProject] = useState()
 
     const authContext = useContext(AuthContext)
@@ -101,7 +102,7 @@ const Project: React.FC<IProject> = ({ data, openCloseModal, EditProject, idProj
                         <Icon name="favorite" id={`${liked ? 'already-hearted' : ''}`} />
                     </Button>
                     <span>{
-                        (liked && !data.alreadyHearted) ? data?.hearts.length + 1 : (!liked && data.alreadyHearted) ? data?.hearts.length - 1 : data.hearts.length
+                        (liked && !data.alreadyHearted) ? (data?.hearts||[]).length + 1 : (!liked && data.alreadyHearted) ? (data?.hearts||[]).length - 1 : (data?.hearts||[]).length
                     }</span>
                 </div>
             </div>
@@ -109,4 +110,4 @@ const Project: React.FC<IProject> = ({ data, openCloseModal, EditProject, idProj
     )
 }
 
-export default Project
+export default ProjectCard
