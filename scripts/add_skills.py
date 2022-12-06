@@ -2,18 +2,27 @@ import sys
 import requests
 
 
-API_URL = 'https://devint-api.azurewebsites.net'
+# API_URL = 'https://devint-api.azurewebsites.net'
+API_URL = 'http://localhost:8080/api/v1'
 DEVICON_URL = 'https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons' # /name/name-svgname.svg
 
 
 def auth() :
     res = requests.post(f'{API_URL}/auth', json = {
         'email' : sys.argv[1],
-        'password' : sys.argv[0]
+        'password' : sys.argv[2]
     })
 
     if res.status_code != 200:
         print('Forbidden access to API')
+        print('res ->')
+        print(res.json())
+        print()
+        print('body ->')
+        print({
+            'email' : sys.argv[1],
+            'password' : sys.argv[0]
+        })
         sys.exit()
 
     return res.json()['data']['token']
