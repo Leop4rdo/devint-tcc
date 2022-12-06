@@ -91,7 +91,7 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, ref
 
     const publishProject = async () => {
 
-        if (!formValues.name || !selectdNameRepository)
+        if (!formValues.name || !selectdNameRepository )
             alert("O campo com o nome do projeto e a seleção de um repositorio são obrigatorios")
         else{
             const body = {
@@ -272,6 +272,7 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, ref
 
                         <Input placeholder="Nome"
                             value={formValues.name}
+                            maxLength={100}
                             name="name"
                             onChange={(value) => handleTextChange(value, 'name')}
                         />
