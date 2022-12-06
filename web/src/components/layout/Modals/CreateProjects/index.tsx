@@ -91,7 +91,7 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, ref
 
     const publishProject = async () => {
 
-        if (!formValues.name || !selectdNameRepository)
+        if (!formValues.name || !selectdNameRepository )
             alert("O campo com o nome do projeto e a seleção de um repositorio são obrigatorios")
         else{
             const body = {
@@ -272,6 +272,7 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, ref
 
                         <Input placeholder="Nome"
                             value={formValues.name}
+                            maxLength={100}
                             name="name"
                             onChange={(value) => handleTextChange(value, 'name')}
                         />
@@ -302,14 +303,21 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, ref
 
                         </div>
 
-                        <TextArea
+                       
+                        
+                       <TextArea
                             value={formValues.desc}
                             placeholder="Descrição"
                             onChange={(value: string) => handleTextChange(value, 'desc')}
+                            maxLength={300}
                         />
+                        
+                                
+                        
                         <div className="container-participants-github">
                             <Input placeholder="Participantes do projeto"
                                 value={formValues.nameGithubUsers}
+                                maxLength={100}
                                 onChange={(value) => handleTextChange(value, 'nameGithubUsers')}
                             />
 

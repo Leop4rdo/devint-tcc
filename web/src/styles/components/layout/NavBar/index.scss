@@ -21,6 +21,11 @@
     z-index: 3;
     justify-content: space-between;
 
+    .container-menu{
+        display: flex;
+        align-items: center;
+    }
+
         h1 {
            margin-left: 20px;
             font-size: clamp(2.4rem , 5vw, 3rem);

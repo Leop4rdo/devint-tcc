@@ -5,8 +5,9 @@ interface ITextArea{
     onChange? : any
     name? : string
     value? : any
+    maxLength?: number
 }
-const TextArea : React.FC<ITextArea> = ({placeholder , onChange , name , value}) => {
+const TextArea : React.FC<ITextArea> = ({placeholder , onChange , name , value , maxLength}) => {
     return (
         <div
 			className="container-text-area"
@@ -16,6 +17,7 @@ const TextArea : React.FC<ITextArea> = ({placeholder , onChange , name , value})
             onChange={onChange}
             name={name}
             value={value}
+            maxLength={maxLength}
             >
 
             </textarea>

@@ -26,16 +26,18 @@
         justify-content: space-between;
         margin-top: 8px;
         margin-bottom: 8px;
+        
 
         .name-project {
             display: flex;
             align-items: center;
             gap: 10px;
             word-wrap: break-word;
-            
+            width: 100px;
 
             h2 {
                 color: $color-primary;
+                width: 530px;
             }
 
             span {

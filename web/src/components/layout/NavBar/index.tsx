@@ -17,7 +17,7 @@ const NavBar: React.FC<INavBarProps> = ({ toggleSidebar }) => {
         <div className="container-nav-bar" >
 
             <header>
-                <div>
+                <div className="container-menu">
                     <div className="menu-toggle" onClick={toggleSidebar}>
                         <div className="one"></div>
                         <div className="two"></div>
