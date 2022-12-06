@@ -96,7 +96,6 @@ const UserProfilePage: React.FC = () => {
                 profilePicUrl : (evt.target.name == 'profile') ? downloadURL : dev?.profilePicUrl!,
                 bannerURI : (evt.target.name == 'banner') ? downloadURL : dev?.bannerURI!
             }
-            console.log('come break me down bury me bury me', updateData)
 
             setDev(updateData)
             updateUser(updateData)
