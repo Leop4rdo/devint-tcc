@@ -19,6 +19,7 @@ import { AuthContext } from "../../../store/context/Auth.context";
 import ProfilePostSection from "../../../components/ProfileSections/Posts";
 import { useIsFocused } from "@react-navigation/native";
 import ProfileProjectsSection from "../../../components/ProfileSections/Projects";
+import Semicolon from "../../../components/shared/Semicolon";
 
 const ProfilePage: React.FC<{ route : any, navigation : any }> = ({route, navigation}) => {
     const [currentSection, setCurrentSection] = useState(0);
@@ -119,7 +120,7 @@ const ProfilePage: React.FC<{ route : any, navigation : any }> = ({route, naviga
     useEffect(() => { getDev() }, [isFocused])
 
     return(
-        <LayoutWrapper navigation={navigation} focused={isFocused}>
+        <LayoutWrapper activeSidebarItem={-1}  navigation={navigation} focused={isFocused}>
             <ScrollView>
                 <View style={styles.page}>
 
@@ -224,7 +225,7 @@ const ProfilePage: React.FC<{ route : any, navigation : any }> = ({route, naviga
 
                                 <ProfileProjectsSection isFocused={isFocused} devId={data?.id!} navigation={navigation}/>
                             : (currentSection === 1) ?
-                            <Text>1</Text>
+                                <Semicolon />
                             : (currentSection === 0 ) ? 
                                 <ProfilePostSection navigation={navigation} devId={data?.id!} />
                             :   <Text>Pagina inválida</Text>
