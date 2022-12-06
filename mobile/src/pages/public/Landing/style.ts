@@ -22,7 +22,7 @@ export default StyleSheet.create({
         color: colors.WHITE,
         fontSize: 24,
         textAlign: 'center',
-        marginBottom: '50%',
+        marginBottom: '40%',
         fontFamily: fonts.POPPINS_REGULAR
     },
 

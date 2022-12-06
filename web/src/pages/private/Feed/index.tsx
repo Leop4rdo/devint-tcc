@@ -11,7 +11,7 @@ import * as devService from "../../../services/dev.service"
 import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
 import PostDetailsModal from "components/layout/Modals/PostDetailsModal";
 import NewContents from "components/layout/NewContents/NewContents";
-
+import {Link} from "react-router-dom"
 interface FeedPageProps {
     feedType : 'random' | 'latest' | 'trending'
 }
@@ -48,6 +48,8 @@ const FeedPage : React.FC<FeedPageProps> = ({ feedType }) => {
     useEffect(() => { getDevs(); }, [])
     useEffect(() => { refresh() }, [feedType])
 
+    
+
     return (
         <MenuWapper>
             <div className="feed">
@@ -71,7 +73,9 @@ const FeedPage : React.FC<FeedPageProps> = ({ feedType }) => {
                                     {
                                         devs?.map((dev: IDevMinimal) =>
                                             <SwiperSlide key={`${dev.id}-${Math.random() * 999}`}>
-                                                <div className="container-img-devs-highlighted"><img src={dev.profilePicUrl} /></div>
+                                                <Link className="container-img-devs-highlighted"to={`/dev/${dev?.id}`}>
+                                                    <img src={dev.profilePicUrl} /> 
+                                                </Link>  
                                             </SwiperSlide>
                                         )}
                                 </Swiper>

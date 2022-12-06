@@ -108,6 +108,8 @@ const styles = StyleSheet.create({
     },
     selectedNavItem:{
         fontSize:12,
+        paddingHorizontal : 16,
+        paddingTop : 8,
         color: colors.WHITE,
         fontFamily: fonts.POPPINS_SEMIBOLD,
     },
@@ -133,9 +135,9 @@ const styles = StyleSheet.create({
         borderWidth : 2,
         borderRadius : 8,
 
-        padding : 8,
+        padding : 16,
 
-        marginBottom : 16,
+        marginBottom : 24,
 
         color : '#FFF',
         fontSize : 12,

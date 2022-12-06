@@ -41,15 +41,17 @@ const Comment : React.FC<ICommentProps> = ({ data, onAnswer }) => {
                     </View>
                 </View>
             </View>
-
+            {
+                console.log('comment ->', data)
+            }
             <FlatList 
                 data={data.answers}
                 renderItem={({item}) => 
                     <View style={[styles.comment, {marginLeft : 48}]}>
-                        <Image style={styles.profilePic} source={{ uri : data.writter.profilePicUrl }} />
+                        <Image style={styles.profilePic} source={{ uri : item.writter.profilePicUrl }} />
                         <View style={styles.content}>
-                            <Text style={styles.writterName}>{data.writter.name}</Text>
-                            <Text style={styles.textContent}>{data.content}</Text>
+                            <Text style={styles.writterName}>{item.writter.name}</Text>
+                            <Text style={styles.textContent}>{item.content}</Text>
                         </View>
                     </View>
                 }

@@ -43,7 +43,7 @@ export const list = async (query ?: PostListQuery) : Promise<IResponse> => {
 export const listByDev = async (id : string, query ?: PaginationQuery) : Promise<IResponse> => {
     try {
         const { data } = await api.get(
-            (query) ? `/devs/${id}/posts?${buildQuery(query)}` : `/devs/${id}/posts`,
+            (query) ? `/users/${id}/posts?${buildQuery(query)}` : `/devs/${id}/posts`,
             { headers: { Authorization: `Baerer ${ await getToken()}` } }
         )
 

@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import Button from "../shared/Button";
 import Icon from "../shared/Icon";
 import { Swiper, SwiperSlide } from "swiper/react"
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
 import { IPostListItem, IPost } from "interfaces/IPost";
 import * as postService from "../../services/post.service"
@@ -26,35 +26,49 @@ const Post: React.FC<IPostProps> = ({ data, openDetails }) => {
         setLiked(!liked)
     }
 
+    
+
+    
+
     return (
         <div className="postcard" key={data.id} >
             <div className="post-header">
-                <div className="user-informations" >
+                <Link to={`/dev/${data.writter.id}`} className="user-informations" >
                     <img src={data.writter.profilePicUrl} />
-                    <h2 onClick={() => navigation(`/dev/${data.writter.id}`)}>{data.writter.name}</h2>
-                </div>
+                    <div className="flex-vertical-container">
+                        <h3>{data.writter.name}</h3>
+                        <span className="github">{data.writter.githubUsername}</span>
+                    </div>  
+                </Link>
             </div>
 
             <div className="post-content" >
                 <p onClick={openDetails}>{data.content}</p>
-                <div className="post-images">
-                    <Swiper
-                        modules={[Navigation, Pagination, Scrollbar, A11y]}
-                        spaceBetween={50}
-                        slidesPerView={1}
-                        navigation
-                        pagination={{ clickable: true }}
-                        onClick={openDetails}
-                    >
-                        {
-                            data.attachments.map((attachment) => 
-                                <SwiperSlide key={`${attachment}-${Math.random()*999}`}>< img onClick={() => openDetails()} src={attachment} alt="" /></SwiperSlide>
-                            )
-                        }
+                {
+                    data.project &&
+                    <Link to=''>&#60; {data.project.name} /&#62;</Link>
+                }
+                {   
+                    data.attachments.length > 0 &&
+                    <div className="post-images">
+                        <Swiper
+                            modules={[Navigation, Pagination, Scrollbar, A11y]}
+                            spaceBetween={50}
+                            slidesPerView={1}
+                            navigation={data.attachments.length > 0 ? true : false}
+                            pagination={{ clickable: true }}
+                            onClick={openDetails}
+                        >
+                            {
+                                data.attachments.map((attachment) => 
+                                    <SwiperSlide key={`${attachment}-${Math.random()*999}`}>< img onClick={() => openDetails()} src={attachment} alt="" /></SwiperSlide>
+                                )
+                            }
 
-                    </Swiper>
+                        </Swiper>
 
-                </div>
+                    </div>
+                }
             </div>
 
             <div className="horizontal-line"></div>

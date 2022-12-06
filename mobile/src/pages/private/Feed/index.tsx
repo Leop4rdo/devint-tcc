@@ -10,30 +10,40 @@ import {screenHeight} from "../../../styles/utils";
 import CommentModal from "../../../components/CommentModal";
 import {useIsFocused} from "@react-navigation/native";
 import { IPostListItem } from "../../../interfaces/IPost";
+import Semicolon from "../../../components/shared/Semicolon";
 
 const FeedPage : React.FC<{ route : any, navigation : any }> = ({route, navigation}) => {
     const [posts, setPosts] = useState<IPostListItem[]>([])
     const [isRefreshing, setRefreshing] = useState(false)
     const [selectedPostId, setSelectedPostId] = useState("")
     const [activeSidebarItem, setActiveSidebarItem] = useState(0)
+    const [loading, setLoading] = useState(false)
+    const [endReached, setEndReached] = useState(false)
 
     const isFocused = useIsFocused()
 
-
     const getPosts = async () => {
+        if (endReached)
+            return
+        
+        setLoading(true)
         const { data }= await postService.list({ 
             offset : posts.length, 
             limit : 24, 
             order : route?.params?.feedType || "random"
         })
 
-        
         const newPosts = data.filter((post : IPostListItem) => !posts.find((_) => post.id === _.id))
+        
+        if (newPosts.length < 24)
+            setEndReached(true)
 
         setPosts([...posts, ...newPosts])
+        setLoading(false)
     }
 
     const refreshPosts = async () => {
+        setEndReached(false)
         setRefreshing(true)
 
         const { data } = await postService.list({ 
@@ -58,7 +68,7 @@ const FeedPage : React.FC<{ route : any, navigation : any }> = ({route, navigati
 
     }
  
-    useEffect(() => { setPosts([]); getPosts(), getActiveSidebarItem() }, [isFocused])
+    useEffect(() => { refreshPosts(); getActiveSidebarItem() }, [isFocused])
 
     return (
         <LayoutWrapper activeSidebarItem={activeSidebarItem} navigation={navigation} focused={isFocused}>
@@ -77,7 +87,7 @@ const FeedPage : React.FC<{ route : any, navigation : any }> = ({route, navigati
                     onEndReached={getPosts}
                     onEndReachedThreshold={.1}
                     ListHeaderComponent={<DevCarousel navigation={navigation}/>}
-                    ListFooterComponent={<ActivityIndicator />}
+                    ListFooterComponent={(!endReached) ? <ActivityIndicator /> : <Semicolon />}
                     renderItem={({ item }) => (
                         <Post 
                             openProfile={() => navigation.navigate('profile', { devId : item.writter.id})}

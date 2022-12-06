@@ -14,11 +14,8 @@ export interface PaginationQuery {
     offset ?: number
 }
 
-// export const baseUrl = "http://10.107.144.12:8080/api/v1"
-export const baseUrl = "http://10.107.130.62:8080/api/v1"
-// export const baseUrl = "https://devint-api.azurewebsites.net/api/v1/"; // PRODUCTION API (azure)
-// export const baseUrl = "http://192.168.0.113:8080/api/v1"
-// export const baseUrl = "https://8c23-187-84-34-237.sa.ngrok.io/api/v1"
+export const baseUrl = "https://devint-api.azurewebsites.net/api/v1"; // PRODUCTION API (azure)
+// export const baseUrl = "http://10.107.144.25:8080/api/v1"
 
 export const getToken = async () => { 
     return await getFromLocalStorage('devint-authorization')

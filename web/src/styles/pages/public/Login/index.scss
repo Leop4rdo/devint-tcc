@@ -100,20 +100,7 @@
         margin-bottom: 42px;
       }
 
-      p {
-        margin-top: 16px;
-        color: $color-white;
-      }
-
-      p::after,
-      p::before {
-        content: "";
-        width: clamp(7rem, 9vw, 8.4rem);
-        height: 1px;
-        background-color: $color-primary;
-        display: inline-block;
-        margin: 0px 8px 3.7px 8px;
-      }
+     
 
       button {
         width: clamp(11rem, 10vw, 15rem);
@@ -127,28 +114,7 @@
         margin-top: 24px;
       }
 
-      .button-container {
-        width: 100%;
-        display: flex;
-        gap: 24px;
-        justify-content: center;
-
-        .btn-secondary {
-          width: clamp(3rem, 10vw, 5rem);
-          height: 41px;
-          margin-top: 24px;
-        }
-
-        img {
-          width: 24px;
-          height: 24px;
-        }
-
-        #icon-github {
-          width: 23.8px;
-        }
-
-      }
+      
     }
 
     @media (max-width: $breakpoint-medium) {

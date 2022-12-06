@@ -1,3 +1,4 @@
+
 import React, {
 	useState,
 	useEffect,
@@ -8,6 +9,7 @@ import React, {
 interface IAutoTextArea extends TextareaHTMLAttributes<HTMLTextAreaElement> {
 	placeholder?: string
 	value?: string
+	MaxLength? : number
 } 
 
 const AutoTextArea : React.FC<IAutoTextArea> = (props: IAutoTextArea ) => {
@@ -48,6 +50,7 @@ const AutoTextArea : React.FC<IAutoTextArea> = (props: IAutoTextArea ) => {
 				}}
 				onChange={onChangeHandler}
 				value={props.value}
+				
 			/>
 		</div>
 	);
