@@ -65,7 +65,7 @@ const UserProfilePage: React.FC = () => {
             console.log(img.height);
             
             
-            if (img.width / img.height !== 4) {
+            if (img.width / img.height !== 36 / 9) {
                 
                 console.log('CHegou');
                 
