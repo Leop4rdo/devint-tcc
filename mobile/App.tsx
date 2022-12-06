@@ -6,6 +6,7 @@ import AppNavigator from './src/navigators';
 import { AuthProvider } from './src/store/context/Auth.context';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import colors from './src/styles/colors';
+import { AlertNotificationRoot } from 'react-native-alert-notification';
 
 export default function App() {
   let [fontsLoaded] = useFonts(fontsToImport);
@@ -15,9 +16,16 @@ export default function App() {
   return (
     <View style={{ width : '100%', height : '100%', backgroundColor : colors.PRIMARY}}>
       <SafeAreaProvider>
-        <AuthProvider>
-          <AppNavigator />
-        </AuthProvider>
+        <AlertNotificationRoot 
+          theme='dark' 
+          toastConfig={{
+            autoClose : true,
+          }}
+          >
+          <AuthProvider>
+            <AppNavigator />
+          </AuthProvider>
+        </AlertNotificationRoot>
       </SafeAreaProvider>
     </View>
   );

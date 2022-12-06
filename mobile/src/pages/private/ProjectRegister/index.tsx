@@ -20,6 +20,7 @@ import { GithubRepository } from "../../../interfaces/IGithubRepository"
 import { Picker } from "@react-native-picker/picker"
 import IProject from "../../../interfaces/IProject"
 import PickerComponent from "../../../components/shared/Picker"
+import { ALERT_TYPE, Toast } from "react-native-alert-notification"
 
 const ProjectRegisterPage : React.FC<{ route : any, navigation : any }> = ({route, navigation}) => {
     const authContext = useContext(AuthContext)
@@ -148,7 +149,8 @@ const ProjectRegisterPage : React.FC<{ route : any, navigation : any }> = ({rout
             })
         } catch (err) {
             console.log(err)
-            Alert.alert('Houve um erro inesperado ao fazer upload!')
+            Toast.show({ type : ALERT_TYPE.DANGER, title : 'Erro ao fazer upload! tente novamente mais tarde'})
+
         }
 
         setUploading(false)
@@ -169,7 +171,7 @@ const ProjectRegisterPage : React.FC<{ route : any, navigation : any }> = ({rout
         if (!res.hasError) {
             navigation.goBack()
         } else {
-            Alert.alert('Houve um erro inesperado ao salvar projeto!')
+            Toast.show({ type : ALERT_TYPE.DANGER, title : 'Erro ao salvar projeto! tente novamente mais tarde'})
         }
     }
 

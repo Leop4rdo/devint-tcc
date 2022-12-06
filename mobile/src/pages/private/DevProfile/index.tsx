@@ -20,6 +20,7 @@ import ProfilePostSection from "../../../components/ProfileSections/Posts";
 import { useIsFocused } from "@react-navigation/native";
 import ProfileProjectsSection from "../../../components/ProfileSections/Projects";
 import Semicolon from "../../../components/shared/Semicolon";
+import { ALERT_TYPE, Toast } from "react-native-alert-notification";
 
 const ProfilePage: React.FC<{ route : any, navigation : any }> = ({route, navigation}) => {
     const [currentSection, setCurrentSection] = useState(0);
@@ -95,7 +96,7 @@ const ProfilePage: React.FC<{ route : any, navigation : any }> = ({route, naviga
 
         } catch (err) {
             console.log(err)
-            Alert.alert('Houve um erro inesperado ao fazer upload!')
+            return Toast.show({ type : ALERT_TYPE.DANGER, title : 'Erro ao carregar comentários!'})
         } finally {
             setUploading(false)
         }

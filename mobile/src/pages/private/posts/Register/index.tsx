@@ -15,6 +15,7 @@ import * as postService from "../../../../services/post.service"
 import * as projectService from "../../../../services/project.service";
 import IProject from "../../../../interfaces/IProject"
 import { Picker } from "@react-native-picker/picker"
+import { ALERT_TYPE, Toast } from "react-native-alert-notification"
 
 const PostRegisterPage : React.FC<{ navigation : any }> = ({navigation}) => {
     const [attachments, setAttachments] = useState<string[]>([])
@@ -66,7 +67,7 @@ const PostRegisterPage : React.FC<{ navigation : any }> = ({navigation}) => {
             ])
         } catch (err) {
             console.log(err)
-            Alert.alert('Houve um erro inesperado ao fazer upload!')
+            Toast.show({ type : ALERT_TYPE.DANGER, title : 'Erro ao fazer upload!'})
         }
 
         setUploading(false)
@@ -78,7 +79,13 @@ const PostRegisterPage : React.FC<{ navigation : any }> = ({navigation}) => {
     console.log(selectedProject)
 
     const publish = async () => {
-        if (!content || uploading) return
+        if (!content || uploading) {
+
+            Toast.show({ type : ALERT_TYPE.DANGER, title : 'Ainda estamos fazendo upload!'})
+            return
+        }
+            
+        console.log()
 
         const body = {
             content : content,
@@ -88,7 +95,9 @@ const PostRegisterPage : React.FC<{ navigation : any }> = ({navigation}) => {
 
         const res = await postService.create(body)
 
-        if (res.hasError) return Alert.alert('Houve um erro inesperado ao publicar, tente novamente mais tarde!')
+        if (res.hasError) 
+            Toast.show({ type : ALERT_TYPE.DANGER, title : 'Erro ao publicar! tente novamente mais tarde'})
+
 
         navigation.goBack()
     }
