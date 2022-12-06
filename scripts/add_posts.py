@@ -5,7 +5,9 @@ import string
 
 
 
-API_URL = 'https://devint-api.azurewebsites.net'
+# API_URL = 'https://devint-api.azurewebsites.net'
+API_URL = 'http://localhost:8080/api/v1'
+
 
 def auth() :
     res = requests.post(f'{API_URL}/auth', json = {

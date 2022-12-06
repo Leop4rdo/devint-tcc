@@ -11,11 +11,13 @@ import { useIsFocused } from "@react-navigation/native"
 import colors from "../../../styles/colors"
 import ButtonComponent from "../../shared/Button"
 import { AuthContext } from "../../../store/context/Auth.context"
+import Semicolon from "../../shared/Semicolon"
 
 const ProfilePostSection : React.FC<{ navigation : any, devId : string }> = ({ navigation, devId }) => {
     const [posts, setPosts] = useState<IPostListItem[]>([])
     const [selectedPostId, setSelectedPostId] = useState('')
     const authContext = useContext(AuthContext)
+    const [loading, setLoading] = useState(true)
 
     const isFocused = useIsFocused()
 
@@ -29,6 +31,7 @@ const ProfilePostSection : React.FC<{ navigation : any, devId : string }> = ({ n
         const newPosts = data.filter((post : IPostListItem) => !posts.find((_) => post.id === _.id))
 
         setPosts([...posts, ...newPosts])
+        setLoading(false)
     }
 
 
@@ -50,10 +53,12 @@ const ProfilePostSection : React.FC<{ navigation : any, devId : string }> = ({ n
                             openProfile={() => navigation.navigate('profile', { devId : p.writter.id})}
                             openComments={() => setSelectedPostId(p.id)} 
                             data={p} 
+                            openProject={() => navigation.navigate('project-details', { projectId : p.project?.id})}
                             key={p.id}
                         />
                     )
                 }
+                {(loading) ? <ActivityIndicator /> : <Semicolon />}
             </View>
             { 
                 selectedPostId && 

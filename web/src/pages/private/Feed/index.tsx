@@ -1,4 +1,4 @@
-import MenuWapper from "components/layout/MenuWrapper";
+  import MenuWapper from "components/layout/MenuWrapper";
 import Post from "components/Post";
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import * as postService from 'services/post.service'
@@ -11,7 +11,7 @@ import * as devService from "../../../services/dev.service"
 import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
 import PostDetailsModal from "components/layout/Modals/PostDetailsModal";
 import NewContents from "components/layout/NewContents/NewContents";
-
+import {Link} from "react-router-dom"
 interface FeedPageProps {
     feedType : 'random' | 'latest' | 'trending'
 }
@@ -48,6 +48,8 @@ const FeedPage : React.FC<FeedPageProps> = ({ feedType }) => {
     useEffect(() => { getDevs(); }, [])
     useEffect(() => { refresh() }, [feedType])
 
+    
+
     return (
         <MenuWapper>
             <div className="feed">
@@ -71,7 +73,9 @@ const FeedPage : React.FC<FeedPageProps> = ({ feedType }) => {
                                     {
                                         devs?.map((dev: IDevMinimal) =>
                                             <SwiperSlide key={`${dev.id}-${Math.random() * 999}`}>
-                                                <div className="container-img-devs-highlighted"><img src={dev.profilePicUrl} /></div>
+                                                <Link className="container-img-devs-highlighted"to={`/dev/${dev?.id}`}>
+                                                    <img src={dev.profilePicUrl} /> 
+                                                </Link>  
                                             </SwiperSlide>
                                         )}
                                 </Swiper>
@@ -95,29 +99,9 @@ const FeedPage : React.FC<FeedPageProps> = ({ feedType }) => {
                             {
                                 posts.length > 45 ? 
                                     <div id="scroll-observer" onClick={getPosts} ref={triggerRef}>Ver mais</div> :
-                                    'Fim'
+                                    ''
                             }
                         </div>
-                    </div>
-
-                    <div className="side-card-container">
-                        <SideCard title="Seguindo" >
-                            <a href=""><img alt="" src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
-                            <a href=""><img alt="" src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
-                            <a href=""><img alt="" src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
-                            <a href=""><img alt="" src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
-                            <a href=""><img alt="" src="https://avatars.githubusercontent.com/u/5909549?v=4" />username123</a>
-                        </SideCard>
-                        <SideCard title="Artigos em alta">
-                            <a>Stop complaining about PHP</a>
-                            <a>Start your React App</a>
-                            <a>Improve your CSS Skills</a>
-                            <a>Development Performance</a>
-                        </SideCard>
-                        <SideCard title="Meus grupos">
-                            <a>Juninhos</a>
-                            <a>Um empreguinho por favor</a>
-                        </SideCard>
                     </div>
                 </div>
             </div>

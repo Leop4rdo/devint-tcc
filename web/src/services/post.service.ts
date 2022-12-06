@@ -1,8 +1,10 @@
+import { ProjectMinimal } from "interfaces/IProject"
 import api, { buildQuery, getToken, IResponse, PaginationQuery } from "."
 
 interface createPostRequestBody {
     content : string,
     attachments : string[]
+    project ?: ProjectMinimal
 }
 
 export const create = async (body : createPostRequestBody) => {

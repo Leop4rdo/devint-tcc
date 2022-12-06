@@ -4,7 +4,7 @@ import colors from "../../../styles/colors";
 const styles = StyleSheet.create({
     navBar : {
         width : '100%',
-        height : 56,
+        height : 64,
         backgroundColor : colors.PRIMARY,
         justifyContent : 'space-between',
         paddingHorizontal : 8,

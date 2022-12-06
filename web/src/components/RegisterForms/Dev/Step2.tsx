@@ -8,26 +8,30 @@ interface IFormProps {
     onChange?: any;
     onSubmit: () => void,
     formData: any;
+    apiGit : any
+    ValidadeUserGithub : boolean
 }
 
-const DevForm2: React.FC<IFormProps> = ({ onSubmit, formData, onChange }) => {
+const DevForm2: React.FC<IFormProps> = ({ onSubmit, formData, onChange , ValidadeUserGithub , apiGit}) => {
 
     const [checked, setChecked] = useState('off');
-
+    
     const handleChecked = () => {
         if (checked == 'off') setChecked('on')
         if (checked == 'on') setChecked('off')
     }
 
     
+    
 
+    
     
 
     return (
 
         <form className="form" onSubmit={onSubmit}>
 
-            <Input type="text" placeholder="Usuário do GitHub (opcional)" onChange={onChange} value={formData.githubUser} name="githubUser" image="/assets/icons/github.svg" />
+            <Input type="text" onBlur={apiGit} placeholder="Usuário do GitHub (opcional)" onChange={onChange} value={formData.githubUser} name="githubUser" image="/assets/icons/github.svg" validate={() => ValidadeUserGithub} />
 
             <Input icon="lock" placeholder="Senha" onChange={onChange} name="password" type="password" validate={() => !isEmpty(formData.password)}/>
 

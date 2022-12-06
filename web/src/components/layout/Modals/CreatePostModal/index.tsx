@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { ChangeEvent, useContext, useEffect, useState } from "react";
 import { AuthContext } from "store/context/Auth.context";
 
 import firebase from "config/firebase"
@@ -8,16 +8,20 @@ import Icon from "components/shared/Icon";
 import AutoTextArea from "components/shared/AutogrowTextArea";
 
 import * as postService from "services/post.service"
+import { ProjectMinimal } from "interfaces/IProject";
+import * as projectService from "services/project.service"
+
 interface ICreatePostModalProps {
     onClose : () => void
 }
-
 
 const CreatePostModal : React.FC<ICreatePostModalProps> = ({ onClose }) => {
     const authContext = useContext(AuthContext)
     const [content, setContent] = useState('');
     const [attachments, setAttachments] = useState<string[]>([])
     const [uploading, setUploading] = useState(false);
+    const [projects, setProjects] = useState<ProjectMinimal[]>()
+    const [selectedProject, setSelectedProject] = useState<ProjectMinimal>()
 
     const upload = async (evt : any) => {
         setUploading(true)
@@ -50,7 +54,8 @@ const CreatePostModal : React.FC<ICreatePostModalProps> = ({ onClose }) => {
     const publishPost = async () => {
         if (!content || uploading) return
         
-        const body = { content, attachments}
+        const body = { content, attachments, project : selectedProject }
+        console.log(body)
 
         const res = await postService.create(body)
         
@@ -60,6 +65,21 @@ const CreatePostModal : React.FC<ICreatePostModalProps> = ({ onClose }) => {
        
         onClose()
     }
+
+    const getProjects = async () => {
+        const res = await projectService.listMinimal(authContext?.userData.id)
+
+        setProjects(res.data)
+    }
+
+    const onProjectSelect = (e : ChangeEvent<HTMLSelectElement>) => {
+        const selected = projects?.find((p) => p.id == e.target.value)
+
+        setSelectedProject(selected)
+        console.log(selected)
+    } 
+
+    useEffect(() => { getProjects() });
 
     return (
         <div className="modal-wrapper">
@@ -97,8 +117,13 @@ const CreatePostModal : React.FC<ICreatePostModalProps> = ({ onClose }) => {
 
                     </div>
                     <div className="post-options">
-                        <select>
+                        <select value={selectedProject?.id} onChange={onProjectSelect}>
                             <option selected>Selecione um projeto</option>
+                            {
+                                projects?.map((p) => 
+                                    <option value={p.id} key={p.id}>{p.name}</option>
+                                )
+                            }
                         </select>
                         <button 
                             onClick={publishPost

@@ -1,7 +1,7 @@
 import sys
 import requests
 
-API_URL = 'https://devint-api.azurewebsites.net'
+API_URL = 'http://localhost:8080/api/v1'
 SENIORITIES_TO_CREATE = [
     'Estudante',
     'Junior',

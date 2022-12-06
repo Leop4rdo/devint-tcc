@@ -155,7 +155,7 @@ const DetailSection: React.FC<IDetailSectionProps> = (props) => {
 			>
 				<InfoItem
 					icon="today"
-					value={data.birthday}
+					value={dateMask(data.birthday)}
 					onChangeText={(event) =>
 						handleChange(event?.target.value, "birthday")
 					}
@@ -176,7 +176,7 @@ const DetailSection: React.FC<IDetailSectionProps> = (props) => {
 					editing={editing.about}
 				/>
 				<InfoItem
-					imageUri={"./public/assets/icons/github.svg"}
+					imageUri="/assets/icons/github.svg"
 					value={data.githubUsername}
 					editing={editing.about}
 					onChangeText={(event) =>

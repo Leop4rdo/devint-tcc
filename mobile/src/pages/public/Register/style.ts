@@ -31,27 +31,26 @@ const styles = StyleSheet.create({
         ...globalStyles.text,
         fontFamily: fonts.POPPINS_BOLD,
         color: colors.PRIMARY,
-        fontSize: 32,
+        fontSize: 48,
     },
     stepDescription: {
         fontFamily: fonts.POPPINS_MEDIUM,
+        fontSize : 20,
         color: colors.WHITE,
         textAlign: 'center',
         justifyContent: 'center',
-        width: screenWidth * .5,
+        width: screenWidth * .75,
         marginBottom : 32
     },
     input: {
         width : '75%'
     },
-
     form: {
         flex : 1,
         display: 'flex',
         justifyContent: 'space-around',
         alignContent: 'center',
     }
-
 })
 
 export default styles

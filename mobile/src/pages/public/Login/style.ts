@@ -13,11 +13,11 @@ const styles = StyleSheet.create({
 
     title : {
         ...globalStyles.text,
-        fontSize: 32,
+        fontSize: 48,
         color : colors.PRIMARY,
         fontFamily: fonts.POPPINS_MEDIUM,
         textAlign: "center",
-        marginBottom: 16
+        marginBottom: '30%'
     },
 
     linkPasswordRecover : {

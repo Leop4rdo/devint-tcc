@@ -15,21 +15,16 @@ const styles = StyleSheet.create({
     },
 
     logoSymbols: {
-        fontSize: 38,
-        color: colors.BLACK,
+        fontSize: 48,
+        color: colors.DARK_GRAY,
         fontFamily: fonts.POPPINS_MEDIUM,
     },
 
     logo: {
-        fontSize: 38,
+        fontSize: 48,
         color: colors.WHITE,
-        marginLeft: -24,
-        marginRight: -24,
         fontFamily: fonts.POPPINS_REGULAR,
     },
-
-
-
 })
 
 export default styles

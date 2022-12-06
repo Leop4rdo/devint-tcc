@@ -7,6 +7,22 @@
     gap: .5em;
     padding: .5em;
 
+    input {
+        margin-bottom: 16px;
+        height: 40px;
+        width: 300px;
+        padding: 0px 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background-color: #1F252F;
+        border: 2px solid;
+        border-color: #485467;
+        border-radius: 8px;
+        border-style: solid;
+        color: white;
+    }
+
     .card-header {
         color: $color-white;
         font-size: 1.2em;
@@ -28,8 +44,8 @@
     }
 
     img {
-        width: 3em;
-        height: 3em;
+        width: 1.5em;
+        height: 1.5em;
     }
 
 }

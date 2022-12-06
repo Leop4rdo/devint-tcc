@@ -3,13 +3,14 @@ import Icon from "components/shared/Icon";
 import Input from "components/shared/Input";
 import TextArea from "components/shared/TextArea";
 import * as projectService from 'services/project.service';
-import React, { useState, useEffect , useContext} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import * as devService from "services/dev.service"
 import IDevMinimal from "interfaces/IDev";
 import Select from "components/shared/Select";
 import { v4 as randomUUIDV4 } from "uuid"
 import firebase from "config/firebase"
 import { AuthContext } from "store/context/Auth.context";
+import IProjectProps from "../../../../interfaces/IProject"
 
 interface ICreateProjects {
     openCloseModal: any
@@ -23,16 +24,20 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, ref
     const [searchUsers, setsearchUsers] = useState<IDevMinimal[]>([])
     const [dataGithubRepo, setdataGithubRepo] = useState([])
     const [selectdNameRepository, setSelectdNameRepository] = useState()
-    const [checkBoxValue, setCheckBoxValue] = useState()
-    const [attachments, setAttachments] = useState<string[]>([])
+    const [checkBoxValue, setCheckBoxValue] = useState(Boolean)
+    const [banner, setBanner] = useState<string>('')
     const authContext = useContext(AuthContext)
+    const [visible, setVisible] = useState(true)
+    const UrlRepositoryGit = `https://github.com/${selectdNameRepository}`
+
     const [formValues, setFormValues] = useState({
         name: "",
         nameGithubUsers: "",
         desc: "",
-        members : [
+        members: [
             authContext?.userData
-        ]
+        ],
+
 
     })
 
@@ -41,10 +46,10 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, ref
             ...formValues,
             [key]: value.target.value
         })
-        getSearchUsers(formValues.nameGithubUsers) 
+        getSearchUsers(formValues.nameGithubUsers)
     }
 
-    
+
 
     const getSearchUsers = async (nameUser: string) => {
 
@@ -82,40 +87,40 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, ref
 
     }
 
-    
+
 
     const publishProject = async () => {
 
-        if (!formValues.name || !formValues.desc || !selectdNameRepository || !attachments)
-            return
-
-        const UrlRepositoryGit = `https://github.com/${selectdNameRepository}`
-
-        const body = {
-            name: formValues.name,
-            bannerURI: attachments[0],
-            githubRepository: {
-                url: UrlRepositoryGit,
-                name: selectdNameRepository
-            },
-            members: formValues.members,
-            openSource: checkBoxValue,
-            desc: formValues.desc
+        if (!formValues.name || !selectdNameRepository)
+            alert("O campo com o nome do projeto e a seleção de um repositorio são obrigatorios")
+        else{
+            const body = {
+                name: formValues.name,
+                bannerURI: banner,
+                githubRepository: {
+                    url: UrlRepositoryGit,
+                    name: selectdNameRepository
+                },
+                members: formValues.members,
+                openSource: checkBoxValue,
+                desc: formValues.desc
+            }
+    
+            const res = await projectService.create(body)
+    
+            if (res.hasError)
+                return alert('Houve um erro inesperado ao publicar, tente novamente mais tarde!')
+    
+            openCloseModal(false)
+            refreshPage()
         }
-
-        const res = await projectService.create(body)
-
-        if (res.hasError)
-            return alert('Houve um erro inesperado ao publicar, tente novamente mais tarde!')
-
-        openCloseModal(false)
-        refreshPage()
+       
 
     }
 
 
     const upload = async (evt: any) => {
-        
+
 
         const file = evt.target.files[0]
 
@@ -124,15 +129,13 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, ref
         try {
             const extension = `.${file.name.split('.')[1]}`
             const fileName = randomUUIDV4() + extension
-            const uploaded = await firebase.storage().ref().child('attachments/').child(fileName).put(file)
-            setAttachments([
-                await uploaded.ref.getDownloadURL()
-            ])
+            const uploaded = await firebase.storage().ref().child('projectas/').child(fileName).put(file)
+            setBanner(await uploaded.ref.getDownloadURL())
         } catch (err) {
             console.log(err)
             alert('Houve um erro inesperado ao fazer upload!')
         }
-        
+
     }
 
 
@@ -154,50 +157,85 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, ref
                 name: data.name,
                 nameGithubUsers: "",
                 desc: data.desc,
-                members: data.members
+                members: data.members,
             })
-            
+
             setCheckBoxValue(data.openSource)
-            setAttachments(data.bannerURI)
+            setBanner(data.bannerURI)
             setSelectdNameRepository(data.githubRepository.name)
         }
     }
 
-    const addTeamMember = (member : IDevMinimal) => {
-        
+    const addTeamMember = (member: IDevMinimal) => {
+
         if (member.id === authContext?.userData.id)
             return
 
         if (formValues.members.find(m => m.id === member.id))
             return
-            
+
         setFormValues({
             ...formValues,
-            members : [...formValues.members, member]
+            members: [...formValues.members, member],
+            nameGithubUsers: ""
         })
 
-        
+
 
     }
 
-    const removeTeamMember = (member : IDevMinimal) => {
+
+
+    const removeTeamMember = (member: IDevMinimal) => {
         if (member.id === authContext?.userData.id)
             return
 
         setFormValues({
             ...formValues,
-            members : formValues.members.filter((m) => m.id != member.id)
+            members: formValues.members.filter((m) => m.id != member.id)
         })
 
-        
+
     }
 
-    
+
+    const update = async () => {
+
+        if (!formValues.name || !formValues.desc || !selectdNameRepository)
+            return
+
+        if (editProject) {
+            const body = {
+                name: formValues.name,
+                bannerURI: banner,
+                githubRepository: {
+                    url: UrlRepositoryGit,
+                    name: selectdNameRepository
+                },
+                members: formValues.members,
+                openSource: checkBoxValue,
+                desc: formValues.desc
+            }
+            try {
+                await projectService.update(body, IdProject)
+                openCloseModal()
+                refreshPage()
+            } catch (err) {
+                console.log(err)
+                alert('Houve um erro inesperado ao fazer a edição')
+            }
+
+
+        }
+
+    }
+
+
+
 
     useEffect(() => { getUserData(); getByidProjects() }, [])
 
-    console.log(attachments)
-    
+
 
     return (
         <div className="modal-container-global">
@@ -210,20 +248,22 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, ref
 
                     <div className="container-image">
 
-
                         <div className="attachment-list">
-                            {attachments[0] ?
-                                <img src={`${attachments}`} alt="" /> :
+
+                            {banner ?
+                                <img src={banner} alt="" /> :
                                 <div className="container-image-not-selected">
-                                </div>}
+                                    <div className="container-input-file">
+                                        <label htmlFor="input-file">
+                                            <Icon name="add_a_photo" />
+                                        </label>
+                                        <input accept="image/*" onChange={upload} type="file" name="input-file" id="input-file" />
+                                    </div>
+                                </div>
+                            }
                         </div>
 
-                        <div className="container-input-file">
-                            <label htmlFor="input-file">
-                                <Icon name="add_a_photo" />
-                            </label>
-                            <input accept="image/*" onChange={upload} type="file" name="input-file" id="input-file" />
-                        </div>
+
 
 
                     </div>
@@ -236,7 +276,7 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, ref
                             onChange={(value) => handleTextChange(value, 'name')}
                         />
                         <div className="data-github">
-                            <Select  onChange={(selectd: any) => {
+                            <Select onChange={(selectd: any) => {
                                 setSelectdNameRepository(selectd.target.value)
                             }}>
                                 <option>Selecione um Repositório</option>
@@ -254,7 +294,7 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, ref
                             </Select>
                             <span>Open Source</span>
                             <div className="toggle-button">
-                                <input type="checkbox" id="chk" onChange={(value: any) => setCheckBoxValue(value.target.checked)} />
+                                <input type="checkbox" id="chk" checked={checkBoxValue} onChange={value => setCheckBoxValue(value.target.checked)} />
                                 <label htmlFor="chk" className="switch">
                                     <span className="slider"></span>
                                 </label>
@@ -263,7 +303,7 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, ref
                         </div>
 
                         <TextArea
-                            value={formValues.desc}  
+                            value={formValues.desc}
                             placeholder="Descrição"
                             onChange={(value: string) => handleTextChange(value, 'desc')}
                         />
@@ -272,13 +312,13 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, ref
                                 value={formValues.nameGithubUsers}
                                 onChange={(value) => handleTextChange(value, 'nameGithubUsers')}
                             />
-                            <Button className="btn-primary" children={<Icon name="add" />} />
+
                         </div>
                         {
                             searchUsers.length > 0 && formValues.nameGithubUsers != "" ?
                                 <div className="container-search-users-github">
                                     <div className="search-users-github">
-                                        <div className="container-scroll-participants-project">
+                                        <div className="container-scroll-member-project">
 
 
                                             {
@@ -319,59 +359,40 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, ref
 
 
                         <div className="container-scroll-participants-project">
+                            {formValues.members &&
+                                formValues.members.map((member: IDevMinimal) => (
+                                    <div className="conatiner-participants-project">
+                                        <div className="participants-project">
+                                            <div className="participants">
+                                                <div className="image">
+                                                    <img src={member.profilePicUrl} />
+                                                </div>
+                                                <div className="container-information-participants">
+                                                    <div className="developer-name">
+                                                        <span>{member.name}</span>
+                                                    </div>
+                                                    <div className="developer-github">
+                                                        <span >{member.githubUsername}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {member.id === userId ? "" : <Icon name="delete_forever" onClick={() => removeTeamMember(member)} />}
 
-                         {formValues.members &&
-                            formValues.members.map((member : IDevMinimal) => (
-                                <div className="conatiner-participants-project">
-                                <div className="participants-project">
-                                    <div className="participants">
-                                        <div className="image">
-                                            <img src={member.profilePicUrl} />
-                                        </div>
-                                        <div className="container-information-participants">
-                                            <div className="developer-name">
-                                                <span>{member.name}</span>
-                                            </div>
-                                            <div className="developer-github">
-                                                <span >{member.githubUsername}</span>
-                                            </div>
-                                        </div>
                                     </div>
-                                </div>
-                                <Icon name="delete_forever" onClick={() => removeTeamMember(member)}/>
-                            </div>
-                            ))
-                        
-                        
-                            
-                        
-                            
-                        } 
-                            
+                                ))
 
-                            {/* <div className="conatiner-participants-project">
-                                <div className="participants-project">
-                                    <div className="participants">
-                                        <div className="image">
-                                            <img />
-                                        </div>
-                                        <div className="container-information-participants">
-                                            <div className="developer-name">
-                                                <span>Developer_Name</span>
-                                            </div>
-                                            <div className="developer-github">
-                                                <span >Developer_Github</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <Icon name="delete_forever" />
-                            </div> */}
+
+                            }
+
                         </div>
+
                     </div>
 
                     <div className="container-button-create-project">
-                        <Button onClick={publishProject} className="btn-primary" children={"Criar Projeto"} />
+                        <Button onClick={() => editProject ? update() : publishProject()} className="btn-primary" >
+                            Salvar <Icon name="save"/>
+                        </Button>
 
                         {
                             editProject &&

@@ -21,6 +21,21 @@ export const getProjectByUser = async (userId : string ,query ?: PaginationQuery
     }
 }
 
+export const listMinimal = async (devId : string) : Promise<IResponse> => {
+    try {
+        const { data } = await api.get(
+            `/devs/${devId}/projects/list-minimal`,
+            { headers: { Authorization: `Baerer ${ await getToken()}` } }
+        )
+
+        return data as IResponse
+    } catch (err : any) {
+        console.log('error at project list by dev')
+        console.log(err)
+        return err.response.data as IResponse
+    }
+}
+
 export const findById = async (id : string) => {
     try {
         const { data } = await api.get(
@@ -100,7 +115,7 @@ export const GetByIdProject = async (id : string) => {
 }
 
 
-export const update = async (body : IProjectProps, id : string) : Promise<IResponse> => {
+export const update = async (body : any, id : string) : Promise<IResponse> => {
     try {
         const { data } = await api.put(
             `/projects/${id}`,
@@ -114,3 +129,24 @@ export const update = async (body : IProjectProps, id : string) : Promise<IRespo
         return err.response.data as IResponse
     }
 }
+
+
+export const toggleHeart = async (id : string) => {
+    try {
+        const { data } = await api.patch(
+            `/projects/${id}/toggle-heart`,
+            {},
+            { headers: { Authorization: `Baerer ${ await getToken()}` } }
+        )
+
+        return data as IResponse
+    } catch (err : any) {
+        console.log(err)
+        return err.response.data as IResponse
+    }
+}
+
+
+
+
+

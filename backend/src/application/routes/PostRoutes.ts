@@ -8,6 +8,7 @@ postRouter.get('/posts/', ctrl.list)
 postRouter.get('/posts/:postId', ctrl.getById)
 postRouter.post('/posts/', ctrl.create);
 postRouter.get('/devs/:userId/posts', ctrl.getByWritter)
+postRouter.get('/projects/:projectId/posts', ctrl.getByProject)
 postRouter.patch('/posts/:postId/toggle-heart', ctrl.toggleHeart)
 
 export default postRouter

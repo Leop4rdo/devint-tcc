@@ -12,9 +12,10 @@ interface IPostProps {
     data : IPostListItem,
     openComments : () => void
     openProfile : () => void
+    openProject : () => void
 }
 
-const Post : React.FC<IPostProps> = ({ data, openComments, openProfile }) =>{
+const Post : React.FC<IPostProps> = ({ data, openComments, openProfile, openProject }) =>{
     const [liked, setLiked] = useState(data.alreadyHearted)
 
     const giveLike = async () => {
@@ -42,7 +43,7 @@ const Post : React.FC<IPostProps> = ({ data, openComments, openProfile }) =>{
 
                 {
                     data.project &&
-                    <Pressable>
+                    <Pressable onPress={openProject}>
                         <Text style={styles.projectLink}>&#60; {data.project.name} &#47;&#62;</Text>
                     </Pressable>
                 }

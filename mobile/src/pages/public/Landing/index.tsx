@@ -3,6 +3,7 @@ import styles from "./style";
 import Header from '../../../components/shared/Header';
 import ButtonComponent from "../../../components/shared/Button";
 import { IPageProps } from "../../../navigators";
+import { ScrollView } from "react-native-gesture-handler";
 
 const LandingPage: React.FC<IPageProps> = ({ navigation }) => {
 
@@ -11,21 +12,17 @@ const LandingPage: React.FC<IPageProps> = ({ navigation }) => {
         <View style={styles.container}>
         <Header/>
 
-            <View>
+            <ScrollView>
                 <View>
                         <Text style={styles.textWelcome}>Bem Vindo</Text>
-                        <Text style={styles.textMessageWelcome}>Dev Int conecta todos no processo de aprimoramento pessoal e em equipe </Text>
+                        <Text style={styles.textMessageWelcome}>A rede social profissional feita de desenvolvedores, para desenvolvedores</Text>
                 </View>
                 <View style={styles.containerButtons}>
                     <ButtonComponent text="login" onPress={() => navigation.navigate('login')} />
                     <ButtonComponent text="cadastrar" onPress={() => navigation.navigate('register')}></ButtonComponent>
                 </View>
-            </View>
+            </ScrollView>
         </View>
-
-
-
-        
     )
 }
 

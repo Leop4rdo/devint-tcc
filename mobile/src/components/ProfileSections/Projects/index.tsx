@@ -1,15 +1,17 @@
 import { NavigationProp } from "@react-navigation/native";
 import { useCallback, useContext, useEffect, useState } from "react";
-import { Pressable, Text, View } from "react-native";
+import { ActivityIndicator, Pressable, Text, View } from "react-native";
 
 import styles from './style'
 import * as projectService from '../../../services/project.service'
 import ProjectCard from "./ProjectCard";
 import IProject from "../../../interfaces/IProject";
 import {AuthContext} from "../../../store/context/Auth.context";
+import Semicolon from "../../shared/Semicolon";
 
 const ProfileProjectsSection : React.FC<{ navigation : any, devId ?: string, isFocused : boolean }> = ({ navigation, isFocused, devId }) => {
     const [projects, setProjects] = useState<IProject[]>([])
+    const [loading, setLoading] = useState(true)
     const authContext = useContext(AuthContext)
 
     const getProjects = async () => {
@@ -20,6 +22,7 @@ const ProfileProjectsSection : React.FC<{ navigation : any, devId ?: string, isF
         console.log(res)
 
         setProjects(res.data)
+        setLoading(false)
     }
 
     useEffect(() => { getProjects() }, [devId, isFocused])
@@ -47,6 +50,7 @@ const ProfileProjectsSection : React.FC<{ navigation : any, devId ?: string, isF
                         />
                     )
                 }
+                {(loading) ? <ActivityIndicator /> : <Semicolon />}
             </View>
         </>
     )

@@ -12,10 +12,22 @@
 
     .container-elements {
         width: 40vw;
-        height: 98vh;
+        height: 900px;
         background-color: $color-dark-gray;
         border-radius: 16px;
         word-wrap: break-word;
+        overflow-y: auto;
+
+        &::-webkit-scrollbar {
+            background-color: transparent;
+            width: 8px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: $color-light-gray;
+            border-radius: 8px;
+        }
+
 
         .elements {
             padding: 20px;
@@ -40,41 +52,48 @@
 
             .container-image {
                 margin-bottom: 16px;
-                height: 300px;
+                height: 280px;
+                border-bottom: solid 2px;
+                border-color: $color-gray;
+                padding-bottom: 40px;
 
-                .container-input-file{
-                    width: 100%;
-                    display: flex;
-                    justify-content: flex-end;
-                    #input-file {
-                        display: none;
-                    }
-                    .icon {
-                        font-size: clamp(1.5rem, 4vw, 2.5rem);
-                        color: white;
-                        cursor: pointer;
-                        transition: color .25s ease-out;
-    
-                        &:hover {
-                            color: $color-primary;
-                        }
-                    
-                    }
-                }
-                
-
-                .attachment-list{
+                .attachment-list {
                     width: 100%;
                     height: 250px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
                     
-                    .container-image-not-selected{
+                    .container-image-not-selected {
                         width: 100%;
                         height: 100%;
                         background-color: $color-gray;
                         border-radius: 8px;
+                        display: flex;
+                        justify-content: flex-end;
+                        align-items: flex-end;
+
+
+                        .container-input-file {
+                            width: 50px;
+                            height: 50px;
+                            background-color: $color-primary;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            border-radius: 50%;
+
+                            #input-file {
+                                display: none;
+                            }
+
+                            .icon {
+                                font-size: clamp(1.5rem, 4vw, 2.5rem);
+                                color: $color-white;
+                                cursor: pointer;
+                                transition: color .25s ease-out;
+                                margin-left: 3px;
+
+
+                            }
+                        }
                     }
 
                     img {
@@ -132,28 +151,27 @@
 
                         .switch {
                             position: relative;
-                            background-color: $color-black;
-                            width: 60px;
-                            height: 30px;
+                            background-color: $color-light-gray;
+                            width: 45px;
+                            height: 20px;
                             border-radius: 40px;
                             display: flex;
                             align-items: center;
-                            padding: 5px;
+                            padding: 10px;
                             transition: all .5s ease-in-out;
                             cursor: pointer;
-                            border: 2px solid;
 
-                            border-color: $color-gray;
                         }
 
                         .slider {
                             margin-top: 0px;
                             position: absolute;
-                            background-color: $color-light-gray;
+                            background-color: $color-white;
                             border-radius: 50%;
-                            width: 20px;
-                            margin-left: 0px;
-                            height: 20px;
+                            width: 23px;
+                            margin-left: -10px;
+                            margin-right: -10px;
+                            height: 23px;
                             transition: all .3s ease-in-out;
                         }
 
@@ -169,7 +187,7 @@
                     justify-content: space-around;
 
                     .input-container {
-                        width: 90%;
+                        width: 100%;
                     }
 
                     .btn-primary {
@@ -183,18 +201,21 @@
                     display: flex;
                     justify-content: center;
                     align-items: center;
-
+                    margin-bottom: 30px;
+                    
 
                     .search-users-github {
                         width: 700px;
-                        background-color: $color-gray;
+                        background-color: $color-black;
                         border-radius: 8px;
                         height: auto;
+                        border: solid 2px;
+                        border-color: $color-gray;
 
-                        .container-scroll-participants-project {
+                        .container-scroll-member-project {
                             overflow-y: auto;
                             width: 100%;
-                            height: 7vh;
+                            height: 90px;
                             padding-right: 16px;
                             display: flex;
                             flex-direction: column;
@@ -256,8 +277,10 @@
                     }
 
                 }
-
+                
                 .container-scroll-participants-project {
+                    border-top: solid 2px;
+                    border-color: $color-gray;
                     overflow-y: auto;
                     width: 100%;
                     height: 160px;
@@ -265,6 +288,7 @@
                     display: flex;
                     flex-direction: column;
                     gap: 16px;
+                    
 
                     &::-webkit-scrollbar {
                         background-color: transparent;
@@ -276,50 +300,52 @@
                         border-radius: 8px;
                     }
 
-
-                    .conatiner-participants-project {
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-
-                        .participants-project {
-                            margin-top: 24px;
-
-                            .participants {
-                                display: flex;
-                                gap: 16px;
-
-                                .image {
-                                    img{
-                                    width: 48px;
-                                    height: 48px;
-                                    border-radius: 50%;
-                                    }
-                                }
-
-                                .container-information-participants {
-                                    .developer-name {
-                                        span {
-                                            font-size: 20px;
-                                            color: $color-white;
+                    
+                        .conatiner-participants-project {
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+    
+                            .participants-project {
+                                margin-top: 24px;
+    
+                                .participants {
+                                    display: flex;
+                                    gap: 16px;
+    
+                                    .image {
+                                        img {
+                                            width: 48px;
+                                            height: 48px;
+                                            border-radius: 50%;
                                         }
                                     }
-
-                                    .developer-github {
-                                        span {
-                                            color: $color-light-gray;
+    
+                                    .container-information-participants {
+                                        .developer-name {
+                                            span {
+                                                font-size: 20px;
+                                                color: $color-white;
+                                            }
+                                        }
+    
+                                        .developer-github {
+                                            span {
+                                                color: $color-light-gray;
+                                            }
                                         }
                                     }
                                 }
                             }
+    
+                            .icon {
+                                color: $color-red;
+                                cursor: pointer;
+                                margin-top: 30px;
+                            }
                         }
-
-                        .icon {
-                            color: $color-red;
-                            cursor: pointer;
-                            margin-top: 30px;
-                        }
-                    }
+                    
+                    
                 }
 
 
@@ -333,9 +359,9 @@
                 align-items: center;
                 height: 50px;
                 justify-content: space-evenly;
-                    
 
-                .btn-delete{
+
+                .btn-delete {
                     color: $color-red;
                     border: 2px solid;
                     border-color: $color-red;
