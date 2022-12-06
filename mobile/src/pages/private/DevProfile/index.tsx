@@ -217,12 +217,11 @@ const ProfilePage: React.FC<{ route : any, navigation : any }> = ({route, naviga
                         </Pressable>
                     </View>
 
-                    <View style={styles.section}>
+                    <View style={styles.section}>        
                         {
                             (currentSection === 3) ? 
                                 <DetailsSection canEdit={authContext?.userData.id == data?.id} data={data as IDev} onFinishEditing={updateDev}/>
                             : (currentSection === 2) ?
-
                                 <ProfileProjectsSection isFocused={isFocused} devId={data?.id!} navigation={navigation}/>
                             : (currentSection === 1) ?
                                 <Semicolon />
