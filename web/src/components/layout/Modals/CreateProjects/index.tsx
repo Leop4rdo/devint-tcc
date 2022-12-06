@@ -303,14 +303,21 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, ref
 
                         </div>
 
-                        <TextArea
+                       
+                        
+                       <TextArea
                             value={formValues.desc}
                             placeholder="Descrição"
                             onChange={(value: string) => handleTextChange(value, 'desc')}
+                            maxLength={300}
                         />
+                        
+                                
+                        
                         <div className="container-participants-github">
                             <Input placeholder="Participantes do projeto"
                                 value={formValues.nameGithubUsers}
+                                maxLength={100}
                                 onChange={(value) => handleTextChange(value, 'nameGithubUsers')}
                             />
 
