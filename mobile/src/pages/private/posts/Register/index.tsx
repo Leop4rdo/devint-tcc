@@ -111,11 +111,14 @@ const PostRegisterPage : React.FC<{ navigation : any }> = ({navigation}) => {
                     <Text style={styles.title}>Nova publicação</Text>
                 </View>
 
-                <ButtonComponent 
+                {/* <ButtonComponent 
                     textStyle={(content && !uploading) ? styles.publishButtonText : styles.publishButtonTextDisabled} 
                     style={(content && !uploading) ? styles.publishButton : styles.publishButtonDisabled}
                     onPress={publish} 
-                    text='publicar'/>
+                    text='publicar'/> */}
+                <Pressable style={(content && !uploading) ? styles.publishButton : styles.publishButtonDisabled}>
+                    <Text style={(content && !uploading) ? styles.publishButtonText : styles.publishButtonTextDisabled}>Publicar</Text>
+                </Pressable>
             </View>
 
             <View style={styles.profileContainer}>

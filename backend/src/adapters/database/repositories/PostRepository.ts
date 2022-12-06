@@ -15,13 +15,19 @@ export default class PostRepository extends AbstractRepository<PostEntity> {
     }
 
     async listByFilters(filters : PostFilters): Promise<PostEntity[]> {
+        console.log(filters)
     
-        return await this.db.createQueryBuilder('posts')
+        const query = this.db.createQueryBuilder('posts')
             .innerJoinAndSelect('posts.writter', 'devs')
             .leftJoinAndSelect('posts.project', 'projects')
             .leftJoinAndSelect('posts.comments', 'comments')
-            .where((filters.writter) ? 'devs.id = :writterId' : '', { writterId : filters.writter })
-            .where((filters.project) ? 'projects.id = :projectId' : '', { projectId : filters.project })
+        
+        if (filters.writter)
+            query.where('devs.id = :writterId', { writterId : filters.writter });
+        else if (filters.project)
+            query.where('projects.id = :projectId', { projectId : filters.project });
+        
+        return query
             .orderBy(this.getOrderQuery(filters.order), "DESC")
             .limit(filters.limit)
             .offset(filters.offset)

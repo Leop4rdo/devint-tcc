@@ -73,11 +73,9 @@ const FeedPage : React.FC<FeedPageProps> = ({ feedType }) => {
                                     {
                                         devs?.map((dev: IDevMinimal) =>
                                             <SwiperSlide key={`${dev.id}-${Math.random() * 999}`}>
-                                                <div className="container-img-devs-highlighted">
-                                                    <Link to={`/dev/${dev?.id}`}>
+                                                <Link className="container-img-devs-highlighted"to={`/dev/${dev?.id}`}>
                                                     <img src={dev.profilePicUrl} /> 
-                                                    </Link>  
-                                                    </div>
+                                                </Link>  
                                             </SwiperSlide>
                                         )}
                                 </Swiper>

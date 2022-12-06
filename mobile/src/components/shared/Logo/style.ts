@@ -25,9 +25,6 @@ const styles = StyleSheet.create({
         color: colors.WHITE,
         fontFamily: fonts.POPPINS_REGULAR,
     },
-
-
-
 })
 
 export default styles

@@ -24,7 +24,7 @@ const DetailCard : React.FC<IDetailCardProps> = (props) => {
 
                 {
                     props.onEditPress && props.canEdit && 
-                    <Pressable onPress={props.onEditPress}>
+                    <Pressable style={{padding : 16, marginTop: -10, marginRight : -16}} onPress={props.onEditPress}>
                         <MaterialIcons name={(!props.editing) ? "edit" : "check"} size={16} color={colors.LIGHT_GRAY} />
                     </Pressable>
                 }
