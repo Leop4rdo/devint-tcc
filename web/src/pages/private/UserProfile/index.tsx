@@ -59,6 +59,10 @@ const UserProfilePage: React.FC = () => {
 
         var objectURL = url.createObjectURL(file)
 
+        console.log((window.URL || window.webkitURL).createObjectURL(file))
+
+        img.src =  objectURL
+
         img.onload = function() {
 
             console.log(img.width);
@@ -69,7 +73,7 @@ const UserProfilePage: React.FC = () => {
                 
                 console.log('CHegou');
                 
-                alert('Imagem com proporções incompativeis')
+                //alert('Imagem com proporções incompativeis')
 
                 return false
             }
@@ -172,7 +176,7 @@ const UserProfilePage: React.FC = () => {
                     {
                         (authContext?.userData?.id == devId) ?
                             <div className="upload-new-image">
-                                <input accept="image/*" type="file" name="banner" id="banner-input" onChange={uploadImage}/>
+                                <input accept="image/*"  type="file" name="banner" id="banner-input" onChange={uploadImage}/>
                                 <label htmlFor="banner-input"><Icon name="image"  /></label>
                             </div>
 

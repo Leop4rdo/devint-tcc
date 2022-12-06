@@ -110,6 +110,7 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                overflow-x: auto;
 
                 img {
                     height: clamp(4rem, 10vw, 8rem);
