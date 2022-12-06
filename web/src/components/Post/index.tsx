@@ -16,7 +16,7 @@ interface IPostProps {
 
 const Post: React.FC<IPostProps> = ({ data, openDetails }) => {
 
-    const navigation = useNavigate()
+    
 
     const [liked, setLiked] = useState(data.alreadyHearted)
 
@@ -25,8 +25,6 @@ const Post: React.FC<IPostProps> = ({ data, openDetails }) => {
 
         setLiked(!liked)
     }
-
-    
 
     
 
@@ -46,7 +44,7 @@ const Post: React.FC<IPostProps> = ({ data, openDetails }) => {
                 <p onClick={openDetails}>{data.content}</p>
                 {
                     data.project &&
-                    <Link to=''>&#60; {data.project.name} /&#62;</Link>
+                    <Link to='/dev/projectdetails'>&#60; {data.project.name} /&#62;</Link>
                 }
                 {   
                     data.attachments.length > 0 &&
@@ -55,7 +53,7 @@ const Post: React.FC<IPostProps> = ({ data, openDetails }) => {
                             modules={[Navigation, Pagination, Scrollbar, A11y]}
                             spaceBetween={50}
                             slidesPerView={1}
-                            navigation={data.attachments.length > 0 ? true : false}
+                            navigation={data.attachments.length > 1 ? true : false}
                             pagination={{ clickable: true }}
                             onClick={openDetails}
                         >

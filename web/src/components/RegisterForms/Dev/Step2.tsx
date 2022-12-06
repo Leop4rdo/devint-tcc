@@ -21,11 +21,6 @@ const DevForm2: React.FC<IFormProps> = ({ onSubmit, formData, onChange , Validad
         if (checked == 'on') setChecked('off')
     }
 
-    
-    
-
-    
-    
 
     return (
 

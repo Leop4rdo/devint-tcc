@@ -16,9 +16,9 @@ interface IProject {
 
 const ProjectCard: React.FC<IProject> = ({ data, openCloseModal, EditProject, idProject }) => {
     const [UrlRepoGithubProject, setUrlRepoGithubProject] = useState()
-
+    const [hearted, setHearted] = useState(false);
     const authContext = useContext(AuthContext)
-    const [liked, setLiked] = useState(data.alreadyHearted)
+    
 
 
 
@@ -30,21 +30,21 @@ const ProjectCard: React.FC<IProject> = ({ data, openCloseModal, EditProject, id
 
     const toggleHeart = () => {
         projectService.toggleHeart(data.id!)
-        setLiked(!liked)
+        setHearted(!hearted)
     }
 
-    /* const getHeartAmount = () => {
+     const getHeartAmount = () => {
         if (data.hearts!.includes(authContext?.userData.id) && !hearted)
             return data.hearts?.length! -1;
         if (!data.hearts!.includes(authContext?.userData.id) && hearted)
             return data.hearts?.length! +1;
         else
             return data.hearts?.length!;
-    } */
+    } 
 
 
 
-    useEffect(() => { getUrlGithubRepo(); }, [])
+    useEffect(() => { getUrlGithubRepo(); setHearted(data.hearts!.includes(authContext?.userData.id))}, [data])
 
     return (
         <div className="container-project" >
@@ -99,10 +99,10 @@ const ProjectCard: React.FC<IProject> = ({ data, openCloseModal, EditProject, id
                 <div className="container-interaction-project">
 
                     <Button onClick={toggleHeart}>
-                        <Icon name="favorite" id={`${liked ? 'already-hearted' : ''}`} />
+                        <Icon name="favorite" id={`${hearted ? 'already-hearted' : ''}`} />
                     </Button>
                     <span>{
-                        (liked && !data.alreadyHearted) ? (data?.hearts||[]).length + 1 : (!liked && data.alreadyHearted) ? (data?.hearts||[]).length - 1 : (data?.hearts||[]).length
+                        getHeartAmount()
                     }</span>
                 </div>
             </div>

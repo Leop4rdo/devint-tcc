@@ -309,7 +309,6 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, ref
                             value={formValues.desc}
                             placeholder="Descrição"
                             onChange={(value: string) => handleTextChange(value, 'desc')}
-                            maxLength={300}
                         />
                         
                                 
