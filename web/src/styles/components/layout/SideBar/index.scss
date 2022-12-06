@@ -4,13 +4,13 @@
 
 	grid-row: 2;
 
-	padding: 48px 0;
+	padding: clamp(16px, 4vh, 48px) 0;
 
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 
-	gap: 24.5px;
+	gap: 24px;
 	background-color: $color-black;
 	z-index: 3;
 
@@ -28,16 +28,16 @@
 			justify-content: center;
 			
 			img {
-				width: clamp(80px, 15vw, 120px);
-				height: clamp(80px, 15vw, 120px);
+				width: clamp(80px, 5vw, 120px);
+				height: clamp(80px, 5vw, 120px);
 				border-radius: 50%;
 				cursor: pointer;
-				border: 4px solid $color-primary;
+				border: 3px solid $color-primary;
 			}
 		}
 
 		h2 {
-			font-size: clamp(1rem, 3vw, 1.3rem);
+			font-size: clamp(.75rem, 1.3vw, 1.3rem);
 			margin-top: 16px;
 			color: $color-primary;
 			font-weight: $font-regular;
@@ -61,7 +61,7 @@
 		.container-nav {
 			display: flex;
 			flex-direction: column;
-			gap: clamp(16px, 4vh, 24px);
+			gap: clamp(8px, 2vh, 24px);
 		}
 
 		.sidebar-item {
@@ -73,7 +73,7 @@
 			border-radius: 12px;
 
 			width: 100%;
-			height: clamp(32px, 8vw, 48px);
+			height: clamp(32px, 2vw, 48px);
 
 			transition: background 0.25s ease-out;
 			cursor: pointer;
