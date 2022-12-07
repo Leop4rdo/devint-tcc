@@ -40,11 +40,11 @@ const Post: React.FC<IPostProps> = ({ data, openDetails }) => {
                 </Link>
             </div>
 
-            <div className="post-content" >
+            <div className="post-content">
                 <p onClick={openDetails}>{data.content}</p>
                 {
                     data.project &&
-                    <Link to='/dev/projectdetails'>&#60; {data.project.name} /&#62;</Link>
+                    <Link to={`/dev/projectdetails/${data.project.id}`}>&#60; {data.project.name} /&#62;</Link>
                 }
                 {   
                     data.attachments.length > 0 &&

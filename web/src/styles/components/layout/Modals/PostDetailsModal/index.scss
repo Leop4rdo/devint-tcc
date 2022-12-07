@@ -9,7 +9,7 @@
     min-height: 50vh;
 
 
-
+    
     .container-itens {
         width: 30vw;
         word-wrap: break-word;
@@ -129,7 +129,7 @@
                         color: $color-light-gray;
                         transition: color 0.1s ease-out;
 
-                        &:hover {
+                        &:hover, &#already-hearted {
                             color: $color-primary;
                         }
                     }

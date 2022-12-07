@@ -81,32 +81,6 @@
             background-color: $color-light-gray;
         }
 
-        .container-project-owner {
-             margin-top: -10px;   
-             .container-crown-project-owner{
-                padding-left: 30px;  
-                height:55px;
-                margin-top: -20px;
-                img {
-                    width: 2rem;
-                    height: 2rem;
-                    margin-bottom: 20px;
-                    background-color: aliceblue;
-                    
-                }
-             }   
-            
-            .project-owner {
-                margin-top: -20px;
-                img {
-                    margin-top: 0;
-                    width: 4rem;
-                    height: 4rem;
-                    border-radius: 50%;
-                }
-            }
-        }
-
     }
 
     .container-interactions {

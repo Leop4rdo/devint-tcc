@@ -13,15 +13,15 @@ interface IPostDetailsModalProps {
     postId: string
     onClick: any
     refreshComment: any
-   
+
 }
 
-const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick , refreshComment  }) => {
+const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick, refreshComment }) => {
     const authContext = useContext(AuthContext)
 
-    const [post, setPost] = useState<IPost | null>(null)
+    const [post, setPost] = useState<IPost>()
     const [newComment, setNewComment] = useState({
-        content : ''
+        content: ''
     })
 
     const getPost = async () => {
@@ -35,14 +35,24 @@ const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick , 
 
         const res = await postService.addComment(newComment, postId)
 
-        if (res.hasError !== false) 
+        if (res.hasError !== false)
             return alert('Erro ao postar commentario!')
 
-        setNewComment({ content : '' })
+        setNewComment({ content: '' })
 
         getPost()
         refreshComment()
     }
+
+    const [liked, setLiked] = useState(post?.alreadyHearted)
+
+    const giveLike = async () => {
+        await postService.addHeart(`${post?.id}`)
+
+        setLiked(!liked)
+    }
+
+
 
     useEffect(() => { getPost() }, [postId])
 
@@ -60,12 +70,12 @@ const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick , 
                             <div className="dice-user">
                                 <Button className="follow-button" children={[<Icon name="add" />, "Seguir"]} />
                                 {post?.attachments === undefined || post?.attachments.length === 0 &&
-                                <div className="container-icon-close">
-                                     <Icon className="close" name="close" onClick={onClick} />
-                                </div>
-                                   
+                                    <div className="container-icon-close">
+                                        <Icon className="close" name="close" onClick={onClick} />
+                                    </div>
+
                                 }
-                                
+
                             </div>
                         </div>
 
@@ -78,9 +88,11 @@ const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick , 
                             </div>
 
                             <div className="hearts">
-                                <p>{post?.hearts}</p>
-                                <Button>
-                                    <Icon name="favorite" />
+                                <p>{
+                                    (liked && !post?.alreadyHearted) ? post?.hearts! + 1 : (!liked && post?.alreadyHearted) ? post?.hearts! - 1 : post?.hearts!
+                                }</p>
+                                <Button onClick={giveLike}>
+                                    <Icon name="favorite" id={`${liked ? 'already-hearted' : ''}`} />
                                 </Button>
                             </div>
                         </div>
@@ -90,10 +102,10 @@ const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick , 
                                 <div className="profile">
                                     <img src={authContext?.userData.profilePicUrl} />
                                 </div>
-                                <AutoTextArea value={newComment.content} onChange={(e) => setNewComment({ ...newComment, content : e.target.value })} />
-                                <Icon name="send" onClick={addComment}/>
+                                <AutoTextArea value={newComment.content} onChange={(e) => setNewComment({ ...newComment, content: e.target.value })} />
+                                <Icon name="send" onClick={addComment} />
                             </div>
-                            
+
                             {
                                 post?.comments.sort((a, b) => a.hearts > b.hearts ? 1 : -1).map((comment?) => (
                                     <Comment refresh={getPost} data={comment} key={postId} />
@@ -102,21 +114,21 @@ const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick , 
                             }
                         </div>
                     </div>
-                    
+
                     {
                         post?.attachments != undefined && post?.attachments.length > 0 &&
                         <div className="container-carousel">
-                            <Icon  name="close" onClick={onClick} />
+                            <Icon name="close" onClick={onClick} />
                             <div className="carousel-image" >
 
                                 <Swiper modules={[Navigation, Pagination, Scrollbar, A11y]}
                                     spaceBetween={50}
                                     slidesPerView={1}
-                                    navigation={post.attachments.length > 0 ? true : false}
+                                    navigation={post.attachments.length > 1 ? true : false}
                                     pagination={{ clickable: true }}
                                 >
                                     {
-                                        post?.attachments.map((attachment, index) => 
+                                        post?.attachments.map((attachment, index) =>
                                             <SwiperSlide><img src={attachment} alt="" key={`${index}`} /></SwiperSlide>
                                         )
                                     }
