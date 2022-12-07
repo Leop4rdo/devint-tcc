@@ -133,7 +133,7 @@ const CompanyRegistrationPage: React.FC = () => {
 
             <div className="image-container">
 
-                <img src="../assets/images/svg/company-img.svg" alt="developer on a computer" />
+                <img src="assets/images/svg/company-img.svg" alt="developer on a computer" />
 
             </div>
 

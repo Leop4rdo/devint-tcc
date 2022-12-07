@@ -31,7 +31,7 @@ const DevForm2: React.FC<IFormProps> = ({ onSubmit, formData, onChange , Validad
 
         <form className="form" onSubmit={onSubmit}>
 
-            <Input type="text" onBlur={apiGit} placeholder="Usuário do GitHub (opcional)" onChange={onChange} value={formData.githubUser} name="githubUser" image="/assets/icons/github.svg" validate={() => ValidadeUserGithub} />
+            <Input type="text" onBlur={apiGit} placeholder="Usuário do GitHub (opcional)" onChange={onChange} value={formData.githubUser} name="githubUser" image="assets/icons/github.svg" validate={() => ValidadeUserGithub} />
 
             <Input icon="lock" placeholder="Senha" onChange={onChange} name="password" type="password" validate={() => !isEmpty(formData.password)}/>
 

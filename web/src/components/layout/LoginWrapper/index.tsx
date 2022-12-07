@@ -15,7 +15,7 @@ const LoginWrapper: React.FC<ILoginWapper> = (props) => {
 
             <main>
                 <div className="image-container">
-                    <img src="../assets/images/svg/login.svg" className="login-image" />
+                    <img src="assets/images/svg/login.svg" className="login-image" />
                 </div>
                 <div className="login-wrapper">
                     

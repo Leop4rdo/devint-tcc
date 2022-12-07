@@ -92,7 +92,7 @@ const ProjectCard: React.FC<IProject> = ({ data, openCloseModal, EditProject, id
             <div className="container-interactions">
                 <div className="container-github">
                     <a href={UrlRepoGithubProject}>
-                        <img src="../assets/icons/github.svg" alt="" />
+                        <img src="assets/icons/github.svg" alt="" />
                         github
                     </a>
                 </div>
