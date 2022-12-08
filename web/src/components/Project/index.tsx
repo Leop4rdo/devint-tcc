@@ -92,7 +92,7 @@ const ProjectCard: React.FC<IProject> = ({ data, openCloseModal, EditProject, id
             <div className="container-interactions">
                 <div className="container-github">
                     <a href={UrlRepoGithubProject}>
-                        <img src="assets/icons/github.svg" alt="" />
+                        <img src="https://firebasestorage.googleapis.com/v0/b/devint-tcc-33eb6.appspot.com/o/assets%2Ficons%2Fgithub.svg?alt=media&token=bb7fee41-f60d-4dbe-ad91-d99be0b62426" alt="" />
                         github
                     </a>
                 </div>
