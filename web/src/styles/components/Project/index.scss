@@ -33,7 +33,7 @@
             align-items: center;
             gap: 10px;
             word-wrap: break-word;
-            width: 100px;
+            
             
             
 
@@ -41,14 +41,15 @@
                 width: 530px;
                 color: $color-primary;
                 
-            }
-
-            
                 span {
-                    
+                    font-size: 16px;   
                     color: $color-gray;
                     font-weight: $font-regular;
                 }
+            }
+
+            
+               
                
             
            

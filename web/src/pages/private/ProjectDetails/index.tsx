@@ -3,7 +3,7 @@ import React, { useEffect, useState, useContext } from "react";
 import Icon from "components/shared/Icon";
 import * as postService from "../../../services/post.service"
 import * as projectService from "../../../services/project.service"
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "store/context/Auth.context";
 import Project from "interfaces/IProject"
 import { IPostListItem } from "interfaces/IPost";
@@ -61,9 +61,9 @@ const ProjectDetails: React.FC<ProjectDetails> = ({ feedType }) => {
                 <div className="container-projetc-details">
                     <div className="container-title-project">
                         <div className="title">
-                            <h1>{dataProject?.name}</h1>
+                            <h1>{dataProject?.name} {dataProject?.openSource ? <span>(Open Source)</span> : ""}</h1>
 
-                            {dataProject?.openSource ? <span>(Open Source)</span> : ""}
+                            
                         </div>
                         <div className="hearts">
                             <span>{/* {
@@ -93,7 +93,10 @@ const ProjectDetails: React.FC<ProjectDetails> = ({ feedType }) => {
 
                             {dataProject?.members.map((data) => (
                                 <div className="members-image">
-                                    <img src={data.profilePicUrl} alt="" />
+                                    <Link to={`/dev/${data.id}`}>
+                                        <img src={data.profilePicUrl} alt="" />
+                                    </Link>
+
                                 </div>
                             ))}
 

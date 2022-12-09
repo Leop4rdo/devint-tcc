@@ -22,21 +22,19 @@
                 align-items: center;
                 gap: 10px;
                 word-wrap: break-word;
-                width: 100px;
-                
-                
+                    
     
                 h1 {
-                    width: 530px;
+                    width: 1050px;
                     color: $color-primary;
                     
-                }
-    
                     span {
-                        
+                        font-size: 20px;
                         color: $color-gray;
                         font-weight: $font-regular;
                     }
+                }
+    
             }
 
             .hearts {

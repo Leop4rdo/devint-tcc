@@ -4,7 +4,7 @@ import Project from "components/Project";
 import React, { useState, useEffect , useContext } from "react";
 import IProjectProps from "interfaces/IProject"
 import * as projectService from 'services/project.service';
-import  {AuthContext}  from "../../../store/context/Auth.context";
+
 
 interface IProjectTab {
     devId: string
@@ -53,7 +53,7 @@ const ProjectsTabs: React.FC<IProjectTab> = ({ devId }) => {
             {
                 projects?.map((project: IProjectProps) =>
                     <>
-                        <Project EditProject={EditProject} key={`${project.id}-${Math.random() * 999}`} data={project} idProject={project.id} openCloseModal={() => {
+                        <Project  EditProject={EditProject} key={`${project.id}-${Math.random() * 999}`} data={project} idProject={project.id} openCloseModal={() => {
                             ModalProject()
                             setIdProject(`${project.id}`)
                         }
