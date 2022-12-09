@@ -4,7 +4,7 @@ import ButtonComponent from '../shared/Button';
 import { useState , useContext} from 'react';
 import { isEmail, isEmpty } from '../../utils/validation';
 import * as authService from "../../services/auth.service";
-
+import { ALERT_TYPE, Toast } from "react-native-alert-notification";
  interface ILoginFormProps {
     styles : any,
     next: () => void
@@ -26,12 +26,21 @@ const LoginFormStep1 :  React.FC<ILoginFormProps> = ({styles, next }) => {
     }
 
     const onSubmit = async () => {
-        if (!isEmail(formValues.email)) return
+        if (!isEmail(formValues.email)) 
+            return Toast.show({
+                type : ALERT_TYPE.DANGER,
+                title : 'Null Pointer Exception!',
+                textBody : "O campo de email não pode estar vazio"
+            })
 
         const res = await authService.requestPasswordRecovery(formValues.email)
 
         if (res.hasError)
-            alert('Um erro inesperado aconteceu, tente novamente mais tarde')
+            Toast.show({
+                type : ALERT_TYPE.DANGER,
+                title : 'Compiler Error!',
+                textBody : "Houve um erro inesperado, por favor tente novamente mais tarde!"
+            })
         else
             next()
     }

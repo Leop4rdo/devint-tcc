@@ -171,7 +171,7 @@ const DevRegistrationPage: React.FC = () => {
             </div>
 
             <div className="image-container">
-                <img src="../assets/images/svg/dev-img.svg" alt="developer on a computer" />
+                <img src="https://firebasestorage.googleapis.com/v0/b/devint-tcc-33eb6.appspot.com/o/assets%2Fimgs%2Fdev-img.svg?alt=media&token=3efe00c8-4f70-4eaa-9b19-75e830d886c5" alt="developer on a computer" />
             </div>
 
         </div>

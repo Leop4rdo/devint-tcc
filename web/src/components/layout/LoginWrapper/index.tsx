@@ -15,7 +15,10 @@ const LoginWrapper: React.FC<ILoginWapper> = (props) => {
 
             <main>
                 <div className="image-container">
-                    <img src="../assets/images/svg/login.svg" className="login-image" />
+                    <img 
+                        src="https://firebasestorage.googleapis.com/v0/b/devint-tcc-33eb6.appspot.com/o/assets%2Fimgs%2Flogin.svg?alt=media&token=09016021-c248-4356-839b-8ed4b27f3d71" 
+                        className="login-image" 
+                    />
                 </div>
                 <div className="login-wrapper">
                     

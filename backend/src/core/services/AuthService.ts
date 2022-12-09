@@ -81,14 +81,14 @@ export default class AuthService {
 
             user.role = (body.cnpj) ? userRoles.COMPANY : userRoles.DEV
 
-            this.emailService.send({
-                to: auth.email,
-                subject: 'Confirmação de email',
-                values: {
-                    USER: user.name,
-                    LINK: `${process.env.FRONTEND_URL}/email-confirm/${auth.email}`
-                }
-            }, EmailTemplates.EMAIL_CONFIRM)
+            // this.emailService.send({
+            //     to: auth.email,
+            //     subject: 'Confirmação de email',
+            //     values: {
+            //         USER: user.name,
+            //         LINK: `${process.env.FRONTEND_URL}/email-confirm/${auth.email}`
+            //     }
+            // }, EmailTemplates.EMAIL_CONFIRM)
 
             return new SuccessResponse({
                 status: 201,
@@ -193,14 +193,14 @@ export default class AuthService {
 
         await this.passResetTokenRepo.create(passResetToken);
 
-        await this.emailService.send({
-            to: auth.email,
-            subject: 'Recuperação de senha',
-            values: {
-                USER: user.name,
-                LINK: `${process.env.FRONTEND_URL}/change-my-password/${passResetToken.token}`
-            }
-        }, EmailTemplates.PASSWORD_RECOVERY)
+        // await this.emailService.send({
+        //     to: auth.email,
+        //     subject: 'Recuperação de senha',
+        //     values: {
+        //         USER: user.name,
+        //         LINK: `${process.env.FRONTEND_URL}/change-my-password/${passResetToken.token}`
+        //     }
+        // }, EmailTemplates.PASSWORD_RECOVERY)
 
         return new SuccessResponse({
             status: 200,

@@ -14,7 +14,8 @@ export interface PaginationQuery {
     offset ?: number
 }
 
-export const baseUrl = "http://192.168.0.105:8080/api/v1"; // PRODUCTION API (azure)
+export const baseUrl = "https://devint-api.azurewebsites.net/api/v1"; // PRODUCTION API (azure)
+// export const baseUrl = "http://10.107.144.25:8080/api/v1"
 
 export const getToken = async () => { 
     return await getFromLocalStorage('devint-authorization')

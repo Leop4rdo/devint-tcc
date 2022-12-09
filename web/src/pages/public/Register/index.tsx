@@ -14,7 +14,7 @@ const Register: React.FC = () => {
             <main>
                 <div className="image-container">
 
-                    <img src="../../assets/images/svg/register.svg" className="register-image" />
+                    <img src="https://firebasestorage.googleapis.com/v0/b/devint-tcc-33eb6.appspot.com/o/assets%2Fimgs%2Fregister.svg?alt=media&token=00a36294-731c-403d-8732-5bc53860b40d" className="register-image" />
                     <h2>Crie conexões, tenha seu portfólio online e participe de uma comunidade de desenvolvimento incrivel</h2>
 
                 </div>

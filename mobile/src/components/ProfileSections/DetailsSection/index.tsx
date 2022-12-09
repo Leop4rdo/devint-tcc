@@ -16,6 +16,7 @@ import { Picker } from "@react-native-picker/picker"
 import PickerComponent from "../../shared/Picker"
 import ISkillProps from "../../../interfaces/ISkill"
 import SkillToken from "./SkillToken"
+import { ALERT_TYPE, Toast } from "react-native-alert-notification"
 
 
 interface IDetailSectionProps {
@@ -122,7 +123,8 @@ const DetailsSection : React.FC<IDetailSectionProps> = (props) => {
         const newSkill = allSkills.find((s) => s.id == id)
 
         if (!newSkill)
-            Alert.alert("Erro ao adicionar skill!")
+            return Toast.show({ type : ALERT_TYPE.WARNING, title : 'Erro ao carregar comentários!'})
+
 
         setData({
             ...data,

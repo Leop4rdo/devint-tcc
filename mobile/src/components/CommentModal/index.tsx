@@ -11,6 +11,7 @@ import { withDecay } from "react-native-reanimated"
 import AddCommentModal from "./AddComment"
 import Comment from "./Comment"
 import { AuthContext } from "../../store/context/Auth.context"
+import { ALERT_TYPE, Toast } from "react-native-alert-notification"
 
 interface ICommentModalProps {
     postId : string
@@ -31,7 +32,7 @@ const CommentModal : React.FC<ICommentModalProps> = ({ postId, onClose }) => {
         const res = await postService.getById(postId)
 
         if (res.hasError !== false)
-            return Alert.alert('Erro ao carregar comentários!')
+            return Toast.show({ type : ALERT_TYPE.WARNING, title : 'Erro ao carregar comentários!'})
  
         setComments(res.data.comments)
     }

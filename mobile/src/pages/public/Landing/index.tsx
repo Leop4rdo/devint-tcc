@@ -1,9 +1,10 @@
-import { Text, View } from "react-native"
+import { Pressable, Text, View } from "react-native"
 import styles from "./style";
 import Header from '../../../components/shared/Header';
 import ButtonComponent from "../../../components/shared/Button";
 import { IPageProps } from "../../../navigators";
 import { ScrollView } from "react-native-gesture-handler";
+import { ALERT_TYPE, Toast } from "react-native-alert-notification";
 
 const LandingPage: React.FC<IPageProps> = ({ navigation }) => {
 

@@ -129,7 +129,7 @@ const CreateProjects: React.FC<ICreateProjects> = ({ openCloseModal, userId, ref
         try {
             const extension = `.${file.name.split('.')[1]}`
             const fileName = randomUUIDV4() + extension
-            const uploaded = await firebase.storage().ref().child('projectas/').child(fileName).put(file)
+            const uploaded = await firebase.storage().ref().child('projects/').child(fileName).put(file)
             setBanner(await uploaded.ref.getDownloadURL())
         } catch (err) {
             console.log(err)

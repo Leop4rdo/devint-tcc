@@ -10,6 +10,7 @@ import * as AuthService from "../../../services/auth.service";
 import { AuthContext } from "../../../store/context/Auth.context";
 import Header from "../../../components/shared/Header";
 import { IPageProps } from "../../../navigators"
+import { ALERT_TYPE, Toast } from "react-native-alert-notification";
 
 const RegisterPage: React.FC<IPageProps> = ({navigation}) => {
     const authContext = useContext(AuthContext)
@@ -66,7 +67,7 @@ const RegisterPage: React.FC<IPageProps> = ({navigation}) => {
     const onConfirmButtonPress = () => {
         if (currentStep < steps.length - 1) {
             if (!steps[currentStep].isValid())
-                return alert("Por favor verifique se os dados estão corretos")
+                return Toast.show({ type : ALERT_TYPE.WARNING, title : 'Por favor verifique se os dados estão corretos!' })
 
             setCurrentStep(currentStep + 1)
 
@@ -74,7 +75,7 @@ const RegisterPage: React.FC<IPageProps> = ({navigation}) => {
         }
 
         if (!isFormValid())
-            return alert("Por favor verifique se os dados estão corretos")
+            return Toast.show({ type : ALERT_TYPE.WARNING, title : 'Por favor verifique se os dados estão corretos!' })
 
         register()
     }
@@ -102,7 +103,7 @@ const RegisterPage: React.FC<IPageProps> = ({navigation}) => {
         const res = await AuthService.register(body)
 
         if (res.hasError)
-            return alert("Por favor verifique se os dados estão corretos")
+            return Toast.show({ type : ALERT_TYPE.WARNING, title : 'Por favor verifique se os dados estão corretos!' })
 
         authContext?.signIn(body.email, body.password);
     }
