@@ -34,16 +34,24 @@
             gap: 10px;
             word-wrap: break-word;
             width: 100px;
+            
+            
 
             h2 {
-                color: $color-primary;
                 width: 530px;
+                color: $color-primary;
+                
             }
 
-            span {
-                color: $color-gray;
-                font-weight: $font-regular;
-            }
+            
+                span {
+                    
+                    color: $color-gray;
+                    font-weight: $font-regular;
+                }
+               
+            
+           
         }
 
         .icon {

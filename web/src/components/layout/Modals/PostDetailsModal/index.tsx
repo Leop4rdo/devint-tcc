@@ -9,6 +9,8 @@ import Comment from "components/shared/Comment"
 import { AuthContext } from "store/context/Auth.context"
 import Input from "components/shared/Input";
 import AutoTextArea from "components/shared/AutogrowTextArea";
+import * as devService from "services/dev.service";
+
 interface IPostDetailsModalProps {
     postId: string
     onClick: any
@@ -18,16 +20,18 @@ interface IPostDetailsModalProps {
 
 const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick, refreshComment }) => {
     const authContext = useContext(AuthContext)
-
+    const [following, setFollowing] = useState(false);
     const [post, setPost] = useState<IPost>()
     const [newComment, setNewComment] = useState({
         content: ''
     })
 
+    
+
     const getPost = async () => {
         const { data } = await postService.findById(postId)
         setPost(data)
-        console.log(data)
+        
     }
 
     const addComment = async () => {
@@ -52,6 +56,13 @@ const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick, r
         setLiked(!liked)
     }
 
+     const toggleFollow = async () => {
+        if (!authContext?.userData?.id) return
+        const res = await devService.toggleFollow(authContext?.userData?.id)
+        setFollowing(!following);
+        const updateFollowing = await devService.findById(authContext?.userData?.id)
+        /* setDev(updateFollowing.data) */
+    } 
 
 
     useEffect(() => { getPost() }, [postId])
@@ -68,7 +79,14 @@ const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick, r
                             </div>
 
                             <div className="dice-user">
-                                <Button className="follow-button" children={[<Icon name="add" />, "Seguir"]} />
+                                {
+                                    (authContext?.userData?.id !== authContext?.userData?.id) ?
+                                    <Button className="follow-button" children={[<Icon name="add" />, "Seguir"]}  onClick={toggleFollow} />
+                                    : ''
+                                }
+                                
+
+
                                 {post?.attachments === undefined || post?.attachments.length === 0 &&
                                     <div className="container-icon-close">
                                         <Icon className="close" name="close" onClick={onClick} />

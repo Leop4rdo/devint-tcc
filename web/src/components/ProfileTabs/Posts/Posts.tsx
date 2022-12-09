@@ -3,24 +3,25 @@ import NewContents from "components/layout/NewContents/NewContents"
 import Post from "components/Post"
 import { IPostListItem } from "interfaces/IPost"
 import React, { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
-import * as postService from "../../../services/post.service"
 
+import * as postService from "../../../services/post.service"
+import PostDetailsModal from "components/layout/Modals/PostDetailsModal";
 interface IPostsTab {
-    devId : string
+    devId: string
 }
 
 const PostsTab: React.FC<IPostsTab> = ({ devId }) => {
 
     const [writtingPost, setWrittingPost] = useState(false)
     const [posts, setPosts] = useState<IPostListItem[]>([])
+    const [selectedPostId, setSelectedPostId] = useState('')
 
     const getPosts = async () => {
-        if (!devId) return 
+        if (!devId) return
         const { data } = await postService.getPostsByUser(devId)
 
         setPosts([...posts, ...data])
-        
+
     }
 
     const refresh = async () => {
@@ -33,35 +34,49 @@ const PostsTab: React.FC<IPostsTab> = ({ devId }) => {
 
     //useEffect(() => { refresh() })
 
-    useEffect(() => { getPosts(); }, [])
+    useEffect(() => { getPosts(); refresh() }, [])
 
     return (
-        
-        <div className="post-container">
-            <NewContents 
-                        catchphrase="O que você tem para nos dizer hoje?" 
-                        newContentName="Novo Post"
-                        openCloseModal={() => setWrittingPost(true)}
-                        />
-            {
-                posts.map((post: IPostListItem) =>
-                    <>
-                        <Post key={`${post.id}-${Math.random() * 999}`} data={post} openDetails={() => { }} />
-                    </>
-                )
-            }
-
-            {
-                writtingPost &&
-                <CreatePostModal onClose={() =>  { setWrittingPost(false); refresh()}}  />
-            }
+        <>
+            <NewContents
+                catchphrase="O que você tem para nos dizer hoje?"
+                newContentName="Novo Post"
+                openCloseModal={() => setWrittingPost(true)}
+            />
             
-        </div>
+            <div className="post-container">
+
+                {
+                    posts.map((post: IPostListItem) =>
+                        <>
+                            <Post key={`${post.id}-${Math.random() * 999}`} data={post} openDetails={() => setSelectedPostId(post.id)} />
+                        </>
+                    )
+                }
+
+                {
+                    writtingPost &&
+                    <CreatePostModal onClose={() => { setWrittingPost(false); refresh() }} />
+                }
 
 
-        
+                {
+                    selectedPostId &&
+                    <PostDetailsModal postId={selectedPostId} onClick={() => setSelectedPostId('')} refreshComment={refresh} />
+                }
+
+            </div>
+
+
+        </>
+
+
+
+
     )
 
 }
 
 export default PostsTab;
+
+

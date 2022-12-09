@@ -34,7 +34,6 @@ const UserProfilePage: React.FC = () => {
     const [following, setFollowing] = useState(false);
 
     const updateUser = async (body : IDev) => {
-
         const _body : IDev = {
             ...body,
             birthday : body.birthday.split('/').reverse().join('-')

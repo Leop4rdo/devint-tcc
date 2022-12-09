@@ -43,14 +43,11 @@ const ProjectCard: React.FC<IProject> = ({ data, openCloseModal, EditProject, id
             return data.hearts?.length!;
     }
 
-
+   
 
     useEffect(() => { getUrlGithubRepo(); setHearted(data.hearts!.includes(authContext?.userData.id)) }, [data])
 
     return (
-
-
-
 
         <>
 
@@ -70,8 +67,8 @@ const ProjectCard: React.FC<IProject> = ({ data, openCloseModal, EditProject, id
                     <Link to={`/dev/projectdetails/${idProject}`}>
                         <div className="name-project">
                             <h2>{data.name}</h2>
-
-                            {data.openSource ? <span>(Open source)</span> : ""}
+                            
+                            {data.openSource ? <span>(Open Source)</span> : ""}
 
                         </div>
                     </Link>
