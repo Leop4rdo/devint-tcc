@@ -54,13 +54,9 @@ const DevRegistrationPage: React.FC = () => {
                     setValidadeUserGithub(true)
                 else if(data.message === 'Not Found' || data.message)
                     setValidadeUserGithub(false)
-                
-
-                console.log(data)
             })
             .catch((data) => {
                 setValidadeUserGithub(true)
-                console.log(data)
             })
         }
         

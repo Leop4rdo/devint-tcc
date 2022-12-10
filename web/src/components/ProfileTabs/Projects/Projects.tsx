@@ -1,7 +1,7 @@
 import CreateProjects from "components/layout/Modals/CreateProjects";
 import NewContents from "components/layout/NewContents/NewContents";
 import Project from "components/Project";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect , useContext } from "react";
 import IProjectProps from "interfaces/IProject"
 import * as projectService from 'services/project.service';
 
@@ -17,7 +17,6 @@ const ProjectsTabs: React.FC<IProjectTab> = ({ devId }) => {
     const [editProject , setEditProject] = useState(false)
     const [idProject , setIdProject] = useState('')
 
-
     const ModalProject = () => {
         if (writtingProject)
             setWrittingProject(false)
@@ -30,11 +29,8 @@ const ProjectsTabs: React.FC<IProjectTab> = ({ devId }) => {
         setProjects([])
         const { data } = await projectService.getProjectByUser(devId)
         setProjects(data)
-        
-        
-        
+           
     }
-
     const EditProject = () => {
         if(!editProject)
             setEditProject(true)    
@@ -57,7 +53,7 @@ const ProjectsTabs: React.FC<IProjectTab> = ({ devId }) => {
             {
                 projects?.map((project: IProjectProps) =>
                     <>
-                        <Project EditProject={EditProject} key={`${project.id}-${Math.random() * 999}`} data={project} idProject={project.id} openCloseModal={() => {
+                        <Project  EditProject={EditProject} key={`${project.id}-${Math.random() * 999}`} data={project} idProject={project.id} openCloseModal={() => {
                             ModalProject()
                             setIdProject(`${project.id}`)
                         }

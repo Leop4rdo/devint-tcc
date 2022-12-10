@@ -28,6 +28,7 @@ const FeedPage : React.FC<FeedPageProps> = ({ feedType }) => {
         const res = await devService.list({ limit: 24 })
 
         setDevs(res.data)
+        
     }
 
     const getPosts = async () => {

@@ -1,0 +1,144 @@
+.container-page-project-details {
+    width: 100vw;
+    height: 100vh;
+    background-color: $color-dark-gray;
+    display: flex;
+    justify-content: center;
+
+
+    .container-projetc-details {
+        margin-top: 100px;
+        width: 1200px;
+        padding: 10px;
+
+        .container-title-project {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+
+            .title {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                word-wrap: break-word;
+                    
+    
+                h1 {
+                    width: 1050px;
+                    color: $color-primary;
+                    
+                    span {
+                        font-size: 20px;
+                        color: $color-gray;
+                        font-weight: $font-regular;
+                    }
+                }
+    
+            }
+
+            .hearts {
+                gap: 8px;
+                display: flex;
+                align-items: center;
+
+                span {
+                    font-size: 20px;
+                    color: $color-white;
+                }
+
+                .icon {
+                    font-size: 27px;
+                    cursor: pointer;
+                    color: $color-light-gray;
+
+                    &:hover, &#already-hearted {
+                        color: $color-primary;
+                    }
+                }
+            }
+        }
+
+
+        .container-image-Project {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .image-project {
+
+                img {
+                    width: 400px;
+                    height: 400px;
+                    object-fit: contain;
+                }
+            }
+
+
+
+        }
+
+        .container-descrição {
+            margin-top: 30px;
+            width: 100%;
+            word-wrap: break-word;
+
+            span {
+                color: $color-light-gray;
+                font-weight: $font-medium;
+                font-size: 20px;
+
+            }
+
+        }
+
+        .container-members {
+            margin-top: 30px;
+
+
+            span {
+                color: $color-primary;
+                font-family: $font-medium;
+                font-size: 24px;
+
+            }
+
+            .container-members-image {
+                margin-top: 16px;
+                display: flex;
+                gap: 16px;
+                flex-wrap: wrap;
+                padding-bottom: 40px;
+                border-bottom: solid 3px;
+                border-color: $color-primary;
+
+                .members-image {
+
+                    img {
+                        width: clamp(2rem, 8vw, 4rem);
+                        height: clamp(2rem, 8vw, 4rem);
+                        border-radius: 50%;
+                        border-width: 2px;
+                        border-style: solid;
+                        border-color: $color-primary;
+                    }
+
+                }
+
+
+
+            }
+        }
+
+        .container-posts{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 40px;
+            flex-direction: column;
+            
+        }
+    }
+}
