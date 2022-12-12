@@ -19,6 +19,7 @@ import { dateMask } from "utils/masks";
 import { setEnvironmentData } from "worker_threads";
 import DetailSection from "components/ProfileSections/DetailSection";
 import { trace } from "console";
+import Semicolon from "components/shared/Semicolon";
 
 const UserProfilePage: React.FC = () => {
 
@@ -242,12 +243,21 @@ const UserProfilePage: React.FC = () => {
                     </div>
                     <hr></hr>
                     <div className="selected-tab">
-                        {currentTab === "postsTab" ? <PostsTab devId={devId || ''} /> : ""}
+                        {/* {currentTab === "postsTab" ? <PostsTab devId={devId || ''} /> : ""}
 
                         {currentTab === "projectsTab" ?
-                
                         <ProjectsTabs devId={devId || ''}/>
-                         : ""}
+                         : ""} */}
+
+                        {
+                            currentTab === "postsTab" ?
+                                <PostsTab devId={devId!} canEdit={authContext?.userData.id == dev?.id} />
+                            : currentTab === "projectsTab" ? 
+                                <ProjectsTabs devId={devId!} canEdit={authContext?.userData.id == dev?.id} />
+                            : 
+                                <Semicolon />
+                            
+                        }
                     </div>
                 </div>
 

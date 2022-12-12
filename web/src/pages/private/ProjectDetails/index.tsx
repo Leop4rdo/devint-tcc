@@ -10,6 +10,7 @@ import { IPostListItem } from "interfaces/IPost";
 import Post from "components/Post";
 import PostDetailsModal from "components/layout/Modals/PostDetailsModal";
 import Button from "components/shared/Button";
+import Semicolon from "components/shared/Semicolon";
 interface ProjectDetails {
     feedType?: 'random' | 'latest' | 'trending'
 }
@@ -61,9 +62,7 @@ const ProjectDetails: React.FC<ProjectDetails> = ({ feedType }) => {
                 <div className="container-projetc-details">
                     <div className="container-title-project">
                         <div className="title">
-                            <h1>{dataProject?.name} {dataProject?.openSource ? <span>(Open Source)</span> : ""}</h1>
-
-                            
+                            <h2>{dataProject?.name} {dataProject?.openSource ? <span>(Open Source)</span> : ""}</h2>
                         </div>
                         <div className="hearts">
                             <span>{/* {
@@ -109,6 +108,8 @@ const ProjectDetails: React.FC<ProjectDetails> = ({ feedType }) => {
                         {dataProjectPost?.map((data) => (
                             <Post key={`${data.id}-${Math.random() * 999}`} data={data} openDetails={() => setSelectedPostId(data.id)} />
                         ))}
+
+                        <Semicolon />
 
                     </div>
 

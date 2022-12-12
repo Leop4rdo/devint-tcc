@@ -5,10 +5,13 @@ import React, { useState, useEffect , useContext } from "react";
 import IProjectProps from "interfaces/IProject"
 import * as projectService from 'services/project.service';
 import { useParams } from "react-router-dom";
+import Semicolon from "components/shared/Semicolon";
+import { AuthContext } from "store/context/Auth.context";
 
 
 interface IProjectTab {
     devId: string
+    canEdit ?: boolean
 }
 
 const ProjectsTabs: React.FC<IProjectTab> = (props) => {
@@ -17,6 +20,7 @@ const ProjectsTabs: React.FC<IProjectTab> = (props) => {
     const [projects, setProjects] = useState<IProjectProps[]>([])
     const [editProject , setEditProject] = useState(false)
     const [idProject , setIdProject] = useState('')
+    const authContext = useContext(AuthContext)
 
     const { devId } = useParams()
 
@@ -44,36 +48,41 @@ const ProjectsTabs: React.FC<IProjectTab> = (props) => {
     
     useEffect(() => { getProjects(); }, [devId])
 
+    console.log(authContext?.userData.Id === devId ?  
+        'true'
+        : 'false')
+
+    console.log(authContext?.userData.id === devId)
+
     return (
         <>
 
-
-            <NewContents catchphrase="Compartilhe seus projetos com a comunidade !" newContentName="Novo projeto" openCloseModal={ModalProject} />
+            {
+                props.canEdit && 
+                <NewContents catchphrase="Compartilhe seus projetos com a comunidade !" newContentName="Novo projeto" openCloseModal={ModalProject} />
+            }
 
             {writtingProject &&
                 <CreateProjects IdProject={idProject} openCloseModal={ModalProject} userId={devId!} refreshPage={getProjects} editProject={editProject} />
             }
-
-
             {
                 projects?.map((project: IProjectProps) =>
                     <>
-                        <Project  EditProject={EditProject} key={`${project.id}-${Math.random() * 999}`} data={project} idProject={project.id} openCloseModal={() => {
-                            ModalProject()
-                            setIdProject(`${project.id}`)
-                        }
-                        } />
-
+                        <Project 
+                            EditProject={EditProject} 
+                            key={`${project.id}-${Math.random() * 999}`} 
+                            data={project} 
+                            canEdit={props.canEdit}
+                            openCloseModal={() => {
+                                ModalProject()
+                                setIdProject(`${project.id}`)
+                            }} 
+                        />
                     </>
                 )
             }
-
-
+            <Semicolon />
         </>
-
-
-
-
     )
 }
 

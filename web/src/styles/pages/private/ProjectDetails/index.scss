@@ -7,25 +7,21 @@
 
 
     .container-projetc-details {
-        margin-top: 100px;
-        width: 1200px;
-        padding: 10px;
+        margin-top: 2vh;
+        width: 80%;
 
         .container-title-project {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 30px;
 
             .title {
                 display: flex;
                 align-items: center;
                 gap: 10px;
                 word-wrap: break-word;
-                    
     
-                h1 {
-                    width: 1050px;
+                h2 {
                     color: $color-primary;
                     
                     span {
@@ -43,12 +39,12 @@
                 align-items: center;
 
                 span {
-                    font-size: 20px;
+                    font-size: 1.5rem;
                     color: $color-white;
                 }
 
                 .icon {
-                    font-size: 27px;
+                    font-size: 1.5rem;
                     cursor: pointer;
                     color: $color-light-gray;
 
@@ -58,9 +54,8 @@
                 }
             }
         }
-
-
         .container-image-Project {
+            width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -68,14 +63,11 @@
             .image-project {
 
                 img {
-                    width: 400px;
-                    height: 400px;
-                    object-fit: contain;
+                    width: 100%;
+                    aspect-ratio: 3;
+                    object-fit: cover;
                 }
             }
-
-
-
         }
 
         .container-descrição {
@@ -87,9 +79,7 @@
                 color: $color-light-gray;
                 font-weight: $font-medium;
                 font-size: 20px;
-
             }
-
         }
 
         .container-members {

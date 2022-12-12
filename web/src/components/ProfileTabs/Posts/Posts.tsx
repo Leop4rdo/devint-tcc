@@ -7,8 +7,10 @@ import React, { useEffect, useState } from "react"
 import * as postService from "../../../services/post.service"
 import PostDetailsModal from "components/layout/Modals/PostDetailsModal";
 import { useParams } from "react-router-dom"
+import Semicolon from "components/shared/Semicolon"
 interface IPostsTab {
     devId: string
+    canEdit ?: boolean
 }
 
 const PostsTab: React.FC<IPostsTab> = (props) => {
@@ -33,11 +35,11 @@ const PostsTab: React.FC<IPostsTab> = (props) => {
 
     return (
         <>
-            <NewContents
+            { props.canEdit && <NewContents
                 catchphrase="O que você tem para nos dizer hoje?"
                 newContentName="Novo Post"
                 openCloseModal={() => setWrittingPost(true)}
-            />
+            />}
             
             <div className="post-container">
 
@@ -49,20 +51,16 @@ const PostsTab: React.FC<IPostsTab> = (props) => {
                     )
                 }
 
-                {
-                    writtingPost &&
-                    <CreatePostModal onClose={() => { setWrittingPost(false); refresh() }} />
-                }
-
-
-                {
-                    selectedPostId &&
-                    <PostDetailsModal postId={selectedPostId} onClick={() => setSelectedPostId('')} refreshComment={refresh} />
-                }
-
+                <Semicolon />
             </div>
-
-
+            {
+                writtingPost &&
+                <CreatePostModal onClose={() => { setWrittingPost(false); refresh() }} />
+            }
+            {
+                selectedPostId &&
+                <PostDetailsModal postId={selectedPostId} onClick={() => setSelectedPostId('')} refreshComment={refresh} />
+            }
         </>
 
 
