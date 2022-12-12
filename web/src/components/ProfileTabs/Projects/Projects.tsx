@@ -4,18 +4,21 @@ import Project from "components/Project";
 import React, { useState, useEffect , useContext } from "react";
 import IProjectProps from "interfaces/IProject"
 import * as projectService from 'services/project.service';
+import { useParams } from "react-router-dom";
 
 
 interface IProjectTab {
     devId: string
 }
 
-const ProjectsTabs: React.FC<IProjectTab> = ({ devId }) => {
+const ProjectsTabs: React.FC<IProjectTab> = (props) => {
 
     const [writtingProject, setWrittingProject] = useState(false)
     const [projects, setProjects] = useState<IProjectProps[]>([])
     const [editProject , setEditProject] = useState(false)
     const [idProject , setIdProject] = useState('')
+
+    const { devId } = useParams()
 
     const ModalProject = () => {
         if (writtingProject)
@@ -26,6 +29,8 @@ const ProjectsTabs: React.FC<IProjectTab> = ({ devId }) => {
     }
 
     const getProjects = async () => {
+        if (!devId) return
+
         setProjects([])
         const { data } = await projectService.getProjectByUser(devId)
         setProjects(data)
@@ -37,7 +42,7 @@ const ProjectsTabs: React.FC<IProjectTab> = ({ devId }) => {
     }
 
     
-    useEffect(() => { getProjects(); }, [])
+    useEffect(() => { getProjects(); }, [devId])
 
     return (
         <>
@@ -46,7 +51,7 @@ const ProjectsTabs: React.FC<IProjectTab> = ({ devId }) => {
             <NewContents catchphrase="Compartilhe seus projetos com a comunidade !" newContentName="Novo projeto" openCloseModal={ModalProject} />
 
             {writtingProject &&
-                <CreateProjects IdProject={idProject} openCloseModal={ModalProject} userId={devId} refreshPage={getProjects} editProject={editProject} />
+                <CreateProjects IdProject={idProject} openCloseModal={ModalProject} userId={devId!} refreshPage={getProjects} editProject={editProject} />
             }
 
 

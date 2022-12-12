@@ -6,35 +6,30 @@ import React, { useEffect, useState } from "react"
 
 import * as postService from "../../../services/post.service"
 import PostDetailsModal from "components/layout/Modals/PostDetailsModal";
+import { useParams } from "react-router-dom"
 interface IPostsTab {
     devId: string
 }
 
-const PostsTab: React.FC<IPostsTab> = ({ devId }) => {
+const PostsTab: React.FC<IPostsTab> = (props) => {
 
     const [writtingPost, setWrittingPost] = useState(false)
     const [posts, setPosts] = useState<IPostListItem[]>([])
     const [selectedPostId, setSelectedPostId] = useState('')
 
-    const getPosts = async () => {
-        if (!devId) return
-        const { data } = await postService.getPostsByUser(devId)
-
-        setPosts([...posts, ...data])
-
-    }
+    const { devId } = useParams()
 
     const refresh = async () => {
+        if (!devId) return
+
         setPosts([])
 
-        const { data } = await postService.list({ limit: 48, offset: 0 })
+        const { data } = await postService.getPostsByUser(devId!)
 
         setPosts(data)
     }
 
-    //useEffect(() => { refresh() })
-
-    useEffect(() => { getPosts(); refresh() }, [])
+    useEffect(() => { refresh() }, [devId])
 
     return (
         <>

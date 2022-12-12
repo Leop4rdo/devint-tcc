@@ -26,12 +26,9 @@ const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick, r
         content: ''
     })
 
-    
-
     const getPost = async () => {
         const { data } = await postService.findById(postId)
         setPost(data)
-        
     }
 
     const addComment = async () => {
@@ -58,13 +55,9 @@ const PostDetailsModal: React.FC<IPostDetailsModalProps> = ({ postId, onClick, r
 
      const toggleFollow = async () => {
         if (!authContext?.userData?.id) return
-        const res = await devService.toggleFollow(authContext?.userData?.id)
+        await devService.toggleFollow(authContext?.userData?.id)
         setFollowing(!following);
-        const updateFollowing = await devService.findById(authContext?.userData?.id)
-        /* setDev(updateFollowing.data) */
     } 
-
-
     useEffect(() => { getPost() }, [postId])
 
     return (
