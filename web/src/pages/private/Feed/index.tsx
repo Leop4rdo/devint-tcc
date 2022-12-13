@@ -100,7 +100,10 @@ const FeedPage : React.FC<FeedPageProps> = ({ feedType }) => {
                             {
                                 posts.length > 45 ? 
                                     <div id="scroll-observer" onClick={getPosts} ref={triggerRef}>Ver mais</div> :
-                                    ''
+                                    <div className="posts-end">
+                                        <span>&#59;</span>
+                                        <span>Parece que chegamos ao fim da linha</span>
+                                    </div>
                             }
                         </div>
                     </div>

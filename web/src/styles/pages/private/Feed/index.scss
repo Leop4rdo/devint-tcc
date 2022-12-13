@@ -146,6 +146,14 @@
 
     }
   }
+
+  .posts-end{
+    display: flex;
+    flex-direction: column;
+    font-size: 1em;
+    color: $color-white;
+    align-items: center;
+  }
 }
 
 @media (max-width : $breakpoint-laptop) {

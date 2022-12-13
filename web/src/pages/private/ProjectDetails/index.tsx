@@ -29,7 +29,18 @@ const ProjectDetails: React.FC<ProjectDetails> = ({ feedType }) => {
         setDataProject(data)
         setHearted(data.hearts.includes(authContext?.userData.id))
 
+        
+        
+        console.log(data);
     }
+
+    // const [liked, setLiked] = useState(data.alreadyHearted)
+
+    // const giveLike = async () => {
+    //     await postService.addHeart(data.id)
+
+    //     setLiked(!liked)
+    // }
 
     const getPost = async () => {
         const { data } = await postService.listProjectPosts(`${IdProject}`)
@@ -48,6 +59,9 @@ const ProjectDetails: React.FC<ProjectDetails> = ({ feedType }) => {
     const toggleHeart = () => {
         projectService.toggleHeart(dataProject!.id!)
         setHearted(!hearted)
+
+        console.log(dataProject);
+        
     }
 
 
@@ -66,9 +80,11 @@ const ProjectDetails: React.FC<ProjectDetails> = ({ feedType }) => {
                             
                         </div>
                         <div className="hearts">
-                            <span>{/* {
-                        (hearted ) ? dataProject!.hearts?.length || 0 + 1 : (!hearted ) ? dataProject!.hearts?.length || 0 - 1 : dataProject!.hearts?.length
-                    }  */}</span>
+                            <span>
+                            {/* {
+                                (liked && !data.alreadyHearted) ? data.hearts + 1 : (!liked && data.alreadyHearted) ? data.hearts - 1 : data.hearts
+                            } */}
+                            </span>
                             <Icon onClick={toggleHeart} id={`${hearted ? 'already-hearted' : ''}`} name="favorite" />
                         </div>
                     </div>
