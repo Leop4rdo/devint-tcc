@@ -11,6 +11,7 @@ import style from "./style";
 import * as projectService from '../../../../services/project.service'
 import { AuthContext } from "../../../../store/context/Auth.context";
 import { A } from "@expo/html-elements";
+import { useNavigation } from "@react-navigation/native";
 
 interface IProjectCardProps {
     data : IProject
@@ -21,6 +22,8 @@ interface IProjectCardProps {
 const ProjectCard: React.FC<IProjectCardProps> = ({ data, onMemberPress, onEditPress }) => {
     const [hearted, setHearted] = useState(false);
     const authContext = useContext(AuthContext)
+
+    const navigation = useNavigation()
 
     const toggleHeart = () => {
         projectService.toggleHeart(data.id!)
@@ -40,13 +43,17 @@ const ProjectCard: React.FC<IProjectCardProps> = ({ data, onMemberPress, onEditP
 
     return (
        <View style={style.card}>
-            { data.bannerURI && <Image source={{ uri : data.bannerURI}} style={style.banner}></Image>}
+            { data.bannerURI && 
+                <Pressable onPress={() => navigation.navigate('project-details' as never, { projectId : data.id} as never)}>
+                    <Image source={{ uri : data.bannerURI}} style={style.banner} />
+                </Pressable>
+            }
             <View style={style.contents}>
                 <View style={style.containerProject}>
-                    <View style={style.containerTitle}>
+                    <Pressable onPress={() => navigation.navigate('project-details' as never, { projectId : data.id} as never)} style={style.containerTitle}>
                         { data.openSource && <Text style={style.typeProject}>(open source)</Text> }
                         <Text style={style.title}>{data.name}</Text>
-                    </View>
+                    </Pressable>
 
                     <View >
                         <Pressable onPress={onEditPress}>
@@ -57,13 +64,13 @@ const ProjectCard: React.FC<IProjectCardProps> = ({ data, onMemberPress, onEditP
 
                 {
                     data.desc &&
-                    <View>
+                    <Pressable onPress={() => navigation.navigate('project-details' as never, { projectId : data.id} as never)}>
                         <Text style={style.description}>{data.desc}</Text>
-                    </View>
+                    </Pressable>
                 }
             </View>
 
-            <View>
+            <Pressable onPress={() => navigation.navigate('project-details' as never, { projectId : data.id} as never)}>
                 <FlatList
                     data={data.members}
                     renderItem={({item}) => 
@@ -74,7 +81,7 @@ const ProjectCard: React.FC<IProjectCardProps> = ({ data, onMemberPress, onEditP
                     pagingEnabled
                     horizontal
                 />
-            </View>
+            </Pressable>
 
             <View style={style.data}>
                 <View >

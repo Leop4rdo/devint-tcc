@@ -23,12 +23,8 @@ const genderOptions = [
 ];
 
 const DetailSection: React.FC<IDetailSectionProps> = (props) => {
-	const [careerFocusOptions, setCareerFocusOptions] = useState<
-		{ label: string; value: string }[]
-	>([]);
-	const [seniorityOptions, setSeniorityOptions] = useState<
-		{ label: string; value: string }[]
-	>([]);
+	const [careerFocusOptions, setCareerFocusOptions] = useState<{ label: string; value: string }[]>([]);
+	const [seniorityOptions, setSeniorityOptions] = useState<{ label: string; value: string }[]>([]);
 	const [allSkills, setAllSkills] = useState<ISkillProps[]>([]);
 	const [data, setData] = useState({ ...props.data });
 
@@ -176,7 +172,7 @@ const DetailSection: React.FC<IDetailSectionProps> = (props) => {
 					editing={editing.about}
 				/>
 				<InfoItem
-					imageUri="assets/icons/github.svg"
+					imageUri="https://firebasestorage.googleapis.com/v0/b/devint-tcc-33eb6.appspot.com/o/assets%2Ficons%2Fgithub.svg?alt=media&token=bb7fee41-f60d-4dbe-ad91-d99be0b62426"
 					value={data.githubUsername}
 					editing={editing.about}
 					onChangeText={(event) =>

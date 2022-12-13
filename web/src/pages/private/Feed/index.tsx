@@ -12,6 +12,7 @@ import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
 import PostDetailsModal from "components/layout/Modals/PostDetailsModal";
 import NewContents from "components/layout/NewContents/NewContents";
 import {Link} from "react-router-dom"
+import Semicolon from "components/shared/Semicolon";
 interface FeedPageProps {
     feedType : 'random' | 'latest' | 'trending'
 }
@@ -22,13 +23,13 @@ const FeedPage : React.FC<FeedPageProps> = ({ feedType }) => {
     const [writtingPost, setWrittingPost] = useState(false)
     const [posts, setPosts] = useState<IPostListItem[]>([])
     const [loading, setLoading] = useState(true)
+    const [hasReachedEnd, setEndReached] = useState(false) 
     const triggerRef = useRef<HTMLDivElement>(null)
 
     const getDevs = async () => {
         const res = await devService.list({ limit: 24 })
 
         setDevs(res.data)
-        
     }
 
     const getPosts = async () => {
@@ -36,14 +37,21 @@ const FeedPage : React.FC<FeedPageProps> = ({ feedType }) => {
 
         setPosts([...posts, ...data])
         setLoading(false)
+
+        if ([...posts, ...data].length < posts.length + 48)
+            setEndReached(true)
     }
 
     const refresh = async () => {
         setPosts([])
+        setEndReached(false)
 
         const { data } = await postService.list({ limit: 48, offset: 0, order : feedType || 'random'  })
 
         setPosts(data)
+
+        if (data.length < 48)
+            setEndReached(true)
     }
 
     useEffect(() => { getDevs(); }, [])
@@ -98,12 +106,9 @@ const FeedPage : React.FC<FeedPageProps> = ({ feedType }) => {
                                 )
                             }
                             {
-                                posts.length > 45 ? 
-                                    <div id="scroll-observer" onClick={getPosts} ref={triggerRef}>Ver mais</div> :
-                                    <div className="posts-end">
-                                        <span>&#59;</span>
-                                        <span>Parece que chegamos ao fim da linha</span>
-                                    </div>
+                                hasReachedEnd ?
+                                    <Semicolon />
+                                : <div id="scroll-observer" onClick={getPosts} ref={triggerRef}>Ver mais</div>
                             }
                         </div>
                     </div>

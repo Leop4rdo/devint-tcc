@@ -13,7 +13,7 @@
         img {
             width: 100%;
             aspect-ratio: 36 / 9;
-            object-fit: fill;
+            object-fit: cover;
         }
 
         .upload-new-image{
@@ -156,6 +156,7 @@
                     width: 150px;
                     height: 150px;
                     background-color: $color-white;
+                    object-fit: cover;
                     border-radius: 50%;
                     border: 4px solid $color-primary;
                 }

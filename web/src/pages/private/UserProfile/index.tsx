@@ -19,6 +19,7 @@ import { dateMask } from "utils/masks";
 import { setEnvironmentData } from "worker_threads";
 import DetailSection from "components/ProfileSections/DetailSection";
 import { trace } from "console";
+import Semicolon from "components/shared/Semicolon";
 
 const UserProfilePage: React.FC = () => {
 
@@ -30,7 +31,6 @@ const UserProfilePage: React.FC = () => {
 
     const [dev, setDev] = useState<IDev | null>(null)
     const { devId } = useParams()
-    const [select, setSelectSkill] = useState()
     const [following, setFollowing] = useState(false);
 
     const updateUser = async (body : IDev) => {
@@ -127,7 +127,7 @@ const UserProfilePage: React.FC = () => {
         }
     }
 
-    const findById = async () => {
+    const getDev = async () => {
         if (!devId) return
         const res = await devService.findById(devId)
 
@@ -146,26 +146,13 @@ const UserProfilePage: React.FC = () => {
         setDev(updateFollowing.data)
     }
 
-    useEffect(() => { findById() }, [devId])
+    useEffect(() => { getDev() }, [devId])
 
     const handleInputChange = (e : any) => {
         setDev({
             ...dev!,
             [e.target.name]: e.target.value
         })
-    }
-
-    const toggleEditing = () => {
-        if (editing)
-            updateUser(dev!)
-
-        setEditing(!editing)    
-    }
-
-    const getDevs = async () => {
-        const res = await devService.list({ limit: 24 })
-
-        setSelectSkill(res.data)
     }
 
     return (
@@ -239,7 +226,12 @@ const UserProfilePage: React.FC = () => {
 
                     </div>
                     
-                    {dev && <DetailSection canEdit={authContext?.userData.id == dev?.id} data={dev as IDev} onFinishEditing={updateUser} />}
+                    {dev && 
+                    <DetailSection
+                        canEdit={authContext?.userData.id == dev?.id} 
+                        data={dev as IDev} 
+                        onFinishEditing={updateUser} />
+                    }
 
                 </div>
 
@@ -251,12 +243,21 @@ const UserProfilePage: React.FC = () => {
                     </div>
                     <hr></hr>
                     <div className="selected-tab">
-                        {currentTab === "postsTab" ? <PostsTab devId={devId || ''} /> : ""}
+                        {/* {currentTab === "postsTab" ? <PostsTab devId={devId || ''} /> : ""}
 
                         {currentTab === "projectsTab" ?
-                
                         <ProjectsTabs devId={devId || ''}/>
-                         : ""}
+                         : ""} */}
+
+                        {
+                            currentTab === "postsTab" ?
+                                <PostsTab devId={devId!} canEdit={authContext?.userData.id == dev?.id} />
+                            : currentTab === "projectsTab" ? 
+                                <ProjectsTabs devId={devId!} canEdit={authContext?.userData.id == dev?.id} />
+                            : 
+                                <Semicolon />
+                            
+                        }
                     </div>
                 </div>
 

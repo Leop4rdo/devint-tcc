@@ -38,9 +38,28 @@ a {
       transform:  scaleX(1);
     }
   }
+}
 
+.semicolon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(1rem, 1vh, 1.5rem);
+  flex-direction: column;
 
-  
+  .semicolon-icon {
+    color: $color-gray;
+    font-size: clamp(2rem, 8vw, 5rem);
+    font-weight: $font-semibold;
+  }
+
+  .semicolon-message {
+    color: $color-gray;
+    width: 75%;
+    text-align: center;
+    font-size: clamp(1rem, 4vw, 1.5rem);
+    font-weight: $font-semibold;
+  }
 }
 
 #root {
